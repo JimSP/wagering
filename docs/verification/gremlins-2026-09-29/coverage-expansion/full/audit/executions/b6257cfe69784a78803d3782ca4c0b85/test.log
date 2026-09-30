@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.200s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:00:40 INFO transaction handled correlationId="" messageId="" transactionId=04c20ca9-3215-49c2-ac2e-847d473f002d walletId=2d179db6-05e8-4720-b2c8-7f0fbad31e0c providerId=p status=PROCESSED
+2026/09/29 02:00:40 WARN transaction handling failed correlationId="" messageId="" transactionId=90dc6ff8-1d3e-4f2b-a0a7-02d478f6ba7f walletId=2d179db6-05e8-4720-b2c8-7f0fbad31e0c providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.501s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/pending/external (0.00s)
+        input_contract_test.go:56: output={eventID:event aggregateID:wallet typ:WagerTransactionPendingReference payload:{"eventId":"event","eventType":"WagerTransactionPendingReference","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","providerId":"p","externalTransactionId":"","referenceExternalTransactionId":"ref","nextAttemptAt":"2026-09-28T09:00:01-03:00","expiresAt":"2026-09-28T10:00:00-03:00"}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+    input_contract_test.go:61: invalid integration event: pending reference fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.655s
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.087s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.838s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.546s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.991s
+FAIL

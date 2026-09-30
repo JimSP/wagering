@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.405s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	5.266s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.811s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.511s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.030s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.925s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.695s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.051s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.620s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.596s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 23:00:19 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:19 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestTransientBackoffAndCleanupLogsMatchActualOutcome (0.00s)
+    --- FAIL: TestTransientBackoffAndCleanupLogsMatchActualOutcome/1 (0.00s)
+        contract_test.go:88: visibility=1 want=4 ack=false
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.410s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.456s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.470s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.550s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.581s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.364s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.379s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.459s
+FAIL

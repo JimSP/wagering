@@ -1,0 +1,55 @@
+{
+  "command": "go test -count=1 -race -json ./...",
+  "exit_code": 1,
+  "tags": [],
+  "top_level_results": {
+    "pass": 123,
+    "fail": 28
+  },
+  "leaf_results": {
+    "pass": 591,
+    "fail": 195
+  },
+  "new_functions": [
+    {
+      "name": "TestGeneratedPairedBETOrderPreservesOtherAccounts",
+      "result": "fail"
+    },
+    {
+      "name": "TestHTTPPairedBETUsesSameLiteralFinancialContract",
+      "result": "fail"
+    },
+    {
+      "name": "TestPairedBETComparatorAcceptsBothAccountEvents",
+      "result": "pass"
+    },
+    {
+      "name": "TestPairedBETFailureAtEachWriteRestoresBothAccounts",
+      "result": "fail"
+    },
+    {
+      "name": "TestPairedBETRejectedIdentityStaysRejectedAfterGuaranteeTopUp",
+      "result": "pass"
+    },
+    {
+      "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+      "result": "fail"
+    },
+    {
+      "name": "TestPairedFixtureRollbackPreservesGuaranteeAndBinding",
+      "result": "pass"
+    }
+  ],
+  "new_leaf_results": {
+    "fail": 96,
+    "pass": 19
+  },
+  "production_go_changes": [],
+  "all_previous_default_tests_preserved": true,
+  "financial_suite_ready": false,
+  "vet_exit_code": 0,
+  "graphify_exit_code": 0,
+  "integration_executed": false,
+  "coverage_executed": false,
+  "mutation_executed": false
+}

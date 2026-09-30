@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -117,7 +117,7 @@
+ 		if err = t.ResolveReference(r.ID); err != nil {
+ 			return err
+ 		}
+-		if s.Kind == wager.KindRollback {
++		if s.Kind != wager.KindRollback {
+ 			// CanReference above restricts ROLLBACK to BET/WIN/REFUND,
+ 			// all of which have a defined reversal direction.
+ 			direction, _ = wager.ReversalDirection(r.Kind)

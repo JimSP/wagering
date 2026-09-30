@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.752s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	1.864s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+--- FAIL: TestMoneyPreservesExactValueAcrossArithmeticAndWireFormat (0.00s)
+    semantics_test.go:50: comparison: -9223372036854775808 -9223372036854775808 => -1/<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	0.991s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:47: history changed {    {0 } {0 } {0 } {0 0 <nil>}} INVALID_INPUT: invalid input: ledger entry entry-0 has inconsistent balances
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.593s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=INVALID_INPUT: invalid input: ledger entry l1 has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.885s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.215s
+FAIL

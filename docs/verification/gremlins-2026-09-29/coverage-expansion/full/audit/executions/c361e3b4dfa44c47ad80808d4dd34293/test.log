@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.412s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:55:52 INFO transaction handled correlationId="" messageId="" transactionId=1784d3cd-bcce-4c96-9f68-a7dddc51e063 walletId=c23da194-15e6-4287-8464-5968d98e8a47 providerId=p status=PROCESSED
+2026/09/29 01:55:52 WARN transaction handling failed correlationId="" messageId="" transactionId=56731a57-4faa-4171-b0d1-a0c5879515a9 walletId=c23da194-15e6-4287-8464-5968d98e8a47 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"transactionId":"","status":"","idempotentReplay":false}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.855s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.087s
+FAIL

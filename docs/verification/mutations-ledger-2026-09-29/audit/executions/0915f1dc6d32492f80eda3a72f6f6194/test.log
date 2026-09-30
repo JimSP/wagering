@@ -1,0 +1,38 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.868s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:28:50 INFO transaction handled correlationId="" messageId="" transactionId=21f0c737-3f45-4a93-ac25-72da3e0f186c walletId=a7b67cfb-0c36-4cee-b5f6-e676b7b8e210 providerId=p status=PROCESSED
+2026/09/29 22:28:50 WARN transaction handling failed correlationId="" messageId="" transactionId=ee511124-ca6d-470c-b371-11dd18fb5f2b walletId=a7b67cfb-0c36-4cee-b5f6-e676b7b8e210 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.157s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.997s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=1 subtract=false got={0 } err=money: overflow want=-9223372036854775807
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.813s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: BALANCE_OVERFLOW: settlement reversal overflows counterparty
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.277s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.407s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.534s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.896s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.960s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=money: overflow want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.855s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.547s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.430s
+FAIL

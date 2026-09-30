@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.176s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:15:07 INFO transaction handled correlationId="" messageId="" transactionId=be3a6c12-601f-49ca-a48b-beebc995276f walletId=6c9931a8-7154-40a0-a652-0a9f9a93d41d providerId=p status=PROCESSED
+2026/09/30 00:15:07 WARN transaction handling failed correlationId="" messageId="" transactionId=0fa6304c-8d2d-444a-b8b3-9b21aa29de25 walletId=6c9931a8-7154-40a0-a652-0a9f9a93d41d providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/invalid_reference (0.00s)
+        settlement_audit_test.go:202: got <nil>, want INVALID_INPUT: invalid input
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.523s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.536s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.921s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.582s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/self_reference (0.00s)
+        lifecycle_semantics_test.go:286: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.794s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.042s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.118s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.852s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.359s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.078s
+FAIL

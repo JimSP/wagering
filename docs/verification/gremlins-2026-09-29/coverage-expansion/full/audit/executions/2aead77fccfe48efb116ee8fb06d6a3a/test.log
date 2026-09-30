@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.602s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:56:39 INFO transaction handled correlationId="" messageId="" transactionId=18e6e04c-2c3f-4454-a6c9-df64c5388908 walletId=60008118-c7cf-480a-bba8-56eee8d562f3 providerId=p status=PROCESSED
+2026/09/29 01:56:39 WARN transaction handling failed correlationId="" messageId="" transactionId=2c584d78-392f-4281-bb0e-07eaa3f8031d walletId=60008118-c7cf-480a-bba8-56eee8d562f3 providerId=p transient=false
+--- FAIL: TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation (0.00s)
+    --- FAIL: TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation/full_batch (0.00s)
+        worker_contract_test.go:98: n=21 claims=21 updates=21 metrics=[REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED] err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.875s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.168s
+FAIL

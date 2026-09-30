@@ -1,0 +1,26 @@
+# github.com/alexandre/wagering/internal/domain/wager
+# [github.com/alexandre/wagering/internal/domain/wager]
+internal/domain/wager/types.go:26:42: suspect and: k == KindRefund && k == KindRollback
+ok  	github.com/alexandre/wagering/cmd/wagering	10.299s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:31:31 INFO transaction handled correlationId="" messageId="" transactionId=35c454d6-04b2-422c-995e-ea2c03b8101c walletId=36820be9-08d9-4333-918c-8b25f85943ac providerId=p status=PROCESSED
+2026/09/30 01:31:31 WARN transaction handling failed correlationId="" messageId="" transactionId=f7374b43-e982-49f8-a8fb-5a044952737f walletId=36820be9-08d9-4333-918c-8b25f85943ac providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got INVALID_INPUT: invalid input: ROLLBACK must not carry a reference, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.568s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.680s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.072s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.927s
+FAIL	github.com/alexandre/wagering/internal/domain/wager [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.178s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.677s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.805s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.511s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.161s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.082s
+FAIL

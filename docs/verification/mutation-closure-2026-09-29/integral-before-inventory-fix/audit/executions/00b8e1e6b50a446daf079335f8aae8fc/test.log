@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.892s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:03:01 INFO transaction handled correlationId="" messageId="" transactionId=b221aa42-b2cd-4d00-9272-7d4329298c1c walletId=7426bae0-9b82-4504-8d34-e46ddade8458 providerId=p status=PROCESSED
+2026/09/30 00:03:01 WARN transaction handling failed correlationId="" messageId="" transactionId=28fdfd35-f58a-4b60-bd79-264a431ee87b walletId=7426bae0-9b82-4504-8d34-e46ddade8458 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.04s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.04s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid commitment"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.768s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.203s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.333s
+--- FAIL: TestMutationProofZeroCommitment (0.00s)
+    mutation_regression_test.go:13: zero remaining commitment must coexist with funded participant: invalid settlement distribution: invalid commitment
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.076s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.795s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.025s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.590s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.906s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.515s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.015s
+FAIL

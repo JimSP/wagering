@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.248s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.356s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.971s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.728s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.701s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.587s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.097s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.792s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.836s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.282s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.715s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.336s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.314s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.345s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.340s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.300s
+--- FAIL: TestCommitmentComparisonAcceptsClosedConsumptionAndIndependentStake (0.00s)
+    commitments_test.go:19: unexpected or changed commitment: got={ExternalID:a2 Bet:bet-2 Wallet:WA Guarantee:GA Provider:p Currency:BRL Settlement: Stake:2000 Remaining:2000} want={ExternalID:a2 Bet:bet-2 Wallet:WA Guarantee:GA Provider:p Currency:BRL Settlement: Stake:2000 Remaining:2000}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.847s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.897s
+FAIL

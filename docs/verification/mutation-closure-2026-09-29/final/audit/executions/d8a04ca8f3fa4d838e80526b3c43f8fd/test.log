@@ -1,0 +1,40 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.834s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:02:19 INFO transaction handled correlationId="" messageId="" transactionId=e5efc859-0287-4451-84fb-b252409ef090 walletId=cddce297-1bbe-46d6-a8d4-d5304e9e1568 providerId=p status=PROCESSED
+2026/09/30 01:02:19 WARN transaction handling failed correlationId="" messageId="" transactionId=327dc546-2589-4605-b118-bd425e3b787b walletId=cddce297-1bbe-46d6-a8d4-d5304e9e1568 providerId=p transient=false
+--- FAIL: TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime (0.00s)
+    --- FAIL: TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime/expires (0.00s)
+panic: runtime error: index out of range [8] with length 8 [recovered, repanicked]
+
+goroutine 369 [running]:
+testing.tRunner.func1.2({0x104db9b50, 0x3bf702b36510})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104db9b50?, 0x3bf702b36510?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase_test.TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime.func1(0x3bf702cff448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/app/usecase/journey_semantics_test.go:380 +0x1300
+testing.tRunner(0x3bf702cff448, 0x3bf702cb4c60)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 368
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.712s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.802s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.019s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.673s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.264s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.139s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.655s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.556s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.988s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.678s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.134s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.266s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.815s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.779s
+ok  	github.com/alexandre/wagering/internal/platform/worker	8.951s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -12,7 +12,7 @@
+ func (u *SubmitTransaction) meta(t *wager.Transaction) event.Meta {
+ 	s := t.Snapshot()
+ 	cor := s.CorrelationID
+-	if cor == "" {
++	if cor != "" {
+ 		cor = s.ID
+ 	}
+ 	return event.Meta{EventID: u.ids.NewID(), AggregateID: s.WalletID, CorrelationID: cor, CausationID: s.CausationID, OccurredAt: u.clock.Now()}

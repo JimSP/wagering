@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.089s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	10.561s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.530s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.393s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.782s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_commitment (0.00s)
+        mutation_regression_test.go:62: unbound commitment accepted: {Failure: Wait:false ReferenceID:bet Guarantee:{ID:guarantee PlayerID:player Balance:{minor:200 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:0 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.519s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.632s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.459s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.741s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.274s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.623s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.276s
+ok  	github.com/alexandre/wagering/internal/platform/logging	11.247s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	11.314s
+ok  	github.com/alexandre/wagering/internal/platform/sys	11.088s
+ok  	github.com/alexandre/wagering/internal/platform/worker	11.192s
+FAIL

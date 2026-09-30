@@ -1,0 +1,52 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.512s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:09:13 INFO transaction handled correlationId="" messageId="" transactionId=92798bab-640e-4172-ac94-e82ff67cb9e0 walletId=617bd919-bb3e-43ce-9aec-f51f36867a0a providerId=p status=PROCESSED
+2026/09/29 02:09:13 WARN transaction handling failed correlationId="" messageId="" transactionId=49174c19-e9b4-4227-8e28-6342732aacc1 walletId=617bd919-bb3e-43ce-9aec-f51f36867a0a providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.03s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/win (0.00s)
+        http_contract_test.go:154: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000011","status":"PROCESSED","idempotentReplay":false,"balance":{"amount":"87.00","currency":"BRL"}}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000011","status":"PROCESSED","balance":{"amount":"80.00","currency":"BRL"},"idempotentReplay":false}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.838s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+--- FAIL: TestNilWalletMovementsReturnDomainError (0.00s)
+    --- FAIL: TestNilWalletMovementsReturnDomainError/credit (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x58 pc=0x102e2ebe4]
+
+goroutine 39 [running]:
+testing.tRunner.func1.2({0x102f8f9f8, 0x102fc91d0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102f8f9f8?, 0x102fc91d0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Credit(0x0, {0x131b0590?, {0x102e3bcad?, 0x6abb47f9?}}, {0x4d5cc002ee48?, 0x102da36cc?, 0x102fd3b40?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/domain/wallet/wallet.go:102 +0x154
+github.com/alexandre/wagering/internal/domain/wallet_test.TestNilWalletMovementsReturnDomainError.func1(0x4d5cc006cd88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/domain/wallet/input_contract_test.go:31 +0x7c
+testing.tRunner(0x4d5cc006cd88, 0x4d5cc000e530)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 38
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	1.021s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.331s
+FAIL

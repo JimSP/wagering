@@ -1,0 +1,11 @@
+--- original/internal/infra/auth/middleware.go
++++ mutant/internal/infra/auth/middleware.go
+@@ -56,7 +56,7 @@
+ // RequireProvider requires a provider identity (providerId claim).
+ func RequireProvider(next http.Handler) http.Handler {
+ 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+-		if p, ok := PrincipalFrom(r.Context()); !ok || p.ProviderID == "" {
++		if p, ok := PrincipalFrom(r.Context()); !ok && p.ProviderID == "" {
+ 			deny(w, http.StatusForbidden, "FORBIDDEN")
+ 			return
+ 		}

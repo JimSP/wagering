@@ -1,0 +1,1885 @@
+--- before/internal/app/usecase/failpoint_contract_test.go
++++ after/internal/app/usecase/failpoint_contract_test.go
+@@ -0,0 +1,75 @@
++//go:build faults
++
++package usecase
++
++import (
++	"context"
++	"github.com/alexandre/wagering/internal/domain/event"
++	"os"
++	"os/exec"
++	"path/filepath"
++	"testing"
++	"time"
++)
++
++func TestPublishCrashOccursOnlyAfterSuccessfulSend(t *testing.T) {
++	mode := os.Getenv("WAGERING_PUBLISH_CHILD")
++	if mode != "" {
++		ev, err := event.NewRejected(event.Meta{EventID: "event", AggregateID: "wallet", CorrelationID: "corr", OccurredAt: pathTime}, event.RejectedData{TransactionID: "tx", WalletID: "wallet", ProviderID: "p", ExternalTransactionID: "ext", Kind: "BET", FailureCode: "INSUFFICIENT_FUNDS"}).ToOutgoing()
++		if err != nil {
++			t.Fatal(err)
++		}
++		rescheduled := 0
++		repo := outboxStub{claim: func(context.Context, time.Time, int, time.Duration) ([]event.Outgoing, error) {
++			return []event.Outgoing{ev}, nil
++		}, mark: func(context.Context, string, int, time.Time) error { t.Fatal("marked before crash"); return nil }, reschedule: func(context.Context, string, int, time.Time) error { rescheduled++; return nil }, oldest: func(context.Context) (*time.Time, error) { return nil, nil }}
++		u := &uowStub{tx: txStub{o: repo}}
++		pub := publishFunc(func(context.Context, event.Outgoing) error {
++			if mode == "failure" {
++				return errPort
++			}
++			return nil
++		})
++		_, err = NewPublishOutbox(u, pub, clockFunc(func() time.Time { return pathTime }), &metricsSpy{}).RunOnce(context.Background())
++		if err != nil {
++			t.Fatal(err)
++		}
++		if mode == "success" {
++			t.Fatal("successful send did not trigger crash")
++		}
++		if rescheduled != 1 {
++			t.Fatal(rescheduled)
++		}
++		return
++	}
++	exe, err := os.Executable()
++	if err != nil {
++		t.Fatal(err)
++	}
++	for _, mode := range []string{"success", "failure"} {
++		t.Run(mode, func(t *testing.T) {
++			dir := t.TempDir()
++			ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
++			defer cancel()
++			cmd := exec.CommandContext(ctx, exe, "-test.run=^TestPublishCrashOccursOnlyAfterSuccessfulSend$")
++			cmd.Env = append(os.Environ(), "WAGERING_PUBLISH_CHILD="+mode, "FAILPOINT=after_publish_before_mark", "FAILPOINT_DIR="+dir)
++			out, e := cmd.CombinedOutput()
++			if mode == "success" {
++				exit, ok := e.(*exec.ExitError)
++				if !ok || exit.ExitCode() != 86 {
++					t.Fatalf("exit=%v output=%s", e, out)
++				}
++				if _, e = os.Stat(filepath.Join(dir, "after_publish_before_mark")); e != nil {
++					t.Fatal(e)
++				}
++			} else {
++				if e != nil {
++					t.Fatalf("unexpected crash: %v %s", e, out)
++				}
++				if _, e = os.Stat(filepath.Join(dir, "after_publish_before_mark")); !os.IsNotExist(e) {
++					t.Fatal("failure triggered marker", e)
++				}
++			}
++		})
++	}
++}
+--- before/internal/app/usecase/outbox_paths_test.go
++++ after/internal/app/usecase/outbox_paths_test.go
+@@ -30,7 +30,7 @@
+ 			m := &metricsSpy{lag: time.Hour}
+ 			repo := outboxStub{
+ 				claim: func(_ context.Context, now time.Time, limit int, lease time.Duration) ([]event.Outgoing, error) {
+-					if now != pathTime || limit != 1 || lease != OutboxLease {
++					if now != pathTime || limit != 1 || lease != 30*time.Second {
+ 						t.Fatal("lease contract")
+ 					}
+ 					if stage == "claim failure" {
+--- before/internal/app/usecase/worker_contract_test.go
++++ after/internal/app/usecase/worker_contract_test.go
+@@ -112,3 +112,19 @@
+ 		})
+ 	}
+ }
++
++func TestEmptyReferenceQueueReturnsWithoutRepeatedClaims(t *testing.T) {
++	claims := 0
++	repo := transactionStub{claim: func(context.Context, time.Time, int) ([]*wager.Transaction, error) {
++		claims++
++		if claims > 1 {
++			t.Fatal("empty queue was queried again without progress")
++		}
++		return nil, nil
++	}}
++	u := &uowStub{tx: txStub{t: repo}}
++	n, e := NewProcessPendingReferences(u, clockFunc(func() time.Time { return pathTime }), &metricsSpy{}, pathSubmit(u)).RunOnce(context.Background())
++	if n != 0 || e != nil || claims != 1 {
++		t.Fatalf("n=%d error=%v claims=%d", n, e, claims)
++	}
++}
+--- before/internal/domain/money/arithmetic_contract_test.go
++++ after/internal/domain/money/arithmetic_contract_test.go
+@@ -0,0 +1,42 @@
++package money_test
++
++import (
++	"github.com/alexandre/wagering/internal/domain/money"
++	"math"
++	"math/big"
++	"testing"
++)
++
++func TestArithmeticBoundaryMatrixAndErrorOutput(t *testing.T) {
++	values := []int64{math.MinInt64, math.MinInt64 + 1, -2, -1, 0, 1, 2, math.MaxInt64 - 1, math.MaxInt64}
++	for _, currency := range []string{"BRL", "USD", "EUR"} {
++		for _, x := range values {
++			for _, y := range values {
++				a, _ := money.FromMinor(x, currency)
++				b, _ := money.FromMinor(y, currency)
++				for _, subtract := range []bool{false, true} {
++					want := big.NewInt(x)
++					var got money.Money
++					var err error
++					if subtract {
++						want.Sub(want, big.NewInt(y))
++						got, err = a.Sub(b)
++					} else {
++						want.Add(want, big.NewInt(y))
++						got, err = a.Add(b)
++					}
++					if !want.IsInt64() {
++						if err != money.ErrOverflow || err.Error() != "money: overflow" || got != (money.Money{}) {
++							t.Fatalf("x=%d y=%d subtract=%v got=%v err=%v", x, y, subtract, got, err)
++						}
++					} else if err != nil || got.Minor() != want.Int64() || got.Currency() != currency {
++						t.Fatalf("x=%d y=%d subtract=%v got=%v err=%v want=%v", x, y, subtract, got, err, want)
++					}
++					if a.Minor() != x || b.Minor() != y {
++						t.Fatal("operands changed")
++					}
++				}
++			}
++		}
++	}
++}
+--- before/internal/domain/wager/error_text_contract_test.go
++++ after/internal/domain/wager/error_text_contract_test.go
+@@ -0,0 +1,46 @@
++package wager_test
++
++import (
++	"errors"
++	"github.com/alexandre/wagering/internal/domain/wager"
++	"reflect"
++	"testing"
++	"time"
++)
++
++func TestPendingRetryErrorsHaveExactText(t *testing.T) {
++	tx := external(t, wager.KindRefund)
++	base := tx.Snapshot()
++	expiry := base.CreatedAt.Add(time.Hour)
++	for _, c := range []struct {
++		name     string
++		attempts int
++		expires  *time.Time
++		want     string
++	}{
++		{"fresh", 0, nil, ""},
++		{"attempt only", 1, nil, "INVALID_INPUT: invalid input: retry history on initial pending state"},
++		{"expiry only", 0, &expiry, "INVALID_INPUT: invalid input: retry history on initial pending state"},
++		{"both", 1, &expiry, "INVALID_INPUT: invalid input: retry history on initial pending state"},
++		{"negative", -1, nil, "INVALID_INPUT: invalid input: invalid snapshot"},
++	} {
++		t.Run(c.name, func(t *testing.T) {
++			s := base
++			s.Attempts = c.attempts
++			s.ExpiresAt = c.expires
++			got, err := wager.Rehydrate(s)
++			if c.want == "" {
++				if err != nil || got == nil || !reflect.DeepEqual(got.Snapshot(), s) {
++					t.Fatal(got, err)
++				}
++			} else {
++				if got != nil || !errors.Is(err, wager.ErrInvalidInput) || err.Error() != c.want {
++					t.Fatalf("got=%v err=%v want=%q", got, err, c.want)
++				}
++			}
++			if !reflect.DeepEqual(tx.Snapshot(), base) {
++				t.Fatal("input changed")
++			}
++		})
++	}
++}
+--- before/internal/domain/wager/input_contract_test.go
++++ after/internal/domain/wager/input_contract_test.go
+@@ -29,8 +29,17 @@
+ 		t.Run(name, func(t *testing.T) {
+ 			s := valid
+ 			damage(&s)
++			want := "INVALID_INPUT: invalid input: invalid opening snapshot"
++			switch name {
++			case "id":
++				want = `INVALID_INPUT: invalid input: corrupted snapshot ""`
++			case "wallet":
++				want = `INVALID_INPUT: invalid input: corrupted snapshot "opening"`
++			case "player", "created", "updated", "backwards", "negative attempts":
++				want = "INVALID_INPUT: invalid input: invalid snapshot"
++			}
+ 			got, err := wager.Rehydrate(s)
+-			if got != nil || !errors.Is(err, wager.ErrInvalidInput) {
++			if got != nil || !errors.Is(err, wager.ErrInvalidInput) || err.Error() != want {
+ 				t.Fatalf("accepted %+v: %v %v", s, got, err)
+ 			}
+ 			if !reflect.DeepEqual(original.Snapshot(), valid) {
+@@ -54,8 +63,15 @@
+ 		t.Run(name, func(t *testing.T) {
+ 			s := valid
+ 			damage(&s)
++			want := "INVALID_INPUT: invalid input: invalid pending reference"
++			if name == "reference absent" {
++				want = "INVALID_INPUT: invalid input: referenceExternalTransactionId is required for REFUND"
++			}
++			if name == "next equal updated" {
++				want = "INVALID_INPUT: invalid input: invalid reference attempt"
++			}
+ 			got, err := wager.Rehydrate(s)
+-			if got != nil || !errors.Is(err, wager.ErrInvalidInput) {
++			if got != nil || !errors.Is(err, wager.ErrInvalidInput) || err.Error() != want {
+ 				t.Fatalf("accepted %+v: %v %v", s, got, err)
+ 			}
+ 		})
+@@ -63,7 +79,7 @@
+ }
+ func TestNilTransactionReturnsDomainError(t *testing.T) {
+ 	var tx *wager.Transaction
+-	if err := tx.ResolveReference("reference"); !errors.Is(err, wager.ErrInvalidInput) {
++	if err := tx.ResolveReference("reference"); !errors.Is(err, wager.ErrInvalidInput) || err.Error() != "INVALID_INPUT: invalid input: uninitialized transaction" {
+ 		t.Fatalf("err=%v", err)
+ 	}
+ }
+--- before/internal/infra/postgres/late_error_integration_test.go
++++ after/internal/infra/postgres/late_error_integration_test.go
+@@ -0,0 +1,42 @@
++//go:build integration
++
++package postgres
++
++import (
++	"context"
++	"errors"
++	"github.com/jackc/pgx/v5"
++	"github.com/jackc/pgx/v5/pgconn"
++	"os"
++	"testing"
++	"time"
++)
++
++type lateErrorQuery struct {
++	dbtx
++	conn *pgx.Conn
++}
++
++func (q lateErrorQuery) Query(ctx context.Context, _ string, _ ...any) (pgx.Rows, error) {
++	// Two valid rows followed by a server-side error. The page needs only one
++	// entry and one lookahead row; pgx discovers the error when rows are closed.
++	return q.conn.Query(ctx, `SELECT n::text,'tx','CREDIT',100::bigint,'BRL',0::bigint,100::bigint,'2026-01-02T03:04:05Z'::timestamptz,(n+0/(3-n))::bigint FROM generate_series(1,3) n`)
++}
++func TestLedgerPropagatesLatePostgresError(t *testing.T) {
++	url := os.Getenv("TEST_DATABASE_ADMIN_URL")
++	if url == "" {
++		t.Fatal("TEST_DATABASE_ADMIN_URL required")
++	}
++	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
++	defer cancel()
++	conn, err := pgx.Connect(ctx, url)
++	if err != nil {
++		t.Fatal(err)
++	}
++	defer conn.Close(context.Background())
++	_, err = (ledgerRepo{lateErrorQuery{conn: conn}}).List(ctx, "wallet", "", 1)
++	var pe *pgconn.PgError
++	if !errors.As(err, &pe) || pe.Code != "22012" || pe.Message != "division by zero" {
++		t.Fatalf("lost late PostgreSQL error: %v", err)
++	}
++}
+--- before/internal/infra/postgres/messaging_contract_test.go
++++ after/internal/infra/postgres/messaging_contract_test.go
+@@ -0,0 +1,105 @@
++package postgres
++
++import (
++	"context"
++	"github.com/alexandre/wagering/internal/app/port"
++	"github.com/alexandre/wagering/internal/domain/event"
++	"reflect"
++	"testing"
++	"time"
++)
++
++func outgoing(t *testing.T) event.Outgoing {
++	t.Helper()
++	e, err := event.NewProcessed(event.Meta{EventID: "event", AggregateID: "wallet", CorrelationID: "corr", OccurredAt: repoTime}, event.ProcessedData{TransactionID: "tx", Kind: "OPENING", WalletID: "wallet", PlayerID: "player", Money: event.MoneyDTO{Amount: "1.00", Currency: "BRL"}}).ToOutgoing()
++	if err != nil {
++		t.Fatal(err)
++	}
++	return e
++}
++func TestInboxStatesAndCompletion(t *testing.T) {
++	ctx := context.Background()
++	d := &testDB{}
++	r := inboxRepo{d}
++	for _, c := range []struct {
++		hash string
++		at   *time.Time
++		want port.InboxState
++	}{{"hash", nil, port.InboxNew}, {"hash", &repoTime, port.InboxCompleted}, {"other", nil, port.InboxConflict}, {"other", &repoTime, port.InboxConflict}} {
++		d.row = testRow{values: []any{c.hash, c.at}}
++		got, e := r.Begin(ctx, "consumer", "message", "hash", repoTime)
++		requireError(t, e, nil)
++		if got != c.want {
++			t.Fatal(got, c.want)
++		}
++		requireArgs(t, d, "consumer", "message")
++	}
++	d.err = repoFailure
++	state, e := r.Begin(ctx, "c", "m", "h", repoTime)
++	requireError(t, e, repoFailure)
++	if state != port.InboxNew {
++		t.Fatal(state)
++	}
++	d.err = nil
++	d.row = testRow{err: repoFailure}
++	_, e = r.Begin(ctx, "c", "m", "h", repoTime)
++	requireError(t, e, repoFailure)
++	requireError(t, r.Complete(ctx, "c", "m", repoTime), nil)
++	requireArgs(t, d, "c", "m", repoTime)
++	d.err = repoFailure
++	requireError(t, r.Complete(ctx, "c", "m", repoTime), repoFailure)
++}
++func TestOutboxLeasePayloadAndErrors(t *testing.T) {
++	ctx := context.Background()
++	ev := outgoing(t)
++	d := &testDB{}
++	r := outboxRepo{d}
++	requireError(t, r.Add(ctx, ev), nil)
++	requireArgs(t, d, ev.EventID(), ev.AggregateID(), ev.Type(), ev.Payload(), repoTime)
++	row := testRow{values: []any{ev.EventID(), ev.AggregateID(), ev.Type(), ev.Payload(), repoTime, 2}}
++	d.rows = &testRows{records: []testRow{row}}
++	got, e := r.ClaimBatch(ctx, repoTime, 3, 10*time.Second)
++	requireError(t, e, nil)
++	requireArgs(t, d, repoTime, repoTime.Add(10*time.Second), 3)
++	if len(got) != 1 || got[0].Attempts() != 2 || got[0].EventID() != ev.EventID() || !reflect.DeepEqual(got[0].Payload(), ev.Payload()) || !d.rows.closed {
++		t.Fatal(got)
++	}
++	for _, c := range []struct{ query, scan, iterate error }{{repoFailure, nil, nil}, {nil, repoFailure, nil}, {nil, nil, repoFailure}} {
++		d.err = c.query
++		d.rows = &testRows{err: c.iterate}
++		if c.scan != nil {
++			d.rows.records = []testRow{{err: c.scan}}
++		}
++		_, e = r.ClaimBatch(ctx, repoTime, 1, time.Second)
++		requireError(t, e, repoFailure)
++		if c.query == nil && !d.rows.closed {
++			t.Fatal("rows leaked")
++		}
++	}
++	d.err = nil
++	row.values[0] = ""
++	d.rows = &testRows{records: []testRow{row}}
++	got, e = r.ClaimBatch(ctx, repoTime, 1, time.Second)
++	if e == nil || got != nil {
++		t.Fatal(got, e)
++	}
++	for _, err := range []error{nil, repoFailure} {
++		d.err = err
++		requireError(t, r.Add(ctx, ev), err)
++		requireError(t, r.MarkPublished(ctx, "event", 2, repoTime), err)
++		requireArgs(t, d, "event", 2, repoTime)
++		requireError(t, r.Reschedule(ctx, "event", 2, repoTime), err)
++		requireArgs(t, d, "event", 2, repoTime)
++	}
++	for _, at := range []*time.Time{nil, &repoTime} {
++		d.row = testRow{values: []any{at}}
++		got, e := r.OldestPending(ctx)
++		requireError(t, e, nil)
++		if !reflect.DeepEqual(got, at) {
++			t.Fatal(got)
++		}
++	}
++	d.row = testRow{err: repoFailure}
++	_, e = r.OldestPending(ctx)
++	requireError(t, e, repoFailure)
++}
+--- before/internal/infra/postgres/pool_contract_test.go
++++ after/internal/infra/postgres/pool_contract_test.go
+@@ -0,0 +1,83 @@
++package postgres
++
++import (
++	"context"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"go.uber.org/fx"
++	"strings"
++	"testing"
++	"time"
++)
++
++type poolLifecycle struct{ hooks []fx.Hook }
++
++func (l *poolLifecycle) Append(h fx.Hook) { l.hooks = append(l.hooks, h) }
++func TestPoolConfigurationAndFailedStartup(t *testing.T) {
++	lc := &poolLifecycle{}
++	p, e := NewPool(lc, config.Config{DatabaseURL: "://bad"})
++	if e == nil || p != nil || !strings.HasPrefix(e.Error(), "parse DATABASE_URL: ") || len(lc.hooks) != 0 {
++		t.Fatal(p, e)
++	}
++	p, e = NewPool(lc, config.Config{DatabaseURL: "postgres://user:pass@127.0.0.1:1/db?connect_timeout=1"})
++	if e != nil {
++		t.Fatal(e)
++	}
++	defer p.Close()
++	cfg := p.Config()
++	if cfg.ConnConfig.RuntimeParams["statement_timeout"] != "10000" || cfg.ConnConfig.RuntimeParams["lock_timeout"] != "8000" {
++		t.Fatal(cfg.ConnConfig.RuntimeParams)
++	}
++	u := NewUnitOfWork(p)
++	if u.pool != p {
++		t.Fatal("wrong pool")
++	}
++	r := NewReadiness(p)
++	if r.Name() != "postgres" {
++		t.Fatal(r.Name())
++	}
++	ctx, cancel := context.WithCancel(context.Background())
++	cancel()
++	if e = r.Check(ctx); e == nil {
++		t.Fatal("cancel ignored")
++	}
++	if len(lc.hooks) != 1 {
++		t.Fatal(lc.hooks)
++	}
++	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
++	defer cancel()
++	if e = lc.hooks[0].OnStart(ctx); e == nil {
++		t.Fatal("offline DB accepted")
++	}
++	closedCtx, closedCancel := context.WithTimeout(context.Background(), time.Second)
++	defer closedCancel()
++	if e = p.Ping(closedCtx); e == nil || e.Error() != "closed pool" {
++		t.Fatalf("pool leaked after failed startup: %v", e)
++	}
++	if e = lc.hooks[0].OnStop(ctx); e != nil {
++		t.Fatal(e)
++	}
++}
++
++type pingFunc func(context.Context) error
++
++func (f pingFunc) Ping(ctx context.Context) error { return f(ctx) }
++func TestReadinessDeadlineAndCleanup(t *testing.T) {
++	for _, cause := range []error{nil, repoFailure} {
++		var captured context.Context
++		r := &Readiness{pool: pingFunc(func(ctx context.Context) error {
++			captured = ctx
++			deadline, ok := ctx.Deadline()
++			remaining := time.Until(deadline)
++			if !ok || remaining < 1900*time.Millisecond || remaining > 2*time.Second {
++				t.Fatalf("readiness deadline: %v", remaining)
++			}
++			return cause
++		})}
++		if err := r.Check(context.Background()); err != cause {
++			t.Fatalf("got=%v want=%v", err, cause)
++		}
++		if captured == nil || captured.Err() != context.Canceled {
++			t.Fatal("readiness context not released")
++		}
++	}
++}
+--- before/internal/infra/postgres/repository_contract_test.go
++++ after/internal/infra/postgres/repository_contract_test.go
+@@ -0,0 +1,416 @@
++package postgres
++
++import (
++	"context"
++	"encoding/base64"
++	"errors"
++	"reflect"
++	"strings"
++	"testing"
++	"time"
++
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"github.com/alexandre/wagering/internal/domain/money"
++	"github.com/alexandre/wagering/internal/domain/wager"
++	"github.com/alexandre/wagering/internal/domain/wallet"
++	"github.com/jackc/pgx/v5"
++	"github.com/jackc/pgx/v5/pgconn"
++)
++
++var repoTime = time.Date(2026, 1, 2, 3, 4, 5, 0, time.UTC)
++var repoFailure = errors.New("database unavailable")
++
++type testRow struct {
++	values []any
++	err    error
++}
++
++func (r testRow) Scan(dest ...any) error {
++	if r.err != nil {
++		return r.err
++	}
++	if len(dest) != len(r.values) {
++		panic("incorrect column count")
++	}
++	for i, v := range r.values {
++		d := reflect.ValueOf(dest[i]).Elem()
++		if v == nil {
++			d.SetZero()
++		} else {
++			d.Set(reflect.ValueOf(v))
++		}
++	}
++	return nil
++}
++
++type testRows struct {
++	closeErr error
++	pgx.Rows
++	records []testRow
++	index   int
++	closed  bool
++	err     error
++}
++
++func (r *testRows) Next() bool {
++	if r.index >= len(r.records) {
++		return false
++	}
++	r.index++
++	return true
++}
++func (r *testRows) Scan(d ...any) error { return r.records[r.index-1].Scan(d...) }
++func (r *testRows) Close() {
++	if !r.closed {
++		r.closed = true
++		if r.err == nil {
++			r.err = r.closeErr
++		}
++	}
++}
++func (r *testRows) Err() error { return r.err }
++
++type testDB struct {
++	tag   string
++	err   error
++	row   testRow
++	rows  *testRows
++	sql   string
++	args  []any
++	calls int
++}
++
++func (d *testDB) capture(sql string, a []any) { d.sql = sql; d.args = a; d.calls++ }
++func (d *testDB) Exec(_ context.Context, s string, a ...any) (pgconn.CommandTag, error) {
++	d.capture(s, a)
++	return pgconn.NewCommandTag(d.tag), d.err
++}
++func (d *testDB) QueryRow(_ context.Context, s string, a ...any) pgx.Row {
++	d.capture(s, a)
++	return d.row
++}
++func (d *testDB) Query(_ context.Context, s string, a ...any) (pgx.Rows, error) {
++	d.capture(s, a)
++	return d.rows, d.err
++}
++func repoMoney(t *testing.T, n int64) money.Money {
++	t.Helper()
++	m, e := money.FromMinor(n, "BRL")
++	if e != nil {
++		t.Fatal(e)
++	}
++	return m
++}
++func requireError(t *testing.T, got, want error) {
++	t.Helper()
++	target := want
++	if errors.Unwrap(want) != nil {
++		target = errors.Unwrap(want)
++	}
++	if !errors.Is(got, target) {
++		t.Fatalf("error=%v want=%v", got, want)
++	}
++	if want != nil && got.Error() != want.Error() {
++		t.Fatalf("text=%q want=%q", got.Error(), want.Error())
++	}
++}
++func requireArgs(t *testing.T, d *testDB, want ...any) {
++	t.Helper()
++	if !reflect.DeepEqual(d.args, want) {
++		t.Fatalf("args=%#v want=%#v", d.args, want)
++	}
++}
++
++func TestWalletPersistenceContract(t *testing.T) {
++	ctx := context.Background()
++	w, e := wallet.New("wallet", "player", repoMoney(t, 100), repoTime)
++	if e != nil {
++		t.Fatal(e)
++	}
++	d := &testDB{}
++	r := walletRepo{d}
++	requireError(t, r.Create(ctx, w), nil)
++	s := w.Snapshot()
++	requireArgs(t, d, s.ID, s.PlayerID, "BRL", int64(100), s.Version, repoTime, repoTime)
++	for _, c := range []struct{ err, want error }{{repoFailure, repoFailure}, {&pgconn.PgError{Code: "23505"}, apperr.ErrWalletExists}, {&pgconn.PgError{Code: "23503"}, &pgconn.PgError{Code: "23503"}}} {
++		d.err = c.err
++		got := r.Create(ctx, w)
++		if c.err == c.want || c.want == apperr.ErrWalletExists {
++			requireError(t, got, c.want)
++		} else if got != c.err {
++			t.Fatal(got)
++		}
++	}
++	d.err = nil
++	for _, c := range []struct {
++		tag       string
++		err, want error
++	}{{"UPDATE 1", nil, nil}, {"UPDATE 0", nil, apperr.ErrConcurrentModification}, {"UPDATE 2", nil, apperr.ErrConcurrentModification}, {"", repoFailure, repoFailure}} {
++		d.tag = c.tag
++		d.err = c.err
++		requireError(t, r.Save(ctx, w, 7), c.want)
++		requireArgs(t, d, "wallet", int64(100), s.Version, repoTime, int64(7))
++	}
++	d.err = nil
++	d.row = testRow{values: []any{"wallet", "player", "BRL", int64(100), s.Version, repoTime, repoTime}}
++	for _, lock := range []bool{false, true} {
++		var got *wallet.Wallet
++		var err error
++		if lock {
++			got, err = r.GetForUpdate(ctx, "wallet")
++		} else {
++			got, err = r.Get(ctx, "wallet")
++		}
++		requireError(t, err, nil)
++		if got == nil || !reflect.DeepEqual(got.Snapshot(), s) {
++			t.Fatal(got.Snapshot())
++		}
++		requireArgs(t, d, "wallet")
++		if strings.Contains(d.sql, "FOR NO KEY UPDATE") != lock {
++			t.Fatal(d.sql)
++		}
++	}
++	for _, cause := range []error{pgx.ErrNoRows, repoFailure} {
++		d.row = testRow{err: cause}
++		got, err := r.Get(ctx, "wallet")
++		want := cause
++		if cause == pgx.ErrNoRows {
++			want = apperr.ErrWalletNotFound
++		}
++		requireError(t, err, want)
++		if got != nil {
++			t.Fatal(got)
++		}
++	}
++	d.row = testRow{values: []any{"wallet", "player", "XXX", int64(100), s.Version, repoTime, repoTime}}
++	got, err := r.Get(ctx, "wallet")
++	requireError(t, err, money.ErrInvalidCurrency)
++	if got != nil {
++		t.Fatal(got)
++	}
++}
++
++func opening(t *testing.T) *wager.Transaction {
++	t.Helper()
++	v, e := wager.NewOpening("tx", "wallet", "player", repoMoney(t, 100), repoTime)
++	if e != nil {
++		t.Fatal(e)
++	}
++	return v
++}
++func transactionRow(s wager.Snapshot) testRow {
++	var b *int64
++	if s.BalanceAfter != nil {
++		v := s.BalanceAfter.Minor()
++		b = &v
++	}
++	return testRow{values: []any{s.ID, s.Origin, s.ProviderID, s.ExternalID, s.IdempotencyKey, s.PayloadHash, s.WalletID, s.PlayerID, s.RoundID, s.GameID, s.Kind, s.Amount.Minor(), s.Amount.Currency(), s.ReferenceExternalID, s.ReferenceID, s.Status, s.FailureCode, b, s.Attempts, s.NextAttemptAt, s.ExpiresAt, s.CreatedAt, s.UpdatedAt, s.CorrelationID, s.CausationID}}
++}
++func TestTransactionPersistenceContract(t *testing.T) {
++	ctx := context.Background()
++	tx := opening(t)
++	s := tx.Snapshot()
++	d := &testDB{tag: "INSERT 0 1", row: transactionRow(s)}
++	r := transactionRepo{d}
++	requireError(t, r.Insert(ctx, tx), nil)
++	if strings.Contains(d.sql, "ON CONFLICT") || len(d.args) != 25 || !reflect.DeepEqual(d.args, transactionRow(s).values) {
++		t.Fatalf("insert args=%#v", d.args)
++	}
++	ok, err := r.InsertPending(ctx, tx)
++	if !ok || err != nil || (!strings.HasPrefix(d.sql, "INSERT INTO wager_transactions(") || !strings.HasSuffix(d.sql, " ON CONFLICT DO NOTHING")) {
++		t.Fatal(ok, err, d.sql)
++	}
++	d.tag = "INSERT 0 0"
++	ok, err = r.InsertPending(ctx, tx)
++	if ok || err != nil {
++		t.Fatal(ok, err)
++	}
++	d.err = repoFailure
++	requireError(t, r.Insert(ctx, tx), repoFailure)
++	d.err = nil
++	for _, get := range []func() (*wager.Transaction, error){func() (*wager.Transaction, error) { return r.FindByID(ctx, "tx") }, func() (*wager.Transaction, error) { return r.FindByIdempotencyKey(ctx, "provider", "key") }, func() (*wager.Transaction, error) { return r.FindByExternalID(ctx, "provider", "external") }} {
++		got, e := get()
++		requireError(t, e, nil)
++		if got == nil || !reflect.DeepEqual(got.Snapshot(), s) {
++			t.Fatal(got.Snapshot())
++		}
++	}
++	for _, c := range []struct {
++		tag       string
++		err, want error
++	}{{"UPDATE 1", nil, nil}, {"UPDATE 0", nil, apperr.ErrConcurrentModification}, {"UPDATE 2", nil, apperr.ErrConcurrentModification}, {"", repoFailure, repoFailure}} {
++		d.tag = c.tag
++		d.err = c.err
++		requireError(t, r.Update(ctx, tx), c.want)
++		requireArgs(t, d, s.ID, s.ReferenceID, s.Status, s.FailureCode, transactionRow(s).values[17], s.Attempts, s.NextAttemptAt, s.ExpiresAt, s.UpdatedAt)
++	}
++	d.err = nil
++	d.rows = &testRows{records: []testRow{transactionRow(s)}}
++	got, e := r.ClaimDue(ctx, repoTime, 20)
++	requireError(t, e, nil)
++	requireArgs(t, d, repoTime, 20)
++	if len(got) != 1 || !reflect.DeepEqual(got[0].Snapshot(), s) || !d.rows.closed {
++		t.Fatal(got)
++	}
++	for _, c := range []struct{ query, scan, iterate error }{{repoFailure, nil, nil}, {nil, repoFailure, nil}, {nil, nil, repoFailure}} {
++		d.err = c.query
++		d.rows = &testRows{err: c.iterate}
++		if c.scan != nil {
++			d.rows.records = []testRow{{err: c.scan}}
++		}
++		_, e = r.ClaimDue(ctx, repoTime, 20)
++		requireError(t, e, repoFailure)
++		if c.query == nil && !d.rows.closed {
++			t.Fatal("rows leaked")
++		}
++	}
++	d.err = nil
++	for _, yes := range []bool{false, true} {
++		d.row = testRow{values: []any{yes}}
++		got, e := r.HasReversal(ctx, "ref")
++		requireError(t, e, nil)
++		if got != yes {
++			t.Fatal(got)
++		}
++		requireArgs(t, d, "ref")
++	}
++	d.row = testRow{err: repoFailure}
++	_, e = r.HasReversal(ctx, "ref")
++	requireError(t, e, repoFailure)
++	for _, cause := range []error{pgx.ErrNoRows, repoFailure} {
++		v, e := scanTx(testRow{err: cause})
++		want := cause
++		if cause == pgx.ErrNoRows {
++			want = apperr.ErrNotFound
++		}
++		requireError(t, e, want)
++		if v != nil {
++			t.Fatal(v)
++		}
++	}
++	bad := transactionRow(s)
++	bad.values[12] = "XXX"
++	v, e := scanTx(bad)
++	requireError(t, e, money.ErrInvalidCurrency)
++	if v != nil {
++		t.Fatal(v)
++	}
++	// Pending transactions have no balance result; persistence must preserve nil.
++	pending, e := wager.NewExternal(wager.ExternalParams{ID: "pending", ProviderID: "p", ExternalID: "e", IdempotencyKey: "k", PayloadHash: "h", WalletID: "w", PlayerID: "p", RoundID: "r", GameID: "g", Kind: wager.KindBet, Amount: repoMoney(t, 1)}, repoTime)
++	requireError(t, e, nil)
++	d.tag = "UPDATE 1"
++	requireError(t, r.Update(ctx, pending), nil)
++	if !reflect.ValueOf(d.args[4]).IsNil() {
++		t.Fatal(d.args)
++	}
++	d.tag = "INSERT 0 1"
++	requireError(t, r.Insert(ctx, pending), nil)
++	if !reflect.ValueOf(d.args[17]).IsNil() {
++		t.Fatal(d.args)
++	}
++	v, e = scanTx(transactionRow(pending.Snapshot()))
++	requireError(t, e, nil)
++	if v == nil || !reflect.DeepEqual(v.Snapshot(), pending.Snapshot()) {
++		t.Fatal(v)
++	}
++}
++
++func TestLedgerPaginationAndTotalsContract(t *testing.T) {
++	ctx := context.Background()
++	d := &testDB{}
++	r := ledgerRepo{d}
++	for _, limit := range []int{-1, 0, 201} {
++		page, e := r.List(ctx, "w", "", limit)
++		requireError(t, e, apperr.Invalid("limit out of range"))
++		if page.Entries == nil || len(page.Entries) != 0 || page.NextCursor != "" {
++			t.Fatal(page)
++		}
++	}
++	for _, raw := range []string{"@", base64.RawURLEncoding.EncodeToString([]byte("w")), base64.RawURLEncoding.EncodeToString([]byte("other:1")), base64.RawURLEncoding.EncodeToString([]byte("w:x")), base64.RawURLEncoding.EncodeToString([]byte("w:-1"))} {
++		_, e := r.List(ctx, "w", raw, 1)
++		requireError(t, e, apperr.Invalid("invalid cursor"))
++	}
++	if d.calls != 0 {
++		t.Fatal("invalid input reached DB")
++	}
++	record := func(id string, seq int64) testRow {
++		return testRow{values: []any{id, "tx", wager.Credit, int64(100), "BRL", int64(0), int64(100), repoTime, seq}}
++	}
++	d.rows = &testRows{records: []testRow{record("first", 1)}}
++	zeroPage, zeroErr := r.List(ctx, "w", base64.RawURLEncoding.EncodeToString([]byte("w:0")), 1)
++	requireError(t, zeroErr, nil)
++	requireArgs(t, d, "w", int64(0), 2)
++	if len(zeroPage.Entries) != 1 || zeroPage.Entries[0].ID() != "first" || zeroPage.NextCursor != "" {
++		t.Fatal(zeroPage)
++	}
++	d.rows = &testRows{records: []testRow{record("l1", 7), record("l2", 8)}}
++	page, e := r.List(ctx, "w", "", 1)
++	requireError(t, e, nil)
++	if len(page.Entries) != 1 || page.Entries[0].ID() != "l1" || page.Entries[0].BalanceAfter().Minor() != 100 || page.NextCursor != base64.RawURLEncoding.EncodeToString([]byte("w:7")) || !d.rows.closed {
++		t.Fatal(page)
++	}
++	requireArgs(t, d, "w", int64(0), 2)
++	d.rows = &testRows{records: []testRow{record("l2", 8)}}
++	next, e := r.List(ctx, "w", page.NextCursor, 200)
++	requireError(t, e, nil)
++	requireArgs(t, d, "w", int64(7), 201)
++	if len(next.Entries) != 1 || next.NextCursor != "" {
++		t.Fatal(next)
++	}
++	requireError(t, r.Append(ctx, page.Entries[0]), nil)
++	requireArgs(t, d, "l1", "w", "tx", wager.Credit, int64(100), "BRL", int64(0), int64(100), repoTime)
++	d.err = repoFailure
++	requireError(t, r.Append(ctx, page.Entries[0]), repoFailure)
++	for _, c := range []struct{ query, scan, iterate error }{{repoFailure, nil, nil}, {nil, repoFailure, nil}, {nil, nil, repoFailure}} {
++		d.err = c.query
++		d.rows = &testRows{err: c.iterate}
++		if c.scan != nil {
++			d.rows.records = []testRow{{err: c.scan}}
++		}
++		_, e = r.List(ctx, "w", "", 1)
++		requireError(t, e, repoFailure)
++		if c.query == nil && !d.rows.closed {
++			t.Fatal("rows leaked")
++		}
++	}
++	d.err = nil
++	bad := record("bad", 1)
++	bad.values[4] = "XXX"
++	d.rows = &testRows{records: []testRow{bad}}
++	_, e = r.List(ctx, "w", "", 1)
++	requireError(t, e, money.ErrInvalidCurrency)
++	bad = record("bad", 1)
++	bad.values[6] = int64(101)
++	d.rows = &testRows{records: []testRow{bad}}
++	_, e = r.List(ctx, "w", "", 1)
++	if e == nil || !strings.Contains(e.Error(), "ledger") {
++		t.Fatal(e)
++	}
++	d.row = testRow{values: []any{"BRL", "100", int64(2)}}
++	tot, e := r.Totals(ctx, "w")
++	requireError(t, e, nil)
++	if tot.Calculated != repoMoney(t, 100) || tot.Entries != 2 {
++		t.Fatal(tot)
++	}
++	d.row = testRow{err: repoFailure}
++	_, e = r.Totals(ctx, "w")
++	requireError(t, e, repoFailure)
++	d.row = testRow{values: []any{"BRL", "9223372036854775808", int64(2)}}
++	_, e = r.Totals(ctx, "w")
++	requireError(t, e, money.ErrOverflow)
++	d.row = testRow{values: []any{"XXX", "1", int64(2)}}
++	_, e = r.Totals(ctx, "w")
++	requireError(t, e, money.ErrInvalidCurrency)
++}
++
++func TestLedgerReportsErrorDiscoveredWhileClosingLookahead(t *testing.T) {
++	row := func(id string, seq int64) testRow {
++		return testRow{values: []any{id, "tx", wager.Credit, int64(100), "BRL", int64(0), int64(100), repoTime, seq}}
++	}
++	d := &testDB{rows: &testRows{records: []testRow{row("one", 1), row("two", 2)}, closeErr: repoFailure}}
++	_, err := (ledgerRepo{d}).List(context.Background(), "w", "", 1)
++	requireError(t, err, repoFailure)
++	if !d.rows.closed {
++		t.Fatal("rows leaked")
++	}
++}
+--- before/internal/infra/postgres/uow_contract_test.go
++++ after/internal/infra/postgres/uow_contract_test.go
+@@ -0,0 +1,147 @@
++package postgres
++
++import (
++	"context"
++	"errors"
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"github.com/alexandre/wagering/internal/app/port"
++	"github.com/jackc/pgx/v5"
++	"github.com/jackc/pgx/v5/pgconn"
++	"testing"
++	"time"
++)
++
++type fakeBeginner struct {
++	tx   *fakeTransaction
++	err  error
++	opts pgx.TxOptions
++	ctx  context.Context
++}
++
++func (b *fakeBeginner) BeginTx(c context.Context, o pgx.TxOptions) (pgx.Tx, error) {
++	b.ctx = c
++	b.opts = o
++	return b.tx, b.err
++}
++
++type fakeTransaction struct {
++	pgx.Tx
++	commits, rollbacks int
++	commitErr          error
++	rollbackCtxErr     error
++	budget             time.Duration
++}
++
++func (f *fakeTransaction) Commit(context.Context) error { f.commits++; return f.commitErr }
++func (f *fakeTransaction) Rollback(c context.Context) error {
++	f.rollbacks++
++	f.rollbackCtxErr = c.Err()
++	deadline, _ := c.Deadline()
++	f.budget = time.Until(deadline)
++	return nil
++}
++func TestUnitOfWorkIsolationCommitRollbackAndErrors(t *testing.T) {
++	for _, snapshot := range []bool{false, true} {
++		for _, stage := range []string{"success", "begin", "callback", "commit", "cancel"} {
++			t.Run(stage+map[bool]string{false: "Write", true: "Snapshot"}[snapshot], func(t *testing.T) {
++				tx := &fakeTransaction{}
++				b := &fakeBeginner{tx: tx}
++				u := &UnitOfWork{pool: b}
++				ctx, cancel := context.WithCancel(context.Background())
++				defer cancel()
++				called := 0
++				if stage == "begin" {
++					b.err = repoFailure
++				}
++				if stage == "commit" {
++					tx.commitErr = repoFailure
++				}
++				run := u.Do
++				if snapshot {
++					run = u.DoSnapshot
++				}
++				err := run(ctx, func(c context.Context, p port.Tx) error {
++					called++
++					if c != ctx {
++						t.Fatal("context changed")
++					}
++					a, ok := p.(txAdapter)
++					if !ok || a.q != tx {
++						t.Fatal("repository escaped transaction")
++					}
++					if p.Wallets() == nil || p.Transactions() == nil || p.Inbox() == nil || p.Outbox() == nil || p.Ledger() == nil {
++						t.Fatal("missing repository")
++					}
++					if stage == "callback" {
++						return repoFailure
++					}
++					if stage == "cancel" {
++						cancel()
++						return context.Canceled
++					}
++					return nil
++				})
++				if b.ctx != ctx {
++					t.Fatal("begin context")
++				}
++				wantOpts := pgx.TxOptions{IsoLevel: pgx.ReadCommitted}
++				if snapshot {
++					wantOpts = pgx.TxOptions{IsoLevel: pgx.RepeatableRead, AccessMode: pgx.ReadOnly}
++				}
++				if b.opts != wantOpts {
++					t.Fatal(b.opts)
++				}
++				if stage == "begin" {
++					if !apperr.IsTransient(err) || !errors.Is(err, repoFailure) || called != 0 || tx.rollbacks != 0 {
++						t.Fatal(err, called, tx)
++					}
++					return
++				}
++				if called != 1 || tx.rollbacks != 1 || tx.rollbackCtxErr != nil || tx.budget < 2*time.Second || tx.budget > 3*time.Second {
++					t.Fatal(called, tx)
++				}
++				switch stage {
++				case "success":
++					requireError(t, err, nil)
++				case "cancel":
++					requireError(t, err, context.Canceled)
++				default:
++					requireError(t, err, repoFailure)
++				}
++				expectedCommits := 0
++				if stage == "success" || stage == "commit" {
++					expectedCommits = 1
++				}
++				if tx.commits != expectedCommits {
++					t.Fatal(tx)
++				}
++			})
++		}
++	}
++}
++func TestEverySQLStateClassification(t *testing.T) {
++	for _, code := range []string{"23514", "23503", "P0001", "42601", "22P02", "55P03", "40001", "40P01", "57P01", "53300", "57014", "08006", "08", "0", "", "23505"} {
++		cause := &pgconn.PgError{Code: code, Message: "db detail"}
++		got := classify(cause)
++		switch code {
++		case "23514", "23503", "P0001", "42601":
++			if !apperr.IsPermanent(got) || !errors.Is(got, cause) {
++				t.Fatal(code, got)
++			}
++		case "22P02":
++			requireError(t, got, apperr.Invalid("invalid identifier"))
++		case "55P03", "40001", "40P01":
++			if !apperr.IsTransient(got) || !errors.Is(got, apperr.ErrConcurrentModification) || !errors.Is(got, cause) {
++				t.Fatal(code, got)
++			}
++		case "57P01", "53300", "57014", "08006", "08":
++			if !apperr.IsTransient(got) || !errors.Is(got, cause) {
++				t.Fatal(code, got)
++			}
++		default:
++			if got != cause {
++				t.Fatal(code, got)
++			}
++		}
++	}
++}
+--- before/internal/infra/sqs/poll_contract_test.go
++++ after/internal/infra/sqs/poll_contract_test.go
+@@ -0,0 +1,122 @@
++//go:build go1.25
++
++package sqs
++
++import (
++	"bytes"
++	"context"
++	"errors"
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"github.com/alexandre/wagering/internal/platform/metrics"
++	"github.com/aws/aws-sdk-go-v2/aws"
++	sdk "github.com/aws/aws-sdk-go-v2/service/sqs"
++	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
++	"log/slog"
++	"net/http/httptest"
++	"strings"
++	"testing"
++	"testing/synctest"
++	"time"
++)
++
++type pollClient struct {
++	fakeClient
++	receive func(context.Context, *sdk.ReceiveMessageInput) (*sdk.ReceiveMessageOutput, error)
++}
++
++func (c *pollClient) ReceiveMessage(ctx context.Context, in *sdk.ReceiveMessageInput, _ ...func(*sdk.Options)) (*sdk.ReceiveMessageOutput, error) {
++	return c.receive(ctx, in)
++}
++func TestPollRetryAndCancellation(t *testing.T) {
++	for _, stop := range []string{"before", "during-error", "during-backoff", "after-backoff"} {
++		t.Run(stop, func(t *testing.T) {
++			synctest.Test(t, func(t *testing.T) {
++				ctx, cancel := context.WithCancel(context.Background())
++				defer cancel()
++				calls := 0
++				var logs bytes.Buffer
++				rec := metrics.New()
++				start := time.Now()
++				cl := &pollClient{receive: func(c context.Context, in *sdk.ReceiveMessageInput) (*sdk.ReceiveMessageOutput, error) {
++					calls++
++					if calls == 2 && stop == "after-backoff" && time.Since(start) != 2*time.Second {
++						t.Errorf("retry occurred after %v, want 2s", time.Since(start))
++					}
++					if calls > 2 {
++						t.Fatal("poll repeated after cancellation")
++					}
++					if aws.ToString(in.QueueUrl) != "queue" || in.MaxNumberOfMessages != 1 {
++						t.Fatal(in)
++					}
++					if stop == "during-error" || calls == 2 {
++						cancel()
++					}
++					return nil, errors.New("poll failed")
++				}}
++				c := NewConsumer(cl, "queue", handlerFunc(func(context.Context, []byte) error { t.Error("handler called without message"); return nil }), slog.New(slog.NewJSONHandler(&logs, nil)), rec)
++				if stop == "before" {
++					cancel()
++				}
++				done := make(chan error, 1)
++				go func() { done <- c.Run(ctx) }()
++				synctest.Wait()
++				if stop == "during-backoff" {
++					cancel()
++				}
++				if stop == "after-backoff" {
++					time.Sleep(2 * time.Second)
++				}
++				synctest.Wait()
++				if e := <-done; e != nil {
++					t.Fatal(e)
++				}
++				want := 1
++				if stop == "before" {
++					want = 0
++				}
++				if stop == "after-backoff" {
++					want = 2
++					if time.Since(start) != 2*time.Second {
++						t.Fatal(time.Since(start))
++					}
++				}
++				if calls != want {
++					t.Fatal(calls, want)
++				}
++				if stop == "during-backoff" || stop == "after-backoff" {
++					if !strings.Contains(logs.String(), "sqs receive failed") {
++						t.Fatal(logs.String())
++					}
++					w := httptest.NewRecorder()
++					rec.Handler().ServeHTTP(w, httptest.NewRequest("GET", "/metrics", nil))
++					if !strings.Contains(w.Body.String(), `wagering_retries_total{component="sqs-receive"} 1`) {
++						t.Fatal(w.Body.String())
++					}
++				}
++			})
++		})
++	}
++}
++func TestEachPoisonErrorAndRedriveThreshold(t *testing.T) {
++	for _, cause := range []error{apperr.ErrInvalidMessage, apperr.ErrInvalidInput, apperr.ErrIdempotencyConflict, apperr.ErrMessageConflict} {
++		for _, count := range []string{"4", "5", "6", "bad"} {
++			cl := &fakeClient{visibility: -1}
++			rec := metrics.New()
++			var logs bytes.Buffer
++			c := NewConsumer(cl, "queue", handlerFunc(func(context.Context, []byte) error { return cause }), slog.New(slog.NewJSONHandler(&logs, nil)), rec)
++			c.process(context.Background(), types.Message{MessageId: aws.String("message"), Attributes: map[string]string{string(types.MessageSystemAttributeNameApproximateReceiveCount): count}})
++			if cl.ack || cl.visibility != 2 || !strings.Contains(logs.String(), `"failureCode":"INVALID_MESSAGE"`) {
++				t.Fatal(cl, logs.String())
++			}
++			w := httptest.NewRecorder()
++			rec.Handler().ServeHTTP(w, httptest.NewRequest("GET", "/metrics", nil))
++			want := "0"
++			if count == "5" || count == "6" {
++				want = "1"
++			}
++			if !strings.Contains(w.Body.String(), "wagering_poison_redrive_threshold_total "+want) {
++				t.Fatal(w.Body.String())
++			}
++		}
++	}
++}
+--- before/internal/infra/sqs/registration_contract_test.go
++++ after/internal/infra/sqs/registration_contract_test.go
+@@ -0,0 +1,100 @@
++//go:build go1.25
++
++package sqs
++
++import (
++	"bytes"
++	"context"
++	"encoding/json"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"github.com/alexandre/wagering/internal/platform/metrics"
++	"github.com/alexandre/wagering/internal/platform/worker"
++	"log/slog"
++	"net/http"
++	"strings"
++	"testing"
++	"testing/synctest"
++	"time"
++)
++
++func TestConfiguredConsumerShutdownBudgets(t *testing.T) {
++	for _, c := range []struct {
++		shutdown time.Duration
++		poll     int32
++		work     time.Duration
++	}{{8 * time.Second, 5, 3 * time.Second}, {10 * time.Second, 7, 5 * time.Second}, {25 * time.Second, 20, 10 * time.Second}} {
++		got := configuredConsumer(nil, config.Config{ShutdownTimeout: c.shutdown}, nil, nil, nil)
++		if got.waitSeconds != c.poll || got.workTimeout != c.work {
++			t.Fatalf("shutdown=%v poll=%d work=%v", c.shutdown, got.waitSeconds, got.workTimeout)
++		}
++	}
++}
++func TestRoleAndDLQMonitorRegistration(t *testing.T) {
++	for _, c := range []struct {
++		role bool
++		dlq  string
++	}{{false, "dlq"}, {true, ""}, {true, "dlq"}} {
++		synctest.Test(t, func(t *testing.T) {
++			var logs bytes.Buffer
++			log := slog.New(slog.NewJSONHandler(&logs, nil))
++			rec := metrics.New()
++			lc := &sqsLifecycle{}
++			cfg := config.Config{WagerQueueURL: "wagers", EventsQueueURL: "events", WagerDLQURL: c.dlq, ShutdownTimeout: 25 * time.Second}
++			if c.role {
++				cfg.Roles = []string{"sqs-consumer"}
++			}
++			polls, depths := 0, 0
++			start := time.Now()
++			cl := sdkClient(func(r *http.Request) (*http.Response, error) {
++				if strings.HasSuffix(r.Header.Get("X-Amz-Target"), "ReceiveMessage") {
++					polls++
++					<-r.Context().Done()
++					return nil, r.Context().Err()
++				}
++				var body map[string]any
++				if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
++					t.Error(err)
++				}
++				if body["QueueUrl"] != "wagers" && body["QueueUrl"] != "events" {
++					depths++
++					if time.Since(start) != 5*time.Second {
++						t.Errorf("DLQ poll at %v, want 5s", time.Since(start))
++					}
++				}
++				return sdkResponse(`{"Attributes":{"ApproximateNumberOfMessages":"3","ApproximateNumberOfMessagesNotVisible":"2"}}`), nil
++			})
++			group := worker.NewGroup(log, nil, cfg)
++			register(lc, group, cfg, cl, handlerFunc(func(context.Context, []byte) error { t.Error("unexpected message"); return nil }), log, rec, rec)
++			group.Install(lc)
++			for _, h := range lc.hooks {
++				if h.OnStart != nil {
++					if err := h.OnStart(context.Background()); err != nil {
++						t.Fatal(err)
++					}
++				}
++			}
++			time.Sleep(5 * time.Second)
++			synctest.Wait()
++			wantPolls, wantDepths := 0, 0
++			if c.role {
++				wantPolls = 1
++				if c.dlq != "" {
++					wantDepths = 1
++				}
++			}
++			if polls != wantPolls || depths != wantDepths {
++				t.Errorf("role=%v dlq=%q polls=%d depths=%d", c.role, c.dlq, polls, depths)
++			}
++			if strings.Contains(logs.String(), "DLQ metrics unavailable") {
++				t.Error(logs.String())
++			}
++			for i := len(lc.hooks) - 1; i >= 0; i-- {
++				if lc.hooks[i].OnStop != nil {
++					if err := lc.hooks[i].OnStop(context.Background()); err != nil {
++						t.Error(err)
++					}
++				}
++			}
++		})
++	}
++}
+--- before/internal/infra/sqs/sdk_contract_test.go
++++ after/internal/infra/sqs/sdk_contract_test.go
+@@ -0,0 +1,184 @@
++package sqs
++
++import (
++	"context"
++	"encoding/json"
++	"errors"
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"github.com/alexandre/wagering/internal/domain/event"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"github.com/alexandre/wagering/internal/platform/metrics"
++	"github.com/alexandre/wagering/internal/platform/worker"
++	"github.com/aws/aws-sdk-go-v2/aws"
++	sdk "github.com/aws/aws-sdk-go-v2/service/sqs"
++	"go.uber.org/fx"
++	"io"
++	"log/slog"
++	"net/http"
++	"net/http/httptest"
++	"strings"
++	"testing"
++	"time"
++)
++
++type sdkHTTP func(*http.Request) (*http.Response, error)
++
++func (f sdkHTTP) Do(r *http.Request) (*http.Response, error) { return f(r) }
++func sdkClient(f sdkHTTP) *sdk.Client {
++	return sdk.New(sdk.Options{Region: "us-east-1", BaseEndpoint: aws.String("https://sqs.example.test"), Credentials: aws.CredentialsProviderFunc(func(context.Context) (aws.Credentials, error) {
++		return aws.Credentials{AccessKeyID: "test", SecretAccessKey: "test"}, nil
++	}), HTTPClient: f, RetryMaxAttempts: 1})
++}
++func sdkResponse(body string) *http.Response {
++	return &http.Response{StatusCode: 200, Header: http.Header{"Content-Type": []string{"application/x-amz-json-1.0"}}, Body: io.NopCloser(strings.NewReader(body))}
++}
++func TestSDKPublisherAndReadinessContracts(t *testing.T) {
++	at := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
++	ev, e := event.NewProcessed(event.Meta{EventID: "event", AggregateID: "wallet", CorrelationID: "corr", OccurredAt: at}, event.ProcessedData{TransactionID: "tx", Kind: "OPENING", WalletID: "wallet", PlayerID: "player", Money: event.MoneyDTO{Amount: "1.00", Currency: "BRL"}}).ToOutgoing()
++	if e != nil {
++		t.Fatal(e)
++	}
++	calls := 0
++	cause := errors.New("network offline")
++	fail := false
++	cl := sdkClient(func(r *http.Request) (*http.Response, error) {
++		calls++
++		if fail {
++			return nil, cause
++		}
++		var body map[string]any
++		if e := json.NewDecoder(r.Body).Decode(&body); e != nil {
++			t.Fatal(e)
++		}
++		if strings.HasSuffix(r.Header.Get("X-Amz-Target"), "SendMessage") {
++			if body["QueueUrl"] != "https://sqs.example.test/events.fifo" || body["MessageBody"] != string(ev.Payload()) || body["MessageGroupId"] != "wallet" || body["MessageDeduplicationId"] != "event" {
++				t.Fatal(body)
++			}
++			attrs := body["MessageAttributes"].(map[string]any)["eventType"].(map[string]any)
++			if attrs["StringValue"] != ev.Type() || attrs["DataType"] != "String" {
++				t.Fatal(attrs)
++			}
++		} else {
++			if body["QueueUrl"] != "https://sqs.example.test/wagers.fifo" {
++				t.Fatal(body)
++			}
++			deadline, ok := r.Context().Deadline()
++			if !ok || time.Until(deadline) > 2*time.Second || time.Until(deadline) < time.Second {
++				t.Fatal("readiness deadline")
++			}
++		}
++		return sdkResponse(`{}`), nil
++	})
++	cfg := config.Config{WagerQueueURL: "https://sqs.example.test/wagers.fifo", EventsQueueURL: "https://sqs.example.test/events.fifo"}
++	p := NewPublisher(cl, cfg)
++	if e = p.Publish(context.Background(), ev); e != nil {
++		t.Fatal(e)
++	}
++	r := NewReadiness(cl, cfg)
++	if r.Name() != "sqs" {
++		t.Fatal(r.Name())
++	}
++	if e = r.Check(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++	fail = true
++	if e = p.Publish(context.Background(), ev); !apperr.IsTransient(e) || !errors.Is(e, cause) {
++		t.Fatal(e)
++	}
++	if e = r.Check(context.Background()); !errors.Is(e, cause) {
++		t.Fatal(e)
++	}
++	if calls != 4 {
++		t.Fatal(calls)
++	}
++}
++
++type sqsLifecycle struct{ hooks []fx.Hook }
++
++func (l *sqsLifecycle) Append(h fx.Hook) { l.hooks = append(l.hooks, h) }
++func TestQueueStartupAndDLQMetrics(t *testing.T) {
++	for _, role := range []bool{false, true} {
++		for _, dlq := range []string{"", "https://sqs.example.test/dlq.fifo"} {
++			cfg := config.Config{WagerQueueURL: "wagers", EventsQueueURL: "events", WagerDLQURL: dlq, ShutdownTimeout: 25 * time.Second}
++			if role {
++				cfg.Roles = []string{"sqs-consumer"}
++			}
++			lc := &sqsLifecycle{}
++			rec := metrics.New()
++			calls := 0
++			fail := false
++			cause := errors.New("broker unavailable")
++			cl := sdkClient(func(r *http.Request) (*http.Response, error) {
++				calls++
++				if fail {
++					return nil, cause
++				}
++				var b map[string]any
++				json.NewDecoder(r.Body).Decode(&b)
++				want := "wagers"
++				if calls == 2 {
++					want = "events"
++				}
++				if b["QueueUrl"] != want {
++					t.Fatal(b)
++				}
++				return sdkResponse(`{}`), nil
++			})
++			register(lc, &worker.Group{}, cfg, cl, handlerFunc(func(context.Context, []byte) error { return nil }), slog.New(slog.NewTextHandler(io.Discard, nil)), rec, rec)
++			if len(lc.hooks) != 1 {
++				t.Fatal(lc.hooks)
++			}
++			if e := lc.hooks[0].OnStart(context.Background()); e != nil || calls != 2 {
++				t.Fatal(calls, e)
++			}
++			fail = true
++			if e := lc.hooks[0].OnStart(context.Background()); !errors.Is(e, cause) {
++				t.Fatal(e)
++			}
++		}
++	}
++	for _, body := range []string{`{"Attributes":{"ApproximateNumberOfMessages":"3","ApproximateNumberOfMessagesNotVisible":"2"}}`, `{"Attributes":{"ApproximateNumberOfMessages":"bad","ApproximateNumberOfMessagesNotVisible":"2"}}`, `{"Attributes":{"ApproximateNumberOfMessages":"3","ApproximateNumberOfMessagesNotVisible":"bad"}}`, "transport error"} {
++		rec := metrics.New()
++		cl := sdkClient(func(r *http.Request) (*http.Response, error) {
++			if body == "transport error" {
++				return nil, errors.New(body)
++			}
++			return sdkResponse(body), nil
++		})
++		e := updateDLQDepth(context.Background(), cl, "dlq", rec)
++		if body == `{"Attributes":{"ApproximateNumberOfMessages":"3","ApproximateNumberOfMessagesNotVisible":"2"}}` {
++			if e != nil {
++				t.Fatal(e)
++			}
++			w := httptest.NewRecorder()
++			rec.Handler().ServeHTTP(w, httptest.NewRequest("GET", "/metrics", nil))
++			for _, line := range []string{`wagering_dlq_messages{state="visible"} 3`, `wagering_dlq_messages{state="inflight"} 2`} {
++				if !strings.Contains(w.Body.String(), line) {
++					t.Fatal(w.Body.String())
++				}
++			}
++		} else if e == nil {
++			t.Fatal("error suppressed", body)
++		}
++	}
++}
++func TestAWSClientConfiguration(t *testing.T) {
++	t.Setenv("AWS_ACCESS_KEY_ID", "test")
++	t.Setenv("AWS_SECRET_ACCESS_KEY", "test")
++	t.Setenv("AWS_EC2_METADATA_DISABLED", "true")
++	for _, endpoint := range []string{"", "https://sqs.example.test"} {
++		cl, e := NewClient(config.Config{AWSRegion: "eu-west-1", AWSEndpointURL: endpoint})
++		if e != nil {
++			t.Fatal(e)
++		}
++		o := cl.Options()
++		if o.Region != "eu-west-1" || aws.ToString(o.BaseEndpoint) != endpoint {
++			t.Fatal(o.Region, o.BaseEndpoint)
++		}
++	}
++	t.Setenv("AWS_CONFIG_FILE", t.TempDir()+"/missing")
++	t.Setenv("AWS_PROFILE", "profile-does-not-exist")
++	if cl, e := NewClient(config.Config{}); e == nil || cl != nil {
++		t.Fatal(cl, e)
++	}
++}
+--- before/internal/platform/failpoint/hit_test.go
++++ after/internal/platform/failpoint/hit_test.go
+@@ -0,0 +1,69 @@
++package failpoint
++
++import (
++	"os"
++	"os/exec"
++	"path/filepath"
++	"testing"
++)
++
++func TestCrashMarkerAndExitContract(t *testing.T) {
++	dir := t.TempDir()
++	t.Setenv("FAILPOINT", "wanted")
++	t.Setenv("FAILPOINT_DIR", dir)
++	var codes []int
++	exit := func(code int) { codes = append(codes, code) }
++	hit("other", exit)
++	if len(codes) != 0 {
++		t.Fatal(codes)
++	}
++	if _, err := os.Stat(filepath.Join(dir, "other")); !os.IsNotExist(err) {
++		t.Fatal(err)
++	}
++	hit("wanted", exit)
++	if len(codes) != 1 || codes[0] != 86 {
++		t.Fatal(codes)
++	}
++	info, err := os.Stat(filepath.Join(dir, "wanted"))
++	if err != nil {
++		t.Fatal(err)
++	}
++	if info.Mode().Perm() != 0600 || info.Size() != 0 {
++		t.Fatal(info)
++	}
++	hit("wanted", exit)
++	if len(codes) != 1 {
++		t.Fatal("crashed twice", codes)
++	}
++	t.Setenv("FAILPOINT_DIR", "")
++	hit("wanted", exit)
++	if len(codes) != 1 {
++		t.Fatal(codes)
++	}
++	t.Setenv("FAILPOINT_DIR", filepath.Join(dir, "missing"))
++	hit("wanted", exit)
++	if len(codes) != 1 {
++		t.Fatal(codes)
++	}
++}
++func TestRealCrashExit(t *testing.T) {
++	if os.Getenv("WAGERING_FAILPOINT_CHILD") == "1" {
++		Hit("crash")
++		return
++	}
++	exe, err := os.Executable()
++	if err != nil {
++		t.Fatal(err)
++	}
++	dir := t.TempDir()
++	cmd := exec.Command(exe, "-test.run=^TestRealCrashExit$")
++	cmd.Env = append(os.Environ(), "WAGERING_FAILPOINT_CHILD=1", "FAILPOINT=crash", "FAILPOINT_DIR="+dir)
++	err = cmd.Run()
++	exit, ok := err.(*exec.ExitError)
++	if !ok || exit.ExitCode() != 86 {
++		t.Fatalf("exit=%v", err)
++	}
++	if _, err = os.Stat(filepath.Join(dir, "crash")); err != nil {
++		t.Fatal(err)
++	}
++}
+--- before/internal/platform/logging/logging_test.go
++++ after/internal/platform/logging/logging_test.go
+@@ -0,0 +1,22 @@
++package logging
++
++import (
++	"context"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"log/slog"
++	"testing"
++)
++
++func TestConfiguredLevelAndDefaultLogger(t *testing.T) {
++	old := slog.Default()
++	defer slog.SetDefault(old)
++	for _, c := range []struct {
++		level       string
++		debug, info bool
++	}{{"debug", true, true}, {"info", false, true}, {"error", false, false}} {
++		log := New(config.Config{LogLevel: c.level})
++		if slog.Default() != log || log.Enabled(context.Background(), slog.LevelDebug) != c.debug || log.Enabled(context.Background(), slog.LevelInfo) != c.info || !log.Enabled(context.Background(), slog.LevelError) {
++			t.Fatal(c)
++		}
++	}
++}
+--- before/internal/platform/sys/sys_test.go
++++ after/internal/platform/sys/sys_test.go
+@@ -0,0 +1,39 @@
++package sys
++
++import (
++	"errors"
++	"github.com/google/uuid"
++	"testing"
++	"time"
++)
++
++type brokenRandom struct{}
++
++func (brokenRandom) Read([]byte) (int, error) { return 0, errors.New("entropy unavailable") }
++func TestUUIDFailureIsNotSilentlyAccepted(t *testing.T) {
++	uuid.SetRand(brokenRandom{})
++	defer uuid.SetRand(nil)
++	defer func() {
++		v := recover()
++		e, ok := v.(error)
++		if !ok || e.Error() != "entropy unavailable" {
++			t.Fatalf("panic=%v", v)
++		}
++	}()
++	UUIDv7{}.NewID()
++	t.Fatal("expected panic")
++}
++func TestClockAndUUID(t *testing.T) {
++	before := time.Now()
++	now := (Clock{}).Now()
++	after := time.Now()
++	if now.Before(before) || now.After(after) || now.Location() != time.UTC {
++		t.Fatal(now)
++	}
++	first := (UUIDv7{}).NewID()
++	second := (UUIDv7{}).NewID()
++	id, e := uuid.Parse(first)
++	if e != nil || id.Version() != 7 || first == second {
++		t.Fatal(first, second, e)
++	}
++}
+--- before/internal/platform/worker/every_contract_test.go
++++ after/internal/platform/worker/every_contract_test.go
+@@ -0,0 +1,109 @@
++//go:build go1.25
++
++package worker
++
++import (
++	"context"
++	"errors"
++	"testing"
++	"testing/synctest"
++	"time"
++)
++
++func TestEveryCancellationAndFailure(t *testing.T) {
++	synctest.Test(t, func(t *testing.T) {
++		ctx, cancel := context.WithCancel(context.Background())
++		done := make(chan error, 1)
++		calls, errorsSeen := 0, 0
++		failure := errors.New("step failed")
++		go func() {
++			done <- Every(time.Second, func(c context.Context) error {
++				calls++
++				deadline, ok := c.Deadline()
++				if !ok || time.Until(deadline) != 15*time.Second {
++					t.Error("wrong step deadline")
++				}
++				return failure
++			}, func(e error) {
++				if e != failure {
++					t.Error(e)
++				}
++				errorsSeen++
++				cancel()
++			})(ctx)
++		}()
++		time.Sleep(time.Second)
++		synctest.Wait()
++		cancel()
++		synctest.Wait()
++		if e := <-done; e != nil {
++			t.Fatal(e)
++		}
++		if calls != 1 || errorsSeen != 1 {
++			t.Fatal(calls, errorsSeen)
++		}
++	})
++	synctest.Test(t, func(t *testing.T) {
++		ctx, cancel := context.WithCancel(context.Background())
++		cancel()
++		n := 0
++		err := Every(time.Second, func(context.Context) error { n++; return nil }, nil)(ctx)
++		if err != nil || n != 0 {
++			t.Fatal(n, err)
++		}
++	})
++	synctest.Test(t, func(t *testing.T) {
++		ctx, cancel := context.WithCancel(context.Background())
++		done := make(chan error, 1)
++		calls := 0
++		go func() {
++			done <- Every(time.Second, func(c context.Context) error { calls++; cancel(); return nil }, nil)(ctx)
++		}()
++		time.Sleep(time.Second)
++		synctest.Wait()
++		cancel()
++		synctest.Wait()
++		if e := <-done; e != nil || calls != 1 {
++			t.Fatal(calls, e)
++		}
++	})
++}
++
++func TestEveryReportsOnlyErrorsAndAllowsAbsentCallback(t *testing.T) {
++	for _, failure := range []error{nil, errors.New("step failed")} {
++		for _, callback := range []bool{false, true} {
++			synctest.Test(t, func(t *testing.T) {
++				ctx, cancel := context.WithCancel(context.Background())
++				defer cancel()
++				done := make(chan error, 1)
++				calls, reports := 0, 0
++				var report func(error)
++				if callback {
++					report = func(err error) {
++						reports++
++						if err != failure || err == nil {
++							t.Errorf("unexpected reported error: %v", err)
++						}
++					}
++				}
++				go func() {
++					done <- Every(time.Second, func(context.Context) error { calls++; return failure }, report)(ctx)
++				}()
++				time.Sleep(time.Second)
++				synctest.Wait()
++				cancel()
++				synctest.Wait()
++				if err := <-done; err != nil {
++					t.Fatal(err)
++				}
++				want := 0
++				if callback && failure != nil {
++					want = 1
++				}
++				if calls != 1 || reports != want {
++					t.Fatalf("calls=%d reports=%d want=%d", calls, reports, want)
++				}
++			})
++		}
++	}
++}
+--- before/internal/transport/httpapi/lifecycle_contract_test.go
++++ after/internal/transport/httpapi/lifecycle_contract_test.go
+@@ -0,0 +1,137 @@
++package httpapi
++
++import (
++	"context"
++	"errors"
++	"github.com/alexandre/wagering/internal/app/port"
++	"github.com/alexandre/wagering/internal/infra/auth"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"github.com/alexandre/wagering/internal/platform/metrics"
++	"github.com/alexandre/wagering/internal/platform/worker"
++	"go.uber.org/fx"
++	"io"
++	"log/slog"
++	"net"
++	"net/http"
++	"net/http/httptest"
++	"testing"
++	"time"
++)
++
++type httpLifecycle struct{ hooks []fx.Hook }
++
++func (l *httpLifecycle) Append(h fx.Hook) { l.hooks = append(l.hooks, h) }
++
++type healthCheck struct {
++	err   error
++	calls int
++}
++
++func (c *healthCheck) Name() string { return "test-db" }
++func (c *healthCheck) Check(ctx context.Context) error {
++	c.calls++
++	d, ok := ctx.Deadline()
++	if !ok || time.Until(d) > 2*time.Second || time.Until(d) < time.Second {
++		return errors.New("wrong budget")
++	}
++	return c.err
++}
++func TestReadinessAndListenerFailure(t *testing.T) {
++	log := slog.New(slog.NewTextHandler(io.Discard, nil))
++	lc := &httpLifecycle{}
++	check := &healthCheck{}
++	srv := NewServer(lc, &worker.Group{}, config.Config{}, log, Deps{Auth: &auth.Verifier{}, Metrics: metrics.New(), Checks: []port.ReadinessChecker{check}})
++	for _, bad := range []bool{false, true} {
++		if bad {
++			check.err = errors.New("offline")
++		}
++		w := httptest.NewRecorder()
++		srv.Handler.ServeHTTP(w, httptest.NewRequest("GET", "/health/ready", nil))
++		want := 200
++		if bad {
++			want = 503
++		}
++		if w.Code != want {
++			t.Fatal(w.Code)
++		}
++		if bad && w.Body.String() != "{\"code\":\"NOT_READY\",\"message\":\"test-db\"}\n" {
++			t.Fatal(w.Body.String())
++		}
++	}
++	if check.calls != 2 {
++		t.Fatal(check.calls)
++	}
++	if e := lc.hooks[0].OnStart(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++	if e := lc.hooks[0].OnStop(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++	ln, e := net.Listen("tcp", "127.0.0.1:0")
++	if e != nil {
++		t.Fatal(e)
++	}
++	defer ln.Close()
++	lc = &httpLifecycle{}
++	NewServer(lc, &worker.Group{}, config.Config{Roles: []string{"api"}, HTTPAddr: ln.Addr().String()}, log, Deps{Auth: &auth.Verifier{}, Metrics: metrics.New()})
++	if e = lc.hooks[0].OnStart(context.Background()); e == nil {
++		t.Fatal("occupied address accepted")
++	}
++	if e = lc.hooks[0].OnStop(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++}
++func TestHTTPServeAndShutdown(t *testing.T) {
++	log := slog.New(slog.NewTextHandler(io.Discard, nil))
++	var srv *http.Server
++	app := fx.New(fx.NopLogger, fx.Supply(config.Config{Roles: []string{"api"}, HTTPAddr: "127.0.0.1:0", ShutdownTimeout: time.Second}, log), fx.Provide(worker.NewGroup), fx.Invoke(func(lc fx.Lifecycle, g *worker.Group, cfg config.Config) {
++		srv = NewServer(lc, g, cfg, log, Deps{Auth: &auth.Verifier{}, Metrics: metrics.New()})
++	}), fx.Invoke((*worker.Group).Install))
++	if e := app.Start(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++	if srv == nil {
++		t.Fatal("server missing")
++	}
++	if e := app.Stop(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++}
++
++func TestFailedGracefulShutdownClosesActiveConnection(t *testing.T) {
++	entered := make(chan struct{})
++	handlerDone := make(chan struct{})
++	clientDone := make(chan error, 1)
++	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { close(entered); <-r.Context().Done(); close(handlerDone) }))
++	defer func() { _ = server.Config.Close(); server.Close() }()
++	go func() {
++		resp, err := server.Client().Get(server.URL)
++		if resp != nil {
++			resp.Body.Close()
++		}
++		clientDone <- err
++	}()
++	select {
++	case <-entered:
++	case <-time.After(time.Second):
++		t.Fatal("request never entered handler")
++	}
++	ctx, cancel := context.WithCancel(context.Background())
++	cancel()
++	if err := shutdownServer(ctx, server.Config); !errors.Is(err, context.Canceled) {
++		t.Fatalf("shutdown error=%v", err)
++	}
++	select {
++	case err := <-clientDone:
++		if err == nil {
++			t.Fatal("unfinished request reported success")
++		}
++	case <-time.After(time.Second):
++		t.Fatal("failed graceful shutdown left connection open")
++	}
++	select {
++	case <-handlerDone:
++	case <-time.After(time.Second):
++		t.Fatal("handler context was not cancelled")
++	}
++}
+--- before/cmd/wagering/app_test.go
++++ after/cmd/wagering/app_test.go
+@@ -27,3 +27,16 @@
+ 		t.Fatalf("shutdown budget=%v", app.StopTimeout())
+ 	}
+ }
++
++func TestCompositionConstructsLogger(t *testing.T) {
++	t.Setenv("DATABASE_URL", "://invalid")
++	t.Setenv("WAGER_QUEUE_URL", "queue")
++	t.Setenv("EVENTS_QUEUE_URL", "events")
++	t.Setenv("OIDC_ISSUER", "issuer")
++	t.Setenv("OIDC_JWKS_URL", "https://idp.example/jwks")
++	t.Setenv("OIDC_AUDIENCE", "audience")
++	app := fx.New(Options()...)
++	if app.Err() == nil {
++		t.Fatal("invalid database config accepted")
++	}
++}

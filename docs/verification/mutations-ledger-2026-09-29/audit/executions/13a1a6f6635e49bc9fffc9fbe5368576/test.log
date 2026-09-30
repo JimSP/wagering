@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.474s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:34:27 INFO transaction handled correlationId="" messageId="" transactionId=1a440b1c-5a1f-4612-9b9d-352eed5710f1 walletId=47b73099-cacc-4e3e-a789-a75a31fa0bd2 providerId=p status=PROCESSED
+2026/09/29 22:34:27 WARN transaction handling failed correlationId="" messageId="" transactionId=8fc1d459-d2fe-4c86-bae1-13d382b2111e walletId=47b73099-cacc-4e3e-a789-a75a31fa0bd2 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/invalid_wallet_time (0.00s)
+        submit_failure_test.go:162: invalid wallet time INVALID_INPUT: invalid input: transaction has no reference to wait for
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.772s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.334s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.000s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.263s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/implicit_ambiguous_WIN (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:true ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.584s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.882s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.056s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.187s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.070s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.243s
+FAIL

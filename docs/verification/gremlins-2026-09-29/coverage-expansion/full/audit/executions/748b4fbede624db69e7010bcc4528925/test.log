@@ -1,0 +1,42 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.773s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:02:07 INFO transaction handled correlationId="" messageId="" transactionId=dbe613f8-06b8-4423-a7f7-e5611991a6ff walletId=b27782c0-fe53-4dcf-a470-a53cf27b4125 providerId=p status=PROCESSED
+2026/09/29 02:02:07 WARN transaction handling failed correlationId="" messageId="" transactionId=beba1b80-4466-458c-bd5c-a96675a2ca02 walletId=b27782c0-fe53-4dcf-a470-a53cf27b4125 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/append (0.00s)
+        read_failure_test.go:156: append money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.059s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.547s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=1 subtract=false got={0 } err=money: overflow want=-9223372036854775807
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.293s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.795s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.389s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=money: overflow want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.728s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.151s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    contract_test.go:110: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	4.053s
+FAIL

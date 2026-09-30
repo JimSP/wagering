@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.234s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:39:32 INFO transaction handled correlationId="" messageId="" transactionId=687a46f7-01ac-422a-93d7-44d9e1ad9602 walletId=73831966-c434-4af7-954c-318f7b1aabb6 providerId=p status=PROCESSED
+2026/09/29 22:39:32 WARN transaction handling failed correlationId="" messageId="" transactionId=f1deffaa-63da-4c62-88d9-7feb102cd51b walletId=73831966-c434-4af7-954c-318f7b1aabb6 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.444s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.119s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.995s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.849s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.931s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.240s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.368s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.365s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx" want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.672s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.271s
+FAIL

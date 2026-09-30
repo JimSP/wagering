@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.348s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:07:13 INFO transaction handled correlationId="" messageId="" transactionId=e68b29d6-86c8-47a3-b6b4-f6d277084964 walletId=5eaf3dfd-cec0-4a76-adad-347dd00195ca providerId=p status=PROCESSED
+2026/09/29 03:07:13 WARN transaction handling failed correlationId="" messageId="" transactionId=04a8a16e-47c8-480d-994a-81958ba38bdb walletId=5eaf3dfd-cec0-4a76-adad-347dd00195ca providerId=p transient=false
+--- FAIL: TestSubmissionObservabilityFollowsCommittedOutcome (0.00s)
+    --- FAIL: TestSubmissionObservabilityFollowsCommittedOutcome/success_and_replay (0.00s)
+        observable_contract_test.go:66: replay={TransactionID:00000000-0000-4000-8000-000000000006 Status:PROCESSED Balance:0x6c87c2143b78 FailureCode: IdempotentReplay:true} err=<nil> results=[BET:PROCESSED BET:PROCESSED] duplicates=[HTTP] logs={"time":"2026-09-29T03:07:14.131672-03:00","level":"INFO","msg":"transaction handled","correlationId":"correlation","messageId":"","transactionId":"00000000-0000-4000-8000-000000000006","walletId":"00000000-0000-4000-8000-000000000001","providerId":"p","status":"PROCESSED"}
+            {"time":"2026-09-29T03:07:14.131679-03:00","level":"WARN","msg":"transaction handling failed","correlationId":"correlation","messageId":"","transactionId":"00000000-0000-4000-8000-000000000006","walletId":"00000000-0000-4000-8000-000000000001","providerId":"p","transient":false}
+            {"time":"2026-09-29T03:07:14.131683-03:00","level":"INFO","msg":"transaction handled","correlationId":"correlation","messageId":"","transactionId":"00000000-0000-4000-8000-000000000006","walletId":"00000000-0000-4000-8000-000000000001","providerId":"p","status":"PROCESSED"}
+            {"time":"2026-09-29T03:07:14.131685-03:00","level":"WARN","msg":"transaction handling failed","correlationId":"correlation","messageId":"","transactionId":"00000000-0000-4000-8000-000000000010","walletId":"00000000-0000-4000-8000-000000000001","providerId":"p","transient":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.097s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.374s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.735s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.849s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.957s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.942s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.258s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.687s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.158s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.613s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.309s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.411s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.409s
+FAIL

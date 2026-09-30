@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.116s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:13:02 INFO transaction handled correlationId="" messageId="" transactionId=f91aca48-be07-4239-b921-ff4e291a0cc3 walletId=55d17458-edd5-416b-bdc0-cd36f47883c5 providerId=p status=PROCESSED
+2026/09/30 00:13:02 WARN transaction handling failed correlationId="" messageId="" transactionId=9a546be0-3ffa-4147-9152-3ce4aca3688f walletId=55d17458-edd5-416b-bdc0-cd36f47883c5 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.046s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.166s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.683s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.420s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.270s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.378s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.761s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.548s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: processed reference not resolved steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.845s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.141s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.133s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.133s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.323s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.452s
+FAIL

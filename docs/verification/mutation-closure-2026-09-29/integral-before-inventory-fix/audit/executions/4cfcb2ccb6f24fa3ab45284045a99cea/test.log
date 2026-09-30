@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.450s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:12:49 INFO transaction handled correlationId="" messageId="" transactionId=24733a72-34b2-4e2a-b441-70da7074df52 walletId=fe563d53-4824-482b-90d5-ae8091ab223b providerId=p status=PROCESSED
+2026/09/30 00:12:49 WARN transaction handling failed correlationId="" messageId="" transactionId=0c071fe9-3267-4128-9a55-9453b388509b walletId=fe563d53-4824-482b-90d5-ae8091ab223b providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.16s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/refund (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: invalid resolved reference"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.854s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.206s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.068s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.009s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/REFUND (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: invalid resolved reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.925s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.117s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.022s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.771s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.497s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.141s
+FAIL

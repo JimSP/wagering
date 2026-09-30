@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -158,7 +158,7 @@
+ 		}
+ 	}
+ 	for _, r := range d.Restores {
+-		if _, err := t.q.Exec(ctx, `INSERT INTO commitment_effects(commitment_id,journal_id,kind,amount_minor,reverses_effect_id,created_at) VALUES($1,$2,'RESTORE',$3,$4,$5)`, r.CommitmentID, journalID, r.Amount, r.EffectID, now); err != nil {
++		if _, err := t.q.Exec(ctx, `INSERT INTO commitment_effects(commitment_id,journal_id,kind,amount_minor,reverses_effect_id,created_at) VALUES($1,$2,'RESTORE',$3,$4,$5)`, r.CommitmentID, journalID, r.Amount, r.EffectID, now); err == nil {
+ 			return err
+ 		}
+ 		if _, err := t.q.Exec(ctx, `UPDATE bet_commitments SET remaining_minor=remaining_minor+$2,version=version+1,updated_at=$3 WHERE id=$1`, r.CommitmentID, r.Amount, now); err != nil {

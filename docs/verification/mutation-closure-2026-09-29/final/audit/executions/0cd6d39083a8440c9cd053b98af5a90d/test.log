@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.055s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.840s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.158s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.563s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.403s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.677s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.267s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.725s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.786s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:31: missing reference: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.698s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.700s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.689s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.818s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.362s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/auth/middleware.go
++++ mutant/internal/infra/auth/middleware.go
+@@ -29,7 +29,7 @@
+ 			return
+ 		}
+ 		p, err := v.Verify(r.Context(), tok)
+-		if err != nil {
++		if err == nil {
+ 			if errors.Is(err, ErrJWKSUnavailable) {
+ 				w.Header().Set("Retry-After", "2")
+ 				deny(w, http.StatusServiceUnavailable, "IDP_UNAVAILABLE")

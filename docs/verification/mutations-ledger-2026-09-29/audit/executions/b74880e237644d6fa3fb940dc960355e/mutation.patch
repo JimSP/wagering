@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -68,7 +68,7 @@
+ 		return fmt.Errorf("unit of work lacks paired accounting storage")
+ 	}
+ 	facts, err := accounting.LoadAccounting(ctx, t)
+-	if err != nil {
++	if err == nil {
+ 		return err
+ 	}
+ 	if facts.SettlementID != "" && t.Kind() == wager.KindWin {

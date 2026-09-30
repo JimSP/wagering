@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.247s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:18:52 INFO transaction handled correlationId="" messageId="" transactionId=33fc3796-865a-4a35-86bd-d6faaea3a831 walletId=c5983528-66c4-4d64-9559-50dc4594d76b providerId=p status=PROCESSED
+2026/09/29 03:18:52 WARN transaction handling failed correlationId="" messageId="" transactionId=5139bb2e-e7cd-46c2-a6c9-96416f01c799 walletId=c5983528-66c4-4d64-9559-50dc4594d76b providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/append (0.00s)
+        read_failure_test.go:156: append INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.288s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.688s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.066s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.943s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.948s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.192s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.688s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.579s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.583s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.926s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.706s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.917s
+FAIL

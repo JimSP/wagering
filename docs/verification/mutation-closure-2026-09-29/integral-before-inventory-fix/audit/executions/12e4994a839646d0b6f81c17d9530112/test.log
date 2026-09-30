@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.237s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.638s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.602s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.474s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.509s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.344s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.620s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.192s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.395s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.295s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.591s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.591s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.570s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.606s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.136s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.174s
+--- FAIL: TestTransfersValidateFixturesAndPostingBoundaries (0.00s)
+    --- FAIL: TestTransfersValidateFixturesAndPostingBoundaries/same-account (0.00s)
+        mutation_regression_test.go:108: invalid transfer accepted
+    mutation_regression_test.go:119: invalid transfer fixture
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.322s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.965s
+ok  	github.com/alexandre/wagering/scripts	2.965s
+FAIL

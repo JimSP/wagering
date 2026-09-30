@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.929s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:13:24 INFO transaction handled correlationId="" messageId="" transactionId=f373a2f9-d65e-46e5-9fbe-e556be30d6be walletId=8e7b2ae5-5a1f-457e-90f9-8e3ecaded5d4 providerId=p status=PROCESSED
+2026/09/30 00:13:24 WARN transaction handling failed correlationId="" messageId="" transactionId=f109ee18-f634-41c1-8b57-51e142280e49 walletId=8e7b2ae5-5a1f-457e-90f9-8e3ecaded5d4 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: result on unprocessed transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.219s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.701s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.574s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.062s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: result on unprocessed transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.459s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.463s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.214s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.835s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: result on unprocessed transaction want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.362s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.083s
+FAIL

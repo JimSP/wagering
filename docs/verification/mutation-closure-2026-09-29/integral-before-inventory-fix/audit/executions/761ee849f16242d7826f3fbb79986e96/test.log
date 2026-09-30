@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.585s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:13:16 INFO transaction handled correlationId="" messageId="" transactionId=3f691ec0-3b17-401b-b0c4-4ace12acf192 walletId=c3c29d2c-22e7-4ddb-a4d3-0297fc4fb735 providerId=p status=PROCESSED
+2026/09/30 00:13:16 WARN transaction handling failed correlationId="" messageId="" transactionId=4da133de-73df-4705-909a-722c9eded404 walletId=c3c29d2c-22e7-4ddb-a4d3-0297fc4fb735 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/refund (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: processed reference not resolved"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.961s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.306s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.179s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.041s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.800s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.549s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.698s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.436s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.394s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.186s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -39,7 +39,7 @@
+ 			if err != nil {
+ 				break
+ 			}
+-			f.ReferenceCandidates++
++			f.ReferenceCandidates--
+ 		}
+ 		if err == nil {
+ 			err = rows.Err()

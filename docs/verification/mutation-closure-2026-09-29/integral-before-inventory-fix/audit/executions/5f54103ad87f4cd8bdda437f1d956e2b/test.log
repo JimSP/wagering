@@ -1,0 +1,47 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.102s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:05:28 INFO transaction handled correlationId="" messageId="" transactionId=44195897-c7d6-48db-aa0e-bac347860102 walletId=ffdcd571-bab6-4778-a754-452900bbd354 providerId=p status=PROCESSED
+2026/09/30 00:05:28 WARN transaction handling failed correlationId="" messageId="" transactionId=dac010f9-9e37-4942-a72e-64efb63fbb92 walletId=ffdcd571-bab6-4778-a754-452900bbd354 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/reference_already_resolved (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x10137d398]
+
+goroutine 156 [running]:
+testing.tRunner.func1.2({0x101ad71e0, 0x101bc7b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x101ad71e0?, 0x101bc7b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.transactionStub.Update(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/ports_test.go:97
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).waitReference(0x2f44d2901ec0, {0x101b6d198, 0x101c0e380}, {0x101b6dc50, 0x2f44d2bb66e0}, 0x2f44d2bc3800)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/process.go:55 +0x198
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x2f44d2a43ec0, {0x101b6d198, 0x101c0e380}, {0x101b6dc50, 0x2f44d2bb66e0}, 0x2f44d2bc3800)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/process.go:93 +0x694
+github.com/alexandre/wagering/internal/app/usecase.TestProcessingPropagatesDomainAndPortFailures.func1(0x2f44d2bc6b48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/submit_failure_test.go:161 +0x9c8
+testing.tRunner(0x2f44d2bc6b48, 0x2f44d2ba9200)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 152
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.190s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.283s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.150s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.839s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:true ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.584s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.507s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.156s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.394s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.830s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.151s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.138s
+FAIL

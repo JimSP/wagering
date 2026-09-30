@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -86,7 +86,7 @@
+ 		if errors.Is(e, apperr.ErrNotFound) {
+ 			return u.waitReference(ctx, tx, t)
+ 		}
+-		if e != nil {
++		if e == nil {
+ 			return e
+ 		}
+ 		r := ref.Snapshot()

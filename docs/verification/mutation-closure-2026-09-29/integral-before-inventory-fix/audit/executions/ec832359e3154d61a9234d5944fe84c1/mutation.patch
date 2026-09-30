@@ -1,0 +1,70 @@
+--- original/internal/app/usecase/workers.go
++++ mutant/internal/app/usecase/workers.go
+@@ -13,17 +13,17 @@
+ )
+ 
+ const (
+-	MaxReferenceAttempts = 8
+-	BatchSize            = 20
++	MaxReferenceAttempts	= 8
++	BatchSize		= 20
+ )
+ 
+-func Backoff(attempt int) time.Duration { return time.Second << min(max(attempt, 0), 6) }
++func Backoff(attempt int) time.Duration	{ return time.Second << min(max(attempt, 0), 6) }
+ 
+ type ProcessPendingReferences struct {
+-	uow     port.UnitOfWork
+-	clock   port.Clock
+-	metrics port.Metrics
+-	submit  *SubmitTransaction
++	uow	port.UnitOfWork
++	clock	port.Clock
++	metrics	port.Metrics
++	submit	*SubmitTransaction
+ }
+ 
+ func NewProcessPendingReferences(u port.UnitOfWork, c port.Clock, m port.Metrics, s *SubmitTransaction) *ProcessPendingReferences {
+@@ -91,7 +91,7 @@
+ 		if !found {
+ 			break
+ 		}
+-		n++
++		n--
+ 		u.metrics.TxResult(string(outcome.Kind()), string(outcome.Status()))
+ 		u.metrics.Retry("reference")
+ 	}
+@@ -99,10 +99,10 @@
+ }
+ 
+ type PublishOutbox struct {
+-	uow     port.UnitOfWork
+-	pub     port.EventPublisher
+-	clock   port.Clock
+-	metrics port.Metrics
++	uow	port.UnitOfWork
++	pub	port.EventPublisher
++	clock	port.Clock
++	metrics	port.Metrics
+ }
+ 
+ func NewPublishOutbox(u port.UnitOfWork, p port.EventPublisher, c port.Clock, m port.Metrics) *PublishOutbox {
+@@ -121,12 +121,12 @@
+ 	}
+ 	for _, ev := range events {
+ 		var ids struct {
+-			CorrelationID string `json:"correlationId"`
+-			CausationID   string `json:"causationId"`
+-			Data          struct {
+-				TransactionID string `json:"transactionId"`
+-				ProviderID    string `json:"providerId"`
+-			} `json:"data"`
++			CorrelationID	string	`json:"correlationId"`
++			CausationID	string	`json:"causationId"`
++			Data		struct {
++				TransactionID	string	`json:"transactionId"`
++				ProviderID	string	`json:"providerId"`
++			}	`json:"data"`
+ 		}
+ 		_ = json.Unmarshal(ev.Payload(), &ids)
+ 		log := slog.Default().With("eventId", ev.EventID(), "walletId", ev.AggregateID(), "transactionId", ids.Data.TransactionID, "providerId", ids.Data.ProviderID, "correlationId", ids.CorrelationID, "messageId", ids.CausationID, "attempt", ev.Attempts())

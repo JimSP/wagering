@@ -1,0 +1,31 @@
+--- original/internal/app/usecase/settlement.go
++++ mutant/internal/app/usecase/settlement.go
+@@ -12,15 +12,15 @@
+ )
+ 
+ type Settlements struct {
+-	uow   port.UnitOfWork
+-	clock port.Clock
+-	ids   port.IDGenerator
++	uow	port.UnitOfWork
++	clock	port.Clock
++	ids	port.IDGenerator
+ }
+ 
+ func NewSettlements(u port.UnitOfWork, c port.Clock, ids port.IDGenerator) *Settlements {
+ 	return &Settlements{u, c, ids}
+ }
+-func (u *SubmitTransaction) Settlements() *Settlements { return NewSettlements(u.uow, u.clock, u.ids) }
++func (u *SubmitTransaction) Settlements() *Settlements	{ return NewSettlements(u.uow, u.clock, u.ids) }
+ func settlementStore(tx port.Tx) (port.SettlementStore, error) {
+ 	s, ok := tx.(port.SettlementTransaction)
+ 	if !ok {
+@@ -92,7 +92,7 @@
+ 		if e != nil {
+ 			return e
+ 		}
+-		if e = d.Validate(b, cs); e != nil {
++		if e = d.Validate(b, cs); e == nil {
+ 			return e
+ 		}
+ 		out = port.SettlementRecord{ID: u.ids.NewID(), BetID: b.ID, ResultID: d.ResultID, Status: "CONFIRMED", Hash: d.Hash()}

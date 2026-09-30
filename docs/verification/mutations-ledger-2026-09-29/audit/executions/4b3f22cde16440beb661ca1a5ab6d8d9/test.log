@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.948s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:50:34 INFO transaction handled correlationId="" messageId="" transactionId=f6972982-0ee3-44d1-89e9-59f5eb5abfad walletId=fd278e84-7744-4db9-9f0a-a3cc75d5ba03 providerId=p status=PROCESSED
+2026/09/29 22:50:34 WARN transaction handling failed correlationId="" messageId="" transactionId=4d49362e-7128-4c47-8434-cac0096f9087 walletId=fd278e84-7744-4db9-9f0a-a3cc75d5ba03 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    http_contract_test.go:127: auth: jwks unavailable: unexpected end of JSON input
+        failed keyfunc: could not unmarshal raw JWK Set JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.988s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.016s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.144s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.252s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.513s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.287s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.06s)
+    authorization_paths_test.go:64: auth: jwks unavailable: unexpected end of JSON input
+        failed keyfunc: could not unmarshal raw JWK Set JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.629s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.396s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.183s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.108s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.921s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.932s
+FAIL

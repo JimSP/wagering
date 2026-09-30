@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.171s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:13:34 INFO transaction handled correlationId="" messageId="" transactionId=63e00429-71d0-43d7-a3d8-65fb549f9144 walletId=45a09e67-cab2-4dcf-917f-8548749afda8 providerId=p status=PROCESSED
+2026/09/30 00:13:34 WARN transaction handling failed correlationId="" messageId="" transactionId=27b9906b-5a69-4060-84d8-2964366c21b6 walletId=45a09e67-cab2-4dcf-917f-8548749afda8 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.19s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: schedule outside pending reference"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.613s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.901s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.506s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.779s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_equal_updated (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING_REFERENCE FailureCode: BalanceAfter:<nil> Attempts:1 NextAttemptAt:2026-09-28 12:00:00 +0000 UTC ExpiresAt:2026-09-28 13:00:00 +0000 UTC CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.266s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.035s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.290s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.385s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.693s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.126s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.768s
+FAIL

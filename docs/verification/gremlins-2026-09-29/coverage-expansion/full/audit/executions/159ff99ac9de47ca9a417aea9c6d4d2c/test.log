@@ -1,0 +1,36 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.607s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:04:03 INFO transaction handled correlationId="" messageId="" transactionId=fb2b80ca-2501-4f8a-abfb-253fd13d70e0 walletId=93dfe6be-6d75-4a84-8c84-de45658c42de providerId=p status=PROCESSED
+2026/09/29 02:04:03 WARN transaction handling failed correlationId="" messageId="" transactionId=18935898-4ea8-43c5-b68b-eb16b98e637b walletId=93dfe6be-6d75-4a84-8c84-de45658c42de providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/append (0.00s)
+        read_failure_test.go:156: append INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.934s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.439s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.200s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    contract_test.go:110: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.771s
+FAIL

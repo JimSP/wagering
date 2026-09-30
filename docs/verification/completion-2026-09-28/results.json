@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-28",
+  "go_version": "go1.27.1 darwin/arm64",
+  "docker_build_go_version": "go1.23.12",
+  "top_level_tests": {
+    "test": {
+      "pass": 48,
+      "fail": 0,
+      "skip": 0
+    },
+    "race": {
+      "pass": 48,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "commands": {
+    "go test -count=1 -json ./...": 0,
+    "go test -count=1 -race -json ./...": 0,
+    "go vet ./...": 0
+  },
+  "integration_executed": true,
+  "integration": {
+    "exit_code": 0,
+    "race": true,
+    "system_tests": 22,
+    "cmd_tests": 3,
+    "passed_tests": [
+      "TestSimultaneousChannelsAndSQSTerminalRejection",
+      "TestConcurrentReversalsAndFullRestart",
+      "TestDependencyOutagesRecoverDurableWork",
+      "TestSIGTERMDrainsInFlightSQS",
+      "TestInternalAuthorizationAndExternalOpening",
+      "TestOutputContractsAndDurableDownstreamDedup",
+      "TestExternalOpeningSQSReachesDLQ",
+      "TestReferenceAttemptsExhaustionAndPendingDependency",
+      "TestTransientExhaustionReachesDLQWithoutFinancialEffect",
+      "TestOutboxOldLeaseCannotConfirmNewOwner",
+      "TestLockTimeoutIsRetryableAndReconciliationSnapshotIsStable",
+      "TestThreeProcessesConcurrentMoney",
+      "TestAuthorization",
+      "TestReversalsAndLoss",
+      "TestDatabaseGuardsAndAtomicRollback",
+      "TestBrokerPermissions",
+      "TestHTTPAndSQSReplayAndCrash",
+      "TestPendingReferenceRestart",
+      "TestOutboxRecoveryTwoPublishers",
+      "TestLedgerCursorAndOpeningZero",
+      "TestExpiredIdPToken",
+      "TestMigrationRoundTrip",
+      "TestFxGraph",
+      "TestRealFxStartStop",
+      "TestJWKSStartupFailureClosesDatabase"
+    ]
+  },
+  "docker_compose_build_app": 0,
+  "readiness_http_status": 200,
+  "limitations": "MiniStack/IAM emulates SQS; no AWS homologation, load test or formal proof. See VERIFICATION.md."
+}

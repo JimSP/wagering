@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.232s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:45:26 INFO transaction handled correlationId="" messageId="" transactionId=958a0c54-e640-41d5-a25c-1276d74de945 walletId=8b4fc35e-5be1-4f1d-9e49-601126afcf5b providerId=p status=PROCESSED
+2026/09/29 22:45:26 WARN transaction handling failed correlationId="" messageId="" transactionId=55a04f83-e072-4170-bbfa-35eb57b3af21 walletId=8b4fc35e-5be1-4f1d-9e49-601126afcf5b providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/wait_invalid (0.00s)
+        submit_failure_test.go:189: wait invalid repository unavailable
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.705s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.225s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.366s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.632s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/time_before_creation (0.00s)
+        lifecycle_semantics_test.go:286: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.057s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.767s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.491s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.797s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.368s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.214s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.180s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.149s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.205s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.338s
+FAIL

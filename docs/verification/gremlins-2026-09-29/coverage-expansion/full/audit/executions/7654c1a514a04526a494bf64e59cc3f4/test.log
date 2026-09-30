@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.417s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	1.521s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/status (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PENDING FailureCode: BalanceAfter:<nil> Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: invalid opening result
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	0.640s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:225: error=INVALID_INPUT: invalid input: invalid opening snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.263s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	(cached)
+FAIL

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.438s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	1.492s
+--- FAIL: TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot (0.00s)
+    --- FAIL: TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot/id (0.00s)
+        semantics_test.go:162: inconsistent outbox record accepted <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	0.992s
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:84: [{ wallet WagerTransactionProcessed {"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"corr","occurredAt":"2026-01-02T03:04:05Z","version":1,"data":{"transactionId":"tx","kind":"OPENING","walletId":"wallet","playerId":"player","money":{"amount":"1.00","currency":"BRL"}}} 1 2 {0 63902919845 <nil>}}] <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.295s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	(cached)
+FAIL

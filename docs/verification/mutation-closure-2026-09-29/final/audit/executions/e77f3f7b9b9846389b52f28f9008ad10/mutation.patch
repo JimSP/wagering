@@ -1,0 +1,45 @@
+--- original/internal/infra/postgres/uow.go
++++ mutant/internal/infra/postgres/uow.go
+@@ -28,7 +28,7 @@
+ 
+ type UnitOfWork struct{ pool transactionBeginner }
+ 
+-func NewUnitOfWork(pool *pgxpool.Pool) *UnitOfWork { return &UnitOfWork{pool} }
++func NewUnitOfWork(pool *pgxpool.Pool) *UnitOfWork	{ return &UnitOfWork{pool} }
+ 
+ func (u *UnitOfWork) Do(ctx context.Context, fn func(context.Context, port.Tx) error) error {
+ 	return u.run(ctx, pgx.TxOptions{IsoLevel: pgx.ReadCommitted}, fn)
+@@ -40,14 +40,14 @@
+ 
+ func (u *UnitOfWork) run(ctx context.Context, opts pgx.TxOptions, fn func(context.Context, port.Tx) error) error {
+ 	t, err := u.pool.BeginTx(ctx, opts)
+-	if err != nil {
++	if err == nil {
+ 		return apperr.Transient(err)
+ 	}
+ 	defer func() {
+ 		c, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+ 		defer cancel()
+ 		_ = t.Rollback(c)
+-	}() // no-op after a successful commit
++	}()	// no-op after a successful commit
+ 	if err := fn(ctx, txAdapter{t}); err != nil {
+ 		return classify(err)
+ 	}
+@@ -83,11 +83,11 @@
+ 
+ type txAdapter struct{ q dbtx }
+ 
+-func (t txAdapter) Wallets() port.WalletRepository           { return walletRepo{t.q} }
+-func (t txAdapter) Transactions() port.TransactionRepository { return transactionRepo{t.q} }
+-func (t txAdapter) Ledger() port.LedgerRepository            { return ledgerRepo{t.q} }
+-func (t txAdapter) Inbox() port.InboxRepository              { return inboxRepo{t.q} }
+-func (t txAdapter) Outbox() port.OutboxRepository            { return outboxRepo{t.q} }
++func (t txAdapter) Wallets() port.WalletRepository		{ return walletRepo{t.q} }
++func (t txAdapter) Transactions() port.TransactionRepository	{ return transactionRepo{t.q} }
++func (t txAdapter) Ledger() port.LedgerRepository		{ return ledgerRepo{t.q} }
++func (t txAdapter) Inbox() port.InboxRepository			{ return inboxRepo{t.q} }
++func (t txAdapter) Outbox() port.OutboxRepository		{ return outboxRepo{t.q} }
+ 
+ func (t txAdapter) SettleByID(ctx context.Context, id string) error {
+ 	_, err := t.q.Exec(ctx, `SELECT accounting_execute_settlement($1::uuid,clock_timestamp())`, id)

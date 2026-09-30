@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.284s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:04:04 INFO transaction handled correlationId="" messageId="" transactionId=b0a0ea5d-23db-4a11-b297-122831358aa4 walletId=6c9c53af-801b-471a-9f9a-34619274088d providerId=p status=PROCESSED
+2026/09/30 00:04:04 WARN transaction handling failed correlationId="" messageId="" transactionId=3bd1ff95-f83a-415e-9126-3de54f7001eb walletId=6c9c53af-801b-471a-9f9a-34619274088d providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got settlement is not processed, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.427s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.219s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.777s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: settlement is not processed
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.780s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.342s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.520s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.451s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.896s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.677s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.015s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.001s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.981s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.959s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.119s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.139s
+FAIL

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.399s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:38:54 INFO transaction handled correlationId="" messageId="" transactionId=eb1fef2f-3a7c-43d9-9131-e648fada4526 walletId=6f7d7d43-c284-41fc-a389-5edf6c88eb71 providerId=p status=PROCESSED
+2026/09/29 22:38:54 WARN transaction handling failed correlationId="" messageId="" transactionId=d2d6ff7e-f19f-4b4b-9f0c-b868a64cce52 walletId=6f7d7d43-c284-41fc-a389-5edf6c88eb71 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/opening_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.948s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.502s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.047s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.761s
+--- FAIL: TestInvalidTransactionSnapshotsAndConstructorBoundaries (0.00s)
+    validation_paths_test.go:50: &{   INTERNAL     w p   OPENING {100 BRL}   PROCESSED  0x5720df407860 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.162s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.883s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.604s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.277s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.582s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.193s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.132s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.987s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.189s
+FAIL

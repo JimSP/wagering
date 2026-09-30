@@ -1,0 +1,50 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.121s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:58:26 INFO transaction handled correlationId="" messageId="" transactionId=c7572f6c-9998-4eb6-ae96-590ce49d8c88 walletId=b0f0ffc4-3e5f-4674-8478-82b8fafb9cd5 providerId=p status=PROCESSED
+2026/09/29 01:58:26 WARN transaction handling failed correlationId="" messageId="" transactionId=565a87c0-ef48-41c8-abe5-90085fd3f51a walletId=b0f0ffc4-3e5f-4674-8478-82b8fafb9cd5 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/processed_event (0.00s)
+        read_failure_test.go:156: processed event invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.442s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.669s
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.427s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.747s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:25 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.167s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.985s
+FAIL

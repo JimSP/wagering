@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -54,7 +54,7 @@
+ 		}
+ 		if len(out.Entries) == limit {
+ 			out.NextCursor = base64.RawURLEncoding.EncodeToString([]byte(w + ":" + strconv.FormatInt(last, 10)))
+-			break
++			continue
+ 		}
+ 		a, e := money.FromMinor(amount, cur)
+ 		if e != nil {

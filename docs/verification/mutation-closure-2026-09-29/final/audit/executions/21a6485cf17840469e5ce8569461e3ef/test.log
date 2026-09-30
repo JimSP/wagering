@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.956s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:07:19 INFO transaction handled correlationId="" messageId="" transactionId=8c342be6-2a06-491f-957a-d6c8efc1e147 walletId=6cac3a1e-c1d1-4dbd-86c5-837436de2798 providerId=p status=PROCESSED
+2026/09/30 01:07:19 WARN transaction handling failed correlationId="" messageId="" transactionId=f6e264c5-389d-49cc-a793-1e0cf805b189 walletId=6cac3a1e-c1d1-4dbd-86c5-837436de2798 providerId=p transient=false
+--- FAIL: TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox (0.00s)
+    --- FAIL: TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox/business_rejection_completes_inbox_and_remains_terminal (0.00s)
+        reference_semantics_test.go:112: invalid message: <nil>
+    reference_semantics_test.go:142: invalid message: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	13.639s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.636s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.903s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.770s
+ok  	github.com/alexandre/wagering/internal/domain/wager	14.031s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.148s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.845s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.381s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	14.208s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.945s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.927s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.902s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.959s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.969s
+FAIL

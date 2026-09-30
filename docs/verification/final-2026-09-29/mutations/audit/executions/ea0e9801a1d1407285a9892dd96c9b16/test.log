@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.412s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:20:12 INFO transaction handled correlationId="" messageId="" transactionId=93812945-9a1c-44c2-aa52-640cbb5f52d9 walletId=0da4e6fe-b6fc-4a13-9fd9-8da779405c28 providerId=p status=PROCESSED
+2026/09/29 03:20:12 WARN transaction handling failed correlationId="" messageId="" transactionId=e8e2f18e-d7d9-4e27-8084-b5937dc65f1e walletId=0da4e6fe-b6fc-4a13-9fd9-8da779405c28 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/opening (0.00s)
+        read_failure_test.go:160: work continued after failure [create insert]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.658s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.119s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.907s
+--- FAIL: TestInvalidTransactionSnapshotsAndConstructorBoundaries (0.00s)
+    validation_paths_test.go:50: &{   INTERNAL     w p   OPENING {100 BRL}   PROCESSED  0x1878e556d4b8 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.153s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.260s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.219s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.708s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.016s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.613s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	4.043s
+FAIL

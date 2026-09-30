@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.716s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:39:27 INFO transaction handled correlationId="" messageId="" transactionId=cb416c25-3270-4805-8523-301fd978e587 walletId=47b92868-0ac4-4730-9efb-11ed9cb3cc9e providerId=p status=PROCESSED
+2026/09/29 22:39:27 WARN transaction handling failed correlationId="" messageId="" transactionId=831a2d82-4e9e-4ea1-badf-4751a714db22 walletId=47b92868-0ac4-4730-9efb-11ed9cb3cc9e providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: corrupted snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.954s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.203s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.339s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.900s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: corrupted snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.464s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.062s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.149s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.469s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: corrupted snapshot "tx" want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.199s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.240s
+FAIL

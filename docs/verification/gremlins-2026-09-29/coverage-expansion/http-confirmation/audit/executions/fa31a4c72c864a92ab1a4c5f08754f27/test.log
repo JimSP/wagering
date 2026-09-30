@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.616s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:41:08 INFO transaction handled correlationId="" messageId="" transactionId=9f62c2d5-7313-4657-94d2-5205d6408396 walletId=dd566882-4b40-41d9-bcd5-5e438fb3263f providerId=p status=PROCESSED
+2026/09/29 02:41:08 WARN transaction handling failed correlationId="" messageId="" transactionId=3152e2db-463d-4dbe-8360-d7046e4f8585 walletId=dd566882-4b40-41d9-bcd5-5e438fb3263f providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.997s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.037s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.314s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.690s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.574s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.000s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.799s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.208s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	0.254s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.657s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.405s
+FAIL

@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	6.566s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	8.865s
+--- FAIL: TestEventVariantsRejectInconsistentMetadata (0.00s)
+    --- FAIL: TestEventVariantsRejectInconsistentMetadata/opening_with_provider (0.00s)
+        validation_paths_test.go:77: {event wallet WagerTransactionProcessed {"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"t","kind":"OPENING","walletId":"wallet","playerId":"p","providerId":"external","money":{"amount":"1.00","currency":"BRL"}}} 1 0 {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	7.386s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.131s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.675s
+ok  	github.com/alexandre/wagering/internal/domain/wager	7.005s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.799s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.017s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.922s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	6.766s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.289s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.762s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.629s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.821s
+FAIL

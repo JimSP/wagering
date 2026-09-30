@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.822s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:51:49 INFO transaction handled correlationId="" messageId="" transactionId=8759faca-117d-469d-bb92-d8fba2476518 walletId=c25c60a6-fc6e-4861-b13e-25857080f2a0 providerId=p status=PROCESSED
+2026/09/29 23:51:49 WARN transaction handling failed correlationId="" messageId="" transactionId=bb9e320b-05ce-430c-a95a-cd63d6892e1b walletId=c25c60a6-fc6e-4861-b13e-25857080f2a0 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.02s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"transactionId":"","status":"","idempotentReplay":false}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.726s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.797s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.099s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.785s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.348s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.903s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.377s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.221s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	0.986s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.715s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.706s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.628s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.717s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.716s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.731s
+FAIL

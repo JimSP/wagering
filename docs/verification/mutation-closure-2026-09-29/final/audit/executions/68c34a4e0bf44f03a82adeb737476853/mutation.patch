@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/settlement_audit.go
++++ mutant/internal/app/usecase/settlement_audit.go
+@@ -78,7 +78,7 @@
+ 				return err
+ 			}
+ 		}
+-		if err = r.ReverseSettlement(ctx, record.ID, u.clock.Now()); err != nil {
++		if err = r.ReverseSettlement(ctx, record.ID, u.clock.Now()); err == nil {
+ 			return err
+ 		}
+ 		record.Status = "REVERSED"

@@ -1,0 +1,68 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 493B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 351B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.23.12-alpine
+#3 DONE 1.0s
+
+#4 [internal] load metadata for gcr.io/distroless/static-debian12:nonroot
+#4 DONE 1.4s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 122B done
+#5 DONE 0.0s
+
+#6 [stage-1 1/3] FROM gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab
+#6 resolve gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab 0.0s done
+#6 DONE 0.0s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.23.12-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f
+#7 resolve docker.io/library/golang:1.23.12-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f 0.0s done
+#7 DONE 0.0s
+
+#8 [internal] load build context
+#8 transferring context: 1.01MB 0.0s done
+#8 DONE 0.0s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.0s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -trimpath -o /out/wagering ./cmd/wagering
+#13 DONE 5.3s
+
+#6 [stage-1 1/3] FROM gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab
+#6 CACHED
+
+#14 [stage-1 2/3] COPY --from=build /out/wagering /wagering
+#14 DONE 0.0s
+
+#15 [stage-1 3/3] COPY migrations /migrations
+#15 DONE 0.0s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 0.5s done
+#16 exporting manifest sha256:94ae503c11beee45e40083be6b1f2ec151baa5a402bbf3d5fa48b7e559314ee4 done
+#16 exporting config sha256:6f7779c7c7c7f4317b1683a3b64821fb767b7ab837baaa4f6b46b5e59e13d464 done
+#16 exporting attestation manifest sha256:094f7781d3e11294abf46850e4cab3d851d148fccba6ef102964eb306e5705a6 done
+#16 exporting manifest list sha256:2baaf62ec61d24fe880fe8b8f5256a1bed8a40ef88e5809346051c3526d04987 done
+#16 naming to docker.io/library/wagering-app:latest done
+#16 unpacking to docker.io/library/wagering-app:latest 0.1s done
+#16 DONE 0.6s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+ wagering-app  Built

@@ -1,0 +1,20 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.767s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	9.699s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.575s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.290s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.800s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.688s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.912s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.431s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.868s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingExistingBetAndNoNewCommitment (0.00s)
+    accounting_mutation_test.go:64: step 1: SQL "INSERT INTO bets(provider_id,round_id,game_id,currency,created_at) VALUES($1,$2,$3,$4,$5) RETURNING id::text" lacks "SET bet_id"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	8.178s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.483s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.485s
+FAIL

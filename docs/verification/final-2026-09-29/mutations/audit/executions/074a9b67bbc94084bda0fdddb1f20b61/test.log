@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.970s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:29:17 INFO transaction handled correlationId="" messageId="" transactionId=db7c3a6e-3824-44b0-ad69-5c568a6363d3 walletId=c2973f67-adda-4298-94e8-c27e96e5b450 providerId=p status=PROCESSED
+2026/09/29 03:29:17 WARN transaction handling failed correlationId="" messageId="" transactionId=b97adfce-8001-408f-b35d-b6056b8bb591 walletId=c2973f67-adda-4298-94e8-c27e96e5b450 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/invalid_wallet_time (0.00s)
+        submit_failure_test.go:126: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.261s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.356s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.477s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.488s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:48: rehydration changed history wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.921s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.490s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.582s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:164: error=wallet: invalid want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.373s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.840s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.005s
+FAIL

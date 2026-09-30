@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -103,7 +103,7 @@
+ 			return u.reject(ctx, tx, t, wager.FailReferenceNotProcessed)
+ 		}
+ 		if s.Kind.IsReversal() {
+-			if s.Amount.Minor() != r.Amount.Minor() {
++			if s.Amount.Minor() == r.Amount.Minor() {
+ 				return u.reject(ctx, tx, t, wager.FailReversalAmountMismatch)
+ 			}
+ 			yes, e := tx.Transactions().HasReversal(ctx, r.ID)

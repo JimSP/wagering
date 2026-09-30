@@ -1,0 +1,46 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.442s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:19:58 INFO transaction handled correlationId="" messageId="" transactionId=a4d8db5f-9d18-439e-8da6-aded6256c01b walletId=688c05d5-81f3-43e1-887d-8c004d44c025 providerId=p status=PROCESSED
+2026/09/30 01:19:58 WARN transaction handling failed correlationId="" messageId="" transactionId=9c27d07c-0288-4629-85e7-79cfa46b2755 walletId=688c05d5-81f3-43e1-887d-8c004d44c025 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/invalid_wallet_time (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1051cd398]
+
+goroutine 150 [running]:
+testing.tRunner.func1.2({0x1059271e0, 0x105a17b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1059271e0?, 0x105a17b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.transactionStub.Update(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2268104042/internal/app/usecase/ports_test.go:97
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).reject(0x2fe7e77d1ec0, {0x1059bd198, 0x105a5e380}, {0x1059bdc50, 0x2fe7e7b30230}, 0x2fe7e7b2d680, {0x10528b95a, 0x13})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2268104042/internal/app/usecase/process.go:30 +0x98
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x2fe7e790dec0, {0x1059bd198, 0x105a5e380}, {0x1059bdc50, 0x2fe7e7b30230}, 0x2fe7e7b2d680)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2268104042/internal/app/usecase/process.go:90 +0x6bc
+github.com/alexandre/wagering/internal/app/usecase.TestProcessingPropagatesDomainAndPortFailures.func1(0x2fe7e7b2efc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2268104042/internal/app/usecase/submit_failure_test.go:161 +0x9c8
+testing.tRunner(0x2fe7e7b2efc8, 0x2fe7e7b118c0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 145
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.638s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.461s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.087s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.953s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/implicit_ambiguous_WIN (0.00s)
+        accounting_test.go:55: decision={Failure:INSUFFICIENT_FUNDS Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	8.338s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.704s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.039s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.584s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.051s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.635s
+FAIL

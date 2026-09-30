@@ -1,0 +1,399 @@
+{
+  "command": "go test -count=1 -race -tags faults -covermode=atomic -coverpkg=./... -coverprofile=all.out ./...",
+  "testExitCode": 0,
+  "integrationIncluded": false,
+  "metric": "Go statements; blocks deduplicated by source location; not branch coverage",
+  "application": {
+    "covered": 1752,
+    "statements": 2250,
+    "percent": 77.86666666666666
+  },
+  "domain": {
+    "covered": 500,
+    "statements": 540,
+    "percent": 92.5925925925926
+  },
+  "excludedFromApplication": [
+    "internal/testsupport/settlementfacts"
+  ],
+  "packages": {
+    "cmd/wagering": {
+      "covered": 1,
+      "statements": 3,
+      "percent": 33.333333333333336
+    },
+    "internal/app/apperr": {
+      "covered": 14,
+      "statements": 15,
+      "percent": 93.33333333333333
+    },
+    "internal/app/usecase": {
+      "covered": 413,
+      "statements": 498,
+      "percent": 82.93172690763052
+    },
+    "internal/domain/event": {
+      "covered": 86,
+      "statements": 89,
+      "percent": 96.62921348314607
+    },
+    "internal/domain/money": {
+      "covered": 52,
+      "statements": 52,
+      "percent": 100.0
+    },
+    "internal/domain/settlement": {
+      "covered": 32,
+      "statements": 60,
+      "percent": 53.333333333333336
+    },
+    "internal/domain/wager": {
+      "covered": 283,
+      "statements": 292,
+      "percent": 96.91780821917808
+    },
+    "internal/domain/wallet": {
+      "covered": 47,
+      "statements": 47,
+      "percent": 100.0
+    },
+    "internal/infra/auth": {
+      "covered": 120,
+      "statements": 120,
+      "percent": 100.0
+    },
+    "internal/infra/config": {
+      "covered": 24,
+      "statements": 24,
+      "percent": 100.0
+    },
+    "internal/infra/outbox": {
+      "covered": 0,
+      "statements": 6,
+      "percent": 0.0
+    },
+    "internal/infra/postgres": {
+      "covered": 237,
+      "statements": 543,
+      "percent": 43.646408839779006
+    },
+    "internal/infra/reference": {
+      "covered": 0,
+      "statements": 6,
+      "percent": 0.0
+    },
+    "internal/infra/sqs": {
+      "covered": 134,
+      "statements": 143,
+      "percent": 93.7062937062937
+    },
+    "internal/platform/failpoint": {
+      "covered": 11,
+      "statements": 11,
+      "percent": 100.0
+    },
+    "internal/platform/logging": {
+      "covered": 5,
+      "statements": 5,
+      "percent": 100.0
+    },
+    "internal/platform/metrics": {
+      "covered": 23,
+      "statements": 24,
+      "percent": 95.83333333333333
+    },
+    "internal/platform/sys": {
+      "covered": 5,
+      "statements": 7,
+      "percent": 71.42857142857143
+    },
+    "internal/platform/worker": {
+      "covered": 54,
+      "statements": 57,
+      "percent": 94.73684210526316
+    },
+    "internal/testsupport/settlementfacts": {
+      "covered": 127,
+      "statements": 135,
+      "percent": 94.07407407407408
+    },
+    "internal/transport/httpapi": {
+      "covered": 211,
+      "statements": 248,
+      "percent": 85.08064516129032
+    }
+  },
+  "files": {
+    "cmd/wagering/app.go": {
+      "covered": 1,
+      "statements": 2,
+      "percent": 50.0
+    },
+    "cmd/wagering/main.go": {
+      "covered": 0,
+      "statements": 1,
+      "percent": 0.0
+    },
+    "internal/app/apperr/apperr.go": {
+      "covered": 14,
+      "statements": 15,
+      "percent": 93.33333333333333
+    },
+    "internal/app/usecase/process.go": {
+      "covered": 61,
+      "statements": 70,
+      "percent": 87.14285714285714
+    },
+    "internal/app/usecase/settlement.go": {
+      "covered": 45,
+      "statements": 57,
+      "percent": 78.94736842105263
+    },
+    "internal/app/usecase/settlement_audit.go": {
+      "covered": 0,
+      "statements": 52,
+      "percent": 0.0
+    },
+    "internal/app/usecase/settlement_message.go": {
+      "covered": 18,
+      "statements": 19,
+      "percent": 94.73684210526316
+    },
+    "internal/app/usecase/transaction.go": {
+      "covered": 130,
+      "statements": 137,
+      "percent": 94.8905109489051
+    },
+    "internal/app/usecase/wallet.go": {
+      "covered": 60,
+      "statements": 64,
+      "percent": 93.75
+    },
+    "internal/app/usecase/workers.go": {
+      "covered": 99,
+      "statements": 99,
+      "percent": 100.0
+    },
+    "internal/domain/event/event.go": {
+      "covered": 20,
+      "statements": 20,
+      "percent": 100.0
+    },
+    "internal/domain/event/validation.go": {
+      "covered": 66,
+      "statements": 69,
+      "percent": 95.65217391304348
+    },
+    "internal/domain/money/money.go": {
+      "covered": 52,
+      "statements": 52,
+      "percent": 100.0
+    },
+    "internal/domain/settlement/plan.go": {
+      "covered": 32,
+      "statements": 34,
+      "percent": 94.11764705882354
+    },
+    "internal/domain/settlement/reversal.go": {
+      "covered": 0,
+      "statements": 26,
+      "percent": 0.0
+    },
+    "internal/domain/wager/accounting.go": {
+      "covered": 77,
+      "statements": 86,
+      "percent": 89.53488372093024
+    },
+    "internal/domain/wager/errors.go": {
+      "covered": 9,
+      "statements": 9,
+      "percent": 100.0
+    },
+    "internal/domain/wager/ledger.go": {
+      "covered": 28,
+      "statements": 28,
+      "percent": 100.0
+    },
+    "internal/domain/wager/rules.go": {
+      "covered": 33,
+      "statements": 33,
+      "percent": 100.0
+    },
+    "internal/domain/wager/transaction.go": {
+      "covered": 127,
+      "statements": 127,
+      "percent": 100.0
+    },
+    "internal/domain/wager/types.go": {
+      "covered": 9,
+      "statements": 9,
+      "percent": 100.0
+    },
+    "internal/domain/wallet/wallet.go": {
+      "covered": 47,
+      "statements": 47,
+      "percent": 100.0
+    },
+    "internal/infra/auth/middleware.go": {
+      "covered": 34,
+      "statements": 34,
+      "percent": 100.0
+    },
+    "internal/infra/auth/verifier.go": {
+      "covered": 86,
+      "statements": 86,
+      "percent": 100.0
+    },
+    "internal/infra/config/config.go": {
+      "covered": 24,
+      "statements": 24,
+      "percent": 100.0
+    },
+    "internal/infra/outbox/module.go": {
+      "covered": 0,
+      "statements": 6,
+      "percent": 0.0
+    },
+    "internal/infra/postgres/accounting_repo.go": {
+      "covered": 0,
+      "statements": 103,
+      "percent": 0.0
+    },
+    "internal/infra/postgres/helpers.go": {
+      "covered": 1,
+      "statements": 1,
+      "percent": 100.0
+    },
+    "internal/infra/postgres/inbox_outbox_repo.go": {
+      "covered": 41,
+      "statements": 43,
+      "percent": 95.34883720930233
+    },
+    "internal/infra/postgres/ledger_repo.go": {
+      "covered": 59,
+      "statements": 61,
+      "percent": 96.72131147540983
+    },
+    "internal/infra/postgres/module.go": {
+      "covered": 20,
+      "statements": 21,
+      "percent": 95.23809523809524
+    },
+    "internal/infra/postgres/settlement_audit_repo.go": {
+      "covered": 0,
+      "statements": 111,
+      "percent": 0.0
+    },
+    "internal/infra/postgres/settlement_repo.go": {
+      "covered": 0,
+      "statements": 86,
+      "percent": 0.0
+    },
+    "internal/infra/postgres/transaction_repo.go": {
+      "covered": 56,
+      "statements": 57,
+      "percent": 98.24561403508773
+    },
+    "internal/infra/postgres/uow.go": {
+      "covered": 36,
+      "statements": 36,
+      "percent": 100.0
+    },
+    "internal/infra/postgres/wallet_repo.go": {
+      "covered": 24,
+      "statements": 24,
+      "percent": 100.0
+    },
+    "internal/infra/reference/module.go": {
+      "covered": 0,
+      "statements": 6,
+      "percent": 0.0
+    },
+    "internal/infra/sqs/client.go": {
+      "covered": 12,
+      "statements": 12,
+      "percent": 100.0
+    },
+    "internal/infra/sqs/consumer.go": {
+      "covered": 77,
+      "statements": 79,
+      "percent": 97.46835443037975
+    },
+    "internal/infra/sqs/module.go": {
+      "covered": 30,
+      "statements": 35,
+      "percent": 85.71428571428571
+    },
+    "internal/infra/sqs/publisher.go": {
+      "covered": 15,
+      "statements": 17,
+      "percent": 88.23529411764706
+    },
+    "internal/platform/failpoint/hit.go": {
+      "covered": 11,
+      "statements": 11,
+      "percent": 100.0
+    },
+    "internal/platform/logging/logging.go": {
+      "covered": 5,
+      "statements": 5,
+      "percent": 100.0
+    },
+    "internal/platform/metrics/metrics.go": {
+      "covered": 23,
+      "statements": 24,
+      "percent": 95.83333333333333
+    },
+    "internal/platform/sys/sys.go": {
+      "covered": 5,
+      "statements": 7,
+      "percent": 71.42857142857143
+    },
+    "internal/platform/worker/worker.go": {
+      "covered": 54,
+      "statements": 57,
+      "percent": 94.73684210526316
+    },
+    "internal/testsupport/settlementfacts/commitments.go": {
+      "covered": 19,
+      "statements": 19,
+      "percent": 100.0
+    },
+    "internal/testsupport/settlementfacts/facts.go": {
+      "covered": 21,
+      "statements": 22,
+      "percent": 95.45454545454545
+    },
+    "internal/testsupport/settlementfacts/observations.go": {
+      "covered": 87,
+      "statements": 94,
+      "percent": 92.55319148936171
+    },
+    "internal/transport/httpapi/dto.go": {
+      "covered": 9,
+      "statements": 9,
+      "percent": 100.0
+    },
+    "internal/transport/httpapi/errors.go": {
+      "covered": 14,
+      "statements": 16,
+      "percent": 87.5
+    },
+    "internal/transport/httpapi/handlers.go": {
+      "covered": 84,
+      "statements": 94,
+      "percent": 89.36170212765957
+    },
+    "internal/transport/httpapi/module.go": {
+      "covered": 77,
+      "statements": 79,
+      "percent": 97.46835443037975
+    },
+    "internal/transport/httpapi/settlement.go": {
+      "covered": 27,
+      "statements": 50,
+      "percent": 54.0
+    }
+  },
+  "purpose": "Broad unit-only diagnostic; not the per-package 100% acceptance metric. Integration results must not be combined with this profile."
+}

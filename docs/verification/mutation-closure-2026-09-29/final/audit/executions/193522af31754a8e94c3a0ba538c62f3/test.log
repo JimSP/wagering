@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.171s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:23:01 INFO transaction handled correlationId="" messageId="" transactionId=cbed6eb2-87d3-474e-aea5-4b1628e117b0 walletId=52db0d29-92bd-4f1e-9848-6c337d426bef providerId=p status=PROCESSED
+2026/09/30 01:23:01 WARN transaction handling failed correlationId="" messageId="" transactionId=420d5b01-469d-488f-bed3-766d6d5f5073 walletId=52db0d29-92bd-4f1e-9848-6c337d426bef providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.24s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-refund (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000025","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.358s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.198s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.143s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.695s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:57: REFUND
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	8.446s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.399s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.977s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.652s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.964s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.339s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.692s
+FAIL

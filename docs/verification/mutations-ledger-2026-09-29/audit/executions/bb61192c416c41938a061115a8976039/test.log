@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.342s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:45:17 INFO transaction handled correlationId="" messageId="" transactionId=de4381f7-be79-4898-9c03-4adbf96ff8d4 walletId=7e4d75dc-a04b-4685-ab10-42ca98c6f722 providerId=p status=PROCESSED
+2026/09/29 22:45:17 WARN transaction handling failed correlationId="" messageId="" transactionId=469754cc-c089-43c4-90ae-1a0eb12cacac walletId=7e4d75dc-a04b-4685-ab10-42ca98c6f722 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/wait_invalid (0.00s)
+        submit_failure_test.go:189: wait invalid repository unavailable
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.575s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.588s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.159s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.819s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_absent (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING FailureCode: BalanceAfter:<nil> Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{correlation message tx EXTERNAL provider external received-key hash wallet player round game REFUND {1000 BRL} bet-ext  PENDING  <nil> 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.971s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.080s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.547s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.701s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.471s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.243s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -114,7 +114,7 @@
+ 				return u.reject(ctx, tx, t, wager.FailAlreadyReversed)
+ 			}
+ 		}
+-		if err = t.ResolveReference(r.ID); err != nil {
++		if err = t.ResolveReference(r.ID); err == nil {
+ 			return err
+ 		}
+ 		if s.Kind == wager.KindRollback {

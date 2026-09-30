@@ -1,0 +1,49 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.011s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.187s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.136s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.518s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.641s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.239s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.942s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.548s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.359s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.825s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/29 23:00:41 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:00:41 ERROR sqs change visibility failed messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+--- FAIL: TestTransientBackoffAndCleanupLogsMatchActualOutcome (0.00s)
+    --- FAIL: TestTransientBackoffAndCleanupLogsMatchActualOutcome/cleanup_failure=false (0.00s)
+        contract_test.go:121: calls=2 logs={"time":"2026-09-29T23:00:41.418468-03:00","level":"ERROR","msg":"sqs change visibility failed","err":null}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.680s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.665s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.394s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.437s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.373s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.402s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.869s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.940s
+FAIL

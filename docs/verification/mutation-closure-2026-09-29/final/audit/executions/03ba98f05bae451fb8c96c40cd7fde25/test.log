@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.437s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.071s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.791s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.931s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.191s
+--- FAIL: TestRehydrationRejectsImpossibleHistories (0.00s)
+    --- FAIL: TestRehydrationRejectsImpossibleHistories/processed_reversal_without_resolved_reference (0.00s)
+        lifecycle_semantics_test.go:209: accepted impossible history: {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x1273111d6798 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}; err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.576s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.148s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.251s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.315s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.880s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.048s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.715s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.681s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.735s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.896s
+FAIL

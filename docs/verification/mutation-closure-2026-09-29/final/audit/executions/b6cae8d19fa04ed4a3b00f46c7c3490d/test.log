@@ -1,0 +1,38 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.515s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:15:28 INFO transaction handled correlationId="" messageId="" transactionId=c8d3d309-f94d-46d7-a75c-05f0003aee91 walletId=e36db2cd-3361-401b-85af-1ed88e66d66f providerId=p status=PROCESSED
+2026/09/30 01:15:28 WARN transaction handling failed correlationId="" messageId="" transactionId=db2b2f65-1383-4063-98c7-d6b0031618b2 walletId=e36db2cd-3361-401b-85af-1ed88e66d66f providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.475s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.214s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 BRL} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	8.697s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: BALANCE_OVERFLOW: settlement reversal overflows counterparty
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	8.951s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/refund_journal_link (0.00s)
+        mutation_regression_test.go:66: refund lost original journal: {Failure:BALANCE_OVERFLOW Wait:false ReferenceID:bet Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID:commitment ReverseJournalID:original-journal Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.300s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	9.744s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.852s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.330s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=money: overflow want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.049s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	13.181s
+FAIL

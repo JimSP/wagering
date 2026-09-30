@@ -1,0 +1,48 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.958s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:20:37 INFO transaction handled correlationId="" messageId="" transactionId=0646e3ee-0708-43bb-84f8-59ab4deab46d walletId=15a0d574-879a-4f21-8711-5362b1db276e providerId=p status=PROCESSED
+2026/09/29 22:20:37 WARN transaction handling failed correlationId="" messageId="" transactionId=622c65b0-24bb-40e0-9589-6913c1aaf918 walletId=15a0d574-879a-4f21-8711-5362b1db276e providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/opening_identity (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0xc0 pc=0x10322e14c]
+
+goroutine 50 [running]:
+testing.tRunner.func1.2({0x103992fb8, 0x103a83b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x103992fb8?, 0x103a83b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Kind(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/domain/wager/transaction.go:184
+github.com/alexandre/wagering/internal/app/usecase.TestPositiveOpeningStopsAtEachFinancialDependency.func1.2({0x8?, 0x1032f027d?}, 0x0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/paired_storage_failure_test.go:117 +0xbc
+github.com/alexandre/wagering/internal/app/usecase.transactionStub.Insert(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/ports_test.go:93
+github.com/alexandre/wagering/internal/app/usecase.(*OpenWallet).Execute.func1({0x103a28e08, 0x103aca380}, {0x103a298c0, 0x66985ac12c0})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/wallet.go:58 +0x12c
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x40?, {0x103a28e08?, 0x103aca380?}, 0x102d944f4?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*OpenWallet).Execute(0x66985ba2240, {0x103a28e08, 0x103aca380}, {{0x103308c98, 0x24}, {0x64, {0x1032f0277, 0x3}}})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/wallet.go:47 +0x2ec
+github.com/alexandre/wagering/internal/app/usecase.TestPositiveOpeningStopsAtEachFinancialDependency.func1(0x66985ba4d88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/paired_storage_failure_test.go:150 +0x470
+testing.tRunner(0x66985ba4d88, 0x66985aacf78)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 49
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.327s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.611s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.484s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.334s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.751s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.340s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.367s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.065s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.233s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.864s
+FAIL

@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.816s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:07:27 INFO transaction handled correlationId="" messageId="" transactionId=215b34f9-bd6d-41d0-b51b-614366f905e5 walletId=c9ef4a9e-8869-42a6-80e5-9b690e16ab33 providerId=p status=PROCESSED
+2026/09/30 01:07:27 WARN transaction handling failed correlationId="" messageId="" transactionId=9baaedc2-ca70-4455-9c50-59c0a99929f5 walletId=c9ef4a9e-8869-42a6-80e5-9b690e16ab33 providerId=p transient=false
+--- FAIL: TestMessageEnvelopeRejectsEachRequiredField (0.00s)
+    --- FAIL: TestMessageEnvelopeRejectsEachRequiredField/messageId (0.00s)
+        worker_contract_test.go:45: err=invalid input: inbox identity required writes=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.326s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.535s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.222s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.410s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.449s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.334s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.101s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.119s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.001s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.185s
+FAIL

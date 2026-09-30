@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.394s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:49:15 INFO transaction handled correlationId="" messageId="" transactionId=7b0ec547-6d82-4668-8a02-7819e6a825ef walletId=1a4cabd5-92b6-4212-a6bd-ae37575bb1f5 providerId=p status=PROCESSED
+2026/09/29 23:49:15 WARN transaction handling failed correlationId="" messageId="" transactionId=7fa3e5f4-77df-46ea-9550-546cb5db66eb walletId=1a4cabd5-92b6-4212-a6bd-ae37575bb1f5 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.05s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.05s)
+        result_lifecycle_contract_test.go:90: confirmation lacks durable settlement ID: {"settlementId":"","betId":"","resultId":"","status":""}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.574s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.064s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.678s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.786s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.180s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.556s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.694s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.285s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	0.955s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.351s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	3.005s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.998s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.990s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.994s
+ok  	github.com/alexandre/wagering/internal/platform/worker	3.020s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	3.023s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	3.079s
+FAIL

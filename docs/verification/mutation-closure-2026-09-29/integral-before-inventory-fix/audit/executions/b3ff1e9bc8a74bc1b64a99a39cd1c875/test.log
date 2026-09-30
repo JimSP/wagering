@@ -1,0 +1,47 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.210s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:56:22 INFO transaction handled correlationId="" messageId="" transactionId=85e43d46-b988-4833-ae1e-d50030f07c00 walletId=8ad9fb5a-6167-4f53-a7e8-b9c4098c19d6 providerId=p status=PROCESSED
+2026/09/29 23:56:22 WARN transaction handling failed correlationId="" messageId="" transactionId=80e907d0-d6f9-4172-851a-b43e751f9611 walletId=8ad9fb5a-6167-4f53-a7e8-b9c4098c19d6 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/processed_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger] [wallet opening ledger WagerTransactionProcessed]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.547s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/transaction (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"","kind":"BET","walletId":"wallet","playerId":"p","providerId":"provider","externalTransactionId":"ext","roundId":"r","money":{"amount":"1.00","currency":"BRL"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+    input_contract_test.go:61: invalid integration event: processed identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.991s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.622s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.722s
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: processed identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.235s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.535s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.722s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.931s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: processed identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.828s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:56:23 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: processed identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.130s
+FAIL

@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.420s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:08:58 INFO transaction handled correlationId="" messageId="" transactionId=fb8e6b4b-a2ce-4704-b39c-6eb14773e2ab walletId=eb414c41-bc66-4c89-b133-6778d42f40c2 providerId=p status=PROCESSED
+2026/09/29 02:08:58 WARN transaction handling failed correlationId="" messageId="" transactionId=14b1dde5-7132-4e09-a021-5aeab13a541b walletId=eb414c41-bc66-4c89-b133-6778d42f40c2 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/ledger_identity (0.00s)
+        submit_failure_test.go:162: ledger identity wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.756s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {0 } {0 } wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	0.980s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.307s
+FAIL

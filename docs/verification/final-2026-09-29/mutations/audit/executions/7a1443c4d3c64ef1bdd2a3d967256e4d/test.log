@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	3.080s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:55 INFO transaction handled correlationId="" messageId="" transactionId=7755fe33-3cca-4ba1-8fa1-5ff4aaaaefb0 walletId=c9f84d36-3ba0-43f1-a11d-b44d34096c7f providerId=p status=PROCESSED
+2026/09/29 03:24:55 WARN transaction handling failed correlationId="" messageId="" transactionId=0f0a9952-4df7-486f-805b-0863f60542d2 walletId=c9f84d36-3ba0-43f1-a11d-b44d34096c7f providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.606s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.548s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.701s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.435s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.177s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.329s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.953s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid reference lifetime want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.857s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	4.431s
+FAIL

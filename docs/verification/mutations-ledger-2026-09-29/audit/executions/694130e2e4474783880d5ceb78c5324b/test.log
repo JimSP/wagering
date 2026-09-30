@@ -1,0 +1,29 @@
+# github.com/alexandre/wagering/internal/infra/auth
+internal/infra/auth/verifier.go:45:11: syntax error: unexpected |, expected expression
+internal/infra/auth/verifier.go:46:61: syntax error: unexpected {, expected (
+internal/infra/auth/verifier.go:47:7: syntax error: unexpected := in parameter list; possibly missing comma or )
+internal/infra/auth/verifier.go:48:3: syntax error: non-declaration statement outside function body
+internal/infra/auth/verifier.go:52:41: syntax error: unexpected {, expected (
+FAIL	github.com/alexandre/wagering/cmd/wagering [build failed]
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+FAIL	github.com/alexandre/wagering/internal/app/usecase [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/event	1.370s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.484s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.588s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.698s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.771s
+FAIL	github.com/alexandre/wagering/internal/infra/auth [build failed]
+ok  	github.com/alexandre/wagering/internal/infra/config	1.886s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.093s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.045s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.164s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.288s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.535s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.540s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.569s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.538s
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi [build failed]
+FAIL

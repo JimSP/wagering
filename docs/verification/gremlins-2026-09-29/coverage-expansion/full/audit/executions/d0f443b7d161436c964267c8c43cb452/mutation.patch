@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -71,7 +71,7 @@
+ 		return u.reject(ctx, tx, t, wager.FailReferenceNotFound)
+ 	}
+ 	w, err := tx.Wallets().GetForUpdate(ctx, s.WalletID)
+-	if err != nil {
++	if err == nil {
+ 		return err
+ 	}
+ 	if w.PlayerID() != s.PlayerID {

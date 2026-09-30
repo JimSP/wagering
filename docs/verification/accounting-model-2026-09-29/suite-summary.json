@@ -1,0 +1,156 @@
+{
+  "command": "go test -race -json ./...",
+  "top_level_tests": {
+    "pass": 135,
+    "fail": 36
+  },
+  "failed_packages": [
+    "github.com/alexandre/wagering/internal/app/usecase"
+  ],
+  "failed_tests": [
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestOpeningStopsAtEveryFailedDependency"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSettlementMessageExecutesOnlyIDInOneTransaction"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSettlementMessagePropagatesDatabaseFailure"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSettlementRedeliveryKeepsSameDatabaseIdentity"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPOpeningAndPermanentFailureHaveExactWireContracts"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPDependencyErrorsRollBackAndRetryPreservesIdentity"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPDuplicateKeysFollowDocumentedLastValuePolicy"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestReversalsUndoOnlyEligibleUnreversedMovements"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestInvalidRequestsDoNotConsumeFinancialIdentity"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestGeneratedJourneysMatchIndependentFinancialModel"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestEveryFinancialOperationRollsBackFailuresAndRecoversOnce"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSubmissionObservabilityFollowsCommittedOutcome"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPPairedBETUsesSameLiteralFinancialContract"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestPairedBETFailureAtEachWriteRestoresBothAccounts"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestGeneratedPairedBETOrderPreservesOtherAccounts"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestConfirmedResultAutomaticallyEnqueuesOnlyItsOwnSettlement"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestClosedBetRejectsRefundWhileSettlementIsStillPending"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestClosedResultCannotChangeDistributionOrConsumeAnotherIdentity"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestInvalidDistributionDoesNotCloseBetOrQueuePartialSettlement"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedStandaloneWINCannotCreateUnfundedMoney"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedBETCannotSpendWithoutItsOwnGuarantee"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedCommittedMovementCannotHaveOnlyOneSide"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedBETMustNotEmitWalletDebitAsStakeCommitment"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestWINWithCounterpartyPreservesOptionalReference"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestWINCannotUseBalanceWithoutAnExistingBET"
+    }
+  ]
+}

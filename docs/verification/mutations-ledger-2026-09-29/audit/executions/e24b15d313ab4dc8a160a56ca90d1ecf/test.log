@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.837s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:24:37 INFO transaction handled correlationId="" messageId="" transactionId=9a93e035-79e4-4ec4-a116-a667ff589f61 walletId=35529c43-2fe3-4dba-bb0a-ca1de549f762 providerId=p status=PROCESSED
+2026/09/29 22:24:37 WARN transaction handling failed correlationId="" messageId="" transactionId=740c3c3c-f495-43c0-817d-d6eb493c8c24 walletId=35529c43-2fe3-4dba-bb0a-ca1de549f762 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.158s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/round (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","playerId":"p","providerId":"provider","externalTransactionId":"ext","money":{"amount":"1.00","currency":"BRL"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+    input_contract_test.go:61: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.350s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.866s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.607s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.116s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.382s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.972s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.931s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.249s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.859s
+FAIL

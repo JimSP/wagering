@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -128,7 +128,7 @@
+ 	if _, err := t.q.Exec(ctx, `UPDATE wager_transactions SET bet_id=nullif($2,'')::uuid WHERE id=$1`, s.ID, bid); err != nil {
+ 		return err
+ 	}
+-	if err := t.Transactions().Update(ctx, tx); err != nil {
++	if err := t.Transactions().Update(ctx, tx); err == nil {
+ 		return err
+ 	}
+ 	if d.GuaranteeDirection == "" {

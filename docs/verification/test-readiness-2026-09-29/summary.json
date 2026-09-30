@@ -1,0 +1,416 @@
+{
+  "command": "go test -count=1 -race -json ./...",
+  "exit_code": 1,
+  "includes_integration_or_faults_tags": false,
+  "environment": "go1.27.1 darwin/arm64; approved execution outside sandbox for local HTTP listeners",
+  "default_tests_build_and_run": true,
+  "new_financial_contract_ready": false,
+  "test_files": 70,
+  "declarations": {
+    "test": 170,
+    "fuzz": 1,
+    "harness": 1
+  },
+  "subtest_declaration_sites": 93,
+  "top_level_results": {
+    "pass": 120,
+    "fail": 24
+  },
+  "observed_leaf_results": {
+    "pass": 572,
+    "fail": 99
+  },
+  "not_run_declarations": [
+    {
+      "path": "cmd/wagering/lifecycle_integration_test.go",
+      "name": "TestRealFxStartStop",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "cmd/wagering/lifecycle_integration_test.go",
+      "name": "TestJWKSStartupFailureClosesDatabase",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "internal/app/usecase/failpoint_contract_test.go",
+      "name": "TestPublishCrashOccursOnlyAfterSuccessfulSend",
+      "kind": "test",
+      "build_tags": [
+        "faults"
+      ]
+    },
+    {
+      "path": "internal/infra/postgres/late_error_integration_test.go",
+      "name": "TestLedgerPropagatesLatePostgresError",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/contract_test.go",
+      "name": "TestHTTPContractsAgreeWithCommittedDatabaseFacts",
+      "kind": "test",
+      "build_tags": [
+        "integration && faults"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestSimultaneousChannelsAndSQSTerminalRejection",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestConcurrentReversalsAndFullRestart",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestDependencyOutagesRecoverDurableWork",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestSIGTERMDrainsInFlightSQS",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestInternalAuthorizationAndExternalOpening",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestOutputContractsAndDurableDownstreamDedup",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestExternalOpeningSQSReachesDLQ",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestReferenceAttemptsExhaustionAndPendingDependency",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestTransientExhaustionReachesDLQWithoutFinancialEffect",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestOutboxOldLeaseCannotConfirmNewOwner",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/recovery_test.go",
+      "name": "TestLockTimeoutIsRetryableAndReconciliationSnapshotIsStable",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestMain",
+      "kind": "harness",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestThreeProcessesConcurrentMoney",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestAuthorization",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestReversalsAndLoss",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestDatabaseGuardsAndAtomicRollback",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestBrokerPermissions",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestHTTPAndSQSReplayAndCrash",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestPendingReferenceRestart",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestOutboxRecoveryTwoPublishers",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestLedgerCursorAndOpeningZero",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestExpiredIdPToken",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    },
+    {
+      "path": "test/integration/system_test.go",
+      "name": "TestMigrationRoundTrip",
+      "kind": "test",
+      "build_tags": [
+        "integration"
+      ]
+    }
+  ],
+  "failures_by_class": {
+    "interface_ou_mensagem_ausente": 5,
+    "oraculo_fixture_legados_incompativeis_com_helper": 12,
+    "rejeicao_ausente_com_contrato_de_erro_proposto": 2,
+    "invariante_condicional_sem_caminho_positivo": 2,
+    "direcao_legada_em_producao_prova_local": 3
+  },
+  "failures": [
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+      "classification": "interface_ou_mensagem_ausente",
+      "first_diagnostic": "settlement_message_contract_test.go:59: err=invalid message: json: unknown field \"settlementId\" tx=0 command=0 commit=0 rollback=0; want nil/1/1/1/0"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSettlementMessagePropagatesDatabaseFailure",
+      "classification": "interface_ou_mensagem_ausente",
+      "first_diagnostic": "settlement_message_contract_test.go:93: err=invalid message: json: unknown field \"settlementId\" transactions=0 calls=0; want \"settlement begin failed\"/1/0"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestSettlementRedeliveryKeepsSameDatabaseIdentity",
+      "classification": "interface_ou_mensagem_ausente",
+      "first_diagnostic": "settlement_message_contract_test.go:128: delivery 0: invalid message: json: unknown field \"settlementId\""
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "http_contract_test.go:175: ledger direction contradicts operation {00000000-0000-4000-8000-000000000007 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000006 DEBIT {2000 BRL} {10000 BRL} {8000 BRL} {0 63926193600 <nil>}} {contract-correlation  00000000-0000-4000-8000-000000000006 EXTERNAL p bet opaque/bet 725562723988c5ba57ec282253f1e2a95773f027254642e35ad44098171e6333 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game BET {2000 BRL}   PROCESSED  0xc00050f2d8 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPDependencyErrorsRollBackAndRetryPreservesIdentity",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "http_contract_test.go:336: ledger direction contradicts operation {00000000-0000-4000-8000-000000000010 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000009 DEBIT {100 BRL} {10000 BRL} {9900 BRL} {0 63926193600 <nil>}} {contract-correlation  00000000-0000-4000-8000-000000000009 EXTERNAL p retry same-key 245214789c36868c90d2710fc20fe1b7f51dc12be4e3e0f56be3b52d6e9587c9 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game BET {100 BRL}   PROCESSED  0xc00052c3a8 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestHTTPDuplicateKeysFollowDocumentedLastValuePolicy",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "http_contract_test.go:349: ledger direction contradicts operation {00000000-0000-4000-8000-000000000007 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000006 CREDIT {100 BRL} {10000 BRL} {10100 BRL} {0 63926193600 <nil>}} {contract-correlation  00000000-0000-4000-8000-000000000006 EXTERNAL p duplicate-field duplicate-field 5bd28d46fd77508c0ff8d3afb80d5b1063cbc2592eb0c8e6ccd396c5149a4789 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game WIN {100 BRL}   PROCESSED  0xc000408078 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "journey_semantics_test.go:228: paired movement: net=-8000 operational postings=1"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "journey_semantics_test.go:289: paired movement: net=2000 operational postings=1"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "journey_semantics_test.go:417: ledger direction contradicts operation {00000000-0000-4000-8000-000000000007 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000006 DEBIT {100 BRL} {10000 BRL} {9900 BRL} {0 63926193600 <nil>}} {correlation  00000000-0000-4000-8000-000000000006 EXTERNAL p bet key:bet f68b6757d80ebb8a5523cbe88134afd348424f4370cb1140b421ec1374bb9fa3 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game BET {100 BRL}   PROCESSED  0xc0004383c0 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "journey_semantics_test.go:542: ledger direction contradicts operation {00000000-0000-4000-8000-000000000009 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000008 DEBIT {2000 BRL} {10000 BRL} {8000 BRL} {0 63926193600 <nil>}} {correlation  00000000-0000-4000-8000-000000000008 EXTERNAL p bet key:bet 725562723988c5ba57ec282253f1e2a95773f027254642e35ad44098171e6333 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game BET {2000 BRL}   PROCESSED  0xc00052c450 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "journey_semantics_test.go:593: paired movement: net=-100 operational postings=1"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestGeneratedJourneysMatchIndependentFinancialModel",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "model_semantics_test.go:116: paired movement: net=15888 operational postings=1"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestEveryFinancialOperationRollsBackFailuresAndRecoversOnce",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "model_semantics_test.go:239: paired movement: net=-2000 operational postings=1"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "reference_semantics_test.go:28: ledger direction contradicts operation {00000000-0000-4000-8000-000000000007 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000006 DEBIT {2000 BRL} {10000 BRL} {8000 BRL} {0 63926193600 <nil>}} {correlation  00000000-0000-4000-8000-000000000006 EXTERNAL p bet key:bet 725562723988c5ba57ec282253f1e2a95773f027254642e35ad44098171e6333 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game BET {2000 BRL}   PROCESSED  0xc00050e300 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox",
+      "classification": "oraculo_fixture_legados_incompativeis_com_helper",
+      "first_diagnostic": "reference_semantics_test.go:131: ledger direction contradicts operation {00000000-0000-4000-8000-000000000007 00000000-0000-4000-8000-000000000001 00000000-0000-4000-8000-000000000006 DEBIT {100 BRL} {10000 BRL} {9900 BRL} {0 63926193600 <nil>}} {msg msg 00000000-0000-4000-8000-000000000006 EXTERNAL p bet opaque/received-key-73 f68b6757d80ebb8a5523cbe88134afd348424f4370cb1140b421ec1374bb9fa3 00000000-0000-4000-8000-000000000001 0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1 round game BET {100 BRL}   PROCESSED  0xc00050fbc0 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedStandaloneWINCannotCreateUnfundedMoney",
+      "classification": "rejeicao_ausente_com_contrato_de_erro_proposto",
+      "first_diagnostic": "settlement_red_contract_test.go:55: standalone WIN: err=<nil> result={TransactionID:00000000-0000-4000-8000-000000000002 Status:PROCESSED Balance:0xc00050fe00 FailureCode: IdempotentReplay:false}; want INVALID_INPUT"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedBETCannotSpendWithoutItsOwnGuarantee",
+      "classification": "rejeicao_ausente_com_contrato_de_erro_proposto",
+      "first_diagnostic": "settlement_red_contract_test.go:86: missing own guarantee: err=<nil> result={TransactionID:00000000-0000-4000-8000-000000000003 Status:PROCESSED Balance:0xc0003e6fd8 FailureCode: IdempotentReplay:false}; want invalid input: wallet has no guarantee account"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedCommittedMovementCannotHaveOnlyOneSide",
+      "classification": "invariante_condicional_sem_caminho_positivo",
+      "first_diagnostic": "settlement_red_contract_test.go:146: committed BET has 1 postings on 1 accounts, net=-2500 cents; want two distinct accounts and zero net"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/app/usecase",
+      "test": "TestRevisedBETMustNotEmitWalletDebitAsStakeCommitment",
+      "classification": "invariante_condicional_sem_caminho_positivo",
+      "first_diagnostic": "settlement_red_contract_test.go:182: BET success event debits operational wallet instead of crediting the stake: {\"eventId\":\"00000000-0000-4000-8000-000000000004\",\"eventType\":\"WalletBalanceChanged\",\"aggregateId\":\"00000000-0000-4000-8000-000000000001\",\"correlationId\":\"correlation\",\"occurredAt\":\"2026-09-28T12:00:00Z\",\"version\":1,\"data\":{\"walletId\":\"00000000-0000-4000-8000-000000000001\",\"transactionId\":\"00000000-0000-4000-8000-000000000002\",\"direction\":\"DEBIT\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"balanceBefore\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"balanceAfter\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"walletVersion\":2}}"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/infra/postgres",
+      "test": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+      "classification": "interface_ou_mensagem_ausente",
+      "first_diagnostic": "settlement_contract_test.go:32: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/infra/postgres",
+      "test": "TestSettlementDatabaseCommandPreservesRetryClassification",
+      "classification": "interface_ou_mensagem_ausente",
+      "first_diagnostic": "settlement_contract_test.go:47: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/domain/wager",
+      "test": "TestReferenceStateAndRules",
+      "classification": "direcao_legada_em_producao_prova_local",
+      "first_diagnostic": "invariants_test.go:64: DEBIT"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/domain/wager",
+      "test": "TestRevisedOperationalWalletMovementDirections",
+      "classification": "direcao_legada_em_producao_prova_local",
+      "first_diagnostic": "settlement_direction_contract_test.go:27: operational wallet: direction=\"DEBIT\" movement=true; want direction=\"CREDIT\" movement=true"
+    },
+    {
+      "package": "github.com/alexandre/wagering/internal/domain/wager",
+      "test": "TestRevisedReversalInvertsOperationalWalletMovement",
+      "classification": "direcao_legada_em_producao_prova_local",
+      "first_diagnostic": "settlement_direction_contract_test.go:47: reverse BET: direction=\"CREDIT\" err=<nil>; want \"DEBIT\" and nil"
+    }
+  ],
+  "renamed_tests": {
+    "TestSettlementMessageNeverAcknowledgesDatabaseFailure": "TestSettlementMessagePropagatesDatabaseFailure"
+  },
+  "new_tests": [
+    "TestConsumerDeleteRequiresSuccessfulHandlerCompletion"
+  ],
+  "removed_tests": [],
+  "limits": [
+    "AST enumeration is not individual semantic approval.",
+    "Dynamic subtest declarations are not all concrete inputs; early failures truncate generated journeys.",
+    "Four package skips in the log mean packages with no default tests, not skipped financial assertions.",
+    "No integration, coverage or mutation campaign was executed."
+  ],
+  "changed_production_go_since_previous_snapshot": []
+}

@@ -1,0 +1,61 @@
+{
+  "unit_race": {
+    "command": "go test -count=1 -race -json ./...",
+    "exit_code": 1,
+    "main": {
+      "pass": 119,
+      "fail": 39
+    },
+    "leaves": {
+      "pass": 587,
+      "fail": 309
+    }
+  },
+  "isolated_postgres": {
+    "executed_this_round": true,
+    "command": "bash scripts/test-postgres-isolated.sh -json",
+    "exit_code": 1,
+    "main": {
+      "pass": 13,
+      "fail": 23
+    },
+    "leaves": {
+      "pass": 26,
+      "fail": 39
+    }
+  },
+  "isolated_system": {
+    "executed_this_round": true,
+    "command": "bash scripts/test-integration.sh -json",
+    "exit_code": 1,
+    "main": {
+      "fail": 21,
+      "pass": 7
+    },
+    "leaves": {
+      "fail": 23,
+      "pass": 7
+    }
+  },
+  "inventory": {
+    "files": 79,
+    "kinds": {
+      "test": 205,
+      "fuzz": 1,
+      "harness": 1
+    },
+    "subtest_declarations": 115
+  },
+  "production_go_changes": [],
+  "changed_test_package_documentation": [
+    "test/integration/doc.go"
+  ],
+  "new_test_support_go": [
+    "internal/testsupport/settlementfacts/facts.go"
+  ],
+  "all_previous_test_declarations_preserved": true,
+  "desafio_and_user_script_preserved": true,
+  "vet_exit_code": 0,
+  "financial_suite_ready": false,
+  "full_settlement_integration_proven": false
+}

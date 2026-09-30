@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.182s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.141s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.553s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.266s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.863s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.775s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.389s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.883s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.660s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:31: missing reference: {Guarantee:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Operational:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.228s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.716s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.715s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.710s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.467s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.503s
+ok  	github.com/alexandre/wagering/internal/platform/worker	8.524s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.627s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	9.786s
+FAIL

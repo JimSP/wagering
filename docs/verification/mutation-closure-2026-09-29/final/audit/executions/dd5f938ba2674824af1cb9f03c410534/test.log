@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.390s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:02:26 INFO transaction handled correlationId="" messageId="" transactionId=132b04df-9808-4487-96b4-70ad5dd8b78d walletId=53987448-2c59-4e9e-9b2a-ad617ce50fe7 providerId=p status=PROCESSED
+2026/09/30 01:02:26 WARN transaction handling failed correlationId="" messageId="" transactionId=94afd1ea-6ef0-41a7-a0c9-c427ac222abd walletId=53987448-2c59-4e9e-9b2a-ad617ce50fe7 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.08s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000052","status":"REJECTED","failureCode":"REFERENCE_NOT_FOUND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	13.428s
+ok  	github.com/alexandre/wagering/internal/domain/event	13.023s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.754s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	14.075s
+ok  	github.com/alexandre/wagering/internal/domain/wager	13.865s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.968s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.241s
+ok  	github.com/alexandre/wagering/internal/infra/config	13.440s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.762s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.168s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.550s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.389s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.334s
+FAIL

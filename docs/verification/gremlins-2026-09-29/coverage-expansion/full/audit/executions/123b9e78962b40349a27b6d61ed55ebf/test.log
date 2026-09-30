@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.450s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:57:11 INFO transaction handled correlationId="" messageId="" transactionId=ac8758a9-d1a4-466a-96b2-d210042ea219 walletId=8cf6e19e-26b9-4ffc-b1b1-457c6a4ebb72 providerId=p status=PROCESSED
+2026/09/29 01:57:11 WARN transaction handling failed correlationId="" messageId="" transactionId=3a92abdd-5330-4b96-a6b5-7e5e72c69333 walletId=8cf6e19e-26b9-4ffc-b1b1-457c6a4ebb72 providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    --- FAIL: TestOutboxPublishRetryConfirmationAndLag/success (0.00s)
+        outbox_paths_test.go:94: incorrect success log: {"time":"2026-09-29T01:57:11.749714-03:00","level":"ERROR","msg":"event publication confirmation failed","eventId":"event","walletId":"wallet","transactionId":"tx","providerId":"p","correlationId":"correlation","messageId":"","attempt":3,"err":null}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.753s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.054s
+FAIL

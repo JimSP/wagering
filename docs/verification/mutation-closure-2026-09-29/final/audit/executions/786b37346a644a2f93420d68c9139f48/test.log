@@ -1,0 +1,26 @@
+# github.com/alexandre/wagering/internal/infra/postgres
+internal/infra/postgres/transaction_repo.go:70:34: invalid operation: operator - not defined on `SELECT ` + txCols (untyped string constant "SELECT id::text,origin,coalesce(provider_id,''),coalesce(external_tr...)
+FAIL	github.com/alexandre/wagering/cmd/wagering [build failed]
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.211s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.474s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.728s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.972s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.602s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.231s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.232s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.852s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+FAIL	github.com/alexandre/wagering/internal/infra/postgres [build failed]
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.199s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.302s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.116s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.819s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.811s
+ok  	github.com/alexandre/wagering/internal/platform/worker	9.826s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.815s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	9.875s
+ok  	github.com/alexandre/wagering/scripts	9.746s
+FAIL

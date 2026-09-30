@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.621s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:08:41 INFO transaction handled correlationId="" messageId="" transactionId=d1f4e0b0-5511-4cf1-a12d-41e6018b751a walletId=91fa6a5e-9b9e-4aec-90ad-90e7059ff9cf providerId=p status=PROCESSED
+2026/09/30 00:08:41 WARN transaction handling failed correlationId="" messageId="" transactionId=56f1a2a6-0693-4e45-b367-0d179e2eb2c4 walletId=91fa6a5e-9b9e-4aec-90ad-90e7059ff9cf providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.14s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-refund (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000025","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.206s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.675s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.547s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.274s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:57: REFUND
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.815s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.391s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.019s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.928s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.257s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.146s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.134s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.111s
+FAIL

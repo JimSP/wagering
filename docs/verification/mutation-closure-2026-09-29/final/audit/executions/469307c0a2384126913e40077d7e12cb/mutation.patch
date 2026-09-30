@@ -1,0 +1,11 @@
+--- original/internal/infra/auth/middleware.go
++++ mutant/internal/infra/auth/middleware.go
+@@ -17,7 +17,7 @@
+ func deny(w http.ResponseWriter, status int, code string) {
+ 	w.Header().Set("Content-Type", "application/json")
+ 	w.WriteHeader(status)
+-	_, _ = w.Write([]byte(`{"code":"` + code + `"}`))
++	_, _ = w.Write([]byte(`{"code":"` - code + `"}`))
+ }
+ 
+ // Authenticate requires a valid Bearer token (401 missing/invalid/expired; 503 if the IdP is unreachable).

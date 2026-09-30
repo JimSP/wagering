@@ -1,0 +1,47 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.402s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:12:26 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestQueueStartupAndDLQMetrics (0.00s)
+    sdk_contract_test.go:157: # HELP wagering_concurrency_conflicts_total Optimistic/lock conflicts
+        # TYPE wagering_concurrency_conflicts_total counter
+        wagering_concurrency_conflicts_total 0
+        # HELP wagering_outbox_lag_seconds Age of the oldest unpublished event at last successful poll; zero when empty
+        # TYPE wagering_outbox_lag_seconds gauge
+        wagering_outbox_lag_seconds 0
+        # HELP wagering_poison_redrive_threshold_total Poison messages observed at broker redrive threshold
+        # TYPE wagering_poison_redrive_threshold_total counter
+        wagering_poison_redrive_threshold_total 0
+        # HELP wagering_reconciliation_divergences_total Reconciliation divergences
+        # TYPE wagering_reconciliation_divergences_total counter
+        wagering_reconciliation_divergences_total 0
+        
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	0.740s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	(cached)
+FAIL

@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.272s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:04:22 INFO transaction handled correlationId="" messageId="" transactionId=e11b12e8-6b4f-464c-b339-a2871a1cd1c2 walletId=81909ae5-132c-4066-86e6-8e54fada8661 providerId=p status=PROCESSED
+2026/09/30 01:04:22 WARN transaction handling failed correlationId="" messageId="" transactionId=ceb939a1-625e-4298-a4f8-dc329113b126 walletId=81909ae5-132c-4066-86e6-8e54fada8661 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:207: {    }
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.466s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.433s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.322s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.208s
+ok  	github.com/alexandre/wagering/internal/domain/wager	7.939s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.716s
+ok  	github.com/alexandre/wagering/internal/infra/auth	7.793s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.824s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.111s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.036s
+FAIL

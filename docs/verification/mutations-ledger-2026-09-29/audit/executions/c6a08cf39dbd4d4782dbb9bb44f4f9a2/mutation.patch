@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -72,7 +72,7 @@
+ 		return err
+ 	}
+ 	if facts.SettlementID != "" && t.Kind() == wager.KindWin {
+-		if err = accounting.SettleByID(ctx, facts.SettlementID); err != nil {
++		if err = accounting.SettleByID(ctx, facts.SettlementID); err == nil {
+ 			return err
+ 		}
+ 		persisted, err := tx.Transactions().FindByID(ctx, t.ID())

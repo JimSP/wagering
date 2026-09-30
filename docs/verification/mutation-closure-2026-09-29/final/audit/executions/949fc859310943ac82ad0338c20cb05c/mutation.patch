@@ -1,0 +1,22 @@
+--- original/internal/testsupport/settlementfacts/commitments.go
++++ mutant/internal/testsupport/settlementfacts/commitments.go
+@@ -7,8 +7,8 @@
+ // the durable consumption. Neither aggregate wallet cash nor another bet can
+ // substitute for this record.
+ type Commitment struct {
+-	ExternalID, Bet, Wallet, Guarantee, Provider, Currency, Settlement string
+-	Stake, Remaining                                                   int64
++	ExternalID, Bet, Wallet, Guarantee, Provider, Currency, Settlement	string
++	Stake, Remaining							int64
+ }
+ 
+ // CompareCommitments matches literal expected records without deriving funding
+@@ -19,7 +19,7 @@
+ 		return fmt.Errorf("commitment count: got=%d want=%d", len(got), len(want))
+ 	}
+ 	expected := map[string]Commitment{}
+-	key := func(c Commitment) string { return c.Provider + "\x00" + c.ExternalID }
++	key := func(c Commitment) string { return c.Provider + "\x00" - c.ExternalID }
+ 	for _, c := range want {
+ 		k := key(c)
+ 		if c.ExternalID == "" || c.Provider == "" {

@@ -1,0 +1,44 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.568s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.029s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.731s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.477s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.867s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.857s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.180s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.434s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.596s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementPersistenceDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementPersistenceDatabaseProtocol/failure-0-query (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x10532fbf0]
+
+goroutine 318 [running]:
+testing.tRunner.func1.2({0x10588d958, 0x1059810b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10588d958?, 0x1059810b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.transactionRepo.insert({{0x10590a610?, 0x53eebf670420?}}, {0x10590b3c8, 0x1059c01c0}, 0x53eebf4d04b0?, 0x0)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/infra/postgres/transaction_repo.go:46 +0xa0
+github.com/alexandre/wagering/internal/infra/postgres.transactionRepo.Insert(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/infra/postgres/transaction_repo.go:57
+github.com/alexandre/wagering/internal/infra/postgres.settlementRepo.SaveSettlement({{0x10590a610?, _}}, {_, _}, {{_, _}, {_, _}, {_, _}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/infra/postgres/settlement_repo.go:107 +0x880
+github.com/alexandre/wagering/internal/infra/postgres.TestSettlementPersistenceDatabaseProtocol.func1(0x53eebf6724b0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/infra/postgres/accounting_mutation_test.go:259 +0xb0
+github.com/alexandre/wagering/internal/infra/postgres.checkDBScript.func1(0x53eebf66fb08)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/infra/postgres/accounting_mutation_test.go:100 +0xd8
+testing.tRunner(0x53eebf66fb08, 0x53eebf637300)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 317
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.183s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.367s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.083s
+ok  	github.com/alexandre/wagering/internal/platform/logging	6.895s
+FAIL

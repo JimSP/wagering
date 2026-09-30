@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.219s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:17:44 INFO transaction handled correlationId="" messageId="" transactionId=64039a28-494e-4903-987f-8c4a5811a02c walletId=d4a92260-9340-4146-a4e0-4ce8118b0d8a providerId=p status=PROCESSED
+2026/09/30 01:17:44 WARN transaction handling failed correlationId="" messageId="" transactionId=f8a5f6aa-8377-49ee-adeb-fcb069d3137c walletId=d4a92260-9340-4146-a4e0-4ce8118b0d8a providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.02s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.02s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid return"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	14.153s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.978s
+ok  	github.com/alexandre/wagering/internal/domain/money	13.105s
+--- FAIL: TestMutationProofZeroCommitment (0.00s)
+    mutation_regression_test.go:13: zero remaining commitment must coexist with funded participant: invalid settlement distribution: invalid return
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	12.868s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.602s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.246s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.824s
+ok  	github.com/alexandre/wagering/internal/infra/config	13.513s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.816s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.353s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	12.161s
+FAIL

@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.512s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:11:58 INFO transaction handled correlationId="" messageId="" transactionId=f0589b30-cb10-43e1-a334-fa1f3a16bb1c walletId=16c3d3f5-a812-4267-8fad-1a2d1c8ddb5c providerId=p status=PROCESSED
+2026/09/29 03:11:58 WARN transaction handling failed correlationId="" messageId="" transactionId=1ba4d3e1-9975-417d-a1d4-1ccf89afce55 walletId=16c3d3f5-a812-4267-8fad-1a2d1c8ddb5c providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.10s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.508s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/round (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","playerId":"p","providerId":"provider","externalTransactionId":"ext","money":{"amount":"1.00","currency":"BRL"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+    input_contract_test.go:61: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.660s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.808s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.904s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.408s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.145s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.299s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.197s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.163s
+FAIL

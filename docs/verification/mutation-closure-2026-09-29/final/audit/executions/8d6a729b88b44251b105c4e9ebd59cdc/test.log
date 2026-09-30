@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	6.525s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:23:56 INFO transaction handled correlationId="" messageId="" transactionId=5d01aae8-9472-481d-aa35-489573557f4d walletId=8900cd8e-2c90-4e8e-8edc-3de092bea9a1 providerId=p status=PROCESSED
+2026/09/30 01:23:56 WARN transaction handling failed correlationId="" messageId="" transactionId=429c52a0-e787-412f-8f36-e2be561e29b4 walletId=8900cd8e-2c90-4e8e-8edc-3de092bea9a1 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/opening_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	6.671s
+ok  	github.com/alexandre/wagering/internal/domain/event	6.916s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.033s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.288s
+--- FAIL: TestInvalidTransactionSnapshotsAndConstructorBoundaries (0.00s)
+    validation_paths_test.go:50: &{   INTERNAL     w p   OPENING {100 BRL}   PROCESSED  0x5e33da2579f8 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	8.062s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.397s
+ok  	github.com/alexandre/wagering/internal/infra/auth	7.104s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.502s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	7.823s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.112s
+FAIL

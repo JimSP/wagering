@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/settlement_audit.go
++++ mutant/internal/app/usecase/settlement_audit.go
+@@ -41,7 +41,7 @@
+ // there can be only one full inverse of a settled result.
+ func (u *Settlements) Reverse(ctx context.Context, id string) (port.SettlementRecord, error) {
+ 	parsed, err := uuid.Parse(id)
+-	if err != nil {
++	if err == nil {
+ 		return port.SettlementRecord{}, apperr.Invalid("invalid settlementId")
+ 	}
+ 	var out port.SettlementRecord

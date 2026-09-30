@@ -1,0 +1,53 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.421s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: BET requires amount greater than zero
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.723s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.025s
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    error_text_contract_test.go:12: INVALID_INPUT: invalid input: REFUND requires amount greater than zero
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.627s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {0 } {0 } wallet: amount must be positive
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.870s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.368s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:01:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	3.228s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    contract_test.go:110: INVALID_INPUT: invalid input: ledger amount must be positive
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	3.553s
+FAIL

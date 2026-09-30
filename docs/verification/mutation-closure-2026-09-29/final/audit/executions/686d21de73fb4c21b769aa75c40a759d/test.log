@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.559s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:29:18 INFO transaction handled correlationId="" messageId="" transactionId=0e878ba6-0cd3-4802-99c2-de083512529c walletId=e80cd00e-3699-46de-a85a-cf6c37cd1b3f providerId=p status=PROCESSED
+2026/09/30 01:29:18 WARN transaction handling failed correlationId="" messageId="" transactionId=1499004b-b256-4b27-bfd9-8c4ca6b19d12 walletId=e80cd00e-3699-46de-a85a-cf6c37cd1b3f providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/invalid_reference (0.00s)
+        settlement_audit_test.go:202: got <nil>, want INVALID_INPUT: invalid input
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.867s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.510s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.959s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.525s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/resolved_identity_cannot_be_replaced (0.00s)
+        lifecycle_semantics_test.go:265: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	13.880s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.632s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.725s
+ok  	github.com/alexandre/wagering/internal/infra/config	13.079s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	14.187s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.955s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.946s
+FAIL

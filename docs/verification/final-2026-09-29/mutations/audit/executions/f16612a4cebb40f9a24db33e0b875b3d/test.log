@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.917s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:21:18 INFO transaction handled correlationId="" messageId="" transactionId=7143985a-5dae-4cb0-9873-2d51a3858507 walletId=3e89825e-73ed-4b2a-beb5-4b4767f48c2d providerId=p status=PROCESSED
+2026/09/29 03:21:18 WARN transaction handling failed correlationId="" messageId="" transactionId=3f80bb4b-bd6e-4951-9d82-0b19cee6de59 walletId=3e89825e-73ed-4b2a-beb5-4b4767f48c2d providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.370s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.463s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.465s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.720s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.827s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.249s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.345s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.243s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.810s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.352s
+FAIL

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.109s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:50:55 INFO transaction handled correlationId="" messageId="" transactionId=aa54d5ee-9a78-44e0-b66a-bf3a8e5331f3 walletId=48899fd7-65c8-469c-b91c-74360a3763ac providerId=p status=PROCESSED
+2026/09/29 22:50:55 WARN transaction handling failed correlationId="" messageId="" transactionId=76f6ca88-8f7c-47de-aed6-2922ef8a3d6f walletId=48899fd7-65c8-469c-b91c-74360a3763ac providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.10s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"IDP_UNAVAILABLE"} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.611s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.710s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.736s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.616s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.327s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.148s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.38s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/no_subject (0.00s)
+        authorization_paths_test.go:97: 503
+    authorization_paths_test.go:104: failed keyfunc: could not find alg in JWT header
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	1.401s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.211s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.495s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.979s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.646s
+FAIL

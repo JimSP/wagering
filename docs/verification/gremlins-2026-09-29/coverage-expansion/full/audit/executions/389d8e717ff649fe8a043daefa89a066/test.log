@@ -1,0 +1,32 @@
+# github.com/alexandre/wagering/internal/domain/wager
+internal/domain/wager/rules.go:28:10: suspect and: ref == KindBet && ref == KindWin
+ok  	github.com/alexandre/wagering/cmd/wagering	0.389s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:04:14 INFO transaction handled correlationId="" messageId="" transactionId=7fabccaa-3e95-4176-8536-2b681128e876 walletId=aa233b52-0d08-4c13-844d-df2e589e3d7e providerId=p status=PROCESSED
+2026/09/29 02:04:14 WARN transaction handling failed correlationId="" messageId="" transactionId=6ae4f171-cfe9-4aa7-b7c0-8d53e266758d walletId=aa233b52-0d08-4c13-844d-df2e589e3d7e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.10s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/rollback (0.00s)
+        http_contract_test.go:154: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000024","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"107.00","currency":"BRL"},"version":4}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.825s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+FAIL	github.com/alexandre/wagering/internal/domain/wager [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.029s
+FAIL

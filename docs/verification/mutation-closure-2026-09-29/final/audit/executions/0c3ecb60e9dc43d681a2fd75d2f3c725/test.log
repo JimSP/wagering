@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.269s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:17:20 INFO transaction handled correlationId="" messageId="" transactionId=96abfb44-7e13-40a9-bc83-9dfcba65c860 walletId=138b4c91-96ed-43db-be93-3c9d7d48c7bd providerId=p status=PROCESSED
+2026/09/30 01:17:20 WARN transaction handling failed correlationId="" messageId="" transactionId=5d976783-a260-44f5-8999-7153287987be walletId=138b4c91-96ed-43db-be93-3c9d7d48c7bd providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.02s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.02s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid commitment"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.195s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.176s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.044s
+--- FAIL: TestMutationProofZeroCommitment (0.00s)
+    mutation_regression_test.go:13: zero remaining commitment must coexist with funded participant: invalid settlement distribution: invalid commitment
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	10.999s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.785s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.759s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.828s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.659s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.658s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.458s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.270s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.388s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.440s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.565s
+ok  	github.com/alexandre/wagering/internal/platform/worker	10.359s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	10.509s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	11.130s
+FAIL

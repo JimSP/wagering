@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.056s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:08:13 INFO transaction handled correlationId="" messageId="" transactionId=dcb590f7-20d4-485b-a899-25b21b1d00ef walletId=81297a6b-4da7-4f48-b508-5f7617674201 providerId=p status=PROCESSED
+2026/09/30 00:08:13 WARN transaction handling failed correlationId="" messageId="" transactionId=054964e6-ffee-4e35-ac29-bac6a294be8f walletId=81297a6b-4da7-4f48-b508-5f7617674201 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:125: {    {0 } {0 } {0 } {0 0 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.357s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.884s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.011s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.680s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:43: unexplained movement {    {0 } {0 } {0 } {0 0 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.417s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.754s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.073s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.126s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry first has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.644s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.173s
+FAIL

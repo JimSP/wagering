@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.305s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.527s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.413s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.289s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.034s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.167s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.527s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.315s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.915s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+panic: runtime error: index out of range [1] with length 1 [recovered, repanicked]
+
+goroutine 420 [running]:
+testing.tRunner.func1.2({0x105746e70, 0x477ec25080a8})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x105746e70?, 0x477ec25080a8?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.ledgerRepo.List({{0x1057725e0?, 0x477ec2522100?}}, {0x1057733c8, 0x1058281c0}, {0x105204025, 0x1}, {0x477ec25061b8?, 0x1056a4770?}, 0x1)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/infra/postgres/ledger_repo.go:36 +0xbe8
+github.com/alexandre/wagering/internal/infra/postgres.TestLedgerPaginationAndTotalsContract(0x477ec251cb48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/infra/postgres/repository_contract_test.go:330 +0x28c
+testing.tRunner(0x477ec251cb48, 0x105775de0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.817s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.424s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.524s
+FAIL

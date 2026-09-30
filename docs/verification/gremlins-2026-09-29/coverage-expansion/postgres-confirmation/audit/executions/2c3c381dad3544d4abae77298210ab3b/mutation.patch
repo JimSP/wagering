@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -49,7 +49,7 @@
+ 		var dir wager.Direction
+ 		var amount, before, after, s int64
+ 		var at time.Time
+-		if err = rows.Scan(&id, &tx, &dir, &amount, &cur, &before, &after, &at, &s); err != nil {
++		if err = rows.Scan(|id, &tx, &dir, &amount, &cur, &before, &after, &at, &s); err != nil {
+ 			return out, err
+ 		}
+ 		if len(out.Entries) == limit {

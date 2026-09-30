@@ -1,0 +1,42 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.511s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.669s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.822s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.285s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.159s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_absent (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x102521c94]
+
+goroutine 71 [running]:
+testing.tRunner.func1.2({0x1026ebbc8, 0x10272d390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1026ebbc8?, 0x10272d390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.Rehydrate({{0x10253f8c4, 0xb}, {0x10253e6e6, 0x7}, {0x10253dd44, 0x2}, {0x10253ea31, 0x8}, {0x10253ea49, 0x8}, ...})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/transaction.go:154 +0xaa4
+github.com/alexandre/wagering/internal/domain/wager_test.TestPendingSnapshotRequiresFutureSchedule.func5(0x3a9bf355cd88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/input_contract_test.go:73 +0x1f0
+testing.tRunner(0x3a9bf355cd88, 0x3a9bf346fce0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 70
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.068s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.401s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.750s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.174s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.718s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.085s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.452s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.434s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.640s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.584s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.691s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.730s
+FAIL

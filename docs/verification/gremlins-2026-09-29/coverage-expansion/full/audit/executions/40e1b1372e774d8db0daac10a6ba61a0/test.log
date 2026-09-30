@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.428s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:05:03 INFO transaction handled correlationId="" messageId="" transactionId=26bbc17d-3056-4d4d-8699-e770816ebe8a walletId=647ed220-c0ee-4fb4-b472-05a1a95ea24d providerId=p status=PROCESSED
+2026/09/29 02:05:03 WARN transaction handling failed correlationId="" messageId="" transactionId=adf72567-4d63-4f8c-9784-7ebf6cc6744f walletId=647ed220-c0ee-4fb4-b472-05a1a95ea24d providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.744s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.261s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:225: error=INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx" want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.017s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	(cached)
+FAIL

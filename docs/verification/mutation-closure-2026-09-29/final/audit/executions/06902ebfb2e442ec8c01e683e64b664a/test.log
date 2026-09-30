@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.921s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:12:44 INFO transaction handled correlationId="" messageId="" transactionId=683e01c2-d652-40d5-909c-79b178956c35 walletId=d63523a4-2090-4a88-9ee0-46aa71c9a3d1 providerId=p status=PROCESSED
+2026/09/30 01:12:44 WARN transaction handling failed correlationId="" messageId="" transactionId=98f032fc-9ac9-4e8d-87de-fea297562531 walletId=d63523a4-2090-4a88-9ee0-46aa71c9a3d1 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.213s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	11.434s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.566s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.696s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.412s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.630s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.277s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.519s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.180s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.263s
+FAIL

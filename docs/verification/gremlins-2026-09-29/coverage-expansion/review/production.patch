@@ -1,0 +1,354 @@
+--- before/internal/app/usecase/process.go
++++ after/internal/app/usecase/process.go
+@@ -9,6 +9,7 @@
+ 	"github.com/alexandre/wagering/internal/domain/money"
+ 	"github.com/alexandre/wagering/internal/domain/wager"
+ 	"github.com/alexandre/wagering/internal/domain/wallet"
++	"time"
+ )
+ 
+ func (u *SubmitTransaction) meta(t *wager.Transaction) event.Meta {
+@@ -51,7 +52,7 @@
+ 	if s.Attempts >= MaxReferenceAttempts || t.ReferenceExpired(now) {
+ 		return u.reject(ctx, tx, t, wager.FailReferenceNotFound)
+ 	}
+-	if err := t.MarkPendingReference(now, now.Add(Backoff(s.Attempts)), ReferenceTTL); err != nil {
++	if err := t.MarkPendingReference(now, now.Add(Backoff(s.Attempts)), 10*time.Minute); err != nil {
+ 		return err
+ 	}
+ 	if err := tx.Transactions().Update(ctx, t); err != nil {
+--- before/internal/app/usecase/workers.go
++++ after/internal/app/usecase/workers.go
+@@ -14,8 +14,6 @@
+ 
+ const (
+ 	MaxReferenceAttempts = 8
+-	ReferenceTTL         = 10 * time.Minute
+-	OutboxLease          = 30 * time.Second
+ 	BatchSize            = 20
+ )
+ 
+@@ -111,10 +109,11 @@
+ 	return &PublishOutbox{u, p, c, m}
+ }
+ func (u *PublishOutbox) RunOnce(ctx context.Context) (int, error) {
++	const outboxLease = 30 * time.Second
+ 	var events []event.Outgoing
+ 	err := u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error {
+ 		var e error
+-		events, e = tx.Outbox().ClaimBatch(ctx, u.clock.Now(), 1, OutboxLease)
++		events, e = tx.Outbox().ClaimBatch(ctx, u.clock.Now(), 1, outboxLease)
+ 		return e
+ 	})
+ 	if err != nil {
+@@ -133,7 +132,7 @@
+ 		log := slog.Default().With("eventId", ev.EventID(), "walletId", ev.AggregateID(), "transactionId", ids.Data.TransactionID, "providerId", ids.Data.ProviderID, "correlationId", ids.CorrelationID, "messageId", ids.CausationID, "attempt", ev.Attempts())
+ 		sendCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
+ 		sendErr := u.pub.Publish(sendCtx, ev)
+-		if sendErr == nil {
++		if failpoint.Enabled && sendErr == nil {
+ 			failpoint.Hit("after_publish_before_mark")
+ 		}
+ 		cancel()
+--- before/internal/domain/money/money.go
++++ after/internal/domain/money/money.go
+@@ -89,10 +89,10 @@
+ 	if err := m.compatible(o); err != nil {
+ 		return 0, err
+ 	}
+-	switch {
+-	case m.minor < o.minor:
++	if m.minor < o.minor {
+ 		return -1, nil
+-	case m.minor > o.minor:
++	}
++	if m.minor > o.minor {
+ 		return 1, nil
+ 	}
+ 	return 0, nil
+--- before/internal/infra/postgres/ledger_repo.go
++++ after/internal/infra/postgres/ledger_repo.go
+@@ -54,7 +54,9 @@
+ 		}
+ 		if len(out.Entries) == limit {
+ 			out.NextCursor = base64.RawURLEncoding.EncodeToString([]byte(w + ":" + strconv.FormatInt(last, 10)))
+-			break
++			// Closing can discover a server error after the lookahead row.
++			rows.Close()
++			return out, rows.Err()
+ 		}
+ 		a, e := money.FromMinor(amount, cur)
+ 		if e != nil {
+--- before/internal/infra/postgres/module.go
++++ after/internal/infra/postgres/module.go
+@@ -44,7 +44,9 @@
+ 	return pool, nil
+ }
+ 
+-type Readiness struct{ pool *pgxpool.Pool }
++type pinger interface{ Ping(context.Context) error }
++
++type Readiness struct{ pool pinger }
+ 
+ func NewReadiness(pool *pgxpool.Pool) *Readiness { return &Readiness{pool} }
+ func (*Readiness) Name() string                  { return "postgres" }
+--- before/internal/infra/postgres/uow.go
++++ after/internal/infra/postgres/uow.go
+@@ -22,7 +22,11 @@
+ 	QueryRow(ctx context.Context, sql string, args ...any) pgx.Row
+ }
+ 
+-type UnitOfWork struct{ pool *pgxpool.Pool }
++type transactionBeginner interface {
++	BeginTx(context.Context, pgx.TxOptions) (pgx.Tx, error)
++}
++
++type UnitOfWork struct{ pool transactionBeginner }
+ 
+ func NewUnitOfWork(pool *pgxpool.Pool) *UnitOfWork { return &UnitOfWork{pool} }
+ 
+@@ -61,14 +65,16 @@
+ 	}
+ 	var pe *pgconn.PgError
+ 	if errAs(err, &pe) {
+-		switch {
+-		case pe.Code == "23514" || pe.Code == "23503" || pe.Code == "P0001" || pe.Code == "42601":
++		if pe.Code == "23514" || pe.Code == "23503" || pe.Code == "P0001" || pe.Code == "42601" {
+ 			return apperr.Permanent(err)
+-		case pe.Code == "22P02":
++		}
++		if pe.Code == "22P02" {
+ 			return apperr.Invalid("invalid identifier")
+-		case pe.Code == "55P03", pe.Code == "40001", pe.Code == "40P01":
++		}
++		if pe.Code == "55P03" || pe.Code == "40001" || pe.Code == "40P01" {
+ 			return apperr.Transient(errors.Join(apperr.ErrConcurrentModification, err))
+-		case pe.Code == "57P01", pe.Code == "53300", pe.Code == "57014", len(pe.Code) >= 2 && pe.Code[:2] == "08":
++		}
++		if pe.Code == "57P01" || pe.Code == "53300" || pe.Code == "57014" || (len(pe.Code) >= 2 && pe.Code[:2] == "08") {
+ 			return apperr.Transient(err)
+ 		}
+ 	}
+--- before/internal/infra/sqs/consumer.go
++++ after/internal/infra/sqs/consumer.go
+@@ -56,10 +56,12 @@
+ 			}
+ 			c.log.Error("sqs receive failed", "err", err)
+ 			c.metrics.Retry("sqs-receive")
++			retry := time.NewTimer(2 * time.Second)
+ 			select {
+ 			case <-ctx.Done():
+-			case <-time.After(2 * time.Second):
++			case <-retry.C:
+ 			}
++			retry.Stop()
+ 			continue
+ 		}
+ 		for _, m := range out.Messages {
+@@ -91,11 +93,12 @@
+ 		return
+ 	}
+ 	err := c.handler.Handle(hctx, []byte(aws.ToString(m.Body)))
+-	switch {
+-	case err == nil:
+-		failpoint.Hit("after_commit_before_ack")
++	if err == nil {
++		if failpoint.Enabled {
++			failpoint.Hit("after_commit_before_ack")
++		}
+ 		c.ack(hctx, m)
+-	case errors.Is(err, apperr.ErrInvalidMessage), errors.Is(err, apperr.ErrInvalidInput), errors.Is(err, apperr.ErrIdempotencyConflict), errors.Is(err, apperr.ErrMessageConflict):
++	} else if errors.Is(err, apperr.ErrInvalidMessage) || errors.Is(err, apperr.ErrInvalidInput) || errors.Is(err, apperr.ErrIdempotencyConflict) || errors.Is(err, apperr.ErrMessageConflict) {
+ 		// Broker redrive moves poison messages after 5 receives; never acknowledge uncommitted input.
+ 		n, _ := strconv.Atoi(m.Attributes[string(types.MessageSystemAttributeNameApproximateReceiveCount)])
+ 		if n >= 5 {
+@@ -103,7 +106,7 @@
+ 		}
+ 		c.log.Error("invalid message", "failureCode", "INVALID_MESSAGE")
+ 		c.setVisibility(hctx, m, 2)
+-	default:
++	} else {
+ 		if ctx.Err() != nil {
+ 			c.setVisibility(hctx, m, 0)
+ 			return
+--- before/internal/infra/sqs/module.go
++++ after/internal/infra/sqs/module.go
+@@ -22,39 +22,50 @@
+ 		fx.Annotate(NewPublisher, fx.As(new(port.EventPublisher))),
+ 		fx.Annotate(NewReadiness, fx.As(new(port.ReadinessChecker)), fx.ResultTags(`group:"readiness"`)),
+ 	),
+-	fx.Invoke(func(lc fx.Lifecycle, group *worker.Group, cfg config.Config, cl *awssqs.Client, h port.MessageHandler, log *slog.Logger, m port.Metrics, recorder *metrics.Recorder) {
+-		lc.Append(fx.Hook{OnStart: func(ctx context.Context) error {
+-			for _, url := range []string{cfg.WagerQueueURL, cfg.EventsQueueURL} {
+-				if _, err := cl.GetQueueAttributes(ctx, &awssqs.GetQueueAttributesInput{QueueUrl: &url}); err != nil {
+-					return err
+-				}
++	fx.Invoke(register),
++)
++
++func register(lc fx.Lifecycle, group *worker.Group, cfg config.Config, cl *awssqs.Client, h port.MessageHandler, log *slog.Logger, m port.Metrics, recorder *metrics.Recorder) {
++	lc.Append(fx.Hook{OnStart: func(ctx context.Context) error {
++		for _, url := range []string{cfg.WagerQueueURL, cfg.EventsQueueURL} {
++			if _, err := cl.GetQueueAttributes(ctx, &awssqs.GetQueueAttributesInput{QueueUrl: &url}); err != nil {
++				return err
+ 			}
+-			return nil
+-		}})
+-		if !cfg.HasRole("sqs-consumer") {
+-			return
+ 		}
+-		if cfg.WagerDLQURL != "" {
+-			worker.Register(group, "dlq-monitor", log, worker.Every(5*time.Second, func(ctx context.Context) error {
+-				resp, err := cl.GetQueueAttributes(ctx, &awssqs.GetQueueAttributesInput{QueueUrl: &cfg.WagerDLQURL, AttributeNames: []types.QueueAttributeName{types.QueueAttributeNameApproximateNumberOfMessages, types.QueueAttributeNameApproximateNumberOfMessagesNotVisible}})
+-				if err != nil {
+-					return err
+-				}
+-				visible, err := strconv.ParseInt(resp.Attributes["ApproximateNumberOfMessages"], 10, 64)
+-				if err != nil {
+-					return err
+-				}
+-				inflight, err := strconv.ParseInt(resp.Attributes["ApproximateNumberOfMessagesNotVisible"], 10, 64)
+-				if err != nil {
+-					return err
+-				}
+-				recorder.DLQDepth(float64(visible), float64(inflight))
+-				return nil
+-			}, func(err error) { log.Warn("DLQ metrics unavailable", "err", err) }))
+-		}
+-		consumer := NewConsumer(cl, cfg.WagerQueueURL, h, log, m)
+-		consumer.waitSeconds = int32(min(20, max(0, int(cfg.ShutdownTimeout/time.Second)-3)))
+-		consumer.workTimeout = min(10*time.Second, cfg.ShutdownTimeout-5*time.Second)
+-		worker.Register(group, "sqs-consumer", log, consumer.Run)
+-	}),
+-)
++		return nil
++	}})
++	if !cfg.HasRole("sqs-consumer") {
++		return
++	}
++	if cfg.WagerDLQURL != "" {
++		worker.Register(group, "dlq-monitor", log, worker.Every(5*time.Second, func(ctx context.Context) error {
++			return updateDLQDepth(ctx, cl, cfg.WagerDLQURL, recorder)
++		}, func(err error) { log.Warn("DLQ metrics unavailable", "err", err) }))
++	}
++	consumer := configuredConsumer(cl, cfg, h, log, m)
++	worker.Register(group, "sqs-consumer", log, consumer.Run)
++}
++
++func updateDLQDepth(ctx context.Context, cl *awssqs.Client, queueURL string, recorder *metrics.Recorder) error {
++	resp, err := cl.GetQueueAttributes(ctx, &awssqs.GetQueueAttributesInput{QueueUrl: &queueURL, AttributeNames: []types.QueueAttributeName{types.QueueAttributeNameApproximateNumberOfMessages, types.QueueAttributeNameApproximateNumberOfMessagesNotVisible}})
++	if err != nil {
++		return err
++	}
++	visible, err := strconv.ParseInt(resp.Attributes["ApproximateNumberOfMessages"], 10, 64)
++	if err != nil {
++		return err
++	}
++	inflight, err := strconv.ParseInt(resp.Attributes["ApproximateNumberOfMessagesNotVisible"], 10, 64)
++	if err != nil {
++		return err
++	}
++	recorder.DLQDepth(float64(visible), float64(inflight))
++	return nil
++}
++
++func configuredConsumer(cl *awssqs.Client, cfg config.Config, h port.MessageHandler, log *slog.Logger, m port.Metrics) *Consumer {
++	consumer := NewConsumer(cl, cfg.WagerQueueURL, h, log, m)
++	consumer.waitSeconds = int32(min(20, max(0, int(cfg.ShutdownTimeout/time.Second)-3)))
++	consumer.workTimeout = min(10*time.Second, cfg.ShutdownTimeout-5*time.Second)
++	return consumer
++}
+--- before/internal/platform/failpoint/hit.go
++++ after/internal/platform/failpoint/hit.go
+@@ -0,0 +1,25 @@
++// Fault hooks exist only in explicitly instrumented test builds.
++package failpoint
++
++import (
++	"os"
++	"path/filepath"
++)
++
++func Hit(point string) { hit(point, os.Exit) }
++
++func hit(point string, exit func(int)) {
++	if os.Getenv("FAILPOINT") != point {
++		return
++	}
++	dir := os.Getenv("FAILPOINT_DIR")
++	if dir == "" {
++		return
++	}
++	f, e := os.OpenFile(filepath.Join(dir, point), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
++	if e != nil {
++		return
++	}
++	_ = f.Close()
++	exit(86)
++}
+--- before/internal/platform/failpoint/off.go
++++ after/internal/platform/failpoint/off.go
+@@ -2,4 +2,4 @@
+ 
+ package failpoint
+ 
+-func Hit(string) {}
++const Enabled = false
+--- before/internal/platform/failpoint/on.go
++++ after/internal/platform/failpoint/on.go
+@@ -1,25 +1,5 @@
+ //go:build faults
+ 
+-// Fault hooks exist only in explicitly instrumented test builds.
+ package failpoint
+ 
+-import (
+-	"os"
+-	"path/filepath"
+-)
+-
+-func Hit(point string) {
+-	if os.Getenv("FAILPOINT") != point {
+-		return
+-	}
+-	dir := os.Getenv("FAILPOINT_DIR")
+-	if dir == "" {
+-		return
+-	}
+-	f, e := os.OpenFile(filepath.Join(dir, point), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+-	if e != nil {
+-		return
+-	}
+-	_ = f.Close()
+-	os.Exit(86)
+-}
++const Enabled = true
+--- before/internal/transport/httpapi/module.go
++++ after/internal/transport/httpapi/module.go
+@@ -88,13 +88,7 @@
+ 			}
+ 			return err
+ 		})
+-		group.Drain(func(ctx context.Context) error {
+-			err := srv.Shutdown(ctx)
+-			if err != nil {
+-				_ = srv.Close()
+-			}
+-			return err
+-		})
++		group.Drain(func(ctx context.Context) error { return shutdownServer(ctx, srv) })
+ 	}
+ 	lc.Append(fx.Hook{
+ 		OnStart: func(context.Context) error {
+@@ -118,3 +112,11 @@
+ 	})
+ 	return srv
+ }
++
++func shutdownServer(ctx context.Context, srv *http.Server) error {
++	err := srv.Shutdown(ctx)
++	if err != nil {
++		_ = srv.Close()
++	}
++	return err
++}

@@ -1,0 +1,89 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.763s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:13:34 INFO transaction handled correlationId="" messageId="" transactionId=877f099e-d364-4f72-9728-b499127fe0f0 walletId=d0a50c67-44e6-4b87-8948-5e0c54dcaedb providerId=p status=PROCESSED
+2026/09/29 02:13:34 WARN transaction handling failed correlationId="" messageId="" transactionId=68a0ce9e-e8eb-4c97-82f8-3be7d6bcc9c8 walletId=d0a50c67-44e6-4b87-8948-5e0c54dcaedb providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+panic: runtime error: index out of range [3] with length 2 [recovered, repanicked]
+
+goroutine 114 [running]:
+testing.tRunner.func1.2({0x102cbb448, 0x472dc8d6a558})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102cbb448?, 0x472dc8d6a558?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/transport/httpapi.chain({0x102ceb400?, 0x472dc8f7b200?}, {0x472dc90d6708, 0x2, 0x472dc8d5e6c0?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:38 +0x70
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer.func3(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:66
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer({0x102ceb820, 0x472dc8d2aa28}, 0x0, {{0x0, 0x0, 0x0}, {0x0, 0x0}, 0x0, {0x0, ...}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:68 +0x344
+github.com/alexandre/wagering/internal/app/usecase_test.newContractAPI.func2({0x102ceb820, 0x472dc8d2aa28})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/http_contract_test.go:54 +0x4e8
+reflect.Value.call({0x102bfcfe8?, 0x472dc902c5a0?, 0x472dc90d7138?}, {0x1025e86a0, 0x4}, {0x472dc90b3db8, 0x1, 0x102cf5f88?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/reflect/value.go:586 +0xa88
+reflect.Value.Call({0x102bfcfe8?, 0x472dc902c5a0?, 0x1?}, {0x472dc90b3db8?, 0x472dc8d2aaf8?, 0x472dc8d28008?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/reflect/value.go:369 +0x94
+go.uber.org/dig.defaultInvoker({0x102bfcfe8?, 0x472dc902c5a0?, 0x472dc8f79950?}, {0x472dc90b3db8?, 0x1?, 0x102cf5290?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/dig@v1.18.0/container.go:257 +0x28
+go.uber.org/dig.(*Scope).Invoke(0x472dc8d502c0, {0x102bfcfe8, 0x472dc902c5a0}, {0x0, 0x0, 0x102d4f060?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/dig@v1.18.0/invoke.go:161 +0x41c
+go.uber.org/dig.(*Container).Invoke(0x102d4f050?, {0x102bfcfe8?, 0x472dc902c5a0?}, {0x0?, 0x1025e875c?, 0x4?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/dig@v1.18.0/invoke.go:83 +0x2c
+go.uber.org/fx.runInvoke({0x150180430?, 0x472dc8d2aa30?}, {{0x102bfcfe8, 0x472dc902c5a0}, {0x472dc8f0b540, 0x3, 0x4}})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/invoke.go:109 +0x148
+go.uber.org/fx.(*module).executeInvoke(0x472dc8d43860, {{0x102bfcfe8, 0x472dc902c5a0}, {0x472dc8f0b540, 0x3, 0x4}})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/module.go:322 +0xf8
+go.uber.org/fx.(*module).executeInvokes(0x472dc8d43860)
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/module.go:308 +0xa4
+go.uber.org/fx.New({0x472dc90d78c8, 0x2, 0x800?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:517 +0x768
+github.com/alexandre/wagering/internal/app/usecase_test.newContractAPI(0x472dc902eb48, 0x472dc8f5b500)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/http_contract_test.go:51 +0x260
+github.com/alexandre/wagering/internal/app/usecase_test.TestHTTPFinancialResponsesMatchContractAndPersistedFacts(0x472dc902eb48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/http_contract_test.go:126 +0x3c
+testing.tRunner(0x472dc902eb48, 0x102cf6198)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.518s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestReadinessAndListenerFailure (0.00s)
+panic: runtime error: index out of range [3] with length 2 [recovered, repanicked]
+
+goroutine 61 [running]:
+testing.tRunner.func1.2({0x1056240f0, 0x679401bda258})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1056240f0?, 0x679401bda258?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/transport/httpapi.chain({0x1056526f8?, 0x679401bcd620?}, {0x679401c81a88, 0x2, 0x679401bce240?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:38 +0x70
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer.func3(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:66
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer({0x1056526d8, 0x679401bdccf0}, 0x679401c81cc8, {{0x0, 0x0, 0x0}, {0x0, 0x0}, 0x0, {0x0, ...}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:68 +0x344
+github.com/alexandre/wagering/internal/transport/httpapi.TestReadinessAndListenerFailure(0x679401dad8c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/lifecycle_contract_test.go:43 +0x2b4
+testing.tRunner(0x679401dad8c8, 0x10565d148)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.083s
+FAIL

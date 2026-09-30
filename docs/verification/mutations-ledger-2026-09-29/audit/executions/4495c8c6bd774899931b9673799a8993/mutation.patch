@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -93,7 +93,7 @@
+ 		return u.waitReference(ctx, tx, t)
+ 	}
+ 	if decision.ReferenceID != "" {
+-		if err = t.ResolveReference(decision.ReferenceID); err != nil {
++		if err = t.ResolveReference(decision.ReferenceID); err == nil {
+ 			return err
+ 		}
+ 	}

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.112s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:20:45 INFO transaction handled correlationId="" messageId="" transactionId=35f6f576-bbbc-49a9-bccb-0226f96177cb walletId=77cb5eeb-95c9-42f6-8a57-ade64477833d providerId=p status=PROCESSED
+2026/09/29 22:20:45 WARN transaction handling failed correlationId="" messageId="" transactionId=d13d11ed-ebf2-4d76-aa40-40e4290e1be1 walletId=77cb5eeb-95c9-42f6-8a57-ade64477833d providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.083s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.086s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.586s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.467s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.184s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.718s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.072s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.214s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.359s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.867s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.847s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.825s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.616s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.601s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.390s
+FAIL

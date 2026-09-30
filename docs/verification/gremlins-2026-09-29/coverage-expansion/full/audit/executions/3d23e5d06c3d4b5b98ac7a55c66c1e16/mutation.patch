@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -90,7 +90,7 @@
+ 			return e
+ 		}
+ 		r := ref.Snapshot()
+-		if r.ID == s.ID || r.WalletID != s.WalletID || r.PlayerID != s.PlayerID || r.Amount.Currency() != s.Amount.Currency() || r.RoundID != s.RoundID {
++		if r.ID == s.ID || r.WalletID == s.WalletID || r.PlayerID != s.PlayerID || r.Amount.Currency() != s.Amount.Currency() || r.RoundID != s.RoundID {
+ 			return u.reject(ctx, tx, t, wager.FailReferenceMismatch)
+ 		}
+ 		if !wager.CanReference(s.Kind, r.Kind) {

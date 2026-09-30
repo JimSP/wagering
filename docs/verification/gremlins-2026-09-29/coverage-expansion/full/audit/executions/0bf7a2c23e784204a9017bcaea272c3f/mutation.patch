@@ -1,0 +1,50 @@
+--- original/internal/transport/httpapi/handlers.go
++++ mutant/internal/transport/httpapi/handlers.go
+@@ -21,7 +21,7 @@
+ 
+ type corrKey struct{}
+ 
+-func correlationID(ctx context.Context) string { s, _ := ctx.Value(corrKey{}).(string); return s }
++func correlationID(ctx context.Context) string	{ s, _ := ctx.Value(corrKey{}).(string); return s }
+ 
+ // withCorrelation propagates/creates X-Correlation-Id (logs, events and responses share it).
+ func withCorrelation(next http.Handler) http.Handler {
+@@ -134,12 +134,12 @@
+ 	}
+ 	p, _ := auth.PrincipalFrom(r.Context())
+ 	res, err := h.d.Submit.Execute(r.Context(), usecase.SubmitInput{
+-		Source: usecase.SourceHTTP, AuthorizedProviderID: p.ProviderID, IdempotencyKey: key,
+-		CorrelationID: correlationID(r.Context()),
+-		ProviderID:    req.ProviderID, ExternalTransactionID: req.ExternalTransactionID, PlayerID: req.PlayerID,
+-		WalletID: req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,
+-		ReferenceExternalTransactionID: req.ReferenceExternalTransactionID,
+-		Amount:                         req.Money.Amount, Currency: req.Money.Currency,
++		Source:	usecase.SourceHTTP, AuthorizedProviderID: p.ProviderID, IdempotencyKey: key,
++		CorrelationID:	correlationID(r.Context()),
++		ProviderID:	req.ProviderID, ExternalTransactionID: req.ExternalTransactionID, PlayerID: req.PlayerID,
++		WalletID:	req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,
++		ReferenceExternalTransactionID:	req.ReferenceExternalTransactionID,
++		Amount:				req.Money.Amount, Currency: req.Money.Currency,
+ 	})
+ 	if err != nil {
+ 		writeError(w, err)
+@@ -151,8 +151,8 @@
+ 	case wager.StatusProcessed:
+ 		writeJSON(w, http.StatusOK, body)
+ 	case wager.StatusRejected, wager.StatusFailed:
+-		writeJSON(w, http.StatusUnprocessableEntity, body) // definitive business outcome
+-	default: // PENDING / PENDING_REFERENCE
++		writeJSON(w, http.StatusUnprocessableEntity, body)	// definitive business outcome
++	default:	// PENDING / PENDING_REFERENCE
+ 		w.Header().Set("Location", "/wagering/transactions/"+res.TransactionID)
+ 		writeJSON(w, http.StatusAccepted, body)
+ 	}
+@@ -179,7 +179,7 @@
+ 
+ func (h handlers) getProviderTransaction(w http.ResponseWriter, r *http.Request) {
+ 	v, err := h.d.GetTx.ByExternalID(r.Context(), r.PathValue("providerId"), r.PathValue("externalTransactionId"), scopeOf(r))
+-	if err != nil {
++	if err == nil {
+ 		writeError(w, err)
+ 		return
+ 	}

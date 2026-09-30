@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.703s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:12 INFO transaction handled correlationId="" messageId="" transactionId=76ea13d7-65e6-4fe6-aadc-615c473422bd walletId=254c3bc3-6f39-4521-a620-d9337b41d6c5 providerId=p status=PROCESSED
+2026/09/29 03:24:12 WARN transaction handling failed correlationId="" messageId="" transactionId=43a0721d-3f42-4b89-9752-028559571644 walletId=254c3bc3-6f39-4521-a620-d9337b41d6c5 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.058s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.627s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.885s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.432s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.200s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.465s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.539s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: schedule outside pending reference want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.508s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.889s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.318s
+FAIL

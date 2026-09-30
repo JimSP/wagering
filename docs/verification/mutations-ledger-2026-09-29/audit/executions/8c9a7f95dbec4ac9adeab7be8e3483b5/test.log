@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.419s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:49:22 INFO transaction handled correlationId="" messageId="" transactionId=f61bb818-8c15-436f-be5f-7517b7875a44 walletId=388f95a6-3c06-400c-90f2-f77893d34eb1 providerId=p status=PROCESSED
+2026/09/29 22:49:22 WARN transaction handling failed correlationId="" messageId="" transactionId=618097cc-49ef-4c87-83f7-09fd993e78d7 walletId=388f95a6-3c06-400c-90f2-f77893d34eb1 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got REVERSAL_INSUFFICIENT_FUNDS: insufficient funds to reverse, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.353s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.995s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.111s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: REVERSAL_INSUFFICIENT_FUNDS: insufficient funds to reverse
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.821s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/counterparty_newer_than_command (0.00s)
+        accounting_test.go:55: decision={Failure:INSUFFICIENT_FUNDS Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:01:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:true ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	0.602s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {0 } {0 } wallet: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	0.877s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.824s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.934s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.432s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.280s
+FAIL

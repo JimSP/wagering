@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.451s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:32:37 INFO transaction handled correlationId="" messageId="" transactionId=8e0520c3-8f1d-45f6-98c9-4b08bf59b5e4 walletId=cc8d263f-fc7d-43ec-bd2f-d88ea2662442 providerId=p status=PROCESSED
+2026/09/29 22:32:37 WARN transaction handling failed correlationId="" messageId="" transactionId=301b2316-17dd-477d-9781-e074eb44c7c2 walletId=cc8d263f-fc7d-43ec-bd2f-d88ea2662442 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.09s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.09s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid allocation"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	4.231s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.381s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.247s
+--- FAIL: TestDistributionRequiresCompleteConservedStakes (0.00s)
+    --- FAIL: TestDistributionRequiresCompleteConservedStakes/funded (0.00s)
+        plan_test.go:30: validation=invalid settlement distribution: invalid allocation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	3.099s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.831s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.718s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.967s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.845s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.165s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.168s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.793s
+FAIL

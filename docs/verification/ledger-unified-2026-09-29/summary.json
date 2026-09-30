@@ -1,0 +1,17 @@
+{
+  "standard_command": "go test -count=1 -race -json ./...",
+  "standard_top_level_tests": {
+    "pass": 173
+  },
+  "failures": [],
+  "postgres_top_level_passed": 17,
+  "distributed_executed": [
+    "TestAccountingAutomaticSettlementAcrossProcesses",
+    "TestSettlementBrokerRejectsForgedAuthority",
+    "TestConcurrentReversalsAndFullRestart",
+    "TestThreeProcessesConcurrentMoney",
+    "TestHTTPAndSQSReplayAndCrash",
+    "TestPendingReferenceRestart"
+  ],
+  "full_integration_suite_accepted": false
+}

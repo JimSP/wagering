@@ -1,0 +1,27 @@
+# github.com/alexandre/wagering/internal/domain/wager
+# [github.com/alexandre/wagering/internal/domain/wager]
+internal/domain/wager/types.go:39:9: suspect and: s == StatusProcessed && s == StatusRejected
+ok  	github.com/alexandre/wagering/cmd/wagering	1.261s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:17:26 INFO transaction handled correlationId="" messageId="" transactionId=bf1bacfe-14c0-4d7f-8487-cf3c0d28f84d walletId=2abad870-d925-47e3-89c2-e61b0b9eecc6 providerId=p status=PROCESSED
+2026/09/30 00:17:26 WARN transaction handling failed correlationId="" messageId="" transactionId=36f98555-8edb-42a6-a9ca-9186e3417e2f walletId=2abad870-d925-47e3-89c2-e61b0b9eecc6 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/already_terminal (0.00s)
+        reference_failure_test.go:84: worker reported a failure it did not persist [REFUND:FAILED]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.669s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.282s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.008s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.873s
+FAIL	github.com/alexandre/wagering/internal/domain/wager [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.425s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.656s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.126s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.729s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.064s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.999s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.989s
+FAIL

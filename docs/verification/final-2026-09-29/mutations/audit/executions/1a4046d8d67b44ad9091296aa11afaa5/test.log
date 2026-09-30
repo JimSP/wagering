@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.066s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:15:41 INFO transaction handled correlationId="" messageId="" transactionId=7c0e895a-44cc-496d-a4d6-a5edc77671e7 walletId=1d06b36a-5636-4c42-b674-458916ccc96f providerId=p status=PROCESSED
+2026/09/29 03:15:41 WARN transaction handling failed correlationId="" messageId="" transactionId=b8a39b48-2b84-4abe-8c12-647d9cc00e82 walletId=1d06b36a-5636-4c42-b674-458916ccc96f providerId=p transient=false
+--- FAIL: TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome (0.00s)
+    --- FAIL: TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome/credit_overflow_is_rejected_without_rounding_or_mutation (0.00s)
+        reference_semantics_test.go:82: INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.821s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.243s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775807 y=-1 subtract=false got={0 } err=money: overflow want=-9223372036854775808
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.685s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/overflow (0.00s)
+        ledger_semantics_test.go:80: INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	4.185s
+--- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState (0.00s)
+    --- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState/credit_overflow (0.00s)
+        semantics_test.go:94: rejection mutated state or wrong error <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.595s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.584s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.349s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.989s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.945s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.756s
+FAIL

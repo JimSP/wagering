@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.015s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:22:16 INFO transaction handled correlationId="" messageId="" transactionId=851f49f0-40f8-42d7-9ce7-7d96aadb8088 walletId=f6d9e88d-42c5-4c29-99cc-e676e2f47ed8 providerId=p status=PROCESSED
+2026/09/29 22:22:16 WARN transaction handling failed correlationId="" messageId="" transactionId=fb579bbd-9eb1-47f1-9a66-df4604336713 walletId=f6d9e88d-42c5-4c29-99cc-e676e2f47ed8 providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    --- FAIL: TestOutboxPublishRetryConfirmationAndLag/success (0.00s)
+        outbox_paths_test.go:90: incorrect failure log: {"time":"2026-09-29T22:22:16.283641-03:00","level":"WARN","msg":"event publication failed","eventId":"event","walletId":"wallet","transactionId":"tx","providerId":"p","correlationId":"correlation","messageId":"","attempt":3,"err":null}
+            {"time":"2026-09-29T22:22:16.283648-03:00","level":"INFO","msg":"event published","eventId":"event","walletId":"wallet","transactionId":"tx","providerId":"p","correlationId":"correlation","messageId":"","attempt":3}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.229s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.478s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.977s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.732s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.606s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.847s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.075s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.092s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.261s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.760s
+FAIL

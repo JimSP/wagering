@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.926s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.687s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.431s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.548s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.024s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.154s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.828s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.447s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.265s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingDatabaseProtocol (0.00s)
+    --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT (0.00s)
+        --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT/failure-3-query (0.00s)
+            accounting_mutation_test.go:109: failure 3 lost: concurrent modification
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.569s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.358s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.341s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.178s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.027s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.046s
+ok  	github.com/alexandre/wagering/internal/platform/worker	8.017s
+FAIL

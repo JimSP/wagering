@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.404s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: providerId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.368s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.580s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.098s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.980s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+        accounting_test.go:46: INVALID_INPUT: invalid input: roundId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	0.849s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.460s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.240s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.957s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:27: INVALID_INPUT: invalid input: externalTransactionId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.594s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.303s
+FAIL

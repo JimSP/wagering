@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.235s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.523s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.447s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.088s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:91: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.030s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.645s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.381s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.768s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.341s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.483s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.402s
+FAIL

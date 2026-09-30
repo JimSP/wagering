@@ -1,0 +1,45 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.390s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.554s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.709s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.869s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.003s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.154s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.470s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.810s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.592s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.769s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:01:01 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+panic: non-positive interval for NewTicker
+
+goroutine 519 [running, synctest bubble 7]:
+time.NewTicker(0x0?)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/time/tick.go:38 +0xac
+github.com/alexandre/wagering/internal/platform/worker.Every.func1({0x102fa6c28, 0x1641aa110d20})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/platform/worker/worker.go:99 +0x44
+github.com/alexandre/wagering/internal/platform/worker.(*Group).Install.func1.1({{0x1027c6b12?, 0x1641aa13e380?}, 0x1641aa123640?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/platform/worker/worker.go:52 +0xf4
+created by github.com/alexandre/wagering/internal/platform/worker.(*Group).Install.func1 in goroutine 509
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/platform/worker/worker.go:49 +0x9c
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.712s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.495s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.446s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.493s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.469s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.300s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.291s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.297s
+FAIL

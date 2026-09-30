@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.931s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:20:51 INFO transaction handled correlationId="" messageId="" transactionId=debbd827-7158-4a02-adf9-cd68046892fa walletId=0852686d-9e16-42df-96cc-3aaa4c0aa916 providerId=p status=PROCESSED
+2026/09/29 03:20:51 WARN transaction handling failed correlationId="" messageId="" transactionId=30671c2f-bc00-4007-9185-cdff45ffa4d0 walletId=0852686d-9e16-42df-96cc-3aaa4c0aa916 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.379s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.015s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.468s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.194s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.742s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.036s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.635s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx" want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.942s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.541s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.963s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.939s
+FAIL

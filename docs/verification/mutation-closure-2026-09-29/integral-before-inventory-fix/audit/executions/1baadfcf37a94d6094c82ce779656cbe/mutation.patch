@@ -1,0 +1,11 @@
+--- original/internal/infra/sqs/module.go
++++ mutant/internal/infra/sqs/module.go
+@@ -66,7 +66,7 @@
+ 		return err
+ 	}
+ 	inflight, err := strconv.ParseInt(resp.Attributes["ApproximateNumberOfMessagesNotVisible"], 10, 64)
+-	if err != nil {
++	if err == nil {
+ 		return err
+ 	}
+ 	recorder.DLQDepth(float64(visible), float64(inflight))

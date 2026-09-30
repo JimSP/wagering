@@ -1,0 +1,36 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.344s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.410s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.246s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.132s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.869s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.742s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.981s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.385s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.445s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x20 pc=0x10296ddc4]
+
+goroutine 410 [running]:
+testing.tRunner.func1.2({0x102ec9958, 0x102fbd0b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102ec9958?, 0x102fbd0b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.walletRepo.Create({{0x102f465e0?, 0x3b58d94cb000?}}, {0x102f473c8, 0x102ffc1c0}, 0x3b58d94befc0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/infra/postgres/wallet_repo.go:32 +0x2d4
+github.com/alexandre/wagering/internal/infra/postgres.TestWalletPersistenceContract(0x3b58d94fc908)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/infra/postgres/repository_contract_test.go:132 +0x12c
+testing.tRunner(0x3b58d94fc908, 0x102f49e78)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.585s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.830s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.826s
+FAIL

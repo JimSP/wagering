@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.841s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.084s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.480s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.153s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.605s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.736s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.298s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.003s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.953s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementDatabaseCommandPreservesRetryClassification (0.00s)
+    --- FAIL: TestSettlementDatabaseCommandPreservesRetryClassification/40001 (0.00s)
+        settlement_contract_test.go:50: cause lost or non-retryable: err=invalid input: invalid identifier calls=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.037s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.875s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.622s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.621s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.441s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.255s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.396s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.394s
+FAIL

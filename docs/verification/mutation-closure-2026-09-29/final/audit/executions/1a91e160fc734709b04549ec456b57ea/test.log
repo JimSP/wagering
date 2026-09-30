@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.874s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:27:17 INFO transaction handled correlationId="" messageId="" transactionId=b3b31cb8-2f0d-4a97-b113-a0ca27556c52 walletId=cfc07d95-9bd8-46b0-86b7-8a26ff3c5249 providerId=p status=PROCESSED
+2026/09/30 01:27:17 WARN transaction handling failed correlationId="" messageId="" transactionId=89f3d601-74b1-4408-9fd6-6a3a337f3442 walletId=cfc07d95-9bd8-46b0-86b7-8a26ff3c5249 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.165s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.910s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.037s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.277s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.681s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.239s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.730s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.660s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.560s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.686s
+FAIL

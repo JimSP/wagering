@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.849s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:16:26 INFO transaction handled correlationId="" messageId="" transactionId=dddddc9b-3f6b-4fb9-b35b-e4baf31c79e2 walletId=026c9652-5eb3-4db0-a7e5-dfbb5c19b51c providerId=p status=PROCESSED
+2026/09/30 01:16:26 WARN transaction handling failed correlationId="" messageId="" transactionId=b1c89edd-e5c0-434a-a31f-12923aed2f3e walletId=026c9652-5eb3-4db0-a7e5-dfbb5c19b51c providerId=p transient=false
+--- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts (0.29s)
+    --- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts/opening=10.00 (0.00s)
+        http_contract_test.go:268: {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: ledger entry 00000000-0000-4000-8000-000000000011 has inconsistent balances"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.155s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.401s
+--- FAIL: TestMoneyPreservesExactValueAcrossArithmeticAndWireFormat (0.00s)
+    semantics_test.go:50: comparison: -9223372036854775808 -9223372036854775808 => 1/<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	9.870s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.138s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:47: history changed {    {0 } {0 } {0 } {0 0 <nil>}} INVALID_INPUT: invalid input: ledger entry entry-0 has inconsistent balances
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.655s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.496s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.262s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.770s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry first has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.239s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.146s
+FAIL

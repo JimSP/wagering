@@ -1,0 +1,49 @@
+11 versions; paired up/down files; SHA-256 verified
+=== RUN   TestRollbackRecoversOpenBetOnlyWhenGuaranteeInsufficient
+=== RUN   TestRollbackRecoversOpenBetOnlyWhenGuaranteeInsufficient/100.00
+2026/09/30 14:31:52 INFO transaction handled correlationId=712cb2cc-b8f0-4a32-960d-79d8b450074b messageId="" transactionId=1d8c50d8-8913-4fe4-babb-8d15bd0cccbc walletId=732fdacc-1f30-49dd-94fd-3ec52a296073 providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=bffc65c2-a5e4-4cd1-9ecf-496f12841bf5 messageId="" transactionId=a447f99d-98bd-4f5a-b1b2-2984a99e3895 walletId=cdb7167b-635f-48a5-9550-570b26bb30bb providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=65176fbc-646f-4d4f-b1f1-d9fbbc442326 messageId="" transactionId=916e4388-d0cf-4b50-89df-39aa31a9a42b walletId=732fdacc-1f30-49dd-94fd-3ec52a296073 providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=5526040e-3ac2-456a-92d2-32826624fbda messageId="" transactionId=706cf3f6-435d-440a-aea6-8e58aa1ca9b1 walletId=732fdacc-1f30-49dd-94fd-3ec52a296073 providerId=p status=PROCESSED
+=== RUN   TestRollbackRecoversOpenBetOnlyWhenGuaranteeInsufficient/50.00
+2026/09/30 14:31:52 INFO transaction handled correlationId=82736edb-953b-40db-964a-e2c0f469efbc messageId="" transactionId=a74b4b0b-560c-4de9-922f-921252530aa9 walletId=bc78d71c-3c75-4266-a1ee-d31fe0273799 providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=a32e19d0-5ba0-48d8-ae2f-51e9515134f9 messageId="" transactionId=2e05134a-552c-4899-b797-ab015c4e2865 walletId=abfe376e-52bb-4f59-ab49-f656b8d0ff30 providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=915fec5d-9012-47cc-808f-94d0120d32c1 messageId="" transactionId=16926ed9-43b3-4722-a60d-e795989747d7 walletId=bc78d71c-3c75-4266-a1ee-d31fe0273799 providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=0b49241a-1e6e-43fa-9060-2698c9db62d7 messageId="" transactionId=c642abe7-ff8d-4ab9-bbd0-f519b3255545 walletId=bc78d71c-3c75-4266-a1ee-d31fe0273799 providerId=p status=PROCESSED
+--- PASS: TestRollbackRecoversOpenBetOnlyWhenGuaranteeInsufficient (0.36s)
+    --- PASS: TestRollbackRecoversOpenBetOnlyWhenGuaranteeInsufficient/100.00 (0.20s)
+    --- PASS: TestRollbackRecoversOpenBetOnlyWhenGuaranteeInsufficient/50.00 (0.15s)
+=== RUN   TestRollbackPendingSurvivesRetriesAndRestartThenUsesWinningBalance
+2026/09/30 14:31:52 INFO transaction handled correlationId=efe7d51b-6d7f-4151-8a98-c62d776efa4a messageId="" transactionId=9da0cea8-daad-4eff-ba1f-22fae637011d walletId=998b63d9-4b03-48b5-a1f0-e20af69a872f providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=d6ad78e5-5ed8-4fab-93a7-fae610c6067b messageId="" transactionId=0128af9d-3d8d-4f8f-8827-6b1f650dd712 walletId=fc76a944-9eb2-48cb-819b-9a464eebd3cc providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=5f77dc15-7ad9-4428-8511-e936fee39daf messageId="" transactionId=aa1e07a4-f129-4dba-8c34-dd09586c6e02 walletId=998b63d9-4b03-48b5-a1f0-e20af69a872f providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=b09a61c4-65e3-45fe-8174-4c795cbe8f27 messageId="" transactionId=3fe4230d-14a2-4216-88ca-c6b25b39c040 walletId=69d98211-5e30-4e6b-8f04-6d47a7aeb232 providerId=p status=PROCESSED
+2026/09/30 14:31:52 INFO transaction handled correlationId=8eb6eca4-717b-4cbd-a545-a63430d38af7 messageId="" transactionId=109676b5-91bc-4e5d-8364-788215a8c11e walletId=998b63d9-4b03-48b5-a1f0-e20af69a872f providerId=p status=PENDING_ROLLBACK
+2026/09/30 14:31:52 INFO transaction handled correlationId=998f1b1b-7b83-4cb2-a322-aeec1ca26dd0 messageId="" transactionId=109676b5-91bc-4e5d-8364-788215a8c11e walletId=998b63d9-4b03-48b5-a1f0-e20af69a872f providerId=p status=PENDING_ROLLBACK
+2026/09/30 14:31:52 INFO transaction handled correlationId=b5d2f329-f947-4385-809a-2df78eb714e2 messageId="" transactionId=109676b5-91bc-4e5d-8364-788215a8c11e walletId=998b63d9-4b03-48b5-a1f0-e20af69a872f providerId=p status=PROCESSED
+--- PASS: TestRollbackPendingSurvivesRetriesAndRestartThenUsesWinningBalance (0.27s)
+=== RUN   TestRollbackAfterLossUsesRemainingGuaranteeOrRejects
+=== RUN   TestRollbackAfterLossUsesRemainingGuaranteeOrRejects/50.00
+2026/09/30 14:31:53 INFO transaction handled correlationId=7f256911-fb3e-4a0f-920b-65200ac11e23 messageId="" transactionId=2fcce423-e738-45ed-9b51-e3224add004e walletId=8a94df46-e713-4908-9550-ed719b7ec1ef providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=7709659f-9f67-4900-ae19-a2651de63d8b messageId="" transactionId=76b70e75-ab10-401f-9241-56b0f2cd7896 walletId=efbd6239-69b8-402b-a99c-105663c5215c providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=d5f1eb24-086b-4afc-9f3e-f6a55351d409 messageId="" transactionId=74b2b7b8-9e3a-4aa6-93c1-6e5671c431a6 walletId=8a94df46-e713-4908-9550-ed719b7ec1ef providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=bb685763-c7d4-4650-88fb-e8c950d3090b messageId="" transactionId=44b6ab1f-a7e3-4b51-8a1c-e801edb568a1 walletId=162adfc3-da30-4555-81e5-06c5e9dc9bbe providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=c05165df-217f-40ea-b4d7-d51d2fee5e22 messageId="" transactionId=24a2a299-16ef-4976-b2bb-58758bbdfc53 walletId=8a94df46-e713-4908-9550-ed719b7ec1ef providerId=p status=PROCESSED
+=== RUN   TestRollbackAfterLossUsesRemainingGuaranteeOrRejects/100.00
+2026/09/30 14:31:53 INFO transaction handled correlationId=674f6da4-d530-40b4-80dd-77397543d7bd messageId="" transactionId=fbb27311-2327-4f6d-80ee-518a981e1b53 walletId=1f7fcfaa-642f-46cc-a6b7-cf040acdb9c8 providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=945ffcea-7b69-4875-b811-95ed8fe28346 messageId="" transactionId=171a10d0-9aa8-40f5-a324-db78374eed33 walletId=3182d279-c44e-43ff-9c62-ec31b2cb2ae7 providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=37011a74-515f-440b-bd7d-7b01291502c5 messageId="" transactionId=643e6248-8cf6-43d4-af41-1f2d94e7fef1 walletId=1f7fcfaa-642f-46cc-a6b7-cf040acdb9c8 providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=2338efbe-b97e-49ac-9ee2-c9074e66d144 messageId="" transactionId=ae59ac07-bd7b-46e3-bfe8-0c92308ef258 walletId=11cdaf6a-cbaa-4cf8-8ce0-88ff7cfcd6ce providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=11cdde83-06a8-4ffd-9d7c-809018bb2865 messageId="" transactionId=f36cd064-bced-4248-afa3-1eb92c09cef2 walletId=1f7fcfaa-642f-46cc-a6b7-cf040acdb9c8 providerId=p status=REJECTED
+--- PASS: TestRollbackAfterLossUsesRemainingGuaranteeOrRejects (0.40s)
+    --- PASS: TestRollbackAfterLossUsesRemainingGuaranteeOrRejects/50.00 (0.22s)
+    --- PASS: TestRollbackAfterLossUsesRemainingGuaranteeOrRejects/100.00 (0.18s)
+=== RUN   TestRollbackPendingDoesNotCommitPartialOpenBetRecovery
+2026/09/30 14:31:53 INFO transaction handled correlationId=1ae255d6-2d84-4e83-b0bb-57b8e407f90a messageId="" transactionId=afbb938f-a1ea-4cda-a0dc-9fa99e4518fc walletId=ed4e4957-89c3-43a7-ac80-bf418ebb32ad providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=09c369a6-3b58-4a36-91eb-7f6a4d46367e messageId="" transactionId=7f7a87d4-3f3d-46fa-bb29-214fceede104 walletId=3fea6bf4-11d9-483f-b3f7-4bdcdb6749fc providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=7f08ca95-f221-49b4-94ae-0d3d72e70e6a messageId="" transactionId=c491284a-144c-4d3d-8afe-9359d1312e4d walletId=ed4e4957-89c3-43a7-ac80-bf418ebb32ad providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=9b74f4ac-9c09-46dd-b881-b41432485a0a messageId="" transactionId=8db7dae5-bce7-442f-ab22-d0466515021d walletId=ed4e4957-89c3-43a7-ac80-bf418ebb32ad providerId=p status=PROCESSED
+2026/09/30 14:31:53 INFO transaction handled correlationId=18e26aae-d94a-4a2e-82c6-e08c24b7a7b1 messageId="" transactionId=85a06e2c-e43d-4198-bf1e-b5543fcb1624 walletId=ed4e4957-89c3-43a7-ac80-bf418ebb32ad providerId=p status=PENDING_ROLLBACK
+--- PASS: TestRollbackPendingDoesNotCommitPartialOpenBetRecovery (0.23s)
+PASS
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.739s

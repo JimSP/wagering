@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -74,7 +74,7 @@
+ 	if err != nil {
+ 		return err
+ 	}
+-	if w.PlayerID() != s.PlayerID {
++	if w.PlayerID() == s.PlayerID {
+ 		return u.reject(ctx, tx, t, wager.FailReferenceMismatch)
+ 	}
+ 	if w.Currency() != s.Amount.Currency() {

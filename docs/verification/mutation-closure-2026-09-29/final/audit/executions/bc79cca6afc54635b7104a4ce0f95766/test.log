@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.937s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:01:56 INFO transaction handled correlationId="" messageId="" transactionId=33c2cd1f-d6c2-4c3f-9f51-61e17cd5ae0f walletId=7bb4cd13-b0d7-466d-91ab-7312eb02a196 providerId=p status=PROCESSED
+2026/09/30 01:01:56 WARN transaction handling failed correlationId="" messageId="" transactionId=6ec19de1-c97e-4b4f-be2f-7c6a066a824a walletId=7bb4cd13-b0d7-466d-91ab-7312eb02a196 providerId=p transient=false
+--- FAIL: TestSettlementDeliveryRequiresDedicatedExecutor (0.00s)
+    paired_storage_failure_test.go:299: <nil> 1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.472s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.507s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.799s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.255s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.694s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.889s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.649s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.333s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries (0.00s)
+    --- FAIL: TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries/23514 (0.00s)
+        settlement_contract_test.go:64: permanent failure lost/misclassified: <nil> calls=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	12.084s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.304s
+FAIL

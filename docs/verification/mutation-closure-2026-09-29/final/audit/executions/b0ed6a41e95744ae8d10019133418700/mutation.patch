@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -148,7 +148,7 @@
+ 		}
+ 	}
+ 	if d.ConsumeCommitmentID != "" {
+-		if _, err := t.q.Exec(ctx, `SELECT accounting_consume($1,$2,$3,$4)`, d.ConsumeCommitmentID, journalID, s.Amount.Minor(), now); err != nil {
++		if _, err := t.q.Exec(ctx, `SELECT accounting_consume($1,$2,$3,$4)`, d.ConsumeCommitmentID, journalID, s.Amount.Minor(), now); err == nil {
+ 			return err
+ 		}
+ 	}

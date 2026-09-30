@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.801s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.748s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.407s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.294s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.903s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.204s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.594s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.640s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.483s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:238: audit {SettlementRecord:{ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} Payments:[] Postings:[{ID:entry JournalID:journal TransactionID:p AccountID:account WalletID:w Role:GUARANTEE Direction:CREDIT Money:{minor:100 currency:BRL} Before:{minor:0 currency:BRL} After:{minor:100 currency:BRL} Version:2 Sequence:3 Reverses:original CreatedAt:2026-01-02 03:04:05 +0000 UTC}]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query#01 (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.893s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.048s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.194s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.900s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.990s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.821s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.694s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.706s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.857s
+FAIL

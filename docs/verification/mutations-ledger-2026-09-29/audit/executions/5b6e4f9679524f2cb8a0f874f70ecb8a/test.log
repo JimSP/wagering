@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.350s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:34:37 INFO transaction handled correlationId="" messageId="" transactionId=38581938-8f4b-4b4f-9cf9-5af3a5390c79 walletId=aa5818ee-d8f9-4951-a9a3-f8b2242cea9f providerId=p status=PROCESSED
+2026/09/29 22:34:37 WARN transaction handling failed correlationId="" messageId="" transactionId=78a3f688-96c5-4e6b-8b0c-a53fdb4b565a walletId=aa5818ee-d8f9-4951-a9a3-f8b2242cea9f providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.15s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/win-exceeds-committed-funds (0.00s)
+        http_contract_test.go:153: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000049","status":"REJECTED","idempotentReplay":false,"failureCode":"INSUFFICIENT_FUNDS"}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000049","status":"REJECTED","failureCode":"REFERENCE_NOT_FOUND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.712s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.193s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.056s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.919s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/implicit_ambiguous_WIN (0.00s)
+        accounting_test.go:55: decision={Failure:INSUFFICIENT_FUNDS Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.313s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.659s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.205s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.060s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.496s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.482s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.121s
+FAIL

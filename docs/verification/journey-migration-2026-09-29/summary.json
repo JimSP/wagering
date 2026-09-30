@@ -1,0 +1,41 @@
+{
+  "unit_race": {
+    "command": "go test -count=1 -race -json ./...",
+    "exit_code": 1,
+    "main": {
+      "pass": 123,
+      "fail": 33
+    },
+    "leaves": {
+      "pass": 586,
+      "fail": 300
+    }
+  },
+  "isolated_postgres": {
+    "command": "bash scripts/test-postgres-isolated.sh -json",
+    "exit_code": 1,
+    "main": {
+      "pass": 13,
+      "fail": 4
+    },
+    "leaves": {
+      "pass": 26,
+      "fail": 8
+    }
+  },
+  "inventory": {
+    "files": 76,
+    "kinds": {
+      "test": 184,
+      "fuzz": 1,
+      "harness": 1
+    },
+    "subtest_declarations": 105
+  },
+  "production_go_changes": [],
+  "all_previous_test_declarations_preserved": true,
+  "desafio_and_user_script_preserved": true,
+  "vet_exit_code": 0,
+  "financial_suite_ready": false,
+  "full_settlement_integration_proven": false
+}

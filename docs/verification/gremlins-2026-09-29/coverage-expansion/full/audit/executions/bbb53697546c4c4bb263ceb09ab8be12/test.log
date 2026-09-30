@@ -1,0 +1,58 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.511s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:03:45 WARN transaction handling failed correlationId="" messageId="" transactionId=f0e973e2-67f0-49ca-ad5b-587c3ec9950b walletId=6f6806a7-eee4-4c7c-8b43-ee91f7e29436 providerId=p transient=false
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:66: {  <nil>  true} idempotency key reused with different payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.688s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: noncanonical money
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.694s
+--- FAIL: TestExactBoundaries (0.00s)
+    boundaries_test.go:23: -0.08
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.922s
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: noncanonical money
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.219s
+--- FAIL: TestDebitInvariants (0.00s)
+    wallet_test.go:23: unexpected state: v=2 bal=200000.00
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.477s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: noncanonical money
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.005s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:03:45 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: noncanonical money
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.341s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    --- FAIL: TestLedgerWireContractAndPaginationBoundaries/limit= (0.00s)
+        contract_test.go:135: want {"entries":[{"id":"entry","transactionId":"tx","direction":"CREDIT","money":{"amount":"1.00","currency":"BRL"},"balanceBefore":{"amount":"0.00","currency":"BRL"},"balanceAfter":{"amount":"1.00","currency":"BRL"},"createdAt":"2026-09-28T12:00:00Z"}],"nextCursor":"next"} got {"entries":[{"id":"entry","transactionId":"tx","direction":"CREDIT","money":{"amount":"10000.00","currency":"BRL"},"balanceBefore":{"amount":"0.00","currency":"BRL"},"balanceAfter":{"amount":"10000.00","currency":"BRL"},"createdAt":"2026-09-28T12:00:00Z"}],"nextCursor":"next"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	3.802s
+FAIL

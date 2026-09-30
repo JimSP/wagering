@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.720s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:39:44 INFO transaction handled correlationId="" messageId="" transactionId=cf6f24d8-789b-425e-be37-ede827e4619a walletId=8ce5e5a0-fce0-4b7f-83a8-f11de76f9478 providerId=p status=PROCESSED
+2026/09/29 22:39:44 WARN transaction handling failed correlationId="" messageId="" transactionId=46e17d05-4c94-4752-83d2-650ea94fd1dc walletId=8ce5e5a0-fce0-4b7f-83a8-f11de76f9478 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid origin
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.905s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.764s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.301s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.436s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid origin
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.562s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.889s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.447s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.153s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: invalid origin want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.808s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.457s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.453s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.430s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.502s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.900s
+FAIL

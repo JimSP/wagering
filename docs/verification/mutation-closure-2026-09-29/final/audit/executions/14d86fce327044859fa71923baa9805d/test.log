@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.512s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:18:17 INFO transaction handled correlationId="" messageId="" transactionId=c964f753-440d-4a74-b002-f859d23215b7 walletId=5d2244d7-318c-4f57-9b15-2b73cf893553 providerId=p status=PROCESSED
+2026/09/30 01:18:17 WARN transaction handling failed correlationId="" messageId="" transactionId=9d7b7e41-6835-40ed-9f67-df403bef5677 walletId=5d2244d7-318c-4f57-9b15-2b73cf893553 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.02s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.02s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid allocation"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.337s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.189s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.059s
+--- FAIL: TestDistributionRequiresCompleteConservedStakes (0.00s)
+    --- FAIL: TestDistributionRequiresCompleteConservedStakes/funded (0.00s)
+        plan_test.go:30: validation=invalid settlement distribution: invalid allocation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	9.935s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.719s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.303s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.039s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.593s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.023s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.174s
+FAIL

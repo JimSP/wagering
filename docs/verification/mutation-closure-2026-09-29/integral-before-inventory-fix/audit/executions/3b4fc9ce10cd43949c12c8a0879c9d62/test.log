@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.724s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:48:59 INFO transaction handled correlationId="" messageId="" transactionId=2b182dbc-dfc9-4d67-bbce-a9cb24dc6540 walletId=0e976065-72e6-48fe-a315-5fbd0a33aaf6 providerId=p status=PROCESSED
+2026/09/29 23:48:59 WARN transaction handling failed correlationId="" messageId="" transactionId=2f6c12ab-2e3a-4a0e-8404-88dd7f1d8f30 walletId=0e976065-72e6-48fe-a315-5fbd0a33aaf6 providerId=p transient=false
+--- FAIL: TestConfirmSettlementStopsBeforeSavingIncompleteFacts (0.00s)
+    --- FAIL: TestConfirmSettlementStopsBeforeSavingIncompleteFacts/lookup_failure (0.00s)
+        settlement_failure_test.go:173: idempotency key reused with different payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.023s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.230s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.364s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.104s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.891s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.768s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.250s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.478s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.063s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.745s
+FAIL

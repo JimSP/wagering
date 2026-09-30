@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.930s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:15:01 INFO transaction handled correlationId="" messageId="" transactionId=b6fa3a7d-c9ba-42f4-b55e-fcd789c9a515 walletId=2846c640-5450-4967-8b96-b94e6cd73380 providerId=p status=PROCESSED
+2026/09/30 01:15:01 WARN transaction handling failed correlationId="" messageId="" transactionId=b1704a73-5859-47fb-9cdc-88ccd6eb690d walletId=2846c640-5450-4967-8b96-b94e6cd73380 providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+    paired_storage_failure_test.go:91: INVALID_INPUT: invalid input: LOSS requires amount 0.00
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.035s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.594s
+--- FAIL: TestExactBoundaries (0.00s)
+    boundaries_test.go:35: {0 BRL} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	10.082s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.822s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_guarantee_on_LOSS (0.00s)
+        mutation_regression_test.go:48: INVALID_INPUT: invalid input: LOSS requires amount 0.00
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.334s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.851s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.525s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.120s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.567s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	13.682s
+FAIL

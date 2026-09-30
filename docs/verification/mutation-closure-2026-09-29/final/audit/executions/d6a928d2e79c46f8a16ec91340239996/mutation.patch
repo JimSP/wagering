@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -83,7 +83,7 @@
+ 		return nil
+ 	}
+ 	decision, err := wager.DecideAccounting(t, facts, u.clock.Now())
+-	if err != nil {
++	if err == nil {
+ 		return err
+ 	}
+ 	if decision.Failure != "" {

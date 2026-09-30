@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.268s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:15:46 INFO transaction handled correlationId="" messageId="" transactionId=63d93006-266d-48ea-b862-30ce57e98961 walletId=8dc4645e-63db-4768-947f-3126eaac7240 providerId=p status=PROCESSED
+2026/09/29 03:15:46 WARN transaction handling failed correlationId="" messageId="" transactionId=88b72117-fc5c-4a63-a1d0-70e8c959921f walletId=8dc4645e-63db-4768-947f-3126eaac7240 providerId=p transient=false
+--- FAIL: TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome (0.00s)
+    --- FAIL: TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome/credit_overflow_is_rejected_without_rounding_or_mutation (0.00s)
+        reference_semantics_test.go:81: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.838s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.882s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=0 y=9223372036854775807 subtract=false got={0 } err=money: overflow want=9223372036854775807
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.602s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.087s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.337s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.209s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.843s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	0.645s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.599s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	4.651s
+FAIL

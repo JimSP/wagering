@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.272s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:46:22 INFO transaction handled correlationId="" messageId="" transactionId=ee6deda5-326c-4b99-8687-0e510335bb45 walletId=009745d7-edd9-425b-a5c9-9e1b9e84e255 providerId=p status=PROCESSED
+2026/09/29 22:46:22 WARN transaction handling failed correlationId="" messageId="" transactionId=66c0403a-7325-4f11-ac70-e7672f3e3786 walletId=009745d7-edd9-425b-a5c9-9e1b9e84e255 providerId=p transient=false
+--- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting (0.00s)
+    --- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting/success (0.00s)
+        paired_storage_failure_test.go:42: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.051s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.628s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.291s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.654s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:82: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.034s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.412s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.289s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.766s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.298s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.218s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.193s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.117s
+FAIL

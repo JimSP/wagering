@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.085s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:28:13 INFO transaction handled correlationId="" messageId="" transactionId=8cfaff09-2287-4f7f-a90e-72516c92b9da walletId=7e080ed0-8f1e-44af-830d-a0d9a07338a0 providerId=p status=PROCESSED
+2026/09/29 03:28:13 WARN transaction handling failed correlationId="" messageId="" transactionId=729e989c-fda7-4f50-bb6c-860a15e79269 walletId=7e080ed0-8f1e-44af-830d-a0d9a07338a0 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/already_terminal (0.00s)
+        reference_failure_test.go:84: worker reported a failure it did not persist [REFUND:FAILED]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.984s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.124s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.543s
+--- FAIL: TestRejectedAndFailedAreTerminal (0.00s)
+    invariants_test.go:88: terminal reopened
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.388s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.683s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.809s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.087s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.989s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.425s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.085s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.081s
+FAIL

@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.077s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.255s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.683s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.215s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.715s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.439s
+--- FAIL: TestJWKSCacheExpiryThrottleAndLifecycleContracts (0.02s)
+    --- FAIL: TestJWKSCacheExpiryThrottleAndLifecycleContracts/fresh_cache (0.00s)
+        cache_contract_test.go:73: healthy startup closed connections
+    cache_contract_test.go:121: failed startup cleanup=0 err=auth: jwks unavailable: Get "http://jwks.test": offline
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.048s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.331s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.610s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.230s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.751s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.716s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.425s
+FAIL

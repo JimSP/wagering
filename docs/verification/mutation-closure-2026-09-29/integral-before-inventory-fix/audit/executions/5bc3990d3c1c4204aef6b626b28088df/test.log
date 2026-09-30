@@ -1,0 +1,51 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.076s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:10:46 INFO transaction handled correlationId="" messageId="" transactionId=26522aab-4c7d-407d-ae3e-67785d6afe56 walletId=c4315a9b-203f-4b29-ad04-a4f7cecc0fa7 providerId=p status=PROCESSED
+2026/09/30 00:10:46 WARN transaction handling failed correlationId="" messageId="" transactionId=eabd121d-bcf3-4570-a221-bb2162e35cdf walletId=c4315a9b-203f-4b29-ad04-a4f7cecc0fa7 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x1050ff5ec]
+
+goroutine 79 [running]:
+testing.tRunner.func1.2({0x1059771e0, 0x105a67b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1059771e0?, 0x105a67b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute.func2({0x105a0d198, 0x105aae380}, {0x105a0dc50, 0x64d2742d4190})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/transaction.go:168 +0x4b4
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x38?, {0x105a0d198?, 0x105aae380?}, 0x7?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute(_, {_, _}, {{0x1052d2beb, 0x3}, {0x1052d2a20, 0x1}, {0x1052d2bfd, 0x3}, {0x0, ...}, ...})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/transaction.go:111 +0xa84
+github.com/alexandre/wagering/internal/app/usecase.TestSubmitInboxBindingFailurePreventsCompletion(0x64d2742ccb48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/paired_storage_failure_test.go:289 +0x55c
+testing.tRunner(0x64d2742ccb48, 0x105a12690)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.399s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.716s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.477s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.970s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.218s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.586s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.202s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.332s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_mutation_test.go:57: step 3: SQL "SELECT id FROM ledger_accounts WHERE wallet_id=$1 ORDER BY id FOR NO KEY UPDATE" lacks "coalesce(bet_id"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.631s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.095s
+FAIL

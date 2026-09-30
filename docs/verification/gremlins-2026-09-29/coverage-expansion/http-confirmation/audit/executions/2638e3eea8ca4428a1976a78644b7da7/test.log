@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.029s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:39:40 INFO transaction handled correlationId="" messageId="" transactionId=8d3870e5-5307-4e9b-b05a-bb8614e947a0 walletId=d0304bcb-1a82-4fcf-b5fc-8f06f6e1ec3a providerId=p status=PROCESSED
+2026/09/29 02:39:40 WARN transaction handling failed correlationId="" messageId="" transactionId=40977fef-e193-4a49-8be9-851d3daf4398 walletId=d0304bcb-1a82-4fcf-b5fc-8f06f6e1ec3a providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.04s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INVALID_INPUT","message":"invalid input: malformed body: http: request body too large"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.429s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.470s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.458s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.792s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.565s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.490s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.674s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.346s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	0.679s
+FAIL

@@ -1,0 +1,70 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.682s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:47:51 INFO transaction handled correlationId="" messageId="" transactionId=2f041eb0-248d-4106-a873-7704cd04e1cc walletId=40ce7653-100e-4477-9a5d-637fd7e23e9c providerId=p status=PROCESSED
+2026/09/29 22:47:51 WARN transaction handling failed correlationId="" messageId="" transactionId=d8433c69-1dbe-4d16-8de1-5baa68b801aa walletId=40ce7653-100e-4477-9a5d-637fd7e23e9c providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+    paired_storage_failure_test.go:92: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.421s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.735s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.541s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1027c7a30]
+
+goroutine 12 [running]:
+testing.tRunner.func1.2({0x102931958, 0x10296d050})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102931958?, 0x10296d050?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Snapshot(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/wallet/wallet.go:50
+github.com/alexandre/wagering/internal/domain/settlement.reversalFacts()
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/settlement/reversal_test.go:20 +0x1c0
+github.com/alexandre/wagering/internal/domain/settlement.TestReversalValidatesWholeHistoryWithoutMutatingFacts(0x68b1fcbf5208)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/settlement/reversal_test.go:30 +0x28
+testing.tRunner(0x68b1fcbf5208, 0x102950348)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.808s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x100237890]
+
+goroutine 20 [running]:
+testing.tRunner.func1.2({0x1003ff928, 0x10043d390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1003ff928?, 0x10043d390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Snapshot(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/wallet/wallet.go:50
+github.com/alexandre/wagering/internal/domain/wager.TestAccountingRejectsCorruptFactsWithoutChangingBalances.func10(0x318264ee488)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/wager/accounting_test.go:50 +0x130
+testing.tRunner(0x318264ee488, 0x318264d6850)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 19
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.031s
+--- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently (0.00s)
+    --- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently/id (0.00s)
+        input_contract_test.go:22: wallet=&{ player {0 BRL} 1 {0 63926236800 <nil>} {0 63926236800 <nil>}} error=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.669s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.324s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.401s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:128: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.293s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.400s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.388s
+FAIL

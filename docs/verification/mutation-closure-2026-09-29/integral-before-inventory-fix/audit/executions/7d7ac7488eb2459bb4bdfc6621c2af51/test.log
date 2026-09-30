@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.862s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.127s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.871s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.517s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.941s
+--- FAIL: TestRehydrationRejectsImpossibleHistories (0.00s)
+    --- FAIL: TestRehydrationRejectsImpossibleHistories/opening_with_invented_result (0.00s)
+        lifecycle_semantics_test.go:209: accepted impossible history: {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:1000 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x4a9c841dc990 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}; err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.448s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.573s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.751s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.692s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.244s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.093s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.079s
+FAIL

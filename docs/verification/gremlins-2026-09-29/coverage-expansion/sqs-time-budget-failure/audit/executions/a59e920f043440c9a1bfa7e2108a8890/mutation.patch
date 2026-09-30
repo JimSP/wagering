@@ -1,0 +1,67 @@
+--- original/internal/infra/sqs/consumer.go
++++ mutant/internal/infra/sqs/consumer.go
+@@ -24,13 +24,13 @@
+ 	ChangeMessageVisibility(context.Context, *awssqs.ChangeMessageVisibilityInput, ...func(*awssqs.Options)) (*awssqs.ChangeMessageVisibilityOutput, error)
+ }
+ type Consumer struct {
+-	client      clientAPI
+-	queueURL    string
+-	handler     port.MessageHandler
+-	log         *slog.Logger
+-	metrics     port.Metrics
+-	waitSeconds int32
+-	workTimeout time.Duration
++	client		clientAPI
++	queueURL	string
++	handler		port.MessageHandler
++	log		*slog.Logger
++	metrics		port.Metrics
++	waitSeconds	int32
++	workTimeout	time.Duration
+ }
+ 
+ func NewConsumer(c clientAPI, queueURL string, h port.MessageHandler, log *slog.Logger, m port.Metrics) *Consumer {
+@@ -44,10 +44,10 @@
+ 		// A cancelled receive can still hide a message at the broker until visibility expires.
+ 		receiveCtx, receiveCancel := context.WithTimeout(context.WithoutCancel(ctx), time.Duration(c.waitSeconds+1)*time.Second)
+ 		out, err := c.client.ReceiveMessage(receiveCtx, &awssqs.ReceiveMessageInput{
+-			QueueUrl:                    &c.queueURL,
+-			MaxNumberOfMessages:         1,
+-			WaitTimeSeconds:             c.waitSeconds,
+-			MessageSystemAttributeNames: []types.MessageSystemAttributeName{types.MessageSystemAttributeNameApproximateReceiveCount},
++			QueueUrl:			&c.queueURL,
++			MaxNumberOfMessages:		1,
++			WaitTimeSeconds:		c.waitSeconds,
++			MessageSystemAttributeNames:	[]types.MessageSystemAttributeName{types.MessageSystemAttributeNameApproximateReceiveCount},
+ 		})
+ 		receiveCancel()
+ 		if err != nil {
+@@ -74,13 +74,13 @@
+ func (c *Consumer) process(ctx context.Context, m types.Message) {
+ 	// Only identifiers are extracted; never log the raw envelope or financial values.
+ 	var ids struct {
+-		MessageID string `json:"messageId"`
+-		Data      struct {
+-			WalletID   string `json:"walletId"`
+-			ProviderID string `json:"providerId"`
+-		} `json:"data"`
++		MessageID	string	`json:"messageId"`
++		Data		struct {
++			WalletID	string	`json:"walletId"`
++			ProviderID	string	`json:"providerId"`
++		}	`json:"data"`
+ 	}
+-	_ = json.Unmarshal([]byte(aws.ToString(m.Body)), &ids)
++	_ = json.Unmarshal([]byte(aws.ToString(m.Body)), |ids)
+ 	scoped := *c
+ 	scoped.log = c.log.With("messageId", ids.MessageID, "correlationId", ids.MessageID, "brokerMessageId", aws.ToString(m.MessageId), "walletId", ids.Data.WalletID, "providerId", ids.Data.ProviderID)
+ 	c = &scoped
+@@ -131,7 +131,7 @@
+ 	ctx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 2*time.Second)
+ 	defer cancel()
+ 	_, err := c.client.ChangeMessageVisibility(ctx, &awssqs.ChangeMessageVisibilityInput{
+-		QueueUrl: &c.queueURL, ReceiptHandle: m.ReceiptHandle, VisibilityTimeout: seconds})
++		QueueUrl:	&c.queueURL, ReceiptHandle: m.ReceiptHandle, VisibilityTimeout: seconds})
+ 	if err != nil {
+ 		c.log.Error("sqs change visibility failed", "err", err)
+ 	}

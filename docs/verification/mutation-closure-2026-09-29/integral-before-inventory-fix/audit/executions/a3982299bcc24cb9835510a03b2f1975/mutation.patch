@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -46,7 +46,7 @@
+ 		}
+ 		rows.Close()
+ 	}
+-	if err != nil {
++	if err == nil {
+ 		return f, err
+ 	}
+ 	if reference != nil {

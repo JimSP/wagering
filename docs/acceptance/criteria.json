@@ -1,0 +1,2322 @@
+{
+  "version": 2,
+  "baseline_zip_sha256": "0c97758924f677c699badcabe6e52848d50cc07b614852b17791c3eafc0b706a",
+  "behaviors": [
+    {
+      "id": "MONEY",
+      "name": "Exatidão e compatibilidade monetária",
+      "tests": [
+        {
+          "name": "TestMoneyPreservesExactValueAcrossArithmeticAndWireFormat",
+          "file": "internal/domain/money/semantics_test.go"
+        },
+        {
+          "name": "TestMoneyRejectsAmbiguousInputAndIncompatibleOperations",
+          "file": "internal/domain/money/semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "WALLET",
+      "name": "História e atomicidade das transições da carteira",
+      "tests": [
+        {
+          "name": "TestWalletOwnsItsBalanceVersionAndHistory",
+          "file": "internal/domain/wallet/semantics_test.go"
+        },
+        {
+          "name": "TestWalletRejectsInvalidMovementsWithoutChangingState",
+          "file": "internal/domain/wallet/semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "LEDGER",
+      "name": "Explicação de cada centavo por lançamentos válidos",
+      "tests": [
+        {
+          "name": "TestLedgerExplainsEveryCentWithoutReapplyingHistory",
+          "file": "internal/domain/wager/ledger_semantics_test.go"
+        },
+        {
+          "name": "TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance",
+          "file": "internal/domain/wager/ledger_semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "TX",
+      "name": "Aceite, terminalidade e reconstrução do histórico",
+      "tests": [
+        {
+          "name": "TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning",
+          "file": "internal/domain/wager/lifecycle_semantics_test.go"
+        },
+        {
+          "name": "TestPendingReferenceRetainsItsDeadlineAcrossRetriesAndRehydration",
+          "file": "internal/domain/wager/lifecycle_semantics_test.go"
+        },
+        {
+          "name": "TestRehydrationRejectsImpossibleHistories",
+          "file": "internal/domain/wager/lifecycle_semantics_test.go"
+        },
+        {
+          "name": "TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies",
+          "file": "internal/domain/wager/lifecycle_semantics_test.go"
+        },
+        {
+          "name": "TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation",
+          "file": "internal/domain/wager/lifecycle_semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "IDENTITY",
+      "name": "Identidade financeira independente do transporte",
+      "tests": [
+        {
+          "name": "TestBusinessIdentityIncludesEveryFinancialFieldInCanonicalOrder",
+          "file": "internal/domain/wager/identity_semantics_test.go"
+        },
+        {
+          "name": "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox",
+          "file": "internal/app/usecase/reference_semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "JOURNEY",
+      "name": "Jornada de saldo, ledger, resultado, eventos e reconciliação",
+      "tests": [
+        {
+          "name": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "REVERSAL",
+      "name": "Reversibilidade integral e rejeição sem efeito financeiro",
+      "tests": [
+        {
+          "name": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        },
+        {
+          "name": "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+          "file": "internal/app/usecase/reference_semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "REFERENCE",
+      "name": "Espera limitada, resolução e expiração",
+      "tests": [
+        {
+          "name": "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+          "file": "internal/app/usecase/journey_semantics_test.go"
+        }
+      ]
+    },
+    {
+      "id": "EVENT",
+      "name": "Fatos tipados e snapshots de integração",
+      "tests": [
+        {
+          "name": "TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots",
+          "file": "internal/domain/event/semantics_test.go"
+        },
+        {
+          "name": "TestEventBoundaryRejectsForgedOrUninitializedFacts",
+          "file": "internal/domain/event/semantics_test.go"
+        },
+        {
+          "name": "TestBalanceEventCannotContradictItsFinancialFact",
+          "file": "internal/domain/event/semantics_test.go"
+        },
+        {
+          "name": "TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot",
+          "file": "internal/domain/event/semantics_test.go"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "E01",
+      "requirement": "Go com versão declarada; Modules e checksums (§4,15)",
+      "acceptance": "Um checkout contém go.mod/go.sum; a versão Go declarada coincide com a imagem de compilação e build/vet terminam sem erro.",
+      "behaviors": [],
+      "additional_evidence": [
+        "BUILD/REVISÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E02",
+      "requirement": "Uber Fx com módulos, construtores, Provide/Invoke (§4)",
+      "acceptance": "A composição Fx resolve os construtores, registra módulos e valida o grafo; startup/stop reais liberam os componentes criados.",
+      "behaviors": [],
+      "additional_evidence": [
+        "BUILD/REVISÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E03",
+      "requirement": "Domínio independente de Fx, HTTP, SQS e persistência (§4,6)",
+      "acceptance": "Os pacotes de domínio não importam Fx, adaptadores HTTP/SQS ou persistência; executam isoladamente sem serviços externos.",
+      "behaviors": [],
+      "additional_evidence": [
+        "BUILD/REVISÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E04",
+      "requirement": "HTTP, PostgreSQL, AWS SQS e Compose (§4)",
+      "acceptance": "Compose inicia API, PostgreSQL, Keycloak e SQS reais; uma operação autenticada chega ao armazenamento e ao broker configurados.",
+      "behaviors": [],
+      "additional_evidence": [
+        "INTEGRAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E05",
+      "requirement": "Migrations versionadas, aplicação e reversão (§4,15)",
+      "acceptance": "Aplicar migrations em banco vazio, reverter e reaplicar termina sem erro e recria constraints, índices, funções e triggers esperados.",
+      "behaviors": [],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E06",
+      "requirement": "Biblioteca SQL, Money e fronteira transacional documentados (§4)",
+      "acceptance": "Todos os repositórios do processamento recebem a mesma transação pgx; o mapeamento BIGINT preserva centavos e a documentação coincide com o código.",
+      "behaviors": [],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E07",
+      "requirement": "Inicialização valida configuração e dependências (§4)",
+      "acceptance": "Configuração inválida ou dependência inicial indisponível impede startup; recursos parcialmente abertos são fechados e o erro é observável.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CICLO DE VIDA REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E08",
+      "requirement": "Cancelamento, prazos e término observável dos workers (§4)",
+      "acceptance": "Ao cancelar workers, eles encerram no prazo, registram término e não deixam operações usando dependências já fechadas.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CICLO DE VIDA REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E09",
+      "requirement": "Parar entradas, concluir/liberar trabalho, fechar recursos depois (§4,10)",
+      "acceptance": "Ao iniciar shutdown, nenhuma entrada nova é buscada/aceita; trabalho em curso conclui ou fica recuperável antes do fechamento de recursos.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CICLO DE VIDA REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E10",
+      "requirement": "IdP externo OAuth/OIDC e client_credentials (§2)",
+      "acceptance": "O IdP provisionado emite access token por client_credentials; a aplicação apenas valida e não emite credenciais próprias.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E11",
+      "requirement": "Validação efetiva de assinatura, issuer, audience, exp (§2)",
+      "acceptance": "Sem token, com token adulterado/expirado ou issuer/audience/algoritmo incorreto, acesso é negado sem efeitos financeiros; token válido funciona.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E12",
+      "requirement": "Identidade determina provider autorizado, inclusive replay (§2,9)",
+      "acceptance": "Provider divergente do token é recusado antes de acesso/replay; consultas de outro provider não expõem resultado nem existência da transação.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "replay"
+      ]
+    },
+    {
+      "id": "E13",
+      "requirement": "Operações de carteira restritas ao serviço interno (§2)",
+      "acceptance": "Provider sem papel interno não abre, lê ou reconcilia carteira nem consulta ledger; internal-service autorizado executa essas operações.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E14",
+      "requirement": "Broker com credenciais e políticas; domínio validado no consumidor (§2,10)",
+      "acceptance": "Broker nega ações não concedidas; só produtor interno confiável publica entrada, e mensagens inválidas continuam sujeitas ao domínio.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E15",
+      "requirement": "Justificar IdP, credenciais e permissões (§2,15)",
+      "acceptance": "A arquitetura identifica issuer, audience, validação de assinatura, papéis, claim providerId, políticas IAM e fronteira de confiança SQS usada.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E16",
+      "requirement": "Endpoints de negócio sem acesso anônimo (§2,14)",
+      "acceptance": "Todas as rotas de negócio retornam 401/403 para acesso não autorizado; somente as rotas públicas documentadas escapam da proteção.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E17",
+      "requirement": "Dinheiro sem float em parsing, cálculo, JSON e banco (§5,6.1)",
+      "acceptance": "Cada quantia mantém valor inteiro exato do parser ao JSON e SQL; nenhum caminho financeiro passa por ponto flutuante.",
+      "behaviors": [
+        "MONEY",
+        "LEDGER",
+        "EVENT"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "money-exact"
+      ]
+    },
+    {
+      "id": "E18",
+      "requirement": "Money imutável com moeda, criação, zero, soma, subtração, negação, comparação e serialização (§6.1)",
+      "acceptance": "Criação, zero, soma, subtração, negação, comparação e JSON preservam moeda/valor e não modificam os operandos.",
+      "behaviors": [
+        "MONEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-exact"
+      ]
+    },
+    {
+      "id": "E19",
+      "requirement": "Escala fixa 2; rejeitar vazios, NaN, Infinity, científico, excesso e negativo externo (§6.1)",
+      "acceptance": "Entradas vazias, NaN, Infinity, expoente, sinal negativo externo ou escala diferente de duas casas falham sem arredondamento nem consumo de chave.",
+      "behaviors": [
+        "MONEY",
+        "IDENTITY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-invalid",
+        "invalid-request"
+      ]
+    },
+    {
+      "id": "E20",
+      "requirement": "Moeda ISO e incompatibilidade entre moedas (§6.1)",
+      "acceptance": "Moeda fora da lista ISO suportada falha; soma/subtração/comparação de moedas distintas retornam erro classificável e não fabricam resultado.",
+      "behaviors": [
+        "MONEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-invalid"
+      ]
+    },
+    {
+      "id": "E21",
+      "requirement": "Overflow no parsing, soma, subtração e negação (§6.1)",
+      "acceptance": "Operação cujo resultado matemático sai de int64 retorna ErrOverflow; extremos representáveis conservam o centavo exato, inclusive na serialização.",
+      "behaviors": [
+        "MONEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-exact"
+      ]
+    },
+    {
+      "id": "E22",
+      "requirement": "Normalização pré-hash e limites documentados (§6.1,9)",
+      "acceptance": "Valores equivalentes aceitos produzem a mesma representação decimal e hash; limites e normalizações são enumerados nos contratos.",
+      "behaviors": [
+        "MONEY",
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "DOCUMENTAÇÃO/ARTEFATOS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "money-exact",
+        "hash"
+      ]
+    },
+    {
+      "id": "E23",
+      "requirement": "Negativos apenas em cálculos internos, não no saldo (§6.1,6.2)",
+      "acceptance": "Diferenças internas negativas são serializáveis; nenhuma criação/transição de carteira aceita saldo negativo.",
+      "behaviors": [
+        "MONEY",
+        "WALLET"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-exact",
+        "wallet-rejection"
+      ]
+    },
+    {
+      "id": "E24",
+      "requirement": "Entidades encapsuladas, criação versus reidratação sem efeitos (§6)",
+      "acceptance": "Criar e reidratar produzem estados válidos; reidratar não muda saldo/versão, não reaplica movimento e não aceita histórico impossível.",
+      "behaviors": [
+        "WALLET",
+        "LEDGER",
+        "TX"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "wallet-history",
+        "ledger-history",
+        "transaction-snapshot"
+      ]
+    },
+    {
+      "id": "E25",
+      "requirement": "Valores inválidos/não inicializados rejeitados nas operações públicas (§6)",
+      "acceptance": "Valores zero-value ou inválidos são recusados nas fronteiras de negócio, inclusive snapshots e eventos, sem mutação parcial do agregado.",
+      "behaviors": [
+        "MONEY",
+        "WALLET",
+        "LEDGER",
+        "TX",
+        "EVENT"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-invalid",
+        "wallet-rejection",
+        "ledger-invalid",
+        "transaction-snapshot",
+        "transaction-time",
+        "event-boundary"
+      ]
+    },
+    {
+      "id": "E26",
+      "requirement": "Erros classificáveis, sem panic para negócio (§6)",
+      "acceptance": "Rejeições retornam erros classificáveis por errors.Is/As; nenhuma entrada de negócio inválida causa panic ou saída abrupta do processo.",
+      "behaviors": [
+        "MONEY",
+        "WALLET",
+        "LEDGER",
+        "TX"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-invalid",
+        "wallet-rejection",
+        "ledger-invalid"
+      ]
+    },
+    {
+      "id": "E27",
+      "requirement": "I/O recebe context e respeita cancelamento/timeout (§6)",
+      "acceptance": "Cancelamento/deadline interrompe operações I/O, inclusive a busca de JWKS; nenhum efeito é reportado como confirmado quando o commit falha.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "CICLO DE VIDA REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "failure"
+      ]
+    },
+    {
+      "id": "E28",
+      "requirement": "Wallet: identidade, jogador, moeda, saldo, versão e timestamps (§6.2)",
+      "acceptance": "A carteira conserva identidade, jogador, moeda, createdAt e saldo; updatedAt acompanha somente transições válidas com tempo não regressivo.",
+      "behaviors": [
+        "WALLET"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "wallet-history"
+      ]
+    },
+    {
+      "id": "E29",
+      "requirement": "Unicidade jogador/moeda; débito não negativo; moeda compatível (§6.2)",
+      "acceptance": "Criar duplicata jogador/moeda conflita; débito excessivo ou moeda incompatível falha sem alterar saldo, versão ou timestamps.",
+      "behaviors": [
+        "WALLET",
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "wallet-rejection",
+        "opening-zero"
+      ]
+    },
+    {
+      "id": "E30",
+      "requirement": "Versão inicial 1; só muda com saldo; sem lost update (§6.2)",
+      "acceptance": "Versão inicia em 1; cada alteração de saldo incrementa uma vez; rejeições/LOSS não incrementam; escritores concorrentes não perdem atualização.",
+      "behaviors": [
+        "WALLET",
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "wallet-history",
+        "journey"
+      ]
+    },
+    {
+      "id": "E31",
+      "requirement": "Metadados completos de operação externa (§6.3)",
+      "acceptance": "A transação externa aceita guarda todos os identificadores de negócio, chave recebida, hash, money, referência, estado e timestamps corretos.",
+      "behaviors": [
+        "TX"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-history"
+      ]
+    },
+    {
+      "id": "E32",
+      "requirement": "Estados e transições validados; terminais imutáveis (§6.3)",
+      "acceptance": "Somente transições legais ocorrem; terminal é irreversível; snapshot com falha/resultado/agendamento incompatível é rejeitado sem efeito.",
+      "behaviors": [
+        "TX"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-history",
+        "transaction-snapshot",
+        "transaction-time"
+      ]
+    },
+    {
+      "id": "E33",
+      "requirement": "Replay terminal lê resultado; não reaplica (§6.3,9)",
+      "acceptance": "Replay de resultado terminal conserva transactionId, status, failureCode e saldo original; não adiciona ledger, evento ou movimento.",
+      "behaviors": [
+        "TX",
+        "IDENTITY",
+        "JOURNEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "replay",
+        "journey"
+      ]
+    },
+    {
+      "id": "E34",
+      "requirement": "PENDING confirmado retomável por outra instância (§6.3)",
+      "acceptance": "Interrupção após qualquer aceite confirmado deixa operação que outra instância consegue reclamar; fluxo síncrono não confirma PENDING isolado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "REVISÃO/INTEGRAÇÃO COMPLEMENTAR"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E35",
+      "requirement": "Distinguir falha transitória de permanente e auditar FAILED (§6.3)",
+      "acceptance": "Falha transitória é retomável; falha permanente de operação já aceita termina FAILED auditável; rollback sem aceite não inventa transação aceita.",
+      "behaviors": [],
+      "additional_evidence": [
+        "REVISÃO/INTEGRAÇÃO COMPLEMENTAR"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E36",
+      "requirement": "OPENING exclusivamente interno, identidade estável, sem metadados externos (§6.3,9)",
+      "acceptance": "OPENING só nasce internamente e positivo, já PROCESSED; não contém metadados externos e não pode creditar a mesma abertura duas vezes.",
+      "behaviors": [
+        "TX",
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "REVISÃO/INTEGRAÇÃO COMPLEMENTAR"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "transaction-opening",
+        "journey",
+        "opening-zero"
+      ]
+    },
+    {
+      "id": "E37",
+      "requirement": "Ledger imutável, campos completos e matemática validada (§6.4)",
+      "acceptance": "Cada lançamento tem identidade, direção, quantia positiva, before/after não negativos e equação exata; reidratação rejeita um centavo divergente.",
+      "behaviors": [
+        "LEDGER"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "ledger-history",
+        "ledger-invalid",
+        "journey"
+      ]
+    },
+    {
+      "id": "E38",
+      "requirement": "Unicidade (walletId,transactionId), proteção UPDATE/DELETE/TRUNCATE (§5,6.4)",
+      "acceptance": "Banco rejeita segundo lançamento para o mesmo wallet/transaction e rejeita UPDATE/DELETE/TRUNCATE do ledger pela aplicação.",
+      "behaviors": [],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E39",
+      "requirement": "LOSS e rejeição sem ledger (§6.4,7)",
+      "acceptance": "LOSS e rejeição não criam lançamento, não alteram saldo/versão e conservam histórico financeiro anterior.",
+      "behaviors": [
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "journey",
+        "business-rejection"
+      ]
+    },
+    {
+      "id": "E40",
+      "requirement": "Saldo, estado, ledger, inbox e outbox atômicos (§5,6.5,11)",
+      "acceptance": "Falha antes do commit reverte saldo/ledger/estado/inbox/eventos juntos; commit os confirma juntos sob conexões reais.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "failure"
+      ]
+    },
+    {
+      "id": "E41",
+      "requirement": "Garantias no DB, sem dependência de locks locais/FIFO (§5)",
+      "acceptance": "Mesmo com três processos e deduplicação FIFO insuficiente, schema/locks impedem saldo negativo, duplicação e saldo sem ledger correspondente.",
+      "behaviors": [],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E42",
+      "requirement": "Idempotência persistente e resistente a restart (§5,9)",
+      "acceptance": "Reiniciar todos os processos não apaga chaves/resultados; repetir operação retorna o resultado anterior sem reaplicação.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E43",
+      "requirement": "Header obrigatório; respeitar chave recebida (§9)",
+      "acceptance": "Header/chave de mensagem ausente é inválido; uma chave recebida não é substituída por chave calculada pelo servidor.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "invalid-request",
+        "message"
+      ]
+    },
+    {
+      "id": "E44",
+      "requirement": "Hash determinístico, JSON com chaves ordenadas e campos de negócio (§9)",
+      "acceptance": "JSON de negócio possui ordem canônica, inclusive money; qualquer mudança de campo financeiro altera hash; metadados/chave ficam excluídos.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "hash"
+      ]
+    },
+    {
+      "id": "E45",
+      "requirement": "Mesmo conteúdo/chave = replay; diferente = conflito (§9)",
+      "acceptance": "Conteúdo equivalente com a mesma chave é replay; alterar conteúdo conflita e conserva integralmente o estado anterior.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "replay"
+      ]
+    },
+    {
+      "id": "E46",
+      "requirement": "Mesmo provider/external com outra chave não reaplica (§9)",
+      "acceptance": "Trocar somente a chave mantendo provider/external não cria novo efeito; retorna conflito conforme a política documentada.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "replay"
+      ]
+    },
+    {
+      "id": "E47",
+      "requirement": "Replay retorna saldo original, mesmo após novas operações (§9)",
+      "acceptance": "Após crédito/débito posterior, replay devolve o saldo do processamento original, nunca o saldo atual da carteira.",
+      "behaviors": [
+        "IDENTITY",
+        "JOURNEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "replay",
+        "journey"
+      ]
+    },
+    {
+      "id": "E48",
+      "requirement": "BET positivo, débito e saldo suficiente (§7)",
+      "acceptance": "BET positivo debita exatamente seu valor se houver saldo; zero/negativo é inválido e insuficiência produz rejeição auditada sem débito.",
+      "behaviors": [
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-opening",
+        "journey",
+        "business-rejection"
+      ]
+    },
+    {
+      "id": "E49",
+      "requirement": "WIN positivo; referência opcional a BET da mesma rodada (§7)",
+      "acceptance": "WIN positivo credita exatamente seu valor; referência opcional só é aceita se for BET processada e compatível com a rodada/identidades.",
+      "behaviors": [
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-opening",
+        "journey",
+        "reference-scope"
+      ]
+    },
+    {
+      "id": "E50",
+      "requirement": "LOSS exatamente zero, moeda correta, sem versão/ledger; evento Processed (§7)",
+      "acceptance": "LOSS zero na moeda da carteira termina PROCESSED, gera apenas Processed e preserva saldo, versão e ledger.",
+      "behaviors": [
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-opening",
+        "journey"
+      ]
+    },
+    {
+      "id": "E51",
+      "requirement": "REFUND integral de BET processada (§7)",
+      "acceptance": "REFUND exige referência obrigatória a BET processada e valor integral; sucesso credita uma vez e resolve a referência interna.",
+      "behaviors": [
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-opening",
+        "journey",
+        "reversal"
+      ]
+    },
+    {
+      "id": "E52",
+      "requirement": "ROLLBACK integral/oposto de BET, WIN ou REFUND processada (§7)",
+      "acceptance": "ROLLBACK inverte integralmente BET, WIN ou REFUND processado; tipos não elegíveis ou valores parciais são rejeitados.",
+      "behaviors": [
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-opening",
+        "reversal"
+      ]
+    },
+    {
+      "id": "E53",
+      "requirement": "Referência por provider/external, concordância de identidades/moeda/rodada (§7)",
+      "acceptance": "Resolução usa provider/external; identidade, carteira, jogador, moeda e rodada devem concordar; autorreferência não é aceita.",
+      "behaviors": [
+        "REVERSAL"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "transaction-time",
+        "business-rejection",
+        "reference-scope"
+      ]
+    },
+    {
+      "id": "E54",
+      "requirement": "Sem duas reversões de mesmo tipo; coerência REFUND + ROLLBACK (§7)",
+      "acceptance": "Duas reversões diretas bem-sucedidas da mesma referência são impossíveis; ambas as ordens REFUND/ROLLBACK preservam a política documentada.",
+      "behaviors": [
+        "REVERSAL"
+      ],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "reversal"
+      ]
+    },
+    {
+      "id": "E55",
+      "requirement": "Insuficiência em reversão auditável e distinta de BET (§7)",
+      "acceptance": "ROLLBACK que debitaria além do disponível retorna REVERSAL_INSUFFICIENT_FUNDS, distinto de INSUFFICIENT_FUNDS de BET, sem ledger.",
+      "behaviors": [
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "business-rejection"
+      ]
+    },
+    {
+      "id": "E56",
+      "requirement": "Referência ausente persistida e retomada com backoff (§7)",
+      "acceptance": "Referência ausente ou ainda pendente produz PENDING_REFERENCE durável sem movimento; nova tentativa pode resolver após sua chegada.",
+      "behaviors": [
+        "TX",
+        "REFERENCE"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "reference-time"
+      ]
+    },
+    {
+      "id": "E57",
+      "requirement": "Máximo de tentativas ou TTL; rejeição/evento ao esgotar (§7)",
+      "acceptance": "Retries avançam nextAttemptAt exponencialmente sem estender expiresAt; máximo de tentativas ou TTL termina REJECTED com REFERENCE_NOT_FOUND e evento.",
+      "behaviors": [
+        "REFERENCE"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "reference-time"
+      ]
+    },
+    {
+      "id": "E58",
+      "requirement": "Referência existente pendente ou terminal sem sucesso (§7)",
+      "acceptance": "Referência PENDING aguarda; referência REJECTED/FAILED termina REFERENCE_NOT_PROCESSED; nenhuma delas é usada para movimentar dinheiro.",
+      "behaviors": [
+        "TX",
+        "REVERSAL",
+        "REFERENCE"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "business-rejection",
+        "reference-scope"
+      ]
+    },
+    {
+      "id": "E59",
+      "requirement": "Códigos estáveis e corrigível versus definitivo (§7,9)",
+      "acceptance": "Entrada corrigível anterior ao aceite não consome chave; rejeição terminal preserva failureCode mesmo se saldo/referência mudar posteriormente.",
+      "behaviors": [
+        "IDENTITY",
+        "JOURNEY",
+        "REVERSAL"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "replay",
+        "invalid-request",
+        "business-rejection"
+      ]
+    },
+    {
+      "id": "E60",
+      "requirement": "Carteiras independentes paralelas; sem lock global (§5,8)",
+      "acceptance": "Lock mantido em carteira A não impede progresso da carteira B em processo independente; não existe serialização global do saldo.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E61",
+      "requirement": "Atualização sem perda e documentação de concorrência (§6.2,8)",
+      "acceptance": "Dois escritores sobre a mesma versão não descartam atualização confirmada; lock/CAS e tratamento de conflito correspondem à arquitetura documentada.",
+      "behaviors": [],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E62",
+      "requirement": "POST /wallets e conflito de jogador/moeda (§9)",
+      "acceptance": "POST /wallets autenticado cria a carteira com resposta 201; repetição jogador/moeda retorna 409 sem novo crédito.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "opening-zero"
+      ]
+    },
+    {
+      "id": "E63",
+      "requirement": "Abertura positiva: OPENING, crédito, dois eventos, versão 1 no mesmo commit (§9)",
+      "acceptance": "Abertura positiva confirma carteira versão 1, OPENING, um crédito desde zero e dois eventos com valores/identidades coerentes no mesmo commit.",
+      "behaviors": [
+        "JOURNEY",
+        "EVENT"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "journey"
+      ]
+    },
+    {
+      "id": "E64",
+      "requirement": "Abertura zero sem OPENING/ledger/eventos financeiros (§9)",
+      "acceptance": "Abertura zero cria só carteira versão 1, sem OPENING, ledger ou eventos financeiros.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "opening-zero"
+      ]
+    },
+    {
+      "id": "E65",
+      "requirement": "GET carteira/ledger/transação por ID interno e por provider/externo (§9)",
+      "acceptance": "As quatro rotas de leitura retornam registros esperados dentro do escopo autorizado e não expõem registros de outro provedor.",
+      "behaviors": [],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E66",
+      "requirement": "Cursor opaco com ordem estável e limite (§9)",
+      "acceptance": "Páginas do ledger seguem ordem estável sem repetir/perder entradas; cursor de outra carteira ou limite inválido é recusado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E67",
+      "requirement": "Status, falha e pendência consultáveis (§9)",
+      "acceptance": "Consultas exibem status/failureCode e agenda quando pendente; resultado concluído conserva o saldo originalmente observado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E68",
+      "requirement": "HTTP diferencia inválido, conflito, rejeitado, pendente e indisponível (§9)",
+      "acceptance": "Contratos distinguem 400, 409, 422, 202, 503, 401/403/404 e 500; indisponibilidade JWKS necessária não é confundida com token inválido.",
+      "behaviors": [],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E69",
+      "requirement": "Reconciliação consistente, inclui abertura, diferença stored-calculated, não altera saldo (§9)",
+      "acceptance": "Reconciliação inclui OPENING, calcula créditos menos débitos e stored-calculated em uma visão consistente; nunca corrige saldo implicitamente.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "journey",
+        "reconcile"
+      ]
+    },
+    {
+      "id": "E70",
+      "requirement": "Divergência na resposta, log e métrica (§9,12)",
+      "acceptance": "Divergência retorna consistent=false e diferença correta, emite log identificável e incrementa métrica sem modificar dados.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "reconcile"
+      ]
+    },
+    {
+      "id": "E71",
+      "requirement": "Health público: live e ready com PostgreSQL/SQS (§9,12)",
+      "acceptance": "Liveness responde com processo vivo; readiness falha se PG ou SQS fica indisponível e volta a passar quando as dependências retornam.",
+      "behaviors": [],
+      "additional_evidence": [
+        "HTTP/POSTGRESQL REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E72",
+      "requirement": "Filas input FIFO, DLQ FIFO e redrive automático (§10)",
+      "acceptance": "Provisionamento cria input/DLQ FIFO e política de redrive; falhas esgotadas realmente aparecem na DLQ sob infraestrutura real.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E73",
+      "requirement": "Envelope, messageId durável e hash em reentrega (§6.5,10)",
+      "acceptance": "Mesmo consumer/messageId com mesmo envelope é redelivery; hash diferente é conflito; não há efeitos adicionais em ambos os casos.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "message"
+      ]
+    },
+    {
+      "id": "E74",
+      "requirement": "Inbox recebimento/conclusão no mesmo commit financeiro (§6.5,10)",
+      "acceptance": "Recebimento e conclusão da inbox compartilham commit com resultado financeiro/pendência, ledger e eventos; rollback não deixa conclusão falsa.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "message",
+        "failure"
+      ]
+    },
+    {
+      "id": "E75",
+      "requirement": "HTTP/SQS mesmo UC e chave de data.idempotencyKey (§10)",
+      "acceptance": "Os dois adaptadores preservam a chave e significado do negócio no mesmo UC; outra mensagem do mesmo negócio não cria nova movimentação.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "message"
+      ]
+    },
+    {
+      "id": "E76",
+      "requirement": "ACK só depois do commit; rejeição confirmada é terminal (§10)",
+      "acceptance": "DeleteMessage só é chamado após tratamento confirmado; rejeição de negócio confirmada permite ACK e não vira retry transitório.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E77",
+      "requirement": "Retry/backoff transitório, poison e tentativas esgotadas na DLQ (§10)",
+      "acceptance": "Falha temporária aplica backoff e redelivery; erro permanente/mensagem inválida ou esgotamento chega à DLQ sem sucesso financeiro inventado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E78",
+      "requirement": "Limites, visibility timeout, invalid messages, group/dedup documentados (§10)",
+      "acceptance": "Timeout de visibilidade, tentativas, tratamento de mensagens inválidas e group/dedup têm valores definidos e coincidem com scripts/consumer.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E79",
+      "requirement": "SIGTERM para buscar e conclui/libera em prazo (§10)",
+      "acceptance": "SIGTERM interrompe novas buscas; mensagem em curso confirma com segurança ou recebe visibilidade útil para reentrega dentro do prazo de shutdown.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CICLO DE VIDA REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E80",
+      "requirement": "Outbox só publica registros confirmados (§5,11)",
+      "acceptance": "Nenhum evento pode ser observado no destino antes do commit que confirmou seu fato financeiro; rollback não produz publicação.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OUTBOX/POSTGRESQL/SQS REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E81",
+      "requirement": "Claim concorrente, lease abandonada, backoff e eventId estável (§11)",
+      "acceptance": "Publishers concorrentes reclamam trabalho com lease/fence; abandonado é retomado, falha é reagendada e todo reenvio conserva eventId.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OUTBOX/POSTGRESQL/SQS REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E82",
+      "requirement": "Destino de saída e contratos de roteamento/consumo (§11)",
+      "acceptance": "Fila de saída provisionada recebe envelope, eventType e group/dedup previstos; consumidor consegue deduplicar eventId persistentemente.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OUTBOX/POSTGRESQL/SQS REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E83",
+      "requirement": "Quatro tipos concretos de eventos e envelope completo (§11)",
+      "acceptance": "Cada um dos quatro eventos contém envelope completo, UTC, versão e data tipado; JSON financeiro usa strings exatas.",
+      "behaviors": [
+        "JOURNEY",
+        "REFERENCE",
+        "EVENT"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "event-wire"
+      ]
+    },
+    {
+      "id": "E84",
+      "requirement": "BalanceChanged inclui direção, money, before/after, walletVersion (§11)",
+      "acceptance": "BalanceChanged reproduz integralmente wallet/transaction, direção, valor, before/after e walletVersion do movimento associado.",
+      "behaviors": [
+        "JOURNEY",
+        "EVENT"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "journey",
+        "event-wire",
+        "event-balance"
+      ]
+    },
+    {
+      "id": "E85",
+      "requirement": "Tipo/versão por construtor e snapshot imutável (§11)",
+      "acceptance": "Evento não aceita tipo/versão forjados ou metadados/valores inválidos; payload confirmado é snapshot independente e imutável no DB.",
+      "behaviors": [
+        "EVENT"
+      ],
+      "additional_evidence": [
+        "OUTBOX/POSTGRESQL/SQS REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "event-wire",
+        "event-boundary",
+        "event-balance",
+        "event-storage"
+      ]
+    },
+    {
+      "id": "E86",
+      "requirement": "Logs JSON com IDs disponíveis, sem credenciais/payload financeiro (§12)",
+      "acceptance": "Logs JSON de sucesso/falha/retry incluem IDs disponíveis da operação/evento sem token, segredo ou corpo financeiro completo.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OBSERVABILIDADE EM EXECUÇÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E87",
+      "requirement": "Métricas de status, duplicata, retries, DLQ, concorrência, lag, latência, divergência (§12)",
+      "acceptance": "Métricas refletem resultados/replays/retries/DLQ/conflitos/lag/latência/divergências observados; não exibem backlog inexistente como atraso atual.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OBSERVABILIDADE EM EXECUÇÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E88",
+      "requirement": "Unitários de Money: parsing, escala, limites, invalidade, moedas (§13)",
+      "acceptance": "Suite Money verifica representação exata, aritmética e comparação em casos normais/extremos e inválidos, usando oráculo independente e erros classificáveis.",
+      "behaviors": [
+        "MONEY"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "money-exact",
+        "money-invalid"
+      ]
+    },
+    {
+      "id": "E89",
+      "requirement": "Unitários das invariantes Wallet, estados e cinco tipos (§13)",
+      "acceptance": "Suite de domínio verifica história completa da carteira/transação, transições rejeitadas sem mutação e semântica dos cinco tipos e referências.",
+      "behaviors": [
+        "WALLET",
+        "LEDGER",
+        "TX",
+        "IDENTITY",
+        "JOURNEY",
+        "REVERSAL",
+        "REFERENCE"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "wallet-history",
+        "wallet-rejection",
+        "transaction-history",
+        "transaction-opening",
+        "journey"
+      ]
+    },
+    {
+      "id": "E90",
+      "requirement": "Unitário conflito payload/chave e abertura/eventos internos (§13)",
+      "acceptance": "Suite verifica conflito/replay e abertura positiva/zero incluindo resultado, metadados internos, ledger e os dois eventos coerentes.",
+      "behaviors": [
+        "TX",
+        "IDENTITY",
+        "JOURNEY",
+        "EVENT"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "hash",
+        "replay",
+        "journey",
+        "opening-zero"
+      ]
+    },
+    {
+      "id": "E91",
+      "requirement": "Integração com PG/IdP/SQS em containers reais (§13)",
+      "acceptance": "Testes de integração usam PG, IdP e SQS em containers reais e falham quando dependências necessárias faltam; nenhum resultado simulado é contado como integração.",
+      "behaviors": [],
+      "additional_evidence": [
+        "INTEGRAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E92",
+      "requirement": "Constraints, imutabilidade, atomicidade, inbox, redelivery (§13)",
+      "acceptance": "Testes reais comprovam constraints, append-only, rollback atômico, inbox e redelivery, incluindo primeira operação inédita via SQS.",
+      "behaviors": [],
+      "additional_evidence": [
+        "INTEGRAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E93",
+      "requirement": "Outbox concorrente, retry, DLQ e reinicialização (§13)",
+      "acceptance": "Testes reais de falha comprovam outbox concorrente, reagendamento, DLQ e retomada após restart, consumindo a saída para verificar seus IDs/payloads.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OUTBOX/POSTGRESQL/SQS REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E94",
+      "requirement": "Testar composição Fx, início/fim e liberação de recursos (§13)",
+      "acceptance": "Teste inicia/encerra Fx com componentes reais, trabalho em curso e pool fechado após workers; não há goroutines/recursos pendentes relevantes.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CICLO DE VIDA REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E95",
+      "requirement": "IdP real: ausente, inválido, expirado; isolamento e internos (§13)",
+      "acceptance": "Tokens reais ausente/inválido/expirado e outro provider são recusados; negativas de todas as operações internas não causam efeitos/exposição.",
+      "behaviors": [],
+      "additional_evidence": [
+        "IDP/IAM/HTTP REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E96",
+      "requirement": "Mesma aposta 50 vezes em paralelo com um débito (§13.1)",
+      "acceptance": "50 submissões paralelas da mesma aposta em três processos geram um único débito e resultados de replay coerentes.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E97",
+      "requirement": "Duas BETs 80 sobre 100: uma aceita, outra rejeitada, saldo 20 (§8,13.2)",
+      "acceptance": "Duas BETs distintas de 80 sobre 100 concorrem: uma PROCESSED, outra REJECTED, saldo 20 e único débito; reenviar não muda resultado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E98",
+      "requirement": "Carteiras distintas avançam em paralelo (§13.3)",
+      "acceptance": "Carteiras diferentes são exercitadas simultaneamente e uma carteira bloqueada não impede confirmação da outra.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E99",
+      "requirement": "Pelo menos três processos, memória/conexões próprias (§8,13.4)",
+      "acceptance": "Cenários executam ao menos três PIDs reais, com pools/memória independentes; falha/race de qualquer filho faz o teste falhar.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E100",
+      "requirement": "Crash consumidor após commit antes do delete (§13.5)",
+      "acceptance": "Matar consumidor após commit e antes de ACK provoca reentrega comprovada e nenhum novo efeito, inclusive para operação inicialmente recebida por SQS.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SQS/IAM REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E101",
+      "requirement": "Dois publishers e recuperação de publicação (§13.6)",
+      "acceptance": "Dois publishers mais crash pós-envio/pré-marcação preservam saída durável e eventId ao recuperar a lease; verificação observa mensagens de saída.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OUTBOX/POSTGRESQL/SQS REAIS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E102",
+      "requirement": "Reversão antes da referência; resolver ou expirar (§13.7)",
+      "acceptance": "REFUND/ROLLBACK antecipado é retomado após chegada da referência ou rejeitado ao esgotar; saldo/ledger/eventos permanecem coerentes.",
+      "behaviors": [
+        "REFERENCE"
+      ],
+      "additional_evidence": [
+        "INTEGRAÇÃO REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "reference-time"
+      ]
+    },
+    {
+      "id": "E103",
+      "requirement": "Reiniciar aplicação preservando idempotência/pendências/consistência (§13.8)",
+      "acceptance": "Reiniciar todas as instâncias preserva replay, agenda e consistência; outra instância conclui o trabalho anteriormente confirmado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E104",
+      "requirement": "Crash após aceite PENDING, se assíncrono (§13.8)",
+      "acceptance": "Se aceite assíncrono PENDING passar a existir, crash entre aceite/execução deve ser retomado; no fluxo atual sem commit intermediário, documentar não aplicabilidade.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONDICIONAL/OPCIONAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E105",
+      "requirement": "Reconciliação final e cenários cruzando HTTP/SQS (§13)",
+      "acceptance": "Ao final dos cenários reais, reconciliar saldo/ledger; disparar mesma operação simultaneamente por HTTP e SQS, não apenas sequencialmente.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "journey"
+      ]
+    },
+    {
+      "id": "E106",
+      "requirement": "Duplicidade deve provar deduplicação da aplicação (§13)",
+      "acceptance": "Testes de duplicidade provam múltiplos recebimentos e deduplicação da aplicação, variando dedup IDs ou ultrapassando a janela FIFO.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E107",
+      "requirement": "Executar go test -race nos testes aplicáveis (§4,13,15)",
+      "acceptance": "Executar go test -race nos testes aplicáveis; resultado só é aprovado se não houver asserções falhas nem race em pai ou filhos.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONCORRÊNCIA/RECUPERAÇÃO REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E108",
+      "requirement": "README: requisitos, env, filas, migrations up/down, execução, exemplos e testes (§15)",
+      "acceptance": "README permite preparar checkout limpo, variáveis, filas, migrations up/down, aplicação, autenticação, exemplos e testes com pré-requisitos explícitos.",
+      "behaviors": [],
+      "additional_evidence": [
+        "DOCUMENTAÇÃO/ARTEFATOS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E109",
+      "requirement": ".env.example sem segredos reais; IdP/identidades de teste automáticos (§15)",
+      "acceptance": "Exemplos contêm apenas credenciais locais fictícias; IdP/usuários são provisionados automaticamente e nenhum segredo real entra no pacote.",
+      "behaviors": [],
+      "additional_evidence": [
+        "DOCUMENTAÇÃO/ARTEFATOS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E110",
+      "requirement": "ARCHITECTURE: dinheiro, transações, locks, refs, reversões, inbox/outbox, auth/Fx/shutdown e limitações (§15)",
+      "acceptance": "ARCHITECTURE descreve decisões e limites reais, incluindo falhas ainda abertas e distinção entre teste escrito, compilado e executado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "DOCUMENTAÇÃO/ARTEFATOS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E111",
+      "requirement": "Comandos Compose, test, race, vet e integração/falhas separados (§15)",
+      "acceptance": "Os comandos documentados existem, são executáveis e preservam código de saída; preparação de integração e simulações de falha são separadas dos unitários.",
+      "behaviors": [],
+      "additional_evidence": [
+        "DOCUMENTAÇÃO/ARTEFATOS"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E112",
+      "requirement": "gofmt e dependências reproduzíveis (§15)",
+      "acceptance": "Todo Go está formatado, módulos/checksums disponíveis e build reproduzível sob versão declarada; ZIP não contém caches ou credenciais reais.",
+      "behaviors": [],
+      "additional_evidence": [
+        "BUILD/REVISÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "E113",
+      "requirement": "Diferenciais: partidas dobradas, tracing, dashboards e carga (§14)",
+      "acceptance": "Tracing, dashboards, partidas dobradas e carga permanecem opcionais; se carga for entregue, apresentar ambiente/metodologia/throughput/percentis/erros/lag.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CONDICIONAL/OPCIONAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I01",
+      "requirement": "Resposta perdida após commit",
+      "acceptance": "Reenviar mesma chave após perda da resposta recupera resultado original sem efeito extra.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "FALHA HTTP/COMMIT REAL"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "replay"
+      ]
+    },
+    {
+      "id": "I02",
+      "requirement": "ACK separado de commit",
+      "acceptance": "Crash entre commit e delete causa reentrega segura; a inbox permanece concluída.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "SQS/POSTGRESQL REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "message"
+      ]
+    },
+    {
+      "id": "I03",
+      "requirement": "Autorização anterior ao replay",
+      "acceptance": "Outro provider é negado antes do acesso ao resultado; teste verifica ausência de chamada ao UoW.",
+      "behaviors": [
+        "IDENTITY"
+      ],
+      "additional_evidence": [
+        "IDP/HTTP REAIS"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "replay"
+      ]
+    },
+    {
+      "id": "I04",
+      "requirement": "Reidratação/construtores coerentes",
+      "acceptance": "Nenhum snapshot/evento inválido atravessa a fronteira; recusa não modifica estado.",
+      "behaviors": [
+        "TX",
+        "EVENT"
+      ],
+      "additional_evidence": [],
+      "scope": "UNIDADE",
+      "unit_claims": [
+        "transaction-snapshot",
+        "event-boundary",
+        "event-storage"
+      ]
+    },
+    {
+      "id": "I05",
+      "requirement": "Contexto OIDC",
+      "acceptance": "JWKS necessário respeita cancelamento/deadline de cada requisição e não valida token sem chave.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OIDC COM FALHA CONTROLADA"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I06",
+      "requirement": "Dependência inicial validada",
+      "acceptance": "Startup falha quando JWKS essencial está indisponível e libera recursos já abertos.",
+      "behaviors": [],
+      "additional_evidence": [
+        "CICLO DE VIDA/OIDC"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I07",
+      "requirement": "Orçamento de shutdown",
+      "acceptance": "Parada de entradas é imediata; drain e cleanup cabem no orçamento Fx/Compose e não reutilizam contexto expirado.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SIGTERM REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I08",
+      "requirement": "Fence da outbox",
+      "acceptance": "Dono antigo de lease não marca como publicado o trabalho de nova tentativa.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OUTBOX CONCORRENTE REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I09",
+      "requirement": "Deduplicação downstream",
+      "acceptance": "Consumidor de teste recebe eventId repetido e aplica seu efeito uma vez; contrato exige deduplicação persistente.",
+      "behaviors": [],
+      "additional_evidence": [
+        "SQS/CONSUMIDOR REAL"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I10",
+      "requirement": "Conflito transitório",
+      "acceptance": "Deadlock/serialization/lock conflict é classificado e observado como retry, não rejeição financeira terminal.",
+      "behaviors": [],
+      "additional_evidence": [
+        "POSTGRESQL/OBSERVABILIDADE"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I11",
+      "requirement": "Visão consistente da reconciliação",
+      "acceptance": "Saldo e soma do ledger são lidos sob o mesmo snapshot mesmo durante escrituras concorrentes.",
+      "behaviors": [
+        "JOURNEY"
+      ],
+      "additional_evidence": [
+        "POSTGRESQL CONCORRENTE"
+      ],
+      "scope": "MISTO",
+      "unit_claims": [
+        "reconcile"
+      ]
+    },
+    {
+      "id": "I12",
+      "requirement": "Race multiprocesso",
+      "acceptance": "Race ou exit inesperado de qualquer filho torna o comando de teste não zero; exits dos failpoints são separados.",
+      "behaviors": [],
+      "additional_evidence": [
+        "HARNESS MULTIPROCESSO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I13",
+      "requirement": "Pré-requisitos explícitos",
+      "acceptance": "Documentos declaram licença/token e distinguem testes escritos/executados, com comandos reproduzíveis.",
+      "behaviors": [],
+      "additional_evidence": [
+        "DOCUMENTAÇÃO"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I14",
+      "requirement": "Defesa em profundidade (recomendação)",
+      "acceptance": "Container de worker só recebe seu perfil; contexto do Docker exclui .env/credenciais e caches.",
+      "behaviors": [],
+      "additional_evidence": [
+        "REVISÃO DE DEPLOY"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    },
+    {
+      "id": "I15",
+      "requirement": "Operação (recomendação)",
+      "acceptance": "Morte de worker/servidor é observável e /metrics tem acesso restrito pela rede de operação conforme a política.",
+      "behaviors": [],
+      "additional_evidence": [
+        "OPERAÇÃO/OBSERVABILIDADE"
+      ],
+      "scope": "EXTERNO",
+      "unit_claims": []
+    }
+  ],
+  "backlog": [
+    {
+      "id": "B01",
+      "priority": "P1 — código de domínio",
+      "work": "Fortalecer Rehydrate por estado/origem; exigir referência interna em PROCESSED quando aplicável; proibir resultado/falha em PENDING; validar resultado da abertura; impedir timestamp de espera anterior ao estado atual; revisar agendas e campos incompatíveis.",
+      "acceptance": "Os quatro experimentos passam a rejeitar; testes unitários negativos e round-trip de snapshots válidos; transições recusadas não alteram estado."
+    },
+    {
+      "id": "B02",
+      "priority": "P2 — API de domínio/eventos",
+      "work": "Impedir bypass de tipo/versão e mutação indevida do snapshot; validar metadados e Money ao criar eventos. Rever conversão de Money zero-value em DTO para não mascarar objeto inválido.",
+      "acceptance": "Chamadores não produzem evento aceito com tipo/versão inválidos; cópias não alteram payload já construído; testes de contratos dos quatro eventos."
+    },
+    {
+      "id": "B03",
+      "priority": "P1 — inicialização OIDC",
+      "work": "Configurar primeira obtenção JWKS para retornar erro, ou fazer validação explícita equivalente sob contexto de startup; alinhar documentação.",
+      "acceptance": "Endpoint JWKS indisponível/malformado impede início conforme política; dependências já abertas são liberadas; startup válido continua funcionando."
+    },
+    {
+      "id": "B04",
+      "priority": "P1 — contexto e erros OIDC",
+      "work": "Passar context.Context a Verify e KeyfuncCtx; limitar espera/fetch; distinguir erro de credencial de indisponibilidade de chaves sem aceitar token não verificado.",
+      "acceptance": "Cancelamento de requisição encerra validação; chave conhecida em cache funciona conforme política; token inválido = 401, busca necessária temporariamente indisponível = 503."
+    },
+    {
+      "id": "B05",
+      "priority": "P1 — shutdown/ciclo de vida",
+      "work": "Sinalizar parada de novas entradas de todos os componentes no início do shutdown; coordenar orçamento comum; usar contexto de cleanup limitado, mas ainda válido, para visibilidade; alinhar Compose/Fx/timeouts.",
+      "acceptance": "Teste SIGTERM com operação em andamento termina dentro do prazo; commit é reconhecido ou mensagem é liberada/recuperável; nenhum worker usa pool já fechado."
+    },
+    {
+      "id": "B06",
+      "priority": "P2 — logs",
+      "work": "Propagar IDs disponíveis aos logs de erro/retry/referência/publicação; usar eventId na saída e extrair IDs do envelope quando já decodificado; não registrar corpo/segredo.",
+      "acceptance": "Uma operação pode ser acompanhada do recebimento à publicação também no caminho de falha; teste do logger confirma campos e ausência de segredos."
+    },
+    {
+      "id": "B07",
+      "priority": "P2 — métricas",
+      "work": "Distinguir recebimento de poison no limiar de redrive de mensagens efetivas na DLQ; cobrir retries transitórios e conflitos SQL; definir lag atual da outbox e zerar/atualizar quando apropriado; esclarecer se status conta submissões/replays ou operações.",
+      "acceptance": "Nomes/help/documentação refletem o que medem; cenários relevantes alteram as métricas esperadas e não deixam lag obsoleto sem backlog. Pode usar métrica do broker para DLQ real."
+    },
+    {
+      "id": "B08",
+      "priority": "P1 — unitários obrigatórios",
+      "work": "Adicionar testes de ledger, reidratação válida/inválida, carteira crédito/overflow/zero/versão; completar operações Money e canonização; abertura positiva/zero e seus eventos.",
+      "acceptance": "Cada regra explicitamente pedida tem asserção de resultado/erro e ausência de efeitos indevidos; go test e -race aprovados."
+    },
+    {
+      "id": "B09",
+      "priority": "P1 — regras e referências",
+      "work": "Completar matriz BET/WIN/LOSS/REFUND/ROLLBACK: rollback bem-sucedido de BET/WIN/REFUND; valor parcial, tipo inválido, moeda/jogador/carteira/rodada divergentes, autorreferência, referência rejeitada/falha, competição refund/rollback.",
+      "acceptance": "Cada rejeição tem failureCode correto; sucesso tem direção/valor/versão/ledger/eventos corretos; reversões concorrentes não devolvem duas vezes o débito."
+    },
+    {
+      "id": "B10",
+      "priority": "P1 — HTTP/SQS e autorização",
+      "work": "Disparar a mesma operação simultaneamente pelos dois canais; operação inédita primeiro por SQS; rejeição de negócio com inbox e ACK; negativas de todos os endpoints internos; OPENING externo nos dois transportes.",
+      "acceptance": "Um único efeito financeiro e inbox durável; rejeição não redirigida desnecessariamente à DLQ; nenhum acesso negado cria estado/ledger/outbox ou expõe transação alheia."
+    },
+    {
+      "id": "B11",
+      "priority": "P1 — indisponibilidade/retry/DLQ",
+      "work": "Escrever cenários de interrupção e retorno de PG/SQS, falha de publicação, backoff e esgotamento; verificar pending reference com max attempts e referência que permanece pendente.",
+      "acceptance": "Falhas transitórias não são sucesso; trabalho confirmado continua recuperável; mensagem esgotada chega à DLQ; pendência termina com código/evento previsto."
+    },
+    {
+      "id": "B12",
+      "priority": "P1 — recuperação distribuída/outbox",
+      "work": "Reiniciar todas as instâncias para repetir chaves e retomar pendências; observar eventos reais na fila de saída e validar eventId/envelope em retry; ampliar janelas pré/pós-commit e ausência de perda entre commit e publicação.",
+      "acceptance": "Saldos e ledger reconciliam após restart geral; IDs de evento são estáveis; nenhum registro confirmado é perdido. Explicar supressão FIFO e, se necessário, testar consumidor por eventId fora dela."
+    },
+    {
+      "id": "B13",
+      "priority": "P1 — harness/scripts",
+      "work": "Verificar exit status/logs dos processos filhos, inclusive race detector; separar exits esperados dos failpoints; usar SIGTERM nos testes de shutdown; falhar ao exceder prazo em vez de aceitar kill silencioso.",
+      "acceptance": "Uma race ou queda inesperada em filho torna o teste vermelho; failpoints esperados continuam verificáveis; teste não mascara shutdown incompleto."
+    },
+    {
+      "id": "B14",
+      "priority": "P2 — documentação e pacote",
+      "work": "Atualizar ARCHITECTURE/VERIFICATION com esta matriz, fronteira SQS, semântica das métricas e verificações realmente executadas; corrigir alegações sobre JWKS/reidratação; regenerar ZIP após as correções.",
+      "acceptance": "Documentos distinguem implementado/escrito/executado; comandos de checkout limpo e requisitos externos são precisos; artefato final tem hash e lista de pendências remanescentes."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D01",
+      "acceptance": "Publicação SQS direta por provedores só é aceita se houver vínculo verificável produtor/provider; no desenho atual registrar que ingress é serviço interno confiável, sem prometer isolamento por corpo JSON."
+    },
+    {
+      "id": "D02",
+      "acceptance": "As escolhas permitidas (moedas suportadas, ledger simples, sem ordem global, política de reversão e hash de envelope por bytes) permanecem documentadas e coerentes com testes/contrato."
+    }
+  ],
+  "corrected_from_zip_sha256": "3e3a9b247552521fa9f2d7e65cb7b43dc10d1af029587a88b32dcef23f01732a",
+  "unit_claims": [
+    {
+      "id": "money-exact",
+      "test": {
+        "name": "TestMoneyPreservesExactValueAcrossArithmeticAndWireFormat",
+        "file": "internal/domain/money/semantics_test.go"
+      },
+      "observation": "Representação, operações e JSON exatos confrontados com math/big.Int; operandos preservados.",
+      "items": [
+        "E17",
+        "E18",
+        "E21",
+        "E22",
+        "E23",
+        "E88"
+      ]
+    },
+    {
+      "id": "money-invalid",
+      "test": {
+        "name": "TestMoneyRejectsAmbiguousInputAndIncompatibleOperations",
+        "file": "internal/domain/money/semantics_test.go"
+      },
+      "observation": "Parsing inválido e operações entre moedas incompatíveis retornam erros classificáveis.",
+      "items": [
+        "E19",
+        "E20",
+        "E25",
+        "E26",
+        "E88"
+      ]
+    },
+    {
+      "id": "wallet-history",
+      "test": {
+        "name": "TestWalletOwnsItsBalanceVersionAndHistory",
+        "file": "internal/domain/wallet/semantics_test.go"
+      },
+      "observation": "Saldos, versão e timestamps explícitos a cada débito/crédito; reidratação sem movimento.",
+      "items": [
+        "E24",
+        "E28",
+        "E30",
+        "E89"
+      ]
+    },
+    {
+      "id": "wallet-rejection",
+      "test": {
+        "name": "TestWalletRejectsInvalidMovementsWithoutChangingState",
+        "file": "internal/domain/wallet/semantics_test.go"
+      },
+      "observation": "Débito excessivo, moeda, valor, tempo e overflow recusados sem alteração de estado.",
+      "items": [
+        "E23",
+        "E25",
+        "E26",
+        "E29",
+        "E89"
+      ]
+    },
+    {
+      "id": "ledger-history",
+      "test": {
+        "name": "TestLedgerExplainsEveryCentWithoutReapplyingHistory",
+        "file": "internal/domain/wager/ledger_semantics_test.go"
+      },
+      "observation": "Equação before/after e identidade preservadas; after inválido recusado ao reidratar.",
+      "items": [
+        "E24",
+        "E37"
+      ]
+    },
+    {
+      "id": "ledger-invalid",
+      "test": {
+        "name": "TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance",
+        "file": "internal/domain/wager/ledger_semantics_test.go"
+      },
+      "observation": "Lançamentos inválidos recusados com erros esperados.",
+      "items": [
+        "E25",
+        "E26",
+        "E37"
+      ]
+    },
+    {
+      "id": "transaction-history",
+      "test": {
+        "name": "TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning",
+        "file": "internal/domain/wager/lifecycle_semantics_test.go"
+      },
+      "observation": "Aceite preserva metadados; as cinco ações recusadas para PROCESSED, REJECTED e FAILED.",
+      "items": [
+        "E31",
+        "E32",
+        "E89"
+      ]
+    },
+    {
+      "id": "transaction-snapshot",
+      "test": {
+        "name": "TestRehydrationRejectsImpossibleHistories",
+        "file": "internal/domain/wager/lifecycle_semantics_test.go"
+      },
+      "observation": "Snapshots com resultado, falha, referência ou agenda impossíveis são recusados.",
+      "items": [
+        "E24",
+        "E25",
+        "E32",
+        "I04"
+      ]
+    },
+    {
+      "id": "transaction-opening",
+      "test": {
+        "name": "TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies",
+        "file": "internal/domain/wager/lifecycle_semantics_test.go"
+      },
+      "observation": "OPENING interno positivo; tabela de quantias negativas, zero e positivas por tipo externo.",
+      "items": [
+        "E36",
+        "E48",
+        "E49",
+        "E50",
+        "E51",
+        "E52",
+        "E89"
+      ]
+    },
+    {
+      "id": "transaction-time",
+      "test": {
+        "name": "TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation",
+        "file": "internal/domain/wager/lifecycle_semantics_test.go"
+      },
+      "observation": "Tempo regressivo, autorreferência, troca de referência e contador esgotado não alteram o estado.",
+      "items": [
+        "E25",
+        "E32",
+        "E53"
+      ]
+    },
+    {
+      "id": "hash",
+      "test": {
+        "name": "TestBusinessIdentityIncludesEveryFinancialFieldInCanonicalOrder",
+        "file": "internal/domain/wager/identity_semantics_test.go"
+      },
+      "observation": "SHA256 de JSON literal ordenado, com/sem referência; cada campo altera a identidade.",
+      "items": [
+        "E22",
+        "E44",
+        "E90"
+      ]
+    },
+    {
+      "id": "replay",
+      "test": {
+        "name": "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Conflito preserva estado; replay conserva resultado; provider divergente não acessa UoW.",
+      "items": [
+        "E12",
+        "E33",
+        "E45",
+        "E46",
+        "E47",
+        "E59",
+        "E90",
+        "I01",
+        "I03"
+      ]
+    },
+    {
+      "id": "invalid-request",
+      "test": {
+        "name": "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Entrada inválida não consome chave; correção posterior é aceita no mesmo tipo de entrada.",
+      "items": [
+        "E19",
+        "E43",
+        "E59"
+      ]
+    },
+    {
+      "id": "message",
+      "test": {
+        "name": "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox",
+        "file": "internal/app/usecase/reference_semantics_test.go"
+      },
+      "observation": "Chave SQS opaca é preservada; inbox concluída; reentrega e replay via UC HTTP não movem dinheiro.",
+      "items": [
+        "E43",
+        "E73",
+        "E74",
+        "E75",
+        "I02"
+      ]
+    },
+    {
+      "id": "journey",
+      "test": {
+        "name": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Abertura e cinco tipos conferidos contra saldo/versão explícitos, ledger ligado à transação, resultado, eventos e cronologia.",
+      "items": [
+        "E30",
+        "E33",
+        "E36",
+        "E37",
+        "E39",
+        "E47",
+        "E48",
+        "E49",
+        "E50",
+        "E51",
+        "E63",
+        "E69",
+        "E84",
+        "E89",
+        "E90",
+        "E105"
+      ]
+    },
+    {
+      "id": "opening-zero",
+      "test": {
+        "name": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Abertura zero sem fatos financeiros; abertura repetida conflita sem mutação.",
+      "items": [
+        "E29",
+        "E36",
+        "E62",
+        "E64",
+        "E90"
+      ]
+    },
+    {
+      "id": "failure",
+      "test": {
+        "name": "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Erros nas cinco portas não confirmam a UoW em memória; retry termina uma vez e reentrega é replay.",
+      "items": [
+        "E27",
+        "E40",
+        "E74"
+      ]
+    },
+    {
+      "id": "reconcile",
+      "test": {
+        "name": "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Corrupção deliberada do read model retorna diferença -1.00 e incrementa métrica sem reparar saldo.",
+      "items": [
+        "E69",
+        "E70",
+        "I11"
+      ]
+    },
+    {
+      "id": "reversal",
+      "test": {
+        "name": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Rollback dos três tipos tem saldo/direção/versão esperados; duas ordens de reversão recusam devolução duplicada.",
+      "items": [
+        "E51",
+        "E52",
+        "E54"
+      ]
+    },
+    {
+      "id": "business-rejection",
+      "test": {
+        "name": "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Rejeições por saldo, referência e moeda não alteram carteira/ledger; evento e replay guardam failureCode.",
+      "items": [
+        "E39",
+        "E48",
+        "E53",
+        "E55",
+        "E58",
+        "E59"
+      ]
+    },
+    {
+      "id": "reference-scope",
+      "test": {
+        "name": "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+        "file": "internal/app/usecase/reference_semantics_test.go"
+      },
+      "observation": "Provider/carteira incompatíveis, referência pendente/FAILED, WIN referenciado e overflow de crédito.",
+      "items": [
+        "E49",
+        "E53",
+        "E58"
+      ]
+    },
+    {
+      "id": "reference-time",
+      "test": {
+        "name": "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+        "file": "internal/app/usecase/journey_semantics_test.go"
+      },
+      "observation": "Agenda explícita 1/3/7/15/31/63/127/191s; sem retry prematuro; resolução ou rejeição por tentativas/TTL com eventos.",
+      "items": [
+        "E56",
+        "E57",
+        "E102"
+      ]
+    },
+    {
+      "id": "event-wire",
+      "test": {
+        "name": "TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots",
+        "file": "internal/domain/event/semantics_test.go"
+      },
+      "observation": "JSON esperado dos quatro eventos; payload defensivo; reidratação preserva snapshot e tentativas.",
+      "items": [
+        "E83",
+        "E84",
+        "E85"
+      ]
+    },
+    {
+      "id": "event-boundary",
+      "test": {
+        "name": "TestEventBoundaryRejectsForgedOrUninitializedFacts",
+        "file": "internal/domain/event/semantics_test.go"
+      },
+      "observation": "Metadados, tipo, versão e Money inválidos recusados com ErrInvalidEvent.",
+      "items": [
+        "E25",
+        "E85",
+        "I04"
+      ]
+    },
+    {
+      "id": "event-balance",
+      "test": {
+        "name": "TestBalanceEventCannotContradictItsFinancialFact",
+        "file": "internal/domain/event/semantics_test.go"
+      },
+      "observation": "Saldo inventado, moedas, movimento zero, direção, versão e identidade contraditórios recusados.",
+      "items": [
+        "E84",
+        "E85"
+      ]
+    },
+    {
+      "id": "event-storage",
+      "test": {
+        "name": "TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot",
+        "file": "internal/domain/event/semantics_test.go"
+      },
+      "observation": "Metadados de armazenamento divergentes do envelope recusados na reidratação.",
+      "items": [
+        "E85",
+        "I04"
+      ]
+    }
+  ]
+}

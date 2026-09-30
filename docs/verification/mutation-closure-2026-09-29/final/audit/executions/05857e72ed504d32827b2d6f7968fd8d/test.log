@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	13.257s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	15.858s
+ok  	github.com/alexandre/wagering/internal/domain/event	13.613s
+ok  	github.com/alexandre/wagering/internal/domain/money	14.471s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	15.001s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/counterparty_newer_than_command (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:0 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:200 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:true ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.880s
+--- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState (0.00s)
+    --- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState/backwards_time (0.00s)
+        semantics_test.go:94: rejection mutated state or wrong error <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	13.479s
+ok  	github.com/alexandre/wagering/internal/infra/auth	14.186s
+ok  	github.com/alexandre/wagering/internal/infra/config	15.240s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	14.772s
+FAIL

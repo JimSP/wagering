@@ -1,0 +1,14 @@
+--- original/cmd/wagering/app.go
++++ mutant/cmd/wagering/app.go
+@@ -25,9 +25,9 @@
+ // Workers are enabled per instance via ROLES (api, sqs-consumer, outbox-publisher, reference-worker).
+ func Options() []fx.Option {
+ 	return []fx.Option{
+-		fx.StopTimeout(30 * time.Second), // keep >= SHUTDOWN_TIMEOUT
++		fx.StopTimeout(30 * time.Second),	// keep >= SHUTDOWN_TIMEOUT
+ 		fx.Provide(config.Load, logging.New, worker.NewGroup),
+-		fx.WithLogger(func(log *slog.Logger) fxevent.Logger { return &fxevent.SlogLogger{Logger: log} }),
++		fx.WithLogger(func(log *slog.Logger) fxevent.Logger { return |fxevent.SlogLogger{Logger: log} }),
+ 		sys.Module, metrics.Module, postgres.Module, auth.Module,
+ 		usecase.Module, sqs.Module, outbox.Module, reference.Module, httpapi.Module,
+ 		fx.Invoke((*worker.Group).Install),

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.932s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:15:31 INFO transaction handled correlationId="" messageId="" transactionId=20ef5839-e38a-4449-800b-3c5522e69cf6 walletId=953fb6b4-cb30-44f2-b8f1-29de303de017 providerId=p status=PROCESSED
+2026/09/29 22:15:31 WARN transaction handling failed correlationId="" messageId="" transactionId=8999c985-bbb8-4684-b0f3-c60f66c00710 walletId=953fb6b4-cb30-44f2-b8f1-29de303de017 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: failure code required"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.853s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.923s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.311s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.046s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.870s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.189s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.342s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.199s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.403s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.872s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.849s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.831s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.836s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.761s
+FAIL

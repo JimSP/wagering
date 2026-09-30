@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.677s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:57 INFO transaction handled correlationId="" messageId="" transactionId=2ce993f8-7ce6-41e4-a55c-69643ca3efb4 walletId=847b423a-6c6d-47ce-9adf-836e439d3707 providerId=p status=PROCESSED
+2026/09/30 01:22:57 WARN transaction handling failed correlationId="" messageId="" transactionId=711f87c2-1765-4f34-a2d5-a09ccbad54c5 walletId=847b423a-6c6d-47ce-9adf-836e439d3707 providerId=p transient=false
+--- FAIL: TestReversalsUndoOnlyEligibleUnreversedMovements (0.00s)
+    --- FAIL: TestReversalsUndoOnlyEligibleUnreversedMovements/WIN (0.00s)
+        journey_semantics_test.go:130: BET result={TransactionID:00000000-0000-4000-8000-000000000017 Status:REJECTED Balance:<nil> FailureCode:INVALID_REFERENCE_KIND IdempotentReplay:false}; want status=PROCESSED failure= replay=false
+        journey_semantics_test.go:130: persisted BET={CorrelationID:correlation CausationID: ID:00000000-0000-4000-8000-000000000017 Origin:EXTERNAL ProviderID:p ExternalID:undo IdempotencyKey:key:undo PayloadHash:92e6457cf4f2ff4a2c35bd94c8c78571f66b95e1aa17e6da34b533e28d9409b4 WalletID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 RoundID:round GameID:game Kind:ROLLBACK Amount:{minor:2000 currency:BRL} ReferenceExternalID:original ReferenceID: Status:REJECTED FailureCode:INVALID_REFERENCE_KIND BalanceAfter:<nil> Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:01 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} exists=true
+        journey_semantics_test.go:130: operational accounts=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:0 currency:BRL} Version:3 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:2000 currency:BRL} Version:4 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]
+        journey_semantics_test.go:130: exclusive guarantees=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000003 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:10000 currency:BRL} Version:3 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000006 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:100000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000003 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:8000 currency:BRL} Version:4 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000006 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:100000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]
+        journey_semantics_test.go:130: BET postings=0; want exactly 2
+        journey_semantics_test.go:130: events=1; want 2
+        journey_semantics_test.go:130: outcome event={EventID:00000000-0000-4000-8000-000000000018 EventType:WagerTransactionRejected AggregateID:00000000-0000-4000-8000-000000000002 CorrelationID:correlation CausationID: OccurredAt:2026-09-28 12:00:01 +0000 UTC Version:1 Data:{TransactionID:00000000-0000-4000-8000-000000000017 Kind:ROLLBACK WalletID:00000000-0000-4000-8000-000000000002 PlayerID: ProviderID:p ExternalTransactionID:undo RoundID: FailureCode:INVALID_REFERENCE_KIND Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:0 NextAttemptAt:0001-01-01 00:00:00 +0000 UTC ExpiresAt:0001-01-01 00:00:00 +0000 UTC}}; want WagerTransactionProcessed
+        journey_semantics_test.go:130: processed event lost financial identity: {EventID:00000000-0000-4000-8000-000000000018 EventType:WagerTransactionRejected AggregateID:00000000-0000-4000-8000-000000000002 CorrelationID:correlation CausationID: OccurredAt:2026-09-28 12:00:01 +0000 UTC Version:1 Data:{TransactionID:00000000-0000-4000-8000-000000000017 Kind:ROLLBACK WalletID:00000000-0000-4000-8000-000000000002 PlayerID: ProviderID:p ExternalTransactionID:undo RoundID: FailureCode:INVALID_REFERENCE_KIND Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:0 NextAttemptAt:0001-01-01 00:00:00 +0000 UTC ExpiresAt:0001-01-01 00:00:00 +0000 UTC}}
+        journey_semantics_test.go:130: outcomes=1 changed accounts=map[]; want one outcome and 1 account events
+        journey_semantics_test.go:132: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.787s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.556s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.432s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.826s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure:INVALID_REFERENCE_KIND Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.170s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.922s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.704s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.307s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.223s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.331s
+FAIL

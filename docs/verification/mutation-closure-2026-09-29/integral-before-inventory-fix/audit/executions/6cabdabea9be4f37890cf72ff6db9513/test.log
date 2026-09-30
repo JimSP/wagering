@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.296s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:07:33 INFO transaction handled correlationId="" messageId="" transactionId=15e6d396-73c9-459d-8a99-012c5d88f4b8 walletId=46f1036b-c011-46cc-8465-8b576cea3e0d providerId=p status=PROCESSED
+2026/09/30 00:07:33 WARN transaction handling failed correlationId="" messageId="" transactionId=693c984c-617d-4e66-a18a-dd2a8c60fd4f walletId=46f1036b-c011-46cc-8465-8b576cea3e0d providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000009","status":"REJECTED","failureCode":"INSUFFICIENT_FUNDS","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.357s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.257s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.948s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.515s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.824s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.189s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.427s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.765s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.089s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.426s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.382s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.917s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.105s
+FAIL

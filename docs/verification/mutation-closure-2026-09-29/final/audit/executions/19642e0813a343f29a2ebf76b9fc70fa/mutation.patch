@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -51,7 +51,7 @@
+ 		sql += ` ON CONFLICT DO NOTHING`
+ 	}
+ 	tag, err := r.q.Exec(ctx, sql, s.ID, s.Origin, s.ProviderID, s.ExternalID, s.IdempotencyKey, s.PayloadHash, s.WalletID, s.PlayerID, s.RoundID, s.GameID, s.Kind, s.Amount.Minor(), s.Amount.Currency(), s.ReferenceExternalID, s.ReferenceID, s.Status, s.FailureCode, balance, s.Attempts, s.NextAttemptAt, s.ExpiresAt, s.CreatedAt, s.UpdatedAt, s.CorrelationID, s.CausationID)
+-	return tag.RowsAffected() == 1, err
++	return tag.RowsAffected() != 1, err
+ }
+ func (r transactionRepo) Insert(ctx context.Context, t *wager.Transaction) error {
+ 	_, err := r.insert(ctx, t, false)

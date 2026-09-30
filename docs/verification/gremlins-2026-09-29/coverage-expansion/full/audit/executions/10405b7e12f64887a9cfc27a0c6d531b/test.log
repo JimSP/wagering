@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.312s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:09:42 INFO transaction handled correlationId="" messageId="" transactionId=39ec35c9-9b07-468d-a3a4-37b0e9b24c66 walletId=8fd0df30-e801-4835-897b-2d94e795e1f1 providerId=p status=PROCESSED
+2026/09/29 02:09:42 WARN transaction handling failed correlationId="" messageId="" transactionId=0777df7a-c617-4fc4-a090-9b93731b5538 walletId=8fd0df30-e801-4835-897b-2d94e795e1f1 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    http_contract_test.go:126: auth: jwks unavailable: unexpected end of JSON input
+        failed keyfunc: could not unmarshal raw JWK Set JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.009s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.11s)
+    authorization_paths_test.go:64: auth: jwks unavailable: unexpected end of JSON input
+        failed keyfunc: could not unmarshal raw JWK Set JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	0.729s
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.640s
+FAIL

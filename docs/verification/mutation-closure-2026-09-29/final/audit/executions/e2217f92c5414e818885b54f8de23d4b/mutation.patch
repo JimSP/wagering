@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -86,7 +86,7 @@
+ 	if err != nil {
+ 		return err
+ 	}
+-	if decision.Failure != "" {
++	if decision.Failure == "" {
+ 		return u.reject(ctx, tx, t, decision.Failure)
+ 	}
+ 	if decision.Wait {

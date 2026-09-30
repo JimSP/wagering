@@ -1,0 +1,56 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.365s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:47:22 INFO transaction handled correlationId="" messageId="" transactionId=d663a7cd-ca21-4d6d-9717-4646976818a1 walletId=61b11320-8745-48c3-86e0-f28a9342711e providerId=p status=PROCESSED
+2026/09/29 23:47:22 WARN transaction handling failed correlationId="" messageId="" transactionId=5944079e-6e9e-4081-bcb5-b0209f61ca29 walletId=61b11320-8745-48c3-86e0-f28a9342711e providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/transient (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1049707c4]
+
+goroutine 114 [running]:
+testing.tRunner.func1.2({0x1050e31e0, 0x1051d3b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1050e31e0?, 0x1051d3b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Snapshot(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wallet/wallet.go:50
+github.com/alexandre/wagering/internal/app/usecase.txStub.LoadAccounting({{_, _}, {_, _}, {_, _}, {_, _}, {_, _}}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/ports_test.go:212 +0xf4
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x4be3443c2f00, {0x105179390, 0x4be3441abce0}, {0x105179c50, 0x4be3443ccf50}, 0x4be3443cad80)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/process.go:70 +0xa4
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce.func1({0x105179390, 0x4be3441abce0}, {0x105179c50, 0x4be3443ccf50})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/workers.go:50 +0x124
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x28?, {0x105179390?, 0x4be3441abce0?}, 0x104869c28?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce(0x4be3443c2f40, {0x105179390, 0x4be3441abce0})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/workers.go:39 +0x148
+github.com/alexandre/wagering/internal/app/usecase.TestReferenceWorkerClassifiesRecoveryAndAuditFailures.func1(0x4be3443d86c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/reference_failure_test.go:72 +0x550
+testing.tRunner(0x4be3443d86c8, 0x4be3441a7e30)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 112
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.563s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.777s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.656s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.258s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.676s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.883s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.361s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.150s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransportFailuresPreserveCauseAndRetryClassification (0.00s)
+    --- FAIL: TestTransportFailuresPreserveCauseAndRetryClassification/EOF (0.00s)
+        error_contract_test.go:18: classification=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.569s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+--- FAIL: TestConsumerDeleteRequiresSuccessfulHandlerCompletion (0.00s)
+    --- FAIL: TestConsumerDeleteRequiresSuccessfulHandlerCompletion/transient-error (0.00s)
+        ack_boundary_contract_test.go:65: consumer order=[handler-enter handler-success delete]; want [handler-enter handler-error visibility]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.792s
+FAIL

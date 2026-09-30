@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.478s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:12:12 INFO transaction handled correlationId="" messageId="" transactionId=091deede-4c62-4b06-a645-9c02de4cb509 walletId=a67e3495-37a7-46c1-bb37-5c7f9220cf05 providerId=p status=PROCESSED
+2026/09/29 23:12:12 WARN transaction handling failed correlationId="" messageId="" transactionId=3f93fb40-7374-444a-8741-da673bbd7ab7 walletId=a67e3495-37a7-46c1-bb37-5c7f9220cf05 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.03s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.03s)
+        result_lifecycle_contract_test.go:78: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 500 {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.443s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.935s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.814s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.694s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.848s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.584s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.487s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.717s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.115s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.585s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.579s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.584s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -87,7 +87,7 @@
+ 	if err != nil {
+ 		return f, err
+ 	}
+-	err = t.q.QueryRow(ctx, `SELECT id::text,remaining_minor FROM bet_commitments WHERE bet_transaction_id=$1`, r.ID).Scan(&f.CommitmentID, &f.Remaining)
++	err = t.q.QueryRow(ctx, `SELECT id::text,remaining_minor FROM bet_commitments WHERE bet_transaction_id=$1`, r.ID).Scan(&f.CommitmentID, |f.Remaining)
+ 	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
+ 		return f, err
+ 	}

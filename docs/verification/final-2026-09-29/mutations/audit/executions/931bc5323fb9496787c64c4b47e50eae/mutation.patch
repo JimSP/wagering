@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -24,7 +24,7 @@
+ 	if limit < 1 || limit > 200 {
+ 		return out, apperr.Invalid("limit out of range")
+ 	}
+-	if cursor != "" {
++	if cursor == "" {
+ 		b, e := base64.RawURLEncoding.DecodeString(cursor)
+ 		if e != nil {
+ 			return out, apperr.Invalid("invalid cursor")

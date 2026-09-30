@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.842s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	0.867s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.356s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.355s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.467s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.239s
+ok  	github.com/alexandre/wagering/internal/infra/auth	0.882s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.943s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x102ae5f80]
+
+goroutine 34 [running]:
+testing.tRunner.func1.2({0x103022c48, 0x103114f30})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x103022c48?, 0x103114f30?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Snapshot(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/domain/wallet/wallet.go:50
+github.com/alexandre/wagering/internal/infra/postgres.TestWalletPersistenceContract(0x4589a2e24248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/infra/postgres/repository_contract_test.go:166 +0xb10
+testing.tRunner(0x4589a2e24248, 0x1030a1120)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.839s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.146s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.587s
+FAIL

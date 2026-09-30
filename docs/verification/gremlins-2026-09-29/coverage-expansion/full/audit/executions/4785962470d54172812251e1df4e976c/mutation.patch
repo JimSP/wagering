@@ -1,0 +1,10 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -73,6 +73,6 @@
+ 
+ func (r outboxRepo) OldestPending(ctx context.Context) (*time.Time, error) {
+ 	var oldest *time.Time
+-	err := r.q.QueryRow(ctx, `SELECT min(occurred_at) FROM outbox_events WHERE published_at IS NULL`).Scan(&oldest)
++	err := r.q.QueryRow(ctx, `SELECT min(occurred_at) FROM outbox_events WHERE published_at IS NULL`).Scan(|oldest)
+ 	return oldest, err
+ }

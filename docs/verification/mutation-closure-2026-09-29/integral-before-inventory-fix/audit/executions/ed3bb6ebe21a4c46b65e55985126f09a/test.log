@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.006s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:16:57 INFO transaction handled correlationId="" messageId="" transactionId=4d649935-a4f7-4f2a-b5d6-0115c9637631 walletId=8af64cca-b31b-4bf2-8283-ddc16dda2786 providerId=p status=PROCESSED
+2026/09/30 00:16:57 WARN transaction handling failed correlationId="" messageId="" transactionId=b21f4193-b065-42dd-8deb-de7fb1510661 walletId=8af64cca-b31b-4bf2-8283-ddc16dda2786 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:75: 0 INVALID_INPUT: invalid input: invalid transition timestamp
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.745s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.360s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.025s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.135s
+--- FAIL: TestRejectedAndFailedAreTerminal (0.00s)
+    invariants_test.go:84: INVALID_INPUT: invalid input: invalid transition timestamp
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.677s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.243s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.560s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.134s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.442s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.102s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.097s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.094s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.297s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.443s
+FAIL

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.482s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	9.558s
+ok  	github.com/alexandre/wagering/internal/domain/event	6.802s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.017s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	6.913s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.145s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.590s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.299s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.887s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementPersistenceDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementPersistenceDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:57: step 3 args=[]interface {}{"s", "bet", "BRL", "c2", "c1", 10, -1} want=[]interface {}{"s", "bet", "BRL", "c2", "c1", 10, 1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	8.440s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.829s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.823s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.362s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.414s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.237s
+ok  	github.com/alexandre/wagering/internal/platform/worker	8.246s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	8.229s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	8.255s
+FAIL

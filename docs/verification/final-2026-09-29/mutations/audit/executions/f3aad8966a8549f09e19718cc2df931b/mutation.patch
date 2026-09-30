@@ -1,0 +1,45 @@
+--- original/internal/domain/wager/rules.go
++++ mutant/internal/domain/wager/rules.go
+@@ -23,7 +23,7 @@
+ func CanReference(op, ref Kind) bool {
+ 	switch op {
+ 	case KindRefund:
+-		return ref == KindBet
++		return ref != KindBet
+ 	case KindRollback:
+ 		return ref == KindBet || ref == KindWin || ref == KindRefund
+ 	case KindWin:
+@@ -64,22 +64,22 @@
+ // HashInput lists the business fields covered by the idempotency hash. It is shared by HTTP and SQS.
+ // The idempotency key and transport metadata are deliberately excluded.
+ type HashInput struct {
+-	ProviderID, ExternalTransactionID, PlayerID, WalletID, RoundID, GameID string
+-	Kind, ReferenceExternalTransactionID                                   string
+-	Amount, Currency                                                       string // amount already normalized ("25.00")
++	ProviderID, ExternalTransactionID, PlayerID, WalletID, RoundID, GameID	string
++	Kind, ReferenceExternalTransactionID					string
++	Amount, Currency							string	// amount already normalized ("25.00")
+ }
+ 
+ // PayloadHash = hex(sha256(canonical JSON)); map marshaling sorts keys, giving canonical ordering.
+ func PayloadHash(in HashInput) string {
+ 	m := map[string]any{
+-		"providerId":            in.ProviderID,
+-		"externalTransactionId": in.ExternalTransactionID,
+-		"playerId":              in.PlayerID,
+-		"walletId":              in.WalletID,
+-		"roundId":               in.RoundID,
+-		"gameId":                in.GameID,
+-		"kind":                  in.Kind,
+-		"money":                 map[string]any{"amount": in.Amount, "currency": in.Currency},
++		"providerId":			in.ProviderID,
++		"externalTransactionId":	in.ExternalTransactionID,
++		"playerId":			in.PlayerID,
++		"walletId":			in.WalletID,
++		"roundId":			in.RoundID,
++		"gameId":			in.GameID,
++		"kind":				in.Kind,
++		"money":			map[string]any{"amount": in.Amount, "currency": in.Currency},
+ 	}
+ 	if in.ReferenceExternalTransactionID != "" {
+ 		m["referenceExternalTransactionId"] = in.ReferenceExternalTransactionID

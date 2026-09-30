@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.455s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:13:54 INFO transaction handled correlationId="" messageId="" transactionId=bb8f88ec-478b-40ff-b05b-b16d9d397a1a walletId=332217b2-2658-4ff0-a9e3-16075f4234ad providerId=p status=PROCESSED
+2026/09/29 03:13:54 WARN transaction handling failed correlationId="" messageId="" transactionId=ad8a4117-7491-4695-b8cd-3545da5ce32f walletId=332217b2-2658-4ff0-a9e3-16075f4234ad providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.849s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/pending/provider (0.00s)
+        input_contract_test.go:56: output={eventID:event aggregateID:wallet typ:WagerTransactionPendingReference payload:{"eventId":"event","eventType":"WagerTransactionPendingReference","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","providerId":"","externalTransactionId":"ext","referenceExternalTransactionId":"ref","nextAttemptAt":"2026-09-28T09:00:01-03:00","expiresAt":"2026-09-28T10:00:00-03:00"}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+    input_contract_test.go:61: invalid integration event: pending reference fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	3.387s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.130s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.011s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.493s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.302s
+ok  	github.com/alexandre/wagering/internal/infra/config	4.364s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.263s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.834s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.127s
+FAIL

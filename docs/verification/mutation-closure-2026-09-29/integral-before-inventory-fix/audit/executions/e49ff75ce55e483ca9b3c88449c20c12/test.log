@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.122s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.101s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.760s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.500s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.719s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.306s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.610s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.588s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.379s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:228: reversal: {ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} {Status:PROCESSED Payments:[{CorrelationID: CausationID: ID:tx Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x6c2b815868a0 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC}] Journals:[] Accounts:map[g:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} o:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC}]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.627s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.611s
+FAIL

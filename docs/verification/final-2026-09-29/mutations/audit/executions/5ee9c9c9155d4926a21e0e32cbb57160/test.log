@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.241s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:01 INFO transaction handled correlationId="" messageId="" transactionId=29950b16-5e76-41f2-a369-470f9f46b37d walletId=b9ffaa76-b9ca-403b-96ec-5cbfa35c92f3 providerId=p status=PROCESSED
+2026/09/29 03:24:01 WARN transaction handling failed correlationId="" messageId="" transactionId=5fc03f73-9659-4aa1-891f-8350b21671c2 walletId=b9ffaa76-b9ca-403b-96ec-5cbfa35c92f3 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.31s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:181: HTTP contract: 500 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INTERNAL"}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.912s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.969s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.727s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: result on unprocessed transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.714s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.842s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.733s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.822s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: result on unprocessed transaction want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.141s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.319s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.033s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.625s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.099s
+FAIL

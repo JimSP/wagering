@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -20,7 +20,7 @@
+ 		return f, err
+ 	}
+ 	// Batch executor owns its complete lock set, never lock one participant first.
+-	if f.SettlementID != "" && s.Kind == wager.KindWin {
++	if f.SettlementID != "" || s.Kind == wager.KindWin {
+ 		return f, nil
+ 	}
+ 	var reference *wager.Transaction

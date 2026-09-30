@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "test": "TestWINWithCounterpartyPreservesOptionalReference/HTTP/reference=",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINWithCounterpartyPreservesOptionalReference/HTTP/reference=bet",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINWithCounterpartyPreservesOptionalReference/SQS/reference=",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINWithCounterpartyPreservesOptionalReference/SQS/reference=bet",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINWithCounterpartyPreservesOptionalReference",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINCannotUseBalanceWithoutAnExistingBET/HTTP",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINCannotUseBalanceWithoutAnExistingBET/SQS",
+      "result": "fail"
+    },
+    {
+      "test": "TestWINCannotUseBalanceWithoutAnExistingBET",
+      "result": "fail"
+    }
+  ],
+  "panic": false,
+  "race": false,
+  "source_sha256": "001929cb3e55bec89e97ce288cbb8d92a81beb843dc3b22094630dbe7c673667",
+  "vet_log": "cmd/wagering/app.go:10:2: open /Users/alexandre/Library/Caches/go-build/ce/ce9d3455f982edfb5768026d4f83706d1efb03b2833b7e12606f4a66d1159f55-a: operation not permitted\npattern ./...: open /Users/alexandre/Library/Caches/go-build/ce/ce9d3455f982edfb5768026d4f83706d1efb03b2833b7e12606f4a66d1159f55-a: operation not permitted\n"
+}

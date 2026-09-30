@@ -1,0 +1,54 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.351s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.449s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.631s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.086s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.971s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.960s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.607s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.235s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.202s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.505s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:36:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestAWSClientConfiguration (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x105435150]
+
+goroutine 620 [running]:
+testing.tRunner.func1.2({0x105bbd4d0, 0x105cc8940})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x105bbd4d0?, 0x105cc8940?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/aws/aws-sdk-go-v2/service/sqs.(*Client).Options(...)
+	/Users/alexandre/go/pkg/mod/github.com/aws/aws-sdk-go-v2/service/sqs@v1.38.1/api_client.go:223
+github.com/alexandre/wagering/internal/infra/sqs.TestAWSClientConfiguration(0x3d8832eaa6c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/infra/sqs/sdk_contract_test.go:174 +0x150
+testing.tRunner(0x3d8832eaa6c8, 0x105c73ba8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.967s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.687s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.517s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.350s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.345s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.369s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.449s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	3.015s
+ok  	github.com/alexandre/wagering/scripts	3.017s
+FAIL

@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.697s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: BET must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.930s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.409s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.296s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.176s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+        accounting_test.go:46: INVALID_INPUT: invalid input: BET must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.780s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.342s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.315s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.516s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:300: error=INVALID_INPUT: invalid input: BET must not carry a reference want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.234s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.103s
+FAIL

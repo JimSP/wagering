@@ -1,0 +1,52 @@
+[
+  {
+    "tgname": "outbox_immutable",
+    "definition": "CREATE TRIGGER outbox_immutable BEFORE DELETE OR UPDATE ON public.outbox_events FOR EACH ROW EXECUTE FUNCTION guard_outbox()",
+    "table_name": "outbox_events"
+  },
+  {
+    "tgname": "transaction_guard",
+    "definition": "CREATE TRIGGER transaction_guard BEFORE INSERT OR DELETE OR UPDATE ON public.wager_transactions FOR EACH ROW EXECUTE FUNCTION guard_transaction()",
+    "table_name": "wager_transactions"
+  },
+  {
+    "tgname": "tx_integrity",
+    "definition": "CREATE CONSTRAINT TRIGGER tx_integrity AFTER INSERT OR UPDATE ON public.wager_transactions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_transaction_integrity()",
+    "table_name": "wager_transactions"
+  },
+  {
+    "tgname": "ledger_append",
+    "definition": "CREATE TRIGGER ledger_append BEFORE INSERT ON public.wallet_ledger_entries FOR EACH ROW EXECUTE FUNCTION guard_ledger_append()",
+    "table_name": "wallet_ledger_entries"
+  },
+  {
+    "tgname": "ledger_tx_integrity",
+    "definition": "CREATE CONSTRAINT TRIGGER ledger_tx_integrity AFTER INSERT ON public.wallet_ledger_entries DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_transaction_integrity()",
+    "table_name": "wallet_ledger_entries"
+  },
+  {
+    "tgname": "ledger_wallet_integrity",
+    "definition": "CREATE CONSTRAINT TRIGGER ledger_wallet_integrity AFTER INSERT ON public.wallet_ledger_entries DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_wallet_integrity()",
+    "table_name": "wallet_ledger_entries"
+  },
+  {
+    "tgname": "trg_ledger_immutable",
+    "definition": "CREATE TRIGGER trg_ledger_immutable BEFORE DELETE OR UPDATE ON public.wallet_ledger_entries FOR EACH ROW EXECUTE FUNCTION forbid_ledger_mutation()",
+    "table_name": "wallet_ledger_entries"
+  },
+  {
+    "tgname": "trg_ledger_no_truncate",
+    "definition": "CREATE TRIGGER trg_ledger_no_truncate BEFORE TRUNCATE ON public.wallet_ledger_entries FOR EACH STATEMENT EXECUTE FUNCTION forbid_ledger_mutation()",
+    "table_name": "wallet_ledger_entries"
+  },
+  {
+    "tgname": "wallet_guard",
+    "definition": "CREATE TRIGGER wallet_guard BEFORE INSERT OR DELETE OR UPDATE ON public.wallets FOR EACH ROW EXECUTE FUNCTION guard_wallet()",
+    "table_name": "wallets"
+  },
+  {
+    "tgname": "wallet_integrity",
+    "definition": "CREATE CONSTRAINT TRIGGER wallet_integrity AFTER INSERT OR UPDATE ON public.wallets DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_wallet_integrity()",
+    "table_name": "wallets"
+  }
+]

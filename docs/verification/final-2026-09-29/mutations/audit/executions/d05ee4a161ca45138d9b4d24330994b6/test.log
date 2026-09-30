@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.691s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:07:11 INFO transaction handled correlationId="" messageId="" transactionId="" walletId=4c2ac4c5-6cd0-4079-98db-7d4a9046e2de providerId=p status=""
+2026/09/29 03:07:11 WARN transaction handling failed correlationId="" messageId="" transactionId=f339e5e8-e119-4efe-89cc-d553cc64b78d walletId=4c2ac4c5-6cd0-4079-98db-7d4a9046e2de providerId=p transient=false
+--- FAIL: TestSubmissionObservabilityFollowsCommittedOutcome (0.00s)
+    --- FAIL: TestSubmissionObservabilityFollowsCommittedOutcome/success_and_replay (0.00s)
+        observable_contract_test.go:66: replay={TransactionID:00000000-0000-4000-8000-000000000006 Status:PROCESSED Balance:0xba78194cdb0 FailureCode: IdempotentReplay:true} err=<nil> results=[] duplicates=[] logs=
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.797s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.757s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.908s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.118s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.703s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.894s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.000s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.427s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.900s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.595s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.579s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.590s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.188s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.804s
+FAIL

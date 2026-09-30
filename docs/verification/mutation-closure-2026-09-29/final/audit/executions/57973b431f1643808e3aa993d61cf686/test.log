@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.922s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.03s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/success (0.03s)
+        failpoint_contract_test.go:60: exit=exit status 1 output=--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+                failpoint_contract_test.go:20: invalid integration event: rejected fact
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.500s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	11.020s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.593s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.159s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.002s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.751s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.507s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.116s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.583s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.861s
+FAIL

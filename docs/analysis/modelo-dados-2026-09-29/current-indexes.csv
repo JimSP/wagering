@@ -1,0 +1,18 @@
+tablename,indexname,indexdef
+inbox_messages,inbox_messages_pkey,"CREATE UNIQUE INDEX inbox_messages_pkey ON public.inbox_messages USING btree (consumer_name, message_id)"
+outbox_events,ix_outbox_pending,CREATE INDEX ix_outbox_pending ON public.outbox_events USING btree (next_attempt_at) WHERE (published_at IS NULL)
+outbox_events,ix_outbox_transaction,"CREATE INDEX ix_outbox_transaction ON public.outbox_events USING btree ((((payload -> 'data'::text) ->> 'transactionId'::text)), event_type)"
+outbox_events,outbox_events_pkey,CREATE UNIQUE INDEX outbox_events_pkey ON public.outbox_events USING btree (event_id)
+wager_transactions,ix_tx_pending,"CREATE INDEX ix_tx_pending ON public.wager_transactions USING btree (next_attempt_at) WHERE (status = ANY (ARRAY['PENDING'::text, 'PENDING_REFERENCE'::text]))"
+wager_transactions,uq_tx_external,"CREATE UNIQUE INDEX uq_tx_external ON public.wager_transactions USING btree (provider_id, external_transaction_id) WHERE (origin = 'EXTERNAL'::text)"
+wager_transactions,uq_tx_idempotency,"CREATE UNIQUE INDEX uq_tx_idempotency ON public.wager_transactions USING btree (provider_id, idempotency_key) WHERE (origin = 'EXTERNAL'::text)"
+wager_transactions,uq_tx_one_reversal,"CREATE UNIQUE INDEX uq_tx_one_reversal ON public.wager_transactions USING btree (reference_transaction_id) WHERE ((kind = ANY (ARRAY['REFUND'::text, 'ROLLBACK'::text])) AND (status = 'PROCESSED'::text))"
+wager_transactions,uq_tx_one_reversal_per_kind,"CREATE UNIQUE INDEX uq_tx_one_reversal_per_kind ON public.wager_transactions USING btree (reference_transaction_id, kind) WHERE ((kind = ANY (ARRAY['REFUND'::text, 'ROLLBACK'::text])) AND (status = 'PROCESSED'::text))"
+wager_transactions,uq_tx_opening,CREATE UNIQUE INDEX uq_tx_opening ON public.wager_transactions USING btree (wallet_id) WHERE (kind = 'OPENING'::text)
+wager_transactions,wager_transactions_pkey,CREATE UNIQUE INDEX wager_transactions_pkey ON public.wager_transactions USING btree (id)
+wallet_ledger_entries,ix_ledger_wallet_seq,"CREATE INDEX ix_ledger_wallet_seq ON public.wallet_ledger_entries USING btree (wallet_id, seq)"
+wallet_ledger_entries,ledger_seq_unique,CREATE UNIQUE INDEX ledger_seq_unique ON public.wallet_ledger_entries USING btree (seq)
+wallet_ledger_entries,wallet_ledger_entries_pkey,CREATE UNIQUE INDEX wallet_ledger_entries_pkey ON public.wallet_ledger_entries USING btree (id)
+wallet_ledger_entries,wallet_ledger_entries_wallet_id_transaction_id_key,"CREATE UNIQUE INDEX wallet_ledger_entries_wallet_id_transaction_id_key ON public.wallet_ledger_entries USING btree (wallet_id, transaction_id)"
+wallets,wallets_pkey,CREATE UNIQUE INDEX wallets_pkey ON public.wallets USING btree (id)
+wallets,wallets_player_id_currency_key,"CREATE UNIQUE INDEX wallets_player_id_currency_key ON public.wallets USING btree (player_id, currency)"

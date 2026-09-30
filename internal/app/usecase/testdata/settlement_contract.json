@@ -1,0 +1,500 @@
+{
+  "status": "SPECIFICATION_NOT_EXECUTED_AGAINST_PRODUCTION",
+  "reason": "Deposit/guarantee/commitment/participant settlement APIs do not exist. These cases are not counted as passing tests.",
+  "currency": "BRL",
+  "accounts": {
+    "GA": {
+      "kind": "GUARANTEE",
+      "wallet": "A"
+    },
+    "WA": {
+      "kind": "OPERATIONAL",
+      "wallet": "A"
+    },
+    "GB": {
+      "kind": "GUARANTEE",
+      "wallet": "B"
+    },
+    "WB": {
+      "kind": "OPERATIONAL",
+      "wallet": "B"
+    }
+  },
+  "initial_balances": {
+    "GA": 0,
+    "WA": 0,
+    "GB": 0,
+    "WB": 0
+  },
+  "steps": [
+    {
+      "action": "deposit",
+      "id": "deposit-A",
+      "wallet": "A",
+      "amount_minor": 10000,
+      "balances": {
+        "GA": 10000,
+        "WA": 0,
+        "GB": 0,
+        "WB": 0
+      },
+      "postings": [
+        {
+          "account": "GA",
+          "delta_minor": 10000
+        }
+      ],
+      "external_inflow_minor": 10000
+    },
+    {
+      "action": "deposit",
+      "id": "deposit-B",
+      "wallet": "B",
+      "amount_minor": 5000,
+      "balances": {
+        "GA": 10000,
+        "WA": 0,
+        "GB": 5000,
+        "WB": 0
+      },
+      "postings": [
+        {
+          "account": "GB",
+          "delta_minor": 5000
+        }
+      ],
+      "external_inflow_minor": 5000
+    },
+    {
+      "action": "commit_stake",
+      "id": "stake-A",
+      "wallet": "A",
+      "bet_id": "bet-1",
+      "amount_minor": 2500,
+      "balances": {
+        "GA": 7500,
+        "WA": 2500,
+        "GB": 5000,
+        "WB": 0
+      },
+      "postings": [
+        {
+          "account": "GA",
+          "delta_minor": -2500
+        },
+        {
+          "account": "WA",
+          "delta_minor": 2500
+        }
+      ],
+      "external_inflow_minor": 0
+    },
+    {
+      "action": "commit_stake",
+      "id": "stake-B",
+      "wallet": "B",
+      "bet_id": "bet-1",
+      "amount_minor": 1000,
+      "balances": {
+        "GA": 7500,
+        "WA": 2500,
+        "GB": 4000,
+        "WB": 1000
+      },
+      "postings": [
+        {
+          "account": "GB",
+          "delta_minor": -1000
+        },
+        {
+          "account": "WB",
+          "delta_minor": 1000
+        }
+      ],
+      "external_inflow_minor": 0
+    },
+    {
+      "action": "settle_and_return",
+      "id": "settlement-1",
+      "bet_id": "bet-1",
+      "allocations": [
+        {
+          "from_commitment": "stake-B",
+          "to_commitment": "stake-A",
+          "amount_minor": 1000
+        }
+      ],
+      "returns": [
+        {
+          "commitment": "stake-A",
+          "amount_minor": 3500
+        }
+      ],
+      "balances": {
+        "GA": 11000,
+        "WA": 0,
+        "GB": 4000,
+        "WB": 0
+      },
+      "postings": [
+        {
+          "journal": "profit",
+          "account": "WB",
+          "delta_minor": -1000
+        },
+        {
+          "journal": "profit",
+          "account": "WA",
+          "delta_minor": 1000
+        },
+        {
+          "journal": "return",
+          "account": "WA",
+          "delta_minor": -3500
+        },
+        {
+          "journal": "return",
+          "account": "GA",
+          "delta_minor": 3500
+        }
+      ],
+      "external_inflow_minor": 0
+    },
+    {
+      "action": "replay_settlement",
+      "id": "settlement-1",
+      "balances": {
+        "GA": 11000,
+        "WA": 0,
+        "GB": 4000,
+        "WB": 0
+      },
+      "postings": [],
+      "external_inflow_minor": 0,
+      "same_settlement_and_journal_ids": true
+    }
+  ],
+  "atomicity": "settle_and_return includes losing debit, winning credit, return, snapshots and events in one SQL transaction; intermediate balances not externally visible",
+  "risks": [
+    {
+      "id": "deposit_replay",
+      "input": "mesma identidade e payload",
+      "expected": "mesmo resultado, nenhum crédito novo",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "deposit_identity_conflict",
+      "input": "mesma identidade com outro destino/valor/moeda",
+      "expected": "conflito e estado integral inalterado",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "deposit_invalid_amount",
+      "input": "zero/negativo/escala/overflow",
+      "expected": "rejeitar sem depósito nem movimento",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "bet_insufficient_own_guarantee",
+      "input": "GA=2000, GB=100000, BET A=2500; depositar em GA e reenviar a mesma identidade",
+      "expected": "rejeitar A definitivamente; GB intacta; replay após depósito preserva rejeição e não cria compromisso",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "bet_exact_available",
+      "input": "GA=2500, BET A=2500",
+      "expected": "GA=0, WA aumenta2500; duas partidas exatas",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "wrong_guarantee",
+      "input": "wallet A tenta indicar GB",
+      "expected": "rejeitar vínculo, nenhum efeito em A ou B",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "standalone_win",
+      "input": "WIN35 sem liquidação financiada",
+      "expected": "recusar crédito sem origem, zero efeito",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "unfunded_profit",
+      "input": "perdedores comprometem9, lucro solicitado10",
+      "expected": "recusar tudo; sem retorno parcial",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "uncommitted_loser_cash",
+      "input": "WB tem10 mas nenhum compromisso nessa aposta",
+      "expected": "recusar; saldo livre não comprova perda autorizada",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "other_bet_funds",
+      "input": "B compromete10 em bet-2, liquidação de bet-1",
+      "expected": "recusar; não consumir compromisso de outra aposta",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "wrong_currency",
+      "input": "compromissos em moedas diferentes",
+      "expected": "recusar sem câmbio implícito",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "wrong_provider_or_round",
+      "input": "participante fora do escopo autorizado",
+      "expected": "recusar; não misturar provedores/rodadas silenciosamente",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "duplicate_loser_allocation",
+      "input": "mesmo compromisso debitado duas vezes acima do comprometido",
+      "expected": "recusar integralmente",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "already_consumed_commitment",
+      "input": "perda já usada em outra liquidação",
+      "expected": "recusar novo consumo",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "settlement_replay",
+      "input": "mesma liquidação reentregue por SQS após restart, inclusive com outro messageId",
+      "expected": "mesmos IDs/resultados e zero novas partidas/eventos; não depender da deduplicação temporária do broker",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "settlement_payload_conflict",
+      "input": "mesma identidade com vencedores/valores diferentes",
+      "expected": "conflito sem alteração",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "payout_exceeds_allocated",
+      "input": "carteira tem35 para essa aposta, retorno36",
+      "expected": "recusar sem saldo negativo",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "payout_wrong_guarantee",
+      "input": "retorno de WA enviado a GB",
+      "expected": "recusar; somente GA é destino elegível",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "credit_overflow",
+      "input": "garantia do vencedor no limite ao receber retorno",
+      "expected": "rollback de toda liquidação, inclusive débito do perdedor",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "atomicity_every_write",
+      "input": "falha em cada escrita anterior ao commit, ou rollback confirmado",
+      "expected": "snapshot financeiro antes=depois; retry confirma uma vez. Commit com resposta perdida é resultado desconhecido: consultar identidade durável, jamais presumir rollback",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "concurrent_same_commitment",
+      "input": "duas liquidações tentam gastar a mesma perda",
+      "expected": "um único consumo; outra rejeita/conflita conforme identidade",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "concurrent_opposite_pairs",
+      "input": "liquidações de apostas distintas A/B e B/A em processos diferentes",
+      "expected": "ordem canônica de locks; ausência de dependência circular entre filas; deadlock detectado exige retry seguro, sem prometer ausência absoluta de deadlocks",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "independent_pairs",
+      "input": "A/B bloqueados e operação C/D independente",
+      "expected": "C/D progride mesmo na mesma moeda",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "queue_retry",
+      "input": "crash/lease expirado na liquidação",
+      "expected": "dono antigo não duplica; próximo comando não ultrapassa estado pendente",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "reconciliation",
+      "input": "depósitos A100 B50; resultado A+10 B-10",
+      "expected": "GA+WA=11000; GB+WB=4000; total15000",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "events",
+      "input": "resultado confirmado por serviço interno autorizado; entrega repetida; liquidação confirmada ou recusada",
+      "expected": "disparo automático apenas da aposta confirmada; evento de resultado durável; efeitos exatos por conta/diário; nenhuma publicação de sucesso de transação desfeita",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "refund_unsettled_stake",
+      "input": "devolver compromisso antes do encerramento; repetir após encerramento com liquidação ainda pendente; disputar com encerramento",
+      "expected": "antes do encerramento: WA debitada e GA creditada integralmente, compromisso indisponível; após encerramento: rejeitar sem efeitos; corrida admite apenas uma ordem serial válida",
+      "status": "needs_production_contract"
+    },
+    {
+      "id": "rollback_settlement",
+      "input": "reverter resultado já retornado às garantias, inclusive após encerramento e liquidação",
+      "expected": "permitir reversão integral elegível conforme DESAFIO; compensar todos os movimentos envolvidos numa transação; liquidez insuficiente rejeita tudo; impedir reversão duplicada e não habilitar REFUND pós-encerramento",
+      "status": "needs_production_contract"
+    }
+  ],
+  "execution_contract": {
+    "message_type": "SettlementRequested",
+    "data": {
+      "settlementId": "settlement-1"
+    },
+    "server_side": true,
+    "transaction": "one ACID transaction for the entire persisted settlement",
+    "participants_source": "persisted settlement -> exactly one bet -> all its commitments, participant wallets and exclusive guarantees",
+    "inline_wallets_or_amounts": "rejected",
+    "idempotency": "persisted result keyed by settlement ID, not delivery ID",
+    "trigger": "automatic upon confirmed result of its bet; never wait for another bet result",
+    "message_type_status": "technical proposal; result-confirmation event not implemented"
+  },
+  "independent_bets_example": {
+    "status": "SPECIFICATION_NOT_EXECUTED_AGAINST_PRODUCTION",
+    "replaces": "multi_bet_example: shared settlement and cross-bet rollback superseded by user decision",
+    "initial_balances_minor": {
+      "GA": 7500,
+      "WA": 4500,
+      "GB": 4000,
+      "WB": 1000,
+      "GC": 7000,
+      "WC": 3000
+    },
+    "commitments": [
+      {
+        "id": "a1",
+        "bet": "bet-1",
+        "wallet": "A",
+        "amount_minor": 2500
+      },
+      {
+        "id": "b1",
+        "bet": "bet-1",
+        "wallet": "B",
+        "amount_minor": 1000
+      },
+      {
+        "id": "a2",
+        "bet": "bet-2",
+        "wallet": "A",
+        "amount_minor": 2000
+      },
+      {
+        "id": "c2",
+        "bet": "bet-2",
+        "wallet": "C",
+        "amount_minor": 3000
+      }
+    ],
+    "settlements": [
+      {
+        "settlement_id": "settlement-bet-1",
+        "bet_id": "bet-1",
+        "trigger": "confirmed result of bet-1, even while bet-2 has no result",
+        "movements": [
+          {
+            "bet": "bet-1",
+            "from": "WB",
+            "to": "WA",
+            "amount_minor": 1000
+          },
+          {
+            "bet": "bet-1",
+            "from": "WA",
+            "to": "GA",
+            "amount_minor": 3500
+          }
+        ],
+        "balances_after_minor": {
+          "GA": 11000,
+          "WA": 2000,
+          "GB": 4000,
+          "WB": 0,
+          "GC": 7000,
+          "WC": 3000
+        },
+        "expected_postings": 4,
+        "untouched_commitments": [
+          "a2",
+          "c2"
+        ]
+      },
+      {
+        "settlement_id": "settlement-bet-2",
+        "bet_id": "bet-2",
+        "trigger": "confirmed result of bet-2",
+        "movements": [
+          {
+            "bet": "bet-2",
+            "from": "WA",
+            "to": "WC",
+            "amount_minor": 2000
+          },
+          {
+            "bet": "bet-2",
+            "from": "WC",
+            "to": "GC",
+            "amount_minor": 5000
+          }
+        ],
+        "balances_after_minor": {
+          "GA": 11000,
+          "WA": 0,
+          "GB": 4000,
+          "WB": 0,
+          "GC": 12000,
+          "WC": 0
+        },
+        "expected_postings": 4
+      }
+    ],
+    "expected_total_minor": 27000,
+    "failure_in_second_settlement": "rollback only second settlement; retain first committed settlement and its balances, postings and events",
+    "shared_wallet": "A participates in both bets; lock contention is possible but does not create a dependency on another result"
+  },
+  "rollback_settlement_example": {
+    "status": "SPECIFICATION_NOT_EXECUTED_AGAINST_PRODUCTION",
+    "original_settlement_id": "settlement-1",
+    "before_balances_minor": {
+      "GA": 11000,
+      "WA": 0,
+      "GB": 4000,
+      "WB": 0
+    },
+    "inverse_movements_in_order": [
+      {
+        "from": "GA",
+        "to": "WA",
+        "amount_minor": 3500,
+        "reverses_journal": "return"
+      },
+      {
+        "from": "WA",
+        "to": "WB",
+        "amount_minor": 1000,
+        "reverses_journal": "profit"
+      }
+    ],
+    "after_balances_minor": {
+      "GA": 7500,
+      "WA": 2500,
+      "GB": 4000,
+      "WB": 1000
+    },
+    "expected_postings": 4,
+    "expected_total_minor": 15000,
+    "bet_remains_closed": true,
+    "refund_after_rollback": "rejected: bet remains closed",
+    "scope": "Inverse of settlement only, not refund or reversal of the original stake movements; original history is immutable.",
+    "original_commitments_not_reusable_by_replay": true
+  }
+}

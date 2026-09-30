@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.431s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:13:00 INFO transaction handled correlationId="" messageId="" transactionId=852c6545-adda-4939-a32a-3d95e8d23ef5 walletId=c43c1319-f23b-4586-844c-7efb20b82727 providerId=p status=PROCESSED
+2026/09/30 01:13:00 WARN transaction handling failed correlationId="" messageId="" transactionId=82f4ddb7-e834-4905-ba1d-9416a5afb46b walletId=c43c1319-f23b-4586-844c-7efb20b82727 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.664s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: movement amount
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	10.369s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.500s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.971s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.863s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.614s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.570s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.085s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.093s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.936s
+FAIL

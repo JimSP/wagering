@@ -1,0 +1,24 @@
+package settlement
+
+import (
+	"errors"
+	"testing"
+)
+
+func TestMutationProofZeroCommitment(t *testing.T) {
+	b := Bet{Status: "OPEN", Currency: "BRL"}
+	cs := []Commitment{{ExternalID: "spent", WalletID: "a", Remaining: m(0)}, {ExternalID: "funded", WalletID: "b", Remaining: m(100)}}
+	d := Distribution{ResultID: "result", Returns: []Return{{ExternalID: "funded", Money: m(100)}}}
+	if err := d.Validate(b, cs); err != nil {
+		t.Fatalf("zero remaining commitment must coexist with funded participant: %v", err)
+	}
+}
+
+func TestMutationProofDuplicatePayoutConservingTotal(t *testing.T) {
+	b := Bet{Status: "OPEN", Currency: "BRL"}
+	cs := []Commitment{{ExternalID: "bet", WalletID: "a", Remaining: m(100)}}
+	d := Distribution{ResultID: "result", Returns: []Return{{ExternalID: "bet", Money: m(50)}, {ExternalID: "bet", Money: m(50)}}}
+	if err := d.Validate(b, cs); !errors.Is(err, ErrDistribution) {
+		t.Fatalf("duplicate payout accepted despite matching total: %v", err)
+	}
+}

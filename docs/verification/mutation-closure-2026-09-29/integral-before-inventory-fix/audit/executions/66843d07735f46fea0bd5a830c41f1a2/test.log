@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.141s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.924s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.628s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.516s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.504s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.371s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.245s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.381s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.214s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementPersistenceDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:264: commitments=[]
+    --- FAIL: TestSettlementPersistenceDatabaseProtocol/failure-0-query#02 (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.942s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.574s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.570s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.555s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.590s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.584s
+FAIL

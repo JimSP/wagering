@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.219s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:13:18 INFO transaction handled correlationId="" messageId="" transactionId=62be3bc4-d319-4bdc-b599-67d2bf13cda6 walletId=8382a524-97f5-4c60-9aa3-29f3257a0dfe providerId=p status=PROCESSED
+2026/09/30 01:13:18 WARN transaction handling failed correlationId="" messageId="" transactionId=d6ff2064-09b5-47dd-87b2-0549fffebc41 walletId=8382a524-97f5-4c60-9aa3-29f3257a0dfe providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.504s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	10.195s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.491s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.945s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.701s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.827s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.617s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.608s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.933s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.487s
+FAIL

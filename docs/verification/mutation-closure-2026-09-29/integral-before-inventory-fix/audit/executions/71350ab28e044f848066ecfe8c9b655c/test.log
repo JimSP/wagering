@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.878s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:06:07 INFO transaction handled correlationId="" messageId="" transactionId=75c47f74-3f16-4999-8473-d049cc1af326 walletId=4f86d366-fc76-4b66-bbc5-ad132e9f567a providerId=p status=PROCESSED
+2026/09/30 00:06:07 WARN transaction handling failed correlationId="" messageId="" transactionId=dbfcf091-66a9-4cf1-ace7-bb5dcfd51e8f walletId=4f86d366-fc76-4b66-bbc5-ad132e9f567a providerId=p transient=false
+--- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect (0.00s)
+    --- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect/self_reference (0.00s)
+        journey_semantics_test.go:211: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000007 REJECTED <nil> INVALID_REFERENCE_KIND false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.819s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.548s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.417s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.288s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.805s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.087s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.352s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.199s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.503s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.238s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.775s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.751s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.931s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.936s
+FAIL

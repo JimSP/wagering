@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.425s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:23:01 INFO transaction handled correlationId="" messageId="" transactionId=fc81f306-5624-4585-ab7d-27a10bd7a568 walletId=bd7ff6f3-0cc1-4f48-8e26-a6d07faff41c providerId=p status=PROCESSED
+2026/09/29 03:23:01 WARN transaction handling failed correlationId="" messageId="" transactionId=e5c898f5-dde0-498f-a56f-b77df8b8a96c walletId=bd7ff6f3-0cc1-4f48-8e26-a6d07faff41c providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.658s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.023s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.755s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.265s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.112s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.344s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.005s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: missing failure want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.576s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.910s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	4.041s
+FAIL

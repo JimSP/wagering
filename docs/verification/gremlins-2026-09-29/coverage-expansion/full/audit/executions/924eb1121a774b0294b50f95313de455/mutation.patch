@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -21,7 +21,7 @@
+ 	return event.Meta{EventID: u.ids.NewID(), AggregateID: s.WalletID, CorrelationID: cor, CausationID: s.CausationID, OccurredAt: u.clock.Now()}
+ }
+ func addEvent(ctx context.Context, tx port.Tx, e event.Outgoing, err error) error {
+-	if err != nil {
++	if err == nil {
+ 		return err
+ 	}
+ 	return tx.Outbox().Add(ctx, e)

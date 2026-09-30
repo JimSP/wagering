@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.644s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.125s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.100s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.971s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.506s
+--- FAIL: TestInvalidTransactionSnapshotsAndConstructorBoundaries (0.00s)
+    --- FAIL: TestInvalidTransactionSnapshotsAndConstructorBoundaries/processed_without_result (0.00s)
+        validation_paths_test.go:32: accepted corrupt snapshot: &{correlation message tx EXTERNAL provider external received-key hash wallet player round game BET {1000 BRL}   PROCESSED  <nil> 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.140s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.894s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.670s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.219s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.787s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.129s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.775s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.756s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.932s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.910s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.770s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.771s
+FAIL

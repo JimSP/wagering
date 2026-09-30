@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -82,7 +82,7 @@
+ 	var n int64
+ 	var cur string
+ 	err := r.q.QueryRow(ctx, `SELECT w.currency,coalesce(sum(CASE l.direction WHEN 'CREDIT' THEN l.amount_minor::numeric ELSE -l.amount_minor::numeric END),0)::text,count(l.id) FROM wallets w LEFT JOIN wallet_ledger_entries l ON l.wallet_id=w.id WHERE w.id=$1 GROUP BY w.id`, w).Scan(&cur, &total, &n)
+-	if err != nil {
++	if err == nil {
+ 		return port.LedgerTotals{}, err
+ 	}
+ 	v, err := strconv.ParseInt(total, 10, 64)

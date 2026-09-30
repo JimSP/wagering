@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.478s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:43:51 INFO transaction handled correlationId="" messageId="" transactionId=e3faa4e0-faf0-47df-8175-e1010acd4b7f walletId=f7fc0ee5-24e2-49e0-90ea-4d4dd2f7228a providerId=p status=PROCESSED
+2026/09/29 22:43:51 WARN transaction handling failed correlationId="" messageId="" transactionId=64b5f009-c52c-4545-8b01-a81e225aa250 walletId=f7fc0ee5-24e2-49e0-90ea-4d4dd2f7228a providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.116s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.467s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.476s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.191s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.733s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.209s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.254s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.341s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid reference lifetime want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.781s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.215s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.186s
+FAIL

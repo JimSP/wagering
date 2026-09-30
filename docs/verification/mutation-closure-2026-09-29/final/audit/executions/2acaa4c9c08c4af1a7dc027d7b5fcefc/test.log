@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.353s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.567s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.471s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.347s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.258s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_equal_updated (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING_REFERENCE FailureCode: BalanceAfter:<nil> Attempts:1 NextAttemptAt:2026-09-28 12:00:00 +0000 UTC ExpiresAt:2026-09-28 13:00:00 +0000 UTC CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{correlation message tx EXTERNAL provider external received-key hash wallet player round game REFUND {1000 BRL} bet-ext  PENDING_REFERENCE  <nil> 1 0x10bc88600e88 0x10bc88600ea0 {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.085s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.008s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.085s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.827s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.557s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.441s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.981s
+FAIL

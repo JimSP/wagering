@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.867s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:27:27 INFO transaction handled correlationId="" messageId="" transactionId=989ccf41-905b-4d58-9aef-24979d2dfd33 walletId=707155c0-2f12-4266-acfb-61c193050665 providerId=p status=PROCESSED
+2026/09/30 01:27:27 WARN transaction handling failed correlationId="" messageId="" transactionId=212b9e4f-afd9-4a3e-bbef-2546d31d5084 walletId=707155c0-2f12-4266-acfb-61c193050665 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.20s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/refund (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: processed reference not resolved"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.328s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.677s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.216s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.460s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.314s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.418s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.009s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.042s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.938s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.297s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.961s
+FAIL

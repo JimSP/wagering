@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.604s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:54 INFO transaction handled correlationId="" messageId="" transactionId=01332eb4-2fd1-4a0e-bf61-58692b067cd5 walletId=68b43c5a-1d32-431d-a2d6-daf19a96a0a0 providerId=p status=PROCESSED
+2026/09/30 01:22:54 WARN transaction handling failed correlationId="" messageId="" transactionId=fd703ed0-6674-4657-a59e-bb119f61bd82 walletId=68b43c5a-1d32-431d-a2d6-daf19a96a0a0 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.04s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-bet-again (0.00s)
+        http_contract_test.go:153: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000033","status":"REJECTED","idempotentReplay":false,"failureCode":"ALREADY_REVERSED"}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000033","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.812s
+ok  	github.com/alexandre/wagering/internal/domain/event	13.105s
+ok  	github.com/alexandre/wagering/internal/domain/money	14.161s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.359s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:57: BET
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	13.897s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.988s
+ok  	github.com/alexandre/wagering/internal/infra/auth	14.028s
+ok  	github.com/alexandre/wagering/internal/infra/config	14.418s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	14.737s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.803s
+FAIL

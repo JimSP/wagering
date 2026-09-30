@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -99,7 +99,7 @@
+ 		if !r.Status.IsTerminal() {
+ 			return u.waitReference(ctx, tx, t)
+ 		}
+-		if r.Status != wager.StatusProcessed {
++		if r.Status == wager.StatusProcessed {
+ 			return u.reject(ctx, tx, t, wager.FailReferenceNotProcessed)
+ 		}
+ 		if s.Kind.IsReversal() {

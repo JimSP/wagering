@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.358s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:29:39 INFO transaction handled correlationId="" messageId="" transactionId=f2c010d5-462b-477f-914c-34c8bfba37ee walletId=82c5cacb-e511-4eba-8f87-47c0490c589b providerId=p status=PROCESSED
+2026/09/30 01:29:39 WARN transaction handling failed correlationId="" messageId="" transactionId=c55bc807-04d3-440d-948f-7c7242fdd53f walletId=82c5cacb-e511-4eba-8f87-47c0490c589b providerId=p transient=false
+--- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting (0.00s)
+    --- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting/success (0.00s)
+        paired_storage_failure_test.go:39: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.632s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.944s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.750s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.010s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:84: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.200s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.722s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.781s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.831s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementPersistenceDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementPersistenceDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:103: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.639s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.745s
+FAIL

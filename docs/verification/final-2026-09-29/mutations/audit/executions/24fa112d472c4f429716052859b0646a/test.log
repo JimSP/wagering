@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.314s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:26:14 INFO transaction handled correlationId="" messageId="" transactionId=ba0444ad-a9e2-4dfc-8688-08fcf27ebb59 walletId=eb8346c5-9248-4d4f-a26b-0911ad79ef5b providerId=p status=PROCESSED
+2026/09/29 03:26:14 WARN transaction handling failed correlationId="" messageId="" transactionId=32ce9f07-4ab1-4f42-b91d-3c6089626b86 walletId=eb8346c5-9248-4d4f-a26b-0911ad79ef5b providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/reference_already_resolved (0.00s)
+        submit_failure_test.go:117: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.857s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.326s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.484s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/REFUND (0.00s)
+        lifecycle_semantics_test.go:84: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.234s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.105s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.444s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.347s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.676s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.011s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.998s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.996s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.154s
+FAIL

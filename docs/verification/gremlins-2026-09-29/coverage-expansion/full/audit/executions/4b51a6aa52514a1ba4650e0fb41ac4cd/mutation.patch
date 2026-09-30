@@ -1,0 +1,11 @@
+--- original/internal/infra/auth/middleware.go
++++ mutant/internal/infra/auth/middleware.go
+@@ -45,7 +45,7 @@
+ // RequireInternal restricts wallet operations to the internal service.
+ func RequireInternal(next http.Handler) http.Handler {
+ 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+-		if p, ok := PrincipalFrom(r.Context()); !ok || !p.Internal {
++		if p, ok := PrincipalFrom(r.Context()); !ok && !p.Internal {
+ 			deny(w, http.StatusForbidden, "FORBIDDEN")
+ 			return
+ 		}

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.360s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:19:13 INFO transaction handled correlationId="" messageId="" transactionId=8f129f7b-b4c4-445e-834b-847fc039f94e walletId=96054be0-b807-486b-89c7-2ab2e64d871a providerId=p status=PROCESSED
+2026/09/29 03:19:13 WARN transaction handling failed correlationId="" messageId="" transactionId=b0f2daa1-ef9b-43b7-9de1-07a0b4a332e0 walletId=96054be0-b807-486b-89c7-2ab2e64d871a providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/rollback (0.00s)
+        http_contract_test.go:154: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000024","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"107.00","currency":"BRL"},"version":4}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.766s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.425s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.302s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:57: BET
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.883s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.539s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.363s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.794s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.180s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.272s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.088s
+FAIL

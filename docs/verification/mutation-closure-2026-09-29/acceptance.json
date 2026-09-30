@@ -1,0 +1,57 @@
+{
+  "accepted": true,
+  "evidence_mode": "integral campaign plus same-input official timeout confirmations",
+  "original_integral_counts": {
+    "KILLED": 1420,
+    "TIMED OUT": 2
+  },
+  "confirmed_counts": {
+    "KILLED": 1422
+  },
+  "historical_timeouts_preserved": 2,
+  "unresolved_mutations": 0,
+  "mutation_coverage": 100,
+  "input_files": 181,
+  "input_hash_mismatches": [],
+  "confirmations": [
+    {
+      "evidence": "recheck-apperr/results.json",
+      "counts": {
+        "KILLED": 6
+      },
+      "same_inputs": true,
+      "same_patches": true,
+      "complete_test_suite": true
+    },
+    {
+      "evidence": "recheck-composition/results.json",
+      "counts": {
+        "KILLED": 2
+      },
+      "same_inputs": true,
+      "same_patches": true,
+      "complete_test_suite": true
+    }
+  ],
+  "resolved_timeouts": [
+    {
+      "file": "internal/app/apperr/apperr.go",
+      "operator": "CONDITIONALS_NEGATION",
+      "line": 28,
+      "column": 9,
+      "original_status": "TIMED OUT",
+      "confirmed_status": "KILLED",
+      "evidence": "recheck-apperr/results.json"
+    },
+    {
+      "file": "cmd/wagering/app.go",
+      "operator": "INVERT_BITWISE",
+      "line": 30,
+      "column": 64,
+      "original_status": "TIMED OUT",
+      "confirmed_status": "KILLED",
+      "evidence": "recheck-composition/results.json"
+    }
+  ],
+  "raw_reports_modified": false
+}

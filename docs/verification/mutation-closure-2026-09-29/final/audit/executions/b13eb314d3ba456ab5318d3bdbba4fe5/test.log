@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.612s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: INVALID_INPUT: invalid input: invalid result balance
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.886s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.220s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.348s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.596s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_guarantee_on_LOSS (0.00s)
+        mutation_regression_test.go:26: INVALID_INPUT: invalid input: invalid result balance
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	8.085s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.001s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.448s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.272s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    accounting_closure_extra_test.go:37: INVALID_INPUT: invalid input: invalid result balance
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	8.892s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.984s
+FAIL

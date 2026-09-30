@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.052s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.350s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.109s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.571s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.815s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.702s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.935s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.741s
+--- FAIL: TestConfigurationDefaultsAndExplicitValues (0.00s)
+    config_test.go:43: got={Roles:[api sqs-consumer outbox-publisher reference-worker] HTTPAddr::9090 ShutdownTimeout:8s LogLevel:debug DatabaseURL:postgres://test@localhost/test AWSRegion:sa-east-1 AWSEndpointURL:http://localhost:4566 WagerQueueURL:https://queue.test/wager WagerDLQURL:https://queue.test/dead EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} want={Roles:[api sqs-consumer outbox-publisher reference-worker] HTTPAddr::9090 ShutdownTimeout:8s LogLevel:debug DatabaseURL:postgres://test@localhost/test AWSRegion:sa-east-1 AWSEndpointURL:http://localhost:4566 WagerQueueURL:https://queue.test/wager WagerDLQURL:https://queue.test/dead EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} err=SHUTDOWN_TIMEOUT must be in [8s,25s]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	3.183s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.786s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.110s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.100s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.881s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.922s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.926s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.092s
+FAIL

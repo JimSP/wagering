@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.143s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:15:48 INFO transaction handled correlationId="" messageId="" transactionId=2662c4fa-2026-4208-bc25-68dc2d99a736 walletId=5e5e0099-bd29-4a85-8270-7477eec3f19a providerId=p status=PROCESSED
+2026/09/30 01:15:48 WARN transaction handling failed correlationId="" messageId="" transactionId=3fe3ff1c-b762-465a-b324-bad5edcf143b walletId=5e5e0099-bd29-4a85-8270-7477eec3f19a providerId=p transient=false
+--- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors (0.00s)
+    --- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors/reconciliation/currency (0.00s)
+        read_failure_test.go:92: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.381s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	10.298s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=-9223372036854775808 subtract=true got={0 } err=<nil> want=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	10.043s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.780s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:43: unexplained movement {entry-1 wallet tx-1 DEBIT {8000 BRL} {10000 BRL} {0 } {0 63926193601 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.039s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {10000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	8.734s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.248s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.482s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.552s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.564s
+FAIL

@@ -1,0 +1,42 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.729s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:02:27 INFO transaction handled correlationId="" messageId="" transactionId=b3b4f379-3abf-420e-8ba6-b2901cea4266 walletId=67842619-77b7-4d5a-83e3-13008b9c3129 providerId=p status=PROCESSED
+2026/09/29 02:02:27 WARN transaction handling failed correlationId="" messageId="" transactionId=e3446bbd-ce83-4c09-801e-5d900a4d9f19 walletId=67842619-77b7-4d5a-83e3-13008b9c3129 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/append (0.00s)
+        read_failure_test.go:156: append INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.405s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.454s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=1 subtract=false got={9223372036854775807 BRL} err=<nil> want=-9223372036854775807
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.709s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.932s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {-2000 BRL} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.185s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=INSUFFICIENT_FUNDS: insufficient funds want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.690s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.068s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    contract_test.go:110: INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	4.001s
+FAIL

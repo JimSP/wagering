@@ -1,0 +1,12 @@
+# Hooks are opt-in: bash scripts/quality-hooks.sh install
+assert_lefthook_installed: true
+pre-commit:
+  commands:
+    secrets:
+      run: bash scripts/check.sh staged
+    checks:
+      run: bash scripts/check.sh fast
+pre-push:
+  commands:
+    checks:
+      run: bash scripts/check.sh full

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -57,7 +57,7 @@
+ 			return f, err
+ 		}
+ 	}
+-	if f.BetID != "" {
++	if f.BetID == "" {
+ 		if err = t.q.QueryRow(ctx, `SELECT status FROM bets WHERE id=$1 FOR UPDATE`, f.BetID).Scan(&f.BetStatus); err != nil {
+ 			return f, err
+ 		}

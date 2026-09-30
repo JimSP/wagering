@@ -1,0 +1,66 @@
+--- original/internal/domain/wager/accounting.go
++++ mutant/internal/domain/wager/accounting.go
+@@ -11,34 +11,34 @@
+ // AccountingFacts is a locked persistence snapshot, not a command. A wallet
+ // exposes its guarantee balance; its operational account holds committed stakes.
+ type AccountingFacts struct {
+-	Guarantee, Operational                                wallet.Snapshot
+-	Reference                                             *Snapshot
+-	ReferenceCandidates                                   int
+-	BetID, BetStatus, SettlementID, ReferenceSettlementID string
+-	CommitmentID                                          string
+-	Remaining                                             int64
+-	AlreadyReversed                                       bool
+-	OriginalJournalID                                     string
+-	Restores                                              []CommitmentRestore
++	Guarantee, Operational					wallet.Snapshot
++	Reference						*Snapshot
++	ReferenceCandidates					int
++	BetID, BetStatus, SettlementID, ReferenceSettlementID	string
++	CommitmentID						string
++	Remaining						int64
++	AlreadyReversed						bool
++	OriginalJournalID					string
++	Restores						[]CommitmentRestore
+ }
+ 
+ type CommitmentRestore struct {
+-	EffectID, CommitmentID string
+-	Amount                 int64
++	EffectID, CommitmentID	string
++	Amount			int64
+ }
+ 
+ // AccountingDecision contains only a domain decision. Storage adapters must not
+ // reinterpret the operation or choose a different debit/credit counterparty.
+ type AccountingDecision struct {
+-	Failure                FailureCode
+-	Wait                   bool
+-	ReferenceID            string
+-	Guarantee, Operational wallet.Snapshot
+-	GuaranteeDirection     Direction
+-	NewCommitment          bool
+-	ConsumeCommitmentID    string
+-	ReverseJournalID       string
+-	Restores               []CommitmentRestore
++	Failure			FailureCode
++	Wait			bool
++	ReferenceID		string
++	Guarantee, Operational	wallet.Snapshot
++	GuaranteeDirection	Direction
++	NewCommitment		bool
++	ConsumeCommitmentID	string
++	ReverseJournalID	string
++	Restores		[]CommitmentRestore
+ }
+ 
+ func DecideAccounting(t *Transaction, f AccountingFacts, now time.Time) (AccountingDecision, error) {
+@@ -97,7 +97,7 @@
+ 	}
+ 	switch s.Kind {
+ 	case KindBet:
+-		if f.BetID != "" && f.BetStatus != "OPEN" {
++		if f.BetID == "" && f.BetStatus != "OPEN" {
+ 			return reject(FailBetClosed)
+ 		}
+ 		d.GuaranteeDirection = Debit

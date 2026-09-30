@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.873s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.599s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.141s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.009s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.400s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.186s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.273s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.887s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.000s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementDatabaseCommandPreservesRetryClassification (0.00s)
+    --- FAIL: TestSettlementDatabaseCommandPreservesRetryClassification/55P03 (0.00s)
+        settlement_contract_test.go:50: cause lost or non-retryable: err=: settlement failure (SQLSTATE 55P03) calls=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.891s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.542s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.513s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.498s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.532s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.529s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.863s
+FAIL

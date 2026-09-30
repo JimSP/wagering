@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -76,7 +76,7 @@
+ 			return err
+ 		}
+ 		persisted, err := tx.Transactions().FindByID(ctx, t.ID())
+-		if err != nil {
++		if err == nil {
+ 			return err
+ 		}
+ 		*t = *persisted

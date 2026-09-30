@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.413s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:49:32 INFO transaction handled correlationId="" messageId="" transactionId=32419358-81fd-453d-9052-020a7af481e8 walletId=e32a8045-c8b3-482d-aff9-92fadc597ca0 providerId=p status=PROCESSED
+2026/09/30 00:49:32 WARN transaction handling failed correlationId="" messageId="" transactionId=0a729232-2ec5-4c2a-aa62-caee25268608 walletId=e32a8045-c8b3-482d-aff9-92fadc597ca0 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.04s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.04s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 500 {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.569s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.596s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.713s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.092s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.211s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.977s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.748s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.317s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	0.880s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.543s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.148s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.155s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.902s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.907s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.947s
+FAIL

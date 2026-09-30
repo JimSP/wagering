@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.189s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:29:21 INFO transaction handled correlationId="" messageId="" transactionId=540cc633-a799-4b88-acee-ca323caebfbb walletId=da19e689-2a78-4eea-9869-bdd5357c9953 providerId=p status=PROCESSED
+2026/09/30 01:29:21 WARN transaction handling failed correlationId="" messageId="" transactionId=1f1210b3-1542-473b-99d4-e729e9258f01 walletId=da19e689-2a78-4eea-9869-bdd5357c9953 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/invalid_reference (0.00s)
+        settlement_audit_test.go:202: got <nil>, want INVALID_INPUT: invalid input
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.964s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.187s
+ok  	github.com/alexandre/wagering/internal/domain/money	13.240s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.439s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/self_reference (0.00s)
+        lifecycle_semantics_test.go:286: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	13.481s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.594s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.643s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.601s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.905s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.111s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.260s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.265s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.412s
+FAIL

@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.939s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.994s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/provider (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","playerId":"p","externalTransactionId":"ext","roundId":"r","money":{"amount":"1.00","currency":"BRL"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	9.792s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.773s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.350s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.060s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.643s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.979s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.198s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.542s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.988s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.614s
+FAIL

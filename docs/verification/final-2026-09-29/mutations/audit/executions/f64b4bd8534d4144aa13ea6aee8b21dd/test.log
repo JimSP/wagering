@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.085s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:42:56 INFO transaction handled correlationId="" messageId="" transactionId=da996e21-d9e7-4143-bda2-092ec53269ed walletId=4a6ae731-c69b-47bc-9d71-1e6fcb07f161 providerId=p status=PROCESSED
+2026/09/29 03:42:56 WARN transaction handling failed correlationId="" messageId="" transactionId=1816f39d-95aa-4859-95f0-dd4917bfce84 walletId=4a6ae731-c69b-47bc-9d71-1e6fcb07f161 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INVALID_INPUT","message":"invalid input: body must be a JSON object"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.505s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.707s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.528s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.406s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.907s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.465s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.637s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.807s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.295s
+FAIL

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.395s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:55:31 INFO transaction handled correlationId="" messageId="" transactionId=4f57f6eb-dafb-4be3-9e98-ef55cb59e05a walletId=06eeb066-5b0b-4a38-9f09-b938f064f042 providerId=p status=PROCESSED
+2026/09/29 01:55:31 WARN transaction handling failed correlationId="" messageId="" transactionId=cee9e820-6892-43e5-9088-f1b3f444cd68 walletId=06eeb066-5b0b-4a38-9f09-b938f064f042 providerId=p transient=false
+2026/09/29 01:55:31 WARN transaction handling failed correlationId="" messageId="" transactionId=390a9d84-b6bc-44a4-88e7-523ce50a12c4 walletId=06eeb066-5b0b-4a38-9f09-b938f064f042 providerId=p transient=false
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:75: authorization must precede replay idempotency key reused with different payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.698s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.005s
+FAIL

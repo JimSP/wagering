@@ -1,0 +1,71 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.336s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:45:48 INFO transaction handled correlationId="" messageId="" transactionId=1775a343-df60-4f3f-8d73-f35ffe0e3574 walletId=9d4a7cdf-267d-4983-b86a-3f0015010e9e providerId=p status=PROCESSED
+2026/09/29 22:45:48 WARN transaction handling failed correlationId="" messageId="" transactionId=bef849d1-6c2e-47e3-a309-e3e8f4cdf272 walletId=9d4a7cdf-267d-4983-b86a-3f0015010e9e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.02s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x104ae7300]
+
+goroutine 222 [running]:
+testing.tRunner.func1.2({0x10525efb8, 0x10534fb70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10525efb8?, 0x10534fb70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).waitReference(0x3b8eede3fcc0, {0x1052f4f58, 0x3b8eede6f620}, {0x1052f5ac0, 0x3b8eee057ae0}, 0x3b8eeddcf380)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/process.go:62 +0x320
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x3b8eede3fcc0, {0x1052f4f58, 0x3b8eede6f620}, {0x1052f5ac0, 0x3b8eee057ae0}, 0x3b8eeddcf380)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/process.go:93 +0x694
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute.func2({0x1052f4f58, 0x3b8eede6f620}, {0x1052f5ac0, 0x3b8eee057ae0})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/transaction.go:151 +0x3ac
+github.com/alexandre/wagering/internal/app/usecase_test.(*memory).Do(0x3b8eede4dab0, {0x1052f4f58, 0x3b8eede6f620}, 0x3b8eee181640)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/semantic_fixture_test.go:140 +0x1ec
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute(_, {_, _}, {{0x104bbc4c4, 0x4}, {0x104bfd1e0, 0x1}, {0x3b8eee01cfc0, 0xe}, {0x104bc5f08, ...}, ...})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/transaction.go:111 +0xa84
+github.com/alexandre/wagering/internal/transport/httpapi.handlers.submit({{{{}}, 0x3b8eeded6570, 0x3b8eede77de0, 0x3b8eede77df0, 0x3b8eedec4f00, 0x3b8eede3fcc0, 0x3b8eede77e00, 0x3b8eedcb49a0, 0x3b8eede4dc70, {0x0, ...}}}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/transport/httpapi/handlers.go:136 +0x2c4
+net/http.HandlerFunc.ServeHTTP(0x3b8eede6f620?, {0x1052f3630?, 0x3b8eee181580?}, 0x1052e5610?)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/server.go:2338 +0x38
+github.com/alexandre/wagering/internal/infra/auth.RequireProvider.func1({0x1052f3630, 0x3b8eee181580}, 0x3b8eeddc8dc0)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/infra/auth/middleware.go:63 +0xc0
+net/http.HandlerFunc.ServeHTTP(0x3b8eeddc8c80?, {0x1052f3630?, 0x3b8eee181580?}, 0x105396380?)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/server.go:2338 +0x38
+github.com/alexandre/wagering/internal/infra/auth.(*Verifier).Authenticate.func1({0x1052f3630, 0x3b8eee181580}, 0x3b8eeddc8c80)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/infra/auth/middleware.go:41 +0x1c4
+net/http.HandlerFunc.ServeHTTP(0x3b8eedcea780?, {0x1052f3630?, 0x3b8eee181580?}, 0x1052b7348?)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/server.go:2338 +0x38
+net/http.(*ServeMux).ServeHTTP(0x3b8eeddc8b40?, {0x1052f3630, 0x3b8eee181580}, 0x3b8eeddc8c80)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/server.go:2903 +0x194
+github.com/alexandre/wagering/internal/transport/httpapi.withCorrelation.func1({0x1052f3630, 0x3b8eee181580}, 0x3b8eeddc8b40)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/transport/httpapi/handlers.go:36 +0x114
+net/http.HandlerFunc.ServeHTTP(0x38?, {0x1052f3630?, 0x3b8eee181580?}, 0x10?)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/server.go:2338 +0x38
+github.com/alexandre/wagering/internal/app/usecase_test.contractAPI.request({{0x1052ef328?, 0x3b8eedec2c30?}, 0x3b8eedee0670?}, {0x104bbc504, 0x4}, {0x104bc775a, 0x16}, {0x104bbc0a0, 0x1}, {0x3b8eee01cfc0, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/http_contract_test.go:89 +0x3b4
+github.com/alexandre/wagering/internal/app/usecase_test.TestHTTPFinancialResponsesMatchContractAndPersistedFacts.func1(0x3b8eede20248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/http_contract_test.go:140 +0x110
+testing.tRunner(0x3b8eede20248, 0x3b8eee0579a0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 187
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.196s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.297s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.268s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.809s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_equal_updated (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING_REFERENCE FailureCode: BalanceAfter:<nil> Attempts:1 NextAttemptAt:2026-09-28 12:00:00 +0000 UTC ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: invalid pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.549s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.534s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.781s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.647s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.961s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.120s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.114s
+FAIL

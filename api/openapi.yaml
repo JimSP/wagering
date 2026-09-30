@@ -1,0 +1,1187 @@
+openapi: 3.0.3
+info:
+  title: Wagering API
+  version: 1.0.0
+  description: Descrição do servidor implementado. DESAFIO.md é a referência dos requisitos. Restrições adicionais
+    e cenários estão em docs/DESAFIO_VS_CODIGO.md.
+servers:
+- url: http://localhost:8080
+components:
+  securitySchemes:
+    oidc:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Money:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: string
+          pattern: ^\d+\.\d{2}$
+          example: '25.00'
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          example: BRL
+          enum:
+          - BRL
+          - USD
+          - EUR
+      additionalProperties: false
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      additionalProperties: false
+    SubmitTransactionRequest:
+      type: object
+      required:
+      - providerId
+      - externalTransactionId
+      - playerId
+      - walletId
+      - roundId
+      - gameId
+      - kind
+      - money
+      properties:
+        providerId:
+          type: string
+        externalTransactionId:
+          type: string
+        playerId:
+          type: string
+          format: uuid
+        walletId:
+          type: string
+          format: uuid
+        roundId:
+          type: string
+        gameId:
+          type: string
+        kind:
+          type: string
+          enum:
+          - BET
+          - WIN
+          - LOSS
+          - REFUND
+          - ROLLBACK
+        money:
+          $ref: '#/components/schemas/Money'
+        referenceExternalTransactionId:
+          type: string
+          description: ROLLBACK aceita BET/WIN/REFUND processada em qualquer etapa, inclusive após fechamento e liquidação, uma única vez por original; compensa dependências antes de devolver os recursos. Saldo insuficiente pode recuperar BETs abertas da mesma carteira ou produzir PENDING_ROLLBACK sem expiração enquanto aguarda resultado e recursos. Obrigatório para REFUND/ROLLBACK. Opcional para WIN; quando omitido, seleciona a BET processada mais antiga ainda aberta e com compromisso disponível,
+            no mesmo provedor/jogador/carteira/jogo/rodada/moeda, por created_at e desempate por ID. Ver docs/DESAFIO_VS_CODIGO.md.
+        betId:
+          type: string
+          format: uuid
+          description: Opcional, somente para BET. Vincula a uma aposta interna explícita; omitido, a BET cria aposta
+            própria.
+      additionalProperties: false
+    SubmitTransactionResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        status: &id001
+          type: string
+          enum:
+          - PENDING
+          - PENDING_REFERENCE
+          - PENDING_ROLLBACK
+          - PROCESSED
+          - REJECTED
+          - FAILED
+        balance:
+          $ref: '#/components/schemas/Money'
+        failureCode:
+          type: string
+          description: Motivo persistido da rejeição. RESULT_ALREADY_LOST identifica WIN posterior a LOSS processada no mesmo contexto, independentemente da confirmação interna. BET_NOT_CLOSED identifica WIN individual recebida antes do fechamento; replay preserva a rejeição.
+        idempotentReplay:
+          type: boolean
+      required:
+      - transactionId
+      - status
+      - idempotentReplay
+      additionalProperties: false
+    Wallet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        playerId:
+          type: string
+          format: uuid
+        balance:
+          $ref: '#/components/schemas/Money'
+        version:
+          type: integer
+          format: int64
+      required:
+      - id
+      - playerId
+      - balance
+      - version
+      additionalProperties: false
+    OpenWallet:
+      type: object
+      additionalProperties: false
+      required:
+      - playerId
+      - initialBalance
+      properties:
+        playerId:
+          type: string
+          format: uuid
+        initialBalance:
+          $ref: '#/components/schemas/Money'
+    SignedMoney:
+      type: object
+      properties:
+        amount:
+          type: string
+          pattern: ^-?\d+\.\d{2}$
+        currency:
+          type: string
+          enum:
+          - BRL
+          - USD
+          - EUR
+      required:
+      - amount
+      - currency
+      additionalProperties: false
+    Reconciliation:
+      type: object
+      properties:
+        walletId:
+          type: string
+          format: uuid
+        storedBalance:
+          $ref: '#/components/schemas/Money'
+        calculatedBalance:
+          $ref: '#/components/schemas/SignedMoney'
+        difference:
+          $ref: '#/components/schemas/SignedMoney'
+        consistent:
+          type: boolean
+        checkedEntries:
+          type: integer
+          format: int64
+      required:
+      - walletId
+      - storedBalance
+      - calculatedBalance
+      - difference
+      - consistent
+      - checkedEntries
+      additionalProperties: false
+    LedgerEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        walletId:
+          type: string
+          format: uuid
+        transactionId:
+          type: string
+          format: uuid
+        direction:
+          type: string
+          enum:
+          - DEBIT
+          - CREDIT
+        money:
+          $ref: '#/components/schemas/Money'
+        balanceBefore:
+          $ref: '#/components/schemas/Money'
+        balanceAfter:
+          $ref: '#/components/schemas/Money'
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - walletId
+      - transactionId
+      - direction
+      - money
+      - balanceBefore
+      - balanceAfter
+      - createdAt
+      additionalProperties: false
+    Ledger:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEntry'
+        nextCursor:
+          type: string
+      required:
+      - entries
+      additionalProperties: false
+    Transaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+        providerId:
+          type: string
+        externalTransactionId:
+          type: string
+        walletId:
+          type: string
+          format: uuid
+        kind:
+          type: string
+          enum:
+          - OPENING
+          - BET
+          - WIN
+          - LOSS
+          - REFUND
+          - ROLLBACK
+        status: *id001
+        money:
+          $ref: '#/components/schemas/Money'
+        balance:
+          $ref: '#/components/schemas/Money'
+        failureCode:
+          type: string
+          description: Motivo persistido da rejeição. RESULT_ALREADY_LOST identifica WIN posterior a LOSS processada no mesmo contexto, independentemente da confirmação interna. BET_NOT_CLOSED identifica WIN individual recebida antes do fechamento; replay preserva a rejeição.
+        nextAttemptAt:
+          type: string
+          format: date-time
+      required:
+      - transactionId
+      - walletId
+      - kind
+      - status
+      - money
+      additionalProperties: false
+    CreateBetRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        providerId:
+          type: string
+        roundId:
+          type: string
+        gameId:
+          type: string
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          example: BRL
+          enum:
+          - BRL
+          - USD
+          - EUR
+      required:
+      - id
+      - providerId
+      - roundId
+      - gameId
+      - currency
+      additionalProperties: false
+    CreateBetResponse:
+      type: object
+      properties:
+        betId:
+          type: string
+          description: Identidade fornecida na requisição. A criação fixa a janela global BET_WINDOW (padrão 5m); replay não renova o prazo.
+      required:
+      - betId
+      additionalProperties: false
+    SettlementAllocation:
+      type: object
+      properties:
+        fromExternalTransactionId:
+          type: string
+        toExternalTransactionId:
+          type: string
+        money:
+          $ref: '#/components/schemas/Money'
+      required:
+      - fromExternalTransactionId
+      - toExternalTransactionId
+      - money
+      additionalProperties: false
+    SettlementReturn:
+      type: object
+      properties:
+        externalTransactionId:
+          type: string
+        money:
+          $ref: '#/components/schemas/Money'
+      required:
+      - externalTransactionId
+      - money
+      additionalProperties: false
+    ConfirmResultRequest:
+      type: object
+      properties:
+        resultId:
+          type: string
+        allocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementAllocation'
+        returns:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementReturn'
+          minItems: 1
+      required:
+      - resultId
+      - returns
+      additionalProperties: false
+      description: Declara a distribuição completa dos compromissos. Valores positivos, mesma moeda e conservação
+        obrigatórios. A ordem dos arrays participa do hash de replay.
+    SettlementRecord:
+      type: object
+      properties:
+        settlementId:
+          type: string
+          format: uuid
+        betId:
+          type: string
+          format: uuid
+        resultId:
+          type: string
+        status:
+          type: string
+          enum:
+          - CONFIRMED
+          - PROCESSED
+          - REVERSED
+      required:
+      - settlementId
+      - betId
+      - resultId
+      - status
+      additionalProperties: false
+    SettlementPayment:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+        walletId:
+          type: string
+          format: uuid
+        betTransactionId:
+          type: string
+          format: uuid
+        status:
+          type: string
+        money:
+          $ref: '#/components/schemas/Money'
+      required:
+      - transactionId
+      - walletId
+      - betTransactionId
+      - status
+      - money
+      additionalProperties: false
+    SettlementPosting:
+      type: object
+      properties:
+        entryId:
+          type: string
+          format: uuid
+        journalId:
+          type: string
+          format: uuid
+        transactionId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+          format: uuid
+        walletId:
+          type: string
+          format: uuid
+        role:
+          type: string
+          enum:
+          - GUARANTEE
+          - OPERATIONAL
+        direction:
+          type: string
+          enum:
+          - DEBIT
+          - CREDIT
+        money:
+          $ref: '#/components/schemas/Money'
+        balanceBefore:
+          $ref: '#/components/schemas/Money'
+        balanceAfter:
+          $ref: '#/components/schemas/Money'
+        accountVersion:
+          type: integer
+          format: int64
+        sequence:
+          type: integer
+          format: int64
+        reversesJournalId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - entryId
+      - journalId
+      - transactionId
+      - accountId
+      - walletId
+      - role
+      - direction
+      - money
+      - balanceBefore
+      - balanceAfter
+      - accountVersion
+      - sequence
+      - createdAt
+      additionalProperties: false
+    SettlementAudit:
+      type: object
+      properties:
+        settlementId:
+          type: string
+          format: uuid
+        betId:
+          type: string
+          format: uuid
+        resultId:
+          type: string
+        status:
+          type: string
+          enum:
+          - CONFIRMED
+          - PROCESSED
+          - REVERSED
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementPayment'
+          nullable: true
+        postings:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementPosting'
+          nullable: true
+      required:
+      - settlementId
+      - betId
+      - resultId
+      - status
+      - payments
+      - postings
+      additionalProperties: false
+security:
+- oidc: []
+paths:
+  /wallets:
+    post:
+      summary: Open wallet (internal service only)
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: WALLET_EXISTS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE; IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenWallet'
+  /wallets/{walletId}:
+    get:
+      summary: Get wallet (internal)
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE; IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /wallets/{walletId}/ledger:
+    get:
+      summary: Ledger (opaque cursor, limit<=200)
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ledger'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE; IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 200
+          default: 50
+      - name: cursor
+        in: query
+        schema:
+          type: string
+  /wallets/{walletId}/reconciliation:
+    post:
+      summary: Rebuild balance from ledger (read-only)
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reconciliation'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE; IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /wagering/transactions:
+    post:
+      summary: Submit operation (provider; header Idempotency-Key required)
+      parameters:
+      - in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitTransactionRequest'
+      responses:
+        '200':
+          description: PROCESSED (idempotentReplay may be true)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitTransactionResponse'
+        '202':
+          description: PENDING / PENDING_REFERENCE / PENDING_ROLLBACK (see Location)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitTransactionResponse'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN (providerId mismatch)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: IDEMPOTENCY_CONFLICT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: REJECTED (failureCode)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitTransactionResponse'
+        '503':
+          description: UNAVAILABLE (Retry-After); IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /wagering/transactions/{transactionId}:
+    get:
+      summary: Get transaction
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE; IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /providers/{providerId}/wagering/transactions/{externalTransactionId}:
+    get:
+      summary: Get by external id
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE; IDP_UNAVAILABLE quando a consulta necessária ao IdP falha
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: providerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: externalTransactionId
+        in: path
+        required: true
+        schema:
+          type: string
+  /health/live:
+    get:
+      security: []
+      responses:
+        '200':
+          description: ok
+  /health/ready:
+    get:
+      security: []
+      responses:
+        '200':
+          description: ok
+        '503':
+          description: NOT_READY
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /metrics:
+    get:
+      security: []
+      responses:
+        '200':
+          description: Prometheus metrics
+  /bets:
+    post:
+      summary: Criar aposta explícita; replay do mesmo contexto também retorna 201
+      description: Exclusivo de role=internal. Extensão implementada; não substitui as operações externas do desafio.
+      responses:
+        '201':
+          description: Resultado persistido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBetResponse'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: IDEMPOTENCY_CONFLICT ou SETTLEMENT_NOT_PROCESSED, conforme operação
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE ou IDP_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBetRequest'
+  /bets/{betId}/result:
+    post:
+      summary: Confirmar distribuição e agendar liquidação; replay retorna estado persistido
+      description: Exclusivo de role=internal. Extensão implementada; não substitui as operações externas do desafio.
+      responses:
+        '202':
+          description: Resultado persistido após o encerramento da janela; pagamento assíncrono
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementRecord'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: IDEMPOTENCY_CONFLICT ou SETTLEMENT_NOT_PROCESSED, conforme operação
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: BET_NOT_CLOSED antes do fim da janela (sem persistir resultado; pode reenviar após o prazo), INVALID_DISTRIBUTION ou outro código de domínio
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE ou IDP_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmResultRequest'
+      parameters:
+      - in: path
+        name: betId
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /settlements/{settlementId}:
+    get:
+      summary: Auditar liquidação e partidas em snapshot consistente
+      description: Exclusivo de role=internal. Extensão implementada; não substitui as operações externas do desafio.
+      responses:
+        '200':
+          description: Resultado persistido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementAudit'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE ou IDP_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - in: path
+        name: settlementId
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /settlements/{settlementId}/rollback:
+    post:
+      summary: Compensar integralmente liquidação; replay por settlementId
+      description: Exclusivo de role=internal. Extensão implementada; não substitui as operações externas do desafio.
+      responses:
+        '200':
+          description: Resultado persistido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementRecord'
+        '400':
+          description: INVALID_INPUT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: SETTLEMENT_NOT_PROCESSED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Falha de domínio, incluindo REVERSAL_INSUFFICIENT_FUNDS; sem efeitos parciais
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: UNAVAILABLE ou IDP_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: INTERNAL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - in: path
+        name: settlementId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false

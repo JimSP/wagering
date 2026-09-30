@@ -1,0 +1,39 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	6.835s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	9.563s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.303s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.191s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	6.936s
+ok  	github.com/alexandre/wagering/internal/domain/wager	7.752s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.869s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.887s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.628s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingExistingBetAndNoNewCommitment (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1029c46cc]
+
+goroutine 45 [running]:
+testing.tRunner.func1.2({0x102f21958, 0x1030150b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102f21958?, 0x1030150b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.transactionRepo.Update({{0x102f9e610?, 0x7b666392b500?}}, {0x102f9f3c8, 0x1030541c0}, 0x102a3001a?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-144785730/internal/infra/postgres/transaction_repo.go:76 +0x9c
+github.com/alexandre/wagering/internal/infra/postgres.txAdapter.ApplyAccounting({{_, _}}, {_, _}, _, {{{0x0, 0x0}, {0x0, 0x0}, {0x0, ...}, ...}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-144785730/internal/infra/postgres/accounting_repo.go:131 +0x388
+github.com/alexandre/wagering/internal/infra/postgres.TestApplyAccountingExistingBetAndNoNewCommitment(0x7b66639ac908)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-144785730/internal/infra/postgres/accounting_closure_extra_test.go:61 +0x39c
+testing.tRunner(0x7b66639ac908, 0x102fa1dc0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	7.499s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.795s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.796s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.517s
+FAIL

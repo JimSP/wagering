@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -21,7 +21,7 @@
+ func (r ledgerRepo) List(ctx context.Context, w, cursor string, limit int) (port.LedgerPage, error) {
+ 	var seq int64
+ 	out := port.LedgerPage{Entries: []wager.LedgerEntry{}}
+-	if limit < 1 || limit > 200 {
++	if limit <= 1 || limit > 200 {
+ 		return out, apperr.Invalid("limit out of range")
+ 	}
+ 	if cursor != "" {

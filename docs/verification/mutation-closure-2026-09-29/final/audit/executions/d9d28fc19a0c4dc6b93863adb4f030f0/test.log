@@ -1,0 +1,40 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.275s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:10:39 INFO transaction handled correlationId="" messageId="" transactionId=19da2938-7bed-4c51-9215-aa9d39b3734f walletId=7757c420-ff39-4686-8371-b1a4f8d47c24 providerId=p status=PROCESSED
+2026/09/30 01:10:39 WARN transaction handling failed correlationId="" messageId="" transactionId=cc006fa1-1211-4bb6-892a-4a8e1eb263dc walletId=7757c420-ff39-4686-8371-b1a4f8d47c24 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.03s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.03s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 500 {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.997s
+--- FAIL: TestSettlementRequestSurvivesStorageAndRejectsMissingIdentity (0.00s)
+    settlement_contract_test.go:16: invalid integration event: settlement identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	10.861s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.614s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.992s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.250s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.660s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.753s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.544s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.954s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:10:46 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSettlementPublisherUsesPrivateQueueAndStableDelivery (0.00s)
+    sdk_contract_test.go:190: invalid integration event: settlement identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	7.806s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.443s
+FAIL

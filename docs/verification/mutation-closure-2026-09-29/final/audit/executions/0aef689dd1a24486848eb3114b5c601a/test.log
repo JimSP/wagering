@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.894s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:24:55 INFO transaction handled correlationId="" messageId="" transactionId=1e2fb499-86df-4255-b6a3-e2005536d5b4 walletId=f6b3dfcb-d6d9-4512-b3d5-bfa61e7680d4 providerId=p status=PROCESSED
+2026/09/30 01:24:55 WARN transaction handling failed correlationId="" messageId="" transactionId=5597f05b-b44c-4b76-a06b-9195c65e28f7 walletId=f6b3dfcb-d6d9-4512-b3d5-bfa61e7680d4 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.429s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.806s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.531s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.079s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.072s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.478s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.265s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.655s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: invalid snapshot steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	13.372s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.598s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.598s
+FAIL

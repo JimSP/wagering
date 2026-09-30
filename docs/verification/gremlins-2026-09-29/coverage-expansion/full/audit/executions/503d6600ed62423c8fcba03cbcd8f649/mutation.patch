@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -77,7 +77,7 @@
+ 	if w.PlayerID() != s.PlayerID {
+ 		return u.reject(ctx, tx, t, wager.FailReferenceMismatch)
+ 	}
+-	if w.Currency() != s.Amount.Currency() {
++	if w.Currency() == s.Amount.Currency() {
+ 		return u.reject(ctx, tx, t, wager.FailCurrencyMismatch)
+ 	}
+ 	direction, movement := wager.MovementFor(s.Kind)

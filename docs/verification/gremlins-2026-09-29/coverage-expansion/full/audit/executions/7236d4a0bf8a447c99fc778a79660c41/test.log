@@ -1,0 +1,51 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.663s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:58:34 INFO transaction handled correlationId="" messageId="" transactionId=d5fd2d89-ec9a-473e-9ca1-f8ea862a4296 walletId=f1092655-7650-4af9-98f1-32bd9ef270d1 providerId=p status=PROCESSED
+2026/09/29 01:58:34 WARN transaction handling failed correlationId="" messageId="" transactionId=4e5592e7-4ba4-4a82-bca0-207e005edfd4 walletId=f1092655-7650-4af9-98f1-32bd9ef270d1 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/processed_event (0.00s)
+        read_failure_test.go:156: processed event invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.105s
+--- FAIL: TestEventVariantsRejectInconsistentMetadata (0.00s)
+    --- FAIL: TestEventVariantsRejectInconsistentMetadata/opening_with_provider (0.00s)
+        validation_paths_test.go:77: {event wallet WagerTransactionProcessed {"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"t","kind":"OPENING","walletId":"wallet","playerId":"p","providerId":"external","money":{"amount":"1.00","currency":"BRL"}}} 1 0 {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.359s
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.259s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.669s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:58:35 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.020s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.988s
+FAIL

@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.025s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:15:21 INFO transaction handled correlationId="" messageId="" transactionId=e8721cc4-7383-4030-b353-100f4490b970 walletId=7a2b0854-1651-4913-8380-a4d9797caa88 providerId=p status=PROCESSED
+2026/09/29 22:15:21 WARN transaction handling failed correlationId="" messageId="" transactionId=816769f4-fa1d-44d4-ba33-7782cc77379e walletId=7a2b0854-1651-4913-8380-a4d9797caa88 providerId=p transient=false
+--- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting (0.00s)
+    --- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting/success (0.00s)
+        paired_storage_failure_test.go:68: {  tx EXTERNAL p external key hash wallet player round game WIN {100 BRL}   PENDING  <nil> 0 <nil> <nil> 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:00 +0000 UTC} wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.334s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.916s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.444s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.795s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.224s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.450s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.139s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.337s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.102s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.892s
+FAIL

@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.427s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.525s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.415s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.537s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.945s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.065s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.055s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.111s
+--- FAIL: TestConfigurationDefaultsAndExplicitValues (0.00s)
+    config_test.go:25: got={Roles:[api] HTTPAddr::8080 ShutdownTimeout:25s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} want={Roles:[api] HTTPAddr::8080 ShutdownTimeout:25s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} err=missing required env OIDC_AUDIENCE
+        missing required env DATABASE_URL
+        missing required env OIDC_ISSUER
+        missing required env OIDC_JWKS_URL
+        missing required env WAGER_QUEUE_URL
+        missing required env EVENTS_QUEUE_URL
+        missing required env SETTLEMENT_QUEUE_URL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	1.294s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.323s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.361s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	3.714s
+FAIL

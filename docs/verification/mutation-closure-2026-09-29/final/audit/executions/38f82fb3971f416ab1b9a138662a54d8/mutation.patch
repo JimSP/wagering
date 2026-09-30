@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -139,7 +139,7 @@
+ 		debit, credit = credit, debit
+ 	}
+ 	var journalID string
+-	if err := t.q.QueryRow(ctx, `SELECT accounting_move($1,$2,$3,$4,NULL,$5)::text`, s.ID, debit, credit, s.Amount.Minor(), now).Scan(&journalID); err != nil {
++	if err := t.q.QueryRow(ctx, `SELECT accounting_move($1,$2,$3,$4,NULL,$5)::text`, s.ID, debit, credit, s.Amount.Minor(), now).Scan(&journalID); err == nil {
+ 		return err
+ 	}
+ 	if d.NewCommitment {

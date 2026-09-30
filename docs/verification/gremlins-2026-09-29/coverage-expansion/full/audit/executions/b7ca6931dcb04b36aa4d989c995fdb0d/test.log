@@ -1,0 +1,37 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.147s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:04:05 INFO transaction handled correlationId="" messageId="" transactionId=f75d43e4-ba37-473d-b717-e4d3ce48888d walletId=70e8d6bf-71d6-46de-8a3f-1de2816cee6d providerId=p status=PROCESSED
+2026/09/29 02:04:05 WARN transaction handling failed correlationId="" messageId="" transactionId=102c395f-9361-4831-a706-d2d895f3f461 walletId=70e8d6bf-71d6-46de-8a3f-1de2816cee6d providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/balance_event (0.00s)
+        read_failure_test.go:156: balance event invalid integration event: movement amount
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.451s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:43: unexplained movement {    {0 } {0 } {0 } {0 0 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.674s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=INVALID_INPUT: invalid input: ledger entry l1 has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.995s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    --- FAIL: TestLedgerWireContractAndPaginationBoundaries/limit= (0.00s)
+        contract_test.go:135: want {"entries":[{"id":"entry","transactionId":"tx","direction":"CREDIT","money":{"amount":"1.00","currency":"BRL"},"balanceBefore":{"amount":"0.00","currency":"BRL"},"balanceAfter":{"amount":"1.00","currency":"BRL"},"createdAt":"2026-09-28T12:00:00Z"}],"nextCursor":"next"} got {"entries":[{"id":"","transactionId":"","direction":"","money":{"amount":"0.00","currency":""},"balanceBefore":{"amount":"0.00","currency":""},"balanceAfter":{"amount":"0.00","currency":""},"createdAt":"0001-01-01T00:00:00Z"}],"nextCursor":"next"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	2.315s
+FAIL

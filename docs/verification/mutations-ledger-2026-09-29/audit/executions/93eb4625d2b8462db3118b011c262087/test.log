@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.080s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:19:13 INFO transaction handled correlationId="" messageId="" transactionId=74ddd72f-4162-42b0-8bb2-a91750f042ed walletId=f53dc664-18aa-48d7-875e-d0bc5f7e8baf providerId=p status=PROCESSED
+2026/09/29 22:19:13 WARN transaction handling failed correlationId="" messageId="" transactionId=3707a645-ddaa-4035-998b-2e9b4e3152b2 walletId=f53dc664-18aa-48d7-875e-d0bc5f7e8baf providerId=p transient=false
+--- FAIL: TestSubmitExplicitBetRejectsInvalidIdentityAndPersistenceFailures (0.00s)
+    --- FAIL: TestSubmitExplicitBetRejectsInvalidIdentityAndPersistenceFailures/bind_failure (0.00s)
+        paired_storage_failure_test.go:245: unit of work lacks paired accounting storage
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.370s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.211s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.339s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.619s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.513s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.071s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.527s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.946s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.525s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.906s
+FAIL

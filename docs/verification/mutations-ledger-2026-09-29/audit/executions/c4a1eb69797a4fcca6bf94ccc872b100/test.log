@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.684s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:41:13 INFO transaction handled correlationId="" messageId="" transactionId=93eff390-b9e0-4143-a946-1f0babeefec8 walletId=4b6c9add-dd16-411a-83c2-d0cfa02df750 providerId=p status=PROCESSED
+2026/09/29 22:41:13 WARN transaction handling failed correlationId="" messageId="" transactionId=870fe409-7743-41c1-9c9e-3a63f9018ccb walletId=4b6c9add-dd16-411a-83c2-d0cfa02df750 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid processed snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.955s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.331s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.717s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.611s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid processed snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.187s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.496s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.647s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.349s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: invalid processed snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.245s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.494s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.470s
+FAIL

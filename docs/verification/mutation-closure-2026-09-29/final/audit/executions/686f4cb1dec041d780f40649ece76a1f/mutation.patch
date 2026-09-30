@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -111,7 +111,7 @@
+ 		return err
+ 	}
+ 	if decision.GuaranteeDirection != "" {
+-		if err = u.balanceEvent(ctx, tx, t, entry, decision.Guarantee.Version); err != nil {
++		if err = u.balanceEvent(ctx, tx, t, entry, decision.Guarantee.Version); err == nil {
+ 			return err
+ 		}
+ 	}

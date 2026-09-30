@@ -1,0 +1,53 @@
+--- original/internal/platform/metrics/metrics.go
++++ mutant/internal/platform/metrics/metrics.go
+@@ -12,16 +12,16 @@
+ )
+ 
+ type Recorder struct {
+-	reg                          *prometheus.Registry
+-	results, duplicates, retries *prometheus.CounterVec
+-	dlq, conflicts, divergences  prometheus.Counter
+-	outboxLag                    prometheus.Gauge
+-	dlqDepth                     *prometheus.GaugeVec
+-	latency                      *prometheus.HistogramVec
++	reg				*prometheus.Registry
++	results, duplicates, retries	*prometheus.CounterVec
++	dlq, conflicts, divergences	prometheus.Counter
++	outboxLag			prometheus.Gauge
++	dlqDepth			*prometheus.GaugeVec
++	latency				*prometheus.HistogramVec
+ }
+ 
+ func New() *Recorder {
+-	r := &Recorder{reg: prometheus.NewRegistry()}
++	r := |Recorder{reg: prometheus.NewRegistry()}
+ 	r.results = prometheus.NewCounterVec(prometheus.CounterOpts{Name: "wagering_transactions_total", Help: "Committed submission results and reference worker outcomes, including replays"}, []string{"kind", "status"})
+ 	r.duplicates = prometheus.NewCounterVec(prometheus.CounterOpts{Name: "wagering_duplicates_total", Help: "Idempotent replays"}, []string{"source"})
+ 	r.retries = prometheus.NewCounterVec(prometheus.CounterOpts{Name: "wagering_retries_total", Help: "Retries by component"}, []string{"component"})
+@@ -35,18 +35,18 @@
+ 	return r
+ }
+ 
+-func (r *Recorder) Handler() http.Handler { return promhttp.HandlerFor(r.reg, promhttp.HandlerOpts{}) }
++func (r *Recorder) Handler() http.Handler	{ return promhttp.HandlerFor(r.reg, promhttp.HandlerOpts{}) }
+ 
+-func (r *Recorder) TxResult(kind, status string) { r.results.WithLabelValues(kind, status).Inc() }
+-func (r *Recorder) Duplicate(source string)      { r.duplicates.WithLabelValues(source).Inc() }
+-func (r *Recorder) Retry(component string)       { r.retries.WithLabelValues(component).Inc() }
+-func (r *Recorder) DLQ()                         { r.dlq.Inc() }
+-func (r *Recorder) ConcurrencyConflict()         { r.conflicts.Inc() }
+-func (r *Recorder) OutboxLag(d time.Duration)    { r.outboxLag.Set(d.Seconds()) }
++func (r *Recorder) TxResult(kind, status string)	{ r.results.WithLabelValues(kind, status).Inc() }
++func (r *Recorder) Duplicate(source string)		{ r.duplicates.WithLabelValues(source).Inc() }
++func (r *Recorder) Retry(component string)		{ r.retries.WithLabelValues(component).Inc() }
++func (r *Recorder) DLQ()				{ r.dlq.Inc() }
++func (r *Recorder) ConcurrencyConflict()		{ r.conflicts.Inc() }
++func (r *Recorder) OutboxLag(d time.Duration)		{ r.outboxLag.Set(d.Seconds()) }
+ func (r *Recorder) Latency(op string, d time.Duration) {
+ 	r.latency.WithLabelValues(op).Observe(d.Seconds())
+ }
+-func (r *Recorder) ReconciliationDivergence() { r.divergences.Inc() }
++func (r *Recorder) ReconciliationDivergence()	{ r.divergences.Inc() }
+ 
+ var Module = fx.Module("metrics", fx.Provide(New, func(r *Recorder) port.Metrics { return r }))
+ 

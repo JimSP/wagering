@@ -1,0 +1,44 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.465s	coverage: 0.1% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	7.953s	coverage: 84.5% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/domain/event	1.164s	coverage: 9.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/domain/money	1.761s	coverage: 4.2% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.882s	coverage: 9.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.009s	coverage: 31.7% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.351s	coverage: 5.8% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.828s	coverage: 9.6% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/infra/config	2.465s	coverage: 0.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.204s	coverage: 12.9% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.935s	coverage: 3.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.788s	coverage: 0.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.718s	coverage: 0.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.492s	coverage: 0.1% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.512s	coverage: 0.1% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.551s	coverage: 0.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.481s	coverage: 0.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.564s	coverage: 5.8% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+ok  	github.com/alexandre/wagering/scripts	1.329s	coverage: 0.0% of statements in ./internal/domain/..., ./internal/app/usecase, ./internal/infra/auth
+# Cobertura unitária das áreas exigidas
+
+Execução com `-race`, sem tags de integração. A contagem consolida chamadas entre pacotes e inclui todos os blocos do perfil, sem excluir arquivos ou funções.
+
+| Pacote | Statements cobertos/total | Cobertura |
+|---|---:|---:|
+| internal/domain/money | 54/54 | 100.0% |
+| internal/domain/wallet | 47/47 | 100.0% |
+| internal/domain/event | 89/89 | 100.0% |
+| internal/domain/wager | 328/328 | 100.0% |
+| internal/domain/settlement | 60/60 | 100.0% |
+| internal/app/usecase | 553/553 | 100.0% |
+| internal/infra/auth | 120/120 | 100.0% |
+
+Domínio agregado: **578/578 statements**.
+
+Meta de 100% por pacote: **APROVADA**.
+
+100% de statements não significa 100% de branches ou de combinações de entradas. Integração é validada separadamente.
+
+Reproduzir: `./scripts/test-unit-coverage.sh`. Arquivos: `unit.out`, `functions.txt`, `unit.html` e `test.log`.

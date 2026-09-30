@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.176s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.740s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.284s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.416s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/game (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID:g Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x12a2e75aa528 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL     wallet player  g OPENING {100 BRL}   PROCESSED  0x12a2e75aa9a8 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.329s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.444s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.976s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.557s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid opening snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.010s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.762s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.966s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.949s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.124s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.037s
+FAIL

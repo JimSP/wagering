@@ -1,0 +1,452 @@
+[
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestOpeningStopsAtEveryFailedDependency",
+    "first_diagnostic": "read_failure_test.go:110: opening attempted positive account creation"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+    "first_diagnostic": "settlement_message_contract_test.go:59: err=invalid message: json: unknown field \"settlementId\" tx=0 command=0 commit=0 rollback=0; want nil/1/1/1/0"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestSettlementMessagePropagatesDatabaseFailure",
+    "first_diagnostic": "settlement_message_contract_test.go:93: err=invalid message: json: unknown field \"settlementId\" transactions=0 calls=0; want \"settlement begin failed\"/1/0"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestSettlementRedeliveryKeepsSameDatabaseIdentity",
+    "first_diagnostic": "settlement_message_contract_test.go:128: delivery 0: invalid message: json: unknown field \"settlementId\""
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+    "first_diagnostic": "http_contract_test.go:157: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {\"transactionId\":\"00000000-0000-4000-8000-000000000007\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestHTTPOpeningAndPermanentFailureHaveExactWireContracts",
+    "first_diagnostic": "http_contract_test.go:275: positive opening fabricated funds 201 {\"id\":\"00000000-0000-4000-8000-000000000009\",\"playerId\":\"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a3\",\"balance\":{\"amount\":\"10.00\",\"currency\":\"BRL\"},\"version\":1}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestHTTPDependencyErrorsRollBackAndRetryPreservesIdentity",
+    "first_diagnostic": "http_contract_test.go:343: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {\"transactionId\":\"00000000-0000-4000-8000-000000000009\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestHTTPDuplicateKeysFollowDocumentedLastValuePolicy",
+    "first_diagnostic": "http_contract_test.go:359: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {\"transactionId\":\"00000000-0000-4000-8000-000000000007\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+    "first_diagnostic": "journey_semantics_test.go:56: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+    "first_diagnostic": "journey_semantics_test.go:105: opening must create its exclusive empty guarantee"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+    "first_diagnostic": "journey_semantics_test.go:136: operational accounts=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:4000 currency:BRL} Version:3 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:0 currency:BRL} Version:3 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UT"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+    "first_diagnostic": "journey_semantics_test.go:217: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000025 PROCESSED 0xc00034a360  false}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+    "first_diagnostic": "journey_semantics_test.go:243: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+    "first_diagnostic": "journey_semantics_test.go:326: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+    "first_diagnostic": "journey_semantics_test.go:361: BET result={TransactionID:00000000-0000-4000-8000-000000000009 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+    "first_diagnostic": "journey_semantics_test.go:458: expected port failure <nil>"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestGeneratedJourneysMatchIndependentFinancialModel",
+    "first_diagnostic": "model_semantics_test.go:40: BET result={TransactionID:00000000-0000-4000-8000-000000000037 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestEveryFinancialOperationRollsBackFailuresAndRecoversOnce",
+    "first_diagnostic": "model_semantics_test.go:120: BET result={TransactionID:00000000-0000-4000-8000-000000000008 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestSubmissionObservabilityFollowsCommittedOutcome",
+    "first_diagnostic": "observable_contract_test.go:66: replay={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:true} err=<nil> results=[BET:REJECTED BET:REJECTED] duplicates=[HTTP] logs={\"time\":\"2026-09-29T15:26:56.531508-03:00\",\"level\":\"INFO\",\"msg\":\"transaction handled\",\"correlationId\":\"correlation\",\"messageId\":\"\",\"transactionId\":\"00000000-0000-4000-8000-000000000007\",\"walletId\":\"00000000-0000-4000-8000-000000000002\",\"providerId\":\"p\",\"status\":\"REJECTED\"}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+    "first_diagnostic": "paired_bet_contract_test.go:56: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestHTTPPairedBETUsesSameLiteralFinancialContract",
+    "first_diagnostic": "paired_bet_contract_test.go:87: HTTP=422 body={\"transactionId\":\"00000000-0000-4000-8000-000000000007\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestPairedBETFailureAtEachWriteRestoresBothAccounts",
+    "first_diagnostic": "paired_bet_contract_test.go:135: BET result={TransactionID:00000000-0000-4000-8000-000000000008 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestGeneratedPairedBETOrderPreservesOtherAccounts",
+    "first_diagnostic": "paired_bet_contract_test.go:194: BET result={TransactionID:00000000-0000-4000-8000-000000000037 Status:PROCESSED Balance:0xc00034be30 FailureCode: IdempotentReplay:false}; want status=REJECTED failure=BALANCE_OVERFLOW replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+    "first_diagnostic": "reference_semantics_test.go:20: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox",
+    "first_diagnostic": "reference_semantics_test.go:152: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl",
+    "first_diagnostic": "result_lifecycle_contract_test.go:80: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 404 404 page not found"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestConfirmedResultAutomaticallyEnqueuesOnlyItsOwnSettlement",
+    "first_diagnostic": "result_lifecycle_contract_test.go:98: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 404 404 page not found"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestClosedBetRejectsRefundWhileSettlementIsStillPending",
+    "first_diagnostic": "result_lifecycle_contract_test.go:128: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 404 404 page not found"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestClosedResultCannotChangeDistributionOrConsumeAnotherIdentity",
+    "first_diagnostic": "result_lifecycle_contract_test.go:140: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 404 404 page not found"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+    "first_diagnostic": "settlement_contract_test.go:32: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabaseCommandPreservesRetryClassification",
+    "first_diagnostic": "settlement_contract_test.go:47: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries",
+    "first_diagnostic": "settlement_contract_test.go:61: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/domain/wager",
+    "test": "TestReferenceStateAndRules",
+    "first_diagnostic": "invariants_test.go:64: DEBIT"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/domain/wager",
+    "test": "TestRevisedOperationalWalletMovementDirections",
+    "first_diagnostic": "settlement_direction_contract_test.go:27: operational wallet: direction=\"DEBIT\" movement=true; want direction=\"CREDIT\" movement=true"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/domain/wager",
+    "test": "TestRevisedReversalInvertsOperationalWalletMovement",
+    "first_diagnostic": "settlement_direction_contract_test.go:47: reverse BET: direction=\"CREDIT\" err=<nil>; want \"DEBIT\" and nil"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestInvalidDistributionDoesNotCloseBetOrQueuePartialSettlement",
+    "first_diagnostic": "result_lifecycle_contract_test.go:155: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 404 404 page not found"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestRevisedStandaloneWINCannotCreateUnfundedMoney",
+    "first_diagnostic": "settlement_red_contract_test.go:53: standalone WIN: err=<nil> result={TransactionID:00000000-0000-4000-8000-000000000002 Status:PROCESSED Balance:0xc000280c48 FailureCode: IdempotentReplay:false}; want INVALID_INPUT"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestRevisedBETCannotSpendWithoutItsOwnGuarantee",
+    "first_diagnostic": "settlement_red_contract_test.go:84: missing own guarantee: err=<nil> result={TransactionID:00000000-0000-4000-8000-000000000003 Status:PROCESSED Balance:0xc000281770 FailureCode: IdempotentReplay:false}; want invalid input: wallet has no guarantee account"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestRevisedCommittedMovementCannotHaveOnlyOneSide",
+    "first_diagnostic": "settlement_red_contract_test.go:112: BET result={TransactionID:00000000-0000-4000-8000-000000000007 Status:REJECTED Balance:<nil> FailureCode:INSUFFICIENT_FUNDS IdempotentReplay:false}; want status=PROCESSED failure= replay=false"
+  },
+  {
+    "suite": "race",
+    "package": "github.com/alexandre/wagering/internal/app/usecase",
+    "test": "TestRevisedBETMustNotEmitWalletDebitAsStakeCommitment",
+    "first_diagnostic": "settlement_red_contract_test.go:119: operational accounts=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:6500 currency:BRL} Version:2 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:11500 currency:BRL} Version:2 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:0"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestGuaranteeMigrationPreservesLegacyOriginAndRetriesAbortedDDL",
+    "first_diagnostic": "guarantee_migration_integration_test.go:98: MISSING IMPLEMENTATION: guarantee migration after 000002; legacy fixture is valid"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+    "first_diagnostic": "settlement_admission_order_integration_test.go:54: GET /wallets/8c6efe42-4b4e-4998-9e6f-55f233a8ad11/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementBatchMeasurementPreservesLiteralTotals",
+    "first_diagnostic": "settlement_batch_measurement_integration_test.go:29: POST /bets: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+    "first_diagnostic": "settlement_constraints_integration_test.go:32: GET /wallets/8dc3af4c-1616-4758-b144-2aa01693db6d/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+    "first_diagnostic": "settlement_constraints_integration_test.go:93: GET /wallets/c8861728-9943-4e34-9f38-36c98c9c36f0/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+    "first_diagnostic": "settlement_contract_test.go:32: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabaseCommandPreservesRetryClassification",
+    "first_diagnostic": "settlement_contract_test.go:47: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries",
+    "first_diagnostic": "settlement_contract_test.go:61: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+    "first_diagnostic": "settlement_durable_observation_integration_test.go:292: GET /wallets/c083d93a-5137-4902-8dac-8acb9d96a41a/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+    "first_diagnostic": "settlement_events_queries_integration_test.go:66: GET /wallets/a43aa395-0bd4-4321-9627-a3a4b295e10d/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementFundedLifecycleOnRealPostgres",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:273: GET /wallets/4a8d25a0-2303-4ccb-99a8-2d621e3df47d/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:301: GET /wallets/dc141d94-dd29-4ebf-ad16-fdc3f6993c84/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDoesNotWaitForUnconfirmedOtherBet",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:327: GET /wallets/45137062-9fbd-4104-a51d-7c14c7e85f3a/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementCommittedDespiteLostReplyReplaysAfterRestart",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:358: GET /wallets/b480737b-01cd-4a0d-b012-89e5189cb964/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:383: GET /wallets/e234c5c9-36ea-49f1-913a-753be4eae5df/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementSQLWriteFailuresRollBackWholeBatchAndRetry",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:415: GET /wallets/cf9458b6-64dc-4759-9579-b66c5d4b0144/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:468: GET /wallets/137d3bed-7d3a-42e5-9c74-7f3ec0c89961/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementRollbackPreservesClosedBetAndOriginalHistory",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:496: GET /wallets/09ce157c-dd77-4b11-ac01-576f064bfb97/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestDepositIdentityAndValidationOnRealPostgres",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:567: GET /wallets/aacdb469-4d5c-454d-83ac-195ce195809f/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:601: GET /wallets/5e6b23ce-57aa-4257-90cd-5e06c5045115/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:647: GET /wallets/104029e3-7e69-495f-8fac-a09d41507814/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementOverflowRollsBackEveryParticipantThenRetries",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:694: GET /wallets/abc73277-70c7-4b50-a129-5c17e5298b09/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementRollbackCannotBorrowOperationalOrOtherGuaranteeFunds",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:718: GET /wallets/c2faafac-cfbd-437f-b280-7d7d67dede4f/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:739: GET /wallets/4207b053-1655-4238-87c4-062e55273dcb/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:768: GET /wallets/387cfa56-4338-406c-b546-a9b8ef7f1f28/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementLockedPairDoesNotBlockIndependentPair",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:814: GET /wallets/da178add-b9de-40e7-b445-f53c6cfc3a78/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementClosureAndRefundHaveOnlyOneValidAdmissionOrder",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:878: GET /wallets/35900ecf-6bae-4553-a079-08c784dd78c7/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:956: GET /wallets/d4e41e52-18d5-4854-b7ad-059e3c522c4d/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestConcurrentResultsCannotCreateTwoSettlementsForSameCommitments",
+    "first_diagnostic": "settlement_lifecycle_integration_test.go:976: GET /wallets/044b8999-4462-45a7-8a27-796c36f2a840/guarantee: got 404 404 page not found"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementRejectsUnfundedWINWithRealPostgres",
+    "first_diagnostic": "settlement_safety_integration_test.go:112: unfunded WIN must fail before admission: {TransactionID:a1dcab38-af7c-4d2d-b45c-212c7242a26d Status:PROCESSED Balance:0xc000012270 FailureCode: IdempotentReplay:false} <nil>"
+  },
+  {
+    "suite": "postgres",
+    "package": "github.com/alexandre/wagering/internal/infra/postgres",
+    "test": "TestSettlementDatabaseGuardsRejectUnfundedCreditBypass",
+    "first_diagnostic": "settlement_safety_integration_test.go:179: database must reject lack of financial origin with an integrity error, got <nil>"
+  },
+  {
+    "suite": "system",
+    "package": "github.com/alexandre/wagering/test/integration",
+    "test": "TestSettlementBrokerRejectsForgedAuthority",
+    "first_diagnostic": "settlement_system_test.go:44: authorized publisher control operation error SQS: SendMessage, https response error StatusCode: 403, RequestID: , api error AccessDeniedException: User: arn:aws:iam::000000000000:user/worker is not authorized to perform: sqs:SendMessage because no identity-based policy allows the sqs:SendMessage action"
+  },
+  {
+    "suite": "system",
+    "package": "github.com/alexandre/wagering/test/integration",
+    "test": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+    "first_diagnostic": "settlement_system_test.go:152: guarantee 404 404 page not found"
+  },
+  {
+    "suite": "system",
+    "package": "github.com/alexandre/wagering/test/integration",
+    "test": "TestSettlementPublisherLeaseRejectsStaleOwner",
+    "first_diagnostic": "settlement_system_test.go:218: guarantee 404 404 page not found"
+  },
+  {
+    "suite": "system-ingress",
+    "package": "github.com/alexandre/wagering/test/integration",
+    "test": "TestSettlementEnvelopeOnExternalIngressCannotAcquireInternalAuthority",
+    "first_diagnostic": "settlement_system_test.go:251: guarantee 404 404 page not found"
+  }
+]

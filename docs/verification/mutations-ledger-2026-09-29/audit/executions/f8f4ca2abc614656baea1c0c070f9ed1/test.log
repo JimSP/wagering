@@ -1,0 +1,41 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.533s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:30:58 INFO transaction handled correlationId="" messageId="" transactionId=41c70964-6259-4e67-85d3-a200d57bdaec walletId=e59fa22e-ca1e-4b68-a04b-c192bcaaf00c providerId=p status=PROCESSED
+2026/09/29 22:30:58 WARN transaction handling failed correlationId="" messageId="" transactionId=b8430aa5-2707-442e-a3f3-fca5772140a6 walletId=e59fa22e-ca1e-4b68-a04b-c192bcaaf00c providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.775s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	3.504s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=money: currency mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.273s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: money: currency mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.525s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: currency mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.103s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {10000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.012s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.104s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.211s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=money: currency mismatch want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.836s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.597s
+FAIL

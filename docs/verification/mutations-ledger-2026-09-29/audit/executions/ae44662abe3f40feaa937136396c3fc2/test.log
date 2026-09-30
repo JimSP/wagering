@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.934s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:20:27 INFO transaction handled correlationId="" messageId="" transactionId=be2e2e96-fad2-44a4-975d-8ef02e749352 walletId=e391c79e-bd97-41db-a271-93c9e576c339 providerId=p status=PROCESSED
+2026/09/29 22:20:27 WARN transaction handling failed correlationId="" messageId="" transactionId=a54264ba-5e7d-447e-9e8b-47e4f11ae57d walletId=e391c79e-bd97-41db-a271-93c9e576c339 providerId=p transient=false
+--- FAIL: TestMessageEnvelopeRejectsEachRequiredField (0.00s)
+    --- FAIL: TestMessageEnvelopeRejectsEachRequiredField/idempotencyKey (0.00s)
+        worker_contract_test.go:45: err=invalid input: INVALID_INPUT: invalid input: idempotencyKey is required writes=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.192s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.285s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.524s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.638s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.404s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.169s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.190s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.744s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.065s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.695s
+FAIL

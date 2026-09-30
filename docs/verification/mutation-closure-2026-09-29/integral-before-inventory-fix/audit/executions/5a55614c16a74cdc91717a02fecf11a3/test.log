@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.218s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:03:50 INFO transaction handled correlationId="" messageId="" transactionId=7eaded3c-2270-459a-8e0a-be60db907345 walletId=252af55d-c4f3-4361-ae9f-366a5f8402e4 providerId=p status=PROCESSED
+2026/09/30 00:03:50 WARN transaction handling failed correlationId="" messageId="" transactionId=dcc0a5d5-b5eb-4918-97a0-93d054f76289 walletId=252af55d-c4f3-4361-ae9f-366a5f8402e4 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.04s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.04s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid allocation"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.916s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.775s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.633s
+--- FAIL: TestDistributionRequiresCompleteConservedStakes (0.00s)
+    --- FAIL: TestDistributionRequiresCompleteConservedStakes/funded (0.00s)
+        plan_test.go:30: validation=invalid settlement distribution: invalid allocation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.634s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.506s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.076s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.504s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.748s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.387s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.017s
+FAIL

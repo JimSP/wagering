@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.695s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: providerId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.533s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.735s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.661s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.906s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+        accounting_test.go:46: INVALID_INPUT: invalid input: providerId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.012s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.318s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.866s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.158s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:300: error=INVALID_INPUT: invalid input: idempotencyKey is required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.212s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.234s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.204s
+FAIL

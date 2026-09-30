@@ -1,0 +1,174 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	5.617s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+panic: runtime error: slice bounds out of range [:7] with length 4 [recovered, repanicked]
+
+goroutine 26 [running]:
+testing.tRunner.func1.2({0x102d75b50, 0x58b7e62dc120})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102d75b50?, 0x58b7e62dc120?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x102672ccc, 0x4}, {0x1026728a0?, 0x1?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/app/usecase.TestPersistentResultReplayAndPayloadConflict(0x58b7e6486d88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/app/usecase/idempotency_test.go:53 +0x194
+testing.tRunner(0x58b7e6486d88, 0x102db2600)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.374s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/provider (0.00s)
+panic: runtime error: slice bounds out of range [:7] with length 4 [recovered, repanicked]
+
+goroutine 21 [running]:
+testing.tRunner.func1.2({0x104c59050, 0x23bc28e1e048})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104c59050?, 0x23bc28e1e048?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x104a9f77f, 0x4}, {0x23bc28d30ab8?, 0x2?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/domain/event.exactMoney({{0x104a9f77f?, 0x104994934?}, {0x104a9f63c?, 0x104c56468?}})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/validation.go:15 +0x2c
+github.com/alexandre/wagering/internal/domain/event.validate({0x104a9f949?, 0x5?}, {0x104a9fb93?, 0x6?}, {0x104aa1030?, 0xb?}, {0x104aa59b5?, 0x19?}, 0x1?, {0x0?, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/validation.go:37 +0x918
+github.com/alexandre/wagering/internal/domain/event.Envelope[...].ToOutgoing(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/event.go:64 +0x9c
+github.com/alexandre/wagering/internal/domain/event_test.TestEventDataValidatesEachIndependentField.func12(0x23bc28e626c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/input_contract_test.go:34 +0xd0
+testing.tRunner(0x23bc28e626c8, 0x23bc28e24320)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 19
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/event	5.300s
+--- FAIL: TestExactBoundaries (0.00s)
+panic: runtime error: slice bounds out of range [:23] with length 20 [recovered, repanicked]
+
+goroutine 20 [running]:
+testing.tRunner.func1.2({0x104973b50, 0x4c0bf0ba8018})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104973b50?, 0x4c0bf0ba8018?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x10477ca07, 0x14}, {0x4c0bf0b23718?, 0x1046a3ccc?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/domain/money_test.TestExactBoundaries(0x4c0bf0bf0488)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/boundaries_test.go:12 +0x48
+testing.tRunner(0x4c0bf0bf0488, 0x104982f08)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/money	5.859s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	6.123s
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+panic: runtime error: slice bounds out of range [:7] with length 4 [recovered, repanicked]
+
+goroutine 74 [running]:
+testing.tRunner.func1.2({0x10053d6c0, 0x5433f952a1e0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10053d6c0?, 0x5433f952a1e0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x100379dfe, 0x4}, {0x44?, 0x0?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/domain/wager_test.TestOpeningAndSnapshotIsolation(0x5433f95ae248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/wager/invariants_test.go:13 +0x40
+testing.tRunner(0x5433f95ae248, 0x10054b1c8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	6.367s
+--- FAIL: TestDebitInvariants (0.00s)
+panic: runtime error: slice bounds out of range [:9] with length 6 [recovered, repanicked]
+
+goroutine 41 [running]:
+testing.tRunner.func1.2({0x101121ad0, 0x32c128a2a048})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x101121ad0?, 0x32c128a2a048?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x100fbc207, 0x6}, {0x0?, 0x7ee?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/domain/wallet_test.TestDebitInvariants(0x32c128a7d448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/wallet/wallet_test.go:13 +0x40
+testing.tRunner(0x32c128a7d448, 0x10112d280)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	5.589s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.084s
+ok  	github.com/alexandre/wagering/internal/infra/config	6.813s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+panic: runtime error: slice bounds out of range [:7] with length 4 [recovered, repanicked]
+
+goroutine 388 [running]:
+testing.tRunner.func1.2({0x104ed6e70, 0x7d4e48029758})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104ed6e70?, 0x7d4e48029758?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x104998525, 0x4}, {0x104998191?, 0x3?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/domain/event.exactMoney({{0x104998525?, 0x0?}, {0x104998191?, 0x104553850?}})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/validation.go:15 +0x2c
+github.com/alexandre/wagering/internal/domain/event.validate({0x104998929?, 0x90?}, {0x104998ee2?, 0x7d4e4825aea0?}, {0x104998521?, 0x1045cf3c0?}, {0x1049a29fe?, 0x10455c880?}, 0x7d4e47fe25a8?, {0x1045cf0dc?, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/validation.go:37 +0x918
+github.com/alexandre/wagering/internal/domain/event.Envelope[...].ToOutgoing(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/event.go:64 +0x9c
+github.com/alexandre/wagering/internal/infra/postgres.outgoing(0x7d4e48265448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/infra/postgres/messaging_contract_test.go:14 +0x20c
+github.com/alexandre/wagering/internal/infra/postgres.TestOutboxLeasePayloadAndErrors(0x7d4e48265448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/infra/postgres/messaging_contract_test.go:54 +0x28
+testing.tRunner(0x7d4e48265448, 0x104f05e10)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	6.739s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:14:55 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+panic: runtime error: slice bounds out of range [:7] with length 4 [recovered, repanicked]
+
+goroutine 533 [running]:
+testing.tRunner.func1.2({0x101548110, 0x692cb6c2b590})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x101548110?, 0x692cb6c2b590?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/money.Parse({0x100da3d0c, 0x4}, {0x692cb6d1bc70?, 0x692cb6d440c0?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/money/money.go:43 +0x128
+github.com/alexandre/wagering/internal/domain/event.exactMoney({{0x100da3d0c?, 0x692cb6d112c0?}, {0x100da3947?, 0x692cb6d007a0?}})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/validation.go:15 +0x2c
+github.com/alexandre/wagering/internal/domain/event.validate({0x100da41a8?, 0x1014721a8?}, {0x100da47ad?, 0x5150e20cc8e43483?}, {0x100da3d08?, 0x0?}, {0x100db2e56?, 0xffffffffffffffff?}, 0x0?, {0x692cb6cb2690?, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/validation.go:37 +0x918
+github.com/alexandre/wagering/internal/domain/event.Envelope[...].ToOutgoing(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/domain/event/event.go:64 +0x9c
+github.com/alexandre/wagering/internal/infra/sqs.TestSDKPublisherAndReadinessContracts(0x692cb6e8a248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-452045020/internal/infra/sqs/sdk_contract_test.go:37 +0x1dc
+testing.tRunner(0x692cb6e8a248, 0x10158bbf8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	5.439s
+FAIL

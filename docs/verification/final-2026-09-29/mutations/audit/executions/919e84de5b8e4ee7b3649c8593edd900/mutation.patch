@@ -1,0 +1,79 @@
+--- original/internal/app/usecase/wallet.go
++++ mutant/internal/app/usecase/wallet.go
+@@ -13,22 +13,22 @@
+ )
+ 
+ type WalletView struct {
+-	ID, PlayerID string
+-	Balance      money.Money
+-	Version      int64
++	ID, PlayerID	string
++	Balance		money.Money
++	Version		int64
+ }
+ 
+ // ---- OpenWallet -----------------------------------------------------------
+ 
+ type OpenWalletInput struct {
+-	PlayerID       string
+-	InitialBalance money.Money
++	PlayerID	string
++	InitialBalance	money.Money
+ }
+ 
+ type OpenWallet struct {
+-	uow   port.UnitOfWork
+-	clock port.Clock
+-	ids   port.IDGenerator
++	uow	port.UnitOfWork
++	clock	port.Clock
++	ids	port.IDGenerator
+ }
+ 
+ func NewOpenWallet(uow port.UnitOfWork, clock port.Clock, ids port.IDGenerator) *OpenWallet {
+@@ -80,7 +80,7 @@
+ 
+ type GetWallet struct{ uow port.UnitOfWork }
+ 
+-func NewGetWallet(uow port.UnitOfWork) *GetWallet { return &GetWallet{uow} }
++func NewGetWallet(uow port.UnitOfWork) *GetWallet	{ return &GetWallet{uow} }
+ 
+ func (u *GetWallet) Execute(ctx context.Context, walletID string) (WalletView, error) {
+ 	var v WalletView
+@@ -99,12 +99,12 @@
+ 
+ type ListLedger struct{ uow port.UnitOfWork }
+ 
+-func NewListLedger(uow port.UnitOfWork) *ListLedger { return &ListLedger{uow} }
++func NewListLedger(uow port.UnitOfWork) *ListLedger	{ return &ListLedger{uow} }
+ 
+ func (u *ListLedger) Execute(ctx context.Context, walletID, cursor string, limit int) (port.LedgerPage, error) {
+ 	var page port.LedgerPage
+ 	err := u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error {
+-		if _, e := tx.Wallets().Get(ctx, walletID); e != nil {
++		if _, e := tx.Wallets().Get(ctx, walletID); e == nil {
+ 			return e
+ 		}
+ 		var e error
+@@ -117,15 +117,15 @@
+ // ---- ReconcileWallet ------------------------------------------------------
+ 
+ type ReconciliationResult struct {
+-	WalletID                       string
+-	Stored, Calculated, Difference money.Money
+-	Consistent                     bool
+-	CheckedEntries                 int64
++	WalletID			string
++	Stored, Calculated, Difference	money.Money
++	Consistent			bool
++	CheckedEntries			int64
+ }
+ 
+ type ReconcileWallet struct {
+-	uow     port.UnitOfWork
+-	metrics port.Metrics
++	uow	port.UnitOfWork
++	metrics	port.Metrics
+ }
+ 
+ func NewReconcileWallet(uow port.UnitOfWork, m port.Metrics) *ReconcileWallet {

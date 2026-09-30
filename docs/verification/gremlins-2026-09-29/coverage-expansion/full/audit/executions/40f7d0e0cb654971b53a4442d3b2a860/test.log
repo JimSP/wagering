@@ -1,0 +1,46 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.355s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:01:40 INFO transaction handled correlationId="" messageId="" transactionId=d7524fd2-db57-4ab6-a98f-8dc306514f68 walletId=f96e0d74-58fa-4f95-9900-1d5206619120 providerId=p status=PROCESSED
+2026/09/29 02:01:40 WARN transaction handling failed correlationId="" messageId="" transactionId=212b2add-db63-4047-b6d3-62fbcc347ecd walletId=f96e0d74-58fa-4f95-9900-1d5206619120 providerId=p transient=false
+--- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors (0.00s)
+    --- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors/reconciliation/currency (0.00s)
+        read_failure_test.go:92: money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.636s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.677s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	3.267s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.857s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {10000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.410s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=money: uninitialized value want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.168s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.017s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    contract_test.go:110: money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	3.597s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -97,7 +97,7 @@
+ 			return err
+ 		}
+ 	}
+-	if err = t.MarkProcessed(decision.Guarantee.Balance, u.clock.Now()); err != nil {
++	if err = t.MarkProcessed(decision.Guarantee.Balance, u.clock.Now()); err == nil {
+ 		return err
+ 	}
+ 	var entry wager.LedgerEntry

@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.701s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:21 INFO transaction handled correlationId="" messageId="" transactionId=26342858-619d-4b73-a79b-4b6bcd280437 walletId=dc1d9ac4-1981-4fcf-afc2-b328b8435f75 providerId=p status=PROCESSED
+2026/09/29 03:24:21 WARN transaction handling failed correlationId="" messageId="" transactionId=cb14c479-357a-4546-8ee1-bba3221f2b85 walletId=dc1d9ac4-1981-4fcf-afc2-b328b8435f75 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.503s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.727s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.843s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.723s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.425s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.467s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.845s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: retry history on initial pending state want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.153s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.326s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.905s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.919s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.115s
+FAIL

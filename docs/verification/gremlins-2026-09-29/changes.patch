@@ -1,0 +1,1134 @@
+--- a/cmd/wagering/app_test.go
++++ b/cmd/wagering/app_test.go
+@@ -1,7 +1,9 @@
+ package main
+ 
+ import (
++	"errors"
+ 	"testing"
++	"time"
+ 
+ 	"go.uber.org/fx"
+ )
+@@ -12,3 +14,16 @@
+ 		t.Fatal(err)
+ 	}
+ }
++
++func TestShutdownBudgetConfiguration(t *testing.T) {
++	// Inspect Fx options without constructing infrastructure dependencies.
++	inspection := errors.New("configuration inspection only")
++	opts := append(Options(), fx.NopLogger, fx.Error(inspection))
++	app := fx.New(opts...)
++	if !errors.Is(app.Err(), inspection) {
++		t.Fatalf("unexpected construction: %v", app.Err())
++	}
++	if app.StopTimeout() != 30*time.Second {
++		t.Fatalf("shutdown budget=%v", app.StopTimeout())
++	}
++}
+--- /dev/null
++++ b/internal/app/usecase/observable_contract_test.go
+@@ -0,0 +1,70 @@
++package usecase_test
++
++import (
++	"bytes"
++	"context"
++	"errors"
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"github.com/alexandre/wagering/internal/app/usecase"
++	"log/slog"
++	"reflect"
++	"strings"
++	"testing"
++)
++
++func TestSubmitRejectsEachMissingInboxFieldBeforeAnyEffect(t *testing.T) {
++	for _, field := range []string{"id", "hash"} {
++		t.Run(field, func(t *testing.T) {
++			s := scenarioWith(t, 10000)
++			in := s.input("bet", "BET", "1.00", "")
++			in.Source = usecase.SourceSQS
++			in.InboxMessageID = "message"
++			in.InboxHash = "hash"
++			if field == "id" {
++				in.InboxMessageID = ""
++			} else {
++				in.InboxHash = ""
++			}
++			before := s.m.s.copy()
++			calls := s.m.calls
++			got, err := s.submit.Execute(context.Background(), in)
++			if !errors.Is(err, apperr.ErrInvalidInput) || !reflect.DeepEqual(got, usecase.SubmitResult{}) || s.m.calls != calls || !reflect.DeepEqual(before, s.m.s) {
++				t.Fatalf("result=%+v err=%v effects=%d", got, err, s.m.calls-calls)
++			}
++		})
++	}
++}
++func TestSubmissionObservabilityFollowsCommittedOutcome(t *testing.T) {
++	for _, failed := range []bool{false, true} {
++		t.Run(map[bool]string{false: "success and replay", true: "failure"}[failed], func(t *testing.T) {
++			s := scenarioWith(t, 10000)
++			in := s.input("bet", "BET", "1.00", "")
++			s.metrics.results = nil
++			s.metrics.duplicates = nil
++
++			var logs bytes.Buffer
++			old := slog.Default()
++			slog.SetDefault(slog.New(slog.NewJSONHandler(&logs, nil)))
++			defer slog.SetDefault(old)
++			cause := errors.New("outbox unavailable")
++			before := s.m.s.copy()
++			if failed {
++				s.m.failEvent = cause
++			}
++			result, err := s.submit.Execute(context.Background(), in)
++			if failed {
++				if !errors.Is(err, cause) || !reflect.DeepEqual(result, usecase.SubmitResult{}) || !reflect.DeepEqual(before, s.m.s) || len(s.metrics.results) != 0 || len(s.metrics.duplicates) != 0 || !strings.Contains(logs.String(), `"msg":"transaction handling failed"`) || strings.Contains(logs.String(), `"msg":"transaction handled"`) {
++					t.Fatalf("err=%v metrics=%v logs=%s", err, s.metrics.results, logs.String())
++				}
++				return
++			}
++			if err != nil {
++				t.Fatal(err)
++			}
++			replay, err := s.submit.Execute(context.Background(), in)
++			if err != nil || !replay.IdempotentReplay || !reflect.DeepEqual(s.metrics.results, []string{"BET:PROCESSED", "BET:PROCESSED"}) || !reflect.DeepEqual(s.metrics.duplicates, []string{"HTTP"}) || strings.Count(logs.String(), `"msg":"transaction handled"`) != 2 || strings.Contains(logs.String(), `"msg":"transaction handling failed"`) {
++				t.Fatalf("replay=%+v err=%v results=%v duplicates=%v logs=%s", replay, err, s.metrics.results, s.metrics.duplicates, logs.String())
++			}
++		})
++	}
++}
+--- a/internal/app/usecase/outbox_paths_test.go
++++ b/internal/app/usecase/outbox_paths_test.go
+@@ -1,9 +1,12 @@
+ package usecase
+ 
+ import (
++	"bytes"
+ 	"context"
+ 	"errors"
+ 	"github.com/alexandre/wagering/internal/domain/event"
++	"log/slog"
++	"strings"
+ 	"testing"
+ 	"time"
+ )
+@@ -19,6 +22,10 @@
+ 	}
+ 	for _, stage := range []string{"success", "empty", "retry", "claim failure", "mark failure", "reschedule failure", "lag failure"} {
+ 		t.Run(stage, func(t *testing.T) {
++			var logs bytes.Buffer
++			old := slog.Default()
++			slog.SetDefault(slog.New(slog.NewJSONHandler(&logs, nil)))
++			defer slog.SetDefault(old)
+ 			sent, marked, rescheduled := 0, 0, 0
+ 			m := &metricsSpy{lag: time.Hour}
+ 			repo := outboxStub{
+@@ -69,7 +76,7 @@
+ 			publisher := publishFunc(func(ctx context.Context, out event.Outgoing) error {
+ 				sent++
+ 				deadline, ok := ctx.Deadline()
+-				if !ok || time.Until(deadline) > 10*time.Second || string(out.Payload()) != string(ev.Payload()) {
++				if !ok || time.Until(deadline) < 9*time.Second || time.Until(deadline) > 10*time.Second || string(out.Payload()) != string(ev.Payload()) {
+ 					t.Fatal("unbounded send or changed snapshot")
+ 				}
+ 				if stage == "retry" || stage == "reschedule failure" {
+@@ -78,6 +85,14 @@
+ 				return nil
+ 			})
+ 			n, err := NewPublishOutbox(u, publisher, clockFunc(func() time.Time { return pathTime }), m).RunOnce(context.Background())
++			publicationFailed := stage == "retry" || stage == "reschedule failure"
++			if strings.Contains(logs.String(), `"msg":"event publication failed"`) != publicationFailed {
++				t.Fatalf("incorrect failure log: %s", logs.String())
++			}
++			publicationConfirmed := sent == 1 && !publicationFailed && stage != "mark failure"
++			if strings.Contains(logs.String(), `"msg":"event published"`) != publicationConfirmed {
++				t.Fatalf("incorrect success log: %s", logs.String())
++			}
+ 			failed := stage == "claim failure" || stage == "mark failure" || stage == "reschedule failure" || stage == "lag failure"
+ 			if failed {
+ 				if !errors.Is(err, errPort) {
+--- a/internal/app/usecase/ports_test.go
++++ b/internal/app/usecase/ports_test.go
+@@ -149,10 +149,11 @@
+ 
+ type metricsSpy struct {
+ 	port.Metrics
+-	retries   []string
+-	results   []string
+-	conflicts int
+-	lag       time.Duration
++	retries     []string
++	results     []string
++	conflicts   int
++	divergences int
++	lag         time.Duration
+ }
+ 
+ func (m *metricsSpy) Retry(s string)              { m.retries = append(m.retries, s) }
+@@ -160,7 +161,7 @@
+ func (m *metricsSpy) ConcurrencyConflict()        { m.conflicts++ }
+ func (*metricsSpy) Latency(string, time.Duration) {}
+ func (*metricsSpy) Duplicate(string)              {}
+-func (*metricsSpy) ReconciliationDivergence()     {}
++func (m *metricsSpy) ReconciliationDivergence()   { m.divergences++ }
+ func (m *metricsSpy) OutboxLag(d time.Duration)   { m.lag = d }
+ 
+ var pathTime = time.Date(2026, 9, 28, 12, 0, 0, 0, time.UTC)
+--- /dev/null
++++ b/internal/app/usecase/reconciliation_contract_test.go
+@@ -0,0 +1,44 @@
++package usecase
++
++import (
++	"context"
++	"errors"
++	"github.com/alexandre/wagering/internal/app/port"
++	"github.com/alexandre/wagering/internal/domain/wallet"
++	"testing"
++)
++
++func TestReconciliationMetricsOnlyDescribeSuccessfulInconsistentReads(t *testing.T) {
++	for _, mode := range []string{"equal", "different", "failure"} {
++		t.Run(mode, func(t *testing.T) {
++			u := &uowStub{tx: txStub{w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) {
++				if mode == "failure" {
++					return nil, errPort
++				}
++				return pathWallet(t), nil
++			}}, l: ledgerStub{totals: func(context.Context, string) (port.LedgerTotals, error) {
++				n := int64(1000)
++				if mode == "different" {
++					n = 999
++				}
++				return port.LedgerTotals{Calculated: pathMoney(t, n)}, nil
++			}}}}
++			m := &metricsSpy{}
++			got, err := NewReconcileWallet(u, m).Execute(context.Background(), "wallet")
++			want := 0
++			if mode == "different" {
++				want = 1
++			}
++			if m.divergences != want {
++				t.Fatalf("divergences=%d want=%d", m.divergences, want)
++			}
++			if mode == "failure" {
++				if !errors.Is(err, errPort) {
++					t.Fatal(err)
++				}
++			} else if err != nil || got.Consistent != (mode == "equal") {
++				t.Fatalf("result=%+v err=%v", got, err)
++			}
++		})
++	}
++}
+--- a/internal/app/usecase/reference_failure_test.go
++++ b/internal/app/usecase/reference_failure_test.go
+@@ -67,7 +67,9 @@
+ 				return pathTime
+ 			})
+ 			worker := NewProcessPendingReferences(u, clock, m, pathSubmit(u))
+-			n, e := worker.RunOnce(context.Background())
++			ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
++			defer cancel()
++			n, e := worker.RunOnce(ctx)
+ 			if stage == "permanent" || stage == "already terminal" {
+ 				if e != nil || n != 1 {
+ 					t.Fatal(n, e)
+--- a/internal/app/usecase/semantic_fixture_test.go
++++ b/internal/app/usecase/semantic_fixture_test.go
+@@ -30,10 +30,14 @@
+ 
+ func (i *ids) NewID() string { i.n++; return fmt.Sprintf("00000000-0000-4000-8000-%012d", i.n) }
+ 
+-type observation struct{ divergences int }
+-
+-func (*observation) TxResult(string, string)       {}
+-func (*observation) Duplicate(string)              {}
++type observation struct {
++	divergences int
++	results     []string
++	duplicates  []string
++}
++
++func (o *observation) TxResult(k, s string)        { o.results = append(o.results, k+":"+s) }
++func (o *observation) Duplicate(s string)          { o.duplicates = append(o.duplicates, s) }
+ func (*observation) Retry(string)                  {}
+ func (*observation) DLQ()                          {}
+ func (*observation) ConcurrencyConflict()          {}
+--- /dev/null
++++ b/internal/app/usecase/worker_contract_test.go
+@@ -0,0 +1,114 @@
++package usecase
++
++import (
++	"context"
++	"encoding/json"
++	"errors"
++	"fmt"
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"github.com/alexandre/wagering/internal/domain/wager"
++	"github.com/alexandre/wagering/internal/domain/wallet"
++	"testing"
++	"time"
++)
++
++func TestMessageEnvelopeRejectsEachRequiredField(t *testing.T) {
++	for _, field := range []string{"messageId", "type", "idempotencyKey"} {
++		t.Run(field, func(t *testing.T) {
++			in := WagerTransactionRequested{MessageID: "m", Type: "WagerTransactionRequested", OccurredAt: pathTime}
++			valid := pathInput()
++			in.Data.IdempotencyKey = valid.IdempotencyKey
++			in.Data.ProviderID = valid.ProviderID
++			in.Data.ExternalTransactionID = valid.ExternalTransactionID
++			in.Data.PlayerID = valid.PlayerID
++			in.Data.WalletID = valid.WalletID
++			in.Data.RoundID = valid.RoundID
++			in.Data.GameID = valid.GameID
++			in.Data.Kind = valid.Kind
++			in.Data.Money.Amount = valid.Amount
++			in.Data.Money.Currency = valid.Currency
++			switch field {
++			case "messageId":
++				in.MessageID = ""
++			case "type":
++				in.Type = "unknown"
++			case "idempotencyKey":
++				in.Data.IdempotencyKey = ""
++			}
++			body, err := json.Marshal(in)
++			if err != nil {
++				t.Fatal(err)
++			}
++			u := &uowStub{}
++			err = NewConsumeWagerMessage(pathSubmit(u)).Handle(context.Background(), body)
++			if !errors.Is(err, apperr.ErrInvalidMessage) || u.writes != 0 {
++				t.Fatalf("err=%v writes=%d", err, u.writes)
++			}
++		})
++	}
++}
++func TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation(t *testing.T) {
++	for _, mode := range []string{"full batch", "cancelled initially", "cancel after first"} {
++		t.Run(mode, func(t *testing.T) {
++			ctx, cancel := context.WithCancel(context.Background())
++			defer cancel()
++			if mode == "cancelled initially" {
++				cancel()
++			}
++			claims, updates := 0, 0
++			var current *wager.Transaction
++			repo := transactionStub{claim: func(_ context.Context, now time.Time, limit int) ([]*wager.Transaction, error) {
++				claims++
++				if claims > 21 {
++					return nil, errors.New("exceeded contract batch bound")
++				}
++				if limit != 1 || now != pathTime {
++					t.Fatalf("claim limit=%d time=%v", limit, now)
++				}
++				s := pathTransaction(t, wager.KindRefund).Snapshot()
++				s.ID = fmt.Sprint("tx-", claims)
++				current, _ = wager.Rehydrate(s)
++				return []*wager.Transaction{current}, nil
++			}, findID: func(_ context.Context, id string) (*wager.Transaction, error) {
++				if id != current.ID() {
++					t.Fatal(id)
++				}
++				return current, nil
++			}, update: func(_ context.Context, tx *wager.Transaction) error {
++				updates++
++				if tx.Status() != wager.StatusFailed || tx.FailureCode() != wager.FailInternalPermanent {
++					t.Fatal(tx.Snapshot())
++				}
++				if mode == "cancel after first" {
++					cancel()
++				}
++				return nil
++			}}
++			u := &uowStub{tx: txStub{t: repo, w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) { return nil, apperr.Permanent(errPort) }}}}
++			m := &metricsSpy{}
++			n, err := NewProcessPendingReferences(u, clockFunc(func() time.Time { return pathTime }), m, pathSubmit(u)).RunOnce(ctx)
++			want := 20
++			if mode == "cancelled initially" {
++				want = 0
++			}
++			if mode == "cancel after first" {
++				want = 1
++			}
++			if n != want || claims != want || updates != want || len(m.results) != want {
++				t.Fatalf("n=%d claims=%d updates=%d metrics=%v err=%v", n, claims, updates, m.results, err)
++			}
++			if mode == "full batch" {
++				if err != nil {
++					t.Fatal(err)
++				}
++			} else if !errors.Is(err, context.Canceled) {
++				t.Fatal(err)
++			}
++			for _, v := range m.results {
++				if v != "REFUND:FAILED" {
++					t.Fatal(v)
++				}
++			}
++		})
++	}
++}
+--- /dev/null
++++ b/internal/domain/event/input_contract_test.go
+@@ -0,0 +1,76 @@
++package event_test
++
++import (
++	"errors"
++	"github.com/alexandre/wagering/internal/domain/event"
++	"reflect"
++	"testing"
++	"time"
++)
++
++func TestEventDataValidatesEachIndependentField(t *testing.T) {
++	meta := eventMeta()
++	processed := event.NewProcessed(meta, event.ProcessedData{TransactionID: "tx", WalletID: "wallet", PlayerID: "p", ProviderID: "provider", ExternalTransactionID: "ext", RoundID: "r", Kind: "BET", Money: event.MoneyDTO{Amount: "1.00", Currency: "BRL"}})
++	rejected := event.NewRejected(meta, event.RejectedData{TransactionID: "tx", WalletID: "wallet", ProviderID: "provider", ExternalTransactionID: "ext", Kind: "BET", FailureCode: "INSUFFICIENT_FUNDS"})
++	pending := event.NewPendingReference(meta, event.PendingReferenceData{TransactionID: "tx", ProviderID: "p", ExternalTransactionID: "ext", ReferenceExternalTransactionID: "ref", NextAttemptAt: meta.OccurredAt.Add(time.Second), ExpiresAt: meta.OccurredAt.Add(time.Hour)})
++	check := func(t *testing.T, got event.Outgoing, err error) {
++		t.Helper()
++		if !errors.Is(err, event.ErrInvalidEvent) || !reflect.DeepEqual(got, event.Outgoing{}) {
++			t.Fatalf("output=%+v err=%v", got, err)
++		}
++	}
++	for name, change := range map[string]func(*event.Envelope[event.ProcessedData]){
++		"type":               func(e *event.Envelope[event.ProcessedData]) { e.EventType = "invalid" },
++		"transaction":        func(e *event.Envelope[event.ProcessedData]) { e.Data.TransactionID = "" },
++		"wallet":             func(e *event.Envelope[event.ProcessedData]) { e.Data.WalletID = "other" },
++		"player":             func(e *event.Envelope[event.ProcessedData]) { e.Data.PlayerID = "" },
++		"provider":           func(e *event.Envelope[event.ProcessedData]) { e.Data.ProviderID = "" },
++		"external":           func(e *event.Envelope[event.ProcessedData]) { e.Data.ExternalTransactionID = "" },
++		"round":              func(e *event.Envelope[event.ProcessedData]) { e.Data.RoundID = "" },
++		"kind":               func(e *event.Envelope[event.ProcessedData]) { e.Data.Kind = "unknown" },
++		"noncanonical money": func(e *event.Envelope[event.ProcessedData]) { e.Data.Money.Amount = "01.00" },
++		"currency":           func(e *event.Envelope[event.ProcessedData]) { e.Data.Money.Currency = "XYZ" },
++	} {
++		t.Run("processed/"+name, func(t *testing.T) { e := processed; change(&e); o, err := e.ToOutgoing(); check(t, o, err) })
++	}
++	for name, change := range map[string]func(*event.Envelope[event.RejectedData]){
++		"type":        func(e *event.Envelope[event.RejectedData]) { e.EventType = "invalid" },
++		"transaction": func(e *event.Envelope[event.RejectedData]) { e.Data.TransactionID = "" },
++		"wallet":      func(e *event.Envelope[event.RejectedData]) { e.Data.WalletID = "other" },
++		"provider":    func(e *event.Envelope[event.RejectedData]) { e.Data.ProviderID = "" },
++		"external":    func(e *event.Envelope[event.RejectedData]) { e.Data.ExternalTransactionID = "" },
++		"kind":        func(e *event.Envelope[event.RejectedData]) { e.Data.Kind = "unknown" },
++		"failure":     func(e *event.Envelope[event.RejectedData]) { e.Data.FailureCode = "" },
++	} {
++		t.Run("rejected/"+name, func(t *testing.T) { e := rejected; change(&e); o, err := e.ToOutgoing(); check(t, o, err) })
++	}
++	for name, change := range map[string]func(*event.Envelope[event.PendingReferenceData]){
++		"type":        func(e *event.Envelope[event.PendingReferenceData]) { e.EventType = "invalid" },
++		"transaction": func(e *event.Envelope[event.PendingReferenceData]) { e.Data.TransactionID = "" },
++		"provider":    func(e *event.Envelope[event.PendingReferenceData]) { e.Data.ProviderID = "" },
++		"external":    func(e *event.Envelope[event.PendingReferenceData]) { e.Data.ExternalTransactionID = "" },
++		"reference":   func(e *event.Envelope[event.PendingReferenceData]) { e.Data.ReferenceExternalTransactionID = "" },
++		"next":        func(e *event.Envelope[event.PendingReferenceData]) { e.Data.NextAttemptAt = meta.OccurredAt },
++		"expiry":      func(e *event.Envelope[event.PendingReferenceData]) { e.Data.ExpiresAt = meta.OccurredAt },
++	} {
++		t.Run("pending/"+name, func(t *testing.T) { e := pending; change(&e); o, err := e.ToOutgoing(); check(t, o, err) })
++	}
++	for _, build := range []func() (event.Outgoing, error){processed.ToOutgoing, rejected.ToOutgoing, pending.ToOutgoing} {
++		original, err := build()
++		if err != nil {
++			t.Fatal(err)
++		}
++		restored, err := event.RehydrateOutgoing(original.EventID(), original.AggregateID(), original.Type(), original.Payload(), original.OccurredAt(), 0)
++		if err != nil || !reflect.DeepEqual(restored, original) {
++			t.Fatalf("zero attempts roundtrip: %v %v", restored, err)
++		}
++	}
++}
++
++func TestZeroMovementIsInvalidEvenWhenBalanceEquationHolds(t *testing.T) {
++	d := event.BalanceChangedData{TransactionID: "tx", WalletID: "wallet", Direction: "CREDIT", WalletVersion: 1, Money: event.MoneyDTO{Amount: "0.00", Currency: "BRL"}, BalanceBefore: event.MoneyDTO{Amount: "1.00", Currency: "BRL"}, BalanceAfter: event.MoneyDTO{Amount: "1.00", Currency: "BRL"}}
++	got, err := event.NewBalanceChanged(eventMeta(), d).ToOutgoing()
++	if !errors.Is(err, event.ErrInvalidEvent) || !reflect.DeepEqual(got, event.Outgoing{}) {
++		t.Fatalf("zero movement=%v err=%v", got, err)
++	}
++}
+--- /dev/null
++++ b/internal/domain/wager/input_contract_test.go
+@@ -0,0 +1,69 @@
++package wager_test
++
++import (
++	"errors"
++	"github.com/alexandre/wagering/internal/domain/wager"
++	"reflect"
++	"testing"
++	"time"
++)
++
++func TestOpeningSnapshotRejectsEachCorruptedField(t *testing.T) {
++	original, err := wager.NewOpening("opening", "wallet", "player", unitMoney(t, 100, "BRL"), domainTime)
++	if err != nil {
++		t.Fatal(err)
++	}
++	valid := original.Snapshot()
++	for name, damage := range map[string]func(*wager.Snapshot){
++		"id": func(s *wager.Snapshot) { s.ID = "" }, "wallet": func(s *wager.Snapshot) { s.WalletID = "" }, "player": func(s *wager.Snapshot) { s.PlayerID = "" },
++		"created": func(s *wager.Snapshot) { s.CreatedAt = time.Time{} }, "updated": func(s *wager.Snapshot) { s.UpdatedAt = time.Time{} },
++		"backwards":         func(s *wager.Snapshot) { s.UpdatedAt = s.CreatedAt.Add(-time.Nanosecond) },
++		"negative attempts": func(s *wager.Snapshot) { s.Attempts = -1 },
++		"amount":            func(s *wager.Snapshot) { s.Amount = unitMoney(t, 0, "BRL"); s.BalanceAfter = &s.Amount },
++		"status":            func(s *wager.Snapshot) { s.Status = wager.StatusPending; s.BalanceAfter = nil },
++		"provider":          func(s *wager.Snapshot) { s.ProviderID = "p" }, "external": func(s *wager.Snapshot) { s.ExternalID = "e" },
++		"key": func(s *wager.Snapshot) { s.IdempotencyKey = "key" }, "hash": func(s *wager.Snapshot) { s.PayloadHash = "hash" },
++		"round": func(s *wager.Snapshot) { s.RoundID = "r" }, "game": func(s *wager.Snapshot) { s.GameID = "g" },
++		"reference": func(s *wager.Snapshot) { s.ReferenceExternalID = "ref"; s.ReferenceID = "reference" },
++	} {
++		t.Run(name, func(t *testing.T) {
++			s := valid
++			damage(&s)
++			got, err := wager.Rehydrate(s)
++			if got != nil || !errors.Is(err, wager.ErrInvalidInput) {
++				t.Fatalf("accepted %+v: %v %v", s, got, err)
++			}
++			if !reflect.DeepEqual(original.Snapshot(), valid) {
++				t.Fatal("original changed")
++			}
++		})
++	}
++}
++func TestPendingSnapshotRequiresFutureSchedule(t *testing.T) {
++	tx := external(t, wager.KindRefund)
++	if err := tx.MarkPendingReference(domainTime, domainTime.Add(time.Second), time.Hour); err != nil {
++		t.Fatal(err)
++	}
++	valid := tx.Snapshot()
++	for name, damage := range map[string]func(*wager.Snapshot){
++		"next absent":        func(s *wager.Snapshot) { s.NextAttemptAt = nil },
++		"expiry absent":      func(s *wager.Snapshot) { s.ExpiresAt = nil },
++		"reference absent":   func(s *wager.Snapshot) { s.ReferenceExternalID = "" },
++		"next equal updated": func(s *wager.Snapshot) { s.NextAttemptAt = &s.UpdatedAt },
++	} {
++		t.Run(name, func(t *testing.T) {
++			s := valid
++			damage(&s)
++			got, err := wager.Rehydrate(s)
++			if got != nil || !errors.Is(err, wager.ErrInvalidInput) {
++				t.Fatalf("accepted %+v: %v %v", s, got, err)
++			}
++		})
++	}
++}
++func TestNilTransactionReturnsDomainError(t *testing.T) {
++	var tx *wager.Transaction
++	if err := tx.ResolveReference("reference"); !errors.Is(err, wager.ErrInvalidInput) {
++		t.Fatalf("err=%v", err)
++	}
++}
+--- /dev/null
++++ b/internal/domain/wallet/input_contract_test.go
+@@ -0,0 +1,37 @@
++package wallet_test
++
++import (
++	"errors"
++	"github.com/alexandre/wagering/internal/domain/money"
++	"github.com/alexandre/wagering/internal/domain/wallet"
++	"testing"
++	"time"
++)
++
++func TestWalletConstructorRejectsEachMissingIdentityIndependently(t *testing.T) {
++	at := time.Date(2026, 9, 29, 0, 0, 0, 0, time.UTC)
++	for _, tc := range []struct {
++		name, id, player string
++		at               time.Time
++	}{
++		{"id", "", "player", at}, {"player", "wallet", "", at}, {"time", "wallet", "player", time.Time{}},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			got, err := wallet.New(tc.id, tc.player, cents(t, 0, "BRL"), tc.at)
++			if got != nil || !errors.Is(err, wallet.ErrInvalidWallet) {
++				t.Fatalf("wallet=%v error=%v", got, err)
++			}
++		})
++	}
++}
++func TestNilWalletMovementsReturnDomainError(t *testing.T) {
++	var w *wallet.Wallet
++	for name, move := range map[string]func(money.Money, time.Time) (money.Money, money.Money, error){"credit": w.Credit, "debit": w.Debit} {
++		t.Run(name, func(t *testing.T) {
++			before, after, err := move(cents(t, 1, "BRL"), time.Now())
++			if !errors.Is(err, wallet.ErrInvalidWallet) || before != (money.Money{}) || after != (money.Money{}) {
++				t.Fatalf("before=%v after=%v err=%v", before, after, err)
++			}
++		})
++	}
++}
+--- a/internal/infra/auth/authorization_paths_test.go
++++ b/internal/infra/auth/authorization_paths_test.go
+@@ -75,7 +75,7 @@
+ 		}
+ 		return s
+ 	}
+-	for name, header := range map[string]string{"missing": "", "empty": "Bearer ", "malformed": "Bearer bad", "no subject": "Bearer " + token("", "k"), "no kid": "Bearer " + token("svc", ""), "valid": "Bearer " + token("svc", "k")} {
++	for name, header := range map[string]string{"raw JWT without Bearer": token("svc", "k"), "missing": "", "empty": "Bearer ", "malformed": "Bearer bad", "no subject": "Bearer " + token("", "k"), "no kid": "Bearer " + token("svc", ""), "valid": "Bearer " + token("svc", "k")} {
+ 		t.Run(name, func(t *testing.T) {
+ 			r := httptest.NewRequest("GET", "/", nil)
+ 			r.Header.Set("Authorization", header)
+@@ -93,7 +93,7 @@
+ 				if !called || w.Code != 204 {
+ 					t.Fatal(w.Code)
+ 				}
+-			} else if called || w.Code != 401 {
++			} else if called || w.Code != 401 || w.Body.String() != `{"code":"UNAUTHENTICATED"}` || w.Header().Get("Content-Type") != "application/json" {
+ 				t.Fatal(w.Code)
+ 			}
+ 		})
+--- /dev/null
++++ b/internal/infra/auth/cache_contract_test.go
+@@ -0,0 +1,136 @@
++package auth
++
++import (
++	"context"
++	"crypto/rand"
++	"crypto/rsa"
++	"encoding/base64"
++	"encoding/json"
++	"errors"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"github.com/golang-jwt/jwt/v5"
++	"go.uber.org/fx"
++	"io"
++	"net/http"
++	"reflect"
++	"strings"
++	"testing"
++	"time"
++)
++
++type contractLifecycle struct{ hooks []fx.Hook }
++
++func (l *contractLifecycle) Append(h fx.Hook) { l.hooks = append(l.hooks, h) }
++
++type contractTransport struct {
++	calls, closed int
++	body          string
++	err           error
++}
++
++func (tr *contractTransport) RoundTrip(r *http.Request) (*http.Response, error) {
++	tr.calls++
++	if tr.err != nil {
++		return nil, tr.err
++	}
++	return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(tr.body)), Header: make(http.Header), Request: r}, nil
++}
++func (tr *contractTransport) CloseIdleConnections() { tr.closed++ }
++
++func TestJWKSCacheExpiryThrottleAndLifecycleContracts(t *testing.T) {
++	key, err := rsa.GenerateKey(rand.Reader, 2048)
++	if err != nil {
++		t.Fatal(err)
++	}
++	body, err := json.Marshal(map[string]any{"keys": []any{map[string]any{"kty": "RSA", "alg": "RS256", "kid": "known", "n": base64.RawURLEncoding.EncodeToString(key.N.Bytes()), "e": "AQAB"}}})
++	if err != nil {
++		t.Fatal(err)
++	}
++	now := time.Date(2026, 9, 29, 0, 0, 0, 0, time.UTC)
++	for _, tc := range []struct {
++		name      string
++		age       time.Duration
++		wantCalls int
++		blocked   bool
++	}{
++		{"fresh cache", time.Minute, 0, false}, {"one ns before expiry", time.Hour - time.Nanosecond, 0, false},
++		{"at expiry", time.Hour, 1, false}, {"after expiry", time.Hour + time.Nanosecond, 1, false},
++		{"expired throttled", time.Hour, 0, true},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			lc := &contractLifecycle{}
++			v := NewVerifier(lc, config.Config{OIDCJWKSURL: "http://jwks.test"})
++			v.now = func() time.Time { return now }
++			if v.client.Timeout != 2*time.Second {
++				t.Fatalf("HTTP timeout=%v", v.client.Timeout)
++			}
++			tr := &contractTransport{body: string(body)}
++			v.client.Transport = tr
++			if err := lc.hooks[0].OnStart(context.Background()); err != nil {
++				t.Fatal(err)
++			}
++			if tr.closed != 0 {
++				t.Fatal("healthy startup closed connections")
++			}
++			v.fetched = now.Add(-tc.age)
++			v.attempted = now.Add(-time.Second)
++			if tc.blocked {
++				v.attempted = now
++			}
++			tr.calls = 0
++			got, err := v.key(context.Background(), &jwt.Token{Header: map[string]any{"kid": "known", "alg": "RS256"}})
++			if tc.blocked {
++				if got != nil || !errors.Is(err, ErrJWKSUnavailable) {
++					t.Fatalf("stale key=%v err=%v", got, err)
++				}
++			} else if err != nil || !reflect.DeepEqual(got, &key.PublicKey) {
++				t.Fatalf("key=%v err=%v", got, err)
++			}
++			if tr.calls != tc.wantCalls {
++				t.Fatalf("requests=%d want=%d", tr.calls, tc.wantCalls)
++			}
++			if err := lc.hooks[0].OnStop(context.Background()); err != nil || tr.closed != 1 {
++				t.Fatalf("cleanup=%d err=%v", tr.closed, err)
++			}
++		})
++	}
++	for _, age := range []time.Duration{time.Second - time.Nanosecond, time.Second, time.Second + time.Nanosecond} {
++		lc := &contractLifecycle{}
++		v := NewVerifier(lc, config.Config{OIDCJWKSURL: "http://jwks.test"})
++		v.now = func() time.Time { return now }
++		v.attempted = now.Add(-age)
++		tr := &contractTransport{body: string(body)}
++		v.client.Transport = tr
++		if err := v.refresh(context.Background(), false); err != nil {
++			t.Fatal(err)
++		}
++		want := 1
++		if age < time.Second {
++			want = 0
++		}
++		if tr.calls != want {
++			t.Fatalf("age=%v requests=%d want=%d", age, tr.calls, want)
++		}
++	}
++	lc := &contractLifecycle{}
++	v := NewVerifier(lc, config.Config{OIDCJWKSURL: "http://jwks.test"})
++	cause := errors.New("offline")
++	tr := &contractTransport{err: cause}
++	v.client.Transport = tr
++	if err := lc.hooks[0].OnStart(context.Background()); !errors.Is(err, ErrJWKSUnavailable) || !errors.Is(err, cause) || tr.closed != 1 {
++		t.Fatalf("failed startup cleanup=%d err=%v", tr.closed, err)
++	}
++}
++
++func TestEmptyKeyIDDoesNotFetchJWKS(t *testing.T) {
++	lc := &contractLifecycle{}
++	v := NewVerifier(lc, config.Config{OIDCJWKSURL: "http://jwks.test"})
++	tr := &contractTransport{err: errors.New("offline")}
++	v.client.Transport = tr
++	for _, kid := range []any{"", 42, nil} {
++		got, err := v.key(context.Background(), &jwt.Token{Header: map[string]any{"kid": kid, "alg": "RS256"}})
++		if got != nil || !errors.Is(err, ErrInvalidToken) || tr.calls != 0 {
++			t.Fatalf("key=%v err=%v fetches=%d", got, err, tr.calls)
++		}
++	}
++}
+--- a/internal/infra/auth/claims_contract_test.go
++++ b/internal/infra/auth/claims_contract_test.go
+@@ -35,7 +35,7 @@
+ 	if e != nil {
+ 		t.Fatal(e)
+ 	}
+-	v := &Verifier{issuer: "issuer", audience: "api", kf: kf, fetched: time.Now(), attempted: time.Now(), gate: make(chan struct{}, 1)}
++	v := &Verifier{now: time.Now, issuer: "issuer", audience: "api", kf: kf, fetched: time.Now(), attempted: time.Now(), gate: make(chan struct{}, 1)}
+ 	for _, tc := range []struct {
+ 		name       string
+ 		change     func(jwt.MapClaims)
+--- a/internal/infra/auth/verifier.go
++++ b/internal/infra/auth/verifier.go
+@@ -37,10 +37,11 @@
+ 	kf                        keyfunc.Keyfunc
+ 	fetched, attempted        time.Time
+ 	lastErr                   error
++	now                       func() time.Time // immutable source for cache-age decisions; deadlines use context
+ }
+ 
+ func NewVerifier(lc fx.Lifecycle, cfg config.Config) *Verifier {
+-	v := &Verifier{issuer: cfg.OIDCIssuer, jwksURL: cfg.OIDCJWKSURL, audience: cfg.OIDCAudience,
++	v := &Verifier{now: time.Now, issuer: cfg.OIDCIssuer, jwksURL: cfg.OIDCJWKSURL, audience: cfg.OIDCAudience,
+ 		client: &http.Client{Timeout: 2 * time.Second, Transport: http.DefaultTransport.(*http.Transport).Clone()}, gate: make(chan struct{}, 1)}
+ 	lc.Append(fx.Hook{OnStart: func(ctx context.Context) error {
+ 		err := v.refresh(ctx, true)
+@@ -60,7 +61,7 @@
+ 	}
+ 	defer func() { <-v.gate }()
+ 	v.mu.RLock()
+-	recent := time.Since(v.attempted) < time.Second
++	recent := v.now().Sub(v.attempted) < time.Second
+ 	last := v.lastErr
+ 	v.mu.RUnlock()
+ 	if recent && !initial {
+@@ -98,7 +99,7 @@
+ 	}
+ 	v.mu.Lock()
+ 	defer v.mu.Unlock()
+-	v.attempted = time.Now()
++	v.attempted = v.now()
+ 	v.lastErr = err
+ 	if err == nil {
+ 		v.kf = kf
+@@ -118,7 +119,7 @@
+ 	v.mu.RLock()
+ 	kf, fetched := v.kf, v.fetched
+ 	v.mu.RUnlock()
+-	if kf != nil && time.Since(fetched) < time.Hour {
++	if kf != nil && v.now().Sub(fetched) < time.Hour {
+ 		key, err := kf.KeyfuncCtx(ctx)(t)
+ 		if !errors.Is(err, jwkset.ErrKeyNotFound) {
+ 			return key, err
+@@ -130,7 +131,7 @@
+ 	v.mu.RLock()
+ 	kf, fetched = v.kf, v.fetched
+ 	v.mu.RUnlock()
+-	if kf == nil || time.Since(fetched) >= time.Hour {
++	if kf == nil || v.now().Sub(fetched) >= time.Hour {
+ 		return nil, ErrJWKSUnavailable
+ 	}
+ 	return kf.KeyfuncCtx(ctx)(t)
+--- /dev/null
++++ b/internal/infra/config/config_test.go
+@@ -0,0 +1,93 @@
++package config
++
++import (
++	"reflect"
++	"strings"
++	"testing"
++	"time"
++)
++
++func validEnvironment(t *testing.T) {
++	t.Helper()
++	for k, v := range map[string]string{
++		"SHUTDOWN_TIMEOUT": "", "ROLES": "", "HTTP_ADDR": "", "LOG_LEVEL": "", "AWS_REGION": "", "AWS_ENDPOINT_URL": "", "WAGER_DLQ_URL": "",
++		"DATABASE_URL": "postgres://test@localhost/test", "OIDC_ISSUER": "https://issuer.test", "OIDC_JWKS_URL": "https://issuer.test/keys", "OIDC_AUDIENCE": "wagering",
++		"WAGER_QUEUE_URL": "https://queue.test/wager", "EVENTS_QUEUE_URL": "https://queue.test/events",
++	} {
++		t.Setenv(k, v)
++	}
++}
++func TestConfigurationDefaultsAndExplicitValues(t *testing.T) {
++	validEnvironment(t)
++	want := Config{Roles: []string{"api"}, HTTPAddr: ":8080", ShutdownTimeout: 25 * time.Second, LogLevel: "info", DatabaseURL: "postgres://test@localhost/test", AWSRegion: "us-east-1", WagerQueueURL: "https://queue.test/wager", EventsQueueURL: "https://queue.test/events", OIDCIssuer: "https://issuer.test", OIDCJWKSURL: "https://issuer.test/keys", OIDCAudience: "wagering"}
++	got, err := Load()
++	if err != nil || !reflect.DeepEqual(got, want) {
++		t.Fatalf("got=%+v want=%+v err=%v", got, want, err)
++	}
++	t.Setenv("HTTP_ADDR", ":9090")
++	t.Setenv("LOG_LEVEL", "debug")
++	t.Setenv("AWS_REGION", "sa-east-1")
++	t.Setenv("SHUTDOWN_TIMEOUT", "8s")
++	t.Setenv("ROLES", "api,sqs-consumer,outbox-publisher,reference-worker")
++	t.Setenv("AWS_ENDPOINT_URL", "http://localhost:4566")
++	t.Setenv("WAGER_DLQ_URL", "https://queue.test/dead")
++	want.HTTPAddr = ":9090"
++	want.LogLevel = "debug"
++	want.AWSRegion = "sa-east-1"
++	want.ShutdownTimeout = 8 * time.Second
++	want.Roles = []string{"api", "sqs-consumer", "outbox-publisher", "reference-worker"}
++	want.AWSEndpointURL = "http://localhost:4566"
++	want.WagerDLQURL = "https://queue.test/dead"
++	got, err = Load()
++	if err != nil || !reflect.DeepEqual(got, want) {
++		t.Fatalf("got=%+v want=%+v err=%v", got, want, err)
++	}
++	for _, role := range want.Roles {
++		if !got.HasRole(role) {
++			t.Fatal("missing role", role)
++		}
++	}
++	if got.HasRole("unknown") {
++		t.Fatal("invented role")
++	}
++}
++func TestConfigurationRejectsEachMissingRequiredVariable(t *testing.T) {
++	for _, key := range []string{"DATABASE_URL", "OIDC_ISSUER", "OIDC_JWKS_URL", "OIDC_AUDIENCE", "WAGER_QUEUE_URL", "EVENTS_QUEUE_URL"} {
++		t.Run(key, func(t *testing.T) {
++			validEnvironment(t)
++			t.Setenv(key, "")
++			_, err := Load()
++			if err == nil || err.Error() != "missing required env "+key {
++				t.Fatalf("error=%v", err)
++			}
++		})
++	}
++}
++func TestShutdownBudgetBoundsAndInvalidConfiguration(t *testing.T) {
++	for _, tc := range []struct {
++		value string
++		valid bool
++	}{{"7.999999999s", false}, {"8s", true}, {"8.000000001s", true}, {"24.999999999s", true}, {"25s", true}, {"25.000000001s", false}, {"-1s", false}, {"invalid", false}} {
++		t.Run(tc.value, func(t *testing.T) {
++			validEnvironment(t)
++			t.Setenv("SHUTDOWN_TIMEOUT", tc.value)
++			got, err := Load()
++			if tc.valid {
++				want, e := time.ParseDuration(tc.value)
++				if e != nil || err != nil || got.ShutdownTimeout != want {
++					t.Fatalf("budget=%v err=%v", got.ShutdownTimeout, err)
++				}
++			} else if err == nil || !strings.Contains(err.Error(), "SHUTDOWN_TIMEOUT") {
++				t.Fatalf("invalid duration accepted: %+v %v", got, err)
++			}
++		})
++	}
++	t.Run("unknown role", func(t *testing.T) {
++		validEnvironment(t)
++		t.Setenv("ROLES", "api,unknown")
++		_, err := Load()
++		if err == nil || err.Error() != "unknown role unknown" {
++			t.Fatal(err)
++		}
++	})
++}
+--- /dev/null
++++ b/internal/infra/postgres/error_contract_test.go
+@@ -0,0 +1,26 @@
++package postgres
++
++import (
++	"context"
++	"errors"
++	"fmt"
++	"github.com/alexandre/wagering/internal/app/apperr"
++	"io"
++	"net"
++	"testing"
++)
++
++func TestTransportFailuresPreserveCauseAndRetryClassification(t *testing.T) {
++	for _, cause := range []error{io.EOF, io.ErrUnexpectedEOF, &net.DNSError{Err: "offline", Name: "db"}, context.DeadlineExceeded, apperr.ErrConcurrentModification} {
++		t.Run(cause.Error(), func(t *testing.T) {
++			got := classify(fmt.Errorf("query: %w", cause))
++			if !apperr.IsTransient(got) || apperr.IsPermanent(got) || !errors.Is(got, cause) {
++				t.Fatalf("classification=%v", got)
++			}
++		})
++	}
++	cause := errors.New("unclassified")
++	if got := classify(cause); got != cause || apperr.IsTransient(got) {
++		t.Fatal(got)
++	}
++}
+--- a/internal/infra/sqs/consumer_test.go
++++ b/internal/infra/sqs/consumer_test.go
+@@ -82,7 +82,14 @@
+ 	ctx, cancel := context.WithCancel(context.Background())
+ 	done := make(chan error, 1)
+ 	go func() { done <- c.Run(ctx) }()
+-	<-cl.entered
++	defer cancel()
++	select {
++	case <-cl.entered:
++	case err := <-done:
++		t.Fatalf("consumer returned before issuing a poll: %v", err)
++	case <-time.After(time.Second):
++		t.Fatal("consumer did not issue a poll")
++	}
+ 	cancel()
+ 	close(cl.release)
+ 	select {
+--- /dev/null
++++ b/internal/infra/sqs/contract_test.go
+@@ -0,0 +1,125 @@
++package sqs
++
++import (
++	"bytes"
++	"context"
++	"errors"
++	"fmt"
++	"github.com/alexandre/wagering/internal/platform/metrics"
++	"github.com/aws/aws-sdk-go-v2/aws"
++	sdk "github.com/aws/aws-sdk-go-v2/service/sqs"
++	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
++	"log/slog"
++	"strings"
++	"testing"
++	"time"
++)
++
++type contractClient struct {
++	clientAPI
++	receive    func(context.Context, *sdk.ReceiveMessageInput) (*sdk.ReceiveMessageOutput, error)
++	delete     func(context.Context, *sdk.DeleteMessageInput) error
++	visibility func(context.Context, *sdk.ChangeMessageVisibilityInput) error
++}
++
++func (c contractClient) ReceiveMessage(ctx context.Context, in *sdk.ReceiveMessageInput, _ ...func(*sdk.Options)) (*sdk.ReceiveMessageOutput, error) {
++	return c.receive(ctx, in)
++}
++func (c contractClient) DeleteMessage(ctx context.Context, in *sdk.DeleteMessageInput, _ ...func(*sdk.Options)) (*sdk.DeleteMessageOutput, error) {
++	return &sdk.DeleteMessageOutput{}, c.delete(ctx, in)
++}
++func (c contractClient) ChangeMessageVisibility(ctx context.Context, in *sdk.ChangeMessageVisibilityInput, _ ...func(*sdk.Options)) (*sdk.ChangeMessageVisibilityOutput, error) {
++	return &sdk.ChangeMessageVisibilityOutput{}, c.visibility(ctx, in)
++}
++func checkBudget(t *testing.T, ctx context.Context, want time.Duration) {
++	t.Helper()
++	deadline, ok := ctx.Deadline()
++	remaining := time.Until(deadline)
++	if !ok || remaining > want || remaining < want-time.Second {
++		t.Fatalf("remaining=%v want approximately=%v", remaining, want)
++	}
++}
++func TestConsumerPollAndHandlerHaveIndependentBudgets(t *testing.T) {
++	ctx, cancel := context.WithCancel(context.Background())
++	defer cancel()
++	calls := 0
++	cl := contractClient{receive: func(c context.Context, in *sdk.ReceiveMessageInput) (*sdk.ReceiveMessageOutput, error) {
++		calls++
++		checkBudget(t, c, 21*time.Second)
++		if in.WaitTimeSeconds != 20 || in.MaxNumberOfMessages != 1 || aws.ToString(in.QueueUrl) != "queue" {
++			t.Fatal(in)
++		}
++		cancel()
++		if c.Err() != nil {
++			t.Fatal("poll cancelled during drain")
++		}
++		return &sdk.ReceiveMessageOutput{}, nil
++	}}
++	c := NewConsumer(cl, "queue", nil, slog.Default(), metrics.New())
++	if err := c.Run(ctx); err != nil || calls != 1 {
++		t.Fatalf("calls=%d err=%v", calls, err)
++	}
++	called := 0
++	cl.delete = func(c context.Context, in *sdk.DeleteMessageInput) error {
++		checkBudget(t, c, 2*time.Second)
++		return nil
++	}
++	c.client = cl
++	c.handler = handlerFunc(func(ctx context.Context, b []byte) error {
++		called++
++		checkBudget(t, ctx, 10*time.Second)
++		if string(b) != "body" {
++			t.Fatal(string(b))
++		}
++		return nil
++	})
++	c.process(context.Background(), types.Message{Body: aws.String("body")})
++	if called != 1 {
++		t.Fatal(called)
++	}
++}
++func TestTransientBackoffAndCleanupLogsMatchActualOutcome(t *testing.T) {
++	for n, want := range []int32{2, 4, 8, 16, 32, 64, 128, 256, 512, 900, 900} {
++		t.Run(fmt.Sprint(n), func(t *testing.T) {
++			cl := &fakeClient{visibility: -1}
++			c := NewConsumer(cl, "queue", handlerFunc(func(context.Context, []byte) error { return errors.New("offline") }), slog.Default(), metrics.New())
++			c.process(context.Background(), types.Message{Attributes: map[string]string{string(types.MessageSystemAttributeNameApproximateReceiveCount): fmt.Sprint(n)}})
++			if cl.visibility != want || cl.ack {
++				t.Fatalf("visibility=%d want=%d ack=%v", cl.visibility, want, cl.ack)
++			}
++		})
++	}
++	for _, failed := range []bool{false, true} {
++		t.Run(fmt.Sprint("cleanup failure=", failed), func(t *testing.T) {
++			var logs bytes.Buffer
++			calls := 0
++			cause := errors.New("offline")
++			check := func(ctx context.Context, queue, receipt string) error {
++				calls++
++				checkBudget(t, ctx, 2*time.Second)
++				if queue != "queue" || receipt != "receipt" {
++					t.Fatal(queue, receipt)
++				}
++				if failed {
++					return cause
++				}
++				return nil
++			}
++			cl := contractClient{delete: func(ctx context.Context, in *sdk.DeleteMessageInput) error {
++				return check(ctx, aws.ToString(in.QueueUrl), aws.ToString(in.ReceiptHandle))
++			}, visibility: func(ctx context.Context, in *sdk.ChangeMessageVisibilityInput) error {
++				if in.VisibilityTimeout != 16 {
++					t.Fatal(in.VisibilityTimeout)
++				}
++				return check(ctx, aws.ToString(in.QueueUrl), aws.ToString(in.ReceiptHandle))
++			}}
++			c := NewConsumer(cl, "queue", nil, slog.New(slog.NewJSONHandler(&logs, nil)), metrics.New())
++			m := types.Message{ReceiptHandle: aws.String("receipt")}
++			c.ack(context.Background(), m)
++			c.setVisibility(context.Background(), m, 16)
++			if calls != 2 || strings.Contains(logs.String(), "sqs delete failed") != failed || strings.Contains(logs.String(), "sqs change visibility failed") != failed {
++				t.Fatalf("calls=%d logs=%s", calls, logs.String())
++			}
++		})
++	}
++}
+--- a/internal/platform/worker/worker_test.go
++++ b/internal/platform/worker/worker_test.go
+@@ -7,6 +7,7 @@
+ 	"go.uber.org/fx"
+ 	"io"
+ 	"log/slog"
++	"strings"
+ 	"testing"
+ 	"time"
+ )
+@@ -63,3 +64,22 @@
+ 		t.Fatal("missing worker failure")
+ 	}
+ }
++
++func TestUnexpectedSuccessfulReturnIsAnExplicitFailure(t *testing.T) {
++	logger := slog.New(slog.NewJSONHandler(io.Discard, nil))
++	app := fx.New(fx.NopLogger, fx.Supply(logger, config.Config{ShutdownTimeout: time.Second}), fx.Provide(NewGroup), fx.Invoke(func(g *Group) { Register(g, "early", logger, func(context.Context) error { return nil }) }), fx.Invoke((*Group).Install))
++	if e := app.Start(context.Background()); e != nil {
++		t.Fatal(e)
++	}
++	select {
++	case s := <-app.Wait():
++		if s.ExitCode != 1 {
++			t.Fatal(s)
++		}
++	case <-time.After(time.Second):
++		t.Fatal("termination not supervised")
++	}
++	if e := app.Stop(context.Background()); e == nil || !strings.Contains(e.Error(), "unexpected component termination") {
++		t.Fatalf("wrong failure: %v", e)
++	}
++}
+--- /dev/null
++++ b/internal/transport/httpapi/server_contract_test.go
+@@ -0,0 +1,23 @@
++package httpapi
++
++import (
++	"github.com/alexandre/wagering/internal/infra/auth"
++	"github.com/alexandre/wagering/internal/infra/config"
++	"github.com/alexandre/wagering/internal/platform/metrics"
++	"github.com/alexandre/wagering/internal/platform/worker"
++	"go.uber.org/fx"
++	"io"
++	"log/slog"
++	"testing"
++	"time"
++)
++
++type budgetLifecycle struct{}
++
++func (budgetLifecycle) Append(fx.Hook) {}
++func TestHTTPTimeoutBudgets(t *testing.T) {
++	srv := NewServer(budgetLifecycle{}, &worker.Group{}, config.Config{}, slog.New(slog.NewTextHandler(io.Discard, nil)), Deps{Auth: &auth.Verifier{}, Metrics: metrics.New()})
++	if srv.ReadHeaderTimeout != 5*time.Second || srv.ReadTimeout != 15*time.Second || srv.WriteTimeout != 15*time.Second || srv.IdleTimeout != 60*time.Second {
++		t.Fatalf("timeouts: headers=%v read=%v write=%v idle=%v", srv.ReadHeaderTimeout, srv.ReadTimeout, srv.WriteTimeout, srv.IdleTimeout)
++	}
++}
+--- a/scripts/test-mutations.sh
++++ b/scripts/test-mutations.sh
+@@ -7,8 +7,9 @@
+   echo 'Install: GOBIN="$PWD/.local/bin" go install github.com/go-gremlins/gremlins/cmd/gremlins@v0.6.0' >&2
+   exit 1
+ fi
+-mkdir -p .local/gremlins
+-"$gremlins_bin" unleash --integration --coverpkg ./... --workers 2 \
++output_dir="${GREMLINS_OUTPUT_DIR:-$PWD/.local/gremlins}"
++mkdir -p "$output_dir"
++"$gremlins_bin" unleash --integration --coverpkg ./... --workers "${GREMLINS_WORKERS:-4}" \
+   --invert-assignments --invert-bitwise --invert-bwassign --invert-logical \
+   --invert-loopctrl --remove-self-assignments \
+-  --output "$PWD/.local/gremlins/results.json" 2>&1 | tee .local/gremlins/run.log
++  --output "$output_dir/results.json" 2>&1 | tee "$output_dir/run.log"

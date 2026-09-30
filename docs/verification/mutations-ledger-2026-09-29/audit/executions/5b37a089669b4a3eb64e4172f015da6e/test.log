@@ -1,0 +1,60 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.238s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: INVALID_INPUT: invalid input: uninitialized transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.571s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.299s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.718s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.171s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x100fb243c]
+
+goroutine 20 [running]:
+testing.tRunner.func1.2({0x10117b928, 0x1011b9390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10117b928?, 0x1011b9390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/domain/wager.TestAccountingRejectsCorruptFactsWithoutChangingBalances.func10(0x714425dee488)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/wager/accounting_test.go:52 +0x428
+testing.tRunner(0x714425dee488, 0x714425dd6850)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 19
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.785s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.827s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.327s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.905s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x1009e869c]
+
+goroutine 36 [running]:
+testing.tRunner.func1.2({0x101166fc8, 0x1012590b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x101166fc8?, 0x1012590b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/infra/postgres.transactionRepo.Update({{0x1011e1eb0?, 0x26c8efb9000?}}, {0x1011e2c68, 0x101298000}, 0x0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/infra/postgres/transaction_repo.go:73 +0x40
+github.com/alexandre/wagering/internal/infra/postgres.TestTransactionPersistenceContract(0x26c8f016b48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/infra/postgres/repository_contract_test.go:302 +0x1650
+testing.tRunner(0x26c8f016b48, 0x1011e56b0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.604s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.140s
+FAIL

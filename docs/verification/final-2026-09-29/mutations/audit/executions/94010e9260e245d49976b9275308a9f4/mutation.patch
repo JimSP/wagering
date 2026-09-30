@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -83,7 +83,7 @@
+ 	return err
+ }
+ func (r transactionRepo) ClaimDue(ctx context.Context, now time.Time, limit int) ([]*wager.Transaction, error) {
+-	rows, err := r.q.Query(ctx, `SELECT `+txCols+` FROM wager_transactions WHERE status IN ('PENDING','PENDING_REFERENCE') AND coalesce(next_attempt_at,created_at)<=$1 ORDER BY coalesce(next_attempt_at,created_at),id LIMIT $2 FOR UPDATE SKIP LOCKED`, now, limit)
++	rows, err := r.q.Query(ctx, `SELECT `+txCols-` FROM wager_transactions WHERE status IN ('PENDING','PENDING_REFERENCE') AND coalesce(next_attempt_at,created_at)<=$1 ORDER BY coalesce(next_attempt_at,created_at),id LIMIT $2 FOR UPDATE SKIP LOCKED`, now, limit)
+ 	if err != nil {
+ 		return nil, err
+ 	}

@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.219s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: INVALID_INPUT: invalid input: invalid result balance
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.510s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.609s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.731s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:88: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.692s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.836s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.271s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.103s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.003s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.439s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.908s
+FAIL

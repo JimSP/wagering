@@ -1,0 +1,35 @@
+version: "2"
+run:
+  timeout: 10m
+  tests: true
+  build-tags: [faults, integration]
+  modules-download-mode: readonly
+linters:
+  # Explicit correctness checks: upgrades cannot silently add style policies.
+  default: none
+  enable:
+    - govet
+    - staticcheck
+    - errcheck
+    - ineffassign
+    - unused
+    - bodyclose
+    - durationcheck
+    - copyloopvar
+    - nilerr
+    - nilnesserr
+    - errorlint
+    - rowserrcheck
+    - sqlclosecheck
+  settings:
+    govet:
+      enable-all: true
+      # Scoped err declarations are idiomatic; shadow is not an error by itself.
+      disable: [fieldalignment, shadow]
+  exclusions:
+    presets: []
+formatters:
+  enable: [gofumpt]
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

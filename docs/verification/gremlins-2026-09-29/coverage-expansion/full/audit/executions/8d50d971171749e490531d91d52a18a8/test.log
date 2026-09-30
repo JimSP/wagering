@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.473s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:09:15 INFO transaction handled correlationId="" messageId="" transactionId=d348e833-d709-4097-ad82-bbd6b3a40d40 walletId=5a5e541b-61d1-48cf-b31b-a7d8d8132f62 providerId=p status=PROCESSED
+2026/09/29 02:09:15 WARN transaction handling failed correlationId="" messageId="" transactionId=fe3b6146-99d8-4560-806d-2b104bd72dab walletId=5a5e541b-61d1-48cf-b31b-a7d8d8132f62 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.03s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/win (0.00s)
+        http_contract_test.go:154: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000011","status":"PROCESSED","idempotentReplay":false,"balance":{"amount":"87.00","currency":"BRL"}}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000011","status":"PROCESSED","balance":{"amount":"80.00","currency":"BRL"},"idempotentReplay":false}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.803s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:44: {w player {2000 BRL} 2 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:01 +0000 UTC}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	1.001s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.331s
+FAIL

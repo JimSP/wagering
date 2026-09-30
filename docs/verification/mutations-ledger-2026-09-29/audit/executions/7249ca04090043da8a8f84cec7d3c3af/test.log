@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.174s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:19:33 INFO transaction handled correlationId="" messageId="" transactionId="" walletId=3cbb160d-44a4-4470-99a5-46f710fc6cb0 providerId=p status=""
+2026/09/29 22:19:33 WARN transaction handling failed correlationId="" messageId="" transactionId=6d0a2726-ca30-45ff-9253-ccf970674970 walletId=3cbb160d-44a4-4470-99a5-46f710fc6cb0 providerId=p transient=false
+--- FAIL: TestSubmissionObservabilityFollowsCommittedOutcome (0.00s)
+    --- FAIL: TestSubmissionObservabilityFollowsCommittedOutcome/success_and_replay (0.00s)
+        observable_contract_test.go:66: replay={TransactionID:00000000-0000-4000-8000-000000000007 Status:PROCESSED Balance:0x1e51bfa61e30 FailureCode: IdempotentReplay:true} err=<nil> results=[] duplicates=[] logs=
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.438s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.185s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.666s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.932s
+ok  	github.com/alexandre/wagering/internal/domain/wager	4.315s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	4.048s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.857s
+ok  	github.com/alexandre/wagering/internal/infra/config	4.567s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.778s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.881s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.353s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.190s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.105s
+FAIL

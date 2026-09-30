@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.143s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.473s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.376s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.834s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.240s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/hash (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash:hash WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x7255b2ba08b8 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL    hash wallet player   OPENING {100 BRL}   PROCESSED  0x7255b2ba0948 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.379s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.121s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.619s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.501s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.801s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.123s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.985s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.958s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.805s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.787s
+FAIL

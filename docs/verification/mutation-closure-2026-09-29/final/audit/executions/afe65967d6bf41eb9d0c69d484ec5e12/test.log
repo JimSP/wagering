@@ -1,0 +1,44 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.101s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	13.658s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.705s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.193s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.313s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.571s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.877s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.152s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.438s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x102924acc]
+
+goroutine 11 [running]:
+testing.tRunner.func1.2({0x1030c5958, 0x1031b90b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1030c5958?, 0x1031b90b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-598435654/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/infra/postgres.txAdapter.LoadAccounting({{_, _}}, {_, _}, _)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-598435654/internal/infra/postgres/accounting_repo.go:85 +0xd9c
+github.com/alexandre/wagering/internal/infra/postgres.TestLoadAccountingMissingReferenceIsAnObservation(0x7cceab322fc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-598435654/internal/infra/postgres/accounting_closure_extra_test.go:29 +0x528
+testing.tRunner(0x7cceab322fc8, 0x103145df8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	13.178s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.452s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.158s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.178s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.231s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.246s
+ok  	github.com/alexandre/wagering/internal/platform/worker	8.265s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	8.084s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	9.814s
+FAIL

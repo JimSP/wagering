@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.386s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:43:49 INFO transaction handled correlationId="" messageId="" transactionId=cffc2628-fefc-41d5-a8de-26ba9fedc92b walletId=5bb157b5-c2d8-427f-a392-c5d44a98fa47 providerId=p status=PROCESSED
+2026/09/29 03:43:49 WARN transaction handling failed correlationId="" messageId="" transactionId=4632933c-5277-4b47-b138-40498d0f1cad walletId=5bb157b5-c2d8-427f-a392-c5d44a98fa47 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.14s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.936s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.687s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.014s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.948s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.215s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.135s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.864s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.113s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.579s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.464s
+FAIL

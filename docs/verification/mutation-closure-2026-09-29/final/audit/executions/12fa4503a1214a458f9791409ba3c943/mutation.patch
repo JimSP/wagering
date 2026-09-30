@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -24,7 +24,7 @@
+ 		return f, nil
+ 	}
+ 	var reference *wager.Transaction
+-	if s.ReferenceExternalID != "" {
++	if s.ReferenceExternalID == "" {
+ 		reference, err = t.Transactions().FindByExternalID(ctx, s.ProviderID, s.ReferenceExternalID)
+ 		if errors.Is(err, apperr.ErrNotFound) {
+ 			err = nil

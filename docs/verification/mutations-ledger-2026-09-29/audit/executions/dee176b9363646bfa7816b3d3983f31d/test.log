@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.386s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:14:41 INFO transaction handled correlationId="" messageId="" transactionId=2caf95fe-c369-486f-b3cb-94a15704bcf7 walletId=8797ecfe-5b73-4878-a661-f677c25c25a1 providerId=p status=PROCESSED
+2026/09/29 22:14:41 WARN transaction handling failed correlationId="" messageId="" transactionId=6b44495a-4f5d-4041-9cd4-682ab1e00e16 walletId=8797ecfe-5b73-4878-a661-f677c25c25a1 providerId=p transient=false
+--- FAIL: TestSettlementDeliveryRequiresDedicatedExecutor (0.00s)
+    paired_storage_failure_test.go:299: <nil> 1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.490s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.457s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.833s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.585s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.701s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.707s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.351s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.581s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries (0.00s)
+    --- FAIL: TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries/23514 (0.00s)
+        settlement_contract_test.go:64: permanent failure lost/misclassified: <nil> calls=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.155s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.867s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.849s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.379s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.899s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.896s
+FAIL

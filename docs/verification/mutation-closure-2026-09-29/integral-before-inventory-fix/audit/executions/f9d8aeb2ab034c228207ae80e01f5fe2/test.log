@@ -1,0 +1,27 @@
+# github.com/alexandre/wagering/internal/domain/wager
+# [github.com/alexandre/wagering/internal/domain/wager]
+internal/domain/wager/types.go:26:42: suspect and: k == KindRefund && k == KindRollback
+ok  	github.com/alexandre/wagering/cmd/wagering	0.410s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:17:16 INFO transaction handled correlationId="" messageId="" transactionId=3bc5baf9-d481-4c2b-a18c-0633cbae77d5 walletId=066cc0e5-3564-4a8c-8c36-40bd91be41be providerId=p status=PROCESSED
+2026/09/30 00:17:16 WARN transaction handling failed correlationId="" messageId="" transactionId=6fa45ad7-7fd5-40c9-a351-a2fa9c62d467 walletId=066cc0e5-3564-4a8c-8c36-40bd91be41be providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got INVALID_INPUT: invalid input: ROLLBACK must not carry a reference, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.800s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.422s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.882s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.131s
+FAIL	github.com/alexandre/wagering/internal/domain/wager [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.545s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.069s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.815s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.453s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.139s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.929s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.937s
+FAIL

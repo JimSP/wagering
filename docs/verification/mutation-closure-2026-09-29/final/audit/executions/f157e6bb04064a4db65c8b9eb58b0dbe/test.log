@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.101s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:31:40 INFO transaction handled correlationId="" messageId="" transactionId=5a520b58-e373-42f1-bf81-984d30e2c4fa walletId=a80a85fd-a996-48e9-b4f7-d29f82374edc providerId=p status=PROCESSED
+2026/09/30 01:31:40 WARN transaction handling failed correlationId="" messageId="" transactionId=9e535303-42cf-44f5-95ff-d3456b5a2882 walletId=a80a85fd-a996-48e9-b4f7-d29f82374edc providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/already_terminal (0.00s)
+        reference_failure_test.go:84: worker reported a failure it did not persist [REFUND:FAILED]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.187s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.562s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.675s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.415s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:true ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.063s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.654s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.082s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.805s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.403s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.923s
+FAIL

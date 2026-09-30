@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.237s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:09:43 INFO transaction handled correlationId="" messageId="" transactionId=fa45696c-f9f1-4830-a9eb-8ef7c1f17ef6 walletId=3834b0cd-3b0a-4761-8b23-05ef89434dfa providerId=p status=PROCESSED
+2026/09/30 00:09:43 WARN transaction handling failed correlationId="" messageId="" transactionId=af3bce3e-da00-4177-8770-ac40ca208fed walletId=3834b0cd-3b0a-4761-8b23-05ef89434dfa providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet] [wallet opening]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.160s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.292s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.802s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.369s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    input_contract_test.go:14: INVALID_INPUT: invalid input: id, walletId and playerId are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.674s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.923s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.015s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.412s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:222: INVALID_INPUT: invalid input: id, walletId and playerId are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.663s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.103s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.086s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.067s
+FAIL

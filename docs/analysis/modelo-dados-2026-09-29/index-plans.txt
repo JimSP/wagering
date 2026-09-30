@@ -1,0 +1,38 @@
+SET
+SET
+                                      QUERY PLAN                                       
+---------------------------------------------------------------------------------------
+ Seq Scan on wager_transactions  (cost=10000000000.00..10000000012.10 rows=1 width=16)
+   Filter: ((provider_id = 'p'::text) AND (idempotency_key = 'k'::text))
+ JIT:
+   Functions: 4
+   Options: Inlining true, Optimization true, Expressions true, Deforming true
+(5 rows)
+
+                                        QUERY PLAN                                        
+------------------------------------------------------------------------------------------
+ Index Scan using uq_tx_external on wager_transactions  (cost=0.14..8.16 rows=1 width=16)
+   Index Cond: (provider_id = 'p'::text)
+   Filter: (idempotency_key = 'k'::text)
+(3 rows)
+
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=17.17..17.18 rows=1 width=8)
+   ->  Bitmap Heap Scan on wallet_ledger_entries  (cost=11.82..17.16 rows=2 width=0)
+         Recheck Cond: (transaction_id = '00000000-0000-4000-8000-000000000001'::uuid)
+         ->  Bitmap Index Scan on wallet_ledger_entries_wallet_id_transaction_id_key  (cost=0.00..11.82 rows=2 width=0)
+               Index Cond: (transaction_id = '00000000-0000-4000-8000-000000000001'::uuid)
+(5 rows)
+
+                                       QUERY PLAN                                       
+----------------------------------------------------------------------------------------
+ Limit  (cost=9.52..9.52 rows=1 width=24)
+   ->  Sort  (cost=9.52..9.52 rows=1 width=24)
+         Sort Key: (COALESCE(next_attempt_at, created_at)), id
+         ->  Bitmap Heap Scan on wager_transactions  (cost=4.16..9.51 rows=1 width=24)
+               Recheck Cond: (status = ANY ('{PENDING,PENDING_REFERENCE}'::text[]))
+               Filter: (COALESCE(next_attempt_at, created_at) <= now())
+               ->  Bitmap Index Scan on ix_tx_pending  (cost=0.00..4.15 rows=2 width=0)
+(7 rows)
+

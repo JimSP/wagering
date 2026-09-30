@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.840s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.872s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/rejected/type (0.00s)
+        input_contract_test.go:45: output={eventID:event aggregateID:wallet typ:invalid payload:{"eventId":"event","eventType":"invalid","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","providerId":"provider","externalTransactionId":"ext","failureCode":"INSUFFICIENT_FUNDS"}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	10.401s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.531s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.654s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.372s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.608s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.335s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.146s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.134s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.142s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.945s
+FAIL

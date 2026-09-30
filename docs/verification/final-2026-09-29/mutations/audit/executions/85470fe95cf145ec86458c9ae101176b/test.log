@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.158s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:19:57 INFO transaction handled correlationId="" messageId="" transactionId=cd614022-e447-4034-a390-27295d0141c4 walletId=0866171a-88c2-401c-8ad4-83fa5df3b6df providerId=p status=PROCESSED
+2026/09/29 03:19:57 WARN transaction handling failed correlationId="" messageId="" transactionId=acc44a3e-a7e2-4128-8861-3ad4e9813db4 walletId=0866171a-88c2-401c-8ad4-83fa5df3b6df providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/claim (0.00s)
+        reference_failure_test.go:16: INVALID_INPUT: invalid input: referenceExternalTransactionId is required for REFUND
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.765s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.409s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.142s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    error_text_contract_test.go:12: INVALID_INPUT: invalid input: referenceExternalTransactionId is required for REFUND
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.878s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.155s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.799s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.271s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.045s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.640s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.894s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.961s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.143s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.275s
+FAIL

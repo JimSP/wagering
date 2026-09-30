@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -93,7 +93,7 @@
+ 	}
+ 	// Individual reversal can have exactly one original journal. Batch settlement
+ 	// journals are read only by the settlement executor.
+-	if f.ReferenceSettlementID == "" {
++	if f.ReferenceSettlementID != "" {
+ 		err = t.q.QueryRow(ctx, `SELECT id::text FROM ledger_journals WHERE transaction_id=$1`, r.ID).Scan(&f.OriginalJournalID)
+ 		if err != nil && !errors.Is(err, pgx.ErrNoRows) {
+ 			return f, err

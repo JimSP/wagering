@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.327s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:00:32 INFO transaction handled correlationId="" messageId="" transactionId=cff8947f-081d-4325-9a4a-5a7cf26f7e79 walletId=01782a2e-3794-4d71-9a15-b3bf85f1c0b6 providerId=p status=PROCESSED
+2026/09/30 00:00:32 WARN transaction handling failed correlationId="" messageId="" transactionId=312d7c0c-2de5-4d49-ac39-a279ff45b056 walletId=01782a2e-3794-4d71-9a15-b3bf85f1c0b6 providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+    paired_storage_failure_test.go:91: INVALID_INPUT: invalid input: LOSS requires amount 0.00
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.055s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.437s
+--- FAIL: TestExactBoundaries (0.00s)
+    boundaries_test.go:35: {0 BRL} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.283s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.699s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_guarantee_on_LOSS (0.00s)
+        mutation_regression_test.go:48: INVALID_INPUT: invalid input: LOSS requires amount 0.00
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.541s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.069s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.128s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.661s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.483s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.623s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.472s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.314s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -155,7 +155,7 @@
+ 		if err = tx.Wallets().Save(ctx, w, version); err != nil {
+ 			return err
+ 		}
+-		if err = u.balanceEvent(ctx, tx, t, entry, w.Version()); err != nil {
++		if err = u.balanceEvent(ctx, tx, t, entry, w.Version()); err == nil {
+ 			return err
+ 		}
+ 	}

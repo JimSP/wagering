@@ -1,0 +1,56 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.544s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.526s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.226s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.985s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.105s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.128s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.862s
+ok  	github.com/alexandre/wagering/internal/infra/auth	0.970s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.338s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.471s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.578s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.264s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.059s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.117s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.222s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.244s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.237s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.309s
+--- FAIL: TestInventoryDeclarationsAndCalls (0.00s)
+panic: runtime error: panic called with nil argument [recovered, repanicked]
+
+goroutine 5 [running]:
+testing.tRunner.func1.2({0x1030eeac0, 0x10318c020})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x0?, 0x0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/scripts.inventory.func1({0x103139e98?, 0x17d3460fec80})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/scripts/audit-test-inventory.go:102 +0x2e8
+go/ast.inspector.Visit(0x17d34618e8e0, {0x103139e98?, 0x17d3460fec80?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/go/ast/walk.go:361 +0x38
+go/ast.Walk({0x103139600?, 0x17d34618e8e0?}, {0x103139e98, 0x17d3460fec80})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/go/ast/walk.go:34 +0x44
+go/ast.Walk({0x103139600?, 0x17d34618e8e0?}, {0x10313a578, 0x17d3460ac410})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/go/ast/walk.go:183 +0x115c
+go/ast.walkList[...](...)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/go/ast/walk.go:21
+go/ast.Walk({0x103139600?, 0x17d34618e8e0?}, {0x103139e70, 0x17d346188c00})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/go/ast/walk.go:211 +0x18ec
+go/ast.Inspect(...)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/go/ast/walk.go:377
+github.com/alexandre/wagering/scripts.inventory({0x17d3461b41b0, 0x84})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/scripts/audit-test-inventory.go:85 +0x728
+github.com/alexandre/wagering/scripts.TestInventoryDeclarationsAndCalls(0x17d3461b8248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/scripts/audit-test-inventory_test.go:33 +0xcc
+testing.tRunner(0x17d3461b8248, 0x10313bc88)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/scripts	2.792s
+FAIL

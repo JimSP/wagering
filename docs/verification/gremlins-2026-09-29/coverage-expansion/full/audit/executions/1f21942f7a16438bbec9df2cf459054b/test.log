@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.426s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:55:26 INFO transaction handled correlationId="" messageId="" transactionId=bb4989c2-ebf3-4200-aedd-debfc8b57f16 walletId=c453c941-bb26-4e40-9fab-cc33e5f2ab23 providerId=p status=PROCESSED
+2026/09/29 01:55:26 WARN transaction handling failed correlationId="" messageId="" transactionId=b863c214-9c25-4907-bb65-12af2065e4f4 walletId=c453c941-bb26-4e40-9fab-cc33e5f2ab23 providerId=p transient=false
+--- FAIL: TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent (0.00s)
+    journey_semantics_test.go:202: wrong events [{00000000-0000-4000-8000-000000000008 WalletBalanceChanged 00000000-0000-4000-8000-000000000001 correlation  2026-09-28 12:00:01 +0000 UTC 1 {00000000-0000-4000-8000-000000000006  00000000-0000-4000-8000-000000000001      DEBIT {80.00 BRL} {100.00 BRL} {20.00 BRL} 2 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}}]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.979s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.022s
+FAIL

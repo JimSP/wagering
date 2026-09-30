@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -65,7 +65,7 @@
+ 			return out, e
+ 		}
+ 		c, e := money.FromMinor(after, cur)
+-		if e != nil {
++		if e == nil {
+ 			return out, e
+ 		}
+ 		entry, e := wager.RehydrateLedgerEntry(id, w, tx, dir, a, b, c, at)

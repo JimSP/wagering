@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -107,7 +107,7 @@
+ 				return u.reject(ctx, tx, t, wager.FailReversalAmountMismatch)
+ 			}
+ 			yes, e := tx.Transactions().HasReversal(ctx, r.ID)
+-			if e != nil {
++			if e == nil {
+ 				return e
+ 			}
+ 			if yes {

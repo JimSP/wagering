@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.247s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.740s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.629s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.917s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.639s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.355s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.530s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.475s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.473s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingDatabaseProtocol (0.00s)
+    --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT (0.00s)
+        --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT/failure-0-query (0.00s)
+            accounting_mutation_test.go:57: step 7: SQL "INSERT INTO commitment_effects(commitment_id,journal_id,kind,amount_minor,reverses_effect_id,created_at) VALUES($1,$2,'RESTORE',$3,$4,$5)" lacks "INSERT INTO journal_reversals"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.217s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.561s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.564s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.568s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.594s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.441s
+FAIL

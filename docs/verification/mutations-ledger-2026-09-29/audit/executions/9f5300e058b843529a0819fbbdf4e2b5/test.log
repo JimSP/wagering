@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.524s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:30:07 INFO transaction handled correlationId="" messageId="" transactionId=6a511e5d-8f96-47c6-a43c-56e1e25f6e7e walletId=2cb06a7e-e871-48b5-9e69-2222d53fd713 providerId=p status=PROCESSED
+2026/09/29 22:30:07 WARN transaction handling failed correlationId="" messageId="" transactionId=6696a7fb-fca7-4177-a925-0c2b7e85ac6b walletId=2cb06a7e-e871-48b5-9e69-2222d53fd713 providerId=p transient=false
+--- FAIL: TestReconciliationMetricsOnlyDescribeSuccessfulInconsistentReads (0.00s)
+    --- FAIL: TestReconciliationMetricsOnlyDescribeSuccessfulInconsistentReads/equal (0.00s)
+        reconciliation_contract_test.go:40: result={WalletID: Stored:{minor:0 currency:} Calculated:{minor:0 currency:} Difference:{minor:0 currency:} Consistent:false CheckedEntries:0} err=money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.761s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	3.788s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775807 y=1 subtract=true got={0 } err=money: overflow want=-9223372036854775808
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	4.729s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.514s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.004s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {10000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	4.048s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.474s
+ok  	github.com/alexandre/wagering/internal/infra/config	4.159s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.479s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.513s
+FAIL

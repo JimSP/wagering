@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -39,7 +39,7 @@
+ 		}
+ 	}
+ 	rows, err := r.q.Query(ctx, `SELECT id::text,transaction_id::text,direction,amount_minor,currency,balance_before_minor,balance_after_minor,created_at,seq FROM wallet_ledger_entries WHERE wallet_id=$1 AND seq>$2 ORDER BY seq LIMIT $3`, w, seq, limit+1)
+-	if err != nil {
++	if err == nil {
+ 		return out, err
+ 	}
+ 	defer rows.Close()

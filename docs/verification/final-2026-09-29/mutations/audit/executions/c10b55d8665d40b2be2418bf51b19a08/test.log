@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.994s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:21:25 INFO transaction handled correlationId="" messageId="" transactionId=9819cef8-1c38-4172-a188-57a979790f0a walletId=6ffa775f-034d-4793-b88f-419e3d082aba providerId=p status=PROCESSED
+2026/09/29 03:21:25 WARN transaction handling failed correlationId="" messageId="" transactionId=9890e0ad-585b-49c2-a3f0-72d1cf8d0e3f walletId=6ffa775f-034d-4793-b88f-419e3d082aba providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.489s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.112s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.605s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.811s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.222s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.551s
+ok  	github.com/alexandre/wagering/internal/infra/config	4.375s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	4.123s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.563s
+FAIL

@@ -1,0 +1,20 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.488s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.246s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.010s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.592s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.703s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.004s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.121s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.314s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.130s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_mutation_test.go:71: step 2: SQL "SELECT id::text,origin,coalesce(provider_id,''),coalesce(external_transaction_id,''),coalesce(idempotency_key,''),coalesce(payload_hash,''),wallet_id::text,player_id::text,coalesce(round_id,''),coalesce(game_id,''),kind,amount_minor,currency,coalesce(reference_external_id,''),coalesce(reference_transaction_id::text,''),status,coalesce(failure_code,''),balance_after_minor,attempts,next_attempt_at,expires_at,created_at,updated_at,correlation_id,causation_id FROM wager_transactions WHERE kind='BET' AND status='PROCESSED' AND provider_id=$1 AND wallet_id=$2 AND player_id=$3 AND currency=$4 AND round_id=$5 ORDER BY id" lacks "external_transaction_id=$2"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.442s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.770s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.755s
+FAIL

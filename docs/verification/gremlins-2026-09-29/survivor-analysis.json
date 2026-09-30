@@ -1,0 +1,74 @@
+[
+  {
+    "file": "internal/domain/money/money.go",
+    "line": 62,
+    "column": 14,
+    "type": "CONDITIONALS_BOUNDARY",
+    "classification": "equivalence_candidate_pending_audit",
+    "reason": "Add: segundo operando >= 0. A unica entrada adicional tem segundo operando zero. O predicado seguinte exigiria um int64 estritamente fora de [MinInt64, MaxInt64], impossivel; resultado e erro permanecem iguais.",
+    "previous_classification": "equivalent",
+    "audit_status": "pending_user_audit",
+    "evidence_kind": "static_analysis; official campaign reports LIVED; no per-mutant execution trace",
+    "audit_document": "AUDIT.md"
+  },
+  {
+    "file": "internal/domain/money/money.go",
+    "line": 62,
+    "column": 66,
+    "type": "CONDITIONALS_BOUNDARY",
+    "classification": "equivalence_candidate_pending_audit",
+    "reason": "Add: segundo operando <= 0. A unica entrada adicional tem segundo operando zero. O predicado seguinte exigiria um int64 estritamente fora de [MinInt64, MaxInt64], impossivel; resultado e erro permanecem iguais.",
+    "previous_classification": "equivalent",
+    "audit_status": "pending_user_audit",
+    "evidence_kind": "static_analysis; official campaign reports LIVED; no per-mutant execution trace",
+    "audit_document": "AUDIT.md"
+  },
+  {
+    "file": "internal/domain/money/money.go",
+    "line": 82,
+    "column": 14,
+    "type": "CONDITIONALS_BOUNDARY",
+    "classification": "equivalence_candidate_pending_audit",
+    "reason": "Sub: segundo operando >= 0. A unica entrada adicional tem segundo operando zero. O predicado seguinte exigiria um int64 estritamente fora de [MinInt64, MaxInt64], impossivel; resultado e erro permanecem iguais.",
+    "previous_classification": "equivalent",
+    "audit_status": "pending_user_audit",
+    "evidence_kind": "static_analysis; official campaign reports LIVED; no per-mutant execution trace",
+    "audit_document": "AUDIT.md"
+  },
+  {
+    "file": "internal/domain/money/money.go",
+    "line": 82,
+    "column": 66,
+    "type": "CONDITIONALS_BOUNDARY",
+    "classification": "equivalence_candidate_pending_audit",
+    "reason": "Sub: segundo operando <= 0. A unica entrada adicional tem segundo operando zero. O predicado seguinte exigiria um int64 estritamente fora de [MinInt64, MaxInt64], impossivel; resultado e erro permanecem iguais.",
+    "previous_classification": "equivalent",
+    "audit_status": "pending_user_audit",
+    "evidence_kind": "static_analysis; official campaign reports LIVED; no per-mutant execution trace",
+    "audit_document": "AUDIT.md"
+  },
+  {
+    "file": "internal/app/usecase/workers.go",
+    "line": 136,
+    "column": 14,
+    "type": "CONDITIONALS_NEGATION",
+    "classification": "faults_build_behavior_change",
+    "reason": "A inversao altera o disparo de crash na build faults. A campanha sem essa tag nao observa esse efeito; nao e equivalencia do projeto.",
+    "previous_classification": "equivalent_for_default_build",
+    "audit_status": "pending_user_audit",
+    "evidence_kind": "static_analysis; official campaign reports LIVED; no per-mutant execution trace",
+    "audit_document": "AUDIT.md"
+  },
+  {
+    "file": "internal/domain/wager/transaction.go",
+    "line": 151,
+    "column": 51,
+    "type": "INVERT_LOGICAL",
+    "classification": "observable_error_change",
+    "reason": "Attempts=1 e ExpiresAt=nil em snapshot PENDING valido nos demais campos muda o texto de erro retornado. Igualdade de categoria nao demonstra igualdade do contrato de saida. Falta evidencia de execucao individual e auditoria do contrato.",
+    "previous_classification": "same_domain_contract_different_diagnostic",
+    "audit_status": "pending_user_audit",
+    "evidence_kind": "static_analysis; official campaign reports LIVED; no per-mutant execution trace",
+    "audit_document": "AUDIT.md"
+  }
+]

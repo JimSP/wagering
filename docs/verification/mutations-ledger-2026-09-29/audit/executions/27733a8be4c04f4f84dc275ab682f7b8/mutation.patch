@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/settlement_audit.go
++++ mutant/internal/app/usecase/settlement_audit.go
+@@ -25,7 +25,7 @@
+ 	var out port.SettlementAudit
+ 	err = u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error {
+ 		r, err := auditStore(tx)
+-		if err != nil {
++		if err == nil {
+ 			return err
+ 		}
+ 		out, err = r.AuditSettlement(ctx, parsed.String())

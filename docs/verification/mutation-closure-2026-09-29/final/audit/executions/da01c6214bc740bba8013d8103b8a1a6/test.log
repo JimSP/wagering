@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	14.122s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:33:39 INFO transaction handled correlationId="" messageId="" transactionId=d66a13c3-c7da-4f22-9e75-228a1baa623b walletId=fbf44a3f-7f8a-4bcd-bbcb-6ab504cdc117 providerId=p status=PROCESSED
+2026/09/30 01:33:39 WARN transaction handling failed correlationId="" messageId="" transactionId=330efab4-01b0-45cc-a067-58782544d6fb walletId=fbf44a3f-7f8a-4bcd-bbcb-6ab504cdc117 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.35s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:161: operational accounts=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:0 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:2000 currency:BRL} Version:2 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	14.756s
+ok  	github.com/alexandre/wagering/internal/domain/event	15.019s
+ok  	github.com/alexandre/wagering/internal/domain/money	14.637s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: REVERSAL_INSUFFICIENT_FUNDS: insufficient funds to reverse
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	14.884s
+ok  	github.com/alexandre/wagering/internal/domain/wager	15.278s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:44: {w player {2000 BRL} 2 2026-09-28 12:00:00 +0000 UTC 2026-09-28 12:00:01 +0000 UTC}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	16.073s
+ok  	github.com/alexandre/wagering/internal/infra/auth	16.191s
+ok  	github.com/alexandre/wagering/internal/infra/config	15.527s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	16.394s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.117s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.783s
+FAIL

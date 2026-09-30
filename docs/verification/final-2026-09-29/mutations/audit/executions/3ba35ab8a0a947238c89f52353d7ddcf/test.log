@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.390s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:23:09 INFO transaction handled correlationId="" messageId="" transactionId=bf6993a9-1220-4bc7-bf6b-05aa2e6f7ffe walletId=f2a5fff2-ae28-4369-aa2e-e7d094f85d1e providerId=p status=PROCESSED
+2026/09/29 03:23:09 WARN transaction handling failed correlationId="" messageId="" transactionId=7377e000-76eb-4657-80f7-721a92f8f630 walletId=f2a5fff2-ae28-4369-aa2e-e7d094f85d1e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/rejected (0.00s)
+        http_contract_test.go:181: HTTP contract: 500 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.292s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.865s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.430s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/REJECTED (0.00s)
+        lifecycle_semantics_test.go:122: rehydration changed state: INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	0.642s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.750s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.599s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.858s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.172s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.757s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	4.096s
+FAIL

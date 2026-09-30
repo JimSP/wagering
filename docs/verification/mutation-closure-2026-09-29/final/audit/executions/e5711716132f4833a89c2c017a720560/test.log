@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.344s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:20:28 INFO transaction handled correlationId="" messageId="" transactionId=fcc5db34-ea44-4bdc-b84d-27c48f949d50 walletId=8cda3ef6-4afe-43cb-bb57-613107f3d40e providerId=p status=PROCESSED
+2026/09/30 01:20:28 WARN transaction handling failed correlationId="" messageId="" transactionId=602a2f85-129f-4b90-9ec7-b89bcc72b25c walletId=8cda3ef6-4afe-43cb-bb57-613107f3d40e providerId=p transient=false
+--- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect (0.00s)
+    --- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect/self_reference (0.00s)
+        journey_semantics_test.go:211: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000007 REJECTED <nil> INVALID_REFERENCE_KIND false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.818s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.349s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.436s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.050s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.303s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.466s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.913s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.722s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.027s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.496s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.455s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.445s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.154s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.173s
+ok  	github.com/alexandre/wagering/internal/platform/worker	9.325s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.290s
+FAIL

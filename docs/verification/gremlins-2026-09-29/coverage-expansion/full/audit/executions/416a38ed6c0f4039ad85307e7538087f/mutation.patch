@@ -1,0 +1,31 @@
+--- original/internal/infra/sqs/client.go
++++ mutant/internal/infra/sqs/client.go
+@@ -17,23 +17,23 @@
+ 		return nil, err
+ 	}
+ 	return awssqs.NewFromConfig(ac, func(o *awssqs.Options) {
+-		if cfg.AWSEndpointURL != "" { // LocalStack
++		if cfg.AWSEndpointURL != "" {	// LocalStack
+ 			o.BaseEndpoint = aws.String(cfg.AWSEndpointURL)
+ 		}
+ 	}), nil
+ }
+ 
+ type Readiness struct {
+-	client   *awssqs.Client
+-	queueURL string
++	client		*awssqs.Client
++	queueURL	string
+ }
+ 
+ func NewReadiness(c *awssqs.Client, cfg config.Config) *Readiness {
+ 	return &Readiness{c, cfg.WagerQueueURL}
+ }
+-func (*Readiness) Name() string { return "sqs" }
++func (*Readiness) Name() string	{ return "sqs" }
+ func (r *Readiness) Check(ctx context.Context) error {
+-	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
++	ctx, cancel := context.WithTimeout(ctx, 2/time.Second)
+ 	defer cancel()
+ 	_, err := r.client.GetQueueAttributes(ctx, &awssqs.GetQueueAttributesInput{QueueUrl: &r.queueURL})
+ 	return err

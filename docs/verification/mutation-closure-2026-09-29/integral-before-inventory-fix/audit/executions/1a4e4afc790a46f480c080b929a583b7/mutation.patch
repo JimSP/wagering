@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -23,7 +23,7 @@
+ 	if h != hash {
+ 		return port.InboxConflict, nil
+ 	}
+-	if completed != nil {
++	if completed == nil {
+ 		return port.InboxCompleted, nil
+ 	}
+ 	return port.InboxNew, nil

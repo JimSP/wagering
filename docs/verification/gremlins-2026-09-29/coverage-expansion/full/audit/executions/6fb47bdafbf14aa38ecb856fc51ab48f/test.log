@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.429s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:54:58 INFO transaction handled correlationId="" messageId="" transactionId=421c5168-373d-415f-b6c2-e4ddc42d67a7 walletId=eb66dfb8-bb84-4cb9-be87-e40a757e5a62 providerId=p status=PROCESSED
+2026/09/29 01:54:58 WARN transaction handling failed correlationId="" messageId="" transactionId=cd4526af-723e-4ffc-aac3-8b0cf52726e1 walletId=eb66dfb8-bb84-4cb9-be87-e40a757e5a62 providerId=p transient=false
+--- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect (0.00s)
+    --- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect/wrong_round (0.00s)
+        journey_semantics_test.go:345: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000010 PROCESSED 0x7db4c1dc30e0  false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.998s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.011s
+FAIL

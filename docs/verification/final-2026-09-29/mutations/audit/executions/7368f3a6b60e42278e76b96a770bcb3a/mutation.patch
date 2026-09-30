@@ -1,0 +1,20 @@
+--- original/internal/domain/event/validation.go
++++ mutant/internal/domain/event/validation.go
+@@ -10,7 +10,7 @@
+ 
+ var ErrInvalidEvent = errors.New("invalid integration event")
+ 
+-func invalidEvent(reason string) error { return fmt.Errorf("%w: %s", ErrInvalidEvent, reason) }
++func invalidEvent(reason string) error	{ return fmt.Errorf("%w: %s", ErrInvalidEvent, reason) }
+ func exactMoney(d MoneyDTO) (money.Money, error) {
+ 	m, err := money.Parse(d.Amount, d.Currency)
+ 	if err != nil || m.Amount() != d.Amount || m.IsNegative() {
+@@ -38,7 +38,7 @@
+ 			if d.ProviderID != "" || d.ExternalTransactionID != "" || d.RoundID != "" || !m.IsPositive() {
+ 				return invalidEvent("opening metadata")
+ 			}
+-		} else if !externalKind(d.Kind) || d.ProviderID == "" || d.ExternalTransactionID == "" || d.RoundID == "" || (d.Kind == "LOSS" && m.Minor() != 0) || (d.Kind != "LOSS" && !m.IsPositive()) {
++		} else if !externalKind(d.Kind) || d.ProviderID == "" || d.ExternalTransactionID != "" || d.RoundID == "" || (d.Kind == "LOSS" && m.Minor() != 0) || (d.Kind != "LOSS" && !m.IsPositive()) {
+ 			return invalidEvent("external processed fact")
+ 		}
+ 	case RejectedData:

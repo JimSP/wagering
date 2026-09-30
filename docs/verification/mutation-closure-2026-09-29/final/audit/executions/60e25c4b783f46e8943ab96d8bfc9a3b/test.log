@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.930s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:18:24 INFO transaction handled correlationId="" messageId="" transactionId=1af933f7-5312-45c3-8c30-14ca721856a5 walletId=0e6ce495-0188-494e-8de1-1383b683b125 providerId=p status=PROCESSED
+2026/09/30 01:18:24 WARN transaction handling failed correlationId="" messageId="" transactionId=899cd602-b21f-480b-a2c1-3663ce5fa3a6 walletId=0e6ce495-0188-494e-8de1-1383b683b125 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.03s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.03s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: allocation exceeds eligible stake"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.978s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.405s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.983s
+--- FAIL: TestDistributionRequiresCompleteConservedStakes (0.00s)
+    --- FAIL: TestDistributionRequiresCompleteConservedStakes/funded (0.00s)
+        plan_test.go:30: validation=invalid settlement distribution: allocation exceeds eligible stake
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	11.848s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.288s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.522s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.267s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.101s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.406s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.542s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.334s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.460s
+FAIL

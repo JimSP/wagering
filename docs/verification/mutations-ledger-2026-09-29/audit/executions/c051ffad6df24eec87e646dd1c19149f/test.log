@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.756s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:10:32 INFO transaction handled correlationId="" messageId="" transactionId=335effe4-ecca-4b20-bfb9-82f6c755db44 walletId=df2bf790-22f7-4dc4-bf33-1938e72a2e19 providerId=p status=PROCESSED
+2026/09/29 23:10:32 WARN transaction handling failed correlationId="" messageId="" transactionId=104a86ce-920c-4bd4-87f1-b16625fbb92a walletId=df2bf790-22f7-4dc4-bf33-1938e72a2e19 providerId=p transient=false
+--- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts (0.18s)
+    --- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts/opening=0.00 (0.00s)
+        http_contract_test.go:268: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:283: wire contract
+        want {"code":"INVALID_INPUT","message":"invalid input: body must be a JSON object"}
+        got  {"code":"INVALID_INPUT","message":"invalid input: money: invalid amount: \"\""}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.619s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.813s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.413s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.943s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.543s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.949s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.310s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.668s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.120s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.621s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.605s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.587s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.284s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.270s
+FAIL

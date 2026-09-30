@@ -1,0 +1,54 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.424s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:54:40 INFO transaction handled correlationId="" messageId="" transactionId=77679591-214f-4e05-8485-e4759d439974 walletId=1bebc874-9b92-4afe-883f-6b2f6fb3fdb6 providerId=p status=PROCESSED
+2026/09/29 01:54:40 WARN transaction handling failed correlationId="" messageId="" transactionId=c0ed7095-b5aa-46c5-88b0-1fa8f338467b walletId=1bebc874-9b92-4afe-883f-6b2f6fb3fdb6 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x10 pc=0x100843418]
+
+goroutine 83 [running]:
+testing.tRunner.func1.2({0x100f682c8, 0x101053cd0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x100f682c8?, 0x101053cd0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).PlayerID(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/domain/wallet/wallet.go:53
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0xba14ab1e980, {0x100ff9080, 0xba14ab2a700}, {0x100ff9940, 0xba14ab08dc0}, 0xba14ab36a80)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/app/usecase/process.go:77 +0xe8
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce.func1({0x100ff9080, 0xba14ab2a700}, {0x100ff9940, 0xba14ab08dc0})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/app/usecase/workers.go:50 +0x124
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x28?, {0x100ff9080?, 0xba14ab2a700?}, 0x100746958?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce(0xba14ab1e9c0, {0x100ff9080, 0xba14ab2a700})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/app/usecase/workers.go:39 +0x148
+github.com/alexandre/wagering/internal/app/usecase.TestReferenceWorkerClassifiesRecoveryAndAuditFailures.func1(0xba14ab57448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-3556537798/internal/app/usecase/reference_failure_test.go:72 +0x550
+testing.tRunner(0xba14ab57448, 0xba14ab127b0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 80
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.724s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestEverySQLStateClassification (0.00s)
+    uow_contract_test.go:129: 23514 <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.997s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.301s
+FAIL

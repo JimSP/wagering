@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.134s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:09:25 INFO transaction handled correlationId="" messageId="" transactionId=f4f429c8-8c6d-4d7c-bfe7-e09799f6c276 walletId=76a2899e-5afb-4c0e-be79-b80be7235474 providerId=p status=PROCESSED
+2026/09/30 00:09:25 WARN transaction handling failed correlationId="" messageId="" transactionId=d246b0f0-ca0b-4385-bcb9-1a9ca7dfac61 walletId=76a2899e-5afb-4c0e-be79-b80be7235474 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.10s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/win-exceeds-committed-funds (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"INVALID_INPUT","message":"invalid input: INVALID_INPUT: invalid input: WIN must not carry a reference"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.465s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.768s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.633s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.264s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:75: INVALID_INPUT: invalid input: WIN must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.510s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.889s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.384s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.017s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:27: INVALID_INPUT: invalid input: WIN must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.830s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.184s
+FAIL

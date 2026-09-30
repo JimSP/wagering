@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.939s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:09:27 INFO transaction handled correlationId="" messageId="" transactionId=38776968-6e13-44c1-93bd-04769ed2144e walletId=e254b6b6-ed6e-424f-96e8-9fdfa3aa441e providerId=p status=PROCESSED
+2026/09/29 02:09:27 WARN transaction handling failed correlationId="" messageId="" transactionId=bd88cf13-ad04-4850-932c-848e576aa2dd walletId=e254b6b6-ed6e-424f-96e8-9fdfa3aa441e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:181: HTTP contract: 403 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"FORBIDDEN"}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.640s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+--- FAIL: TestAuthorizationPolicyMatrix (0.00s)
+    --- FAIL: TestAuthorizationPolicyMatrix/either/internal (0.00s)
+        authorization_paths_test.go:40: 403
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	1.232s
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.544s
+FAIL

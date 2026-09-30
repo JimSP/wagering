@@ -1,0 +1,64 @@
+--- original/internal/domain/wallet/wallet.go
++++ mutant/internal/domain/wallet/wallet.go
+@@ -10,24 +10,24 @@
+ )
+ 
+ var (
+-	ErrInvalidWallet     = errors.New("wallet: invalid")
+-	ErrInsufficientFunds = errors.New("wallet: insufficient funds")
+-	ErrNonPositiveAmount = errors.New("wallet: amount must be positive")
++	ErrInvalidWallet	= errors.New("wallet: invalid")
++	ErrInsufficientFunds	= errors.New("wallet: insufficient funds")
++	ErrNonPositiveAmount	= errors.New("wallet: amount must be positive")
+ )
+ 
+ type Wallet struct {
+-	id, playerID         string
+-	balance              money.Money
+-	version              int64
+-	createdAt, updatedAt time.Time
++	id, playerID		string
++	balance			money.Money
++	version			int64
++	createdAt, updatedAt	time.Time
+ }
+ 
+ // Snapshot is the persistence view of a Wallet (used by repositories to map rows).
+ type Snapshot struct {
+-	ID, PlayerID         string
+-	Balance              money.Money
+-	Version              int64
+-	CreatedAt, UpdatedAt time.Time
++	ID, PlayerID		string
++	Balance			money.Money
++	Version			int64
++	CreatedAt, UpdatedAt	time.Time
+ }
+ 
+ // New creates a wallet with version 1 (initial balance may be zero).
+@@ -40,7 +40,7 @@
+ 
+ // Rehydrate rebuilds a wallet from storage WITHOUT reapplying movements or emitting events.
+ func Rehydrate(s Snapshot) (*Wallet, error) {
+-	if s.CreatedAt.IsZero() || s.UpdatedAt.Before(s.CreatedAt) || s.ID == "" || s.PlayerID == "" || s.Balance.Currency() == "" || s.Balance.IsNegative() || s.Version < 1 {
++	if (s.CreatedAt.IsZero() || s.UpdatedAt.Before(s.CreatedAt) || s.ID == "" || s.PlayerID == "") && s.Balance.Currency() == "" || s.Balance.IsNegative() || s.Version < 1 {
+ 		return nil, ErrInvalidWallet
+ 	}
+ 	return &Wallet{s.ID, s.PlayerID, s.Balance, s.Version, s.CreatedAt, s.UpdatedAt}, nil
+@@ -49,11 +49,11 @@
+ func (w *Wallet) Snapshot() Snapshot {
+ 	return Snapshot{w.id, w.playerID, w.balance, w.version, w.createdAt, w.updatedAt}
+ }
+-func (w *Wallet) ID() string           { return w.id }
+-func (w *Wallet) PlayerID() string     { return w.playerID }
+-func (w *Wallet) Balance() money.Money { return w.balance }
+-func (w *Wallet) Version() int64       { return w.version }
+-func (w *Wallet) Currency() string     { return w.balance.Currency() }
++func (w *Wallet) ID() string		{ return w.id }
++func (w *Wallet) PlayerID() string	{ return w.playerID }
++func (w *Wallet) Balance() money.Money	{ return w.balance }
++func (w *Wallet) Version() int64	{ return w.version }
++func (w *Wallet) Currency() string	{ return w.balance.Currency() }
+ 
+ func (w *Wallet) check(m money.Money) error {
+ 	if w == nil || w.id == "" || w.version < 1 || w.balance.Currency() == "" {

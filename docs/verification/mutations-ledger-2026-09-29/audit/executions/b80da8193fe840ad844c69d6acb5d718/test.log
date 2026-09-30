@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.457s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:35:10 INFO transaction handled correlationId="" messageId="" transactionId=57491b21-33cb-4600-9ce6-207002a0873c walletId=e5f1c309-3b5b-4d80-9104-6d6221f9eb18 providerId=p status=PROCESSED
+2026/09/29 22:35:10 WARN transaction handling failed correlationId="" messageId="" transactionId=536d1741-f980-423c-b61d-f2c433c33964 walletId=e5f1c309-3b5b-4d80-9104-6d6221f9eb18 providerId=p transient=false
+--- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect (0.00s)
+    --- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect/self_reference (0.00s)
+        journey_semantics_test.go:211: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000007 REJECTED <nil> INVALID_REFERENCE_KIND false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.243s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.428s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.542s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.357s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.108s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.732s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.802s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.624s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.054s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.164s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.324s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.494s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.237s
+FAIL

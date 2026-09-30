@@ -1,0 +1,42 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.225s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:24:11 INFO transaction handled correlationId="" messageId="" transactionId=f5f050b9-ce5c-4bbc-b9d8-af52439e36e2 walletId=31caaadd-37b9-4f7d-8388-7eb19dc0ba39 providerId=p status=PROCESSED
+2026/09/29 22:24:11 WARN transaction handling failed correlationId="" messageId="" transactionId=7bad4511-0000-41ec-8dda-bb87a01fe752 walletId=31caaadd-37b9-4f7d-8388-7eb19dc0ba39 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/processed_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger] [wallet opening ledger WagerTransactionProcessed]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.507s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.857s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.110s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.980s
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.368s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.492s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.271s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.610s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.796s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:13 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.138s
+FAIL

@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.052s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	13.238s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.031s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.393s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.688s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/provider (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID:p ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x25230e0328b8 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL p    wallet player   OPENING {100 BRL}   PROCESSED  0x25230e032948 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.447s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.146s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.548s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.262s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.034s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.827s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.790s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.784s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.336s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.462s
+ok  	github.com/alexandre/wagering/internal/platform/worker	10.678s
+FAIL

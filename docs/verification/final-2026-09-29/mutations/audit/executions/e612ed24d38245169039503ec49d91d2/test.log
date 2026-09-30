@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.284s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:13:22 INFO transaction handled correlationId="" messageId="" transactionId=e6fb8965-f28b-4a5c-afaf-0417a4acf434 walletId=5559e7b6-8b4e-43e3-8d75-f6eb378254ea providerId=p status=PROCESSED
+2026/09/29 03:13:22 WARN transaction handling failed correlationId="" messageId="" transactionId=8b075ec2-cadf-4e3a-b038-0bbab800ae40 walletId=5559e7b6-8b4e-43e3-8d75-f6eb378254ea providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/balance_event (0.00s)
+        read_failure_test.go:156: balance event invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.575s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance equation
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.031s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.606s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.206s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.653s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.561s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.782s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.494s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.964s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.103s
+FAIL

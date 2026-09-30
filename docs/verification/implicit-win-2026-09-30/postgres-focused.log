@@ -1,0 +1,36 @@
+6 versions; paired up/down files; SHA-256 verified
+=== RUN   TestImplicitWINSelectsOldestUnsettledBET
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=f6374480-0514-4016-b81f-2ac1e4d6e78a walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=PROCESSED
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=0a87b04f-140f-4b37-9957-5edfe5c66ca7 walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=PROCESSED
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=3b329aa3-282e-401d-9c21-26f796dd1596 walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=PROCESSED
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=eab61ab4-e7b0-4817-9296-268ca291e19b walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=PROCESSED
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=52d674c5-1b73-4d85-a100-98f3b4fbdfdd walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=PROCESSED
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=3b329aa3-282e-401d-9c21-26f796dd1596 walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=PROCESSED
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=1bf0cd3d-ff05-4888-b1e0-d295bf795aa7 walletId=32c639a6-14d6-49cf-8421-578b23685e3a providerId=model status=REJECTED
+--- PASS: TestImplicitWINSelectsOldestUnsettledBET (0.15s)
+=== RUN   TestImplicitWINSkipsClosedBetsAndOtherGames
+2026/09/30 12:44:38 INFO transaction handled correlationId="" messageId="" transactionId=40e59798-2eec-4c49-8f76-d22a4b892426 walletId=cdd12b3b-36ff-449e-87ea-d5268602e094 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=27f344a0-5166-4bf8-a882-adbb8e86d8c7 walletId=cdd12b3b-36ff-449e-87ea-d5268602e094 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=70533146-1bec-4476-9ddb-86ce10355581 walletId=cdd12b3b-36ff-449e-87ea-d5268602e094 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=11283250-3aef-4121-a263-ce57eb2e784d walletId=cdd12b3b-36ff-449e-87ea-d5268602e094 providerId=model status=PROCESSED
+--- PASS: TestImplicitWINSkipsClosedBetsAndOtherGames (0.10s)
+=== RUN   TestImplicitWINTimestampTieAndExplicitReference
+=== RUN   TestImplicitWINTimestampTieAndExplicitReference/timestamp-tie
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=f204ad68-73cc-4135-bc95-a763ab4cdb7c walletId=515160e7-a62c-4333-aa41-d284940a7835 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=04efa33b-ff9c-4c5b-b73d-0032b685d007 walletId=515160e7-a62c-4333-aa41-d284940a7835 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=7a03e4b5-edaf-4ec7-874d-a1552b0156f1 walletId=515160e7-a62c-4333-aa41-d284940a7835 providerId=model status=PROCESSED
+=== RUN   TestImplicitWINTimestampTieAndExplicitReference/explicit-wins
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=f6efe2f2-a729-48da-89ad-daa90ec25e39 walletId=0d426d56-2cfa-4d5b-be41-903cdba233da providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=0cae35ef-e070-4776-ad2a-f821cd46336d walletId=0d426d56-2cfa-4d5b-be41-903cdba233da providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=753e3854-c28b-45dd-9d4c-b6492d220dc4 walletId=0d426d56-2cfa-4d5b-be41-903cdba233da providerId=model status=PROCESSED
+--- PASS: TestImplicitWINTimestampTieAndExplicitReference (0.14s)
+    --- PASS: TestImplicitWINTimestampTieAndExplicitReference/timestamp-tie (0.07s)
+    --- PASS: TestImplicitWINTimestampTieAndExplicitReference/explicit-wins (0.07s)
+=== RUN   TestConcurrentImplicitWINsWaitForOldestBET
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=a896b8db-ae4e-4f36-8332-ade201a75fce walletId=72d1831a-9b14-44fd-a46a-9173af971f54 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=a0f7a5b7-2acb-4bc8-a223-532ebaf58cf9 walletId=72d1831a-9b14-44fd-a46a-9173af971f54 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=a8bf58ca-47f7-467d-8db7-b4eda03ff007 walletId=72d1831a-9b14-44fd-a46a-9173af971f54 providerId=model status=PROCESSED
+2026/09/30 12:44:39 INFO transaction handled correlationId="" messageId="" transactionId=28959f83-70f0-47af-ae7c-dd11574444de walletId=72d1831a-9b14-44fd-a46a-9173af971f54 providerId=model status=PROCESSED
+--- PASS: TestConcurrentImplicitWINsWaitForOldestBET (0.11s)
+PASS
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.156s

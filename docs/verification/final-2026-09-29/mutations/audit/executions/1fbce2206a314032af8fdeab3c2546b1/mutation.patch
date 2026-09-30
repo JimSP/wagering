@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -58,7 +58,7 @@
+ 	if err := tx.Transactions().Update(ctx, t); err != nil {
+ 		return err
+ 	}
+-	if s.Status == wager.StatusPendingReference {
++	if s.Status != wager.StatusPendingReference {
+ 		return nil
+ 	}
+ 	s = t.Snapshot()

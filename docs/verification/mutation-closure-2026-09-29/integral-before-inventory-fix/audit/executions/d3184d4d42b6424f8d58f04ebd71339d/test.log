@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.241s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.416s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.305s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.430s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.000s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.133s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.594s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.559s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.701s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.492s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.766s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.758s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.743s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.336s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.322s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.656s
+--- FAIL: TestTransfersValidateFixturesAndPostingBoundaries (0.00s)
+    --- FAIL: TestTransfersValidateFixturesAndPostingBoundaries/negative-before (0.00s)
+        mutation_regression_test.go:108: invalid transfer accepted
+    mutation_regression_test.go:119: invalid posting balance
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.827s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.976s
+ok  	github.com/alexandre/wagering/scripts	2.981s
+FAIL

@@ -1,0 +1,49 @@
+--- original/internal/transport/httpapi/settlement.go
++++ mutant/internal/transport/httpapi/settlement.go
+@@ -7,11 +7,11 @@
+ 
+ func (h handlers) createBet(w http.ResponseWriter, r *http.Request) {
+ 	var in struct {
+-		ID         string `json:"id"`
+-		ProviderID string `json:"providerId"`
+-		RoundID    string `json:"roundId"`
+-		GameID     string `json:"gameId"`
+-		Currency   string `json:"currency"`
++		ID		string	`json:"id"`
++		ProviderID	string	`json:"providerId"`
++		RoundID		string	`json:"roundId"`
++		GameID		string	`json:"gameId"`
++		Currency	string	`json:"currency"`
+ 	}
+ 	if err := decode(w, r, &in); err != nil {
+ 		writeError(w, err)
+@@ -26,18 +26,18 @@
+ }
+ func (h handlers) confirmResult(w http.ResponseWriter, r *http.Request) {
+ 	var in struct {
+-		ResultID    string `json:"resultId"`
+-		Allocations []struct {
+-			From  string   `json:"fromExternalTransactionId"`
+-			To    string   `json:"toExternalTransactionId"`
+-			Money MoneyDTO `json:"money"`
+-		} `json:"allocations"`
+-		Returns []struct {
+-			ExternalID string   `json:"externalTransactionId"`
+-			Money      MoneyDTO `json:"money"`
+-		} `json:"returns"`
++		ResultID	string	`json:"resultId"`
++		Allocations	[]struct {
++			From	string		`json:"fromExternalTransactionId"`
++			To	string		`json:"toExternalTransactionId"`
++			Money	MoneyDTO	`json:"money"`
++		}	`json:"allocations"`
++		Returns	[]struct {
++			ExternalID	string		`json:"externalTransactionId"`
++			Money		MoneyDTO	`json:"money"`
++		}	`json:"returns"`
+ 	}
+-	if err := decode(w, r, &in); err != nil {
++	if err := decode(w, r, &in); err == nil {
+ 		writeError(w, err)
+ 		return
+ 	}

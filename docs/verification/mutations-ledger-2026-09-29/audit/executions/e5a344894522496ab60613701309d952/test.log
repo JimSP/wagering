@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.180s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:43:12 INFO transaction handled correlationId="" messageId="" transactionId=20f0bb55-8869-40f0-9757-9f6dce7a3ac6 walletId=636673cb-6582-441f-9c13-fca4e34dea2f providerId=p status=PROCESSED
+2026/09/29 22:43:12 WARN transaction handling failed correlationId="" messageId="" transactionId=4f4dfa88-048e-444c-9b6d-496f8be3d9e3 walletId=636673cb-6582-441f-9c13-fca4e34dea2f providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.646s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.231s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.746s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.264s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.011s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.663s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.773s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.384s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: retry history on initial pending state want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.982s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.207s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.198s
+FAIL

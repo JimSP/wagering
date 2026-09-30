@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.158s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: referenceExternalTransactionId is required for BET
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.202s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.133s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.306s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.587s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+        accounting_test.go:46: INVALID_INPUT: invalid input: referenceExternalTransactionId is required for BET
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.834s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.283s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.946s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.427s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:300: error=INVALID_INPUT: invalid input: referenceExternalTransactionId is required for BET want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.895s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.246s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.218s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.173s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.182s
+FAIL

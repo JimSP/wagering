@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.923s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:11:51 INFO transaction handled correlationId="" messageId="" transactionId=391c9445-ac81-4d28-8bb9-657bc5421b0e walletId=057859f5-f8a9-4e42-8018-4356b47624fb providerId=p status=PROCESSED
+2026/09/30 01:11:51 WARN transaction handling failed correlationId="" messageId="" transactionId=bb8c5fde-005b-457a-a1da-e528e84c7a55 walletId=057859f5-f8a9-4e42-8018-4356b47624fb providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/loss (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.420s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.392s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.890s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.008s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.639s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.451s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.002s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.749s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.937s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.743s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.305s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.167s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.348s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.497s
+ok  	github.com/alexandre/wagering/internal/platform/worker	9.524s
+FAIL

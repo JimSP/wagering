@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.458s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:49:05 INFO transaction handled correlationId="" messageId="" transactionId=942d338e-7b7f-4581-b1ef-696a3459fe2a walletId=25c41899-d96a-40f2-a28c-d1bedef3fd44 providerId=p status=PROCESSED
+2026/09/29 22:49:05 WARN transaction handling failed correlationId="" messageId="" transactionId=3d52a325-b44b-4d10-918f-0480907e9490 walletId=25c41899-d96a-40f2-a28c-d1bedef3fd44 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got money: uninitialized value, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.241s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.434s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.894s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.703s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/counterparty_newer_than_command (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:01:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:true ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.300s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {0 } {0 } money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.766s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.326s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.882s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.523s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.348s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.335s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -79,7 +79,7 @@
+ 			f.Operational = account.Snapshot()
+ 		}
+ 	}
+-	if reference == nil {
++	if reference != nil {
+ 		return f, nil
+ 	}
+ 	r := reference.Snapshot()

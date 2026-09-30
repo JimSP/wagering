@@ -1,0 +1,80 @@
+--- original/internal/domain/wager/errors.go
++++ mutant/internal/domain/wager/errors.go
+@@ -9,27 +9,27 @@
+ type FailureCode string
+ 
+ const (
+-	FailInvalidInput              FailureCode = "INVALID_INPUT"
+-	FailWalletNotFound            FailureCode = "WALLET_NOT_FOUND"
+-	FailCurrencyMismatch          FailureCode = "CURRENCY_MISMATCH"
+-	FailInsufficientFunds         FailureCode = "INSUFFICIENT_FUNDS"          // BET without balance
+-	FailReversalInsufficientFunds FailureCode = "REVERSAL_INSUFFICIENT_FUNDS" // ROLLBACK/REFUND needing more than available
+-	FailReferenceNotFound         FailureCode = "REFERENCE_NOT_FOUND"         // attempts/TTL exhausted
+-	FailReferenceNotProcessed     FailureCode = "REFERENCE_NOT_PROCESSED"     // reference exists but ended REJECTED/FAILED
+-	FailReferenceMismatch         FailureCode = "REFERENCE_MISMATCH"          // provider/player/wallet/currency/round differ
+-	FailReversalAmountMismatch    FailureCode = "REVERSAL_AMOUNT_MISMATCH"
+-	FailInvalidReferenceKind      FailureCode = "INVALID_REFERENCE_KIND"
+-	FailAlreadyReversed           FailureCode = "ALREADY_REVERSED"
+-	FailConflictingReversal       FailureCode = "CONFLICTING_REVERSAL" // REFUND x ROLLBACK on same bet (see ARCHITECTURE.md)
+-	FailInternalPermanent         FailureCode = "INTERNAL_PERMANENT_ERROR"
++	FailInvalidInput		FailureCode	= "INVALID_INPUT"
++	FailWalletNotFound		FailureCode	= "WALLET_NOT_FOUND"
++	FailCurrencyMismatch		FailureCode	= "CURRENCY_MISMATCH"
++	FailInsufficientFunds		FailureCode	= "INSUFFICIENT_FUNDS"		// BET without balance
++	FailReversalInsufficientFunds	FailureCode	= "REVERSAL_INSUFFICIENT_FUNDS"	// ROLLBACK/REFUND needing more than available
++	FailReferenceNotFound		FailureCode	= "REFERENCE_NOT_FOUND"		// attempts/TTL exhausted
++	FailReferenceNotProcessed	FailureCode	= "REFERENCE_NOT_PROCESSED"	// reference exists but ended REJECTED/FAILED
++	FailReferenceMismatch		FailureCode	= "REFERENCE_MISMATCH"		// provider/player/wallet/currency/round differ
++	FailReversalAmountMismatch	FailureCode	= "REVERSAL_AMOUNT_MISMATCH"
++	FailInvalidReferenceKind	FailureCode	= "INVALID_REFERENCE_KIND"
++	FailAlreadyReversed		FailureCode	= "ALREADY_REVERSED"
++	FailConflictingReversal		FailureCode	= "CONFLICTING_REVERSAL"	// REFUND x ROLLBACK on same bet (see ARCHITECTURE.md)
++	FailInternalPermanent		FailureCode	= "INTERNAL_PERMANENT_ERROR"
+ )
+ 
+ type DomainError struct {
+-	Code FailureCode
+-	Msg  string
++	Code	FailureCode
++	Msg	string
+ }
+ 
+-func (e *DomainError) Error() string { return string(e.Code) + ": " + e.Msg }
++func (e *DomainError) Error() string	{ return string(e.Code) + ": " + e.Msg }
+ 
+ // Is compares by code so wrapped errors match sentinels via errors.Is.
+ func (e *DomainError) Is(target error) bool {
+@@ -37,21 +37,21 @@
+ 	return ok && t.Code == e.Code
+ }
+ 
+-func newErr(c FailureCode, msg string) *DomainError { return &DomainError{c, msg} }
++func newErr(c FailureCode, msg string) *DomainError	{ return |DomainError{c, msg} }
+ 
+ var (
+-	ErrInvalidInput           = newErr(FailInvalidInput, "invalid input")
+-	ErrInsufficientFunds      = newErr(FailInsufficientFunds, "insufficient funds")
+-	ErrReversalInsufficient   = newErr(FailReversalInsufficientFunds, "insufficient funds to reverse")
+-	ErrReferenceNotFound      = newErr(FailReferenceNotFound, "reference not found")
+-	ErrReferenceNotProcessed  = newErr(FailReferenceNotProcessed, "reference not processed")
+-	ErrReferenceMismatch      = newErr(FailReferenceMismatch, "reference mismatch")
+-	ErrReversalAmountMismatch = newErr(FailReversalAmountMismatch, "reversal amount mismatch")
+-	ErrInvalidReferenceKind   = newErr(FailInvalidReferenceKind, "invalid reference kind")
+-	ErrAlreadyReversed        = newErr(FailAlreadyReversed, "already reversed")
+-	ErrConflictingReversal    = newErr(FailConflictingReversal, "conflicting reversal")
++	ErrInvalidInput			= newErr(FailInvalidInput, "invalid input")
++	ErrInsufficientFunds		= newErr(FailInsufficientFunds, "insufficient funds")
++	ErrReversalInsufficient		= newErr(FailReversalInsufficientFunds, "insufficient funds to reverse")
++	ErrReferenceNotFound		= newErr(FailReferenceNotFound, "reference not found")
++	ErrReferenceNotProcessed	= newErr(FailReferenceNotProcessed, "reference not processed")
++	ErrReferenceMismatch		= newErr(FailReferenceMismatch, "reference mismatch")
++	ErrReversalAmountMismatch	= newErr(FailReversalAmountMismatch, "reversal amount mismatch")
++	ErrInvalidReferenceKind		= newErr(FailInvalidReferenceKind, "invalid reference kind")
++	ErrAlreadyReversed		= newErr(FailAlreadyReversed, "already reversed")
++	ErrConflictingReversal		= newErr(FailConflictingReversal, "conflicting reversal")
+ 
+-	ErrTerminalState = errors.New("wager: transaction is in a terminal state")
++	ErrTerminalState	= errors.New("wager: transaction is in a terminal state")
+ )
+ 
+ // CodeOf extracts the failure code of a (possibly wrapped) DomainError.

@@ -1,0 +1,866 @@
+[
+  {
+    "id": "coesao_oraculos",
+    "review": "Jornadas e modelo gerado usam checkpoints literais de garantia e carteira; aleatoriedade muda ordem/transporte, não calcula resultados com a regra de produção.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/model_semantics_test.go",
+        "name": "TestGeneratedJourneysMatchIndependentFinancialModel",
+        "line": 19
+      },
+      {
+        "path": "internal/app/usecase/http_contract_test.go",
+        "name": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+        "line": 124
+      },
+      {
+        "path": "internal/app/usecase/journey_semantics_test.go",
+        "name": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "line": 49
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_fixtures",
+    "review": "Fixture guarda fatos e restaura o mapa de garantias no abort; controle SQL lê registros literais. Não há distribuidor financeiro alternativo no fake.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/paired_bet_fixture_contract_test.go",
+        "name": "TestPairedFixtureRollbackPreservesGuaranteeAndBinding",
+        "line": 78
+      },
+      {
+        "path": "internal/infra/postgres/settlement_observer_control_integration_test.go",
+        "name": "TestSettlementSQLObserversReadLiteralStoredFacts",
+        "line": 19
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_asserts_conjuntos",
+    "review": "Comparadores exigem contrapartes, aposta, referências, valores e saldos; controles adulteram fatos mantendo contagem/saldo final. Leitores SQL e apêndice completo impedem projeção HTTP de ocultar extras.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/settlement_facts_contract_test.go",
+        "name": "TestSettlementComparatorRejectsBalancedButWrongFinancialFacts",
+        "line": 56
+      },
+      {
+        "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "line": 308
+      },
+      {
+        "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "line": 91
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_contraparte",
+    "review": "IDs reais são traduzidos em rótulos exclusivos; garantia alheia e participantes incorretos são rejeitados. O HTTP ledger exige walletId próprio por lançamento.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+        "line": 1047
+      },
+      {
+        "path": "internal/testsupport/settlementfacts/commitments_test.go",
+        "name": "TestCommitmentComparisonRejectsWrongFundingDespiteCorrectBalances",
+        "line": 22
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_caminho_positivo",
+    "review": "BET financiada e liquidação financiada devem ter sucesso antes/depois das rejeições. Negar todas as operações não satisfaz a suíte.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/paired_bet_contract_test.go",
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "line": 45
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementFundedLifecycleOnRealPostgres",
+        "line": 279
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_liquidacao_composta",
+    "review": "Verifica diários distintos, partidas pareadas, centavos e cadeias persistidas; transferências independentes podem ter ordens intermediárias diferentes.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/settlement_facts_contract_test.go",
+        "name": "TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals",
+        "line": 36
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+        "line": 474
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_nomes_ack",
+    "review": "Spy SDK verifica Delete apenas após sucesso do handler; processo real testa crash após commit antes do ACK e reentrega. O teste unitário não é apresentado como prova do broker.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/sqs/ack_boundary_contract_test.go",
+        "name": "TestConsumerDeleteRequiresSuccessfulHandlerCompletion",
+        "line": 21
+      },
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "line": 151
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_sql_literal",
+    "review": "Uma chamada parametrizada por ID, mesma transação/contexto; não exige nome da função SQL nem permite carregar participantes no comando Go.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "name": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+        "line": 30
+      },
+      {
+        "path": "internal/app/usecase/settlement_message_contract_test.go",
+        "name": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+        "line": 35
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_erros",
+    "review": "Erros de infraestrutura não satisfazem rejeições de integridade; SQLSTATE permanente/transitório tem assert próprio. Distribuição malformada exige 400; montante bem formado inconsistente exige 422.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/http_contract_test.go",
+        "name": "TestHTTPInvalidInputsAndAuthorizationHaveNoEffects",
+        "line": 202
+      },
+      {
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "name": "TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries",
+        "line": 56
+      },
+      {
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "name": "TestSettlementDatabaseCommandPreservesRetryClassification",
+        "line": 42
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_inventario_total",
+    "review": "Inventário AST atualizado e comparado ao anterior: nenhuma função de teste removida; nomes dinâmicos continuam representados pelas declarações e pelos logs JSON.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [],
+    "financial_acceptance": false
+  },
+  {
+    "id": "deposit_replay",
+    "review": "Snapshot integral permanece igual ao repetir a identidade. Novo depósito positivo exige um crédito exato na garantia, identidade durável, evento e nenhum lançamento operacional.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "line": 607
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "deposit_identity_conflict",
+    "review": "Outra quantia, moeda ou destino sob a mesma identidade exige 409 e nenhuma alteração no snapshot persistido.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "line": 607
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "deposit_invalid_amount",
+    "review": "Zero, negativo, escala inválida e overflow exigem 400 e snapshot igual; o caso válido posterior garante que rejeição indiscriminada falhe.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "line": 607
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "bet_insufficient_own_guarantee",
+    "review": "Dinheiro operacional e garantia alheia não cobrem insuficiência própria; depósito posterior não converte o replay da rejeição original em sucesso.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/paired_bet_contract_test.go",
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "line": 45
+      },
+      {
+        "path": "internal/app/usecase/paired_bet_fixture_contract_test.go",
+        "name": "TestPairedBETRejectedIdentityStaysRejectedAfterGuaranteeTopUp",
+        "line": 101
+      },
+      {
+        "path": "internal/infra/postgres/settlement_admission_order_integration_test.go",
+        "name": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+        "line": 36
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "bet_exact_available",
+    "review": "GA2500/WA0 + BET2500 exige GA0/WA2500, débito/crédito exatos, versões e eventos. Mesma tabela literal é usada em aplicação e HTTP.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/paired_bet_contract_test.go",
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "line": 45
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "wrong_guarantee",
+    "review": "Caller não escolhe garantia: campo alheio é rejeitado sem efeito; removê-lo permite a BET com a garantia vinculada correta.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+        "line": 1047
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "standalone_win",
+    "review": "WIN sem origem é tentada pela aplicação e por bypass SQL. Commit financeiro indevido é detectado por snapshot; esta falha já é observável na produção antiga.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_safety_integration_test.go",
+        "name": "TestSettlementRejectsUnfundedWINWithRealPostgres",
+        "line": 94
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "unfunded_profit",
+    "review": "Perda declarada menor que lucro exige rejeição total; correção financiada da mesma aposta deve poder prosseguir.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+        "line": 305
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "uncommitted_loser_cash",
+    "review": "Ter saldo na carteira não substitui a referência a um compromisso válido: referência inexistente/estrangeira é rejeitada com snapshot integral preservado.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "line": 670
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "other_bet_funds",
+    "review": "Liquidação deixa o compromisso de outra aposta intacto, incluindo saldo operacional reservado e remaining_minor. Leitura SQL compara registros completos.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "line": 308
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "wrong_currency",
+    "review": "Moeda errada na alocação e na devolução são casos separados; teste de constraints altera a moeda de uma partida real sem fabricar a exceção esperada.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "line": 670
+      },
+      {
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "name": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+        "line": 30
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "wrong_provider_or_round",
+    "review": "Perdedor de outro provider/aposta e vencedor de outra aposta são rejeitados; correção preserva os compromissos estrangeiros e seus saldos.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "line": 670
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "duplicate_loser_allocation",
+    "review": "Repetir perda além do compromisso rejeita o conjunto sem fechar a aposta nem consumir identidade corrigível.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "line": 670
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "already_consumed_commitment",
+    "review": "Conjunto já consumido não pode financiar outro fechamento; SQL direto tentando restaurar remaining_minor também precisa ser recusado.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+        "line": 826
+      },
+      {
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "name": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+        "line": 89
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "settlement_replay",
+    "review": "IDs de entrega diferentes reapresentam a mesma liquidação; salvo inbox de transporte, snapshot financeiro permanece idêntico.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementFundedLifecycleOnRealPostgres",
+        "line": 279
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+        "line": 389
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "settlement_payload_conflict",
+    "review": "Resultado fechado não aceita nova distribuição nem sob nova chave; replay do resultado original conserva settlementId.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "line": 732
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "payout_exceeds_allocated",
+    "review": "Devolução acima ou abaixo de stake+lucro e devolução duplicada rejeitam o conjunto, sem retorno parcial.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+        "line": 305
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "payout_wrong_guarantee",
+    "review": "Destino de devolução é o vínculo persistido; indicação da garantia alheia pelo caller é inválida e não produz alterações.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "line": 670
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "credit_overflow",
+    "review": "Garantia preenchida após confirmação força validação sob locks na execução; todo o lote aborta. Nova capacidade permite retry, preservando outra aposta.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementOverflowRollsBackEveryParticipantThenRetries",
+        "line": 779
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "atomicity_every_write",
+    "review": "Probe observa as escritas SQL reais e falha em cada posição; snapshot integral restaura estado e retry positivo exige resultado financeiro completo.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementSQLWriteFailuresRollBackWholeBatchAndRetry",
+        "line": 420
+      },
+      {
+        "path": "internal/infra/postgres/settlement_write_probe_integration_test.go",
+        "name": "TestSettlementWriteProbeObservesAndAbortsEachActualRow",
+        "line": 125
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "concurrent_same_commitment",
+    "review": "Dois resultados concorrentes têm um aceite e um conflito; delta global da outbox é um pedido, evitando a antiga consulta pelo agregado errado.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestConcurrentResultsCannotCreateTwoSettlementsForSameCommitments",
+        "line": 1067
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "concurrent_opposite_pairs",
+    "review": "Dois processos/UoWs concorrentes aceitam somente uma das duas histórias seriais literais; vítimas 40001/40P01 podem ser reentregues sem duplicação.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+        "line": 854
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "independent_pairs",
+    "review": "Lock efetivamente observado em A bloqueia seu lote; C/D deve completar antes de liberar A. Depois, ambos têm resultado financeiro literal.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementLockedPairDoesNotBlockIndependentPair",
+        "line": 900
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "queue_retry",
+    "review": "Processos reais cobrem publicação antes do mark e commit antes do ACK; posse antiga não pode confirmar/reschedule a tentativa nova. Há controle positivo da posse atual.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "line": 151
+      },
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementPublisherLeaseRejectsStaleOwner",
+        "line": 219
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "reconciliation",
+    "review": "Contas, diários e compromissos são lidos do SQL; soma NUMERIC do ledger é comparada ao saldo e ao resultado literal. Não basta somar saldos do HTTP.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "line": 308
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "events",
+    "review": "Eventos de saldo têm valores e versão exatos; terminais confrontam agregado com settlementId esperado e horário UTC. Controles rejeitam SQL e JSON igualmente errados.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "line": 91
+      },
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "line": 151
+      },
+      {
+        "path": "internal/testsupport/settlementfacts/observations_test.go",
+        "name": "TestBalanceEventRejectsWrongVersionDespiteCorrectMoney",
+        "line": 181
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "refund_unsettled_stake",
+    "review": "REFUND antes do fechamento devolve integralmente; após fechamento, inclusive antes da liquidação, exige BET_CLOSED. Corrida admite só as duas ordens válidas.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementClosureAndRefundHaveOnlyOneValidAdmissionOrder",
+        "line": 963
+      },
+      {
+        "path": "test/integration/recovery_test.go",
+        "name": "TestConcurrentReversalsAndFullRestart",
+        "line": 104
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "rollback_settlement",
+    "review": "Reverte integralmente os diários e referencia os originais, inclusive após liquidação; eventos compensatórios e apêndice completo são conferidos. Insuficiência não pode deixar efeitos ocultos no SQL.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRollbackPreservesClosedBetAndOriginalHistory",
+        "line": 532
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementRollbackCannotBorrowOperationalOrOtherGuaranteeFunds",
+        "line": 803
+      },
+      {
+        "path": "internal/app/usecase/journey_semantics_test.go",
+        "name": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "line": 119
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_varias_apostas",
+    "review": "Resultado de uma aposta não aguarda resultado de outra; compromissos restantes não são consumidos. Liquidações com participantes compartilhados aceitam ordens seriais legais.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementDoesNotWaitForUnconfirmedOtherBet",
+        "line": 333
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+        "line": 854
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_identidade_estado",
+    "review": "IDs inválidos/inexistentes e conjuntos vazios/consumidos rejeitam; novos participantes após fechamento são proibidos antes/depois de liquidar, mas replay da BET original permanece permitido.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+        "line": 826
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "line": 732
+      },
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestClosedBetRejectsNewCommitmentsBeforeAndAfterSettlement",
+        "line": 1130
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_centavos",
+    "review": "Quatro participantes exigem seis transferências declaradas, quatro compromissos consumidos, saldos exatos e cadeia SQL válida; centavo excedente é recusado.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+        "line": 474
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_fronteira_id",
+    "review": "Consumidor aceita somente settlementId no data, preserva contexto e usa uma transação; participantes/montantes embutidos não alcançam armazenamento.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/settlement_message_contract_test.go",
+        "name": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+        "line": 35
+      },
+      {
+        "path": "internal/app/usecase/settlement_message_contract_test.go",
+        "name": "TestSettlementMessageRejectsMissingIDAndInlineParticipants",
+        "line": 99
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "autorizacao_participantes",
+    "review": "JWT inválido/ausente e providers não registram resultado nem revertem/consultam conjunto interno. Broker privado nega ingresso externo e fila pública não transforma envelope em autoridade.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "line": 732
+      },
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementBrokerRejectsForgedAuthority",
+        "line": 37
+      },
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementEnvelopeOnExternalIngressCannotAcquireInternalAuthority",
+        "line": 252
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "abertura_deposito_migracao",
+    "review": "Abertura zero, depósito separado; migração conserva caixa e histórico de OPENING/BET/WIN/REFUND/ROLLBACK e estados pendentes/terminais. Testa dirty, abort, retomada entre versões, up repetido e referência pendente retomada após corte.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/app/usecase/journey_semantics_test.go",
+        "name": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "line": 86
+      },
+      {
+        "path": "internal/infra/postgres/guarantee_migration_integration_test.go",
+        "name": "TestGuaranteeMigrationPreservesLegacyOriginAndRetriesAbortedDDL",
+        "line": 29
+      },
+      {
+        "path": "test/integration/system_test.go",
+        "name": "TestMigrationRoundTrip",
+        "line": 852
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "consultas_http_eventos",
+    "review": "Ledger paginado compara todas as entradas ordenadas, conta, transação, dinheiro, saldos e instante; cursores inválidos/cíclicos e acesso por provider falham. Campo ausente no DTO gera RED explícito.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "line": 91
+      },
+      {
+        "path": "internal/app/usecase/http_contract_test.go",
+        "name": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+        "line": 124
+      },
+      {
+        "path": "internal/transport/httpapi/contract_test.go",
+        "name": "TestLedgerWireContractAndPaginationBoundaries",
+        "line": 100
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "constraints_banco",
+    "review": "Mutação na partida efetivamente executada omite crédito, desequilibra ou troca moeda/conta; somente erro de integridade real satisfaz. UPDATE/DELETE diretos não alteram histórico/consumo.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "name": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+        "line": 30
+      },
+      {
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "name": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+        "line": 89
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "ordem_deposito_aposta_liquidacao",
+    "review": "Seis ordens seriais e corrida entre depósito, BET e liquidação exigem dois resultados financeiros legais e replay estável da primeira admissão.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_admission_order_integration_test.go",
+        "name": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+        "line": 36
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "desempenho_lote",
+    "review": "Protocolo 2/10/100 participantes informa ambiente/latência e verifica fatos completos. Contenção tem cenário de lock independente; número de comandos Go é contrato unitário separado. Não há limiar de latência inventado.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_batch_measurement_integration_test.go",
+        "name": "TestSettlementBatchMeasurementPreservesLiteralTotals",
+        "line": 18
+      },
+      {
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "name": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+        "line": 30
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_suite",
+    "review": "Aceite financeiro verde depende da implementação; nesta etapa, compilação, controles e classificação dos REDs são registrados separadamente.",
+    "preparation": "acceptance_after_implementation",
+    "tests": [],
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_mutacao",
+    "review": "Campanha oficial está no executor preservado; deve ocorrer após o novo modelo passar. Resultados de mutação antigos não certificam o contrato novo.",
+    "preparation": "acceptance_after_implementation",
+    "tests": [],
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_documentacao_entrega",
+    "review": "Contrato e continuidade refletem os testes; manifesto/pacote finais devem ser produzidos depois da implementação validada, sem rebatizar artefatos antigos como atuais.",
+    "preparation": "acceptance_after_implementation",
+    "tests": [],
+    "financial_acceptance": false
+  },
+  {
+    "id": "commit_resposta_perdida",
+    "review": "Commit SQL real seguido de erro ao chamador; novo Fx/pool/consumer recupera resultado pelo ID e não compensa nem duplica o commit.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementCommittedDespiteLostReplyReplaysAfterRestart",
+        "line": 364
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "reentrega_outro_message_id",
+    "review": "Entrega sequencial/concorrente por IDs de transporte diferentes mantém mesma identidade financeira; não confundir inbox nova com liquidação nova.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [
+      {
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "name": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+        "line": 389
+      },
+      {
+        "path": "test/integration/settlement_system_test.go",
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "line": 151
+      }
+    ],
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_cobertura",
+    "review": "Executor exige 100% nas áreas registradas; medição do código financeiro futuro vem após implementação e não substitui cenários SQL/concorrentes.",
+    "preparation": "acceptance_after_implementation",
+    "tests": [],
+    "financial_acceptance": false
+  },
+  {
+    "id": "preparacao_integracao",
+    "review": "Scripts criam PostgreSQL/Compose exclusivos, portas dinâmicas, credenciais temporárias e identificação obrigatória; testes de migração usam bases descartáveis próprias.",
+    "preparation": "reviewed_scenario_or_protocol",
+    "tests": [],
+    "financial_acceptance": false
+  }
+]

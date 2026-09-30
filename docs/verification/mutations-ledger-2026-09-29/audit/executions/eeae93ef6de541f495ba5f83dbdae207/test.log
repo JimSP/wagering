@@ -1,0 +1,38 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.119s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:34:48 INFO transaction handled correlationId="" messageId="" transactionId=391764d6-7c07-4682-88d1-2e30fc37b3a5 walletId=a5b36b58-5dc0-4e09-95b4-018bf761d62f providerId=p status=PROCESSED
+2026/09/29 22:34:48 WARN transaction handling failed correlationId="" messageId="" transactionId=b59203a6-ec7d-4f4e-abb8-c99d55dbf912 walletId=a5b36b58-5dc0-4e09-95b4-018bf761d62f providerId=p transient=false
+--- FAIL: TestWINWithCounterpartyPreservesOptionalReference (0.00s)
+    --- FAIL: TestWINWithCounterpartyPreservesOptionalReference/HTTP/reference= (0.00s)
+        win_accounting_contract_test.go:25: BET result={TransactionID:00000000-0000-4000-8000-000000000012 Status:REJECTED Balance:<nil> FailureCode:REFERENCE_MISMATCH IdempotentReplay:false}; want status=PROCESSED failure= replay=false
+        win_accounting_contract_test.go:25: persisted BET={CorrelationID:correlation CausationID: ID:00000000-0000-4000-8000-000000000012 Origin:EXTERNAL ProviderID:p ExternalID:win IdempotencyKey:key:win PayloadHash:fbdc103c57a8f23160b9074b3acf1157ac4b14d7df076cbdecb45c7d09bb2411 WalletID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 RoundID:round GameID:game Kind:WIN Amount:{minor:2000 currency:BRL} ReferenceExternalID: ReferenceID: Status:REJECTED FailureCode:REFERENCE_MISMATCH BalanceAfter:<nil> Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:01 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} exists=true
+        win_accounting_contract_test.go:25: operational accounts=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:2000 currency:BRL} Version:2 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000002 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:0 currency:BRL} Version:3 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000005 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:40000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]
+        win_accounting_contract_test.go:25: exclusive guarantees=map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000003 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:8000 currency:BRL} Version:2 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000006 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:100000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]; want map[00000000-0000-4000-8000-000000000002:{ID:00000000-0000-4000-8000-000000000003 PlayerID:00000000-0000-4000-8000-000000000001 Balance:{minor:10000 currency:BRL} Version:3 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:01 +0000 UTC} 00000000-0000-4000-8000-000000000005:{ID:00000000-0000-4000-8000-000000000006 PlayerID:00000000-0000-4000-8000-000000000004 Balance:{minor:100000 currency:BRL} Version:1 CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}]
+        win_accounting_contract_test.go:25: BET postings=0; want exactly 2
+        win_accounting_contract_test.go:25: events=1; want 2
+        win_accounting_contract_test.go:25: outcome event={EventID:00000000-0000-4000-8000-000000000013 EventType:WagerTransactionRejected AggregateID:00000000-0000-4000-8000-000000000002 CorrelationID:correlation CausationID: OccurredAt:2026-09-28 12:00:01 +0000 UTC Version:1 Data:{TransactionID:00000000-0000-4000-8000-000000000012 Kind:WIN WalletID:00000000-0000-4000-8000-000000000002 PlayerID: ProviderID:p ExternalTransactionID:win RoundID: FailureCode:REFERENCE_MISMATCH Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:0 NextAttemptAt:0001-01-01 00:00:00 +0000 UTC ExpiresAt:0001-01-01 00:00:00 +0000 UTC}}; want WagerTransactionProcessed
+        win_accounting_contract_test.go:25: processed event lost financial identity: {EventID:00000000-0000-4000-8000-000000000013 EventType:WagerTransactionRejected AggregateID:00000000-0000-4000-8000-000000000002 CorrelationID:correlation CausationID: OccurredAt:2026-09-28 12:00:01 +0000 UTC Version:1 Data:{TransactionID:00000000-0000-4000-8000-000000000012 Kind:WIN WalletID:00000000-0000-4000-8000-000000000002 PlayerID: ProviderID:p ExternalTransactionID:win RoundID: FailureCode:REFERENCE_MISMATCH Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:0 NextAttemptAt:0001-01-01 00:00:00 +0000 UTC ExpiresAt:0001-01-01 00:00:00 +0000 UTC}}
+        win_accounting_contract_test.go:25: outcomes=1 changed accounts=map[]; want one outcome and 1 account events
+        win_accounting_contract_test.go:30: WIN must persist its existing BET identity even without a wire reference: got "" want "00000000-0000-4000-8000-000000000007"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	4.351s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.239s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.355s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.913s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.458s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.840s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.900s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.566s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.215s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.639s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.524s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.534s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.307s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.270s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.176s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.190s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.236s
+FAIL

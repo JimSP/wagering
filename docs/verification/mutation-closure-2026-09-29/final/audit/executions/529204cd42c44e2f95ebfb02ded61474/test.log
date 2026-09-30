@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.647s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:23 INFO transaction handled correlationId="" messageId="" transactionId=3a09ca1e-dc17-4671-a178-0b484d73bf7d walletId=2ce0d824-f170-4c83-9aa8-d83078b2679c providerId=p status=PROCESSED
+2026/09/30 01:22:23 WARN transaction handling failed correlationId="" messageId="" transactionId=64175408-2608-47ed-b1da-c89160d8396d walletId=2ce0d824-f170-4c83-9aa8-d83078b2679c providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged] [wallet opening]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.888s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.099s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.983s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.865s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.612s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.273s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.947s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.349s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	13.180s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.393s
+FAIL

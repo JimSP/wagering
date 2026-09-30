@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.189s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:38:43 INFO transaction handled correlationId="" messageId="" transactionId=e6236ea2-c2ac-49ef-b5bc-99237251ac48 walletId=3b6ddc09-090e-4be3-9325-35ac9aed9bbf providerId=p status=PROCESSED
+2026/09/29 22:38:43 WARN transaction handling failed correlationId="" messageId="" transactionId=25962d3f-ac4d-4f3e-8333-9b4e63dab6a6 walletId=3b6ddc09-090e-4be3-9325-35ac9aed9bbf providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/claim (0.00s)
+        reference_failure_test.go:16: INVALID_INPUT: invalid input: REFUND must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.735s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.259s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.771s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.490s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    error_text_contract_test.go:12: INVALID_INPUT: invalid input: REFUND must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.064s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.900s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.503s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.229s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.798s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.289s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.260s
+FAIL

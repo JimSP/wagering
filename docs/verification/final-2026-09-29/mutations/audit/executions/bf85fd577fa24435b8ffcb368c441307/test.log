@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.567s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.777s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.177s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.709s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.302s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.162s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.919s
+--- FAIL: TestShutdownBudgetBoundsAndInvalidConfiguration (0.00s)
+    --- FAIL: TestShutdownBudgetBoundsAndInvalidConfiguration/7.999999999s (0.00s)
+        config_test.go:81: invalid duration accepted: {Roles:[api] HTTPAddr::8080 ShutdownTimeout:7.999999999s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	4.496s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.253s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.936s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.444s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.301s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.328s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.996s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.145s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	4.336s
+FAIL

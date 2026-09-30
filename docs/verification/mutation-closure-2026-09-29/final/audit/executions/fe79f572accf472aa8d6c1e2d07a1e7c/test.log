@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.097s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:21:15 INFO transaction handled correlationId="" messageId="" transactionId=964e1b2e-e7f6-46ee-864d-96475f3c1baa walletId=19fbda9e-1c80-434d-b6d8-fab2fde33844 providerId=p status=PROCESSED
+2026/09/30 01:21:15 WARN transaction handling failed correlationId="" messageId="" transactionId=4521734f-17b4-4246-807d-f1decfda830d walletId=19fbda9e-1c80-434d-b6d8-fab2fde33844 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-refund (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000025","status":"REJECTED","failureCode":"CONFLICTING_REVERSAL","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.463s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.833s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.376s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.698s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID:win Guarantee:{ID:guarantee PlayerID:player Balance:{minor:0 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:200 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.625s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.434s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.172s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.253s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.157s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.028s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.690s
+FAIL

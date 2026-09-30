@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.984s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: providerId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.274s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.863s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.588s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.446s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+        accounting_test.go:46: INVALID_INPUT: invalid input: payloadHash is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.729s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.376s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.351s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.482s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:27: INVALID_INPUT: invalid input: providerId is required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	12.185s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.201s
+FAIL

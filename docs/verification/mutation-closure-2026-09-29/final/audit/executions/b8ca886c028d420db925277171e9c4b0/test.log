@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.277s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:18 INFO transaction handled correlationId="" messageId="" transactionId=bb47da3f-2f20-40f2-a7db-254ee8f00705 walletId=c2af3607-3277-4b65-9752-f924df2b2fcd providerId=p status=PROCESSED
+2026/09/30 01:22:18 WARN transaction handling failed correlationId="" messageId="" transactionId=5681a39e-ef38-459b-9229-187440a3ed68 walletId=c2af3607-3277-4b65-9752-f924df2b2fcd providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged] [wallet opening]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.616s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.963s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.950s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.198s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/negative_starting_balance (0.00s)
+        ledger_semantics_test.go:80: <nil>
+    ledger_semantics_test.go:86: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.513s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.691s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.070s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.823s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.271s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.128s
+FAIL

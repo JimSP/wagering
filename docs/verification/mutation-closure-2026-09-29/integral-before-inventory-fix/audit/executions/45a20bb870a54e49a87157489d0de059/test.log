@@ -1,0 +1,45 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.906s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.03s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/success (0.03s)
+        failpoint_contract_test.go:60: exit=exit status 1 output=--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+                failpoint_contract_test.go:20: invalid integration event: envelope metadata
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.115s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: envelope metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.157s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.305s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.747s
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: envelope metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.596s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.782s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.732s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.202s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: envelope metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.679s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 23:55:54 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: envelope metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.231s
+FAIL

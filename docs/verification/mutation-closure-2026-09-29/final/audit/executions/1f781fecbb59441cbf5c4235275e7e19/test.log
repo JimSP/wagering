@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	6.677s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:29:52 INFO transaction handled correlationId="" messageId="" transactionId=29167330-1524-43f7-b6ac-47ffa621c5a1 walletId=a2bb007b-6712-473b-a2ec-508ebd4b7f2c providerId=p status=PROCESSED
+2026/09/30 01:29:52 WARN transaction handling failed correlationId="" messageId="" transactionId=4325d741-b9a3-48f9-a9a6-b47e1a7c3e96 walletId=a2bb007b-6712-473b-a2ec-508ebd4b7f2c providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/wait_invalid (0.00s)
+        submit_failure_test.go:189: wait invalid repository unavailable
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	6.874s
+ok  	github.com/alexandre/wagering/internal/domain/event	7.394s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.003s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.907s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/time_before_creation (0.00s)
+        lifecycle_semantics_test.go:286: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	7.655s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.027s
+ok  	github.com/alexandre/wagering/internal/infra/auth	7.891s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.271s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.339s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.059s
+FAIL

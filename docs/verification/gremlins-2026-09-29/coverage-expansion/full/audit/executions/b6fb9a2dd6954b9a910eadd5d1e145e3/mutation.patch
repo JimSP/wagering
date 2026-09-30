@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -81,7 +81,7 @@
+ 		return u.reject(ctx, tx, t, wager.FailCurrencyMismatch)
+ 	}
+ 	direction, movement := wager.MovementFor(s.Kind)
+-	if s.ReferenceExternalID != "" {
++	if s.ReferenceExternalID == "" {
+ 		ref, e := tx.Transactions().FindByExternalID(ctx, s.ProviderID, s.ReferenceExternalID)
+ 		if errors.Is(e, apperr.ErrNotFound) {
+ 			return u.waitReference(ctx, tx, t)

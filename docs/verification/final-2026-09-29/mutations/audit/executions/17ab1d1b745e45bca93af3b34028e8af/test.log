@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.399s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:26:04 INFO transaction handled correlationId="" messageId="" transactionId=5e1d4533-f558-42e6-a0d4-e2d34285b8cc walletId=5959e9bb-429f-4713-8da6-1aa72bd76cb9 providerId=p status=PROCESSED
+2026/09/29 03:26:04 WARN transaction handling failed correlationId="" messageId="" transactionId=35c61a0f-fefa-4fde-8ada-b74e03ff4425 walletId=5959e9bb-429f-4713-8da6-1aa72bd76cb9 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/reference_already_resolved (0.00s)
+        submit_failure_test.go:117: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.651s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.286s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.749s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/REFUND (0.00s)
+        lifecycle_semantics_test.go:84: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.014s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.393s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.771s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.824s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.145s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.723s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.938s
+FAIL

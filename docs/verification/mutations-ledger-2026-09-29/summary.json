@@ -1,0 +1,1913 @@
+{
+  "official_counts": {
+    "KILLED": 1196,
+    "LIVED": 51,
+    "NOT COVERED": 206
+  },
+  "total_records": 1453,
+  "packages": {
+    "internal/domain/money": {
+      "KILLED": 64,
+      "LIVED": 4
+    },
+    "internal/app/usecase": {
+      "KILLED": 194
+    },
+    "internal/domain/wager": {
+      "KILLED": 276,
+      "LIVED": 5
+    },
+    "internal/infra/auth": {
+      "KILLED": 46
+    },
+    "internal/infra/postgres": {
+      "KILLED": 162,
+      "NOT COVERED": 178
+    },
+    "internal/transport/httpapi": {
+      "KILLED": 58,
+      "NOT COVERED": 5
+    },
+    "cmd/wagering": {
+      "NOT COVERED": 1,
+      "KILLED": 1
+    },
+    "internal/domain/settlement": {
+      "KILLED": 44,
+      "LIVED": 4
+    },
+    "internal/infra/config": {
+      "KILLED": 11
+    },
+    "internal/infra/sqs": {
+      "KILLED": 63,
+      "LIVED": 1
+    },
+    "internal/domain/event": {
+      "KILLED": 112
+    },
+    "internal/platform/failpoint": {
+      "KILLED": 5
+    },
+    "internal/platform/worker": {
+      "KILLED": 8
+    },
+    "internal/app/apperr": {
+      "KILLED": 6
+    },
+    "internal/platform/metrics": {
+      "KILLED": 1
+    },
+    "internal/platform/sys": {
+      "KILLED": 1
+    },
+    "internal/testsupport/settlementfacts": {
+      "KILLED": 105,
+      "LIVED": 36
+    },
+    "scripts": {
+      "NOT COVERED": 22
+    },
+    "internal/domain/wallet": {
+      "KILLED": 38,
+      "LIVED": 1
+    },
+    "internal/platform/logging": {
+      "KILLED": 1
+    }
+  },
+  "official_metrics": {
+    "go_module": "github.com/alexandre/wagering",
+    "test_efficacy": 95.9101844426624,
+    "mutations_coverage": 85.82243633860978,
+    "mutants_total": 1247,
+    "mutants_killed": 1196,
+    "mutants_lived": 51,
+    "mutants_not_viable": 0,
+    "mutants_not_covered": 206,
+    "elapsed_time": 3491.11704575,
+    "mutator_statistics": {
+      "arithmetic_base": 82,
+      "conditionals_negation": 754,
+      "conditionals_boundary": 48,
+      "increment_decrement": 12,
+      "invert_assignments": 2,
+      "invert_bitwise": 208,
+      "invert_logical": 322,
+      "invert_loop_ctrl": 11,
+      "invert_negatives": 12,
+      "remove_self_assignments": 2
+    }
+  },
+  "lived": [
+    {
+      "file": "internal/domain/money/money.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 62,
+      "column": 14
+    },
+    {
+      "file": "internal/domain/money/money.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 62,
+      "column": 66
+    },
+    {
+      "file": "internal/domain/money/money.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 82,
+      "column": 14
+    },
+    {
+      "file": "internal/domain/money/money.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 82,
+      "column": 66
+    },
+    {
+      "file": "internal/domain/settlement/plan.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 58,
+      "column": 66
+    },
+    {
+      "file": "internal/domain/settlement/plan.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 66,
+      "column": 87
+    },
+    {
+      "file": "internal/domain/settlement/plan.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 66,
+      "column": 62
+    },
+    {
+      "file": "internal/domain/settlement/plan.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 66,
+      "column": 36
+    },
+    {
+      "file": "internal/infra/sqs/module.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "LIVED",
+      "line": 33,
+      "column": 5
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/facts.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 38,
+      "column": 77
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/facts.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "LIVED",
+      "line": 38,
+      "column": 77
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/facts.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "LIVED",
+      "line": 43,
+      "column": 25
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/facts.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "LIVED",
+      "line": 55,
+      "column": 16
+    },
+    {
+      "file": "internal/domain/wager/accounting.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 50,
+      "column": 26
+    },
+    {
+      "file": "internal/domain/wager/accounting.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 72,
+      "column": 33
+    },
+    {
+      "file": "internal/domain/wager/accounting.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 134,
+      "column": 52
+    },
+    {
+      "file": "internal/domain/wager/accounting.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 134,
+      "column": 28
+    },
+    {
+      "file": "internal/domain/wager/accounting.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "LIVED",
+      "line": 139,
+      "column": 12
+    },
+    {
+      "file": "internal/domain/wallet/wallet.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 82,
+      "column": 18
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 37,
+      "column": 62
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 37,
+      "column": 37
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 37,
+      "column": 17
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 63,
+      "column": 50
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 63,
+      "column": 22
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 76,
+      "column": 45
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 76,
+      "column": 16
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 102,
+      "column": 36
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 102,
+      "column": 18
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 102,
+      "column": 48
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "LIVED",
+      "line": 105,
+      "column": 14
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 118,
+      "column": 37
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 118,
+      "column": 21
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 118,
+      "column": 16
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 123,
+      "column": 44
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 123,
+      "column": 21
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 128,
+      "column": 22
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 128,
+      "column": 33
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 136,
+      "column": 19
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "LIVED",
+      "line": 143,
+      "column": 16
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 164,
+      "column": 48
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 164,
+      "column": 23
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "LIVED",
+      "line": 164,
+      "column": 67
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 186,
+      "column": 147
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 186,
+      "column": 113
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 186,
+      "column": 88
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 186,
+      "column": 52
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 186,
+      "column": 31
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 186,
+      "column": 17
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 191,
+      "column": 80
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 191,
+      "column": 43
+    },
+    {
+      "file": "internal/testsupport/settlementfacts/observations.go",
+      "type": "INVERT_LOGICAL",
+      "status": "LIVED",
+      "line": 191,
+      "column": 28
+    }
+  ],
+  "not_covered": [
+    {
+      "file": "internal/transport/httpapi/settlement.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 71,
+      "column": 9
+    },
+    {
+      "file": "internal/transport/httpapi/settlement.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 79,
+      "column": 21
+    },
+    {
+      "file": "internal/transport/httpapi/settlement.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 80,
+      "column": 26
+    },
+    {
+      "file": "internal/transport/httpapi/settlement.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 80,
+      "column": 36
+    },
+    {
+      "file": "internal/transport/httpapi/settlement.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 86,
+      "column": 9
+    },
+    {
+      "file": "cmd/wagering/app.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 30,
+      "column": 64
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 21,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 25,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 90
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 64
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 36
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 20
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 51
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 78
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 28,
+      "column": 106
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 144
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 151
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 166
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 178
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 189
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 202
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 35,
+      "column": 213
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 23
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 30
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 48
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 63
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 76
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 89
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 100
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 109
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 125
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 56,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 65,
+      "column": 138
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 65,
+      "column": 145
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 65,
+      "column": 155
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 65,
+      "column": 168
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 65,
+      "column": 177
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 73,
+      "column": 16
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 73,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 73,
+      "column": 38
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 80,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 90,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "NOT COVERED",
+      "line": 93,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 98,
+      "column": 42
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 98,
+      "column": 36
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 98,
+      "column": 29
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 101,
+      "column": 8
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 104,
+      "column": 55
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 107,
+      "column": 57
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 110,
+      "column": 119
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 113,
+      "column": 264
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "NOT COVERED",
+      "line": 116,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 126,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 129,
+      "column": 11
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 132,
+      "column": 11
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 135,
+      "column": 89
+    },
+    {
+      "file": "internal/infra/postgres/settlement_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 138,
+      "column": 145
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 48,
+      "column": 9
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 55,
+      "column": 9
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 67,
+      "column": 28
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 67,
+      "column": 10
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 67,
+      "column": 21
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 67,
+      "column": 39
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 68,
+      "column": 4
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 72,
+      "column": 21
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 83,
+      "column": 4
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 96,
+      "column": 41
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 96,
+      "column": 11
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 96,
+      "column": 32
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 96,
+      "column": 59
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 103,
+      "column": 29
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 103,
+      "column": 61
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 122,
+      "column": 11
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 125,
+      "column": 21
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 129,
+      "column": 11
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 135,
+      "column": 10
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_BOUNDARY",
+      "status": "NOT COVERED",
+      "line": 140,
+      "column": 63
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 140,
+      "column": 63
+    },
+    {
+      "file": "scripts/audit-test-inventory.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 143,
+      "column": 39
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 18,
+      "column": 143
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 18,
+      "column": 153
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 19,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 23,
+      "column": 26
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 23,
+      "column": 20
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 23,
+      "column": 36
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 27,
+      "column": 27
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 32,
+      "column": 19
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 33,
+      "column": 45
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 33,
+      "column": 38
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 34,
+      "column": 8
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 39,
+      "column": 11
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 40,
+      "column": 5
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INCREMENT_DECREMENT",
+      "status": "NOT COVERED",
+      "line": 42,
+      "column": 25
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 44,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 49,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 15
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 54,
+      "column": 17
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 55,
+      "column": 143
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 55,
+      "column": 153
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 56,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 60,
+      "column": 13
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 61,
+      "column": 94
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 61,
+      "column": 113
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 64,
+      "column": 116
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 68,
+      "column": 128
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 73,
+      "column": 8
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 76,
+      "column": 11
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 82,
+      "column": 15
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 87,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 90,
+      "column": 121
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 90,
+      "column": 138
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 91,
+      "column": 16
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 91,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 96,
+      "column": 29
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 97,
+      "column": 102
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 98,
+      "column": 17
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 98,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 102,
+      "column": 8
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 108,
+      "column": 21
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 108,
+      "column": 40
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 108,
+      "column": 63
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 108,
+      "column": 83
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 113,
+      "column": 28
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_LOGICAL",
+      "status": "NOT COVERED",
+      "line": 123,
+      "column": 21
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 123,
+      "column": 28
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 124,
+      "column": 209
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 124,
+      "column": 220
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 128,
+      "column": 117
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 131,
+      "column": 50
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 134,
+      "column": 26
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 138,
+      "column": 26
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 142,
+      "column": 132
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 142,
+      "column": 149
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 146,
+      "column": 261
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 150,
+      "column": 27
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 151,
+      "column": 134
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 155,
+      "column": 24
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 156,
+      "column": 130
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 161,
+      "column": 230
+    },
+    {
+      "file": "internal/infra/postgres/accounting_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 164,
+      "column": 175
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_ASSIGNMENTS",
+      "status": "NOT COVERED",
+      "line": 19,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "REMOVE_SELF_ASSIGNMENTS",
+      "status": "NOT COVERED",
+      "line": 19,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 22,
+      "column": 43
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 22,
+      "column": 50
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 22,
+      "column": 60
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 22,
+      "column": 73
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 22,
+      "column": 82
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 31,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 36,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 22
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 29
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 42
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 58
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 69
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 73
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 43,
+      "column": 84
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 44,
+      "column": 4
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 47,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 48,
+      "column": 4
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 52,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 56,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 61,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 22
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 29
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 43
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 61
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 75
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 88
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 97
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 111
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 115
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 121
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 130
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 138
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 150
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 163
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 176
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 69,
+      "column": 195
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 73,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 77,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 81,
+      "column": 10
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 91,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 95,
+      "column": 14
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 98,
+      "column": 43
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 101,
+      "column": 115
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 104,
+      "column": 189
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 108,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 113,
+      "column": 8
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 115,
+      "column": 4
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 119,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 123,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 126,
+      "column": 45
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "ARITHMETIC_BASE",
+      "status": "NOT COVERED",
+      "line": 126,
+      "column": 38
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 127,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 132,
+      "column": 8
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_LOOPCTRL",
+      "status": "NOT COVERED",
+      "line": 134,
+      "column": 4
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 138,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 142,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 146,
+      "column": 9
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 154,
+      "column": 22
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 154,
+      "column": 41
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 154,
+      "column": 61
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "INVERT_BITWISE",
+      "status": "NOT COVERED",
+      "line": 154,
+      "column": 65
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 154,
+      "column": 76
+    },
+    {
+      "file": "internal/infra/postgres/settlement_audit_repo.go",
+      "type": "CONDITIONALS_NEGATION",
+      "status": "NOT COVERED",
+      "line": 158,
+      "column": 10
+    }
+  ],
+  "other_statuses": [],
+  "evidence_counts": {
+    "test_failure": 1019,
+    "build_failure": 174,
+    "success_output_present_no_detected_failure": 51,
+    "panic_or_fatal": 3
+  },
+  "changed_source_files_since_start": []
+}

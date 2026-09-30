@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	6.429s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:08:29 INFO transaction handled correlationId="" messageId="" transactionId=fd5944be-884c-434b-bd8c-d642d226a23e walletId=6d33c074-65fb-423c-b057-482952612a38 providerId=p status=PROCESSED
+2026/09/30 01:08:29 WARN transaction handling failed correlationId="" messageId="" transactionId=ef3360b7-d0bc-4ba2-8ff3-9dda6dc2eb55 walletId=6d33c074-65fb-423c-b057-482952612a38 providerId=p transient=false
+--- FAIL: TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation (0.00s)
+    --- FAIL: TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation/full_batch (0.00s)
+        worker_contract_test.go:98: n=21 claims=22 updates=21 metrics=[REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED] err=exceeded contract batch bound
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.024s
+ok  	github.com/alexandre/wagering/internal/domain/event	7.273s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.419s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.655s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.093s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.950s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.523s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.538s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	7.838s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	5.259s
+FAIL

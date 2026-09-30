@@ -1,0 +1,41 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.131s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:16:09 INFO transaction handled correlationId="" messageId="" transactionId=a3b96f9f-23fb-41c8-935d-6074451e7f5f walletId=054f8af4-4a17-4bd8-950d-66d8781ae009 providerId=p status=PROCESSED
+2026/09/30 00:16:09 WARN transaction handling failed correlationId="" messageId="" transactionId=7491af06-dd91-44dd-9be9-071a307b99aa walletId=054f8af4-4a17-4bd8-950d-66d8781ae009 providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+panic: unexpected accounting write [recovered, repanicked]
+
+goroutine 40 [running]:
+testing.tRunner.func1.2({0x105a7b450, 0x1059a08a0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x105a7b450?, 0x1059a08a0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.accountingTxStub.ApplyAccounting(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/paired_storage_failure_test.go:29
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x4a7009807d58, {0x105b21198, 0x105bc2380}, {0x105b21dd0, 0x4a70097cfd40}, 0x4a70097ef680)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/process.go:110 +0x5b4
+github.com/alexandre/wagering/internal/app/usecase.TestProcessRequiresAccountingAndValidTransitionTime(0x4a7009874fc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/app/usecase/paired_storage_failure_test.go:96 +0x2d0
+testing.tRunner(0x4a7009874fc8, 0x105b26610)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.366s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.459s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.014s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.704s
+--- FAIL: TestReferenceHistoryAndTransitionTimeBoundaries (0.00s)
+    validation_paths_test.go:125: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.875s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.815s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.796s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.598s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.312s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.181s
+FAIL

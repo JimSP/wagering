@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.499s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.080s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.619s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.871s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.998s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.744s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.490s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.786s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.901s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:31: missing reference: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.791s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.602s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.719s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.705s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.742s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.734s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.386s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.890s
+FAIL

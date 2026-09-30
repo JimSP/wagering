@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.579s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:23:41 INFO transaction handled correlationId="" messageId="" transactionId=dd2fff46-b0d1-44d6-b57d-ec60bc32cac4 walletId=7d36656f-c0d4-444b-94ba-09c2774edc44 providerId=p status=PROCESSED
+2026/09/30 01:23:41 WARN transaction handling failed correlationId="" messageId="" transactionId=5584dd42-66af-45b4-89b7-3540323b4980 walletId=7d36656f-c0d4-444b-94ba-09c2774edc44 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/claim (0.00s)
+        reference_failure_test.go:16: INVALID_INPUT: invalid input: REFUND must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.799s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.009s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.896s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.175s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/refund_journal_link (0.00s)
+        mutation_regression_test.go:48: INVALID_INPUT: invalid input: REFUND must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.399s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.924s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.498s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.513s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_closure_extra_test.go:27: INVALID_INPUT: invalid input: WIN must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.824s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.763s
+FAIL

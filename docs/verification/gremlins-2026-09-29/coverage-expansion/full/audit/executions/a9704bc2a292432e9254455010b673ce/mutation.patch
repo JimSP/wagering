@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -41,7 +41,7 @@
+ }
+ func (r outboxRepo) ClaimBatch(ctx context.Context, now time.Time, limit int, lease time.Duration) ([]event.Outgoing, error) {
+ 	rows, err := r.q.Query(ctx, `UPDATE outbox_events SET locked_until=$2, attempts=attempts+1 WHERE event_id IN(SELECT event_id FROM outbox_events WHERE published_at IS NULL AND next_attempt_at<=$1 AND (locked_until IS NULL OR locked_until<=$1) ORDER BY occurred_at,event_id LIMIT $3 FOR UPDATE SKIP LOCKED) RETURNING event_id::text,aggregate_id::text,event_type,payload,occurred_at,attempts`, now, now.Add(lease), limit)
+-	if err != nil {
++	if err == nil {
+ 		return nil, err
+ 	}
+ 	defer rows.Close()

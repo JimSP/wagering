@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -73,7 +73,7 @@
+ 		if e != nil {
+ 			return f, e
+ 		}
+-		if role == "GUARANTEE" {
++		if role != "GUARANTEE" {
+ 			f.Guarantee = account.Snapshot()
+ 		} else {
+ 			f.Operational = account.Snapshot()

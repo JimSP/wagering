@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -57,7 +57,7 @@
+ 			break
+ 		}
+ 		a, e := money.FromMinor(amount, cur)
+-		if e != nil {
++		if e == nil {
+ 			return out, e
+ 		}
+ 		b, e := money.FromMinor(before, cur)

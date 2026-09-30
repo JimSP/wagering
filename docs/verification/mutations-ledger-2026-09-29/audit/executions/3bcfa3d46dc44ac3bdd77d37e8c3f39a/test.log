@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.387s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:43:04 INFO transaction handled correlationId="" messageId="" transactionId=18a6a020-3e81-4c7b-8a08-b6f15f861e33 walletId=f686e4cc-9aee-4791-8b13-57c80de01924 providerId=p status=PROCESSED
+2026/09/29 22:43:04 WARN transaction handling failed correlationId="" messageId="" transactionId=cefe076e-abf4-4b24-8062-38ffb5e7d483 walletId=f686e4cc-9aee-4791-8b13-57c80de01924 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.632s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.739s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.141s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.992s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.637s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.265s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.198s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.388s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: schedule outside pending reference want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.097s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.195s
+FAIL
