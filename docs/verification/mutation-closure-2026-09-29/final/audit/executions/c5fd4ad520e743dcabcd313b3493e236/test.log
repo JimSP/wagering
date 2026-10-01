@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.575s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:26 INFO transaction handled correlationId="" messageId="" transactionId=841a9585-dd14-491c-9e32-d24cf6fee814 walletId=a1369222-c38f-46f7-9a7a-59af7c326e0f providerId=p status=PROCESSED
+2026/09/30 01:22:26 WARN transaction handling failed correlationId="" messageId="" transactionId=3bfab528-3d3a-4800-9424-d47e1076c08a walletId=a1369222-c38f-46f7-9a7a-59af7c326e0f providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	13.356s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.833s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.965s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.704s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	13.578s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	13.694s
+ok  	github.com/alexandre/wagering/internal/infra/auth	14.240s
+ok  	github.com/alexandre/wagering/internal/infra/config	13.809s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	14.270s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.066s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.917s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.925s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.109s
+FAIL

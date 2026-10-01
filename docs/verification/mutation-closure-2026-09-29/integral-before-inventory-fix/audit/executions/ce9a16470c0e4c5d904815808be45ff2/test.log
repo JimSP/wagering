@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.729s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.902s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.725s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.033s
+--- FAIL: TestReversalRejectsInvalidHistoryAndUnfundedInversion (0.00s)
+    --- FAIL: TestReversalRejectsInvalidHistoryAndUnfundedInversion/missing_counterparty (0.00s)
+        reversal_test.go:88: got wallet: invalid, want settlement is not processed
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	3.084s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.194s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.844s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.766s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.289s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.661s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.029s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.686s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.639s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.856s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.760s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.838s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.829s
+FAIL

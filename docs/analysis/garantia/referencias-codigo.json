@@ -1,0 +1,4959 @@
+[
+  {
+    "file": "cmd/wagering/app.go",
+    "references": [
+      {
+        "line": 13,
+        "text": "\"github.com/alexandre/wagering/internal/infra/outbox\""
+      },
+      {
+        "line": 25,
+        "text": "// Workers are enabled per instance via ROLES (api, sqs-consumer, outbox-publisher, reference-worker)."
+      },
+      {
+        "line": 32,
+        "text": "usecase.Module, sqs.Module, outbox.Module, reference.Module, httpapi.Module,"
+      }
+    ]
+  },
+  {
+    "file": "cmd/wagering/lifecycle_integration_test.go",
+    "references": [
+      {
+        "line": 18,
+        "text": "t.Setenv(\"ROLES\", \"api,sqs-consumer,outbox-publisher,reference-worker\")"
+      }
+    ]
+  },
+  {
+    "file": "deploy/postgres/roles.sql",
+    "references": [
+      {
+        "line": 4,
+        "text": "ALTER DEFAULT PRIVILEGES FOR ROLE wagering IN SCHEMA public GRANT SELECT,INSERT,UPDATE ON TABLES TO wagering_app;"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/apperr/apperr.go",
+    "references": [
+      {
+        "line": 16,
+        "text": "ErrWalletExists           = errors.New(\"wallet already exists for player and currency\")"
+      },
+      {
+        "line": 17,
+        "text": "ErrWalletNotFound         = errors.New(\"wallet not found\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/port/ports.go",
+    "references": [
+      {
+        "line": 12,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 22,
+        "text": "// DoSnapshot runs fn in a REPEATABLE READ, read-only transaction (consistent view for reconciliation)."
+      },
+      {
+        "line": 27,
+        "text": "Wallets() WalletRepository"
+      },
+      {
+        "line": 29,
+        "text": "Ledger() LedgerRepository"
+      },
+      {
+        "line": 34,
+        "text": "type WalletRepository interface {"
+      },
+      {
+        "line": 35,
+        "text": "Create(ctx context.Context, w *wallet.Wallet) error // apperr.ErrWalletExists on (player, currency) conflict"
+      },
+      {
+        "line": 36,
+        "text": "Get(ctx context.Context, id string) (*wallet.Wallet, error)"
+      },
+      {
+        "line": 37,
+        "text": "GetForUpdate(ctx context.Context, id string) (*wallet.Wallet, error) // SELECT ... FOR UPDATE (per-wallet lock)"
+      },
+      {
+        "line": 38,
+        "text": "Save(ctx context.Context, w *wallet.Wallet, expectedVersion int64) error"
+      },
+      {
+        "line": 50,
+        "text": "// ClaimDue selects PENDING/PENDING_REFERENCE rows whose next_attempt_at <= now (FOR UPDATE SKIP LOCKED)."
+      },
+      {
+        "line": 54,
+        "text": "type LedgerPage struct {"
+      },
+      {
+        "line": 55,
+        "text": "Entries    []wager.LedgerEntry"
+      },
+      {
+        "line": 59,
+        "text": "type LedgerTotals struct {"
+      },
+      {
+        "line": 64,
+        "text": "type LedgerRepository interface {"
+      },
+      {
+        "line": 65,
+        "text": "Append(ctx context.Context, e wager.LedgerEntry) error"
+      },
+      {
+        "line": 66,
+        "text": "List(ctx context.Context, walletID, cursor string, limit int) (LedgerPage, error) // stable order (seq)"
+      },
+      {
+        "line": 67,
+        "text": "Totals(ctx context.Context, walletID string) (LedgerTotals, error)"
+      },
+      {
+        "line": 92,
+        "text": "// EventPublisher publishes an outbox event to the integration bus (must preserve eventId → dedup id)."
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/failpoint_contract_test.go",
+    "references": [
+      {
+        "line": 18,
+        "text": "ev, err := event.NewRejected(event.Meta{EventID: \"event\", AggregateID: \"wallet\", CorrelationID: \"corr\", OccurredAt: pathTime}, event.RejectedData{TransactionID: \"tx\", WalletID: \"wallet\", ProviderID: \"p\", ExternalTransactionID: \"ext\", Kind: \"BET\", FailureCode: \"INSUFFICIENT_FUNDS\"}).ToOutgoing()"
+      },
+      {
+        "line": 23,
+        "text": "repo := outboxStub{claim: func(context.Context, time.Time, int, time.Duration) ([]event.Outgoing, error) {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/http_contract_test.go",
+    "references": [
+      {
+        "line": 54,
+        "text": "srv = httpapi.NewServer(lc, nil, cfg, slog.New(slog.NewTextHandler(io.Discard, nil)), httpapi.Deps{Auth: verifier, Metrics: metrics.New(), OpenWallet: usecase.NewOpenWallet(s.m, s.c, s.id), GetWallet: usecase.NewGetWallet(s.m), ListLedger: usecase.NewListLedger(s.m), Reconcile: usecase.NewReconcileWallet(s.m, s.metrics), Submit: s.submit, GetTx: usecase.NewGetTransaction(s.m)})"
+      },
+      {
+        "line": 111,
+        "text": "return []byte(fmt.Sprintf(`{\"providerId\":\"p\",\"externalTransactionId\":%q,\"playerId\":%q,\"walletId\":%q,\"roundId\":\"round\",\"gameId\":\"game\",\"kind\":%q,\"money\":{\"amount\":%q,\"currency\":\"BRL\"},\"referenceExternalTransactionId\":%q}`, id, player, s.wallet, kind, amount, ref))"
+      },
+      {
+        "line": 128,
+        "text": "id, kind, amount, ref, status, balance, code string"
+      },
+      {
+        "line": 147,
+        "text": "if tc.balance != \"\" {"
+      },
+      {
+        "line": 148,
+        "text": "tail = `,\"balance\":{\"amount\":\"` + tc.balance + `\",\"currency\":\"BRL\"}`"
+      },
+      {
+        "line": 180,
+        "text": "getExpected := fmt.Sprintf(`{\"transactionId\":%q,\"providerId\":\"p\",\"externalTransactionId\":%q,\"walletId\":%q,\"kind\":%q,\"status\":%q,\"money\":{\"amount\":%q,\"currency\":\"BRL\"}%s%s}`, id, tc.id, s.wallet, tc.kind, tc.status, tc.amount, tail, next)"
+      },
+      {
+        "line": 191,
+        "text": "assertWire(t, a.request(\"GET\", \"/wallets/\"+s.wallet, \"internal\", \"\", nil), 200, fmt.Sprintf(`{\"id\":%q,\"playerId\":%q,\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":5}`, s.wallet, player))"
+      },
+      {
+        "line": 193,
+        "text": "assertWire(t, a.request(\"POST\", \"/wallets/\"+s.wallet+\"/reconciliation\", \"internal\", \"\", nil), 200, fmt.Sprintf(`{\"walletId\":%q,\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":5}`, s.wallet))"
+      },
+      {
+        "line": 195,
+        "text": "t.Fatal(\"reconciliation wrote state\")"
+      },
+      {
+        "line": 197,
+        "text": "// Read the original BET after subsequent movements: balance is historical."
+      },
+      {
+        "line": 200,
+        "text": "assertWire(t, w, 200, fmt.Sprintf(`{\"transactionId\":%q,\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"80.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}`, id))"
+      },
+      {
+        "line": 208,
+        "text": "for _, field := range []string{\"externalTransactionId\", \"playerId\", \"walletId\", \"roundId\", \"gameId\", \"kind\", \"money\"} {"
+      },
+      {
+        "line": 237,
+        "text": "for _, route := range []struct{ method, path string }{{\"POST\", \"/wallets\"}, {\"GET\", \"/wallets/\" + s.wallet}, {\"GET\", \"/wallets/\" + s.wallet + \"/ledger\"}, {\"POST\", \"/wallets/\" + s.wallet + \"/reconciliation\"}} {"
+      },
+      {
+        "line": 266,
+        "text": "beforeEvents, beforeEntries, beforeTx := len(s.m.s.events), len(s.m.s.ledger), len(s.m.s.transactions)"
+      },
+      {
+        "line": 267,
+        "text": "body := []byte(fmt.Sprintf(`{\"playerId\":%q,\"initialBalance\":{\"amount\":%q,\"currency\":\"BRL\"}}`, p, amount))"
+      },
+      {
+        "line": 268,
+        "text": "w := a.request(\"POST\", \"/wallets\", \"internal\", \"\", body)"
+      },
+      {
+        "line": 275,
+        "text": "assertWire(t, w, 201, fmt.Sprintf(`{\"id\":%q,\"playerId\":%q,\"balance\":{\"amount\":%q,\"currency\":\"BRL\"},\"version\":1}`, result.ID, p, amount))"
+      },
+      {
+        "line": 280,
+        "text": "if len(s.m.s.transactions)-beforeTx != n || len(s.m.s.ledger)-beforeEntries != n || len(s.m.s.events)-beforeEvents != 2*n {"
+      },
+      {
+        "line": 284,
+        "text": "assertWire(t, a.request(\"POST\", \"/wallets\", \"internal\", \"\", body), 409, `{\"code\":\"WALLET_EXISTS\",\"message\":\"wallet already exists for player and currency\"}`)"
+      },
+      {
+        "line": 290,
+        "text": "assertWire(t, a.request(\"POST\", \"/wallets\", \"internal\", \"\", []byte(\"null\")), 400, `{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: body must be a JSON object\"}`)"
+      },
+      {
+        "line": 335,
+        "text": "assertWire(t, w, 200, fmt.Sprintf(`{\"transactionId\":%q,\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}`, id))"
+      },
+      {
+        "line": 348,
+        "text": "assertWire(t, w, 200, fmt.Sprintf(`{\"transactionId\":%q,\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"101.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}`, id))"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/idempotency_test.go",
+    "references": [
+      {
+        "line": 51,
+        "text": "in := SubmitInput{Source: SourceHTTP, AuthorizedProviderID: \"p\", ProviderID: \"p\", ExternalTransactionID: \"ext\", IdempotencyKey: \"received-key\", PlayerID: uuid.NewString(), WalletID: uuid.NewString(), RoundID: \"round\", GameID: \"game\", Kind: \"BET\", Amount: \"01.00\", Currency: \"BRL\"}"
+      },
+      {
+        "line": 52,
+        "text": "hash := wager.PayloadHash(wager.HashInput{ProviderID: in.ProviderID, ExternalTransactionID: in.ExternalTransactionID, PlayerID: in.PlayerID, WalletID: in.WalletID, RoundID: in.RoundID, GameID: in.GameID, Kind: in.Kind, Amount: \"1.00\", Currency: in.Currency})"
+      },
+      {
+        "line": 54,
+        "text": "tx, e := wager.NewExternal(wager.ExternalParams{ID: uuid.NewString(), ProviderID: in.ProviderID, ExternalID: in.ExternalTransactionID, IdempotencyKey: in.IdempotencyKey, PayloadHash: hash, PlayerID: in.PlayerID, WalletID: in.WalletID, RoundID: in.RoundID, GameID: in.GameID, Kind: wager.KindBet, Amount: amount}, time.Now())"
+      },
+      {
+        "line": 58,
+        "text": "balance, _ := money.Parse(\"99.00\", \"BRL\")"
+      },
+      {
+        "line": 59,
+        "text": "if e = tx.MarkProcessed(balance, time.Now()); e != nil {"
+      },
+      {
+        "line": 65,
+        "text": "if e != nil || !r.IdempotentReplay || r.Balance.Amount() != \"99.00\" {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/journey_semantics_test.go",
+    "references": [
+      {
+        "line": 22,
+        "text": "TransactionID, Kind, WalletID, PlayerID, ProviderID, ExternalTransactionID, RoundID, FailureCode, Direction string"
+      },
+      {
+        "line": 23,
+        "text": "Money, BalanceBefore, BalanceAfter                                                                          event.MoneyDTO"
+      },
+      {
+        "line": 24,
+        "text": "WalletVersion                                                                                               int64"
+      },
+      {
+        "line": 37,
+        "text": "if v.EventID != e.EventID() || v.EventType != e.Type() || v.Version != 1 || v.AggregateID != s.wallet || v.CorrelationID == \"\" || v.OccurredAt.IsZero() {"
+      },
+      {
+        "line": 46,
+        "text": "func assertFinancialState(t *testing.T, s *scenario, balance, version int64, entries int) {"
+      },
+      {
+        "line": 48,
+        "text": "w := s.m.s.wallets[s.wallet]"
+      },
+      {
+        "line": 49,
+        "text": "if w.Balance.Minor() != balance || w.Version != version {"
+      },
+      {
+        "line": 50,
+        "text": "t.Fatalf(\"balance/version=%d/%d, want=%d/%d\", w.Balance.Minor(), w.Version, balance, version)"
+      },
+      {
+        "line": 55,
+        "text": "for _, e := range s.m.s.ledger {"
+      },
+      {
+        "line": 56,
+        "text": "if e.WalletID() != s.wallet {"
+      },
+      {
+        "line": 59,
+        "text": "if seen[e.TransactionID()] || e.BalanceBefore().Minor() != total {"
+      },
+      {
+        "line": 63,
+        "text": "if !ok || tx.Status != wager.StatusProcessed || tx.Kind == wager.KindLoss || tx.WalletID != e.WalletID() || tx.PlayerID != w.PlayerID || tx.Amount != e.Amount() || tx.BalanceAfter == nil || *tx.BalanceAfter != e.BalanceAfter() || tx.UpdatedAt != e.CreatedAt() {"
+      },
+      {
+        "line": 64,
+        "text": "t.Fatal(\"ledger does not belong to its processed financial transaction\", e, tx)"
+      },
+      {
+        "line": 73,
+        "text": "t.Fatal(\"rollback ledger without resolved original\")"
+      },
+      {
+        "line": 80,
+        "text": "t.Fatal(\"ledger direction contradicts operation\", e, tx)"
+      },
+      {
+        "line": 88,
+        "text": "if total < 0 || e.BalanceAfter().Minor() != total {"
+      },
+      {
+        "line": 89,
+        "text": "t.Fatal(\"unexplained ledger balance\")"
+      },
+      {
+        "line": 93,
+        "text": "if total != balance || count != entries {"
+      },
+      {
+        "line": 94,
+        "text": "t.Fatalf(\"journal=%d/%d, want=%d/%d\", total, count, balance, entries)"
+      },
+      {
+        "line": 99,
+        "text": "if r.Status != wager.StatusProcessed || r.FailureCode != \"\" || r.Balance == nil || r.Balance.Minor() != after || r.IdempotentReplay {"
+      },
+      {
+        "line": 103,
+        "text": "if saved.Status != wager.StatusProcessed || saved.BalanceAfter == nil || saved.BalanceAfter.Minor() != after {"
+      },
+      {
+        "line": 106,
+        "text": "ledgerCount := 0"
+      },
+      {
+        "line": 107,
+        "text": "for _, entry := range s.m.s.ledger {"
+      },
+      {
+        "line": 111,
+        "text": "ledgerCount++"
+      },
+      {
+        "line": 112,
+        "text": "if string(entry.Direction()) != direction || entry.Amount().Minor() != amount || entry.Amount().Currency() != \"BRL\" || entry.BalanceBefore().Minor() != before || entry.BalanceAfter().Minor() != after || entry.WalletID() != s.wallet {"
+      },
+      {
+        "line": 116,
+        "text": "wantLedger := 1"
+      },
+      {
+        "line": 118,
+        "text": "wantLedger = 0"
+      },
+      {
+        "line": 120,
+        "text": "if ledgerCount != wantLedger {"
+      },
+      {
+        "line": 121,
+        "text": "t.Fatalf(\"operation ledger entries=%d, expected %d\", ledgerCount, wantLedger)"
+      },
+      {
+        "line": 139,
+        "text": "case event.TypeWalletBalanceChanged:"
+      },
+      {
+        "line": 141,
+        "text": "if e.Data.Direction != direction || e.Data.Money.Currency != \"BRL\" || e.Data.BalanceBefore.Currency != \"BRL\" || e.Data.BalanceAfter.Currency != \"BRL\" || e.Data.Money.Amount != moneyOf(t, amount).Amount() || e.Data.BalanceBefore.Amount != moneyOf(t, before).Amount() || e.Data.BalanceAfter.Amount != moneyOf(t, after).Amount() || e.Data.WalletVersion != version || e.Data.WalletID != s.wallet {"
+      },
+      {
+        "line": 142,
+        "text": "t.Fatal(\"balance snapshot\", e)"
+      },
+      {
+        "line": 153,
+        "text": "func TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent(t *testing.T) {"
+      },
+      {
+        "line": 164,
+        "text": "assertOutcome(t, s, usecase.SubmitResult{TransactionID: opening, Status: wager.StatusProcessed, Balance: s.m.s.transactions[opening].BalanceAfter}, \"OPENING\", 10000, 0, 10000, 1, \"CREDIT\")"
+      },
+      {
+        "line": 184,
+        "text": "previousUpdate := s.m.s.wallets[s.wallet].UpdatedAt"
+      },
+      {
+        "line": 195,
+        "text": "walletTime := s.c.now"
+      },
+      {
+        "line": 197,
+        "text": "walletTime = previousUpdate"
+      },
+      {
+        "line": 199,
+        "text": "if s.m.s.wallets[s.wallet].UpdatedAt != walletTime {"
+      },
+      {
+        "line": 200,
+        "text": "t.Fatal(\"wallet chronology\")"
+      },
+      {
+        "line": 207,
+        "text": "if !replay.IdempotentReplay || replay.Balance.Minor() != 2000 || !reflect.DeepEqual(before, s.m.s) {"
+      },
+      {
+        "line": 210,
+        "text": "reconciled, e := usecase.NewReconcileWallet(s.m, s.metrics).Execute(context.Background(), s.wallet)"
+      },
+      {
+        "line": 211,
+        "text": "if e != nil || !reconciled.Consistent || reconciled.Stored.Minor() != 6000 || reconciled.Calculated.Minor() != 6000 || reconciled.Difference.Minor() != 0 || reconciled.CheckedEntries != 5 {"
+      },
+      {
+        "line": 212,
+        "text": "t.Fatal(reconciled, e)"
+      },
+      {
+        "line": 221,
+        "text": "w := s.m.s.wallets[s.wallet]"
+      },
+      {
+        "line": 222,
+        "text": "w.Balance = moneyOf(t, 5900)"
+      },
+      {
+        "line": 223,
+        "text": "s.m.s.wallets[s.wallet] = w"
+      },
+      {
+        "line": 224,
+        "text": "reconciled, e := usecase.NewReconcileWallet(s.m, s.metrics).Execute(context.Background(), s.wallet)"
+      },
+      {
+        "line": 225,
+        "text": "if e != nil || reconciled.Consistent || reconciled.Difference.Minor() != -100 || s.metrics.divergences != 1 || s.m.s.wallets[s.wallet].Balance.Minor() != 5900 {"
+      },
+      {
+        "line": 226,
+        "text": "t.Fatal(reconciled, e)"
+      },
+      {
+        "line": 233,
+        "text": "if initial == 0 && (len(s.m.s.transactions) != 0 || len(s.m.s.ledger) != 0 || len(s.m.s.events) != 0) {"
+      },
+      {
+        "line": 237,
+        "text": "_, e := usecase.NewOpenWallet(s.m, s.c, s.id).Execute(context.Background(), usecase.OpenWalletInput{PlayerID: player, InitialBalance: moneyOf(t, initial)})"
+      },
+      {
+        "line": 238,
+        "text": "if !errors.Is(e, apperr.ErrWalletExists) || !reflect.DeepEqual(before, s.m.s) {"
+      },
+      {
+        "line": 254,
+        "text": "before := s.m.s.wallets[s.wallet].Balance.Minor()"
+      },
+      {
+        "line": 255,
+        "text": "expectedVersion := s.m.s.wallets[s.wallet].Version + 1"
+      },
+      {
+        "line": 267,
+        "text": "saved := s.m.s.wallets[s.wallet]"
+      },
+      {
+        "line": 268,
+        "text": "n := len(s.m.s.ledger)"
+      },
+      {
+        "line": 270,
+        "text": "if duplicate.Status != wager.StatusRejected || duplicate.FailureCode != wager.FailAlreadyReversed || saved != s.m.s.wallets[s.wallet] || len(s.m.s.ledger) != n {"
+      },
+      {
+        "line": 339,
+        "text": "before := s.m.s.wallets[s.wallet]"
+      },
+      {
+        "line": 340,
+        "text": "walletsBefore := s.m.s.copy().wallets"
+      },
+      {
+        "line": 341,
+        "text": "journal := append([]wager.LedgerEntry(nil), s.m.s.ledger...)"
+      },
+      {
+        "line": 344,
+        "text": "if r.Status != wager.StatusRejected || r.FailureCode != tc.want || r.Balance != nil || before != s.m.s.wallets[s.wallet] || !reflect.DeepEqual(journal, s.m.s.ledger) {"
+      },
+      {
+        "line": 348,
+        "text": "if stored.Status != wager.StatusRejected || stored.FailureCode != tc.want || stored.BalanceAfter != nil || !reflect.DeepEqual(walletsBefore, s.m.s.wallets) {"
+      },
+      {
+        "line": 349,
+        "text": "t.Fatal(\"rejection persistence or foreign wallet effects\", stored)"
+      },
+      {
+        "line": 388,
+        "text": "if !replay.IdempotentReplay || replay.TransactionID != r.TransactionID || replay.Balance.Minor() != 9900 || !s.m.s.inbox[usecase.InboxConsumerName+\":message-1\"].completed {"
+      },
+      {
+        "line": 505,
+        "text": "if len(finalEvents) != 3 || counts[event.TypeWagerTransactionPendingReference] != 1 || counts[event.TypeWagerTransactionProcessed] != 1 || counts[event.TypeWalletBalanceChanged] != 1 {"
+      },
+      {
+        "line": 543,
+        "text": "for _, stage := range []string{\"ledger-append\", \"wallet-save\", \"transaction-update\", \"outbox-add\", \"inbox-complete\"} {"
+      },
+      {
+        "line": 553,
+        "text": "if stage == \"outbox-add\" {"
+      },
+      {
+        "line": 564,
+        "text": "if r.IdempotentReplay || !s.m.s.inbox[usecase.InboxConsumerName+\":message\"].completed {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/model_semantics_test.go",
+    "references": [
+      {
+        "line": 17,
+        "text": "amount, balance             int64"
+      },
+      {
+        "line": 24,
+        "text": "// calls domain movement/reference helpers or uses the observed wallet as truth."
+      },
+      {
+        "line": 30,
+        "text": "balance, version, entries := int64(10000), int64(1), 1"
+      },
+      {
+        "line": 66,
+        "text": "before := balance"
+      },
+      {
+        "line": 80,
+        "text": "if balance+op.delta < 0 {"
+      },
+      {
+        "line": 87,
+        "text": "balance += op.delta"
+      },
+      {
+        "line": 88,
+        "text": "op.balance = balance"
+      },
+      {
+        "line": 116,
+        "text": "assertOutcome(t, s, r, op.kind, op.amount, before, balance, version, direction)"
+      },
+      {
+        "line": 118,
+        "text": "if r.Balance != nil {"
+      },
+      {
+        "line": 119,
+        "text": "t.Fatal(\"invented balance on nonprocessed operation\")"
+      },
+      {
+        "line": 130,
+        "text": "if in.Source == usecase.SourceSQS && !s.m.s.inbox[usecase.InboxConsumerName+\":\"+in.InboxMessageID].completed {"
+      },
+      {
+        "line": 131,
+        "text": "t.Fatal(\"accepted outcome did not complete inbox\")"
+      },
+      {
+        "line": 133,
+        "text": "assertFinancialState(t, s, balance, version, entries)"
+      },
+      {
+        "line": 137,
+        "text": "if !replay.IdempotentReplay || replay.TransactionID != r.TransactionID || replay.Status != r.Status || replay.FailureCode != r.FailureCode || !reflect.DeepEqual(replay.Balance, r.Balance) || !reflect.DeepEqual(snapshot, s.m.s) {"
+      },
+      {
+        "line": 143,
+        "text": "rec, e := usecase.NewReconcileWallet(s.m, s.metrics).Execute(context.Background(), s.wallet)"
+      },
+      {
+        "line": 144,
+        "text": "if e != nil || !rec.Consistent || rec.Stored.Minor() != balance || rec.Calculated.Minor() != balance || rec.Difference.Minor() != 0 || rec.CheckedEntries != int64(entries) {"
+      },
+      {
+        "line": 181,
+        "text": "for _, stage := range []string{\"ledger-append\", \"wallet-save\", \"transaction-update\", \"processed-event\", \"inbox-complete\"} {"
+      },
+      {
+        "line": 182,
+        "text": "if kind == \"LOSS\" && (stage == \"ledger-append\" || stage == \"wallet-save\") {"
+      },
+      {
+        "line": 185,
+        "text": "if stage == \"inbox-complete\" && source == usecase.SourceHTTP {"
+      },
+      {
+        "line": 191,
+        "text": "beforeBalance, version, entries := int64(10000), int64(1), 1"
+      },
+      {
+        "line": 195,
+        "text": "beforeBalance, version, entries = 8000, 2, 2"
+      },
+      {
+        "line": 221,
+        "text": "after := beforeBalance"
+      },
+      {
+        "line": 239,
+        "text": "assertOutcome(t, s, result, kind, cents, beforeBalance, after, version, direction)"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/module.go",
+    "references": [
+      {
+        "line": 11,
+        "text": "NewOpenWallet, NewGetWallet, NewListLedger, NewReconcileWallet,"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/observable_contract_test.go",
+    "references": [
+      {
+        "line": 49,
+        "text": "cause := errors.New(\"outbox unavailable\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/outbox_paths_test.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "raw, e := event.NewRejected(event.Meta{EventID: \"event\", AggregateID: \"wallet\", CorrelationID: \"correlation\", OccurredAt: pathTime.Add(-time.Minute)}, event.RejectedData{TransactionID: \"tx\", WalletID: \"wallet\", ProviderID: \"p\", ExternalTransactionID: \"ext\", Kind: \"BET\", FailureCode: \"INSUFFICIENT_FUNDS\"}).ToOutgoing()"
+      },
+      {
+        "line": 31,
+        "text": "repo := outboxStub{"
+      },
+      {
+        "line": 112,
+        "text": "if marked != 0 || rescheduled != 1 || len(m.retries) != 1 || m.retries[0] != \"outbox\" {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/ports_test.go",
+    "references": [
+      {
+        "line": 10,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 46,
+        "text": "w port.WalletRepository"
+      },
+      {
+        "line": 48,
+        "text": "l port.LedgerRepository"
+      },
+      {
+        "line": 53,
+        "text": "func (s txStub) Wallets() port.WalletRepository           { return s.w }"
+      },
+      {
+        "line": 55,
+        "text": "func (s txStub) Ledger() port.LedgerRepository            { return s.l }"
+      },
+      {
+        "line": 59,
+        "text": "type walletStub struct {"
+      },
+      {
+        "line": 60,
+        "text": "port.WalletRepository"
+      },
+      {
+        "line": 61,
+        "text": "get    func(context.Context, string) (*wallet.Wallet, error)"
+      },
+      {
+        "line": 62,
+        "text": "create func(context.Context, *wallet.Wallet) error"
+      },
+      {
+        "line": 63,
+        "text": "save   func(context.Context, *wallet.Wallet, int64) error"
+      },
+      {
+        "line": 66,
+        "text": "func (s walletStub) Get(c context.Context, id string) (*wallet.Wallet, error) { return s.get(c, id) }"
+      },
+      {
+        "line": 67,
+        "text": "func (s walletStub) GetForUpdate(c context.Context, id string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 70,
+        "text": "func (s walletStub) Create(c context.Context, w *wallet.Wallet) error        { return s.create(c, w) }"
+      },
+      {
+        "line": 71,
+        "text": "func (s walletStub) Save(c context.Context, w *wallet.Wallet, n int64) error { return s.save(c, w, n) }"
+      },
+      {
+        "line": 105,
+        "text": "type ledgerStub struct {"
+      },
+      {
+        "line": 106,
+        "text": "port.LedgerRepository"
+      },
+      {
+        "line": 107,
+        "text": "appendEntry func(context.Context, wager.LedgerEntry) error"
+      },
+      {
+        "line": 108,
+        "text": "list        func(context.Context, string, string, int) (port.LedgerPage, error)"
+      },
+      {
+        "line": 109,
+        "text": "totals      func(context.Context, string) (port.LedgerTotals, error)"
+      },
+      {
+        "line": 112,
+        "text": "func (s ledgerStub) Append(c context.Context, e wager.LedgerEntry) error { return s.appendEntry(c, e) }"
+      },
+      {
+        "line": 113,
+        "text": "func (s ledgerStub) List(c context.Context, w, k string, n int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 116,
+        "text": "func (s ledgerStub) Totals(c context.Context, w string) (port.LedgerTotals, error) {"
+      },
+      {
+        "line": 120,
+        "text": "type inboxStub struct {"
+      },
+      {
+        "line": 125,
+        "text": "func (s inboxStub) Begin(c context.Context, n, id, h string, at time.Time) (port.InboxState, error) {"
+      },
+      {
+        "line": 129,
+        "text": "type outboxStub struct {"
+      },
+      {
+        "line": 138,
+        "text": "func (s outboxStub) Add(c context.Context, e event.Outgoing) error { return s.add(c, e) }"
+      },
+      {
+        "line": 139,
+        "text": "func (s outboxStub) ClaimBatch(c context.Context, n time.Time, l int, d time.Duration) ([]event.Outgoing, error) {"
+      },
+      {
+        "line": 142,
+        "text": "func (s outboxStub) MarkPublished(c context.Context, id string, n int, at time.Time) error {"
+      },
+      {
+        "line": 145,
+        "text": "func (s outboxStub) Reschedule(c context.Context, id string, n int, at time.Time) error {"
+      },
+      {
+        "line": 148,
+        "text": "func (s outboxStub) OldestPending(c context.Context) (*time.Time, error) { return s.oldest(c) }"
+      },
+      {
+        "line": 188,
+        "text": "tx, e := wager.NewExternal(wager.ExternalParams{ID: \"tx\", ProviderID: \"p\", ExternalID: \"external\", IdempotencyKey: \"key\", PayloadHash: \"hash\", WalletID: \"wallet\", PlayerID: \"player\", RoundID: \"round\", GameID: \"game\", Kind: kind, Amount: m, ReferenceExternalID: ref}, pathTime)"
+      },
+      {
+        "line": 194,
+        "text": "func pathWallet(t *testing.T) *wallet.Wallet {"
+      },
+      {
+        "line": 196,
+        "text": "w, e := wallet.New(\"wallet\", \"player\", pathMoney(t, 1000), pathTime)"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/process.go",
+    "references": [
+      {
+        "line": 11,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 21,
+        "text": "return event.Meta{EventID: u.ids.NewID(), AggregateID: s.WalletID, CorrelationID: cor, CausationID: s.CausationID, OccurredAt: u.clock.Now()}"
+      },
+      {
+        "line": 37,
+        "text": "e, err := event.NewRejected(u.meta(t), event.RejectedData{TransactionID: s.ID, Kind: string(s.Kind), WalletID: s.WalletID, ProviderID: s.ProviderID, ExternalTransactionID: s.ExternalID, FailureCode: string(code)}).ToOutgoing()"
+      },
+      {
+        "line": 42,
+        "text": "e, err := event.NewProcessed(u.meta(t), event.ProcessedData{TransactionID: s.ID, Kind: string(s.Kind), WalletID: s.WalletID, PlayerID: s.PlayerID, ProviderID: s.ProviderID, ExternalTransactionID: s.ExternalID, RoundID: s.RoundID, Money: event.ToMoneyDTO(s.Amount)}).ToOutgoing()"
+      },
+      {
+        "line": 45,
+        "text": "func (u *SubmitTransaction) balanceEvent(ctx context.Context, tx port.Tx, t *wager.Transaction, entry wager.LedgerEntry, version int64) error {"
+      },
+      {
+        "line": 46,
+        "text": "e, err := event.NewBalanceChanged(u.meta(t), event.BalanceChangedData{WalletID: t.WalletID(), TransactionID: t.ID(), Direction: string(entry.Direction()), Money: event.ToMoneyDTO(entry.Amount()), BalanceBefore: event.ToMoneyDTO(entry.BalanceBefore()), BalanceAfter: event.ToMoneyDTO(entry.BalanceAfter()), WalletVersion: version}).ToOutgoing()"
+      },
+      {
+        "line": 73,
+        "text": "w, err := tx.Wallets().GetForUpdate(ctx, s.WalletID)"
+      },
+      {
+        "line": 93,
+        "text": "if r.ID == s.ID || r.WalletID != s.WalletID || r.PlayerID != s.PlayerID || r.Amount.Currency() != s.Amount.Currency() || r.RoundID != s.RoundID {"
+      },
+      {
+        "line": 128,
+        "text": "before := w.Balance()"
+      },
+      {
+        "line": 135,
+        "text": "if errors.Is(err, wallet.ErrInsufficientFunds) {"
+      },
+      {
+        "line": 148,
+        "text": "entry, e := wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, s.ID, direction, s.Amount, before, u.clock.Now())"
+      },
+      {
+        "line": 152,
+        "text": "if err = tx.Ledger().Append(ctx, entry); err != nil {"
+      },
+      {
+        "line": 155,
+        "text": "if err = tx.Wallets().Save(ctx, w, version); err != nil {"
+      },
+      {
+        "line": 158,
+        "text": "if err = u.balanceEvent(ctx, tx, t, entry, w.Version()); err != nil {"
+      },
+      {
+        "line": 162,
+        "text": "if err = t.MarkProcessed(w.Balance(), u.clock.Now()); err != nil {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/read_failure_test.go",
+    "references": [
+      {
+        "line": 11,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 19,
+        "text": "w := pathWallet(t)"
+      },
+      {
+        "line": 38,
+        "text": "u := &uowStub{tx: txStub{t: repo, w: walletStub{get: func(_ context.Context, id string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 39,
+        "text": "if id != \"wallet\" {"
+      },
+      {
+        "line": 43,
+        "text": "}}, l: ledgerStub{list: func(_ context.Context, id, cursor string, limit int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 44,
+        "text": "if id != \"wallet\" || cursor != \"opaque\" || limit != 17 {"
+      },
+      {
+        "line": 47,
+        "text": "return port.LedgerPage{NextCursor: \"next\"}, nil"
+      },
+      {
+        "line": 49,
+        "text": "v, e := NewGetWallet(u).Execute(ctx, \"wallet\")"
+      },
+      {
+        "line": 50,
+        "text": "if !errors.Is(e, expected) || (!failure && (v.ID != w.ID() || v.Balance.Minor() != 1000 || v.Version != 1)) {"
+      },
+      {
+        "line": 53,
+        "text": "page, e := NewListLedger(u).Execute(ctx, \"wallet\", \"opaque\", 17)"
+      },
+      {
+        "line": 73,
+        "text": "for _, which := range []string{\"wallet\", \"totals\", \"currency\"} {"
+      },
+      {
+        "line": 74,
+        "text": "t.Run(\"reconciliation/\"+which, func(t *testing.T) {"
+      },
+      {
+        "line": 80,
+        "text": "u := &uowStub{tx: txStub{w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 81,
+        "text": "if which == \"wallet\" {"
+      },
+      {
+        "line": 85,
+        "text": "}}, l: ledgerStub{totals: func(context.Context, string) (port.LedgerTotals, error) {"
+      },
+      {
+        "line": 87,
+        "text": "return port.LedgerTotals{}, errPort"
+      },
+      {
+        "line": 89,
+        "text": "return port.LedgerTotals{Calculated: usd}, nil"
+      },
+      {
+        "line": 91,
+        "text": "if _, e := NewReconcileWallet(u, &metricsSpy{}).Execute(ctx, \"wallet\"); !errors.Is(e, want) {"
+      },
+      {
+        "line": 99,
+        "text": "for _, stage := range []string{\"invalid player\", \"invalid wallet\", \"create\", \"opening\", \"insert\", \"ledger construction\", \"append\", \"processed event\", \"balance event\"} {"
+      },
+      {
+        "line": 104,
+        "text": "w: walletStub{create: func(context.Context, *wallet.Wallet) error {"
+      },
+      {
+        "line": 118,
+        "text": "l: ledgerStub{appendEntry: func(context.Context, wager.LedgerEntry) error {"
+      },
+      {
+        "line": 125,
+        "text": "o: outboxStub{add: func(_ context.Context, e event.Outgoing) error {"
+      },
+      {
+        "line": 127,
+        "text": "if (stage == \"processed event\" && e.Type() == event.TypeWagerTransactionProcessed) || (stage == \"balance event\" && e.Type() == event.TypeWalletBalanceChanged) {"
+      },
+      {
+        "line": 133,
+        "text": "uc := NewOpenWallet(u, clockFunc(func() time.Time { return pathTime }), idFunc(func() string {"
+      },
+      {
+        "line": 135,
+        "text": "if (stage == \"opening\" && ids == 2) || (stage == \"ledger construction\" && ids == 3) {"
+      },
+      {
+        "line": 140,
+        "text": "in := OpenWalletInput{PlayerID: \"00000000-0000-4000-8000-000000000001\", InitialBalance: pathMoney(t, 100)}"
+      },
+      {
+        "line": 144,
+        "text": "if stage == \"invalid wallet\" {"
+      },
+      {
+        "line": 145,
+        "text": "in.InitialBalance = money.Money{}"
+      },
+      {
+        "line": 149,
+        "text": "if stage == \"invalid player\" || stage == \"invalid wallet\" {"
+      },
+      {
+        "line": 152,
+        "text": "if stage == \"opening\" || stage == \"ledger construction\" {"
+      },
+      {
+        "line": 158,
+        "text": "expectedCalls := map[string]int{\"invalid player\": 0, \"invalid wallet\": 0, \"create\": 1, \"opening\": 1, \"insert\": 2, \"ledger construction\": 2, \"append\": 3, \"processed event\": 4, \"balance event\": 5}"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/reconciliation_contract_test.go",
+    "references": [
+      {
+        "line": 7,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 14,
+        "text": "u := &uowStub{tx: txStub{w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 18,
+        "text": "return pathWallet(t), nil"
+      },
+      {
+        "line": 19,
+        "text": "}}, l: ledgerStub{totals: func(context.Context, string) (port.LedgerTotals, error) {"
+      },
+      {
+        "line": 24,
+        "text": "return port.LedgerTotals{Calculated: pathMoney(t, n)}, nil"
+      },
+      {
+        "line": 27,
+        "text": "got, err := NewReconcileWallet(u, m).Execute(context.Background(), \"wallet\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/reference_failure_test.go",
+    "references": [
+      {
+        "line": 8,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 62,
+        "text": "u := &uowStub{tx: txStub{t: repo, w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) { return nil, cause }}}}"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/reference_semantics_test.go",
+    "references": [
+      {
+        "line": 33,
+        "text": "ref, e := wager.NewExternal(wager.ExternalParams{ID: s.id.NewID(), ProviderID: \"p\", ExternalID: \"bet\", IdempotencyKey: \"key:bet\", PayloadHash: \"hash\", WalletID: s.wallet, PlayerID: player, RoundID: \"round\", GameID: \"game\", Kind: wager.KindBet, Amount: moneyOf(t, 2000)}, at)"
+      },
+      {
+        "line": 54,
+        "text": "t.Run(\"different wallet is incompatible\", func(t *testing.T) {"
+      },
+      {
+        "line": 57,
+        "text": "w, e := usecase.NewOpenWallet(s.m, s.c, s.id).Execute(context.Background(), usecase.OpenWalletInput{PlayerID: otherPlayer, InitialBalance: moneyOf(t, 10000)})"
+      },
+      {
+        "line": 63,
+        "text": "bet.WalletID = w.ID"
+      },
+      {
+        "line": 95,
+        "text": "t.Run(\"business rejection completes inbox and remains terminal\", func(t *testing.T) {"
+      },
+      {
+        "line": 98,
+        "text": "body := []byte(`{\"messageId\":\"rejected-msg\",\"type\":\"WagerTransactionRequested\",\"occurredAt\":\"2026-09-28T12:00:00Z\",\"data\":{\"providerId\":\"p\",\"externalTransactionId\":\"bet\",\"idempotencyKey\":\"opaque/rejected\",\"playerId\":\"` + player + `\",\"walletId\":\"` + s.wallet + `\",\"roundId\":\"round\",\"gameId\":\"game\",\"kind\":\"BET\",\"money\":{\"amount\":\"1.00\",\"currency\":\"BRL\"}}}`)"
+      },
+      {
+        "line": 102,
+        "text": "if !s.m.s.inbox[usecase.InboxConsumerName+\":rejected-msg\"].completed || len(s.m.s.transactions) != 1 {"
+      },
+      {
+        "line": 120,
+        "text": "envelope := map[string]any{\"messageId\": \"msg\", \"type\": \"WagerTransactionRequested\", \"occurredAt\": \"2026-09-28T12:00:00Z\", \"data\": map[string]any{\"providerId\": \"p\", \"externalTransactionId\": \"bet\", \"idempotencyKey\": \"opaque/received-key-73\", \"playerId\": player, \"walletId\": s.wallet, \"roundId\": \"round\", \"gameId\": \"game\", \"kind\": \"BET\", \"money\": map[string]string{\"amount\": \"1.00\", \"currency\": \"BRL\"}}}"
+      },
+      {
+        "line": 128,
+        "text": "if !s.m.s.inbox[usecase.InboxConsumerName+\":msg\"].completed {"
+      },
+      {
+        "line": 129,
+        "text": "t.Fatal(\"inbox not completed\")"
+      },
+      {
+        "line": 142,
+        "text": "if !replay.IdempotentReplay || replay.Balance.Minor() != 9900 {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/semantic_fixture_test.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 48,
+        "text": "type inboxRecord struct {"
+      },
+      {
+        "line": 53,
+        "text": "wallets      map[string]wallet.Snapshot"
+      },
+      {
+        "line": 55,
+        "text": "ledger       []wager.LedgerEntry"
+      },
+      {
+        "line": 57,
+        "text": "inbox        map[string]inboxRecord"
+      },
+      {
+        "line": 61,
+        "text": "return &state{wallets: map[string]wallet.Snapshot{}, transactions: map[string]wager.Snapshot{}, inbox: map[string]inboxRecord{}}"
+      },
+      {
+        "line": 65,
+        "text": "for k, v := range s.wallets {"
+      },
+      {
+        "line": 66,
+        "text": "n.wallets[k] = v"
+      },
+      {
+        "line": 69,
+        "text": "if v.BalanceAfter != nil {"
+      },
+      {
+        "line": 70,
+        "text": "value := *v.BalanceAfter"
+      },
+      {
+        "line": 71,
+        "text": "v.BalanceAfter = &value"
+      },
+      {
+        "line": 83,
+        "text": "for k, v := range s.inbox {"
+      },
+      {
+        "line": 84,
+        "text": "n.inbox[k] = v"
+      },
+      {
+        "line": 86,
+        "text": "n.ledger = append(n.ledger, s.ledger...)"
+      },
+      {
+        "line": 138,
+        "text": "func (u unit) Wallets() port.WalletRepository { return wallets{u.s, u.fault(\"wallet-save\")} }"
+      },
+      {
+        "line": 142,
+        "text": "func (u unit) Ledger() port.LedgerRepository { return ledger{u.s, u.fault(\"ledger-append\")} }"
+      },
+      {
+        "line": 143,
+        "text": "func (u unit) Inbox() port.InboxRepository   { return inbox{u.s, u.fault(\"inbox-complete\")} }"
+      },
+      {
+        "line": 145,
+        "text": "return outbox{s: u.s, fail: u.failEvent, failType: u.failEventType}"
+      },
+      {
+        "line": 155,
+        "text": "type wallets struct {"
+      },
+      {
+        "line": 160,
+        "text": "func (r wallets) Create(_ context.Context, w *wallet.Wallet) error {"
+      },
+      {
+        "line": 161,
+        "text": "for _, s := range r.s.wallets {"
+      },
+      {
+        "line": 162,
+        "text": "if s.PlayerID == w.PlayerID() && s.Balance.Currency() == w.Currency() {"
+      },
+      {
+        "line": 163,
+        "text": "return apperr.ErrWalletExists"
+      },
+      {
+        "line": 166,
+        "text": "r.s.wallets[w.ID()] = w.Snapshot()"
+      },
+      {
+        "line": 169,
+        "text": "func (r wallets) Get(_ context.Context, id string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 170,
+        "text": "s, ok := r.s.wallets[id]"
+      },
+      {
+        "line": 172,
+        "text": "return nil, apperr.ErrWalletNotFound"
+      },
+      {
+        "line": 174,
+        "text": "return wallet.Rehydrate(s)"
+      },
+      {
+        "line": 176,
+        "text": "func (r wallets) GetForUpdate(c context.Context, id string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 179,
+        "text": "func (r wallets) Save(_ context.Context, w *wallet.Wallet, expected int64) error {"
+      },
+      {
+        "line": 183,
+        "text": "if r.s.wallets[w.ID()].Version != expected {"
+      },
+      {
+        "line": 186,
+        "text": "r.s.wallets[w.ID()] = w.Snapshot()"
+      },
+      {
+        "line": 271,
+        "text": "type ledger struct {"
+      },
+      {
+        "line": 276,
+        "text": "func (r ledger) Append(_ context.Context, e wager.LedgerEntry) error {"
+      },
+      {
+        "line": 280,
+        "text": "r.s.ledger = append(r.s.ledger, e)"
+      },
+      {
+        "line": 283,
+        "text": "func (r ledger) List(_ context.Context, w, cursor string, limit int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 284,
+        "text": "return port.LedgerPage{}, fmt.Errorf(\"pagination deliberately not simulated\")"
+      },
+      {
+        "line": 286,
+        "text": "func (r ledger) Totals(_ context.Context, w string) (port.LedgerTotals, error) {"
+      },
+      {
+        "line": 288,
+        "text": "for _, e := range r.s.ledger {"
+      },
+      {
+        "line": 289,
+        "text": "if e.WalletID() != w {"
+      },
+      {
+        "line": 299,
+        "text": "m, e := money.FromMinor(total, r.s.wallets[w].Balance.Currency())"
+      },
+      {
+        "line": 300,
+        "text": "return port.LedgerTotals{Calculated: m, Entries: n}, e"
+      },
+      {
+        "line": 303,
+        "text": "type inbox struct {"
+      },
+      {
+        "line": 308,
+        "text": "func (r inbox) Begin(_ context.Context, c, id, hash string, _ time.Time) (port.InboxState, error) {"
+      },
+      {
+        "line": 310,
+        "text": "if v, ok := r.s.inbox[key]; ok {"
+      },
+      {
+        "line": 318,
+        "text": "r.s.inbox[key] = inboxRecord{hash: hash}"
+      },
+      {
+        "line": 321,
+        "text": "func (r inbox) Complete(_ context.Context, c, id string, _ time.Time) error {"
+      },
+      {
+        "line": 326,
+        "text": "v := r.s.inbox[key]"
+      },
+      {
+        "line": 328,
+        "text": "r.s.inbox[key] = v"
+      },
+      {
+        "line": 332,
+        "text": "type outbox struct {"
+      },
+      {
+        "line": 339,
+        "text": "func (r outbox) Add(_ context.Context, e event.Outgoing) error {"
+      },
+      {
+        "line": 354,
+        "text": "wallet  string"
+      },
+      {
+        "line": 369,
+        "text": "w, e := usecase.NewOpenWallet(s.m, s.c, s.id).Execute(context.Background(), usecase.OpenWalletInput{PlayerID: player, InitialBalance: moneyOf(t, initial)})"
+      },
+      {
+        "line": 373,
+        "text": "if w.ID == \"\" || w.PlayerID != player || w.Balance.Minor() != initial || w.Balance.Currency() != \"BRL\" || w.Version != 1 {"
+      },
+      {
+        "line": 376,
+        "text": "s.wallet = w.ID"
+      },
+      {
+        "line": 380,
+        "text": "return usecase.SubmitInput{Source: usecase.SourceHTTP, AuthorizedProviderID: \"p\", ProviderID: \"p\", ExternalTransactionID: external, IdempotencyKey: \"key:\" + external, CorrelationID: \"correlation\", PlayerID: player, WalletID: s.wallet, RoundID: \"round\", GameID: \"game\", Kind: kind, Amount: amount, Currency: \"BRL\", ReferenceExternalTransactionID: reference}"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/submit_failure_test.go",
+    "references": [
+      {
+        "line": 10,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 16,
+        "text": "return SubmitInput{Source: SourceHTTP, AuthorizedProviderID: \"p\", ProviderID: \"p\", ExternalTransactionID: \"external\", IdempotencyKey: \"key\", PlayerID: \"00000000-0000-4000-8000-000000000001\", WalletID: \"00000000-0000-4000-8000-000000000002\", RoundID: \"round\", GameID: \"game\", Kind: \"BET\", Amount: \"1.00\", Currency: \"BRL\"}"
+      },
+      {
+        "line": 19,
+        "text": "for name, change := range map[string]func(*SubmitInput){\"unknown source\": func(i *SubmitInput) { i.Source = \"unknown\" }, \"missing inbox\": func(i *SubmitInput) { i.Source = SourceSQS }, \"invalid wallet\": func(i *SubmitInput) { i.WalletID = \"bad\" }} {"
+      },
+      {
+        "line": 29,
+        "text": "for _, stage := range []string{\"inbox\", \"lookup\", \"wallet\", \"insert\", \"second lookup\", \"racing insert\", \"transient conflict\"} {"
+      },
+      {
+        "line": 60,
+        "text": "u := &uowStub{tx: txStub{t: repo, w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 61,
+        "text": "if stage == \"wallet\" {"
+      },
+      {
+        "line": 64,
+        "text": "return pathWallet(t), nil"
+      },
+      {
+        "line": 65,
+        "text": "}}, i: inboxStub{begin: func(context.Context, string, string, string, time.Time) (port.InboxState, error) {"
+      },
+      {
+        "line": 68,
+        "text": "if stage == \"inbox\" {"
+      },
+      {
+        "line": 78,
+        "text": "if e != nil || !r.IdempotentReplay || r.Balance.Minor() != 900 || r.TransactionID != inserted.ID() {"
+      },
+      {
+        "line": 96,
+        "text": "for _, stage := range []string{\"wallet\", \"reference\", \"reversal lookup\", \"reference already resolved\", \"invalid wallet time\", \"ledger identity\", \"processed transition\"} {"
+      },
+      {
+        "line": 99,
+        "text": "w := pathWallet(t)"
+      },
+      {
+        "line": 121,
+        "text": "if stage == \"invalid wallet time\" {"
+      },
+      {
+        "line": 124,
+        "text": "w, e = wallet.Rehydrate(s)"
+      },
+      {
+        "line": 128,
+        "text": "expected = wallet.ErrInvalidWallet"
+      },
+      {
+        "line": 130,
+        "text": "if stage == \"ledger identity\" {"
+      },
+      {
+        "line": 151,
+        "text": "unit := txStub{w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 152,
+        "text": "if stage == \"wallet\" {"
+      },
+      {
+        "line": 158,
+        "text": "if stage == \"ledger identity\" {"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/transaction.go",
+    "references": [
+      {
+        "line": 39,
+        "text": "ProviderID, ExternalTransactionID, PlayerID, WalletID, RoundID, GameID string"
+      },
+      {
+        "line": 43,
+        "text": "// SQS only: inbox registration shares the domain transaction."
+      },
+      {
+        "line": 50,
+        "text": "Balance          *money.Money // observed at original processing time"
+      },
+      {
+        "line": 76,
+        "text": "return SubmitResult{}, apperr.Invalid(\"inbox identity required\")"
+      },
+      {
+        "line": 91,
+        "text": "wid, err := uuid.Parse(in.WalletID)"
+      },
+      {
+        "line": 93,
+        "text": "return SubmitResult{}, apperr.Invalid(\"invalid walletId\")"
+      },
+      {
+        "line": 96,
+        "text": "in.WalletID = wid.String()"
+      },
+      {
+        "line": 97,
+        "text": "hash := wager.PayloadHash(wager.HashInput{ProviderID: in.ProviderID, ExternalTransactionID: in.ExternalTransactionID, PlayerID: in.PlayerID, WalletID: in.WalletID, RoundID: in.RoundID, GameID: in.GameID, Kind: in.Kind, ReferenceExternalTransactionID: in.ReferenceExternalTransactionID, Amount: m.Amount(), Currency: m.Currency()})"
+      },
+      {
+        "line": 98,
+        "text": "t, err := wager.NewExternal(wager.ExternalParams{ID: u.ids.NewID(), ProviderID: in.ProviderID, ExternalID: in.ExternalTransactionID, IdempotencyKey: in.IdempotencyKey, PayloadHash: hash, WalletID: in.WalletID, PlayerID: in.PlayerID, RoundID: in.RoundID, GameID: in.GameID, Kind: k, Amount: m, ReferenceExternalID: in.ReferenceExternalTransactionID, CorrelationID: in.CorrelationID, CausationID: in.InboxMessageID}, u.clock.Now())"
+      },
+      {
+        "line": 118,
+        "text": "// Missing wallets are invalid requests: no impossible FK/audit row is committed."
+      },
+      {
+        "line": 119,
+        "text": "if _, e = tx.Wallets().Get(ctx, in.WalletID); e != nil {"
+      },
+      {
+        "line": 150,
+        "text": "result.Balance = s.BalanceAfter"
+      },
+      {
+        "line": 162,
+        "text": "slog.InfoContext(ctx, \"transaction handled\", \"correlationId\", in.CorrelationID, \"messageId\", in.InboxMessageID, \"transactionId\", result.TransactionID, \"walletId\", in.WalletID, \"providerId\", in.ProviderID, \"status\", result.Status)"
+      },
+      {
+        "line": 165,
+        "text": "slog.WarnContext(ctx, \"transaction handling failed\", \"correlationId\", in.CorrelationID, \"messageId\", in.InboxMessageID, \"transactionId\", t.ID(), \"walletId\", in.WalletID, \"providerId\", in.ProviderID, \"transient\", apperr.IsTransient(err))"
+      },
+      {
+        "line": 185,
+        "text": "ID, ProviderID, ExternalTransactionID, WalletID string"
+      },
+      {
+        "line": 189,
+        "text": "Balance                                         *money.Money"
+      },
+      {
+        "line": 243,
+        "text": "WalletID                       string `json:\"walletId\"`"
+      },
+      {
+        "line": 286,
+        "text": "PlayerID: m.Data.PlayerID, WalletID: m.Data.WalletID, RoundID: m.Data.RoundID, GameID: m.Data.GameID,"
+      },
+      {
+        "line": 296,
+        "text": "return TransactionView{s.ID, s.ProviderID, s.ExternalID, s.WalletID, s.Kind, s.Status, s.Amount, s.BalanceAfter, s.FailureCode, s.NextAttemptAt}"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/wallet.go",
+    "references": [
+      {
+        "line": 6,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 15,
+        "text": "type WalletView struct {"
+      },
+      {
+        "line": 17,
+        "text": "Balance      money.Money"
+      },
+      {
+        "line": 21,
+        "text": "// ---- OpenWallet -----------------------------------------------------------"
+      },
+      {
+        "line": 23,
+        "text": "type OpenWalletInput struct {"
+      },
+      {
+        "line": 25,
+        "text": "InitialBalance money.Money"
+      },
+      {
+        "line": 28,
+        "text": "type OpenWallet struct {"
+      },
+      {
+        "line": 34,
+        "text": "func NewOpenWallet(uow port.UnitOfWork, clock port.Clock, ids port.IDGenerator) *OpenWallet {"
+      },
+      {
+        "line": 35,
+        "text": "return &OpenWallet{uow, clock, ids}"
+      },
+      {
+        "line": 38,
+        "text": "func (u *OpenWallet) Execute(ctx context.Context, in OpenWalletInput) (WalletView, error) {"
+      },
+      {
+        "line": 41,
+        "text": "return WalletView{}, apperr.Invalid(\"invalid playerId\")"
+      },
+      {
+        "line": 43,
+        "text": "w, err := wallet.New(u.ids.NewID(), player.String(), in.InitialBalance, u.clock.Now())"
+      },
+      {
+        "line": 45,
+        "text": "return WalletView{}, apperr.Invalid(\"%v\", err)"
+      },
+      {
+        "line": 48,
+        "text": "if err := tx.Wallets().Create(ctx, w); err != nil {"
+      },
+      {
+        "line": 51,
+        "text": "if !in.InitialBalance.IsPositive() {"
+      },
+      {
+        "line": 54,
+        "text": "t, err := wager.NewOpening(u.ids.NewID(), w.ID(), w.PlayerID(), in.InitialBalance, u.clock.Now())"
+      },
+      {
+        "line": 61,
+        "text": "// wallet.New has already validated the currency."
+      },
+      {
+        "line": 63,
+        "text": "entry, err := wager.NewLedgerEntry(u.ids.NewID(), w.ID(), t.ID(), wager.Credit, in.InitialBalance, zero, u.clock.Now())"
+      },
+      {
+        "line": 67,
+        "text": "if err = tx.Ledger().Append(ctx, entry); err != nil {"
+      },
+      {
+        "line": 74,
+        "text": "return helper.balanceEvent(ctx, tx, t, entry, 1)"
+      },
+      {
+        "line": 76,
+        "text": "return WalletView{w.ID(), w.PlayerID(), w.Balance(), w.Version()}, err"
+      },
+      {
+        "line": 79,
+        "text": "// ---- GetWallet ------------------------------------------------------------"
+      },
+      {
+        "line": 81,
+        "text": "type GetWallet struct{ uow port.UnitOfWork }"
+      },
+      {
+        "line": 83,
+        "text": "func NewGetWallet(uow port.UnitOfWork) *GetWallet { return &GetWallet{uow} }"
+      },
+      {
+        "line": 85,
+        "text": "func (u *GetWallet) Execute(ctx context.Context, walletID string) (WalletView, error) {"
+      },
+      {
+        "line": 86,
+        "text": "var v WalletView"
+      },
+      {
+        "line": 88,
+        "text": "w, e := tx.Wallets().Get(ctx, walletID)"
+      },
+      {
+        "line": 92,
+        "text": "v = WalletView{w.ID(), w.PlayerID(), w.Balance(), w.Version()}"
+      },
+      {
+        "line": 98,
+        "text": "// ---- ListLedger -----------------------------------------------------------"
+      },
+      {
+        "line": 100,
+        "text": "type ListLedger struct{ uow port.UnitOfWork }"
+      },
+      {
+        "line": 102,
+        "text": "func NewListLedger(uow port.UnitOfWork) *ListLedger { return &ListLedger{uow} }"
+      },
+      {
+        "line": 104,
+        "text": "func (u *ListLedger) Execute(ctx context.Context, walletID, cursor string, limit int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 105,
+        "text": "var page port.LedgerPage"
+      },
+      {
+        "line": 107,
+        "text": "if _, e := tx.Wallets().Get(ctx, walletID); e != nil {"
+      },
+      {
+        "line": 111,
+        "text": "page, e = tx.Ledger().List(ctx, walletID, cursor, limit)"
+      },
+      {
+        "line": 117,
+        "text": "// ---- ReconcileWallet ------------------------------------------------------"
+      },
+      {
+        "line": 120,
+        "text": "WalletID                       string"
+      },
+      {
+        "line": 126,
+        "text": "type ReconcileWallet struct {"
+      },
+      {
+        "line": 131,
+        "text": "func NewReconcileWallet(uow port.UnitOfWork, m port.Metrics) *ReconcileWallet {"
+      },
+      {
+        "line": 132,
+        "text": "return &ReconcileWallet{uow, m}"
+      },
+      {
+        "line": 135,
+        "text": "func (u *ReconcileWallet) Execute(ctx context.Context, walletID string) (ReconciliationResult, error) {"
+      },
+      {
+        "line": 138,
+        "text": "w, e := tx.Wallets().Get(ctx, walletID)"
+      },
+      {
+        "line": 142,
+        "text": "totals, e := tx.Ledger().Totals(ctx, walletID)"
+      },
+      {
+        "line": 146,
+        "text": "diff, e := w.Balance().Sub(totals.Calculated)"
+      },
+      {
+        "line": 150,
+        "text": "out = ReconciliationResult{walletID, w.Balance(), totals.Calculated, diff, diff.IsZero(), totals.Entries}"
+      },
+      {
+        "line": 155,
+        "text": "slog.ErrorContext(ctx, \"reconciliation divergence\", \"walletId\", walletID)"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/worker_contract_test.go",
+    "references": [
+      {
+        "line": 10,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 24,
+        "text": "in.Data.WalletID = valid.WalletID"
+      },
+      {
+        "line": 87,
+        "text": "u := &uowStub{tx: txStub{t: repo, w: walletStub{get: func(context.Context, string) (*wallet.Wallet, error) { return nil, apperr.Permanent(errPort) }}}}"
+      }
+    ]
+  },
+  {
+    "file": "internal/app/usecase/workers.go",
+    "references": [
+      {
+        "line": 34,
+        "text": "// One wallet/transaction per SQL transaction avoids cross-wallet lock cycles."
+      },
+      {
+        "line": 55,
+        "text": "slog.ErrorContext(ctx, \"reference processing failed\", \"transactionId\", s.ID, \"walletId\", s.WalletID, \"providerId\", s.ProviderID, \"correlationId\", s.CorrelationID, \"messageId\", s.CausationID, \"err\", err)"
+      },
+      {
+        "line": 112,
+        "text": "const outboxLease = 30 * time.Second"
+      },
+      {
+        "line": 116,
+        "text": "events, e = tx.Outbox().ClaimBatch(ctx, u.clock.Now(), 1, outboxLease)"
+      },
+      {
+        "line": 132,
+        "text": "log := slog.Default().With(\"eventId\", ev.EventID(), \"walletId\", ev.AggregateID(), \"transactionId\", ids.Data.TransactionID, \"providerId\", ids.Data.ProviderID, \"correlationId\", ids.CorrelationID, \"messageId\", ids.CausationID, \"attempt\", ev.Attempts())"
+      },
+      {
+        "line": 144,
+        "text": "u.metrics.Retry(\"outbox\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/event/event.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "TypeWalletBalanceChanged             = \"WalletBalanceChanged\""
+      },
+      {
+        "line": 43,
+        "text": "// Outgoing is the immutable outbox snapshot of an event (payload = serialized envelope)."
+      },
+      {
+        "line": 78,
+        "text": "WalletID              string   `json:\"walletId\"`"
+      },
+      {
+        "line": 89,
+        "text": "WalletID              string `json:\"walletId\"`"
+      },
+      {
+        "line": 95,
+        "text": "type BalanceChangedData struct {"
+      },
+      {
+        "line": 96,
+        "text": "WalletID      string   `json:\"walletId\"`"
+      },
+      {
+        "line": 100,
+        "text": "BalanceBefore MoneyDTO `json:\"balanceBefore\"`"
+      },
+      {
+        "line": 101,
+        "text": "BalanceAfter  MoneyDTO `json:\"balanceAfter\"`"
+      },
+      {
+        "line": 102,
+        "text": "WalletVersion int64    `json:\"walletVersion\"`"
+      },
+      {
+        "line": 122,
+        "text": "func NewBalanceChanged(m Meta, d BalanceChangedData) Envelope[BalanceChangedData] {"
+      },
+      {
+        "line": 123,
+        "text": "return newEnvelope(m, TypeWalletBalanceChanged, d)"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/event/input_contract_test.go",
+    "references": [
+      {
+        "line": 13,
+        "text": "processed := event.NewProcessed(meta, event.ProcessedData{TransactionID: \"tx\", WalletID: \"wallet\", PlayerID: \"p\", ProviderID: \"provider\", ExternalTransactionID: \"ext\", RoundID: \"r\", Kind: \"BET\", Money: event.MoneyDTO{Amount: \"1.00\", Currency: \"BRL\"}})"
+      },
+      {
+        "line": 14,
+        "text": "rejected := event.NewRejected(meta, event.RejectedData{TransactionID: \"tx\", WalletID: \"wallet\", ProviderID: \"provider\", ExternalTransactionID: \"ext\", Kind: \"BET\", FailureCode: \"INSUFFICIENT_FUNDS\"})"
+      },
+      {
+        "line": 25,
+        "text": "\"wallet\":             func(e *event.Envelope[event.ProcessedData]) { e.Data.WalletID = \"other\" },"
+      },
+      {
+        "line": 39,
+        "text": "\"wallet\":      func(e *event.Envelope[event.RejectedData]) { e.Data.WalletID = \"other\" },"
+      },
+      {
+        "line": 70,
+        "text": "func TestZeroMovementIsInvalidEvenWhenBalanceEquationHolds(t *testing.T) {"
+      },
+      {
+        "line": 71,
+        "text": "d := event.BalanceChangedData{TransactionID: \"tx\", WalletID: \"wallet\", Direction: \"CREDIT\", WalletVersion: 1, Money: event.MoneyDTO{Amount: \"0.00\", Currency: \"BRL\"}, BalanceBefore: event.MoneyDTO{Amount: \"1.00\", Currency: \"BRL\"}, BalanceAfter: event.MoneyDTO{Amount: \"1.00\", Currency: \"BRL\"}}"
+      },
+      {
+        "line": 72,
+        "text": "got, err := event.NewBalanceChanged(eventMeta(), d).ToOutgoing()"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/event/semantics_test.go",
+    "references": [
+      {
+        "line": 14,
+        "text": "return event.Meta{EventID: \"event\", AggregateID: \"wallet\", CorrelationID: \"correlation\", CausationID: \"message\", OccurredAt: time.Date(2026, 9, 28, 9, 0, 0, 0, time.FixedZone(\"BRT\", -3*3600))}"
+      },
+      {
+        "line": 29,
+        "text": "return event.NewProcessed(meta, event.ProcessedData{TransactionID: \"tx\", Kind: \"BET\", WalletID: \"wallet\", PlayerID: \"player\", ProviderID: \"provider\", ExternalTransactionID: \"external\", RoundID: \"round\", Money: event.ToMoneyDTO(m)}).ToOutgoing()"
+      },
+      {
+        "line": 30,
+        "text": "}, map[string]any{\"transactionId\": \"tx\", \"kind\": \"BET\", \"walletId\": \"wallet\", \"playerId\": \"player\", \"providerId\": \"provider\", \"externalTransactionId\": \"external\", \"roundId\": \"round\", \"money\": map[string]any{\"amount\": \"25.00\", \"currency\": \"BRL\"}}},"
+      },
+      {
+        "line": 31,
+        "text": "{event.TypeWalletBalanceChanged, func() (event.Outgoing, error) {"
+      },
+      {
+        "line": 32,
+        "text": "return event.NewBalanceChanged(meta, event.BalanceChangedData{WalletID: \"wallet\", TransactionID: \"tx\", Direction: \"DEBIT\", Money: event.ToMoneyDTO(m), BalanceBefore: event.ToMoneyDTO(before), BalanceAfter: event.ToMoneyDTO(after), WalletVersion: 2}).ToOutgoing()"
+      },
+      {
+        "line": 33,
+        "text": "}, map[string]any{\"walletId\": \"wallet\", \"transactionId\": \"tx\", \"direction\": \"DEBIT\", \"money\": map[string]any{\"amount\": \"25.00\", \"currency\": \"BRL\"}, \"balanceBefore\": map[string]any{\"amount\": \"100.00\", \"currency\": \"BRL\"}, \"balanceAfter\": map[string]any{\"amount\": \"75.00\", \"currency\": \"BRL\"}, \"walletVersion\": json.Number(\"2\")}},"
+      },
+      {
+        "line": 35,
+        "text": "return event.NewRejected(meta, event.RejectedData{TransactionID: \"tx\", Kind: \"BET\", WalletID: \"wallet\", ProviderID: \"provider\", ExternalTransactionID: \"external\", FailureCode: \"INSUFFICIENT_FUNDS\"}).ToOutgoing()"
+      },
+      {
+        "line": 36,
+        "text": "}, map[string]any{\"transactionId\": \"tx\", \"kind\": \"BET\", \"walletId\": \"wallet\", \"providerId\": \"provider\", \"externalTransactionId\": \"external\", \"failureCode\": \"INSUFFICIENT_FUNDS\"}},"
+      },
+      {
+        "line": 57,
+        "text": "want := map[string]any{\"eventId\": \"event\", \"eventType\": tc.name, \"aggregateId\": \"wallet\", \"correlationId\": \"correlation\", \"causationId\": \"message\", \"occurredAt\": \"2026-09-28T12:00:00Z\", \"version\": json.Number(\"1\"), \"data\": tc.wantData}"
+      },
+      {
+        "line": 69,
+        "text": "if out.EventID() != \"event\" || out.AggregateID() != \"wallet\" || out.Type() != tc.name || out.Version() != 1 || !out.OccurredAt().Equal(meta.OccurredAt) {"
+      },
+      {
+        "line": 92,
+        "text": "// Regression: a forged/malformed fact must not become an accepted outbox payload."
+      },
+      {
+        "line": 93,
+        "text": "// Rejections must be classifiable and cannot reach the outbox."
+      },
+      {
+        "line": 103,
+        "text": "{\"forged type\", func(e *event.Envelope[event.ProcessedData]) { e.EventType = event.TypeWalletBalanceChanged }},"
+      },
+      {
+        "line": 109,
+        "text": "fact := event.NewProcessed(eventMeta(), event.ProcessedData{TransactionID: \"tx\", Kind: \"BET\", WalletID: \"wallet\", PlayerID: \"player\", ProviderID: \"provider\", ExternalTransactionID: \"external\", RoundID: \"round\", Money: event.MoneyDTO{Amount: \"25.00\", Currency: \"BRL\"}})"
+      },
+      {
+        "line": 112,
+        "text": "t.Fatal(\"invalid fact accepted as outbox snapshot\")"
+      },
+      {
+        "line": 118,
+        "text": "func TestBalanceEventCannotContradictItsFinancialFact(t *testing.T) {"
+      },
+      {
+        "line": 121,
+        "text": "damage func(*event.BalanceChangedData)"
+      },
+      {
+        "line": 123,
+        "text": "{\"invented cent\", func(d *event.BalanceChangedData) { d.BalanceAfter.Amount = \"75.01\" }},"
+      },
+      {
+        "line": 124,
+        "text": "{\"currency\", func(d *event.BalanceChangedData) { d.BalanceAfter.Currency = \"USD\" }},"
+      },
+      {
+        "line": 125,
+        "text": "{\"zero movement\", func(d *event.BalanceChangedData) { d.Money.Amount = \"0.00\" }},"
+      },
+      {
+        "line": 126,
+        "text": "{\"overdraft\", func(d *event.BalanceChangedData) { d.BalanceAfter.Amount = \"-1.00\" }},"
+      },
+      {
+        "line": 127,
+        "text": "{\"direction\", func(d *event.BalanceChangedData) { d.Direction = \"UNKNOWN\" }},"
+      },
+      {
+        "line": 128,
+        "text": "{\"version\", func(d *event.BalanceChangedData) { d.WalletVersion = 0 }},"
+      },
+      {
+        "line": 129,
+        "text": "{\"wallet\", func(d *event.BalanceChangedData) { d.WalletID = \"other\" }},"
+      },
+      {
+        "line": 130,
+        "text": "{\"transaction\", func(d *event.BalanceChangedData) { d.TransactionID = \"\" }},"
+      },
+      {
+        "line": 133,
+        "text": "d := event.BalanceChangedData{WalletID: \"wallet\", TransactionID: \"tx\", Direction: \"DEBIT\", Money: event.MoneyDTO{Amount: \"25.00\", Currency: \"BRL\"}, BalanceBefore: event.MoneyDTO{Amount: \"100.00\", Currency: \"BRL\"}, BalanceAfter: event.MoneyDTO{Amount: \"75.00\", Currency: \"BRL\"}, WalletVersion: 2}"
+      },
+      {
+        "line": 135,
+        "text": "if _, err := event.NewBalanceChanged(eventMeta(), d).ToOutgoing(); !errors.Is(err, event.ErrInvalidEvent) {"
+      },
+      {
+        "line": 143,
+        "text": "fact, err := event.NewRejected(eventMeta(), event.RejectedData{TransactionID: \"tx\", Kind: \"BET\", WalletID: \"wallet\", ProviderID: \"provider\", ExternalTransactionID: \"external\", FailureCode: \"INSUFFICIENT_FUNDS\"}).ToOutgoing()"
+      },
+      {
+        "line": 153,
+        "text": "{\"id\", \"other\", \"wallet\", fact.Type(), fact.OccurredAt(), 0, fact.Payload()},"
+      },
+      {
+        "line": 155,
+        "text": "{\"type\", \"event\", \"wallet\", event.TypeWalletBalanceChanged, fact.OccurredAt(), 0, fact.Payload()},"
+      },
+      {
+        "line": 156,
+        "text": "{\"time\", \"event\", \"wallet\", fact.Type(), fact.OccurredAt().Add(time.Second), 0, fact.Payload()},"
+      },
+      {
+        "line": 157,
+        "text": "{\"attempts\", \"event\", \"wallet\", fact.Type(), fact.OccurredAt(), -1, fact.Payload()},"
+      },
+      {
+        "line": 158,
+        "text": "{\"json\", \"event\", \"wallet\", fact.Type(), fact.OccurredAt(), 0, []byte(`{`)},"
+      },
+      {
+        "line": 162,
+        "text": "t.Fatal(\"inconsistent outbox record accepted\", err)"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/event/validation.go",
+    "references": [
+      {
+        "line": 30,
+        "text": "if typ != TypeWagerTransactionProcessed || d.TransactionID == \"\" || d.WalletID != aggregate || d.PlayerID == \"\" {"
+      },
+      {
+        "line": 45,
+        "text": "if typ != TypeWagerTransactionRejected || d.TransactionID == \"\" || d.WalletID != aggregate || !externalKind(d.Kind) || d.ProviderID == \"\" || d.ExternalTransactionID == \"\" || d.FailureCode == \"\" {"
+      },
+      {
+        "line": 48,
+        "text": "case BalanceChangedData:"
+      },
+      {
+        "line": 49,
+        "text": "if typ != TypeWalletBalanceChanged || d.TransactionID == \"\" || d.WalletID != aggregate || d.WalletVersion < 1 {"
+      },
+      {
+        "line": 50,
+        "text": "return invalidEvent(\"balance identity\")"
+      },
+      {
+        "line": 56,
+        "text": "before, err := exactMoney(d.BalanceBefore)"
+      },
+      {
+        "line": 60,
+        "text": "after, err := exactMoney(d.BalanceAfter)"
+      },
+      {
+        "line": 74,
+        "text": "return invalidEvent(\"balance equation\")"
+      },
+      {
+        "line": 102,
+        "text": "case TypeWalletBalanceChanged:"
+      },
+      {
+        "line": 103,
+        "text": "data = &BalanceChangedData{}"
+      },
+      {
+        "line": 117,
+        "text": "case *BalanceChangedData:"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/event/validation_paths_test.go",
+    "references": [
+      {
+        "line": 11,
+        "text": "func TestBalanceEventRejectsMalformedFacts(t *testing.T) {"
+      },
+      {
+        "line": 12,
+        "text": "valid := event.BalanceChangedData{WalletID: \"wallet\", TransactionID: \"tx\", Direction: \"CREDIT\", Money: event.MoneyDTO{\"1.00\", \"BRL\"}, BalanceBefore: event.MoneyDTO{\"1.00\", \"BRL\"}, BalanceAfter: event.MoneyDTO{\"2.00\", \"BRL\"}, WalletVersion: 2}"
+      },
+      {
+        "line": 13,
+        "text": "for name, change := range map[string]func(*event.BalanceChangedData){"
+      },
+      {
+        "line": 14,
+        "text": "\"identity\":                  func(d *event.BalanceChangedData) { d.TransactionID = \"\" },"
+      },
+      {
+        "line": 15,
+        "text": "\"zero movement\":             func(d *event.BalanceChangedData) { d.Money.Amount = \"0.00\" },"
+      },
+      {
+        "line": 16,
+        "text": "\"invalid previous balance\":  func(d *event.BalanceChangedData) { d.BalanceBefore.Amount = \"NaN\" },"
+      },
+      {
+        "line": 17,
+        "text": "\"invalid resulting balance\": func(d *event.BalanceChangedData) { d.BalanceAfter.Amount = \"-1.00\" },"
+      },
+      {
+        "line": 18,
+        "text": "\"unknown direction\":         func(d *event.BalanceChangedData) { d.Direction = \"TRANSFER\" },"
+      },
+      {
+        "line": 23,
+        "text": "out, e := event.NewBalanceChanged(eventMeta(), d).ToOutgoing()"
+      },
+      {
+        "line": 33,
+        "text": "valid := event.NewProcessed(meta, event.ProcessedData{TransactionID: \"tx\", WalletID: \"wallet\", PlayerID: \"player\", Kind: \"OPENING\", Money: event.MoneyDTO{\"1.00\", \"BRL\"}})"
+      },
+      {
+        "line": 34,
+        "text": "for name, body := range map[string][]byte{\"invalid JSON\": []byte(\"{\"), \"wrong payload type\": []byte(`{\"eventId\":\"event\",\"aggregateId\":\"wallet\",\"eventType\":\"WagerTransactionProcessed\",\"occurredAt\":\"2026-09-28T12:00:00Z\",\"data\":42}`)} {"
+      },
+      {
+        "line": 59,
+        "text": "return event.NewProcessed(meta, event.ProcessedData{TransactionID: \"t\", WalletID: \"wallet\", PlayerID: \"p\", Kind: \"OPENING\", ProviderID: \"external\", Money: event.MoneyDTO{\"1.00\", \"BRL\"}}).ToOutgoing()"
+      },
+      {
+        "line": 62,
+        "text": "return event.NewProcessed(meta, event.ProcessedData{TransactionID: \"t\", WalletID: \"wallet\", PlayerID: \"p\", Kind: \"WIN\", Money: event.MoneyDTO{\"1.00\", \"BRL\"}}).ToOutgoing()"
+      },
+      {
+        "line": 65,
+        "text": "return event.NewRejected(meta, event.RejectedData{TransactionID: \"t\", WalletID: \"wallet\", ProviderID: \"p\", ExternalTransactionID: \"e\", Kind: \"BET\"}).ToOutgoing()"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/errors.go",
+    "references": [
+      {
+        "line": 13,
+        "text": "FailWalletNotFound            FailureCode = \"WALLET_NOT_FOUND\""
+      },
+      {
+        "line": 15,
+        "text": "FailInsufficientFunds         FailureCode = \"INSUFFICIENT_FUNDS\"          // BET without balance"
+      },
+      {
+        "line": 19,
+        "text": "FailReferenceMismatch         FailureCode = \"REFERENCE_MISMATCH\"          // provider/player/wallet/currency/round differ"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/identity_semantics_test.go",
+    "references": [
+      {
+        "line": 11,
+        "text": "input := wager.HashInput{ProviderID: \"p\", ExternalTransactionID: \"ext\", PlayerID: \"player\", WalletID: \"wallet\", RoundID: \"round\", GameID: \"game\", Kind: \"BET\", Amount: \"25.00\", Currency: \"BRL\"}"
+      },
+      {
+        "line": 14,
+        "text": "canonical := `{\"externalTransactionId\":\"ext\",\"gameId\":\"game\",\"kind\":\"BET\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"playerId\":\"player\",\"providerId\":\"p\",\"roundId\":\"round\",\"walletId\":\"wallet\"}`"
+      },
+      {
+        "line": 22,
+        "text": "withReference := `{\"externalTransactionId\":\"ext\",\"gameId\":\"game\",\"kind\":\"BET\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"playerId\":\"player\",\"providerId\":\"p\",\"referenceExternalTransactionId\":\"original\",\"roundId\":\"round\",\"walletId\":\"wallet\"}`"
+      },
+      {
+        "line": 28,
+        "text": "for name, change := range map[string]func(*wager.HashInput){\"provider\": func(i *wager.HashInput) { i.ProviderID = \"other\" }, \"external\": func(i *wager.HashInput) { i.ExternalTransactionID = \"other\" }, \"player\": func(i *wager.HashInput) { i.PlayerID = \"other\" }, \"wallet\": func(i *wager.HashInput) { i.WalletID = \"other\" }, \"round\": func(i *wager.HashInput) { i.RoundID = \"other\" }, \"game\": func(i *wager.HashInput) { i.GameID = \"other\" }, \"kind\": func(i *wager.HashInput) { i.Kind = \"WIN\" }, \"amount\": func(i *wager.HashInput) { i.Amount = \"25.01\" }, \"currency\": func(i *wager.HashInput) { i.Currency = \"USD\" }, \"reference\": func(i *wager.HashInput) { i.ReferenceExternalTransactionID = \"original\" }} {"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/input_contract_test.go",
+    "references": [
+      {
+        "line": 12,
+        "text": "original, err := wager.NewOpening(\"opening\", \"wallet\", \"player\", unitMoney(t, 100, \"BRL\"), domainTime)"
+      },
+      {
+        "line": 18,
+        "text": "\"id\": func(s *wager.Snapshot) { s.ID = \"\" }, \"wallet\": func(s *wager.Snapshot) { s.WalletID = \"\" }, \"player\": func(s *wager.Snapshot) { s.PlayerID = \"\" },"
+      },
+      {
+        "line": 22,
+        "text": "\"amount\":            func(s *wager.Snapshot) { s.Amount = unitMoney(t, 0, \"BRL\"); s.BalanceAfter = &s.Amount },"
+      },
+      {
+        "line": 23,
+        "text": "\"status\":            func(s *wager.Snapshot) { s.Status = wager.StatusPending; s.BalanceAfter = nil },"
+      },
+      {
+        "line": 36,
+        "text": "case \"wallet\":"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/invariants_test.go",
+    "references": [
+      {
+        "line": 23,
+        "text": "*s.BalanceAfter = zero"
+      },
+      {
+        "line": 24,
+        "text": "if tx.Snapshot().BalanceAfter.Minor() != 100 {"
+      },
+      {
+        "line": 30,
+        "text": "ev, e := event.NewProcessed(event.Meta{EventID: \"e\", AggregateID: \"w\", CorrelationID: \"id\", OccurredAt: time.Now()}, event.ProcessedData{TransactionID: \"id\", Kind: \"OPENING\", WalletID: \"w\", PlayerID: \"p\", Money: event.ToMoneyDTO(m)}).ToOutgoing()"
+      },
+      {
+        "line": 86,
+        "text": "balance, _ := money.Zero(\"BRL\")"
+      },
+      {
+        "line": 87,
+        "text": "if e = tx.MarkProcessed(balance, time.Now()); e == nil {"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/ledger.go",
+    "references": [
+      {
+        "line": 9,
+        "text": "// LedgerEntry is immutable; construction validates balanceAfter = balanceBefore ± amount."
+      },
+      {
+        "line": 10,
+        "text": "type LedgerEntry struct {"
+      },
+      {
+        "line": 11,
+        "text": "id, walletID, transactionID string"
+      },
+      {
+        "line": 17,
+        "text": "func NewLedgerEntry(id, walletID, txID string, dir Direction, amount, before money.Money, now time.Time) (LedgerEntry, error) {"
+      },
+      {
+        "line": 18,
+        "text": "if now.IsZero() || before.IsNegative() || id == \"\" || walletID == \"\" || txID == \"\" {"
+      },
+      {
+        "line": 19,
+        "text": "return LedgerEntry{}, invalid(\"ledger entry ids are required\")"
+      },
+      {
+        "line": 22,
+        "text": "return LedgerEntry{}, invalid(\"ledger amount must be positive\")"
+      },
+      {
+        "line": 34,
+        "text": "return LedgerEntry{}, invalid(\"unknown direction %q\", dir)"
+      },
+      {
+        "line": 37,
+        "text": "return LedgerEntry{}, err"
+      },
+      {
+        "line": 40,
+        "text": "return LedgerEntry{}, ErrInsufficientFunds"
+      },
+      {
+        "line": 42,
+        "text": "return LedgerEntry{id, walletID, txID, dir, amount, before, after, now}, nil"
+      },
+      {
+        "line": 45,
+        "text": "// RehydrateLedgerEntry validates the stored math instead of trusting it."
+      },
+      {
+        "line": 46,
+        "text": "func RehydrateLedgerEntry(id, walletID, txID string, dir Direction, amount, before, after money.Money, at time.Time) (LedgerEntry, error) {"
+      },
+      {
+        "line": 47,
+        "text": "e, err := NewLedgerEntry(id, walletID, txID, dir, amount, before, at)"
+      },
+      {
+        "line": 49,
+        "text": "return LedgerEntry{}, err"
+      },
+      {
+        "line": 52,
+        "text": "return LedgerEntry{}, invalid(\"ledger entry %s has inconsistent balances\", id)"
+      },
+      {
+        "line": 57,
+        "text": "func (e LedgerEntry) ID() string                 { return e.id }"
+      },
+      {
+        "line": 58,
+        "text": "func (e LedgerEntry) WalletID() string           { return e.walletID }"
+      },
+      {
+        "line": 59,
+        "text": "func (e LedgerEntry) TransactionID() string      { return e.transactionID }"
+      },
+      {
+        "line": 60,
+        "text": "func (e LedgerEntry) Direction() Direction       { return e.direction }"
+      },
+      {
+        "line": 61,
+        "text": "func (e LedgerEntry) Amount() money.Money        { return e.amount }"
+      },
+      {
+        "line": 62,
+        "text": "func (e LedgerEntry) BalanceBefore() money.Money { return e.before }"
+      },
+      {
+        "line": 63,
+        "text": "func (e LedgerEntry) BalanceAfter() money.Money  { return e.after }"
+      },
+      {
+        "line": 64,
+        "text": "func (e LedgerEntry) CreatedAt() time.Time       { return e.createdAt }"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/ledger_semantics_test.go",
+    "references": [
+      {
+        "line": 24,
+        "text": "func TestLedgerExplainsEveryCentWithoutReapplyingHistory(t *testing.T) {"
+      },
+      {
+        "line": 25,
+        "text": "balance := unitMoney(t, 0, \"BRL\")"
+      },
+      {
+        "line": 33,
+        "text": "e, err := wager.NewLedgerEntry(entryID, \"wallet\", txID, step.dir, unitMoney(t, step.amount, \"BRL\"), balance, at)"
+      },
+      {
+        "line": 42,
+        "text": "if e.ID() != entryID || e.WalletID() != \"wallet\" || e.TransactionID() != txID || e.Direction() != step.dir || e.Amount().Minor() != step.amount || e.BalanceBefore() != balance || e.BalanceAfter().Minor() != step.after || e.BalanceAfter().Minor() != total || e.CreatedAt() != at {"
+      },
+      {
+        "line": 45,
+        "text": "restored, err := wager.RehydrateLedgerEntry(e.ID(), e.WalletID(), e.TransactionID(), e.Direction(), e.Amount(), e.BalanceBefore(), e.BalanceAfter(), e.CreatedAt())"
+      },
+      {
+        "line": 49,
+        "text": "if _, err = wager.RehydrateLedgerEntry(e.ID(), e.WalletID(), e.TransactionID(), e.Direction(), e.Amount(), e.BalanceBefore(), unitMoney(t, step.after+1, \"BRL\"), at); !errors.Is(err, wager.ErrInvalidInput) {"
+      },
+      {
+        "line": 53,
+        "text": "if _, err := wager.RehydrateLedgerEntry(e.ID(), e.WalletID(), e.TransactionID(), e.Direction(), e.Amount(), e.BalanceBefore(), invalidAfter, at); !errors.Is(err, wager.ErrInvalidInput) {"
+      },
+      {
+        "line": 54,
+        "text": "t.Fatal(\"invalid persisted balance\", err)"
+      },
+      {
+        "line": 57,
+        "text": "balance = e.BalanceAfter()"
+      },
+      {
+        "line": 61,
+        "text": "func TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance(t *testing.T) {"
+      },
+      {
+        "line": 72,
+        "text": "{\"negative starting balance\", wager.Credit, 1, -1, \"BRL\", wager.ErrInvalidInput},"
+      },
+      {
+        "line": 78,
+        "text": "_, e := wager.NewLedgerEntry(\"e\", \"w\", \"t\", tc.dir, unitMoney(t, tc.amount, tc.currency), unitMoney(t, tc.before, \"BRL\"), domainTime)"
+      },
+      {
+        "line": 85,
+        "text": "if _, e := wager.NewLedgerEntry(ids[0], ids[1], ids[2], wager.Credit, unitMoney(t, 1, \"BRL\"), unitMoney(t, 0, \"BRL\"), domainTime); !errors.Is(e, wager.ErrInvalidInput) {"
+      },
+      {
+        "line": 89,
+        "text": "if _, e := wager.NewLedgerEntry(\"e\", \"w\", \"t\", wager.Credit, unitMoney(t, 1, \"BRL\"), unitMoney(t, 0, \"BRL\"), time.Time{}); e == nil {"
+      },
+      {
+        "line": 92,
+        "text": "if _, e := wager.NewLedgerEntry(\"e\", \"w\", \"t\", wager.Credit, unitMoney(t, 1, \"BRL\"), money.Money{}, domainTime); !errors.Is(e, money.ErrUninitialized) {"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/lifecycle_semantics_test.go",
+    "references": [
+      {
+        "line": 24,
+        "text": "tx, e := wager.NewExternal(wager.ExternalParams{ID: \"tx\", ProviderID: \"provider\", ExternalID: \"external\", IdempotencyKey: \"received-key\", PayloadHash: \"hash\", WalletID: \"wallet\", PlayerID: \"player\", RoundID: \"round\", GameID: \"game\", Kind: kind, Amount: unitMoney(t, amount, \"BRL\"), ReferenceExternalID: ref, CorrelationID: \"correlation\", CausationID: \"message\"}, domainTime)"
+      },
+      {
+        "line": 42,
+        "text": "if s.BalanceAfter != nil {"
+      },
+      {
+        "line": 43,
+        "text": "v := *s.BalanceAfter"
+      },
+      {
+        "line": 44,
+        "text": "expected.BalanceAfter = &v"
+      },
+      {
+        "line": 58,
+        "text": "if s.BalanceAfter != nil {"
+      },
+      {
+        "line": 59,
+        "text": "*s.BalanceAfter = unitMoney(t, 99999, \"BRL\")"
+      },
+      {
+        "line": 77,
+        "text": "if s.Status != wager.StatusPending || s.Origin != wager.OriginExternal || s.Amount.Currency() != \"BRL\" || s.BalanceAfter != nil || s.FailureCode != \"\" || s.Attempts != 0 || s.CreatedAt != domainTime || s.UpdatedAt != domainTime || s.IdempotencyKey != \"received-key\" || s.CorrelationID != \"correlation\" || s.CausationID != \"message\" {"
+      },
+      {
+        "line": 93,
+        "text": "if tx.Status() != wager.StatusProcessed || tx.Snapshot().BalanceAfter.Minor() != 9000 {"
+      },
+      {
+        "line": 123,
+        "text": "if tx.Snapshot().BalanceAfter != nil || tx.FailureCode() == \"\" {"
+      },
+      {
+        "line": 148,
+        "text": "if s.Status != wager.StatusPendingReference || s.Attempts != i+1 || !s.NextAttemptAt.Equal(next) || !s.ExpiresAt.Equal(domainTime.Add(time.Minute)) || s.BalanceAfter != nil || s.FailureCode != \"\" {"
+      },
+      {
+        "line": 177,
+        "text": "s.BalanceAfter = &m"
+      },
+      {
+        "line": 179,
+        "text": "{\"pending with result\", func(t *testing.T) *wager.Transaction { return external(t, wager.KindBet) }, func(t *testing.T, s *wager.Snapshot) { m := unitMoney(t, 10000, \"BRL\"); s.BalanceAfter = &m }},"
+      },
+      {
+        "line": 197,
+        "text": "x, e := wager.NewOpening(\"opening\", \"wallet\", \"player\", unitMoney(t, 1000, \"BRL\"), domainTime)"
+      },
+      {
+        "line": 202,
+        "text": "}, func(t *testing.T, s *wager.Snapshot) { m := unitMoney(t, 2000, \"BRL\"); s.BalanceAfter = &m }},"
+      },
+      {
+        "line": 217,
+        "text": "opening, e := wager.NewOpening(\"opening\", \"wallet\", \"player\", unitMoney(t, 10000, \"BRL\"), domainTime)"
+      },
+      {
+        "line": 222,
+        "text": "if s.Kind != wager.KindOpening || s.Origin != wager.OriginInternal || s.Status != wager.StatusProcessed || s.BalanceAfter.Minor() != 10000 || s.ProviderID != \"\" || s.ExternalID != \"\" || s.IdempotencyKey != \"\" || s.PayloadHash != \"\" || s.RoundID != \"\" || s.GameID != \"\" || s.ReferenceExternalID != \"\" || s.ReferenceID != \"\" {"
+      },
+      {
+        "line": 230,
+        "text": "p := wager.ExternalParams{ID: \"t\", ProviderID: \"p\", ExternalID: \"e\", IdempotencyKey: \"k\", PayloadHash: \"h\", WalletID: \"w\", PlayerID: \"pl\", RoundID: \"r\", GameID: \"g\", Kind: kind, Amount: unitMoney(t, amount, \"BRL\")}"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/rules.go",
+    "references": [
+      {
+        "line": 11,
+        "text": "// MovementFor returns the wallet movement of a non-reversal kind (ok=false → no movement, e.g. LOSS)."
+      },
+      {
+        "line": 67,
+        "text": "ProviderID, ExternalTransactionID, PlayerID, WalletID, RoundID, GameID string"
+      },
+      {
+        "line": 78,
+        "text": "\"walletId\":              in.WalletID,"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/transaction.go",
+    "references": [
+      {
+        "line": 1,
+        "text": "// Package wager holds WagerTransaction (state machine), WalletLedgerEntry and per-kind rules."
+      },
+      {
+        "line": 16,
+        "text": "walletID, playerID, roundID, gameID                 string"
+      },
+      {
+        "line": 22,
+        "text": "balanceAfter                                        *money.Money"
+      },
+      {
+        "line": 34,
+        "text": "WalletID, PlayerID, RoundID, GameID                 string"
+      },
+      {
+        "line": 40,
+        "text": "BalanceAfter                                        *money.Money"
+      },
+      {
+        "line": 49,
+        "text": "WalletID, PlayerID, RoundID, GameID                     string"
+      },
+      {
+        "line": 62,
+        "text": "\"idempotencyKey\": p.IdempotencyKey, \"payloadHash\": p.PayloadHash, \"walletId\": p.WalletID,"
+      },
+      {
+        "line": 83,
+        "text": "idempotencyKey: p.IdempotencyKey, payloadHash: p.PayloadHash, walletID: p.WalletID,"
+      },
+      {
+        "line": 89,
+        "text": "// NewOpening creates the internal wallet-opening credit (already PROCESSED). Zero amounts create no OPENING."
+      },
+      {
+        "line": 90,
+        "text": "func NewOpening(id, walletID, playerID string, amount money.Money, now time.Time) (*Transaction, error) {"
+      },
+      {
+        "line": 91,
+        "text": "if now.IsZero() || id == \"\" || walletID == \"\" || playerID == \"\" {"
+      },
+      {
+        "line": 92,
+        "text": "return nil, invalid(\"id, walletId and playerId are required\")"
+      },
+      {
+        "line": 99,
+        "text": "id: id, origin: OriginInternal, walletID: walletID, playerID: playerID, kind: KindOpening,"
+      },
+      {
+        "line": 100,
+        "text": "amount: amount, status: StatusProcessed, balanceAfter: &after, createdAt: now, updatedAt: now,"
+      },
+      {
+        "line": 106,
+        "text": "if s.ID == \"\" || s.WalletID == \"\" || !s.Status.Valid() || s.Amount.Currency() == \"\" {"
+      },
+      {
+        "line": 119,
+        "text": "if _, err := NewExternal(ExternalParams{ID: s.ID, ProviderID: s.ProviderID, ExternalID: s.ExternalID, IdempotencyKey: s.IdempotencyKey, PayloadHash: s.PayloadHash, WalletID: s.WalletID, PlayerID: s.PlayerID, RoundID: s.RoundID, GameID: s.GameID, Kind: s.Kind, Amount: s.Amount, ReferenceExternalID: s.ReferenceExternalID}, s.CreatedAt); err != nil {"
+      },
+      {
+        "line": 125,
+        "text": "if s.Status == StatusProcessed && (s.BalanceAfter == nil || s.BalanceAfter.Currency() != s.Amount.Currency() || s.BalanceAfter.IsNegative() || s.FailureCode != \"\") {"
+      },
+      {
+        "line": 142,
+        "text": "if s.Status != StatusProcessed && s.BalanceAfter != nil {"
+      },
+      {
+        "line": 160,
+        "text": "if s.Kind == KindOpening && (s.BalanceAfter == nil || s.BalanceAfter.Minor() != s.Amount.Minor() || s.Attempts != 0) {"
+      },
+      {
+        "line": 165,
+        "text": "idempotencyKey: s.IdempotencyKey, payloadHash: s.PayloadHash, walletID: s.WalletID,"
+      },
+      {
+        "line": 168,
+        "text": "failureCode: s.FailureCode, balanceAfter: copyMoney(s.BalanceAfter), attempts: s.Attempts,"
+      },
+      {
+        "line": 176,
+        "text": "t.walletID, t.playerID, t.roundID, t.gameID, t.kind, t.amount,"
+      },
+      {
+        "line": 177,
+        "text": "t.referenceExternalID, t.referenceID, t.status, t.failureCode, copyMoney(t.balanceAfter),"
+      },
+      {
+        "line": 186,
+        "text": "func (t *Transaction) WalletID() string            { return t.walletID }"
+      },
+      {
+        "line": 239,
+        "text": "// MarkProcessed stores the balance observed at processing time (returned verbatim on replays)."
+      },
+      {
+        "line": 240,
+        "text": "func (t *Transaction) MarkProcessed(balanceAfter money.Money, now time.Time) error {"
+      },
+      {
+        "line": 250,
+        "text": "if balanceAfter.Currency() != t.amount.Currency() || balanceAfter.IsNegative() {"
+      },
+      {
+        "line": 251,
+        "text": "return invalid(\"invalid result balance\")"
+      },
+      {
+        "line": 253,
+        "text": "t.status, t.balanceAfter, t.nextAttemptAt, t.updatedAt = StatusProcessed, &balanceAfter, nil, now"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/transaction_test.go",
+    "references": [
+      {
+        "line": 19,
+        "text": "WalletID: \"w\", PlayerID: \"pl\", RoundID: \"r\", GameID: \"g\", Kind: kind, Amount: m}"
+      },
+      {
+        "line": 65,
+        "text": "a := wager.HashInput{ProviderID: \"p\", ExternalTransactionID: \"e\", PlayerID: \"pl\", WalletID: \"w\", RoundID: \"r\","
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/types.go",
+    "references": [
+      {
+        "line": 20,
+        "text": "return \"\", invalid(\"OPENING is reserved for internal wallet opening\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wager/validation_paths_test.go",
+    "references": [
+      {
+        "line": 36,
+        "text": "p := wager.ExternalParams{ID: \"id\", ProviderID: \"p\", ExternalID: \"e\", IdempotencyKey: \"k\", PayloadHash: \"h\", WalletID: \"w\", PlayerID: \"p\", RoundID: \"r\", GameID: \"g\", Kind: wager.KindBet, Amount: unitMoney(t, 100, \"BRL\")}"
+      },
+      {
+        "line": 59,
+        "text": "\"invalid balance\":     func(tx *wager.Transaction) error { return tx.MarkProcessed(unitMoney(t, 1, \"USD\"), domainTime) },"
+      },
+      {
+        "line": 90,
+        "text": "_, e := wager.RehydrateLedgerEntry(\"id\", \"w\", \"tx\", wager.Credit, unitMoney(t, 100, \"BRL\"), unitMoney(t, 0, \"BRL\"), unitMoney(t, 100, \"BRL\"), time.Time{})"
+      },
+      {
+        "line": 92,
+        "text": "t.Fatal(\"zero timestamp ledger accepted\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wallet/input_contract_test.go",
+    "references": [
+      {
+        "line": 1,
+        "text": "package wallet_test"
+      },
+      {
+        "line": 6,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 11,
+        "text": "func TestWalletConstructorRejectsEachMissingIdentityIndependently(t *testing.T) {"
+      },
+      {
+        "line": 17,
+        "text": "{\"id\", \"\", \"player\", at}, {\"player\", \"wallet\", \"\", at}, {\"time\", \"wallet\", \"player\", time.Time{}},"
+      },
+      {
+        "line": 20,
+        "text": "got, err := wallet.New(tc.id, tc.player, cents(t, 0, \"BRL\"), tc.at)"
+      },
+      {
+        "line": 21,
+        "text": "if got != nil || !errors.Is(err, wallet.ErrInvalidWallet) {"
+      },
+      {
+        "line": 22,
+        "text": "t.Fatalf(\"wallet=%v error=%v\", got, err)"
+      },
+      {
+        "line": 27,
+        "text": "func TestNilWalletMovementsReturnDomainError(t *testing.T) {"
+      },
+      {
+        "line": 28,
+        "text": "var w *wallet.Wallet"
+      },
+      {
+        "line": 32,
+        "text": "if !errors.Is(err, wallet.ErrInvalidWallet) || before != (money.Money{}) || after != (money.Money{}) {"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wallet/semantics_test.go",
+    "references": [
+      {
+        "line": 1,
+        "text": "package wallet_test"
+      },
+      {
+        "line": 6,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 22,
+        "text": "func TestWalletOwnsItsBalanceVersionAndHistory(t *testing.T) {"
+      },
+      {
+        "line": 24,
+        "text": "w, e := wallet.New(\"w\", \"player\", cents(t, 10000, \"BRL\"), at)"
+      },
+      {
+        "line": 43,
+        "text": "if s.ID != \"w\" || s.PlayerID != \"player\" || s.Balance != after || s.Version != int64(i+2) || s.CreatedAt != at || s.UpdatedAt != now {"
+      },
+      {
+        "line": 46,
+        "text": "restored, e := wallet.Rehydrate(s)"
+      },
+      {
+        "line": 51,
+        "text": "s.Balance = cents(t, 900, \"BRL\")"
+      },
+      {
+        "line": 52,
+        "text": "if w.ID() != \"w\" || w.Balance() != after {"
+      },
+      {
+        "line": 58,
+        "text": "func TestWalletRejectsInvalidMovementsWithoutChangingState(t *testing.T) {"
+      },
+      {
+        "line": 69,
+        "text": "{\"insufficient\", false, 100, 101, \"BRL\", 1, at, wallet.ErrInsufficientFunds},"
+      },
+      {
+        "line": 70,
+        "text": "{\"zero debit\", false, 100, 0, \"BRL\", 1, at, wallet.ErrNonPositiveAmount},"
+      },
+      {
+        "line": 71,
+        "text": "{\"zero credit\", true, 100, 0, \"BRL\", 1, at, wallet.ErrNonPositiveAmount},"
+      },
+      {
+        "line": 72,
+        "text": "{\"negative debit\", false, 100, -1, \"BRL\", 1, at, wallet.ErrNonPositiveAmount},"
+      },
+      {
+        "line": 73,
+        "text": "{\"negative credit\", true, 100, -1, \"BRL\", 1, at, wallet.ErrNonPositiveAmount},"
+      },
+      {
+        "line": 79,
+        "text": "{\"backwards time\", true, 100, 1, \"BRL\", 1, at.Add(-time.Second), wallet.ErrInvalidWallet},"
+      },
+      {
+        "line": 80,
+        "text": "{\"zero time\", false, 100, 1, \"BRL\", 1, time.Time{}, wallet.ErrInvalidWallet},"
+      },
+      {
+        "line": 83,
+        "text": "w, e := wallet.Rehydrate(wallet.Snapshot{ID: \"w\", PlayerID: \"p\", Balance: cents(t, tc.initial, \"BRL\"), Version: tc.version, CreatedAt: at, UpdatedAt: at})"
+      },
+      {
+        "line": 98,
+        "text": "valid := wallet.Snapshot{ID: \"w\", PlayerID: \"p\", Balance: cents(t, 0, \"BRL\"), Version: 1, CreatedAt: at, UpdatedAt: at}"
+      },
+      {
+        "line": 99,
+        "text": "for _, damage := range []func(*wallet.Snapshot){func(s *wallet.Snapshot) { s.ID = \"\" }, func(s *wallet.Snapshot) { s.PlayerID = \"\" }, func(s *wallet.Snapshot) { s.Balance = cents(t, -1, \"BRL\") }, func(s *wallet.Snapshot) { s.Balance = money.Money{} }, func(s *wallet.Snapshot) { s.Version = 0 }, func(s *wallet.Snapshot) { s.CreatedAt = time.Time{} }, func(s *wallet.Snapshot) { s.UpdatedAt = at.Add(-time.Second) }} {"
+      },
+      {
+        "line": 102,
+        "text": "if _, e := wallet.Rehydrate(s); !errors.Is(e, wallet.ErrInvalidWallet) {"
+      },
+      {
+        "line": 107,
+        "text": "if _, e := wallet.New(\"w\", \"p\", initial, at); !errors.Is(e, wallet.ErrInvalidWallet) {"
+      },
+      {
+        "line": 111,
+        "text": "w, _ := wallet.New(\"w\", \"p\", cents(t, 0, \"BRL\"), at)"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wallet/wallet.go",
+    "references": [
+      {
+        "line": 1,
+        "text": "// Package wallet holds the Wallet aggregate root. It is independent of Fx, HTTP, SQS and DB libs."
+      },
+      {
+        "line": 2,
+        "text": "package wallet"
+      },
+      {
+        "line": 13,
+        "text": "ErrInvalidWallet     = errors.New(\"wallet: invalid\")"
+      },
+      {
+        "line": 14,
+        "text": "ErrInsufficientFunds = errors.New(\"wallet: insufficient funds\")"
+      },
+      {
+        "line": 15,
+        "text": "ErrNonPositiveAmount = errors.New(\"wallet: amount must be positive\")"
+      },
+      {
+        "line": 18,
+        "text": "type Wallet struct {"
+      },
+      {
+        "line": 20,
+        "text": "balance              money.Money"
+      },
+      {
+        "line": 25,
+        "text": "// Snapshot is the persistence view of a Wallet (used by repositories to map rows)."
+      },
+      {
+        "line": 28,
+        "text": "Balance              money.Money"
+      },
+      {
+        "line": 33,
+        "text": "// New creates a wallet with version 1 (initial balance may be zero)."
+      },
+      {
+        "line": 34,
+        "text": "func New(id, playerID string, initial money.Money, now time.Time) (*Wallet, error) {"
+      },
+      {
+        "line": 36,
+        "text": "return nil, ErrInvalidWallet"
+      },
+      {
+        "line": 38,
+        "text": "return &Wallet{id: id, playerID: playerID, balance: initial, version: 1, createdAt: now, updatedAt: now}, nil"
+      },
+      {
+        "line": 41,
+        "text": "// Rehydrate rebuilds a wallet from storage WITHOUT reapplying movements or emitting events."
+      },
+      {
+        "line": 42,
+        "text": "func Rehydrate(s Snapshot) (*Wallet, error) {"
+      },
+      {
+        "line": 43,
+        "text": "if s.CreatedAt.IsZero() || s.UpdatedAt.Before(s.CreatedAt) || s.ID == \"\" || s.PlayerID == \"\" || s.Balance.Currency() == \"\" || s.Balance.IsNegative() || s.Version < 1 {"
+      },
+      {
+        "line": 44,
+        "text": "return nil, ErrInvalidWallet"
+      },
+      {
+        "line": 46,
+        "text": "return &Wallet{s.ID, s.PlayerID, s.Balance, s.Version, s.CreatedAt, s.UpdatedAt}, nil"
+      },
+      {
+        "line": 49,
+        "text": "func (w *Wallet) Snapshot() Snapshot {"
+      },
+      {
+        "line": 50,
+        "text": "return Snapshot{w.id, w.playerID, w.balance, w.version, w.createdAt, w.updatedAt}"
+      },
+      {
+        "line": 52,
+        "text": "func (w *Wallet) ID() string           { return w.id }"
+      },
+      {
+        "line": 53,
+        "text": "func (w *Wallet) PlayerID() string     { return w.playerID }"
+      },
+      {
+        "line": 54,
+        "text": "func (w *Wallet) Balance() money.Money { return w.balance }"
+      },
+      {
+        "line": 55,
+        "text": "func (w *Wallet) Version() int64       { return w.version }"
+      },
+      {
+        "line": 56,
+        "text": "func (w *Wallet) Currency() string     { return w.balance.Currency() }"
+      },
+      {
+        "line": 58,
+        "text": "func (w *Wallet) check(m money.Money) error {"
+      },
+      {
+        "line": 59,
+        "text": "if w == nil || w.id == \"\" || w.version < 1 || w.balance.Currency() == \"\" {"
+      },
+      {
+        "line": 60,
+        "text": "return ErrInvalidWallet"
+      },
+      {
+        "line": 68,
+        "text": "if m.Currency() != w.balance.Currency() {"
+      },
+      {
+        "line": 77,
+        "text": "// Debit removes m from the balance; the balance can never go below zero."
+      },
+      {
+        "line": 78,
+        "text": "func (w *Wallet) Debit(m money.Money, now time.Time) (before, after money.Money, err error) {"
+      },
+      {
+        "line": 83,
+        "text": "return money.Money{}, money.Money{}, ErrInvalidWallet"
+      },
+      {
+        "line": 85,
+        "text": "before = w.balance"
+      },
+      {
+        "line": 92,
+        "text": "// overflow or produce a negative balance after the checks above."
+      },
+      {
+        "line": 98,
+        "text": "func (w *Wallet) Credit(m money.Money, now time.Time) (before, after money.Money, err error) {"
+      },
+      {
+        "line": 103,
+        "text": "return money.Money{}, money.Money{}, ErrInvalidWallet"
+      },
+      {
+        "line": 105,
+        "text": "before = w.balance"
+      },
+      {
+        "line": 106,
+        "text": "if after, err = w.balance.Add(m); err != nil {"
+      },
+      {
+        "line": 113,
+        "text": "// apply bumps the version ONLY when the balance changes."
+      },
+      {
+        "line": 114,
+        "text": "func (w *Wallet) apply(after money.Money, now time.Time) {"
+      },
+      {
+        "line": 115,
+        "text": "w.balance = after"
+      }
+    ]
+  },
+  {
+    "file": "internal/domain/wallet/wallet_test.go",
+    "references": [
+      {
+        "line": 1,
+        "text": "package wallet_test"
+      },
+      {
+        "line": 9,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 14,
+        "text": "w, err := wallet.New(\"w1\", \"p1\", ini, time.Now())"
+      },
+      {
+        "line": 22,
+        "text": "if w.Version() != 2 || w.Balance().Amount() != \"20.00\" {"
+      },
+      {
+        "line": 23,
+        "text": "t.Fatalf(\"unexpected state: v=%d bal=%s\", w.Version(), w.Balance().Amount())"
+      },
+      {
+        "line": 25,
+        "text": "if _, _, err := w.Debit(eighty, time.Now()); !errors.Is(err, wallet.ErrInsufficientFunds) {"
+      },
+      {
+        "line": 39,
+        "text": "var zero wallet.Wallet"
+      },
+      {
+        "line": 41,
+        "text": "t.Fatal(\"zero value wallet accepted\")"
+      },
+      {
+        "line": 44,
+        "text": "w, e := wallet.New(\"w\", \"p\", one, now)"
+      },
+      {
+        "line": 51,
+        "text": "if w.Version() != 1 || w.Balance().Amount() != \"1.00\" {"
+      },
+      {
+        "line": 52,
+        "text": "t.Fatal(\"failed operation changed wallet\")"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/auth/middleware.go",
+    "references": [
+      {
+        "line": 45,
+        "text": "// RequireInternal restricts wallet operations to the internal service."
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/config/config.go",
+    "references": [
+      {
+        "line": 70,
+        "text": "case \"api\", \"sqs-consumer\", \"outbox-publisher\", \"reference-worker\":"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/config/config_test.go",
+    "references": [
+      {
+        "line": 31,
+        "text": "t.Setenv(\"ROLES\", \"api,sqs-consumer,outbox-publisher,reference-worker\")"
+      },
+      {
+        "line": 38,
+        "text": "want.Roles = []string{\"api\", \"sqs-consumer\", \"outbox-publisher\", \"reference-worker\"}"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/outbox/module.go",
+    "references": [
+      {
+        "line": 1,
+        "text": "// Package outbox wires the outbox publisher worker (several instances may compete safely)."
+      },
+      {
+        "line": 2,
+        "text": "package outbox"
+      },
+      {
+        "line": 16,
+        "text": "var Module = fx.Module(\"outbox\", fx.Invoke(func(lc fx.Lifecycle, group *worker.Group, cfg config.Config, uc *usecase.PublishOutbox, log *slog.Logger) {"
+      },
+      {
+        "line": 17,
+        "text": "if !cfg.HasRole(\"outbox-publisher\") {"
+      },
+      {
+        "line": 20,
+        "text": "worker.Register(group, \"outbox-publisher\", log, worker.Every(time.Second,"
+      },
+      {
+        "line": 22,
+        "text": "func(err error) { log.Error(\"outbox publish\", \"err\", err) }))"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/inbox_outbox_repo.go",
+    "references": [
+      {
+        "line": 10,
+        "text": "type inboxRepo struct{ q dbtx }"
+      },
+      {
+        "line": 12,
+        "text": "func (r inboxRepo) Begin(ctx context.Context, c, id, h string, now time.Time) (port.InboxState, error) {"
+      },
+      {
+        "line": 13,
+        "text": "_, err := r.q.Exec(ctx, `INSERT INTO inbox_messages(consumer_name,message_id,payload_hash,received_at) VALUES($1,$2,$3,$4) ON CONFLICT(consumer_name,message_id) DO UPDATE SET deliveries=inbox_messages.deliveries+1`, c, id, h, now)"
+      },
+      {
+        "line": 19,
+        "text": "err = r.q.QueryRow(ctx, `SELECT payload_hash,completed_at FROM inbox_messages WHERE consumer_name=$1 AND message_id=$2 FOR UPDATE`, c, id).Scan(&hash, &completed)"
+      },
+      {
+        "line": 31,
+        "text": "func (r inboxRepo) Complete(ctx context.Context, c, id string, now time.Time) error {"
+      },
+      {
+        "line": 32,
+        "text": "_, err := r.q.Exec(ctx, `UPDATE inbox_messages SET completed_at=$3 WHERE consumer_name=$1 AND message_id=$2`, c, id, now)"
+      },
+      {
+        "line": 36,
+        "text": "type outboxRepo struct{ q dbtx }"
+      },
+      {
+        "line": 38,
+        "text": "func (r outboxRepo) Add(ctx context.Context, e event.Outgoing) error {"
+      },
+      {
+        "line": 39,
+        "text": "_, err := r.q.Exec(ctx, `INSERT INTO outbox_events(event_id,aggregate_id,event_type,payload,occurred_at,next_attempt_at) VALUES($1,$2,$3,$4,$5,$5)`, e.EventID(), e.AggregateID(), e.Type(), e.Payload(), e.OccurredAt())"
+      },
+      {
+        "line": 42,
+        "text": "func (r outboxRepo) ClaimBatch(ctx context.Context, now time.Time, limit int, lease time.Duration) ([]event.Outgoing, error) {"
+      },
+      {
+        "line": 43,
+        "text": "rows, err := r.q.Query(ctx, `UPDATE outbox_events SET locked_until=$2, attempts=attempts+1 WHERE event_id IN(SELECT event_id FROM outbox_events WHERE published_at IS NULL AND next_attempt_at<=$1 AND (locked_until IS NULL OR locked_until<=$1) ORDER BY occurred_at,event_id LIMIT $3 FOR UPDATE SKIP LOCKED) RETURNING event_id::text,aggregate_id::text,event_type,payload,occurred_at,attempts`, now, now.Add(lease), limit)"
+      },
+      {
+        "line": 65,
+        "text": "func (r outboxRepo) MarkPublished(ctx context.Context, id string, attempt int, now time.Time) error {"
+      },
+      {
+        "line": 66,
+        "text": "_, err := r.q.Exec(ctx, `UPDATE outbox_events SET published_at=$3,locked_until=NULL WHERE event_id=$1 AND attempts=$2 AND published_at IS NULL`, id, attempt, now)"
+      },
+      {
+        "line": 69,
+        "text": "func (r outboxRepo) Reschedule(ctx context.Context, id string, attempt int, next time.Time) error {"
+      },
+      {
+        "line": 70,
+        "text": "_, err := r.q.Exec(ctx, `UPDATE outbox_events SET next_attempt_at=$3,locked_until=NULL WHERE event_id=$1 AND attempts=$2 AND published_at IS NULL`, id, attempt, next)"
+      },
+      {
+        "line": 74,
+        "text": "func (r outboxRepo) OldestPending(ctx context.Context) (*time.Time, error) {"
+      },
+      {
+        "line": 76,
+        "text": "err := r.q.QueryRow(ctx, `SELECT min(occurred_at) FROM outbox_events WHERE published_at IS NULL`).Scan(&oldest)"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/late_error_integration_test.go",
+    "references": [
+      {
+        "line": 25,
+        "text": "func TestLedgerPropagatesLatePostgresError(t *testing.T) {"
+      },
+      {
+        "line": 37,
+        "text": "_, err = (ledgerRepo{lateErrorQuery{conn: conn}}).List(ctx, \"wallet\", \"\", 1)"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/ledger_repo.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "type ledgerRepo struct{ q dbtx }"
+      },
+      {
+        "line": 17,
+        "text": "func (r ledgerRepo) Append(ctx context.Context, e wager.LedgerEntry) error {"
+      },
+      {
+        "line": 18,
+        "text": "_, err := r.q.Exec(ctx, `INSERT INTO wallet_ledger_entries(id,wallet_id,transaction_id,direction,amount_minor,currency,balance_before_minor,balance_after_minor,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`, e.ID(), e.WalletID(), e.TransactionID(), e.Direction(), e.Amount().Minor(), e.Amount().Currency(), e.BalanceBefore().Minor(), e.BalanceAfter().Minor(), e.CreatedAt())"
+      },
+      {
+        "line": 21,
+        "text": "func (r ledgerRepo) List(ctx context.Context, w, cursor string, limit int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 23,
+        "text": "out := port.LedgerPage{Entries: []wager.LedgerEntry{}}"
+      },
+      {
+        "line": 41,
+        "text": "rows, err := r.q.Query(ctx, `SELECT id::text,transaction_id::text,direction,amount_minor,currency,balance_before_minor,balance_after_minor,created_at,seq FROM wallet_ledger_entries WHERE wallet_id=$1 AND seq>$2 ORDER BY seq LIMIT $3`, w, seq, limit+1)"
+      },
+      {
+        "line": 73,
+        "text": "entry, e := wager.RehydrateLedgerEntry(id, w, tx, dir, a, b, c, at)"
+      },
+      {
+        "line": 82,
+        "text": "func (r ledgerRepo) Totals(ctx context.Context, w string) (port.LedgerTotals, error) {"
+      },
+      {
+        "line": 86,
+        "text": "err := r.q.QueryRow(ctx, `SELECT w.currency,coalesce(sum(CASE l.direction WHEN 'CREDIT' THEN l.amount_minor::numeric ELSE -l.amount_minor::numeric END),0)::text,count(l.id) FROM wallets w LEFT JOIN wallet_ledger_entries l ON l.wallet_id=w.id WHERE w.id=$1 GROUP BY w.id`, w).Scan(&cur, &total, &n)"
+      },
+      {
+        "line": 88,
+        "text": "return port.LedgerTotals{}, err"
+      },
+      {
+        "line": 92,
+        "text": "return port.LedgerTotals{}, money.ErrOverflow"
+      },
+      {
+        "line": 95,
+        "text": "return port.LedgerTotals{Calculated: m, Entries: n}, err"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/messaging_contract_test.go",
+    "references": [
+      {
+        "line": 14,
+        "text": "e, err := event.NewProcessed(event.Meta{EventID: \"event\", AggregateID: \"wallet\", CorrelationID: \"corr\", OccurredAt: repoTime}, event.ProcessedData{TransactionID: \"tx\", Kind: \"OPENING\", WalletID: \"wallet\", PlayerID: \"player\", Money: event.MoneyDTO{Amount: \"1.00\", Currency: \"BRL\"}}).ToOutgoing()"
+      },
+      {
+        "line": 23,
+        "text": "r := inboxRepo{d}"
+      },
+      {
+        "line": 56,
+        "text": "r := outboxRepo{d}"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/repository_contract_test.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 124,
+        "text": "func TestWalletPersistenceContract(t *testing.T) {"
+      },
+      {
+        "line": 126,
+        "text": "w, e := wallet.New(\"wallet\", \"player\", repoMoney(t, 100), repoTime)"
+      },
+      {
+        "line": 131,
+        "text": "r := walletRepo{d}"
+      },
+      {
+        "line": 135,
+        "text": "for _, c := range []struct{ err, want error }{{repoFailure, repoFailure}, {&pgconn.PgError{Code: \"23505\"}, apperr.ErrWalletExists}, {&pgconn.PgError{Code: \"23503\"}, &pgconn.PgError{Code: \"23503\"}}} {"
+      },
+      {
+        "line": 138,
+        "text": "if c.err == c.want || c.want == apperr.ErrWalletExists {"
+      },
+      {
+        "line": 152,
+        "text": "requireArgs(t, d, \"wallet\", int64(100), s.Version, repoTime, int64(7))"
+      },
+      {
+        "line": 155,
+        "text": "d.row = testRow{values: []any{\"wallet\", \"player\", \"BRL\", int64(100), s.Version, repoTime, repoTime}}"
+      },
+      {
+        "line": 157,
+        "text": "var got *wallet.Wallet"
+      },
+      {
+        "line": 160,
+        "text": "got, err = r.GetForUpdate(ctx, \"wallet\")"
+      },
+      {
+        "line": 162,
+        "text": "got, err = r.Get(ctx, \"wallet\")"
+      },
+      {
+        "line": 168,
+        "text": "requireArgs(t, d, \"wallet\")"
+      },
+      {
+        "line": 169,
+        "text": "if strings.Contains(d.sql, \"FOR NO KEY UPDATE\") != lock {"
+      },
+      {
+        "line": 175,
+        "text": "got, err := r.Get(ctx, \"wallet\")"
+      },
+      {
+        "line": 178,
+        "text": "want = apperr.ErrWalletNotFound"
+      },
+      {
+        "line": 185,
+        "text": "d.row = testRow{values: []any{\"wallet\", \"player\", \"XXX\", int64(100), s.Version, repoTime, repoTime}}"
+      },
+      {
+        "line": 186,
+        "text": "got, err := r.Get(ctx, \"wallet\")"
+      },
+      {
+        "line": 195,
+        "text": "v, e := wager.NewOpening(\"tx\", \"wallet\", \"player\", repoMoney(t, 100), repoTime)"
+      },
+      {
+        "line": 203,
+        "text": "if s.BalanceAfter != nil {"
+      },
+      {
+        "line": 204,
+        "text": "v := s.BalanceAfter.Minor()"
+      },
+      {
+        "line": 207,
+        "text": "return testRow{values: []any{s.ID, s.Origin, s.ProviderID, s.ExternalID, s.IdempotencyKey, s.PayloadHash, s.WalletID, s.PlayerID, s.RoundID, s.GameID, s.Kind, s.Amount.Minor(), s.Amount.Currency(), s.ReferenceExternalID, s.ReferenceID, s.Status, s.FailureCode, b, s.Attempts, s.NextAttemptAt, s.ExpiresAt, s.CreatedAt, s.UpdatedAt, s.CorrelationID, s.CausationID}}"
+      },
+      {
+        "line": 298,
+        "text": "// Pending transactions have no balance result; persistence must preserve nil."
+      },
+      {
+        "line": 299,
+        "text": "pending, e := wager.NewExternal(wager.ExternalParams{ID: \"pending\", ProviderID: \"p\", ExternalID: \"e\", IdempotencyKey: \"k\", PayloadHash: \"h\", WalletID: \"w\", PlayerID: \"p\", RoundID: \"r\", GameID: \"g\", Kind: wager.KindBet, Amount: repoMoney(t, 1)}, repoTime)"
+      },
+      {
+        "line": 318,
+        "text": "func TestLedgerPaginationAndTotalsContract(t *testing.T) {"
+      },
+      {
+        "line": 321,
+        "text": "r := ledgerRepo{d}"
+      },
+      {
+        "line": 349,
+        "text": "if len(page.Entries) != 1 || page.Entries[0].ID() != \"l1\" || page.Entries[0].BalanceAfter().Minor() != 100 || page.NextCursor != base64.RawURLEncoding.EncodeToString([]byte(\"w:7\")) || !d.rows.closed {"
+      },
+      {
+        "line": 386,
+        "text": "if e == nil || !strings.Contains(e.Error(), \"ledger\") {"
+      },
+      {
+        "line": 406,
+        "text": "func TestLedgerReportsErrorDiscoveredWhileClosingLookahead(t *testing.T) {"
+      },
+      {
+        "line": 411,
+        "text": "_, err := (ledgerRepo{d}).List(context.Background(), \"w\", \"\", 1)"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/transaction_repo.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "const txCols = `id::text,origin,coalesce(provider_id,''),coalesce(external_transaction_id,''),coalesce(idempotency_key,''),coalesce(payload_hash,''),wallet_id::text,player_id::text,coalesce(round_id,''),coalesce(game_id,''),kind,amount_minor,currency,coalesce(reference_external_id,''),coalesce(reference_transaction_id::text,''),status,coalesce(failure_code,''),balance_after_minor,attempts,next_attempt_at,expires_at,created_at,updated_at,correlation_id,causation_id`"
+      },
+      {
+        "line": 21,
+        "text": "var balance *int64"
+      },
+      {
+        "line": 22,
+        "text": "if err := row.Scan(&s.ID, &s.Origin, &s.ProviderID, &s.ExternalID, &s.IdempotencyKey, &s.PayloadHash, &s.WalletID, &s.PlayerID, &s.RoundID, &s.GameID, &s.Kind, &amount, &currency, &s.ReferenceExternalID, &s.ReferenceID, &s.Status, &s.FailureCode, &balance, &s.Attempts, &s.NextAttemptAt, &s.ExpiresAt, &s.CreatedAt, &s.UpdatedAt, &s.CorrelationID, &s.CausationID); err != nil {"
+      },
+      {
+        "line": 33,
+        "text": "if balance != nil {"
+      },
+      {
+        "line": 34,
+        "text": "b, e := money.FromMinor(*balance, currency)"
+      },
+      {
+        "line": 38,
+        "text": "s.BalanceAfter = &b"
+      },
+      {
+        "line": 44,
+        "text": "var balance *int64"
+      },
+      {
+        "line": 45,
+        "text": "if s.BalanceAfter != nil {"
+      },
+      {
+        "line": 46,
+        "text": "b := s.BalanceAfter.Minor()"
+      },
+      {
+        "line": 47,
+        "text": "balance = &b"
+      },
+      {
+        "line": 49,
+        "text": "sql := `INSERT INTO wager_transactions(id,origin,provider_id,external_transaction_id,idempotency_key,payload_hash,wallet_id,player_id,round_id,game_id,kind,amount_minor,currency,reference_external_id,reference_transaction_id,status,failure_code,balance_after_minor,attempts,next_attempt_at,expires_at,created_at,updated_at,correlation_id,causation_id) VALUES($1,$2,nullif($3,''),nullif($4,''),nullif($5,''),nullif($6,''),$7,$8,nullif($9,''),nullif($10,''),$11,$12,$13,nullif($14,''),nullif($15,'')::uuid,$16,nullif($17,''),$18,$19,$20,$21,$22,$23,$24,$25)`"
+      },
+      {
+        "line": 53,
+        "text": "tag, err := r.q.Exec(ctx, sql, s.ID, s.Origin, s.ProviderID, s.ExternalID, s.IdempotencyKey, s.PayloadHash, s.WalletID, s.PlayerID, s.RoundID, s.GameID, s.Kind, s.Amount.Minor(), s.Amount.Currency(), s.ReferenceExternalID, s.ReferenceID, s.Status, s.FailureCode, balance, s.Attempts, s.NextAttemptAt, s.ExpiresAt, s.CreatedAt, s.UpdatedAt, s.CorrelationID, s.CausationID)"
+      },
+      {
+        "line": 75,
+        "text": "if s.BalanceAfter != nil {"
+      },
+      {
+        "line": 76,
+        "text": "v := s.BalanceAfter.Minor()"
+      },
+      {
+        "line": 79,
+        "text": "tag, err := r.q.Exec(ctx, `UPDATE wager_transactions SET reference_transaction_id=nullif($2,'')::uuid,status=$3,failure_code=nullif($4,''),balance_after_minor=$5,attempts=$6,next_attempt_at=$7,expires_at=$8,updated_at=$9 WHERE id=$1 AND status IN ('PENDING','PENDING_REFERENCE')`, s.ID, s.ReferenceID, s.Status, s.FailureCode, b, s.Attempts, s.NextAttemptAt, s.ExpiresAt, s.UpdatedAt)"
+      },
+      {
+        "line": 86,
+        "text": "rows, err := r.q.Query(ctx, `SELECT `+txCols+` FROM wager_transactions WHERE status IN ('PENDING','PENDING_REFERENCE') AND coalesce(next_attempt_at,created_at)<=$1 ORDER BY coalesce(next_attempt_at,created_at),id LIMIT $2 FOR UPDATE SKIP LOCKED`, now, limit)"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/uow.go",
+    "references": [
+      {
+        "line": 86,
+        "text": "func (t txAdapter) Wallets() port.WalletRepository           { return walletRepo{t.q} }"
+      },
+      {
+        "line": 88,
+        "text": "func (t txAdapter) Ledger() port.LedgerRepository            { return ledgerRepo{t.q} }"
+      },
+      {
+        "line": 89,
+        "text": "func (t txAdapter) Inbox() port.InboxRepository              { return inboxRepo{t.q} }"
+      },
+      {
+        "line": 90,
+        "text": "func (t txAdapter) Outbox() port.OutboxRepository            { return outboxRepo{t.q} }"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/uow_contract_test.go",
+    "references": [
+      {
+        "line": 72,
+        "text": "if p.Wallets() == nil || p.Transactions() == nil || p.Inbox() == nil || p.Outbox() == nil || p.Ledger() == nil {"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/postgres/wallet_repo.go",
+    "references": [
+      {
+        "line": 14,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 17,
+        "text": "var _ port.WalletRepository = walletRepo{}"
+      },
+      {
+        "line": 19,
+        "text": "type walletRepo struct{ q dbtx }"
+      },
+      {
+        "line": 21,
+        "text": "const walletCols = `id::text, player_id::text, currency, balance_minor, version, created_at, updated_at`"
+      },
+      {
+        "line": 23,
+        "text": "func (r walletRepo) Create(ctx context.Context, w *wallet.Wallet) error {"
+      },
+      {
+        "line": 25,
+        "text": "_, err := r.q.Exec(ctx, `INSERT INTO wallets (id, player_id, currency, balance_minor, version, created_at, updated_at)"
+      },
+      {
+        "line": 27,
+        "text": "s.ID, s.PlayerID, s.Balance.Currency(), s.Balance.Minor(), s.Version, s.CreatedAt, s.UpdatedAt)"
+      },
+      {
+        "line": 30,
+        "text": "return apperr.ErrWalletExists"
+      },
+      {
+        "line": 35,
+        "text": "func (r walletRepo) Get(ctx context.Context, id string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 36,
+        "text": "return scanWallet(r.q.QueryRow(ctx, `SELECT `+walletCols+` FROM wallets WHERE id = $1::uuid`, id))"
+      },
+      {
+        "line": 39,
+        "text": "// GetForUpdate takes a row lock on THIS wallet only; independent wallets proceed in parallel."
+      },
+      {
+        "line": 40,
+        "text": "func (r walletRepo) GetForUpdate(ctx context.Context, id string) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 41,
+        "text": "return scanWallet(r.q.QueryRow(ctx, `SELECT `+walletCols+` FROM wallets WHERE id = $1::uuid FOR NO KEY UPDATE`, id))"
+      },
+      {
+        "line": 45,
+        "text": "func (r walletRepo) Save(ctx context.Context, w *wallet.Wallet, expectedVersion int64) error {"
+      },
+      {
+        "line": 47,
+        "text": "tag, err := r.q.Exec(ctx, `UPDATE wallets SET balance_minor = $2, version = $3, updated_at = $4"
+      },
+      {
+        "line": 48,
+        "text": "WHERE id = $1::uuid AND version = $5`, s.ID, s.Balance.Minor(), s.Version, s.UpdatedAt, expectedVersion)"
+      },
+      {
+        "line": 58,
+        "text": "func scanWallet(row pgx.Row) (*wallet.Wallet, error) {"
+      },
+      {
+        "line": 66,
+        "text": "return nil, apperr.ErrWalletNotFound"
+      },
+      {
+        "line": 74,
+        "text": "return wallet.Rehydrate(wallet.Snapshot{ID: id, PlayerID: player, Balance: bal, Version: ver, CreatedAt: created, UpdatedAt: upd})"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/sqs/consumer.go",
+    "references": [
+      {
+        "line": 79,
+        "text": "WalletID   string `json:\"walletId\"`"
+      },
+      {
+        "line": 85,
+        "text": "scoped.log = c.log.With(\"messageId\", ids.MessageID, \"correlationId\", ids.MessageID, \"brokerMessageId\", aws.ToString(m.MessageId), \"walletId\", ids.Data.WalletID, \"providerId\", ids.Data.ProviderID)"
+      },
+      {
+        "line": 126,
+        "text": "c.log.Error(\"sqs delete failed (message will be redelivered; inbox dedupes)\", \"err\", err)"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/sqs/consumer_test.go",
+    "references": [
+      {
+        "line": 47,
+        "text": "m := types.Message{MessageId: aws.String(\"broker\"), Body: aws.String(`{\"messageId\":\"message\",\"data\":{\"walletId\":\"wallet\",\"providerId\":\"provider\",\"money\":{\"amount\":\"SECRET_AMOUNT\"}}}`)}"
+      },
+      {
+        "line": 54,
+        "text": "for _, want := range []string{`\"messageId\":\"message\"`, `\"walletId\":\"wallet\"`, `\"providerId\":\"provider\"`, `\"correlationId\":\"message\"`} {"
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/sqs/publisher.go",
+    "references": [
+      {
+        "line": 15,
+        "text": "// Publisher sends outbox events to wager-events.fifo."
+      }
+    ]
+  },
+  {
+    "file": "internal/infra/sqs/sdk_contract_test.go",
+    "references": [
+      {
+        "line": 37,
+        "text": "ev, e := event.NewProcessed(event.Meta{EventID: \"event\", AggregateID: \"wallet\", CorrelationID: \"corr\", OccurredAt: at}, event.ProcessedData{TransactionID: \"tx\", Kind: \"OPENING\", WalletID: \"wallet\", PlayerID: \"player\", Money: event.MoneyDTO{Amount: \"1.00\", Currency: \"BRL\"}}).ToOutgoing()"
+      },
+      {
+        "line": 54,
+        "text": "if body[\"QueueUrl\"] != \"https://sqs.example.test/events.fifo\" || body[\"MessageBody\"] != string(ev.Payload()) || body[\"MessageGroupId\"] != \"wallet\" || body[\"MessageDeduplicationId\"] != \"event\" {"
+      }
+    ]
+  },
+  {
+    "file": "internal/platform/metrics/metrics.go",
+    "references": [
+      {
+        "line": 18,
+        "text": "outboxLag                    prometheus.Gauge"
+      },
+      {
+        "line": 30,
+        "text": "r.divergences = prometheus.NewCounter(prometheus.CounterOpts{Name: \"wagering_reconciliation_divergences_total\", Help: \"Reconciliation divergences\"})"
+      },
+      {
+        "line": 31,
+        "text": "r.outboxLag = prometheus.NewGauge(prometheus.GaugeOpts{Name: \"wagering_outbox_lag_seconds\", Help: \"Age of the oldest unpublished event at last successful poll; zero when empty\"})"
+      },
+      {
+        "line": 34,
+        "text": "r.reg.MustRegister(r.dlqDepth, r.results, r.duplicates, r.retries, r.dlq, r.conflicts, r.divergences, r.outboxLag, r.latency)"
+      },
+      {
+        "line": 45,
+        "text": "func (r *Recorder) OutboxLag(d time.Duration)    { r.outboxLag.Set(d.Seconds()) }"
+      }
+    ]
+  },
+  {
+    "file": "internal/platform/metrics/metrics_test.go",
+    "references": [
+      {
+        "line": 12,
+        "text": "r.Retry(\"outbox\")"
+      },
+      {
+        "line": 23,
+        "text": "for _, line := range []string{`wagering_retries_total{component=\"outbox\"} 1`, `wagering_concurrency_conflicts_total 1`, `wagering_dlq_messages{state=\"visible\"} 2`, `wagering_poison_redrive_threshold_total 1`, `wagering_outbox_lag_seconds 0`, `wagering_reconciliation_divergences_total 1`} {"
+      }
+    ]
+  },
+  {
+    "file": "internal/transport/httpapi/contract_test.go",
+    "references": [
+      {
+        "line": 13,
+        "text": "\"github.com/alexandre/wagering/internal/domain/wallet\""
+      },
+      {
+        "line": 47,
+        "text": "{\"wallet missing\", apperr.ErrWalletNotFound, 404, `{\"code\":\"NOT_FOUND\"}`, \"\"},"
+      },
+      {
+        "line": 49,
+        "text": "{\"duplicate wallet\", apperr.ErrWalletExists, 409, `{\"code\":\"WALLET_EXISTS\",\"message\":\"wallet already exists for player and currency\"}`, \"\"},"
+      },
+      {
+        "line": 78,
+        "text": "w port.WalletRepository"
+      },
+      {
+        "line": 79,
+        "text": "l port.LedgerRepository"
+      },
+      {
+        "line": 82,
+        "text": "func (x contractTx) Wallets() port.WalletRepository { return x.w }"
+      },
+      {
+        "line": 83,
+        "text": "func (x contractTx) Ledger() port.LedgerRepository  { return x.l }"
+      },
+      {
+        "line": 85,
+        "text": "type contractWallet struct {"
+      },
+      {
+        "line": 86,
+        "text": "port.WalletRepository"
+      },
+      {
+        "line": 87,
+        "text": "wallet *wallet.Wallet"
+      },
+      {
+        "line": 90,
+        "text": "func (w contractWallet) Get(context.Context, string) (*wallet.Wallet, error) { return w.wallet, nil }"
+      },
+      {
+        "line": 92,
+        "text": "type contractLedger struct {"
+      },
+      {
+        "line": 93,
+        "text": "port.LedgerRepository"
+      },
+      {
+        "line": 94,
+        "text": "list func(context.Context, string, string, int) (port.LedgerPage, error)"
+      },
+      {
+        "line": 97,
+        "text": "func (l contractLedger) List(c context.Context, w, k string, n int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 100,
+        "text": "func TestLedgerWireContractAndPaginationBoundaries(t *testing.T) {"
+      },
+      {
+        "line": 104,
+        "text": "w, e := wallet.New(\"wallet\", \"player\", one, at)"
+      },
+      {
+        "line": 108,
+        "text": "entry, e := wager.NewLedgerEntry(\"entry\", \"wallet\", \"tx\", wager.Credit, one, zero, at)"
+      },
+      {
+        "line": 121,
+        "text": "u := &contractUOW{tx: contractTx{w: contractWallet{wallet: w}, l: contractLedger{list: func(_ context.Context, w, c string, n int) (port.LedgerPage, error) {"
+      },
+      {
+        "line": 122,
+        "text": "if w != \"wallet\" || c != \"opaque\" || n != expectedLimit {"
+      },
+      {
+        "line": 125,
+        "text": "return port.LedgerPage{Entries: []wager.LedgerEntry{entry}, NextCursor: \"next\"}, nil"
+      },
+      {
+        "line": 127,
+        "text": "r := httptest.NewRequest(\"GET\", \"/wallets/wallet/ledger?cursor=opaque&limit=\"+limit, nil)"
+      },
+      {
+        "line": 128,
+        "text": "r.SetPathValue(\"walletId\", \"wallet\")"
+      },
+      {
+        "line": 130,
+        "text": "handlers{Deps{ListLedger: usecase.NewListLedger(u)}}.listLedger(out, r)"
+      },
+      {
+        "line": 135,
+        "text": "sameJSON(t, out.Body.String(), `{\"entries\":[{\"id\":\"entry\",\"transactionId\":\"tx\",\"direction\":\"CREDIT\",\"money\":{\"amount\":\"1.00\",\"currency\":\"BRL\"},\"balanceBefore\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"balanceAfter\":{\"amount\":\"1.00\",\"currency\":\"BRL\"},\"createdAt\":\"2026-09-28T12:00:00Z\"}],\"nextCursor\":\"next\"}`)"
+      },
+      {
+        "line": 146,
+        "text": "page   port.LedgerPage"
+      },
+      {
+        "line": 150,
+        "text": "}{{\"empty\", port.LedgerPage{}, nil, 200, `{\"entries\":[]}`}, {\"repository error\", port.LedgerPage{}, apperr.Invalid(\"invalid cursor\"), 400, `{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: invalid cursor\"}`}} {"
+      },
+      {
+        "line": 152,
+        "text": "u := &contractUOW{tx: contractTx{w: contractWallet{wallet: w}, l: contractLedger{list: func(context.Context, string, string, int) (port.LedgerPage, error) { return tc.page, tc.err }}}}"
+      },
+      {
+        "line": 155,
+        "text": "r.SetPathValue(\"walletId\", \"wallet\")"
+      },
+      {
+        "line": 156,
+        "text": "handlers{Deps{ListLedger: usecase.NewListLedger(u)}}.listLedger(out, r)"
+      }
+    ]
+  },
+  {
+    "file": "internal/transport/httpapi/dto.go",
+    "references": [
+      {
+        "line": 36,
+        "text": "type OpenWalletRequest struct {"
+      },
+      {
+        "line": 38,
+        "text": "InitialBalance MoneyDTO `json:\"initialBalance\"`"
+      },
+      {
+        "line": 41,
+        "text": "type WalletResponse struct {"
+      },
+      {
+        "line": 44,
+        "text": "Balance  MoneyDTO `json:\"balance\"`"
+      },
+      {
+        "line": 52,
+        "text": "WalletID                       string   `json:\"walletId\"`"
+      },
+      {
+        "line": 63,
+        "text": "Balance          *MoneyDTO `json:\"balance,omitempty\"`"
+      },
+      {
+        "line": 72,
+        "text": "WalletID              string     `json:\"walletId\"`"
+      },
+      {
+        "line": 76,
+        "text": "Balance               *MoneyDTO  `json:\"balance,omitempty\"`"
+      },
+      {
+        "line": 81,
+        "text": "type LedgerEntryDTO struct {"
+      },
+      {
+        "line": 86,
+        "text": "BalanceBefore MoneyDTO  `json:\"balanceBefore\"`"
+      },
+      {
+        "line": 87,
+        "text": "BalanceAfter  MoneyDTO  `json:\"balanceAfter\"`"
+      },
+      {
+        "line": 91,
+        "text": "type LedgerResponse struct {"
+      },
+      {
+        "line": 92,
+        "text": "Entries    []LedgerEntryDTO `json:\"entries\"`"
+      },
+      {
+        "line": 97,
+        "text": "WalletID          string   `json:\"walletId\"`"
+      },
+      {
+        "line": 98,
+        "text": "StoredBalance     MoneyDTO `json:\"storedBalance\"`"
+      },
+      {
+        "line": 99,
+        "text": "CalculatedBalance MoneyDTO `json:\"calculatedBalance\"`"
+      }
+    ]
+  },
+  {
+    "file": "internal/transport/httpapi/errors.go",
+    "references": [
+      {
+        "line": 29,
+        "text": "case errors.Is(err, apperr.ErrNotFound), errors.Is(err, apperr.ErrWalletNotFound):"
+      },
+      {
+        "line": 33,
+        "text": "case errors.Is(err, apperr.ErrWalletExists):"
+      }
+    ]
+  },
+  {
+    "file": "internal/transport/httpapi/handlers.go",
+    "references": [
+      {
+        "line": 63,
+        "text": "func (h handlers) openWallet(w http.ResponseWriter, r *http.Request) {"
+      },
+      {
+        "line": 64,
+        "text": "var req OpenWalletRequest"
+      },
+      {
+        "line": 69,
+        "text": "m, err := req.InitialBalance.parse()"
+      },
+      {
+        "line": 74,
+        "text": "v, err := h.d.OpenWallet.Execute(r.Context(), usecase.OpenWalletInput{PlayerID: req.PlayerID, InitialBalance: m})"
+      },
+      {
+        "line": 79,
+        "text": "writeJSON(w, http.StatusCreated, WalletResponse{v.ID, v.PlayerID, toMoneyDTO(v.Balance), v.Version})"
+      },
+      {
+        "line": 82,
+        "text": "func (h handlers) getWallet(w http.ResponseWriter, r *http.Request) {"
+      },
+      {
+        "line": 83,
+        "text": "v, err := h.d.GetWallet.Execute(r.Context(), r.PathValue(\"walletId\"))"
+      },
+      {
+        "line": 88,
+        "text": "writeJSON(w, http.StatusOK, WalletResponse{v.ID, v.PlayerID, toMoneyDTO(v.Balance), v.Version})"
+      },
+      {
+        "line": 91,
+        "text": "func (h handlers) listLedger(w http.ResponseWriter, r *http.Request) {"
+      },
+      {
+        "line": 101,
+        "text": "page, err := h.d.ListLedger.Execute(r.Context(), r.PathValue(\"walletId\"), r.URL.Query().Get(\"cursor\"), limit)"
+      },
+      {
+        "line": 106,
+        "text": "out := LedgerResponse{Entries: make([]LedgerEntryDTO, 0, len(page.Entries)), NextCursor: page.NextCursor}"
+      },
+      {
+        "line": 108,
+        "text": "out.Entries = append(out.Entries, LedgerEntryDTO{e.ID(), e.TransactionID(), string(e.Direction()),"
+      },
+      {
+        "line": 109,
+        "text": "toMoneyDTO(e.Amount()), toMoneyDTO(e.BalanceBefore()), toMoneyDTO(e.BalanceAfter()), e.CreatedAt()})"
+      },
+      {
+        "line": 114,
+        "text": "func (h handlers) reconcile(w http.ResponseWriter, r *http.Request) {"
+      },
+      {
+        "line": 115,
+        "text": "res, err := h.d.Reconcile.Execute(r.Context(), r.PathValue(\"walletId\"))"
+      },
+      {
+        "line": 120,
+        "text": "writeJSON(w, http.StatusOK, ReconciliationResponse{res.WalletID, toMoneyDTO(res.Stored), toMoneyDTO(res.Calculated),"
+      },
+      {
+        "line": 140,
+        "text": "WalletID: req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,"
+      },
+      {
+        "line": 148,
+        "text": "body := SubmitTransactionResponse{res.TransactionID, string(res.Status), toMoneyDTOPtr(res.Balance),"
+      },
+      {
+        "line": 167,
+        "text": "return TransactionResponse{v.ID, v.ProviderID, v.ExternalTransactionID, v.WalletID, string(v.Kind), string(v.Status),"
+      },
+      {
+        "line": 168,
+        "text": "toMoneyDTO(v.Amount), toMoneyDTOPtr(v.Balance), string(v.FailureCode), v.NextAttemptAt}"
+      }
+    ]
+  },
+  {
+    "file": "internal/transport/httpapi/module.go",
+    "references": [
+      {
+        "line": 25,
+        "text": "OpenWallet *usecase.OpenWallet"
+      },
+      {
+        "line": 26,
+        "text": "GetWallet  *usecase.GetWallet"
+      },
+      {
+        "line": 27,
+        "text": "ListLedger *usecase.ListLedger"
+      },
+      {
+        "line": 28,
+        "text": "Reconcile  *usecase.ReconcileWallet"
+      },
+      {
+        "line": 68,
+        "text": "mux.Handle(\"POST /wallets\", internal(h.openWallet))"
+      },
+      {
+        "line": 69,
+        "text": "mux.Handle(\"GET /wallets/{walletId}\", internal(h.getWallet))"
+      },
+      {
+        "line": 70,
+        "text": "mux.Handle(\"GET /wallets/{walletId}/ledger\", internal(h.listLedger))"
+      },
+      {
+        "line": 71,
+        "text": "mux.Handle(\"POST /wallets/{walletId}/reconciliation\", internal(h.reconcile))"
+      }
+    ]
+  },
+  {
+    "file": "migrations/000001_init.down.sql",
+    "references": [
+      {
+        "line": 1,
+        "text": "DROP TABLE IF EXISTS outbox_events;"
+      },
+      {
+        "line": 2,
+        "text": "DROP TABLE IF EXISTS inbox_messages;"
+      },
+      {
+        "line": 3,
+        "text": "DROP TRIGGER IF EXISTS trg_ledger_no_truncate ON wallet_ledger_entries;"
+      },
+      {
+        "line": 4,
+        "text": "DROP TRIGGER IF EXISTS trg_ledger_immutable ON wallet_ledger_entries;"
+      },
+      {
+        "line": 5,
+        "text": "DROP TABLE IF EXISTS wallet_ledger_entries;"
+      },
+      {
+        "line": 6,
+        "text": "DROP FUNCTION IF EXISTS forbid_ledger_mutation();"
+      },
+      {
+        "line": 8,
+        "text": "DROP TABLE IF EXISTS wallets;"
+      }
+    ]
+  },
+  {
+    "file": "migrations/000001_init.up.sql",
+    "references": [
+      {
+        "line": 1,
+        "text": "CREATE TABLE wallets ("
+      },
+      {
+        "line": 5,
+        "text": "balance_minor BIGINT      NOT NULL CHECK (balance_minor >= 0),"
+      },
+      {
+        "line": 19,
+        "text": "wallet_id                 UUID        NOT NULL REFERENCES wallets(id),"
+      },
+      {
+        "line": 30,
+        "text": "balance_after_minor       BIGINT,"
+      },
+      {
+        "line": 36,
+        "text": "CONSTRAINT origin_shape CHECK ("
+      },
+      {
+        "line": 44,
+        "text": "CONSTRAINT reversal_needs_reference CHECK (kind NOT IN ('REFUND','ROLLBACK') OR reference_external_id IS NOT NULL)"
+      },
+      {
+        "line": 49,
+        "text": "CREATE UNIQUE INDEX uq_tx_opening     ON wager_transactions (wallet_id) WHERE kind = 'OPENING';"
+      },
+      {
+        "line": 56,
+        "text": "CREATE TABLE wallet_ledger_entries ("
+      },
+      {
+        "line": 58,
+        "text": "wallet_id            UUID        NOT NULL REFERENCES wallets(id),"
+      },
+      {
+        "line": 63,
+        "text": "balance_before_minor BIGINT      NOT NULL CHECK (balance_before_minor >= 0),"
+      },
+      {
+        "line": 64,
+        "text": "balance_after_minor  BIGINT      NOT NULL CHECK (balance_after_minor >= 0),"
+      },
+      {
+        "line": 67,
+        "text": "UNIQUE (wallet_id, transaction_id),"
+      },
+      {
+        "line": 68,
+        "text": "CONSTRAINT balance_math CHECK ("
+      },
+      {
+        "line": 69,
+        "text": "(direction = 'DEBIT'  AND balance_after_minor = balance_before_minor - amount_minor) OR"
+      },
+      {
+        "line": 70,
+        "text": "(direction = 'CREDIT' AND balance_after_minor = balance_before_minor + amount_minor))"
+      },
+      {
+        "line": 73,
+        "text": "CREATE FUNCTION forbid_ledger_mutation() RETURNS trigger AS $$"
+      },
+      {
+        "line": 75,
+        "text": "RAISE EXCEPTION 'wallet_ledger_entries is append-only';"
+      },
+      {
+        "line": 79,
+        "text": "CREATE TRIGGER trg_ledger_immutable"
+      },
+      {
+        "line": 80,
+        "text": "BEFORE UPDATE OR DELETE ON wallet_ledger_entries"
+      },
+      {
+        "line": 81,
+        "text": "FOR EACH ROW EXECUTE FUNCTION forbid_ledger_mutation();"
+      },
+      {
+        "line": 82,
+        "text": "CREATE TRIGGER trg_ledger_no_truncate"
+      },
+      {
+        "line": 83,
+        "text": "BEFORE TRUNCATE ON wallet_ledger_entries"
+      },
+      {
+        "line": 84,
+        "text": "FOR EACH STATEMENT EXECUTE FUNCTION forbid_ledger_mutation();"
+      },
+      {
+        "line": 86,
+        "text": "CREATE TABLE inbox_messages ("
+      },
+      {
+        "line": 95,
+        "text": "CREATE TABLE outbox_events ("
+      },
+      {
+        "line": 106,
+        "text": "CREATE INDEX ix_outbox_pending ON outbox_events (next_attempt_at) WHERE published_at IS NULL;"
+      }
+    ]
+  },
+  {
+    "file": "migrations/000002_integrity.down.sql",
+    "references": [
+      {
+        "line": 1,
+        "text": "ALTER TABLE wallet_ledger_entries DROP CONSTRAINT ledger_seq_unique;"
+      },
+      {
+        "line": 2,
+        "text": "ALTER TABLE wager_transactions DROP CONSTRAINT attempts_nonnegative;"
+      },
+      {
+        "line": 3,
+        "text": "ALTER TABLE inbox_messages DROP COLUMN deliveries;"
+      },
+      {
+        "line": 4,
+        "text": "DROP TRIGGER outbox_immutable ON outbox_events;"
+      },
+      {
+        "line": 5,
+        "text": "DROP FUNCTION guard_outbox();"
+      },
+      {
+        "line": 6,
+        "text": "DROP TRIGGER ledger_tx_integrity ON wallet_ledger_entries;"
+      },
+      {
+        "line": 7,
+        "text": "DROP TRIGGER tx_integrity ON wager_transactions;"
+      },
+      {
+        "line": 9,
+        "text": "DROP TRIGGER ledger_wallet_integrity ON wallet_ledger_entries;"
+      },
+      {
+        "line": 10,
+        "text": "DROP TRIGGER wallet_integrity ON wallets;"
+      },
+      {
+        "line": 11,
+        "text": "DROP FUNCTION check_wallet_integrity();"
+      },
+      {
+        "line": 12,
+        "text": "DROP TRIGGER ledger_append ON wallet_ledger_entries;"
+      },
+      {
+        "line": 13,
+        "text": "DROP FUNCTION guard_ledger_append();"
+      },
+      {
+        "line": 14,
+        "text": "DROP TRIGGER transaction_guard ON wager_transactions;"
+      },
+      {
+        "line": 16,
+        "text": "DROP TRIGGER wallet_guard ON wallets;"
+      },
+      {
+        "line": 17,
+        "text": "DROP FUNCTION guard_wallet();"
+      },
+      {
+        "line": 19,
+        "text": "DROP INDEX ix_ledger_wallet_seq;"
+      },
+      {
+        "line": 20,
+        "text": "DROP INDEX ix_outbox_transaction;"
+      },
+      {
+        "line": 21,
+        "text": "ALTER TABLE wallets DROP CONSTRAINT supported_currency;"
+      },
+      {
+        "line": 22,
+        "text": "ALTER TABLE wager_transactions DROP CONSTRAINT supported_currency, DROP CONSTRAINT internal_shape, DROP CONSTRAINT waiting_shape, DROP CONSTRAINT state_shape, DROP CONSTRAINT amount_policy, DROP COLUMN correlation_id, DROP COLUMN causation_id;"
+      }
+    ]
+  },
+  {
+    "file": "migrations/000002_integrity.up.sql",
+    "references": [
+      {
+        "line": 1,
+        "text": "ALTER TABLE inbox_messages ADD COLUMN deliveries BIGINT NOT NULL DEFAULT 1;"
+      },
+      {
+        "line": 4,
+        "text": "ALTER TABLE wager_transactions ADD CONSTRAINT amount_policy CHECK"
+      },
+      {
+        "line": 6,
+        "text": "ALTER TABLE wager_transactions ADD CONSTRAINT state_shape CHECK"
+      },
+      {
+        "line": 7,
+        "text": "((status='PROCESSED' AND balance_after_minor IS NOT NULL AND balance_after_minor>=0 AND failure_code IS NULL)"
+      },
+      {
+        "line": 10,
+        "text": "ALTER TABLE wager_transactions ADD CONSTRAINT waiting_shape CHECK"
+      },
+      {
+        "line": 12,
+        "text": "ALTER TABLE wager_transactions ADD CONSTRAINT internal_shape CHECK"
+      },
+      {
+        "line": 14,
+        "text": "ALTER TABLE wallets ADD CONSTRAINT supported_currency CHECK(currency IN ('BRL','USD','EUR'));"
+      },
+      {
+        "line": 15,
+        "text": "ALTER TABLE wager_transactions ADD CONSTRAINT supported_currency CHECK(currency IN ('BRL','USD','EUR'));"
+      },
+      {
+        "line": 18,
+        "text": "ALTER TABLE wallet_ledger_entries ADD CONSTRAINT ledger_seq_unique UNIQUE(seq);"
+      },
+      {
+        "line": 19,
+        "text": "ALTER TABLE wager_transactions ADD CONSTRAINT attempts_nonnegative CHECK(attempts>=0);"
+      },
+      {
+        "line": 20,
+        "text": "CREATE INDEX ix_ledger_wallet_seq ON wallet_ledger_entries(wallet_id,seq);"
+      },
+      {
+        "line": 22,
+        "text": "CREATE FUNCTION guard_wallet() RETURNS trigger LANGUAGE plpgsql AS $$"
+      },
+      {
+        "line": 24,
+        "text": "IF TG_OP='DELETE' THEN RAISE EXCEPTION 'wallet deletion forbidden'; END IF;"
+      },
+      {
+        "line": 28,
+        "text": "IF (NEW.id,NEW.player_id,NEW.currency,NEW.created_at) IS DISTINCT FROM (OLD.id,OLD.player_id,OLD.currency,OLD.created_at) THEN RAISE EXCEPTION 'wallet identity immutable'; END IF;"
+      },
+      {
+        "line": 29,
+        "text": "IF NEW.balance_minor=OLD.balance_minor OR NEW.version<>OLD.version+1 THEN RAISE EXCEPTION 'invalid wallet transition'; END IF;"
+      },
+      {
+        "line": 33,
+        "text": "CREATE TRIGGER wallet_guard BEFORE INSERT OR UPDATE OR DELETE ON wallets FOR EACH ROW EXECUTE FUNCTION guard_wallet();"
+      },
+      {
+        "line": 36,
+        "text": "DECLARE r wager_transactions; w wallets;"
+      },
+      {
+        "line": 41,
+        "text": "IF (to_jsonb(NEW)-ARRAY['reference_transaction_id','status','failure_code','balance_after_minor','attempts','next_attempt_at','expires_at','updated_at']) IS DISTINCT FROM"
+      },
+      {
+        "line": 42,
+        "text": "(to_jsonb(OLD)-ARRAY['reference_transaction_id','status','failure_code','balance_after_minor','attempts','next_attempt_at','expires_at','updated_at']) THEN RAISE EXCEPTION 'business fields immutable'; END IF;"
+      },
+      {
+        "line": 45,
+        "text": "SELECT * INTO STRICT w FROM wallets WHERE id=NEW.wallet_id FOR NO KEY UPDATE;"
+      },
+      {
+        "line": 46,
+        "text": "IF (w.player_id,w.currency) IS DISTINCT FROM (NEW.player_id,NEW.currency) THEN RAISE EXCEPTION 'wallet mismatch'; END IF;"
+      },
+      {
+        "line": 50,
+        "text": "(r.provider_id,r.external_transaction_id,r.wallet_id,r.player_id,r.currency,r.round_id) IS DISTINCT FROM"
+      },
+      {
+        "line": 51,
+        "text": "(NEW.provider_id,NEW.reference_external_id,NEW.wallet_id,NEW.player_id,NEW.currency,NEW.round_id) THEN RAISE EXCEPTION 'reference mismatch'; END IF;"
+      },
+      {
+        "line": 58,
+        "text": "CREATE TRIGGER transaction_guard BEFORE INSERT OR UPDATE OR DELETE ON wager_transactions FOR EACH ROW EXECUTE FUNCTION guard_transaction();"
+      },
+      {
+        "line": 60,
+        "text": "CREATE FUNCTION guard_ledger_append() RETURNS trigger LANGUAGE plpgsql AS $$"
+      },
+      {
+        "line": 61,
+        "text": "DECLARE w wallets; t wager_transactions; previous BIGINT;"
+      },
+      {
+        "line": 63,
+        "text": "SELECT * INTO STRICT w FROM wallets WHERE id=NEW.wallet_id FOR NO KEY UPDATE;"
+      },
+      {
+        "line": 65,
+        "text": "IF (t.wallet_id,t.currency,t.amount_minor) IS DISTINCT FROM (NEW.wallet_id,NEW.currency,NEW.amount_minor) OR w.currency<>NEW.currency THEN RAISE EXCEPTION 'ledger transaction mismatch'; END IF;"
+      },
+      {
+        "line": 66,
+        "text": "SELECT balance_after_minor INTO previous FROM wallet_ledger_entries WHERE wallet_id=NEW.wallet_id ORDER BY seq DESC LIMIT 1;"
+      },
+      {
+        "line": 67,
+        "text": "IF NEW.balance_before_minor<>coalesce(previous,0) THEN RAISE EXCEPTION 'ledger chain broken'; END IF;"
+      },
+      {
+        "line": 70,
+        "text": "CREATE TRIGGER ledger_append BEFORE INSERT ON wallet_ledger_entries FOR EACH ROW EXECUTE FUNCTION guard_ledger_append();"
+      },
+      {
+        "line": 73,
+        "text": "CREATE FUNCTION check_wallet_integrity() RETURNS trigger LANGUAGE plpgsql AS $$"
+      },
+      {
+        "line": 74,
+        "text": "DECLARE wid UUID; w wallets; total NUMERIC; changes BIGINT;"
+      },
+      {
+        "line": 76,
+        "text": "IF TG_TABLE_NAME='wallets' THEN wid:=NEW.id; ELSE wid:=NEW.wallet_id; END IF;"
+      },
+      {
+        "line": 77,
+        "text": "SELECT * INTO STRICT w FROM wallets WHERE id=wid;"
+      },
+      {
+        "line": 80,
+        "text": "FROM wallet_ledger_entries l JOIN wager_transactions t ON t.id=l.transaction_id WHERE l.wallet_id=wid;"
+      },
+      {
+        "line": 81,
+        "text": "IF EXISTS(SELECT 1 FROM (SELECT balance_before_minor,coalesce(lag(balance_after_minor) OVER(ORDER BY seq),0) AS expected FROM wallet_ledger_entries WHERE wallet_id=wid) chain WHERE balance_before_minor<>expected) THEN RAISE EXCEPTION 'ledger sequence invariant violated'; END IF;"
+      },
+      {
+        "line": 82,
+        "text": "IF w.balance_minor::numeric<>total OR w.version<>1+changes THEN RAISE EXCEPTION 'wallet/ledger invariant violated'; END IF;"
+      },
+      {
+        "line": 85,
+        "text": "CREATE CONSTRAINT TRIGGER wallet_integrity AFTER INSERT OR UPDATE ON wallets DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_wallet_integrity();"
+      },
+      {
+        "line": 86,
+        "text": "CREATE CONSTRAINT TRIGGER ledger_wallet_integrity AFTER INSERT ON wallet_ledger_entries DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_wallet_integrity();"
+      },
+      {
+        "line": 89,
+        "text": "DECLARE tid UUID; t wager_transactions; l wallet_ledger_entries; n BIGINT; d TEXT; refkind TEXT;"
+      },
+      {
+        "line": 93,
+        "text": "SELECT count(*) INTO n FROM wallet_ledger_entries WHERE transaction_id=tid;"
+      },
+      {
+        "line": 95,
+        "text": "IF n<>1 THEN RAISE EXCEPTION 'processed movement requires exactly one ledger entry'; END IF;"
+      },
+      {
+        "line": 96,
+        "text": "SELECT * INTO STRICT l FROM wallet_ledger_entries WHERE transaction_id=tid;"
+      },
+      {
+        "line": 99,
+        "text": "IF l.direction<>d OR l.balance_after_minor<>t.balance_after_minor THEN RAISE EXCEPTION 'invalid ledger result'; END IF;"
+      },
+      {
+        "line": 100,
+        "text": "ELSIF n<>0 THEN RAISE EXCEPTION 'nonfinancial transaction has ledger entry'; END IF;"
+      },
+      {
+        "line": 101,
+        "text": "IF t.status='PROCESSED' AND NOT EXISTS(SELECT 1 FROM outbox_events WHERE event_type='WagerTransactionProcessed' AND payload->'data'->>'transactionId'=tid::text) THEN RAISE EXCEPTION 'processed event required'; END IF;"
+      },
+      {
+        "line": 102,
+        "text": "IF t.status='PROCESSED' AND t.kind<>'LOSS' AND NOT EXISTS(SELECT 1 FROM outbox_events WHERE event_type='WalletBalanceChanged' AND payload->'data'->>'transactionId'=tid::text) THEN RAISE EXCEPTION 'balance event required'; END IF;"
+      },
+      {
+        "line": 103,
+        "text": "IF t.status='REJECTED' AND NOT EXISTS(SELECT 1 FROM outbox_events WHERE event_type='WagerTransactionRejected' AND payload->'data'->>'transactionId'=tid::text) THEN RAISE EXCEPTION 'rejected event required'; END IF;"
+      },
+      {
+        "line": 106,
+        "text": "CREATE CONSTRAINT TRIGGER tx_integrity AFTER INSERT OR UPDATE ON wager_transactions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_transaction_integrity();"
+      },
+      {
+        "line": 107,
+        "text": "CREATE CONSTRAINT TRIGGER ledger_tx_integrity AFTER INSERT ON wallet_ledger_entries DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION check_transaction_integrity();"
+      },
+      {
+        "line": 108,
+        "text": "CREATE INDEX ix_outbox_transaction ON outbox_events((payload->'data'->>'transactionId'),event_type);"
+      },
+      {
+        "line": 109,
+        "text": "CREATE FUNCTION guard_outbox() RETURNS trigger LANGUAGE plpgsql AS $$"
+      },
+      {
+        "line": 111,
+        "text": "IF TG_OP='DELETE' THEN RAISE EXCEPTION 'outbox deletion forbidden'; END IF;"
+      },
+      {
+        "line": 115,
+        "text": "CREATE TRIGGER outbox_immutable BEFORE UPDATE OR DELETE ON outbox_events FOR EACH ROW EXECUTE FUNCTION guard_outbox();"
+      }
+    ]
+  },
+  {
+    "file": "scripts/manual-session.sh",
+    "references": [
+      {
+        "line": 44,
+        "text": "# name initial-balance; updates PLAYER_ID and WALLET_ID"
+      },
+      {
+        "line": 45,
+        "text": "manual_wallet() {"
+      },
+      {
+        "line": 50,
+        "text": "print(json.dumps({'playerId':sys.argv[1],'initialBalance':{'amount':sys.argv[2],'currency':'BRL'}}))"
+      },
+      {
+        "line": 52,
+        "text": "manual_http \"$name\" internal POST /wallets \"$RUN_DIR/$name.request.json\" || return"
+      },
+      {
+        "line": 60,
+        "text": "external,player,wallet,run,kind,amount,ref,currency=sys.argv[1:]"
+      },
+      {
+        "line": 61,
+        "text": "p={'providerId':'provider-a','externalTransactionId':external,'playerId':player,'walletId':wallet,'roundId':run,'gameId':'manual','kind':kind,'money':{'amount':amount,'currency':currency}}"
+      },
+      {
+        "line": 70,
+        "text": "manual_http \"$1-wallet\" internal GET \"/wallets/$WALLET_ID\""
+      },
+      {
+        "line": 71,
+        "text": "manual_http \"$1-ledger\" internal GET \"/wallets/$WALLET_ID/ledger?limit=200\""
+      },
+      {
+        "line": 72,
+        "text": "manual_http \"$1-reconciliation\" internal POST \"/wallets/$WALLET_ID/reconciliation\""
+      }
+    ]
+  },
+  {
+    "file": "scripts/test-mutations.py",
+    "references": [
+      {
+        "line": 11,
+        "text": "('orphan_ledger_reference','internal/app/usecase/process.go','wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, s.ID, direction','wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, \"10000000\"+s.ID[8:], direction','Link ledger to a nonexistent transaction'),"
+      },
+      {
+        "line": 12,
+        "text": "('opening_event_wrong_version','internal/app/usecase/wallet.go','helper.balanceEvent(ctx, tx, t, entry, 1)','helper.balanceEvent(ctx, tx, t, entry, 2)','Publish walletVersion 2 for opening whose wallet version is 1'),"
+      },
+      {
+        "line": 18,
+        "text": "('http_missing_balance_omission','internal/transport/httpapi/dto.go','`json:\"balance,omitempty\"`','`json:\"balance\"`','Emit null balance for rejected/pending outcomes'),"
+      },
+      {
+        "line": 41,
+        "text": "if original.count(old)!=1 and not (name=='http_missing_balance_omission' and original.count(old)==2):raise RuntimeError('Mutation target not unique: '+name)"
+      }
+    ]
+  },
+  {
+    "file": "scripts/unit-coverage-report.py",
+    "references": [
+      {
+        "line": 7,
+        "text": "TARGETS = ("
+      },
+      {
+        "line": 9,
+        "text": "\"internal/domain/wallet\","
+      },
+      {
+        "line": 28,
+        "text": "summary = {package: {\"covered\": 0, \"statements\": 0} for package in TARGETS}"
+      }
+    ]
+  },
+  {
+    "file": "scripts/verify-sql.mjs",
+    "references": [
+      {
+        "line": 6,
+        "text": "const wallet='00000000-0000-4000-8000-000000000001', player='00000000-0000-4000-8000-000000000002', tx='00000000-0000-4000-8000-000000000003';"
+      },
+      {
+        "line": 8,
+        "text": "INSERT INTO wallets VALUES('${wallet}','${player}','BRL',10000,1,now(),now());"
+      },
+      {
+        "line": 9,
+        "text": "INSERT INTO wager_transactions(id,origin,wallet_id,player_id,kind,amount_minor,currency,status,balance_after_minor,created_at,updated_at) VALUES('${tx}','INTERNAL','${wallet}','${player}','OPENING',10000,'BRL','PROCESSED',10000,now(),now());"
+      },
+      {
+        "line": 10,
+        "text": "INSERT INTO wallet_ledger_entries(id,wallet_id,transaction_id,direction,amount_minor,currency,balance_before_minor,balance_after_minor,created_at) VALUES(gen_random_uuid(),'${wallet}','${tx}','CREDIT',10000,'BRL',0,10000,now());"
+      },
+      {
+        "line": 11,
+        "text": "INSERT INTO outbox_events(event_id,aggregate_id,event_type,payload,occurred_at,next_attempt_at) SELECT gen_random_uuid(),'${wallet}',e,jsonb_build_object('data',jsonb_build_object('transactionId','${tx}')),now(),now() FROM unnest(ARRAY['WagerTransactionProcessed','WalletBalanceChanged']) e;"
+      },
+      {
+        "line": 13,
+        "text": "for (const sql of [`UPDATE wallets SET balance_minor=1,version=2 WHERE id='${wallet}'`,`DELETE FROM wallet_ledger_entries`,`UPDATE wallet_ledger_entries SET amount_minor=1`,`TRUNCATE wallet_ledger_entries`]){let rejected=false;try{await db.exec(sql)}catch(e){rejected=true;console.log('REJECTED',e.message)}if(!rejected)throw Error('mutation accepted '+sql)}"
+      },
+      {
+        "line": 16,
+        "text": "INSERT INTO wager_transactions(id,origin,provider_id,external_transaction_id,idempotency_key,payload_hash,wallet_id,player_id,round_id,game_id,kind,amount_minor,currency,status,created_at,updated_at) VALUES('${bet}','EXTERNAL','p','bet','key','hash','${wallet}','${player}','r','g','BET',8000,'BRL','PENDING',now(),now());"
+      },
+      {
+        "line": 17,
+        "text": "SELECT * FROM wallets WHERE id='${wallet}' FOR NO KEY UPDATE;"
+      },
+      {
+        "line": 18,
+        "text": "INSERT INTO wallet_ledger_entries(id,wallet_id,transaction_id,direction,amount_minor,currency,balance_before_minor,balance_after_minor,created_at) VALUES(gen_random_uuid(),'${wallet}','${bet}','DEBIT',8000,'BRL',10000,2000,now());"
+      },
+      {
+        "line": 19,
+        "text": "UPDATE wallets SET balance_minor=2000,version=2 WHERE id='${wallet}';"
+      },
+      {
+        "line": 20,
+        "text": "UPDATE wager_transactions SET status='PROCESSED',balance_after_minor=2000 WHERE id='${bet}';"
+      },
+      {
+        "line": 21,
+        "text": "INSERT INTO outbox_events(event_id,aggregate_id,event_type,payload,occurred_at,next_attempt_at) SELECT gen_random_uuid(),'${wallet}',e,jsonb_build_object('data',jsonb_build_object('transactionId','${bet}')),now(),now() FROM unnest(ARRAY['WagerTransactionProcessed','WalletBalanceChanged']) e;"
+      },
+      {
+        "line": 22,
+        "text": "COMMIT;`);console.log('OK atomic bet; balance', (await db.query('SELECT balance_minor::text,version FROM wallets')).rows);"
+      }
+    ]
+  },
+  {
+    "file": "test/integration/contract_test.go",
+    "references": [
+      {
+        "line": 25,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 36,
+        "text": "expected := []byte(fmt.Sprintf(`{\"transactionId\":%q,\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"80.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}`, out.ID))"
+      },
+      {
+        "line": 40,
+        "text": "var txBalance, ledgerBalance, walletBalance int64"
+      },
+      {
+        "line": 41,
+        "text": "e = db.QueryRow(context.Background(), `SELECT t.balance_after_minor,l.balance_after_minor,w.balance_minor FROM wager_transactions t JOIN wallet_ledger_entries l ON l.transaction_id=t.id AND l.wallet_id=t.wallet_id JOIN wallets w ON w.id=t.wallet_id WHERE t.id=$1`, out.ID).Scan(&txBalance, &ledgerBalance, &walletBalance)"
+      },
+      {
+        "line": 42,
+        "text": "if e != nil || txBalance != 8000 || ledgerBalance != 8000 || walletBalance != 8000 {"
+      },
+      {
+        "line": 43,
+        "text": "t.Fatal(\"inconsistent committed balances\", txBalance, ledgerBalance, walletBalance, e)"
+      },
+      {
+        "line": 45,
+        "text": "if n := sqlCount(t, `SELECT count(*) FROM outbox_events WHERE aggregate_id=$1 AND payload->'data'->>'transactionId'=$2 AND ((event_type='WagerTransactionProcessed' AND payload->'data'->'money'->>'amount'='20.00') OR (event_type='WalletBalanceChanged' AND payload->'data'->>'direction'='DEBIT' AND payload->'data'->'balanceBefore'->>'amount'='100.00' AND payload->'data'->'balanceAfter'->>'amount'='80.00' AND payload->'data'->>'walletVersion'='2'))`, w.ID, out.ID); n != 2 {"
+      },
+      {
+        "line": 58,
+        "text": "before := sqlCount(t, `SELECT count(*) FROM wager_transactions WHERE wallet_id=$1`, w.ID)"
+      },
+      {
+        "line": 63,
+        "text": "if after := sqlCount(t, `SELECT count(*) FROM wager_transactions WHERE wallet_id=$1`, w.ID); after != before {"
+      },
+      {
+        "line": 66,
+        "text": "reconcile(t, w, \"85.00\", 3)"
+      }
+    ]
+  },
+  {
+    "file": "test/integration/recovery_test.go",
+    "references": [
+      {
+        "line": 34,
+        "text": "return sqlCount(t, `SELECT count(*) FROM inbox_messages WHERE message_id=$1 AND completed_at IS NOT NULL`, id) == 1"
+      },
+      {
+        "line": 42,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 47,
+        "text": "// Hold the wallet: the SQS message is in flight before the HTTP submission joins it."
+      },
+      {
+        "line": 53,
+        "text": "if _, e = lock.Exec(context.Background(), `SELECT id FROM wallets WHERE id=$1 FOR NO KEY UPDATE`, w.ID); e != nil {"
+      },
+      {
+        "line": 82,
+        "text": "reconcile(t, w, \"95.00\", 2)"
+      },
+      {
+        "line": 83,
+        "text": "// A new operation first received through SQS must commit its business rejection and inbox."
+      },
+      {
+        "line": 99,
+        "text": "return sqlCount(t, `SELECT deliveries FROM inbox_messages WHERE message_id=$1`, badID) >= 2"
+      },
+      {
+        "line": 101,
+        "text": "reconcile(t, w, \"95.00\", 2)"
+      },
+      {
+        "line": 105,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 133,
+        "text": "reconcile(t, w, \"100.00\", 3)"
+      },
+      {
+        "line": 152,
+        "text": "if !replay.Replay || replay.ID != original.ID || replay.Balance.Amount != \"80.00\" {"
+      },
+      {
+        "line": 160,
+        "text": "reconcile(t, w, \"100.00\", 5)"
+      },
+      {
+        "line": 172,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 188,
+        "text": "reconcile(t, w, \"97.00\", 2)"
+      },
+      {
+        "line": 189,
+        "text": "publisher := startWorker(t, \"api,outbox-publisher\")"
+      },
+      {
+        "line": 190,
+        "text": "eventually(t, 45*time.Second, func() bool { return sqlCount(t, `SELECT count(*) FROM outbox_events WHERE published_at IS NULL`) == 0 })"
+      },
+      {
+        "line": 196,
+        "text": "return sqlCount(t, `SELECT count(*) FROM outbox_events WHERE payload->'data'->>'transactionId'=$1 AND attempts>0 AND published_at IS NULL AND locked_until IS NULL AND next_attempt_at>occurred_at`, r.ID) > 0"
+      },
+      {
+        "line": 199,
+        "text": "eventually(t, 30*time.Second, func() bool { return sqlCount(t, `SELECT count(*) FROM outbox_events WHERE published_at IS NULL`) == 0 })"
+      },
+      {
+        "line": 202,
+        "text": "return e == nil && strings.Contains(string(b), \"wagering_outbox_lag_seconds 0\")"
+      },
+      {
+        "line": 204,
+        "text": "reconcile(t, w, \"99.00\", 3)"
+      },
+      {
+        "line": 208,
+        "text": "w := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 215,
+        "text": "if _, e = lock.Exec(context.Background(), `SELECT id FROM wallets WHERE id=$1 FOR NO KEY UPDATE`, w.ID); e != nil {"
+      },
+      {
+        "line": 239,
+        "text": "reconcile(t, w, \"9.00\", 2)"
+      },
+      {
+        "line": 243,
+        "text": "w := openWallet(t, \"0.00\")"
+      },
+      {
+        "line": 247,
+        "text": "}{{\"POST\", \"/wallets\", map[string]any{\"playerId\": uuid.NewString(), \"initialBalance\": moneyDTO{\"10.00\", \"BRL\"}}}, {\"GET\", \"/wallets/\" + w.ID, nil}, {\"GET\", \"/wallets/\" + w.ID + \"/ledger\", nil}, {\"POST\", \"/wallets/\" + w.ID + \"/reconciliation\", nil}} {"
+      },
+      {
+        "line": 258,
+        "text": "reconcile(t, w, \"0.00\", 0)"
+      },
+      {
+        "line": 264,
+        "text": "w := openWallet(t, \"7.00\")"
+      },
+      {
+        "line": 265,
+        "text": "startWorker(t, \"outbox-publisher\")"
+      },
+      {
+        "line": 292,
+        "text": "if sqlCount(t, `SELECT count(*) FROM outbox_events WHERE event_id=$1 AND payload=$2::jsonb`, env.EventID, aws.ToString(m.Body)) != 1 {"
+      },
+      {
+        "line": 355,
+        "text": "reconcile(t, w, \"7.00\", 1)"
+      },
+      {
+        "line": 360,
+        "text": "w := openWallet(t, \"0.00\")"
+      },
+      {
+        "line": 395,
+        "text": "reconcile(t, w, \"0.00\", 0)"
+      },
+      {
+        "line": 399,
+        "text": "w := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 422,
+        "text": "if sqlCount(t, `SELECT count(*) FROM outbox_events WHERE event_type='WagerTransactionRejected' AND payload->'data'->>'transactionId'=$1`, id) != 1 {"
+      },
+      {
+        "line": 426,
+        "text": "reconcile(t, w, \"10.00\", 1)"
+      },
+      {
+        "line": 437,
+        "text": "w := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 478,
+        "text": "reconcile(t, w, \"10.00\", 1)"
+      },
+      {
+        "line": 482,
+        "text": "w := openWallet(t, \"1.00\")"
+      },
+      {
+        "line": 484,
+        "text": "if e := db.QueryRow(context.Background(), `SELECT event_id::text FROM outbox_events WHERE aggregate_id=$1 ORDER BY event_id LIMIT 1`, w.ID).Scan(&id); e != nil {"
+      },
+      {
+        "line": 487,
+        "text": "if _, e := db.Exec(context.Background(), `UPDATE outbox_events SET attempts=2,locked_until=now()+interval '1 second' WHERE event_id=$1`, id); e != nil {"
+      },
+      {
+        "line": 499,
+        "text": "if sqlCount(t, `SELECT count(*) FROM outbox_events WHERE event_id=$1 AND published_at IS NULL AND attempts=2 AND locked_until IS NOT NULL AND next_attempt_at=occurred_at`, id) != 1 {"
+      },
+      {
+        "line": 505,
+        "text": "w := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 511,
+        "text": "if _, e = lock.Exec(context.Background(), `SELECT id FROM wallets WHERE id=$1 FOR NO KEY UPDATE`, w.ID); e != nil {"
+      },
+      {
+        "line": 532,
+        "text": "before, e := tx.Wallets().Get(ctx, w.ID)"
+      },
+      {
+        "line": 541,
+        "text": "totals, e := tx.Ledger().Totals(ctx, w.ID)"
+      },
+      {
+        "line": 545,
+        "text": "if totals.Calculated.Minor() != before.Balance().Minor() || totals.Calculated.Amount() != \"9.00\" {"
+      },
+      {
+        "line": 546,
+        "text": "return fmt.Errorf(\"mixed reconciliation snapshots\")"
+      },
+      {
+        "line": 552,
+        "text": "reconcile(t, w, \"11.00\", 3)"
+      }
+    ]
+  },
+  {
+    "file": "test/integration/system_test.go",
+    "references": [
+      {
+        "line": 221,
+        "text": "type walletDTO struct {"
+      },
+      {
+        "line": 224,
+        "text": "Balance moneyDTO `json:\"balance\"`"
+      },
+      {
+        "line": 230,
+        "text": "Balance *moneyDTO `json:\"balance\"`"
+      },
+      {
+        "line": 263,
+        "text": "func openWallet(t *testing.T, amount string) walletDTO {"
+      },
+      {
+        "line": 265,
+        "text": "body := map[string]any{\"playerId\": uuid.NewString(), \"initialBalance\": moneyDTO{amount, \"BRL\"}}"
+      },
+      {
+        "line": 266,
+        "text": "code, b, e := request(apps[0].url, \"POST\", \"/wallets\", tokenInternal, \"\", body)"
+      },
+      {
+        "line": 270,
+        "text": "var w walletDTO"
+      },
+      {
+        "line": 276,
+        "text": "func operation(w walletDTO, kind, amount string) map[string]any {"
+      },
+      {
+        "line": 277,
+        "text": "return map[string]any{\"providerId\": \"provider-a\", \"externalTransactionId\": uuid.NewString(), \"playerId\": w.Player, \"walletId\": w.ID, \"roundId\": \"round\", \"gameId\": \"game\", \"kind\": kind, \"money\": moneyDTO{amount, \"BRL\"}}"
+      },
+      {
+        "line": 298,
+        "text": "func reconcile(t *testing.T, w walletDTO, want string, entries int) {"
+      },
+      {
+        "line": 300,
+        "text": "code, b, e := request(apps[0].url, \"POST\", \"/wallets/\"+w.ID+\"/reconciliation\", tokenInternal, \"\", nil)"
+      },
+      {
+        "line": 302,
+        "text": "Stored     moneyDTO `json:\"storedBalance\"`"
+      },
+      {
+        "line": 310,
+        "text": "t.Fatalf(\"reconcile %d %s %v\", code, b, e)"
+      },
+      {
+        "line": 335,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 344,
+        "text": "if e == nil && (r.Status != \"PROCESSED\" || r.Balance.Amount != \"99.00\") {"
+      },
+      {
+        "line": 357,
+        "text": "reconcile(t, w, \"99.00\", 2)"
+      },
+      {
+        "line": 361,
+        "text": "if !replay.Replay || replay.Balance.Amount != \"99.00\" {"
+      },
+      {
+        "line": 376,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 409,
+        "text": "reconcile(t, w, \"20.00\", 2)"
+      },
+      {
+        "line": 411,
+        "text": "t.Run(\"wallet-lock-isolation\", func(t *testing.T) {"
+      },
+      {
+        "line": 412,
+        "text": "w1 := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 413,
+        "text": "w2 := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 419,
+        "text": "if _, e = tx.Exec(context.Background(), \"SELECT 1 FROM wallets WHERE id=$1 FOR NO KEY UPDATE\", w1.ID); e != nil {"
+      },
+      {
+        "line": 432,
+        "text": "t.Fatal(\"same-wallet request should block\", e)"
+      },
+      {
+        "line": 441,
+        "text": "reconcile(t, w1, \"9.00\", 2)"
+      },
+      {
+        "line": 442,
+        "text": "reconcile(t, w2, \"9.00\", 2)"
+      },
+      {
+        "line": 446,
+        "text": "w := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 470,
+        "text": "for _, path := range []string{\"/wallets/\" + w.ID, \"/wallets/\" + w.ID + \"/ledger\"} {"
+      },
+      {
+        "line": 476,
+        "text": "reconcile(t, w, \"9.00\", 2)"
+      },
+      {
+        "line": 479,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 502,
+        "text": "reconcile(t, w, \"80.00\", 4)"
+      },
+      {
+        "line": 503,
+        "text": "w2 := openWallet(t, \"0.00\")"
+      },
+      {
+        "line": 513,
+        "text": "reconcile(t, w2, \"0.00\", 2)"
+      },
+      {
+        "line": 516,
+        "text": "w := openWallet(t, \"10.00\")"
+      },
+      {
+        "line": 517,
+        "text": "for _, q := range []string{\"UPDATE wallet_ledger_entries SET amount_minor=1 WHERE wallet_id=$1\", \"DELETE FROM wallet_ledger_entries WHERE wallet_id=$1\", \"UPDATE wallets SET balance_minor=-1,version=version+1 WHERE id=$1\", \"UPDATE wallets SET balance_minor=1,version=version+1 WHERE id=$1\", \"UPDATE wager_transactions SET status='FAILED' WHERE wallet_id=$1\", \"UPDATE outbox_events SET payload='{}' WHERE aggregate_id=$1\"} {"
+      },
+      {
+        "line": 522,
+        "text": "if _, e := db.Exec(context.Background(), \"TRUNCATE wallet_ledger_entries\"); e == nil {"
+      },
+      {
+        "line": 525,
+        "text": "reconcile(t, w, \"10.00\", 1)"
+      },
+      {
+        "line": 527,
+        "text": "_, e := db.Exec(context.Background(), `CREATE FUNCTION test_reject_outbox() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN IF NEW.aggregate_id::text='`+w.ID+`' THEN RAISE EXCEPTION 'integration fault'; END IF; RETURN NEW; END $$; CREATE TRIGGER test_outbox BEFORE INSERT ON outbox_events FOR EACH ROW EXECUTE FUNCTION test_reject_outbox()`)"
+      },
+      {
+        "line": 531,
+        "text": "defer db.Exec(context.Background(), `DROP TRIGGER test_outbox ON outbox_events; DROP FUNCTION test_reject_outbox()`)"
+      },
+      {
+        "line": 537,
+        "text": "reconcile(t, w, \"10.00\", 1)"
+      },
+      {
+        "line": 568,
+        "text": "w := openWallet(t, \"0.00\")"
+      },
+      {
+        "line": 577,
+        "text": "reconcile(t, w, \"0.00\", 0)"
+      },
+      {
+        "line": 580,
+        "text": "w := openWallet(t, \"100.00\")"
+      },
+      {
+        "line": 614,
+        "text": "return sqlCount(t, `SELECT coalesce(max(deliveries),0) FROM inbox_messages WHERE message_id=$1`, id) >= 2"
+      },
+      {
+        "line": 620,
+        "text": "return sqlCount(t, `SELECT coalesce(max(deliveries),0) FROM inbox_messages WHERE message_id=$1`, id) >= 3"
+      },
+      {
+        "line": 623,
+        "text": "if replay.ID != r.ID || !replay.Replay || replay.Balance.Amount != \"95.00\" {"
+      },
+      {
+        "line": 626,
+        "text": "reconcile(t, w, \"95.00\", 2)"
+      },
+      {
+        "line": 646,
+        "text": "reconcile(t, w, \"95.00\", 2)"
+      },
+      {
+        "line": 649,
+        "text": "w := openWallet(t, \"20.00\")"
+      },
+      {
+        "line": 672,
+        "text": "reconcile(t, w, \"20.00\", 3)"
+      },
+      {
+        "line": 683,
+        "text": "reconcile(t, w, \"20.00\", 3)"
+      },
+      {
+        "line": 686,
+        "text": "w := openWallet(t, \"5.00\")"
+      },
+      {
+        "line": 687,
+        "text": "if sqlCount(t, `SELECT count(*) FROM outbox_events WHERE aggregate_id=$1 AND published_at IS NULL`, w.ID) != 2 {"
+      },
+      {
+        "line": 690,
+        "text": "p, e := start(\"outbox-publisher\", \"after_publish_before_mark\", t.TempDir())"
+      },
+      {
+        "line": 704,
+        "text": "if e = db.QueryRow(context.Background(), `SELECT event_id::text FROM outbox_events WHERE attempts>0 AND published_at IS NULL ORDER BY occurred_at LIMIT 1`).Scan(&eventID); e != nil {"
+      },
+      {
+        "line": 708,
+        "text": "if _, e = db.Exec(context.Background(), `UPDATE outbox_events SET locked_until=now()-interval '1 second' WHERE event_id=$1`, eventID); e != nil {"
+      },
+      {
+        "line": 711,
+        "text": "a, e := start(\"outbox-publisher\", \"\", \"\")"
+      },
+      {
+        "line": 716,
+        "text": "b, e := start(\"outbox-publisher\", \"\", \"\")"
+      },
+      {
+        "line": 721,
+        "text": "eventually(t, 100*time.Second, func() bool { return sqlCount(t, `SELECT count(*) FROM outbox_events WHERE published_at IS NULL`) == 0 })"
+      },
+      {
+        "line": 722,
+        "text": "if sqlCount(t, `SELECT attempts FROM outbox_events WHERE event_id=$1`, eventID) < 2 {"
+      },
+      {
+        "line": 741,
+        "text": "if sqlCount(t, `SELECT count(*) FROM outbox_events WHERE event_id=$1 AND payload=$2::jsonb`, eventID, aws.ToString(m.Body)) != 1 {"
+      },
+      {
+        "line": 751,
+        "text": "reconcile(t, w, \"5.00\", 1)"
+      },
+      {
+        "line": 753,
+        "text": "func TestLedgerCursorAndOpeningZero(t *testing.T) {"
+      },
+      {
+        "line": 754,
+        "text": "w := openWallet(t, \"0.00\")"
+      },
+      {
+        "line": 755,
+        "text": "reconcile(t, w, \"0.00\", 0)"
+      },
+      {
+        "line": 759,
+        "text": "status, b, e := request(apps[0].url, \"GET\", \"/wallets/\"+w.ID+\"/ledger?limit=2\", tokenInternal, \"\", nil)"
+      },
+      {
+        "line": 770,
+        "text": "_, b, e = request(apps[1].url, \"GET\", \"/wallets/\"+w.ID+\"/ledger?limit=2&cursor=\"+url.QueryEscape(page.Cursor), tokenInternal, \"\", nil)"
+      },
+      {
+        "line": 778,
+        "text": "reconcile(t, w, \"3.00\", 3)"
+      },
+      {
+        "line": 790,
+        "text": "code, _, e := request(apps[0].url, \"GET\", \"/wallets/\"+uuid.NewString(), tok, \"\", nil)"
+      }
+    ]
+  }
+]

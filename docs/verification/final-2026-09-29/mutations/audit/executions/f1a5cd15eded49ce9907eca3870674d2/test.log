@@ -1,0 +1,57 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	3.108s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:27:56 INFO transaction handled correlationId="" messageId="" transactionId=5d658af8-a356-42d3-9648-6e152805c3ca walletId=f79df59d-5106-4080-a3bd-ab7c4ac3f9d3 providerId=p status=PROCESSED
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x105510518]
+
+goroutine 27 [running]:
+testing.tRunner.func1.2({0x105c302c8, 0x105d1bb60})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x105c302c8?, 0x105d1bb60?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.TestPersistentResultReplayAndPayloadConflict(0x177ff034c908)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/idempotency_test.go:65 +0x4f8
+testing.tRunner(0x177ff034c908, 0x105cc6110)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.761s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.399s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.213s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1044944e4]
+
+goroutine 5 [running]:
+testing.tRunner.func1.2({0x104656e28, 0x104695390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104656e28?, 0x104695390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.copyMoney(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/domain/wager/transaction.go:290
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/domain/wager/transaction.go:177 +0x74
+github.com/alexandre/wagering/internal/domain/wager_test.TestPendingRetryErrorsHaveExactText(0x6cf6403c4248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/domain/wager/error_text_contract_test.go:13 +0x50
+testing.tRunner(0x6cf6403c4248, 0x104679a58)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	4.169s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.657s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.179s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.919s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid processed snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.291s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.562s
+FAIL

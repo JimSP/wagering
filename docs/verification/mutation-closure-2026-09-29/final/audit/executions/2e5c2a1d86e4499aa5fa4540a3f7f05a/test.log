@@ -1,0 +1,25 @@
+# github.com/alexandre/wagering/internal/domain/event
+internal/domain/event/validation.go:22:9: suspect and: k == "BET" && k == "WIN"
+ok  	github.com/alexandre/wagering/cmd/wagering	6.775s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.01s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/success (0.01s)
+        failpoint_contract_test.go:60: exit=exit status 1 output=--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+                failpoint_contract_test.go:20: invalid integration event: rejected fact
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.073s
+FAIL	github.com/alexandre/wagering/internal/domain/event [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/money	7.529s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.632s
+ok  	github.com/alexandre/wagering/internal/domain/wager	7.904s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.325s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.247s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.348s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.224s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.672s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.033s
+FAIL

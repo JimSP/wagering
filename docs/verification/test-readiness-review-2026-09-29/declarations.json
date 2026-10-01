@@ -1,0 +1,4240 @@
+[
+  {
+    "path": "cmd/wagering/app_test.go",
+    "sha256": "fd8c06fc4f45185dbb27e2885f0511fc0019e55c51649cf65dfec51bf63979b7",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestFxGraph",
+        "line": 12,
+        "end_line": 16,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Options"
+        ]
+      },
+      {
+        "name": "TestShutdownBudgetConfiguration",
+        "line": 18,
+        "end_line": 29,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Options",
+          "append"
+        ]
+      },
+      {
+        "name": "TestCompositionConstructsLogger",
+        "line": 31,
+        "end_line": 42,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Options"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "cmd/wagering/lifecycle_integration_test.go",
+    "sha256": "6b4ffa2f44d8e7f26465b7e40d0c5f17f65ab6b837779609b82690ccf5e958dc",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestRealFxStartStop",
+        "line": 17,
+        "end_line": 36,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Options",
+          "append",
+          "c",
+          "cancel"
+        ]
+      },
+      {
+        "name": "TestJWKSStartupFailureClosesDatabase",
+        "line": 38,
+        "end_line": 52,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Options",
+          "append",
+          "cancel"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/failpoint_contract_test.go",
+    "sha256": "de0cbab6a946a55ce73f0cd3261dfbf05abdc49b8b04cab85f1bbc50a669db54",
+    "build_tags": [
+      "faults"
+    ],
+    "declarations": [
+      {
+        "name": "TestPublishCrashOccursOnlyAfterSuccessfulSend",
+        "line": 15,
+        "end_line": 75,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 50,
+            "name_expression": "mode"
+          }
+        ],
+        "local_call_candidates": [
+          "NewPublishOutbox",
+          "append",
+          "cancel",
+          "clockFunc",
+          "publishFunc"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/http_contract_test.go",
+    "sha256": "0bea028f44795a365c143341adc106c2e62d4714279d1f55748f8e59c6a74089",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+        "line": 124,
+        "end_line": 200,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 131,
+            "name_expression": "step.id"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedOperation",
+          "assertWire",
+          "decimal",
+          "newContractAPI",
+          "openBetJourney",
+          "pairedScenarioWith",
+          "requestBody",
+          "responseID"
+        ]
+      },
+      {
+        "name": "TestHTTPInvalidInputsAndAuthorizationHaveNoEffects",
+        "line": 202,
+        "end_line": 254,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 223,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "assertWire",
+          "delete",
+          "newContractAPI",
+          "requestBody",
+          "scenarioWith",
+          "string"
+        ]
+      },
+      {
+        "name": "TestHTTPOpeningAndPermanentFailureHaveExactWireContracts",
+        "line": 256,
+        "end_line": 312,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 260,
+            "name_expression": "\"opening=\" + amount"
+          }
+        ],
+        "local_call_candidates": [
+          "assertWire",
+          "len",
+          "newContractAPI",
+          "requestBody",
+          "scenarioWith"
+        ]
+      },
+      {
+        "name": "TestHTTPDependencyErrorsRollBackAndRetryPreservesIdentity",
+        "line": 314,
+        "end_line": 347,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 316,
+            "name_expression": "fmt.Sprintf(\"transient=%v\", transient)"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedOperation",
+          "assertWire",
+          "newContractAPI",
+          "pairedScenarioWith",
+          "requestBody",
+          "responseID"
+        ]
+      },
+      {
+        "name": "TestHTTPDuplicateKeysFollowDocumentedLastValuePolicy",
+        "line": 349,
+        "end_line": 361,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "assertPairedOperation",
+          "assertWire",
+          "newContractAPI",
+          "pairedScenarioWith",
+          "requestBody",
+          "responseID",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/idempotency_test.go",
+    "sha256": "bd292617894b3faef63ebc8f69f8f3af9ab0124857edd6b191c00fed32242437",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestPersistentResultReplayAndPayloadConflict",
+        "line": 50,
+        "end_line": 77,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewSubmitTransaction"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/journey_semantics_test.go",
+    "sha256": "2e5095f43480e44234ab79c0be010c239e7e928deec9d1ce01cc6bd11f35406e",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "line": 49,
+        "end_line": 68,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 55,
+            "name_expression": "step.id"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "executePairJourneyStep",
+          "journeyInput",
+          "openBetJourney",
+          "pairedScenarioWith"
+        ]
+      },
+      {
+        "name": "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "line": 70,
+        "end_line": 84,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "moneyOf",
+          "pairedScenarioWith",
+          "recordPairedHistory"
+        ]
+      },
+      {
+        "name": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "line": 86,
+        "end_line": 117,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 88,
+            "name_expression": "moneyOf(t, initial).Amount()"
+          }
+        ],
+        "local_call_candidates": [
+          "len",
+          "moneyOf",
+          "scenarioWith"
+        ]
+      },
+      {
+        "name": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "line": 119,
+        "end_line": 180,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 121,
+            "name_expression": "kind"
+          },
+          {
+            "line": 151,
+            "name_expression": "\"undoing refund does not reopen original bet\""
+          },
+          {
+            "line": 165,
+            "name_expression": "\"exclusive-reversal/\" + first"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "assertPairedOperation",
+          "journeyInput",
+          "openBetJourney",
+          "pairedScenarioWith",
+          "recordPairedHistory",
+          "recordedReturn"
+        ]
+      },
+      {
+        "name": "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "line": 182,
+        "end_line": 235,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 184,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "assertPairedBET",
+          "eventsFor",
+          "journeyInput",
+          "len",
+          "moneyOf",
+          "openBetJourney",
+          "pairInput",
+          "pairedScenarioWith",
+          "recordPairedHistory",
+          "recordedReturn",
+          "string"
+        ]
+      },
+      {
+        "name": "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "line": 237,
+        "end_line": 300,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 249,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "len",
+          "mutate",
+          "pairInput",
+          "pairedScenarioWith"
+        ]
+      },
+      {
+        "name": "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+        "line": 302,
+        "end_line": 329,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "change",
+          "scenarioWith"
+        ]
+      },
+      {
+        "name": "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+        "line": 331,
+        "end_line": 440,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 333,
+            "name_expression": "map[bool]string{false: \"expires\", true: \"resolves\"}[resolve]"
+          },
+          {
+            "line": 426,
+            "name_expression": "\"deadline precedes attempts exhaustion\""
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedOperation",
+          "eventsFor",
+          "executePairJourneyStep",
+          "journeyInput",
+          "len",
+          "openBetJourney",
+          "pairedScenarioWith",
+          "string"
+        ]
+      },
+      {
+        "name": "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "line": 442,
+        "end_line": 497,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 444,
+            "name_expression": "stage"
+          },
+          {
+            "line": 475,
+            "name_expression": "\"cancelled before commit\""
+          },
+          {
+            "line": 487,
+            "name_expression": "\"cancelled request\""
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "cancel",
+          "pairedScenarioWith"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/model_semantics_test.go",
+    "sha256": "341f1ec90cbdf960ab162d0147fc0b118a2eaa5e71f5a32a1a15e1624e7589a2",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestGeneratedJourneysMatchIndependentFinancialModel",
+        "line": 19,
+        "end_line": 49,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 21,
+            "name_expression": "fmt.Sprintf(\"seed-%d\", seed)"
+          },
+          {
+            "line": 40,
+            "name_expression": "step.id"
+          }
+        ],
+        "local_call_candidates": [
+          "executePairJourneyStep",
+          "int64",
+          "len",
+          "make",
+          "newState",
+          "openBetJourney",
+          "pairedScenarioOn"
+        ]
+      },
+      {
+        "name": "TestEveryExternalKindRejectsMalformedAmountsWithoutConsumingIdentity",
+        "line": 51,
+        "end_line": 76,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 55,
+            "name_expression": "string(source) + \"/\" + kind + \"/\" + raw"
+          }
+        ],
+        "local_call_candidates": [
+          "scenarioWith",
+          "string"
+        ]
+      },
+      {
+        "name": "TestEveryFinancialOperationRollsBackFailuresAndRecoversOnce",
+        "line": 80,
+        "end_line": 125,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 100,
+            "name_expression": "fmt.Sprintf(\"%s/%s/%s/%d\", source, step.id, target.stage, target.nth)"
+          }
+        ],
+        "local_call_candidates": [
+          "executePairJourneyStep",
+          "journeyInput",
+          "openBetJourney",
+          "pairedScenarioWith"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/observable_contract_test.go",
+    "sha256": "bbf1f9cce641f96b1a402fddd8aa257f28301d8afa6ecbeecebdad22d7ae73ae",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSubmitRejectsEachMissingInboxFieldBeforeAnyEffect",
+        "line": 15,
+        "end_line": 36,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 17,
+            "name_expression": "field"
+          }
+        ],
+        "local_call_candidates": [
+          "scenarioWith"
+        ]
+      },
+      {
+        "name": "TestSubmissionObservabilityFollowsCommittedOutcome",
+        "line": 37,
+        "end_line": 70,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 39,
+            "name_expression": "map[bool]string{false: \"success and replay\", true: \"failure\"}[failed]"
+          }
+        ],
+        "local_call_candidates": [
+          "len",
+          "scenarioWith"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/outbox_paths_test.go",
+    "sha256": "13a902d2a009ca88141ed14915c2f801fe48d427e3108c92cdad642b7f04d411",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestOutboxPublishRetryConfirmationAndLag",
+        "line": 14,
+        "end_line": 130,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 24,
+            "name_expression": "stage"
+          }
+        ],
+        "local_call_candidates": [
+          "NewPublishOutbox",
+          "clockFunc",
+          "len",
+          "publishFunc",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/paired_bet_contract_test.go",
+    "sha256": "dbc3e29f1c0f2dc2b68bb4ea90129da666c3af363e1e52122e2c1877272c9336",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "line": 45,
+        "end_line": 72,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 48,
+            "name_expression": "string(source) + \"/\" + tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "assertPairedBET",
+          "len",
+          "pairInput",
+          "pairedBETCases",
+          "pairedScenarioWith",
+          "string"
+        ]
+      },
+      {
+        "name": "TestHTTPPairedBETUsesSameLiteralFinancialContract",
+        "line": 74,
+        "end_line": 121,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 76,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "newContractAPI",
+          "pairedBETCases",
+          "pairedScenarioWith",
+          "requestBody"
+        ]
+      },
+      {
+        "name": "TestPairedBETFailureAtEachWriteRestoresBothAccounts",
+        "line": 123,
+        "end_line": 142,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 134,
+            "name_expression": "fmt.Sprintf(\"%s/%s/%d\", source, target.stage, target.nth)"
+          },
+          {
+            "line": 139,
+            "name_expression": "\"SQS/inbox-complete/1\""
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedBETFailure"
+        ]
+      },
+      {
+        "name": "TestGeneratedPairedBETOrderPreservesOtherAccounts",
+        "line": 175,
+        "end_line": 199,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 177,
+            "name_expression": "fmt.Sprintf(\"seed-%d\", seed)"
+          },
+          {
+            "line": 186,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "int64",
+          "len",
+          "make",
+          "newState",
+          "pairInput",
+          "pairedBETCases",
+          "pairedScenarioOn"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/paired_bet_fixture_contract_test.go",
+    "sha256": "bb8fdec47c99bf205702c5f54fcd86cfc7c38b831d806a9f84e337fd9b284838",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestPairedBETComparatorAcceptsBothAccountEvents",
+        "line": 19,
+        "end_line": 74,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "assertPairedBET",
+          "eventsFor",
+          "len",
+          "moneyOf",
+          "pairedBETCases",
+          "pairedScenarioWith",
+          "string"
+        ]
+      },
+      {
+        "name": "TestPairedFixtureRollbackPreservesGuaranteeAndBinding",
+        "line": 78,
+        "end_line": 99,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "moneyOf",
+          "pairedScenarioWith"
+        ]
+      },
+      {
+        "name": "TestPairedBETRejectedIdentityStaysRejectedAfterGuaranteeTopUp",
+        "line": 101,
+        "end_line": 121,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 103,
+            "name_expression": "string(source)"
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "assertPairedBET",
+          "moneyOf",
+          "pairInput",
+          "pairedBETCases",
+          "pairedScenarioWith",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/paired_bet_fixture_test.go",
+    "sha256": "ce1ceae973bd43538054ff32560c8be72ece9b98a0a02e7ba9e7f51a96c69c14",
+    "build_tags": [],
+    "declarations": []
+  },
+  {
+    "path": "internal/app/usecase/paired_journey_fixture_test.go",
+    "sha256": "8d33656fe4ba6b76a40c0bdc06e092f33498dd77ba5dc897a1b457bbf61abe21",
+    "build_tags": [],
+    "declarations": []
+  },
+  {
+    "path": "internal/app/usecase/ports_test.go",
+    "sha256": "34dc8cbdc1e24d2b5d07f4367731f32ab74fcbb6159883f5ae56108eae1b5bb5",
+    "build_tags": [],
+    "declarations": []
+  },
+  {
+    "path": "internal/app/usecase/read_failure_test.go",
+    "sha256": "8abd92e13e24f44586f4b21502c817ecfaddad5cf7e5675a14598fa17e2e793a",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestReadUseCasesPreserveScopePaginationAndErrors",
+        "line": 17,
+        "end_line": 96,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 22,
+            "name_expression": "map[bool]string{false: \"success\", true: \"repository failure\"}[failure]"
+          },
+          {
+            "line": 74,
+            "name_expression": "\"reconciliation/\" + which"
+          }
+        ],
+        "local_call_candidates": [
+          "NewGetTransaction",
+          "NewGetWallet",
+          "NewListLedger",
+          "NewReconcileWallet",
+          "pathTransaction",
+          "pathWallet"
+        ]
+      },
+      {
+        "name": "TestOpeningStopsAtEveryFailedDependency",
+        "line": 101,
+        "end_line": 149,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 103,
+            "name_expression": "stage"
+          }
+        ],
+        "local_call_candidates": [
+          "NewOpenWallet",
+          "append",
+          "clockFunc",
+          "financial",
+          "idFunc",
+          "pathMoney"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/reconciliation_contract_test.go",
+    "sha256": "80ff9fd91c5a57f4607339c535415f676cb81e53cba41372dc53509ab0da3821",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestReconciliationMetricsOnlyDescribeSuccessfulInconsistentReads",
+        "line": 11,
+        "end_line": 44,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 13,
+            "name_expression": "mode"
+          }
+        ],
+        "local_call_candidates": [
+          "NewReconcileWallet",
+          "int64",
+          "pathMoney",
+          "pathWallet"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/recorded_history_fixture_test.go",
+    "sha256": "1964b32652400a77a723f23af81e8d78e27d231006ec4939bb4e8a163d1f46fe",
+    "build_tags": [],
+    "declarations": []
+  },
+  {
+    "path": "internal/app/usecase/reference_failure_test.go",
+    "sha256": "13921aecb6a0ae28bf0c9268b7fc4998d8069d31669eb8dcb6973e5eefb08b42",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestReferenceWorkerClassifiesRecoveryAndAuditFailures",
+        "line": 13,
+        "end_line": 103,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 15,
+            "name_expression": "stage"
+          }
+        ],
+        "local_call_candidates": [
+          "NewProcessPendingReferences",
+          "cancel",
+          "clockFunc",
+          "len",
+          "pathSubmit",
+          "pathTransaction"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/reference_semantics_test.go",
+    "sha256": "59022eaba3866603d8b4681bcbcf7fcdb4851aa4879df1177fce309f4b7abc6e",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+        "line": 17,
+        "end_line": 102,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 18,
+            "name_expression": "\"another provider does not resolve the same external id\""
+          },
+          {
+            "line": 34,
+            "name_expression": "fmt.Sprintf(\"pending and permanently failed references/%v\", failed)"
+          },
+          {
+            "line": 57,
+            "name_expression": "\"different wallet is incompatible\""
+          },
+          {
+            "line": 71,
+            "name_expression": "\"game equality is not required for an eligible refund\""
+          },
+          {
+            "line": 84,
+            "name_expression": "\"a BET reference does not authorize an unfunded WIN\""
+          },
+          {
+            "line": 93,
+            "name_expression": "\"credit overflow is rejected without rounding or mutation\""
+          }
+        ],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "assertPairedBET",
+          "assertPairedOperation",
+          "executePairJourneyStep",
+          "journeyInput",
+          "moneyOf",
+          "openBetJourney",
+          "pairInput",
+          "pairedBETCases",
+          "pairedScenarioOn",
+          "pairedScenarioWith"
+        ]
+      },
+      {
+        "name": "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox",
+        "line": 104,
+        "end_line": 184,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 105,
+            "name_expression": "\"business rejection completes inbox and remains terminal\""
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "assertPairedBET",
+          "eventsFor",
+          "len",
+          "pairInput",
+          "pairedScenarioWith"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/result_lifecycle_contract_test.go",
+    "sha256": "c46f9016c5cfccc5f10a80b38ac1e70273ae94ad2a747e6aad81897113e36685",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl",
+        "line": 77,
+        "end_line": 95,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 79,
+            "name_expression": "\"denied-\" + who"
+          }
+        ],
+        "local_call_candidates": [
+          "assertWire",
+          "resultScenario"
+        ]
+      },
+      {
+        "name": "TestConfirmedResultAutomaticallyEnqueuesOnlyItsOwnSettlement",
+        "line": 97,
+        "end_line": 125,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "len",
+          "resultScenario"
+        ]
+      },
+      {
+        "name": "TestClosedBetRejectsRefundWhileSettlementIsStillPending",
+        "line": 127,
+        "end_line": 137,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "assertPairReplay",
+          "assertPairedOperation",
+          "pairInput",
+          "resultScenario"
+        ]
+      },
+      {
+        "name": "TestClosedResultCannotChangeDistributionOrConsumeAnotherIdentity",
+        "line": 139,
+        "end_line": 150,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "resultScenario"
+        ]
+      },
+      {
+        "name": "TestInvalidDistributionDoesNotCloseBetOrQueuePartialSettlement",
+        "line": 152,
+        "end_line": 172,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 154,
+            "name_expression": "amount"
+          }
+        ],
+        "local_call_candidates": [
+          "resultScenario"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/semantic_fixture_test.go",
+    "sha256": "c24317a259c92033737708470552f23f75535051a64516736c75883d6b0d1ff8",
+    "build_tags": [],
+    "declarations": []
+  },
+  {
+    "path": "internal/app/usecase/settlement_facts_contract_test.go",
+    "sha256": "7e95e678b415a664fa70ac168f9d3c947af2313295cc3ff52573ce933890d6b1",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals",
+        "line": 36,
+        "end_line": 54,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 41,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "checkSettlementFacts"
+        ]
+      },
+      {
+        "name": "TestSettlementComparatorRejectsBalancedButWrongFinancialFacts",
+        "line": 56,
+        "end_line": 91,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 76,
+            "name_expression": "name"
+          },
+          {
+            "line": 84,
+            "name_expression": "\"inverse references another journal\""
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "change",
+          "checkSettlementFacts",
+          "fundedSettlementFacts",
+          "reversedSettlementFacts"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/settlement_message_contract_test.go",
+    "sha256": "35a2c581f1cb97703fa4091351778332a0f21c9bae4528b0c48f220ca703ad25",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+        "line": 35,
+        "end_line": 61,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewConsumeWagerMessage",
+          "fn",
+          "pathSubmit",
+          "settlementMessage"
+        ]
+      },
+      {
+        "name": "TestSettlementMessagePropagatesDatabaseFailure",
+        "line": 66,
+        "end_line": 97,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 68,
+            "name_expression": "stage"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumeWagerMessage",
+          "fn",
+          "pathSubmit",
+          "settlementMessage"
+        ]
+      },
+      {
+        "name": "TestSettlementMessageRejectsMissingIDAndInlineParticipants",
+        "line": 99,
+        "end_line": 115,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 107,
+            "name_expression": "body"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumeWagerMessage",
+          "pathSubmit",
+          "settlementMessage",
+          "string"
+        ]
+      },
+      {
+        "name": "TestSettlementRedeliveryKeepsSameDatabaseIdentity",
+        "line": 119,
+        "end_line": 136,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewConsumeWagerMessage",
+          "append",
+          "len",
+          "pathSubmit",
+          "settlementDelivery"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/settlement_red_contract_test.go",
+    "sha256": "a80c49352b596133221ce711e832560814e24f2c0b645eeb9f9281d508b2a791",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestRevisedStandaloneWINCannotCreateUnfundedMoney",
+        "line": 44,
+        "end_line": 68,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 47,
+            "name_expression": "fmt.Sprintf(\"%s/balance-%d\", source, balance)"
+          }
+        ],
+        "local_call_candidates": [
+          "len",
+          "revisedInput",
+          "revisedLegacyScenario"
+        ]
+      },
+      {
+        "name": "TestRevisedBETCannotSpendWithoutItsOwnGuarantee",
+        "line": 72,
+        "end_line": 105,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 74,
+            "name_expression": "string(source)"
+          }
+        ],
+        "local_call_candidates": [
+          "len",
+          "moneyOf",
+          "revisedInput",
+          "revisedLegacyScenario",
+          "string"
+        ]
+      },
+      {
+        "name": "TestRevisedCommittedMovementCannotHaveOnlyOneSide",
+        "line": 108,
+        "end_line": 113,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "pairInput",
+          "pairedBETCases",
+          "pairedScenarioWith"
+        ]
+      },
+      {
+        "name": "TestRevisedBETMustNotEmitWalletDebitAsStakeCommitment",
+        "line": 114,
+        "end_line": 120,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "assertPairedBET",
+          "pairInput",
+          "pairedBETCases",
+          "pairedScenarioWith"
+        ]
+      },
+      {
+        "name": "TestRevisedPayoutCannotOverdrawOperationalWallet",
+        "line": 125,
+        "end_line": 139,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "moneyOf",
+          "revisedLegacyScenario"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/submit_failure_test.go",
+    "sha256": "75381863f83de256f505a07b9ef1f5223749e359e6843c9240b30a1f22e757a2",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSubmitInputAndLookupFailures",
+        "line": 18,
+        "end_line": 92,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 20,
+            "name_expression": "name"
+          },
+          {
+            "line": 30,
+            "name_expression": "stage"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumeWagerMessage",
+          "change",
+          "len",
+          "pathInput",
+          "pathMoney",
+          "pathSubmit",
+          "pathWallet"
+        ]
+      },
+      {
+        "name": "TestProcessingPropagatesDomainAndPortFailures",
+        "line": 94,
+        "end_line": 196,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 97,
+            "name_expression": "stage"
+          },
+          {
+            "line": 167,
+            "name_expression": "op"
+          }
+        ],
+        "local_call_candidates": [
+          "addEvent",
+          "clockFunc",
+          "idFunc",
+          "pathMoney",
+          "pathSubmit",
+          "pathTransaction",
+          "pathWallet"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/app/usecase/worker_contract_test.go",
+    "sha256": "57eba0737e24b31f868a2dda926f4754ee337fa0737fd13548e505f6b9439f94",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestMessageEnvelopeRejectsEachRequiredField",
+        "line": 15,
+        "end_line": 49,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 17,
+            "name_expression": "field"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumeWagerMessage",
+          "pathInput",
+          "pathSubmit"
+        ]
+      },
+      {
+        "name": "TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation",
+        "line": 50,
+        "end_line": 114,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 52,
+            "name_expression": "mode"
+          }
+        ],
+        "local_call_candidates": [
+          "NewProcessPendingReferences",
+          "cancel",
+          "clockFunc",
+          "len",
+          "pathSubmit",
+          "pathTransaction"
+        ]
+      },
+      {
+        "name": "TestEmptyReferenceQueueReturnsWithoutRepeatedClaims",
+        "line": 116,
+        "end_line": 130,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewProcessPendingReferences",
+          "clockFunc",
+          "pathSubmit"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/event/input_contract_test.go",
+    "sha256": "6822a24764fb6644c1e4167c7bcd3a5b386201664b5d69e1730cd5b1f7d2e278",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestEventDataValidatesEachIndependentField",
+        "line": 11,
+        "end_line": 68,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 34,
+            "name_expression": "\"processed/\" + name"
+          },
+          {
+            "line": 45,
+            "name_expression": "\"rejected/\" + name"
+          },
+          {
+            "line": 56,
+            "name_expression": "\"pending/\" + name"
+          }
+        ],
+        "local_call_candidates": [
+          "build",
+          "change",
+          "check",
+          "eventMeta"
+        ]
+      },
+      {
+        "name": "TestZeroMovementIsInvalidEvenWhenBalanceEquationHolds",
+        "line": 70,
+        "end_line": 76,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "eventMeta"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/event/semantics_test.go",
+    "sha256": "ee2a4c7c4de99290697885da94004377b468ce470d97f5be59e226f6e885a1c8",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots",
+        "line": 16,
+        "end_line": 90,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 42,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "eventMeta"
+        ]
+      },
+      {
+        "name": "TestEventBoundaryRejectsForgedOrUninitializedFacts",
+        "line": 94,
+        "end_line": 116,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 108,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "eventMeta"
+        ]
+      },
+      {
+        "name": "TestBalanceEventCannotContradictItsFinancialFact",
+        "line": 118,
+        "end_line": 140,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 132,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "eventMeta"
+        ]
+      },
+      {
+        "name": "TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot",
+        "line": 142,
+        "end_line": 166,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 160,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "eventMeta"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/event/validation_paths_test.go",
+    "sha256": "a7ee9034b658038b4e41144f43201122944da0f3c1a05d3e68c91b53e6f6a054",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestBalanceEventRejectsMalformedFacts",
+        "line": 11,
+        "end_line": 29,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 20,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "change",
+          "eventMeta"
+        ]
+      },
+      {
+        "name": "TestStoredEventCorruptionAndSerializationFailure",
+        "line": 31,
+        "end_line": 53,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 35,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "eventMeta"
+        ]
+      },
+      {
+        "name": "TestEventVariantsRejectInconsistentMetadata",
+        "line": 55,
+        "end_line": 89,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 74,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "build",
+          "eventMeta"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/money/arithmetic_contract_test.go",
+    "sha256": "3f28fdcbbab0903329ff827e93feac0dd61371ee8d29b43683c1c3679409370d",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestArithmeticBoundaryMatrixAndErrorOutput",
+        "line": 10,
+        "end_line": 42,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/money/boundaries_test.go",
+    "sha256": "80c1ca9166461b13a00e4ef733589d2a2cb8d7001f678617a50ee8107d7e362c",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestExactBoundaries",
+        "line": 11,
+        "end_line": 51,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/money/money_test.go",
+    "sha256": "47904036126b73c5ea8cffc9929e8be22a6ce090af4f4d06f6d21e06a39f4532",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestParse",
+        "line": 11,
+        "end_line": 30,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      },
+      {
+        "name": "TestArithmetic",
+        "line": 32,
+        "end_line": 46,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/money/property_test.go",
+    "sha256": "c40313c8141bcab0ac9265c7166b605e6c9e386b9333ab8e385d68932eddc885",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "FuzzMoneyArithmeticMatchesBigInteger",
+        "line": 12,
+        "end_line": 80,
+        "kind": "fuzz",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "len",
+          "new",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/money/semantics_test.go",
+    "sha256": "659e452ca39747f0306f18286d5e1ad633ccb3a44675e67f45589f4ba6d510ff",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestMoneyPreservesExactValueAcrossArithmeticAndWireFormat",
+        "line": 15,
+        "end_line": 103,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "new"
+        ]
+      },
+      {
+        "name": "TestMoneyRejectsAmbiguousInputAndIncompatibleOperations",
+        "line": 105,
+        "end_line": 150,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/error_text_contract_test.go",
+    "sha256": "0928eeb6eebc7e9c06e55feac09b079a5f7b376c3f549436fab7b76ce8d10305",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestPendingRetryErrorsHaveExactText",
+        "line": 11,
+        "end_line": 46,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 27,
+            "name_expression": "c.name"
+          }
+        ],
+        "local_call_candidates": [
+          "external"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/identity_semantics_test.go",
+    "sha256": "dcc52cd231adfadceaa8c34ca124206c4c2527cdab0b51ceeb73fec2b2a53dcb",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestBusinessIdentityIncludesEveryFinancialFieldInCanonicalOrder",
+        "line": 10,
+        "end_line": 37,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 29,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "change"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/input_contract_test.go",
+    "sha256": "da56e39cd8b9f5456fe606b7727b9472a278d5524023b65998637a446dd385a5",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestOpeningSnapshotRejectsEachCorruptedField",
+        "line": 11,
+        "end_line": 50,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 29,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "damage",
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestPendingSnapshotRequiresFutureSchedule",
+        "line": 51,
+        "end_line": 79,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 63,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "damage",
+          "external"
+        ]
+      },
+      {
+        "name": "TestNilTransactionReturnsDomainError",
+        "line": 80,
+        "end_line": 85,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/invariants_test.go",
+    "sha256": "26915314d01535c0ef6a06e65e83114fd059be6efc2ffd3b36f4cf61764f1a1f",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestOpeningAndSnapshotIsolation",
+        "line": 12,
+        "end_line": 34,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "string"
+        ]
+      },
+      {
+        "name": "TestReferenceStateAndRules",
+        "line": 35,
+        "end_line": 70,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "mk"
+        ]
+      },
+      {
+        "name": "TestRejectedAndFailedAreTerminal",
+        "line": 72,
+        "end_line": 91,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "mk"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/ledger_semantics_test.go",
+    "sha256": "2bcb24baf74187324af06ff0a149592d7878077b84516180c4e36ba60727dd6e",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestLedgerExplainsEveryCentWithoutReapplyingHistory",
+        "line": 24,
+        "end_line": 59,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance",
+        "line": 61,
+        "end_line": 95,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 77,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "unitMoney"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/lifecycle_semantics_test.go",
+    "sha256": "1d2ddf52b094186a482e84002617cc360c080b7c41d57f2638efea59064ae7f0",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning",
+        "line": 72,
+        "end_line": 137,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 74,
+            "name_expression": "string(kind)"
+          },
+          {
+            "line": 109,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "external",
+          "roundTrip",
+          "string",
+          "unchanged",
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestPendingReferenceRetainsItsDeadlineAcrossRetriesAndRehydration",
+        "line": 139,
+        "end_line": 166,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "external",
+          "roundTrip",
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestRehydrationRejectsImpossibleHistories",
+        "line": 168,
+        "end_line": 213,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 205,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "external",
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies",
+        "line": 215,
+        "end_line": 242,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 216,
+            "name_expression": "\"internal opening\""
+          },
+          {
+            "line": 229,
+            "name_expression": "fmt.Sprintf(\"external %s minor=%d\", kind, amount)"
+          }
+        ],
+        "local_call_candidates": [
+          "roundTrip",
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation",
+        "line": 244,
+        "end_line": 289,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 245,
+            "name_expression": "\"attempt counter cannot overflow\""
+          },
+          {
+            "line": 260,
+            "name_expression": "\"resolved identity cannot be replaced\""
+          },
+          {
+            "line": 284,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "external",
+          "unchanged"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/settlement_direction_contract_test.go",
+    "sha256": "532b348803c6b2139948d43bc98efa3816ab6579e444068c96f0454c938b340a",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestRevisedOperationalWalletMovementDirections",
+        "line": 13,
+        "end_line": 31,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 24,
+            "name_expression": "string(tc.kind)"
+          }
+        ],
+        "local_call_candidates": [
+          "string"
+        ]
+      },
+      {
+        "name": "TestRevisedReversalInvertsOperationalWalletMovement",
+        "line": 35,
+        "end_line": 51,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 44,
+            "name_expression": "string(tc.kind)"
+          }
+        ],
+        "local_call_candidates": [
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/transaction_test.go",
+    "sha256": "8f6e6f4f90cbe975425293418a4e08ab9a687ade9deff3ed04bb826b4791898b",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestZeroPolicy",
+        "line": 26,
+        "end_line": 42,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "mk"
+        ]
+      },
+      {
+        "name": "TestOpeningRejectedExternally",
+        "line": 44,
+        "end_line": 48,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      },
+      {
+        "name": "TestTerminalStateHasNoTransitions",
+        "line": 50,
+        "end_line": 62,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "mk"
+        ]
+      },
+      {
+        "name": "TestPayloadHashDeterministic",
+        "line": 64,
+        "end_line": 75,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wager/validation_paths_test.go",
+    "sha256": "1d714b98d5247902006932d94e50a341022819ab3ad73a6d3528221a1b2f77aa",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestInvalidTransactionSnapshotsAndConstructorBoundaries",
+        "line": 13,
+        "end_line": 71,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 27,
+            "name_expression": "name"
+          },
+          {
+            "line": 38,
+            "name_expression": "name"
+          },
+          {
+            "line": 63,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "action",
+          "change",
+          "damage",
+          "external",
+          "unchanged",
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestClassifiableDomainErrorsAndUnsupportedRules",
+        "line": 73,
+        "end_line": 94,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "unitMoney"
+        ]
+      },
+      {
+        "name": "TestReferenceHistoryAndTransitionTimeBoundaries",
+        "line": 96,
+        "end_line": 128,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "action",
+          "external",
+          "unchanged",
+          "unitMoney"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wallet/input_contract_test.go",
+    "sha256": "89d0d8ca3f6da4756efd18ea04adaa68d7a363c675a60ab23a5afd4eb8f2462b",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestWalletConstructorRejectsEachMissingIdentityIndependently",
+        "line": 11,
+        "end_line": 26,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 19,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "cents"
+        ]
+      },
+      {
+        "name": "TestNilWalletMovementsReturnDomainError",
+        "line": 27,
+        "end_line": 37,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 30,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "cents",
+          "move"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wallet/semantics_test.go",
+    "sha256": "2544bc7587c0c3d7fbcfb4f4f5ed8553bae55147d60440dc07550a4c24f869c9",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestWalletOwnsItsBalanceVersionAndHistory",
+        "line": 22,
+        "end_line": 56,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "cents",
+          "int64"
+        ]
+      },
+      {
+        "name": "TestWalletRejectsInvalidMovementsWithoutChangingState",
+        "line": 58,
+        "end_line": 116,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 82,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "cents",
+          "damage"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/domain/wallet/wallet_test.go",
+    "sha256": "23739d3a74cd40beaeb87d51330814d96a9af05486e93c420bcd957652264305",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestDebitInvariants",
+        "line": 12,
+        "end_line": 35,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      },
+      {
+        "name": "TestRejectInvalidStateWithoutMutation",
+        "line": 37,
+        "end_line": 54,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/auth/authorization_paths_test.go",
+    "sha256": "b151d1738033fdbade0c7f0e289149054079bbb0cb7dadb02e2a7bf5de168020",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestAuthorizationPolicyMatrix",
+        "line": 19,
+        "end_line": 48,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 22,
+            "name_expression": "name + \"/\" + label"
+          }
+        ],
+        "local_call_candidates": [
+          "PrincipalFrom",
+          "wrap"
+        ]
+      },
+      {
+        "name": "TestAuthenticationClaimsHeadersAndCacheBounds",
+        "line": 50,
+        "end_line": 122,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 79,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "NewVerifier",
+          "PrincipalFrom",
+          "cancel",
+          "token"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/auth/cache_contract_test.go",
+    "sha256": "b5a235856d661739e37bda490160c70c7075cde52e65604b3e878d4a05363cfd",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestJWKSCacheExpiryThrottleAndLifecycleContracts",
+        "line": 40,
+        "end_line": 123,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 60,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "NewVerifier",
+          "string"
+        ]
+      },
+      {
+        "name": "TestEmptyKeyIDDoesNotFetchJWKS",
+        "line": 125,
+        "end_line": 136,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewVerifier"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/auth/claims_contract_test.go",
+    "sha256": "0ba2b3eedda301dc83b3238fa842855fc42b2ddb7c8c20eb9a1e79374a40a131",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestOIDCRejectsInvalidClaimsAlgorithmsAndSignatures",
+        "line": 21,
+        "end_line": 81,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 59,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "delete",
+          "make"
+        ]
+      },
+      {
+        "name": "TestOIDCKeyRotationAcceptsNewSignatureAndRejectsRemovedKey",
+        "line": 83,
+        "end_line": 132,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewVerifier",
+          "sign"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/auth/verifier_test.go",
+    "sha256": "988644871fa6deb8a57be10605216e277edd5ecad85bc68f31389ae990c491f5",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestOIDCStartupCacheRotationAndFailureClassification",
+        "line": 20,
+        "end_line": 115,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewVerifier",
+          "allowFetch",
+          "cancel",
+          "make",
+          "token"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/config/config_test.go",
+    "sha256": "c135af6d1f0224a74adcb4be39e1eb997b38e9f20490a0b7d5638f41368b56fc",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestConfigurationDefaultsAndExplicitValues",
+        "line": 20,
+        "end_line": 53,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Load",
+          "validEnvironment"
+        ]
+      },
+      {
+        "name": "TestConfigurationRejectsEachMissingRequiredVariable",
+        "line": 54,
+        "end_line": 65,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 56,
+            "name_expression": "key"
+          }
+        ],
+        "local_call_candidates": [
+          "Load",
+          "validEnvironment"
+        ]
+      },
+      {
+        "name": "TestShutdownBudgetBoundsAndInvalidConfiguration",
+        "line": 66,
+        "end_line": 93,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 71,
+            "name_expression": "tc.value"
+          },
+          {
+            "line": 85,
+            "name_expression": "\"unknown role\""
+          }
+        ],
+        "local_call_candidates": [
+          "Load",
+          "validEnvironment"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/error_contract_test.go",
+    "sha256": "9dbf8541dcb2da92f4e5b7c245a18b569ec985bacda33dd0fd0aa88ca4460b61",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestTransportFailuresPreserveCauseAndRetryClassification",
+        "line": 13,
+        "end_line": 26,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 15,
+            "name_expression": "cause.Error()"
+          }
+        ],
+        "local_call_candidates": [
+          "classify"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/guarantee_migration_integration_test.go",
+    "sha256": "697c72616f6a298bcda372aaec760e0bce166bc259ea0c7566fefe668cec9b77",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestGuaranteeMigrationPreservesLegacyOriginAndRetriesAbortedDDL",
+        "line": 29,
+        "end_line": 281,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "abortBackfill",
+          "append",
+          "appendedSettlementRows",
+          "assertMigratedPendingRefundResumesOnce",
+          "cancel",
+          "delete",
+          "isolatedSettlementDB",
+          "len",
+          "runMigration",
+          "runMigrationResult",
+          "seedClosedLegacyMigrationHistory",
+          "seedNonFinancialLegacyMigrationHistory",
+          "seedResumableLegacyRefund",
+          "settlementSQLSnapshot",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/late_error_integration_test.go",
+    "sha256": "7a833a455c6ab1561b3ab97156960f5f87e6bf66c44cf440e94acc550488a8d0",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestLedgerPropagatesLatePostgresError",
+        "line": 25,
+        "end_line": 42,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "cancel"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/messaging_contract_test.go",
+    "sha256": "9f1cd4b5aa49b3e4c5954560aa7df563d5cc3d712fbfe56346a5ae1cacf1d17a",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestInboxStatesAndCompletion",
+        "line": 20,
+        "end_line": 51,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "requireArgs",
+          "requireError"
+        ]
+      },
+      {
+        "name": "TestOutboxLeasePayloadAndErrors",
+        "line": 52,
+        "end_line": 105,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "len",
+          "outgoing",
+          "requireArgs",
+          "requireError"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/pool_contract_test.go",
+    "sha256": "2c1838a8fc60055953c361da9b45d9db67989f67d10c882d773a64d78f5887a5",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestPoolConfigurationAndFailedStartup",
+        "line": 15,
+        "end_line": 59,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewPool",
+          "NewReadiness",
+          "NewUnitOfWork",
+          "cancel",
+          "closedCancel",
+          "len"
+        ]
+      },
+      {
+        "name": "TestReadinessDeadlineAndCleanup",
+        "line": 64,
+        "end_line": 83,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "pingFunc"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/repository_contract_test.go",
+    "sha256": "57bda6e1bdc4ae407eff3df56687671e1a39877f209951ea45ed503228904835",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestWalletPersistenceContract",
+        "line": 124,
+        "end_line": 191,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "int64",
+          "repoMoney",
+          "requireArgs",
+          "requireError"
+        ]
+      },
+      {
+        "name": "TestTransactionPersistenceContract",
+        "line": 209,
+        "end_line": 316,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "get",
+          "len",
+          "opening",
+          "repoMoney",
+          "requireArgs",
+          "requireError",
+          "scanTx",
+          "transactionRow"
+        ]
+      },
+      {
+        "name": "TestLedgerPaginationAndTotalsContract",
+        "line": 318,
+        "end_line": 404,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "int64",
+          "len",
+          "record",
+          "repoMoney",
+          "requireArgs",
+          "requireError"
+        ]
+      },
+      {
+        "name": "TestLedgerReportsErrorDiscoveredWhileClosingLookahead",
+        "line": 406,
+        "end_line": 416,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "int64",
+          "requireError",
+          "row"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_admission_order_integration_test.go",
+    "sha256": "2938b84a71a4782a791252e0a73a2c5dbfaebcd76bfc530c090715b383ee04c1",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+        "line": 36,
+        "end_line": 157,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 52,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "close",
+          "distribution",
+          "f",
+          "literalTransfer",
+          "make",
+          "newSettlementSystem",
+          "settlementMessage",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_batch_measurement_integration_test.go",
+    "sha256": "ecfcc3bfa7033a3d707aada333f3b0eb2ce83685fccbaa6020fb8ca6ac76222c",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementBatchMeasurementPreservesLiteralTotals",
+        "line": 18,
+        "end_line": 113,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 26,
+            "name_expression": "fmt.Sprintf(\"participants-%d\", tc.losers+1)"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "delete",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+    "sha256": "cd544f132559386ccc1e52484289dffbc7e6bd312ac9633f7dfcc920c733fe9d",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+        "line": 30,
+        "end_line": 87,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 37,
+            "name_expression": "change"
+          }
+        ],
+        "local_call_candidates": [
+          "cancel",
+          "distribution",
+          "newSettlementSystem",
+          "requireIntegrityFailure",
+          "settlementMessage",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+        "line": 89,
+        "end_line": 127,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 91,
+            "name_expression": "change"
+          }
+        ],
+        "local_call_candidates": [
+          "distribution",
+          "newSettlementSystem",
+          "requireIntegrityFailure",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_contract_test.go",
+    "sha256": "c8471dbbbd1fe7cf5cdf2ea3021af3f829463a01c02e2057aa758709af944cbf",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+        "line": 30,
+        "end_line": 41,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "requireSettlementExecutor"
+        ]
+      },
+      {
+        "name": "TestSettlementDatabaseCommandPreservesRetryClassification",
+        "line": 42,
+        "end_line": 54,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 44,
+            "name_expression": "code"
+          }
+        ],
+        "local_call_candidates": [
+          "requireSettlementExecutor"
+        ]
+      },
+      {
+        "name": "TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries",
+        "line": 56,
+        "end_line": 68,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 58,
+            "name_expression": "code"
+          }
+        ],
+        "local_call_candidates": [
+          "requireSettlementExecutor"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+    "sha256": "545e07fc56cc997d8190aa3084b17f89938715f270043a4ae0c75cf32d525f7a",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementAppendObserverRejectsHistoricalMutation",
+        "line": 284,
+        "end_line": 306,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 296,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "appendedSettlementRows",
+          "len",
+          "string"
+        ]
+      },
+      {
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "line": 308,
+        "end_line": 355,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "delete",
+          "distribution",
+          "literalTransfer",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+    "sha256": "2195bc07746de050d40ecf3ef777156b083ddf371fa977d2fcb07146008fd32b",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "line": 91,
+        "end_line": 151,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "delete",
+          "distribution",
+          "fundedFactsFor",
+          "len",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+    "sha256": "b49e8e5b1c321a4dff242e96bf601d4eb4046da68027a292682cdff99904e021",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementFundedLifecycleOnRealPostgres",
+        "line": 279,
+        "end_line": 304,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "delete",
+          "distribution",
+          "fundedFactsFor",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+        "line": 305,
+        "end_line": 332,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 307,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "distribution",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementDoesNotWaitForUnconfirmedOtherBet",
+        "line": 333,
+        "end_line": 344,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "newSettlementSystem"
+        ]
+      },
+      {
+        "name": "TestSettlementCommittedDespiteLostReplyReplaysAfterRestart",
+        "line": 364,
+        "end_line": 387,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "delete",
+          "distribution",
+          "fundedFactsFor",
+          "newSettlementSystem",
+          "settlementMessage",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+        "line": 389,
+        "end_line": 418,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "close",
+          "distribution",
+          "fundedFactsFor",
+          "make",
+          "newSettlementSystem",
+          "settlementMessage"
+        ]
+      },
+      {
+        "name": "TestSettlementSQLWriteFailuresRollBackWholeBatchAndRetry",
+        "line": 420,
+        "end_line": 467,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 442,
+            "name_expression": "fmt.Sprintf(\"%03d-%s-%s\", i+1, write.Table, write.Operation)"
+          }
+        ],
+        "local_call_candidates": [
+          "distribution",
+          "fundedFactsFor",
+          "installSettlementWriteProbe",
+          "int64",
+          "len",
+          "newSettlementSystem",
+          "prepare",
+          "settlementMessage",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+        "line": 474,
+        "end_line": 530,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "allocation",
+          "newSettlementSystem",
+          "ret",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementRollbackPreservesClosedBetAndOriginalHistory",
+        "line": 532,
+        "end_line": 605,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "fundedFactsFor",
+          "literalTransfer",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "line": 607,
+        "end_line": 669,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "body",
+          "len",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "line": 670,
+        "end_line": 731,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 672,
+            "name_expression": "variant"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "distribution",
+          "fundedFactsFor",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "line": 732,
+        "end_line": 777,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "fundedFactsFor",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementOverflowRollsBackEveryParticipantThenRetries",
+        "line": 779,
+        "end_line": 802,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "literalTransfer",
+          "newSettlementSystem",
+          "settlementMessage",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementRollbackCannotBorrowOperationalOrOtherGuaranteeFunds",
+        "line": 803,
+        "end_line": 825,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+        "line": 826,
+        "end_line": 852,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "fundedFactsFor",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+        "line": 854,
+        "end_line": 899,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "close",
+          "distribution",
+          "literalTransfer",
+          "make",
+          "newSettlementSystem",
+          "settlementMessage"
+        ]
+      },
+      {
+        "name": "TestSettlementLockedPairDoesNotBlockIndependentPair",
+        "line": 900,
+        "end_line": 961,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "fundedFactsFor",
+          "make",
+          "newSettlementSystem",
+          "settlementMessage"
+        ]
+      },
+      {
+        "name": "TestSettlementClosureAndRefundHaveOnlyOneValidAdmissionOrder",
+        "line": 963,
+        "end_line": 1045,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 965,
+            "name_expression": "order"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "close",
+          "closeBet",
+          "distribution",
+          "fundedFactsFor",
+          "invoke",
+          "make",
+          "newSettlementSystem",
+          "refund",
+          "string"
+        ]
+      },
+      {
+        "name": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+        "line": 1047,
+        "end_line": 1066,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "delete",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      },
+      {
+        "name": "TestConcurrentResultsCannotCreateTwoSettlementsForSameCommitments",
+        "line": 1067,
+        "end_line": 1128,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "close",
+          "distribution",
+          "fundedFactsFor",
+          "make",
+          "newSettlementSystem"
+        ]
+      },
+      {
+        "name": "TestClosedBetRejectsNewCommitmentsBeforeAndAfterSettlement",
+        "line": 1130,
+        "end_line": 1170,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "distribution",
+          "fundedFactsFor",
+          "newSettlementSystem",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_observer_control_integration_test.go",
+    "sha256": "b669ac787b088b537f7510ba8cb81307f0de7b90449179af982ac6e011ef5218",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementSQLObserversReadLiteralStoredFacts",
+        "line": 19,
+        "end_line": 128,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "fundedFactsFor",
+          "isolatedSettlementDB",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_safety_integration_test.go",
+    "sha256": "12a1fcbccaa90205d974d6febf58b2293d8cb7afbfa7e0650a9b4e128212f35f",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementRejectsUnfundedWINWithRealPostgres",
+        "line": 94,
+        "end_line": 119,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 103,
+            "name_expression": "string(source)"
+          }
+        ],
+        "local_call_candidates": [
+          "NewUnitOfWork",
+          "isolatedSettlementDB",
+          "settlementSQLSnapshot",
+          "string"
+        ]
+      },
+      {
+        "name": "TestSettlementDatabaseGuardsRejectUnfundedCreditBypass",
+        "line": 124,
+        "end_line": 184,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewUnitOfWork",
+          "isolatedSettlementDB",
+          "settlementSQLSnapshot"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/settlement_write_probe_integration_test.go",
+    "sha256": "7c9f7ced6f129a6ec0521bb0121600795818582c44ad4de3c038d3d1a287ddfb",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementWriteProbeObservesAndAbortsEachActualRow",
+        "line": 125,
+        "end_line": 188,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 143,
+            "name_expression": "fmt.Sprintf(\"write-%d\", failAt)"
+          }
+        ],
+        "local_call_candidates": [
+          "installSettlementWriteProbe",
+          "int64",
+          "isolatedSettlementDB",
+          "len"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/uow_contract_test.go",
+    "sha256": "d63eb37ff7c9636f1cb26e05a53988ec1caec47739f1830e8af3eb5d9dadd4ef",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestUnitOfWorkIsolationCommitRollbackAndErrors",
+        "line": 43,
+        "end_line": 121,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 46,
+            "name_expression": "stage + map[bool]string{false: \"Write\", true: \"Snapshot\"}[snapshot]"
+          }
+        ],
+        "local_call_candidates": [
+          "cancel",
+          "requireError",
+          "run"
+        ]
+      },
+      {
+        "name": "TestEverySQLStateClassification",
+        "line": 122,
+        "end_line": 147,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "classify",
+          "requireError"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/postgres/uow_test.go",
+    "sha256": "aae4183758bc8f472fddd6fe34b2f4af15ee89c6123bfcc298b3d4bea3ef053c",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSQLConflictsAreRetryableAndObservable",
+        "line": 10,
+        "end_line": 21,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "classify"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/sqs/ack_boundary_contract_test.go",
+    "sha256": "e7d55f934276dca4ea707d46ca26f0977c21ba0910465db44d989e7a7f8cf754",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestConsumerDeleteRequiresSuccessfulHandlerCompletion",
+        "line": 21,
+        "end_line": 69,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 32,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumer",
+          "append",
+          "handlerFunc",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/sqs/consumer_test.go",
+    "sha256": "df55fd13cb149fb9323c6a022b14a06ec8ecc85c295eca45296d82fc7a175dd6",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestCleanupHasIndependentDeadlineAndLogsOnlyIdentifiers",
+        "line": 41,
+        "end_line": 62,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewConsumer",
+          "cancel",
+          "handlerFunc"
+        ]
+      },
+      {
+        "name": "TestShutdownDrainsIssuedPollAndReleasesWithoutHandling",
+        "line": 78,
+        "end_line": 106,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewConsumer",
+          "cancel",
+          "close",
+          "handlerFunc",
+          "make"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/sqs/contract_test.go",
+    "sha256": "41fe5f8827ca4dd530718af6b26978c94e90bdee3829d7715aafe15bec58c3ca",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestConsumerPollAndHandlerHaveIndependentBudgets",
+        "line": 42,
+        "end_line": 80,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewConsumer",
+          "cancel",
+          "checkBudget",
+          "handlerFunc",
+          "string"
+        ]
+      },
+      {
+        "name": "TestTransientBackoffAndCleanupLogsMatchActualOutcome",
+        "line": 81,
+        "end_line": 125,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 83,
+            "name_expression": "fmt.Sprint(n)"
+          },
+          {
+            "line": 93,
+            "name_expression": "fmt.Sprint(\"cleanup failure=\", failed)"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumer",
+          "check",
+          "checkBudget",
+          "handlerFunc",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/sqs/poll_contract_test.go",
+    "sha256": "4593093c15404d3f4587f2fecdc3fad3b401094f43e74f8b848d031d3e38c408",
+    "build_tags": [
+      "go1.25"
+    ],
+    "declarations": [
+      {
+        "name": "TestPollRetryAndCancellation",
+        "line": 30,
+        "end_line": 99,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 32,
+            "name_expression": "stop"
+          }
+        ],
+        "local_call_candidates": [
+          "NewConsumer",
+          "cancel",
+          "handlerFunc",
+          "make"
+        ]
+      },
+      {
+        "name": "TestEachPoisonErrorAndRedriveThreshold",
+        "line": 100,
+        "end_line": 122,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewConsumer",
+          "handlerFunc",
+          "string"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/sqs/registration_contract_test.go",
+    "sha256": "8d062efc5d846324be3b234a27330488e720abefe741450eb54c0a0eb5bf9130",
+    "build_tags": [
+      "go1.25"
+    ],
+    "declarations": [
+      {
+        "name": "TestConfiguredConsumerShutdownBudgets",
+        "line": 20,
+        "end_line": 31,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "configuredConsumer"
+        ]
+      },
+      {
+        "name": "TestRoleAndDLQMonitorRegistration",
+        "line": 32,
+        "end_line": 100,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "handlerFunc",
+          "len",
+          "register",
+          "sdkClient",
+          "sdkResponse"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/infra/sqs/sdk_contract_test.go",
+    "sha256": "4d9c9544a9d7e48745ef2c9eddd38b27ba1a5f031870e588dc017a52e7207f7a",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestSDKPublisherAndReadinessContracts",
+        "line": 35,
+        "end_line": 94,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewPublisher",
+          "NewReadiness",
+          "sdkClient",
+          "sdkResponse",
+          "string"
+        ]
+      },
+      {
+        "name": "TestQueueStartupAndDLQMetrics",
+        "line": 99,
+        "end_line": 164,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "handlerFunc",
+          "len",
+          "register",
+          "sdkClient",
+          "sdkResponse",
+          "updateDLQDepth"
+        ]
+      },
+      {
+        "name": "TestAWSClientConfiguration",
+        "line": 165,
+        "end_line": 184,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewClient"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/platform/failpoint/hit_test.go",
+    "sha256": "48d90b77a74ba4a8d5cd37ff4860c504656113e82e354b13fa0d4e4a9ce95bac",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestCrashMarkerAndExitContract",
+        "line": 10,
+        "end_line": 48,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "hit",
+          "len"
+        ]
+      },
+      {
+        "name": "TestRealCrashExit",
+        "line": 49,
+        "end_line": 69,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Hit",
+          "append"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/platform/logging/logging_test.go",
+    "sha256": "ff5812d02d9a0ff91f778bbe8034194cf9bc41497ed2ebde83664b999392aa61",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestConfiguredLevelAndDefaultLogger",
+        "line": 10,
+        "end_line": 22,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "New"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/platform/metrics/metrics_test.go",
+    "sha256": "1e0fc6dfa9e15f6596de51b020a54d63cf486c6c6eb66bf5b8b4dc12a7b80d25",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestMetricsDescribeObservedResultsWithoutStaleLag",
+        "line": 10,
+        "end_line": 28,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "New"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/platform/sys/sys_test.go",
+    "sha256": "b2c08270c931add35574b2a28f4b7cbc4925eaa12bf6a777f34207c8948a77de",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestUUIDFailureIsNotSilentlyAccepted",
+        "line": 13,
+        "end_line": 25,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "recover"
+        ]
+      },
+      {
+        "name": "TestClockAndUUID",
+        "line": 26,
+        "end_line": 39,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/platform/worker/every_contract_test.go",
+    "sha256": "12827da4db5f22163df27d776c1f7768eccd9dab682d1eb6bbce82f5d6e447b2",
+    "build_tags": [
+      "go1.25"
+    ],
+    "declarations": [
+      {
+        "name": "TestEveryCancellationAndFailure",
+        "line": 13,
+        "end_line": 70,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Every",
+          "cancel",
+          "make"
+        ]
+      },
+      {
+        "name": "TestEveryReportsOnlyErrorsAndAllowsAbsentCallback",
+        "line": 72,
+        "end_line": 109,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Every",
+          "cancel",
+          "make"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/platform/worker/worker_test.go",
+    "sha256": "e80553aabb6dd7078183207321a5d5ed8a902442e77059a8d0fe340cdac56548",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestLifecycleStopsAllBeforeDrainingAndClosingDependencies",
+        "line": 15,
+        "end_line": 46,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Register",
+          "close",
+          "make"
+        ]
+      },
+      {
+        "name": "TestWorkerFailureRequestsNonzeroShutdown",
+        "line": 47,
+        "end_line": 66,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Register"
+        ]
+      },
+      {
+        "name": "TestUnexpectedSuccessfulReturnIsAnExplicitFailure",
+        "line": 68,
+        "end_line": 85,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "Register"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/testsupport/settlementfacts/commitments_test.go",
+    "sha256": "d1f77dc5d0fd958e132c2686d3204cc919830b119c052c3faf1e412ffe84df85",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestCommitmentComparisonAcceptsClosedConsumptionAndIndependentStake",
+        "line": 15,
+        "end_line": 21,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "literalCommitments"
+        ]
+      },
+      {
+        "name": "TestCommitmentComparisonRejectsWrongFundingDespiteCorrectBalances",
+        "line": 22,
+        "end_line": 47,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 41,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "change",
+          "literalCommitments"
+        ]
+      },
+      {
+        "name": "TestCommitmentComparisonRejectsAmbiguousExpectedFixture",
+        "line": 48,
+        "end_line": 60,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "literalCommitments"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/testsupport/settlementfacts/observations_test.go",
+    "sha256": "59f9862a23ebc7bfc3aa1cb06d931e795e8754fb949141a99acc8bc9dc63c416",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestLedgerObservationRequiresEveryFieldAndStableOrder",
+        "line": 17,
+        "end_line": 60,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 46,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "alter",
+          "append",
+          "observedLedger"
+        ]
+      },
+      {
+        "name": "TestTerminalObserverRejectsConsistentlyWrongStorageAndPayload",
+        "line": 74,
+        "end_line": 133,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 80,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "delete",
+          "terminalRows"
+        ]
+      },
+      {
+        "name": "TestTransferObserverRejectsWrongPostingsWithUnchangedCount",
+        "line": 137,
+        "end_line": 179,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 143,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "append",
+          "transferRows"
+        ]
+      },
+      {
+        "name": "TestBalanceEventRejectsWrongVersionDespiteCorrectMoney",
+        "line": 181,
+        "end_line": 234,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 185,
+            "name_expression": "name"
+          }
+        ],
+        "local_call_candidates": [
+          "append"
+        ]
+      },
+      {
+        "name": "TestTransferObserverAcceptsEitherIndependentFundingOrder",
+        "line": 236,
+        "end_line": 246,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": []
+      }
+    ]
+  },
+  {
+    "path": "internal/transport/httpapi/contract_test.go",
+    "sha256": "7a5db1d3bf799163d4c32486c4b38f934795035d49d28ba077bd2c9ce5c16555",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestHTTPErrorContractsDoNotExposeInfrastructureDetails",
+        "line": 37,
+        "end_line": 63,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 54,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "sameJSON",
+          "writeError"
+        ]
+      },
+      {
+        "name": "TestLedgerWireContractAndPaginationBoundaries",
+        "line": 100,
+        "end_line": 163,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 113,
+            "name_expression": "\"limit=\" + limit"
+          },
+          {
+            "line": 151,
+            "name_expression": "tc.name"
+          }
+        ],
+        "local_call_candidates": [
+          "sameJSON"
+        ]
+      },
+      {
+        "name": "TestCorrelationHeaderMatchesContextAndHonorsCancellation",
+        "line": 164,
+        "end_line": 183,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 166,
+            "name_expression": "fmt.Sprintf(\"supplied=%s\", supplied)"
+          }
+        ],
+        "local_call_candidates": [
+          "cancel",
+          "correlationID",
+          "withCorrelation"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/transport/httpapi/lifecycle_contract_test.go",
+    "sha256": "71531f65accfa54f2cfeec93700b67b72be2137b3177844cf7907e90af52f35d",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestReadinessAndListenerFailure",
+        "line": 39,
+        "end_line": 83,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewServer"
+        ]
+      },
+      {
+        "name": "TestHTTPServeAndShutdown",
+        "line": 84,
+        "end_line": 99,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewServer"
+        ]
+      },
+      {
+        "name": "TestFailedGracefulShutdownClosesActiveConnection",
+        "line": 101,
+        "end_line": 137,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "cancel",
+          "close",
+          "make",
+          "shutdownServer"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "internal/transport/httpapi/server_contract_test.go",
+    "sha256": "7a86d3b05f4d9313f442b5a5541c0126d9c83c0524a75f2bf384990fa2c13f27",
+    "build_tags": [],
+    "declarations": [
+      {
+        "name": "TestHTTPTimeoutBudgets",
+        "line": 18,
+        "end_line": 23,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "NewServer"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "test/integration/contract_test.go",
+    "sha256": "f699a28008ea5541a888509a842dc666ff6b12eeaa4d33c53640153ff32f3919",
+    "build_tags": [
+      "integration \u0026\u0026 faults"
+    ],
+    "declarations": [
+      {
+        "name": "TestHTTPContractsAgreeWithCommittedDatabaseFacts",
+        "line": 24,
+        "end_line": 77,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "contractJSON",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "sqlCount",
+          "string",
+          "submit"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "test/integration/recovery_test.go",
+    "sha256": "1a4df65d9aa61726850ad293a2254e93ba5b809284de2e5fb529ca2eea714b3b",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSimultaneousChannelsAndSQSTerminalRejection",
+        "line": 38,
+        "end_line": 102,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "close",
+          "completed",
+          "envelope",
+          "eventually",
+          "make",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "send",
+          "sqlCount",
+          "sqsClient",
+          "startWorker",
+          "submitAt"
+        ]
+      },
+      {
+        "name": "TestConcurrentReversalsAndFullRestart",
+        "line": 104,
+        "end_line": 161,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "close",
+          "eventually",
+          "make",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "sqlCount",
+          "start",
+          "startWorker",
+          "submit",
+          "submitAt"
+        ]
+      },
+      {
+        "name": "TestDependencyOutagesRecoverDurableWork",
+        "line": 171,
+        "end_line": 205,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "completed",
+          "envelope",
+          "eventually",
+          "openWallet",
+          "operation",
+          "pauseDependency",
+          "reconcile",
+          "request",
+          "resumePG",
+          "resumeSQS",
+          "send",
+          "sqlCount",
+          "sqsClient",
+          "startWorker",
+          "string",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestSIGTERMDrainsInFlightSQS",
+        "line": 207,
+        "end_line": 240,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "close",
+          "completed",
+          "envelope",
+          "eventually",
+          "make",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "send",
+          "sqlCount",
+          "sqsClient",
+          "startWorker"
+        ]
+      },
+      {
+        "name": "TestInternalAuthorizationAndExternalOpening",
+        "line": 242,
+        "end_line": 259,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request"
+        ]
+      },
+      {
+        "name": "TestOutputContractsAndDurableDownstreamDedup",
+        "line": 263,
+        "end_line": 357,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "eventually",
+          "int64",
+          "len",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "send",
+          "sqlCount",
+          "sqsClient",
+          "startWorker",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestExternalOpeningSQSReachesDLQ",
+        "line": 359,
+        "end_line": 397,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "envelope",
+          "eventually",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "send",
+          "sqlCount",
+          "sqsClient",
+          "startWorker",
+          "string"
+        ]
+      },
+      {
+        "name": "TestReferenceAttemptsExhaustionAndPendingDependency",
+        "line": 399,
+        "end_line": 428,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "eventually",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "sqlCount",
+          "startWorker",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestTransientExhaustionReachesDLQWithoutFinancialEffect",
+        "line": 436,
+        "end_line": 480,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "compose",
+          "envelope",
+          "eventually",
+          "openWallet",
+          "operation",
+          "pauseDependency",
+          "reconcile",
+          "resume",
+          "send",
+          "setLimit",
+          "sqlCount",
+          "sqsClient",
+          "startWorker"
+        ]
+      },
+      {
+        "name": "TestOutboxOldLeaseCannotConfirmNewOwner",
+        "line": 482,
+        "end_line": 504,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "openWallet",
+          "operation",
+          "sqlCount",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestLockTimeoutIsRetryableAndReconciliationSnapshotIsStable",
+        "line": 506,
+        "end_line": 555,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "string",
+          "submit",
+          "submitAt"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "test/integration/settlement_observations_test.go",
+    "sha256": "cd7ce2969e276194bfb41fe4c482f93c486a417efb4b6f45936a779b78068bc8",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": []
+  },
+  {
+    "path": "test/integration/settlement_system_test.go",
+    "sha256": "3c73797bde585a603a18076936554249d875fd20328266acd07d0a383b054d36",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestSettlementBrokerRejectsForgedAuthority",
+        "line": 37,
+        "end_line": 67,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "len",
+          "send",
+          "settlementEnvelope",
+          "settlementQueue",
+          "sqsClient"
+        ]
+      },
+      {
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "line": 151,
+        "end_line": 217,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 153,
+            "name_expression": "point"
+          }
+        ],
+        "local_call_candidates": [
+          "completed",
+          "eventually",
+          "expectCrash",
+          "prepareSystemSettlement",
+          "send",
+          "settlementDurableSnapshot",
+          "settlementEnvelope",
+          "settlementQueue",
+          "sqlCount",
+          "sqsClient",
+          "start",
+          "startWorker"
+        ]
+      },
+      {
+        "name": "TestSettlementPublisherLeaseRejectsStaleOwner",
+        "line": 219,
+        "end_line": 250,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "prepareSystemSettlement",
+          "sqlCount"
+        ]
+      },
+      {
+        "name": "TestSettlementEnvelopeOnExternalIngressCannotAcquireInternalAuthority",
+        "line": 252,
+        "end_line": 291,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "completed",
+          "eventually",
+          "prepareSystemSettlement",
+          "send",
+          "settlementDurableSnapshot",
+          "settlementEnvelope",
+          "settlementQueue",
+          "sqlCount",
+          "sqsClient",
+          "startWorker"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "test/integration/system_test.go",
+    "sha256": "12441d1781b74a6659bf644a15b76d1b7b5359293e02169c1bf9d4c8a821cad5",
+    "build_tags": [
+      "integration"
+    ],
+    "declarations": [
+      {
+        "name": "TestMain",
+        "line": 162,
+        "end_line": 224,
+        "kind": "harness",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "panic",
+          "start",
+          "token"
+        ]
+      },
+      {
+        "name": "TestThreeProcessesConcurrentMoney",
+        "line": 382,
+        "end_line": 493,
+        "kind": "test",
+        "subtest_declarations": [
+          {
+            "line": 383,
+            "name_expression": "\"50-replays\""
+          },
+          {
+            "line": 424,
+            "name_expression": "\"two-80-on-100\""
+          },
+          {
+            "line": 460,
+            "name_expression": "\"wallet-lock-isolation\""
+          }
+        ],
+        "local_call_candidates": [
+          "close",
+          "make",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "submit",
+          "submitAt"
+        ]
+      },
+      {
+        "name": "TestAuthorization",
+        "line": 494,
+        "end_line": 526,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestReversalsAndLoss",
+        "line": 527,
+        "end_line": 568,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "openWallet",
+          "operation",
+          "reconcile",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestDatabaseGuardsAndAtomicRollback",
+        "line": 569,
+        "end_line": 596,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "sqlCount",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestBrokerPermissions",
+        "line": 622,
+        "end_line": 633,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "envelope",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "send",
+          "sqsClient"
+        ]
+      },
+      {
+        "name": "TestHTTPAndSQSReplayAndCrash",
+        "line": 634,
+        "end_line": 702,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "envelope",
+          "eventually",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "send",
+          "sqlCount",
+          "sqsClient",
+          "start",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestPendingReferenceRestart",
+        "line": 703,
+        "end_line": 739,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "eventually",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "sqlCount",
+          "start",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestOutboxRecoveryTwoPublishers",
+        "line": 740,
+        "end_line": 808,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "eventually",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "sqlCount",
+          "sqsClient",
+          "start",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestLedgerCursorAndOpeningZero",
+        "line": 809,
+        "end_line": 836,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "deposit",
+          "len",
+          "openWallet",
+          "operation",
+          "reconcile",
+          "request",
+          "submit"
+        ]
+      },
+      {
+        "name": "TestExpiredIdPToken",
+        "line": 841,
+        "end_line": 851,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "request",
+          "token"
+        ]
+      },
+      {
+        "name": "TestMigrationRoundTrip",
+        "line": 852,
+        "end_line": 900,
+        "kind": "test",
+        "subtest_declarations": [],
+        "local_call_candidates": [
+          "append",
+          "cancel",
+          "len",
+          "string"
+        ]
+      }
+    ]
+  }
+]

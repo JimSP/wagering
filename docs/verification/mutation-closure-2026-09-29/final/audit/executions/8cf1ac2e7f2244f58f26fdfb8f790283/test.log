@@ -1,0 +1,20 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	5.695s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	8.895s
+ok  	github.com/alexandre/wagering/internal/domain/event	6.314s
+ok  	github.com/alexandre/wagering/internal/domain/money	6.442s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	5.931s
+ok  	github.com/alexandre/wagering/internal/domain/wager	7.282s
+--- FAIL: TestMutationProofDebitRejectsPastTimeWithoutChangingWallet (0.00s)
+    mutation_regression_test.go:21: past debit accepted or wallet mutated: err=<nil> before={ID:wallet PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} after={ID:wallet PlayerID:player Balance:{minor:0 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 11:59:59 +0000 UTC}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	6.191s
+ok  	github.com/alexandre/wagering/internal/infra/auth	7.173s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.035s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	6.935s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	15.184s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	15.049s
+FAIL

@@ -1,0 +1,31 @@
+--- original/internal/infra/postgres/module.go
++++ mutant/internal/infra/postgres/module.go
+@@ -28,7 +28,7 @@
+ 	pc.ConnConfig.RuntimeParams["statement_timeout"] = "10000"
+ 	pc.ConnConfig.RuntimeParams["lock_timeout"] = "8000"
+ 	pool, err := pgxpool.NewWithConfig(context.Background(), pc)
+-	if err != nil {
++	if err == nil {
+ 		return nil, err
+ 	}
+ 	lc.Append(fx.Hook{
+@@ -39,7 +39,7 @@
+ 			}
+ 			return err
+ 		},
+-		OnStop: func(context.Context) error { pool.Close(); return nil }, // runs after workers/servers stop
++		OnStop:	func(context.Context) error { pool.Close(); return nil },	// runs after workers/servers stop
+ 	})
+ 	return pool, nil
+ }
+@@ -48,8 +48,8 @@
+ 
+ type Readiness struct{ pool pinger }
+ 
+-func NewReadiness(pool *pgxpool.Pool) *Readiness { return &Readiness{pool} }
+-func (*Readiness) Name() string                  { return "postgres" }
++func NewReadiness(pool *pgxpool.Pool) *Readiness	{ return &Readiness{pool} }
++func (*Readiness) Name() string				{ return "postgres" }
+ func (r *Readiness) Check(ctx context.Context) error {
+ 	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+ 	defer cancel()

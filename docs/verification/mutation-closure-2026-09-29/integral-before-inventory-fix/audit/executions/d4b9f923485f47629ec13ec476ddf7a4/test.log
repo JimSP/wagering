@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.887s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:03:09 INFO transaction handled correlationId="" messageId="" transactionId=8701aa1a-3c0b-4c9d-b603-e3888bffe3d3 walletId=a668bedd-9400-4272-af74-79135697f087 providerId=p status=PROCESSED
+2026/09/30 00:03:09 WARN transaction handling failed correlationId="" messageId="" transactionId=95ef65c7-4dca-414f-82fe-e092f49e8696 walletId=a668bedd-9400-4272-af74-79135697f087 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.06s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.06s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid commitment"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.747s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.336s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.865s
+--- FAIL: TestMutationProofZeroCommitment (0.00s)
+    mutation_regression_test.go:13: zero remaining commitment must coexist with funded participant: invalid settlement distribution: invalid commitment
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.592s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.109s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.980s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.788s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.725s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.403s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.013s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.494s
+FAIL

@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.432s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:55:13 INFO transaction handled correlationId="" messageId="" transactionId=8c1cdb5f-6e53-4d0c-9a7b-4600b35d8a14 walletId=dc35577c-549a-4b4f-9691-66a0e854648f providerId=p status=PROCESSED
+2026/09/29 01:55:13 WARN transaction handling failed correlationId="" messageId="" transactionId=3b4cfdf5-6c45-40b0-81b5-eb2e7e082083 walletId=dc35577c-549a-4b4f-9691-66a0e854648f providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.03s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/rollback (0.00s)
+        http_contract_test.go:154: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000024","status":"PROCESSED","idempotentReplay":false,"balance":{"amount":"100.00","currency":"BRL"}}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000024","status":"PROCESSED","balance":{"amount":"107.00","currency":"BRL"},"idempotentReplay":false}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"107.00","currency":"BRL"},"version":4}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.784s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	0.414s
+FAIL

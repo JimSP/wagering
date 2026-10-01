@@ -1,0 +1,41 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.404s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	1.446s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.506s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.525s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.639s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.391s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.459s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.970s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.286s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 02:33:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestRoleAndDLQMonitorRegistration (0.00s)
+    registration_contract_test.go:89: {"time":"1999-12-31T22:00:00-02:00","level":"INFO","msg":"worker started","worker":"dlq-monitor"}
+        {"time":"1999-12-31T22:00:00-02:00","level":"INFO","msg":"worker started","worker":"sqs-consumer"}
+        {"time":"1999-12-31T22:00:05-02:00","level":"WARN","msg":"DLQ metrics unavailable","err":null}
+        
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.874s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.681s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.665s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	3.474s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.945s
+--- FAIL: TestEveryCancellationAndFailure (0.00s)
+    every_contract_test.go:43: 1 0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/platform/worker	3.131s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	3.400s
+FAIL

@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.619s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	10.364s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.560s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.425s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.684s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_guarantee_on_LOSS (0.00s)
+        mutation_regression_test.go:54: invalid account accepted: {Failure: Wait:false ReferenceID: Guarantee:{ID: PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	8.810s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.126s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.717s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.301s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.450s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.516s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.914s
+ok  	github.com/alexandre/wagering/internal/platform/logging	11.897s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	12.071s
+FAIL

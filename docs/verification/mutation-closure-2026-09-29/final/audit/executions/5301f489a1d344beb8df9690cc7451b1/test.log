@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.661s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:09:25 INFO transaction handled correlationId="" messageId="" transactionId=26050d5b-3a27-4793-92b3-8139709789fe walletId=fa051475-0870-4a6e-9876-04c25a374fbb providerId=p status=PROCESSED
+2026/09/30 01:09:25 WARN transaction handling failed correlationId="" messageId="" transactionId=aa760c91-f6a0-4247-a3df-21167f8bde32 walletId=fa051475-0870-4a6e-9876-04c25a374fbb providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    --- FAIL: TestOutboxPublishRetryConfirmationAndLag/success (0.00s)
+        outbox_paths_test.go:90: incorrect failure log: {"time":"2026-09-30T01:09:25.669787-03:00","level":"WARN","msg":"event publication failed","eventId":"event","walletId":"wallet","transactionId":"tx","providerId":"p","correlationId":"correlation","messageId":"","attempt":3,"err":null}
+            {"time":"2026-09-30T01:09:25.66979-03:00","level":"INFO","msg":"event published","eventId":"event","walletId":"wallet","transactionId":"tx","providerId":"p","correlationId":"correlation","messageId":"","attempt":3}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.817s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.320s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.199s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.446s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.739s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.857s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.953s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.879s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.071s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.913s
+FAIL

@@ -1,0 +1,32 @@
+--- original/internal/domain/settlement/reversal.go
++++ mutant/internal/domain/settlement/reversal.go
+@@ -13,14 +13,14 @@
+ 
+ // ReversalJournal is an original journal in descending posting order.
+ type ReversalJournal struct {
+-	DebitAccountID, CreditAccountID string
+-	Amount                          money.Money
++	DebitAccountID, CreditAccountID	string
++	Amount				money.Money
+ }
+ type ReversalFacts struct {
+-	Status   string
+-	Payments []wager.Snapshot
+-	Journals []ReversalJournal
+-	Accounts map[string]wallet.Snapshot
++	Status		string
++	Payments	[]wager.Snapshot
++	Journals	[]ReversalJournal
++	Accounts	map[string]wallet.Snapshot
+ }
+ 
+ // ValidateReversal simulates the exact inverse in memory, including intermediate
+@@ -33,7 +33,7 @@
+ 		return fmt.Errorf("%w: missing accounting history", ErrReversalState)
+ 	}
+ 	for _, p := range f.Payments {
+-		if p.Kind != wager.KindWin || p.Status != wager.StatusProcessed {
++		if p.Kind != wager.KindWin && p.Status != wager.StatusProcessed {
+ 			return fmt.Errorf("%w: payment is not a processed WIN", ErrReversalState)
+ 		}
+ 	}

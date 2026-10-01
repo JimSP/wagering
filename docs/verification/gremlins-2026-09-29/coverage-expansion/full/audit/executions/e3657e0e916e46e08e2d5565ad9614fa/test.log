@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.418s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:08:06 INFO transaction handled correlationId="" messageId="" transactionId=e61872e1-edc1-4d89-b8c5-9ddc44d37eff walletId=27f6c158-6ee2-4995-abc9-fcda8282ef04 providerId=p status=PROCESSED
+2026/09/29 02:08:06 WARN transaction handling failed correlationId="" messageId="" transactionId=df7f2acb-992f-4b9c-a76d-a9fac2302790 walletId=27f6c158-6ee2-4995-abc9-fcda8282ef04 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:75: 0 INVALID_INPUT: invalid input: invalid transition timestamp
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.778s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+--- FAIL: TestRejectedAndFailedAreTerminal (0.00s)
+    invariants_test.go:84: INVALID_INPUT: invalid input: invalid transition timestamp
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	0.928s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.264s
+FAIL

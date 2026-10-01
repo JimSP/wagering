@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.070s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:06:48 INFO transaction handled correlationId="" messageId="" transactionId=6c827816-0ff7-4f1e-a146-4f8e36fc0c99 walletId=6b993269-f5d4-480c-92f0-3198020eb711 providerId=p status=PROCESSED
+2026/09/30 00:06:48 WARN transaction handling failed correlationId="" messageId="" transactionId=ce232c36-cff6-4670-9930-8469531de7ed walletId=6b993269-f5d4-480c-92f0-3198020eb711 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.48s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-refund (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000025","status":"REJECTED","failureCode":"REVERSAL_INSUFFICIENT_FUNDS","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.848s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.879s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.463s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.818s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure:REVERSAL_INSUFFICIENT_FUNDS Wait:false ReferenceID:win Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.080s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.579s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.400s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.554s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.453s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.434s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.068s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.055s
+FAIL

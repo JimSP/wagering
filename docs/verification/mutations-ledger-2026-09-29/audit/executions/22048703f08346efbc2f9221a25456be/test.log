@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.231s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:38:38 INFO transaction handled correlationId="" messageId="" transactionId=f007e061-9489-4cca-8b56-402177746001 walletId=90e21d86-7f27-4727-b372-54e920208756 providerId=p status=PROCESSED
+2026/09/29 22:38:38 WARN transaction handling failed correlationId="" messageId="" transactionId=e3e62566-451d-43aa-9790-430e9443a881 walletId=90e21d86-7f27-4727-b372-54e920208756 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/claim (0.00s)
+        reference_failure_test.go:16: INVALID_INPUT: invalid input: referenceExternalTransactionId is required for REFUND
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.052s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.233s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.677s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.260s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    error_text_contract_test.go:12: INVALID_INPUT: invalid input: referenceExternalTransactionId is required for REFUND
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.523s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.694s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.956s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.382s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.993s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.241s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.220s
+FAIL

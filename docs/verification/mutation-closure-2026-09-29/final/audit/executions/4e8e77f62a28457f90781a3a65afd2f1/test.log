@@ -1,0 +1,43 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.063s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:29:16 INFO transaction handled correlationId="" messageId="" transactionId=30d67a8a-5069-47c4-929d-e99aab1b3201 walletId=a8707838-ccf0-4a45-9bc8-068d60f22e81 providerId=p status=PROCESSED
+2026/09/30 01:29:16 WARN transaction handling failed correlationId="" messageId="" transactionId=41a55813-b2b4-402a-ba18-4d743c99a691 walletId=a8707838-ccf0-4a45-9bc8-068d60f22e81 providerId=p transient=false
+--- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting (0.00s)
+    --- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting/success (0.00s)
+        paired_storage_failure_test.go:42: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.950s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.012s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.309s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	12.193s
+--- FAIL: TestNilTransactionReturnsDomainError (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x20 pc=0x10031a8f8]
+
+goroutine 89 [running]:
+testing.tRunner.func1.2({0x1004e3bc8, 0x100525390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1004e3bc8?, 0x100525390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).ResolveReference(0x0, {0x100336f46, 0x9})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2268104042/internal/domain/wager/transaction.go:206 +0x38
+github.com/alexandre/wagering/internal/domain/wager_test.TestNilTransactionReturnsDomainError(0x2eb6711aa008)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2268104042/internal/domain/wager/input_contract_test.go:82 +0x30
+testing.tRunner(0x2eb6711aa008, 0x1005071c0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.375s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.117s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.920s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.477s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.626s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.473s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.474s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.479s
+FAIL

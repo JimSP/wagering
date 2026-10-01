@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.867s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	1.925s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.283s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.400s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.167s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.151s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.510s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.047s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.593s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:64: step 1: SQL " FOR UPDATE" lacks "FROM settlements"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.059s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.905s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.570s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.688s
+FAIL

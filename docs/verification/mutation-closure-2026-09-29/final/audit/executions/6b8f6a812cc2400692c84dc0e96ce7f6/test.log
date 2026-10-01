@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.614s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 02:04:00 INFO transaction handled correlationId="" messageId="" transactionId=b757632c-9787-405d-bc10-d8466ce701f4 walletId=a74ee2ce-3a40-4784-8661-c4a1b647cc96 providerId=p status=PROCESSED
+2026/09/30 02:04:00 WARN transaction handling failed correlationId="" messageId="" transactionId=b5987c55-105f-4e26-bb6a-08e94e46e300 walletId=a74ee2ce-3a40-4784-8661-c4a1b647cc96 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.04s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.04s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 500 {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.666s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.647s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.772s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.762s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.989s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.874s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.459s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.100s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.268s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.088s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.084s
+ok  	github.com/alexandre/wagering/internal/platform/logging	11.071s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.547s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.365s
+ok  	github.com/alexandre/wagering/internal/platform/worker	12.215s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	12.218s
+--- FAIL: TestSettlementHTTPRejectsMalformedMoneyBeforePersistence (0.00s)
+    --- FAIL: TestSettlementHTTPRejectsMalformedMoneyBeforePersistence/{"resultId":"r","allocations":[{"fromExternalTransactionId":"a","toExternalTransactionId":"b","money":{"amount":"bad","currency":"BRL"}}]} (0.00s)
+        settlement_mutation_test.go:36: status=500 database calls=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	12.421s
+ok  	github.com/alexandre/wagering/scripts	12.369s
+FAIL

@@ -1,0 +1,20 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.866s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	10.339s
+ok  	github.com/alexandre/wagering/internal/domain/event	7.943s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.321s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.617s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.076s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.488s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.731s
+--- FAIL: TestConfigurationDefaultsAndExplicitValues (0.00s)
+    config_test.go:25: got={Roles:[] HTTPAddr: ShutdownTimeout:0s LogLevel: DatabaseURL: AWSRegion: AWSEndpointURL: WagerQueueURL: WagerDLQURL: EventsQueueURL: SettlementQueueURL: OIDCIssuer: OIDCJWKSURL: OIDCAudience:} want={Roles:[api] HTTPAddr::8080 ShutdownTimeout:25s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} err=SHUTDOWN_TIMEOUT: time: invalid duration ""
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	8.207s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.973s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.958s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.957s
+FAIL

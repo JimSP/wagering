@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.878s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:12:00 INFO transaction handled correlationId="" messageId="" transactionId=ba25ef81-8a9b-4064-96b2-1fb32a193b07 walletId=d085bd1e-6c57-4462-806d-f0c3031217d8 providerId=p status=PROCESSED
+2026/09/29 03:12:00 WARN transaction handling failed correlationId="" messageId="" transactionId=efbc62d8-9f20-4bbb-a847-40a4077261c3 walletId=d085bd1e-6c57-4462-806d-f0c3031217d8 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.345s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.630s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.497s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.892s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.363s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.438s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.997s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.314s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.382s
+FAIL

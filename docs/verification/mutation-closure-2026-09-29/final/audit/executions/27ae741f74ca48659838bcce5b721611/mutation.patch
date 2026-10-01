@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -30,7 +30,7 @@
+ 	if err != nil {
+ 		return nil, err
+ 	}
+-	if balance != nil {
++	if balance == nil {
+ 		b, e := money.FromMinor(*balance, currency)
+ 		if e != nil {
+ 			return nil, e

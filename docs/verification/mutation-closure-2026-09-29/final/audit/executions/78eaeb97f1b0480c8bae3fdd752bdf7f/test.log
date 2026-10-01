@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.625s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:33:14 INFO transaction handled correlationId="" messageId="" transactionId=39795528-887b-4633-9122-60339150e2b9 walletId=fde6a1fd-5d85-4459-8e83-048b28f45a81 providerId=p status=PROCESSED
+2026/09/30 01:33:14 WARN transaction handling failed correlationId="" messageId="" transactionId=7cf21cc0-4ac6-4641-8ec9-1d0c76afebea walletId=fde6a1fd-5d85-4459-8e83-048b28f45a81 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got money: overflow, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.888s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.482s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.363s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	12.727s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/counterparty_newer_than_command (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:01:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:true ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.997s
+--- FAIL: TestMutationProofDebitRejectsPastTimeWithoutChangingWallet (0.00s)
+    mutation_regression_test.go:21: past debit accepted or wallet mutated: err=money: overflow before={ID:wallet PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} after={ID:wallet PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	12.099s
+ok  	github.com/alexandre/wagering/internal/infra/auth	15.057s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.250s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.491s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	5.816s
+FAIL

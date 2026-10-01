@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.201s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:32:05 INFO transaction handled correlationId="" messageId="" transactionId=07a4c149-890b-44a4-b25f-0f9f78157ccb walletId=a13208f6-314c-4af1-8581-5809b1c352cb providerId=p status=PROCESSED
+2026/09/29 03:32:05 WARN transaction handling failed correlationId="" messageId="" transactionId=13ed1b4f-110f-48a6-a4a8-3dbf2cc2f02c walletId=a13208f6-314c-4af1-8581-5809b1c352cb providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.15s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+    http_contract_test.go:191: HTTP contract: 401 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"UNAUTHENTICATED"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.757s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.687s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.312s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.196s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.830s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.04s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/no_subject (0.00s)
+        authorization_paths_test.go:88: {  true}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.659s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.081s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.981s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.819s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.620s
+FAIL

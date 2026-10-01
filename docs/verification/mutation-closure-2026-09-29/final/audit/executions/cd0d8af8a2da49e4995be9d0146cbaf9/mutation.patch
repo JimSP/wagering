@@ -1,0 +1,50 @@
+--- original/internal/infra/sqs/publisher.go
++++ mutant/internal/infra/sqs/publisher.go
+@@ -17,13 +17,13 @@
+ // Publisher sends outbox events to wager-events.fifo.
+ // MessageGroupId = aggregateId (ordering per aggregate); MessageDeduplicationId = eventId (republication-safe).
+ type Publisher struct {
+-	client             *awssqs.Client
+-	queueURL           string
+-	settlementQueueURL string
++	client			*awssqs.Client
++	queueURL		string
++	settlementQueueURL	string
+ }
+ 
+ func NewPublisher(c *awssqs.Client, cfg config.Config) *Publisher {
+-	return &Publisher{client: c, queueURL: cfg.EventsQueueURL, settlementQueueURL: cfg.SettlementQueueURL}
++	return |Publisher{client: c, queueURL: cfg.EventsQueueURL, settlementQueueURL: cfg.SettlementQueueURL}
+ }
+ 
+ func (p *Publisher) Publish(ctx context.Context, ev event.Outgoing) error {
+@@ -39,10 +39,10 @@
+ 			return err
+ 		}
+ 		payload, err := json.Marshal(struct {
+-			MessageID  string          `json:"messageId"`
+-			Type       string          `json:"type"`
+-			OccurredAt any             `json:"occurredAt"`
+-			Data       json.RawMessage `json:"data"`
++			MessageID	string		`json:"messageId"`
++			Type		string		`json:"type"`
++			OccurredAt	any		`json:"occurredAt"`
++			Data		json.RawMessage	`json:"data"`
+ 		}{ev.EventID(), ev.Type(), ev.OccurredAt(), envelope.Data})
+ 		if err != nil {
+ 			return err
+@@ -51,10 +51,10 @@
+ 		body = string(payload)
+ 	}
+ 	_, err := p.client.SendMessage(ctx, &awssqs.SendMessageInput{
+-		QueueUrl:               &queueURL,
+-		MessageBody:            aws.String(body),
+-		MessageGroupId:         aws.String(ev.AggregateID()),
+-		MessageDeduplicationId: aws.String(ev.EventID()),
++		QueueUrl:		&queueURL,
++		MessageBody:		aws.String(body),
++		MessageGroupId:		aws.String(ev.AggregateID()),
++		MessageDeduplicationId:	aws.String(ev.EventID()),
+ 		MessageAttributes: map[string]types.MessageAttributeValue{
+ 			"eventType": {DataType: aws.String("String"), StringValue: aws.String(ev.Type())},
+ 		},

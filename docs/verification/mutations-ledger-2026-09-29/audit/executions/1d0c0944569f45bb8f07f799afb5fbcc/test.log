@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.345s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:51:30 INFO transaction handled correlationId="" messageId="" transactionId=f2fcf789-c908-49ef-a63b-5d89ecc14684 walletId=15cf39e3-4773-4828-a10c-b42bffd5c6ab providerId=p status=PROCESSED
+2026/09/29 22:51:30 WARN transaction handling failed correlationId="" messageId="" transactionId=25135999-3490-43d7-8873-acb84e03a595 walletId=15cf39e3-4773-4828-a10c-b42bffd5c6ab providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.786s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.639s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.704s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.817s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.939s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.787s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.03s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/no_kid (0.00s)
+        authorization_paths_test.go:97: 204
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.122s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.359s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.254s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.133s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.122s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.102s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.863s
+FAIL

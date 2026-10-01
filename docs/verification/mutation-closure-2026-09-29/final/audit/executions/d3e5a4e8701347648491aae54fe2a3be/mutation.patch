@@ -1,0 +1,64 @@
+--- original/internal/infra/auth/verifier.go
++++ mutant/internal/infra/auth/verifier.go
+@@ -18,38 +18,38 @@
+ )
+ 
+ var (
+-	ErrJWKSUnavailable = errors.New("auth: jwks unavailable")
+-	ErrInvalidToken    = errors.New("auth: invalid token")
++	ErrJWKSUnavailable	= errors.New("auth: jwks unavailable")
++	ErrInvalidToken		= errors.New("auth: invalid token")
+ )
+ 
+ type Principal struct {
+-	Subject, ProviderID string
+-	Internal            bool
++	Subject, ProviderID	string
++	Internal		bool
+ }
+ 
+ // Refresh is request-owned: no background goroutine can outlive the application.
+ // Cached keys live for one hour; an unknown kid can trigger at most one fetch/second.
+ type Verifier struct {
+-	issuer, jwksURL, audience string
+-	client                    *http.Client
+-	gate                      chan struct{}
+-	mu                        sync.RWMutex
+-	kf                        keyfunc.Keyfunc
+-	fetched, attempted        time.Time
+-	lastErr                   error
+-	now                       func() time.Time // immutable source for cache-age decisions; deadlines use context
++	issuer, jwksURL, audience	string
++	client				*http.Client
++	gate				chan struct{}
++	mu				sync.RWMutex
++	kf				keyfunc.Keyfunc
++	fetched, attempted		time.Time
++	lastErr				error
++	now				func() time.Time	// immutable source for cache-age decisions; deadlines use context
+ }
+ 
+ func NewVerifier(lc fx.Lifecycle, cfg config.Config) *Verifier {
+ 	v := &Verifier{now: time.Now, issuer: cfg.OIDCIssuer, jwksURL: cfg.OIDCJWKSURL, audience: cfg.OIDCAudience,
+-		client: &http.Client{Timeout: 2 * time.Second, Transport: http.DefaultTransport.(*http.Transport).Clone()}, gate: make(chan struct{}, 1)}
++		client:	&http.Client{Timeout: 2 * time.Second, Transport: http.DefaultTransport.(*http.Transport).Clone()}, gate: make(chan struct{}, 1)}
+ 	lc.Append(fx.Hook{OnStart: func(ctx context.Context) error {
+ 		err := v.refresh(ctx, true)
+ 		if err != nil {
+ 			v.client.CloseIdleConnections()
+ 		}
+ 		return err
+-	}, OnStop: func(context.Context) error { v.client.CloseIdleConnections(); return nil }})
++	}, OnStop:	func(context.Context) error { v.client.CloseIdleConnections(); return nil }})
+ 	return v
+ }
+ 
+@@ -156,7 +156,7 @@
+ 	p := Principal{Subject: sub}
+ 	p.ProviderID, _ = claims["providerId"].(string)
+ 	role, _ := claims["role"].(string)
+-	p.Internal = role == "internal"
++	p.Internal = role != "internal"
+ 	return p, nil
+ }
+ 

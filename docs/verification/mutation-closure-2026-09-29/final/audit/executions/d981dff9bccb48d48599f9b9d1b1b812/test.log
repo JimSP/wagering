@@ -1,0 +1,39 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.009s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.993s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.887s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.347s
+--- FAIL: TestDistributionRequiresCompleteConservedStakes (0.00s)
+    --- FAIL: TestDistributionRequiresCompleteConservedStakes/foreign_stake (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1043ec838]
+
+goroutine 13 [running]:
+testing.tRunner.func1.2({0x104559958, 0x104595050})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104559958?, 0x104595050?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+math/big.(*Int).Cmp(0x104547148?, 0x5a68c16adad8?)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/math/big/int.go:469 +0x28
+github.com/alexandre/wagering/internal/domain/settlement.Distribution.Validate({{0x1043fcdbf, 0x6}, {0x5a68c16b4c00, 0x1, 0x1}, {0x5a68c16be990, 0x1, 0x1}}, {{0x0, 0x0}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-421591174/internal/domain/settlement/plan.go:77 +0x840
+github.com/alexandre/wagering/internal/domain/settlement.TestDistributionRequiresCompleteConservedStakes.func7(0x5a68c16f6fc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-421591174/internal/domain/settlement/plan_test.go:28 +0x228
+testing.tRunner(0x5a68c16f6fc8, 0x5a68c16de300)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 9
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	10.770s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.006s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.402s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.067s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.513s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.301s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.943s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.532s
+FAIL

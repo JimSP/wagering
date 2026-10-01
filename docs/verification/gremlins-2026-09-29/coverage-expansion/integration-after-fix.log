@@ -1,0 +1,26 @@
+ Container wagering-app-1  Stopping
+ Container wagering-app-1  Stopped
+ Container wagering-localstack-1  Running
+ Container wagering-postgres-1  Running
+ Container wagering-keycloak-1  Running
+ Container wagering-localstack-1  Waiting
+ Container wagering-keycloak-1  Waiting
+ Container wagering-postgres-1  Waiting
+ Container wagering-postgres-1  Healthy
+ Container wagering-keycloak-1  Healthy
+ Container wagering-localstack-1  Healthy
+ Container wagering-postgres-1  Running
+no change
+=== RUN   TestHTTPContractsAgreeWithCommittedDatabaseFacts
+--- PASS: TestHTTPContractsAgreeWithCommittedDatabaseFacts (0.05s)
+=== RUN   TestSIGTERMDrainsInFlightSQS
+--- PASS: TestSIGTERMDrainsInFlightSQS (1.58s)
+PASS
+ok  	github.com/alexandre/wagering/test/integration	9.880s
+testing: warning: no tests to run
+PASS
+ok  	github.com/alexandre/wagering/cmd/wagering	1.451s [no tests to run]
+=== RUN   TestLedgerPropagatesLatePostgresError
+--- PASS: TestLedgerPropagatesLatePostgresError (0.02s)
+PASS
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.385s

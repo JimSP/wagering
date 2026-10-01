@@ -1,0 +1,62 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.398s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:50:38 INFO transaction handled correlationId="" messageId="" transactionId=bc03fc17-5e49-4a70-9ce6-cd29a6a4221e walletId=d588d627-7a67-4e41-8c07-8e5a5c29d794 providerId=p status=PROCESSED
+2026/09/29 22:50:38 WARN transaction handling failed correlationId="" messageId="" transactionId=771d51b5-1a2e-48e2-8acf-8c140fac4b53 walletId=d588d627-7a67-4e41-8c07-8e5a5c29d794 providerId=p transient=false
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x28 pc=0x100e53814]
+
+goroutine 194 [running]:
+github.com/alexandre/wagering/internal/infra/auth.(*Verifier).refresh(0x160006310630, {0x101620e08, 0x1016c2380}, 0x1)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/infra/auth/verifier.go:88 +0x684
+github.com/alexandre/wagering/internal/infra/auth.NewVerifier.func1({0x101620e08?, 0x1016c2380?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/infra/auth/verifier.go:47 +0x3c
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).runStartHook(0x1600065cc000, {0x101620e08, 0x1016c2380}, {0x1600064cb1e0, 0x1600064cb1f0, {0x0, 0x0}, {0x0, 0x0}, {{0x160006497380, ...}, ...}})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:256 +0x194
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).Start(0x1600065cc000, {0x101620e08, 0x1016c2380})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:216 +0x430
+go.uber.org/fx.(*App).start.func1({0x101620e08?, 0x1016c2380?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:704 +0x3c
+go.uber.org/fx.(*App).withRollback(0x16000631e240, {0x101620e08, 0x1016c2380}, 0x100de2864?)
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:686 +0x38
+go.uber.org/fx.(*App).start(...)
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:703
+go.uber.org/fx.withTimeout.func1()
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:803 +0x60
+created by go.uber.org/fx.withTimeout in goroutine 183
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:791 +0xa0
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.732s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.441s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.553s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.325s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.665s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.896s
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x28 pc=0x10480e7a4]
+
+goroutine 35 [running]:
+github.com/alexandre/wagering/internal/infra/auth.(*Verifier).refresh(0x21e7e3b122c0, {0x104dcf2f8, 0x104e5fae0}, 0x1)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/infra/auth/verifier.go:88 +0x684
+github.com/alexandre/wagering/internal/infra/auth.NewVerifier.func1({0x104dcf2f8?, 0x104e5fae0?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/infra/auth/verifier.go:47 +0x3c
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).runStartHook(0x21e7e3bc4000, {0x104dcf2f8, 0x104e5fae0}, {0x21e7e3b17420, 0x21e7e3b17430, {0x0, 0x0}, {0x0, 0x0}, {{0x21e7e3b1c680, ...}, ...}})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:256 +0x194
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).Start(0x21e7e3bc4000, {0x104dcf2f8, 0x104e5fae0})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:216 +0x430
+go.uber.org/fx.(*App).start.func1({0x104dcf2f8?, 0x104e5fae0?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:704 +0x3c
+go.uber.org/fx.(*App).withRollback(0x21e7e3b420c0, {0x104dcf2f8, 0x104e5fae0}, 0x0?)
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:686 +0x38
+go.uber.org/fx.(*App).start(...)
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:703
+go.uber.org/fx.withTimeout.func1()
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:803 +0x60
+created by go.uber.org/fx.withTimeout in goroutine 33
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:791 +0xa0
+FAIL	github.com/alexandre/wagering/internal/infra/auth	1.239s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.785s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.829s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.547s
+FAIL

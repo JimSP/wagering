@@ -1,0 +1,139 @@
+13 versions; paired up/down files; SHA-256 verified
+=== RUN   TestLossThenWINRejectedAtEveryStage
+=== RUN   TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/explicit-reference/HTTP
+2026/09/30 15:43:33 INFO transaction handled correlationId=fd2841d9-b6e3-4795-8d41-0c1622be5c7c messageId="" transactionId=a3c91532-2953-443e-b230-edd66ebfda3d walletId=e7a9f60c-f8b3-4dac-aa84-b88a5fe12c1d providerId=p status=PROCESSED
+2026/09/30 15:43:33 INFO transaction handled correlationId=9e61b087-0a9d-41cd-aae9-fc97e5f2b5ee messageId="" transactionId=ab56a5be-ed01-4e3b-9707-97d8fff5e931 walletId=806558c3-75af-4472-b569-9e7bcc56bbbe providerId=p status=PROCESSED
+2026/09/30 15:43:33 INFO transaction handled correlationId=100c0c60-14d1-44b1-a660-e7c68da99a79 messageId="" transactionId=56c29089-3746-4c1e-adf1-db31e47819c9 walletId=806558c3-75af-4472-b569-9e7bcc56bbbe providerId=p status=PROCESSED
+2026/09/30 15:43:33 INFO transaction handled correlationId=5cc20d44-936e-410f-b8f7-dd5aff0cb0d9 messageId="" transactionId=195fbcf8-6165-46fc-acbb-43ba96d564cc walletId=806558c3-75af-4472-b569-9e7bcc56bbbe providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:33 INFO transaction handled correlationId=22d58adb-c990-479c-a9b0-2db42126b06d messageId="" transactionId=195fbcf8-6165-46fc-acbb-43ba96d564cc walletId=806558c3-75af-4472-b569-9e7bcc56bbbe providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=HTTP
+=== RUN   TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/explicit-reference/SQS
+2026/09/30 15:43:33 INFO transaction handled correlationId=5ecfd6f3-4c87-488a-a0a8-d0935104f980 messageId="" transactionId=a77b6a64-1cec-4089-9e1f-3e4f7b7bed4d walletId=92167055-9da2-47db-a4e5-9d98b85d064c providerId=p status=PROCESSED
+2026/09/30 15:43:33 INFO transaction handled correlationId=7fc099d3-aa09-4739-be7c-8eb1b1186c21 messageId="" transactionId=400d2f50-4521-462f-8409-3202a4398de1 walletId=23b71170-00bb-4691-8736-2b678acf541f providerId=p status=PROCESSED
+2026/09/30 15:43:33 INFO transaction handled correlationId=1a8597bf-ff29-4dff-8b78-6a7f16efc8dc messageId=1a8597bf-ff29-4dff-8b78-6a7f16efc8dc transactionId=45e147db-22f5-4270-9fc3-9061fcb2f940 walletId=23b71170-00bb-4691-8736-2b678acf541f providerId=p status=PROCESSED
+2026/09/30 15:43:33 INFO transaction handled correlationId=9bedda9d-67ca-49ff-aad7-c0976d09c1f3 messageId=9bedda9d-67ca-49ff-aad7-c0976d09c1f3 transactionId=0a20562b-cd85-4dd4-a427-ac2990673ea9 walletId=23b71170-00bb-4691-8736-2b678acf541f providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:33 INFO transaction handled correlationId=5788ac53-03c4-4bf8-b268-c27b6f7c5874 messageId=5788ac53-03c4-4bf8-b268-c27b6f7c5874 transactionId=0a20562b-cd85-4dd4-a427-ac2990673ea9 walletId=23b71170-00bb-4691-8736-2b678acf541f providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=SQS
+=== RUN   TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/implicit-reference/HTTP
+2026/09/30 15:43:34 INFO transaction handled correlationId=53f20cb9-ce3c-468e-9d6e-3ab8b4cfb607 messageId="" transactionId=75d4bad6-212c-4c58-bf9b-bfcef49461fb walletId=120277ec-f136-4bcb-bc07-68822e29d69b providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=3644f481-003f-4f06-bfbc-8bb365a536b6 messageId="" transactionId=75584f52-f588-4d9c-a934-9c738ee791f2 walletId=97b2f8e7-85f7-4292-8f57-6868d54c118c providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=07a51893-0c87-469c-854f-f261ea13a8c6 messageId="" transactionId=566ca0ca-685d-44a5-b58b-566e83b36852 walletId=97b2f8e7-85f7-4292-8f57-6868d54c118c providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=2284310e-f3e1-40a1-abec-12ed2e16e9da messageId="" transactionId=8c8a7ccc-b8f7-471e-9682-b429ccd7eaa6 walletId=97b2f8e7-85f7-4292-8f57-6868d54c118c providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:34 INFO transaction handled correlationId=5a5a434c-b810-4316-9644-fcaaaf357dab messageId="" transactionId=8c8a7ccc-b8f7-471e-9682-b429ccd7eaa6 walletId=97b2f8e7-85f7-4292-8f57-6868d54c118c providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=HTTP
+=== RUN   TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/implicit-reference/SQS
+2026/09/30 15:43:34 INFO transaction handled correlationId=54e3c73c-5e7b-469a-8d62-e9a58db5e582 messageId="" transactionId=a56f7646-9b4d-4f47-b212-8d5efb0de278 walletId=5558bb43-4030-4c8f-8636-a8d5ca94c632 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=66578a1b-037f-43bb-9f6e-ebca874e4d14 messageId="" transactionId=4f904a3c-6981-464a-9469-eda17f1110ed walletId=685095fa-a879-40f4-8f36-51551e302b71 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=e4143a00-8663-4be5-940f-78af57baedbe messageId=e4143a00-8663-4be5-940f-78af57baedbe transactionId=94551985-08c2-4dda-b0c2-8668603e3a06 walletId=685095fa-a879-40f4-8f36-51551e302b71 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=2a59c117-68ef-4b0f-86c7-586d5bb6a7a8 messageId=2a59c117-68ef-4b0f-86c7-586d5bb6a7a8 transactionId=044576be-0af7-4c9f-aafb-3c46d9fed8ef walletId=685095fa-a879-40f4-8f36-51551e302b71 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:34 INFO transaction handled correlationId=bf55c151-19f7-414c-bd23-34e257128ae6 messageId=bf55c151-19f7-414c-bd23-34e257128ae6 transactionId=044576be-0af7-4c9f-aafb-3c46d9fed8ef walletId=685095fa-a879-40f4-8f36-51551e302b71 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=SQS
+=== RUN   TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/explicit-reference/HTTP
+2026/09/30 15:43:34 INFO transaction handled correlationId=f910e214-96bf-4b70-9a91-f7989c957ef6 messageId="" transactionId=f7268b7e-b3d2-4df0-a0c2-939d61c0c64c walletId=56e34e77-d41e-481b-9ac5-59a38e4537d3 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=a13e0edd-b96d-451e-8531-bc8f71f507d6 messageId="" transactionId=a3ca4265-52a9-4782-9fd5-7b0cdf2f2f21 walletId=a1e4b476-200e-4371-a2f7-a6fa0ea9f1f5 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=cbbe9dde-3721-4a40-8d4d-4563497e8e3a messageId="" transactionId=86b4443a-ffc9-4e18-8e02-ec46f6b6c218 walletId=a1e4b476-200e-4371-a2f7-a6fa0ea9f1f5 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=28d9e3af-58ca-4269-83bf-483bfe3d23d7 messageId="" transactionId=45c04c24-2813-4e33-83e9-90c6092c94e5 walletId=a1e4b476-200e-4371-a2f7-a6fa0ea9f1f5 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:34 INFO transaction handled correlationId=01159022-3bb2-4309-92a1-30bb2c17cd04 messageId="" transactionId=45c04c24-2813-4e33-83e9-90c6092c94e5 walletId=a1e4b476-200e-4371-a2f7-a6fa0ea9f1f5 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=HTTP
+=== RUN   TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/explicit-reference/SQS
+2026/09/30 15:43:34 INFO transaction handled correlationId=d20c095c-3638-4178-a852-12f009981635 messageId="" transactionId=41c3b761-fccc-4502-9f7b-d8da0569244b walletId=d5b6ab95-827a-443b-9e97-1b643b9edcae providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=a4d50761-1a6f-42e2-9358-c339d3bc1ed7 messageId="" transactionId=8f611e0b-8149-4494-bc23-14b06f4d6f0c walletId=fbc9310f-5983-4f1b-899b-831051c434fb providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=535f5862-2cd0-42cb-8249-b77b7970931b messageId=535f5862-2cd0-42cb-8249-b77b7970931b transactionId=357bffa7-cf57-404f-ac2e-1a7e14c75b3a walletId=fbc9310f-5983-4f1b-899b-831051c434fb providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=4d58293e-5a90-4b29-9f12-aa3de58c5aea messageId=4d58293e-5a90-4b29-9f12-aa3de58c5aea transactionId=40090999-341d-47a4-9ae5-a99169f72b87 walletId=fbc9310f-5983-4f1b-899b-831051c434fb providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:34 INFO transaction handled correlationId=d9ac1c55-08dc-4e34-9461-74f2cff1152a messageId=d9ac1c55-08dc-4e34-9461-74f2cff1152a transactionId=40090999-341d-47a4-9ae5-a99169f72b87 walletId=fbc9310f-5983-4f1b-899b-831051c434fb providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=SQS
+=== RUN   TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/implicit-reference/HTTP
+2026/09/30 15:43:34 INFO transaction handled correlationId=b6eb5be2-2040-4607-8838-28775f8f4a61 messageId="" transactionId=97879919-dd9c-4fd0-b1d5-0ac9a7130387 walletId=b53e739f-da43-4ab3-85a8-1ea98589d65d providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=848e3f4d-91f8-410f-a39b-9594f840c19e messageId="" transactionId=23e82d6e-3c1f-4ebb-bf5e-78202ce1c21f walletId=cc952342-2956-4686-ab08-4d886a441f21 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=d7c6c54e-e950-4ef7-939e-58cf22c5eed6 messageId="" transactionId=8f9fa625-5711-49b5-bf76-ddeb13274471 walletId=cc952342-2956-4686-ab08-4d886a441f21 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=d69a781f-b98c-43e4-a751-0f70068aebd1 messageId="" transactionId=3779d761-b855-46be-8756-3b207e161e93 walletId=cc952342-2956-4686-ab08-4d886a441f21 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:34 INFO transaction handled correlationId=00160fa5-95f6-4609-826d-89012b340456 messageId="" transactionId=3779d761-b855-46be-8756-3b207e161e93 walletId=cc952342-2956-4686-ab08-4d886a441f21 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=HTTP
+=== RUN   TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/implicit-reference/SQS
+2026/09/30 15:43:34 INFO transaction handled correlationId=e185c0d9-7dcd-40c5-b37f-d35ea2df88db messageId="" transactionId=813d8391-28c6-43c2-bfd0-d7c3b7e757b2 walletId=1f2cd61c-42ca-42e1-b928-f6ee145d555e providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=c20a2307-a985-4346-b3d9-5eea842f3f8f messageId="" transactionId=fd2edbee-53d3-458e-8a99-a0c3c2e776a5 walletId=3edd1197-2e3c-4fe5-b2af-719a5c3c0e77 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=46554349-9b73-4cf7-b793-eee9c3ff498c messageId=46554349-9b73-4cf7-b793-eee9c3ff498c transactionId=bad49c8e-9b87-46d4-978e-592ffc83e81c walletId=3edd1197-2e3c-4fe5-b2af-719a5c3c0e77 providerId=p status=PROCESSED
+2026/09/30 15:43:34 INFO transaction handled correlationId=080ab07e-4600-4af9-8cbb-39617520bdee messageId=080ab07e-4600-4af9-8cbb-39617520bdee transactionId=00cb9901-806a-4d55-93f2-6df5d128084a walletId=3edd1197-2e3c-4fe5-b2af-719a5c3c0e77 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:34 INFO transaction handled correlationId=fd100814-3dda-4e06-9e9a-172b84d16aa7 messageId=fd100814-3dda-4e06-9e9a-172b84d16aa7 transactionId=00cb9901-806a-4d55-93f2-6df5d128084a walletId=3edd1197-2e3c-4fe5-b2af-719a5c3c0e77 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=SQS
+=== RUN   TestLossThenWINRejectedAtEveryStage/settlement-paid/explicit-reference/HTTP
+2026/09/30 15:43:35 INFO transaction handled correlationId=daa33072-6be7-4f11-9b2a-6e80b531c44e messageId="" transactionId=74e2da5b-0869-4624-a318-f444cc07baf7 walletId=237225db-9479-45b9-880c-8bc0c055a5d7 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=29fe604b-09b3-48ac-886a-57399e8f8cfb messageId="" transactionId=38246461-b1d5-4a6f-adbc-3659a09a0256 walletId=1e11ba53-492e-452b-bfca-4343d8385090 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=4c2fa2be-8f72-4a57-9877-02623a89dc18 messageId="" transactionId=b5b98f29-3898-4e8f-979c-e001d2dce3ed walletId=1e11ba53-492e-452b-bfca-4343d8385090 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=9daa9960-6ea9-4c84-aeab-f408256d0a70 messageId="" transactionId=efb496af-cd23-412c-9346-39d245e09b97 walletId=1e11ba53-492e-452b-bfca-4343d8385090 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:35 INFO transaction handled correlationId=b1e57fc8-4ac3-4d4d-b1a8-40780824f1a2 messageId="" transactionId=efb496af-cd23-412c-9346-39d245e09b97 walletId=1e11ba53-492e-452b-bfca-4343d8385090 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=HTTP
+=== RUN   TestLossThenWINRejectedAtEveryStage/settlement-paid/explicit-reference/SQS
+2026/09/30 15:43:35 INFO transaction handled correlationId=3f55e2e4-4618-41fe-a0d7-519d98161925 messageId="" transactionId=0f48376a-1176-4402-8b12-3c2bbdf224e9 walletId=b55ab1da-e914-4c43-9f10-d0d34e7003e5 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=96a86233-7928-4e13-9a91-626ddb9e2d2a messageId="" transactionId=aac77e07-f747-4c24-b300-470dbd36c4fd walletId=92168e4d-e5fa-4e72-b488-48f6d738c21f providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=040900c6-ba8c-4536-b2bb-a84f1956589a messageId=040900c6-ba8c-4536-b2bb-a84f1956589a transactionId=1fd272b4-19f0-488f-8a53-a6582981568b walletId=92168e4d-e5fa-4e72-b488-48f6d738c21f providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=725b7c3c-eebe-40c4-a973-3e6afa7f38e3 messageId=725b7c3c-eebe-40c4-a973-3e6afa7f38e3 transactionId=6818b55c-96c7-48af-a9df-aa6687a1786c walletId=92168e4d-e5fa-4e72-b488-48f6d738c21f providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:35 INFO transaction handled correlationId=d68c9dde-c427-42d4-b4e0-0f6db78072d3 messageId=d68c9dde-c427-42d4-b4e0-0f6db78072d3 transactionId=6818b55c-96c7-48af-a9df-aa6687a1786c walletId=92168e4d-e5fa-4e72-b488-48f6d738c21f providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=SQS
+=== RUN   TestLossThenWINRejectedAtEveryStage/settlement-paid/implicit-reference/HTTP
+2026/09/30 15:43:35 INFO transaction handled correlationId=a2294127-cf65-492e-abf9-6877144b5f2f messageId="" transactionId=9e4b48f1-33a5-4dae-bf17-abd29184f3f9 walletId=bd913523-c923-4936-867b-b5c6ee141750 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=453f8211-6fce-435c-969c-e0c1aaf1c58a messageId="" transactionId=d5b88f7b-1577-4d95-928e-fa5d87265e72 walletId=361067e9-8bf0-41e8-bf65-6382133ac006 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=552743a6-50ad-4f96-950d-6777ba5a7d18 messageId="" transactionId=3325f4fe-1239-4165-8565-a3fa5e9ea8d6 walletId=361067e9-8bf0-41e8-bf65-6382133ac006 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=ec547c73-3b20-4a30-ab4c-2afd1124aefa messageId="" transactionId=133c331b-4ef9-49f2-93c5-51bedd5ba60e walletId=361067e9-8bf0-41e8-bf65-6382133ac006 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:35 INFO transaction handled correlationId=30f303fe-c396-481b-bead-79ee3a73900b messageId="" transactionId=133c331b-4ef9-49f2-93c5-51bedd5ba60e walletId=361067e9-8bf0-41e8-bf65-6382133ac006 providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=HTTP
+=== RUN   TestLossThenWINRejectedAtEveryStage/settlement-paid/implicit-reference/SQS
+2026/09/30 15:43:35 INFO transaction handled correlationId=354f389e-2a20-411d-9955-d2816ea0ea2d messageId="" transactionId=c0eeee2f-ce37-46e0-ad41-17d670ad47fd walletId=9505ee36-5a69-400f-bece-34780872fbf7 providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=cf8f4185-4ad4-43c5-8503-eec16ac0ae2f messageId="" transactionId=546aec8e-3124-40b3-a92b-fa2122c576bb walletId=9eb44ddf-35c5-4e14-821e-6d656eb5206e providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=815abfac-7992-4884-ba2b-a717318b8d4c messageId=815abfac-7992-4884-ba2b-a717318b8d4c transactionId=dbdbfe99-920f-477d-8a8f-ce158f7a6958 walletId=9eb44ddf-35c5-4e14-821e-6d656eb5206e providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=4828254d-a344-40e0-83fe-456810d3efb6 messageId=4828254d-a344-40e0-83fe-456810d3efb6 transactionId=d781e136-2574-4e4c-9c89-b0056d19f042 walletId=9eb44ddf-35c5-4e14-821e-6d656eb5206e providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:101: WIN rejected RESULT_ALREADY_LOST without postings; A paid 40; A guarantee=120; B guarantee=80
+2026/09/30 15:43:35 INFO transaction handled correlationId=11158563-7fd3-43a3-85a9-79d06edba6f0 messageId=11158563-7fd3-43a3-85a9-79d06edba6f0 transactionId=d781e136-2574-4e4c-9c89-b0056d19f042 walletId=9eb44ddf-35c5-4e14-821e-6d656eb5206e providerId=p status=REJECTED
+    loss_then_win_probe_integration_test.go:114: persisted bet status=CLOSED; channel=SQS
+--- PASS: TestLossThenWINRejectedAtEveryStage (2.26s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/explicit-reference/HTTP (0.21s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/explicit-reference/SQS (0.15s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/implicit-reference/HTTP (0.27s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/window-ended-no-plan/implicit-reference/SQS (0.13s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/explicit-reference/HTTP (0.19s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/explicit-reference/SQS (0.20s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/implicit-reference/HTTP (0.19s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/result-confirmed-unpaid/implicit-reference/SQS (0.14s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/settlement-paid/explicit-reference/HTTP (0.30s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/settlement-paid/explicit-reference/SQS (0.15s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/settlement-paid/implicit-reference/HTTP (0.18s)
+    --- PASS: TestLossThenWINRejectedAtEveryStage/settlement-paid/implicit-reference/SQS (0.15s)
+=== RUN   TestLossDoesNotRejectWINInOtherContext
+=== RUN   TestLossDoesNotRejectWINInOtherContext/roundId
+2026/09/30 15:43:35 INFO transaction handled correlationId=22ce5ef4-5776-47c5-8da7-256997d14268 messageId="" transactionId=98f14c3a-186f-433c-bdcd-3104bbaea597 walletId=be56115a-1a34-41a4-a968-2306a200d71a providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=4056c76b-3a50-4349-b658-a737b2626f02 messageId="" transactionId=05f4777a-a625-40f7-88f1-e8a40486a66c walletId=be56115a-1a34-41a4-a968-2306a200d71a providerId=p status=PROCESSED
+2026/09/30 15:43:35 INFO transaction handled correlationId=34c8b865-9724-4b3a-bb1d-99e14b3d9c54 messageId="" transactionId=5be30b85-1e15-49dc-9a18-68c4814cecc9 walletId=be56115a-1a34-41a4-a968-2306a200d71a providerId=p status=PROCESSED
+=== RUN   TestLossDoesNotRejectWINInOtherContext/gameId
+2026/09/30 15:43:36 INFO transaction handled correlationId=927b6000-2213-42ec-ac04-c917fc9c70be messageId="" transactionId=06d361f1-d781-4aef-bb68-4fdd67834e43 walletId=13a02740-85c7-4d61-91ba-24f532433061 providerId=p status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId=0713ac02-c6ee-4992-8f1e-16d416fb93ed messageId="" transactionId=93a8f9b9-6dba-458a-b2ae-e2ddfc0e5812 walletId=13a02740-85c7-4d61-91ba-24f532433061 providerId=p status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId=1cddf915-8eb6-4d42-8507-ace3855dca54 messageId="" transactionId=24b572b2-6deb-45b1-bde7-5ab385d455ad walletId=13a02740-85c7-4d61-91ba-24f532433061 providerId=p status=PROCESSED
+=== RUN   TestLossDoesNotRejectWINInOtherContext/providerId
+2026/09/30 15:43:36 INFO transaction handled correlationId=bbb9917d-2764-4649-97c9-d70b9247628d messageId="" transactionId=33c7b05e-4f38-44b8-93ca-756ab1458c81 walletId=fa5db9e3-e720-4b14-8569-cc591cfd62d5 providerId=p status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId=4d619f55-a2c9-4c88-b869-984af0836aa7 messageId="" transactionId=b4845120-13d3-401c-85de-18fd39c94b55 walletId=fa5db9e3-e720-4b14-8569-cc591cfd62d5 providerId=other status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId=74ff11b3-e5ac-4591-8038-744ddb1270dc messageId="" transactionId=a25cb02e-3deb-4480-a0cd-8daa0f3bba27 walletId=fa5db9e3-e720-4b14-8569-cc591cfd62d5 providerId=p status=PROCESSED
+--- PASS: TestLossDoesNotRejectWINInOtherContext (0.35s)
+    --- PASS: TestLossDoesNotRejectWINInOtherContext/roundId (0.14s)
+    --- PASS: TestLossDoesNotRejectWINInOtherContext/gameId (0.12s)
+    --- PASS: TestLossDoesNotRejectWINInOtherContext/providerId (0.09s)
+=== RUN   TestWINWaitingBehindLOSSSeesCommittedResult
+2026/09/30 15:43:36 INFO transaction handled correlationId=a9aed1af-a58e-4830-8df2-9e73d92e22f2 messageId="" transactionId=58ed52b2-a18f-469a-b840-ac3db41d96d2 walletId=d97fd68f-7cda-476d-a4d9-1d2967ca201f providerId=p status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId="" messageId="" transactionId=c362113d-222c-45e8-afc7-8fe8cd4d2119 walletId=d97fd68f-7cda-476d-a4d9-1d2967ca201f providerId=p status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId=cc639582-47a5-4795-bbf3-fcc6059e5b85 messageId="" transactionId=f9067e81-5601-4f62-bda3-3ecdedab5627 walletId=d97fd68f-7cda-476d-a4d9-1d2967ca201f providerId=p status=REJECTED
+--- PASS: TestWINWaitingBehindLOSSSeesCommittedResult (0.13s)
+=== RUN   TestDatabaseRejectsProcessedWINAfterLOSS
+2026/09/30 15:43:36 INFO transaction handled correlationId=a73d70b1-9a0f-4bf4-9c91-e0e0d8fa79a9 messageId="" transactionId=a6e83ae5-939f-41e1-a26f-9935c79f57db walletId=19da45bc-ec26-448d-95e2-f07fcd590354 providerId=p status=PROCESSED
+2026/09/30 15:43:36 INFO transaction handled correlationId=2f7bc69e-ec5c-4820-b899-972dc331adee messageId="" transactionId=2fe420e6-e3ec-4356-a6e2-e4580d0c2c28 walletId=19da45bc-ec26-448d-95e2-f07fcd590354 providerId=p status=PROCESSED
+--- PASS: TestDatabaseRejectsProcessedWINAfterLOSS (0.16s)
+PASS
+ok  	github.com/alexandre/wagering/internal/infra/postgres	4.376s

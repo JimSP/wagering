@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.540s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:42:38 INFO transaction handled correlationId="" messageId="" transactionId=2de5a58e-2754-40d4-94dd-ab7f9111b2e4 walletId=ad4d8022-f510-4f54-a114-3b8126c6e8d3 providerId=p status=PROCESSED
+2026/09/29 03:42:38 WARN transaction handling failed correlationId="" messageId="" transactionId=db669c54-a147-4e62-81a6-7e78c31a258d walletId=ad4d8022-f510-4f54-a114-3b8126c6e8d3 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:154: HTTP contract: 200 map[Content-Type:[application/json] X-Correlation-Id:[360d262d-cfa4-467b-8b6c-74ea138b3e9b]] {"transactionId":"00000000-0000-4000-8000-000000000006","status":"PROCESSED","balance":{"amount":"80.00","currency":"BRL"},"idempotentReplay":false}
+    http_contract_test.go:191: HTTP contract: 200 map[Content-Type:[application/json] X-Correlation-Id:[10dc9f69-f37c-4670-9810-13f6bcb136f3]] {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.691s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.168s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.941s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.643s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.055s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.719s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.937s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.813s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.837s
+FAIL

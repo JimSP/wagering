@@ -1,0 +1,43 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.526s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.857s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.959s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.084s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.823s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.217s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.450s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.932s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.331s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.800s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.466s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.270s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.247s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.414s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.404s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.429s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.421s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.668s
+--- FAIL: TestInventoryDeclarationsAndCalls (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x20 pc=0x1041cc980]
+
+goroutine 19 [running]:
+testing.tRunner.func1.2({0x1043a8400, 0x1043ed320})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1043a8400?, 0x1043ed320?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/scripts.inventory({0x56ad3094c1b0, 0x84})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/scripts/audit-test-inventory.go:66 +0x3e0
+github.com/alexandre/wagering/scripts.TestInventoryDeclarationsAndCalls(0x56ad30952248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/scripts/audit-test-inventory_test.go:33 +0xcc
+testing.tRunner(0x56ad30952248, 0x1043cfc88)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/scripts	2.777s
+FAIL

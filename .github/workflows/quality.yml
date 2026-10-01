@@ -1,0 +1,42 @@
+name: Quality
+on:
+  pull_request:
+  push:
+    branches: [feature/ledger, main]
+  workflow_dispatch:
+    inputs:
+      release:
+        description: Run the complete mutation campaign too
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: Build from clean checkout
+        run: go build ./...
+      - name: Install project-private pinned tools
+        run: bash scripts/quality-tools.sh --install --approve-lock "$(sha256sum tools/quality/tools.lock | cut -d ' ' -f 1)"
+      - name: Quality gate
+        env:
+          RELEASE: ${{ inputs.release }}
+        run: |
+          if [[ "$RELEASE" == true ]]; then bash scripts/check.sh release; else bash scripts/check.sh full; fi
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: quality-evidence
+          path: .local/quality-results/
+          include-hidden-files: true

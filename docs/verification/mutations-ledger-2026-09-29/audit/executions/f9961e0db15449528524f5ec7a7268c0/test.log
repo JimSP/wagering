@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.914s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:19:11 INFO transaction handled correlationId="" messageId="" transactionId=3affb727-067e-4105-b8fc-134bdaa4d598 walletId=20b9e9b0-2ead-4881-a4d2-92ad6821b2cb providerId=p status=PROCESSED
+2026/09/29 22:19:11 WARN transaction handling failed correlationId="" messageId="" transactionId=4d8cfaa6-0f76-4f06-a0dc-7171c61ae44a walletId=20b9e9b0-2ead-4881-a4d2-92ad6821b2cb providerId=p transient=false
+--- FAIL: TestSubmitExplicitBetRejectsInvalidIdentityAndPersistenceFailures (0.00s)
+    --- FAIL: TestSubmitExplicitBetRejectsInvalidIdentityAndPersistenceFailures/bind_failure (0.00s)
+        paired_storage_failure_test.go:245: invalid input: BET context differs from explicit bet
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.275s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.419s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.893s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.522s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.117s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.642s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.204s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.230s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.994s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.847s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.819s
+FAIL

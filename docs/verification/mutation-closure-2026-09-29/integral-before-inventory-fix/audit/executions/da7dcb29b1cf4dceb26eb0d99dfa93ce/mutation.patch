@@ -1,0 +1,52 @@
+--- original/internal/transport/httpapi/handlers.go
++++ mutant/internal/transport/httpapi/handlers.go
+@@ -21,7 +21,7 @@
+ 
+ type corrKey struct{}
+ 
+-func correlationID(ctx context.Context) string { s, _ := ctx.Value(corrKey{}).(string); return s }
++func correlationID(ctx context.Context) string	{ s, _ := ctx.Value(corrKey{}).(string); return s }
+ 
+ // withCorrelation propagates/creates X-Correlation-Id (logs, events and responses share it).
+ func withCorrelation(next http.Handler) http.Handler {
+@@ -40,7 +40,7 @@
+ func decode(w http.ResponseWriter, r *http.Request, v any) error {
+ 	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20))
+ 	var body json.RawMessage
+-	if err := dec.Decode(&body); err != nil {
++	if err := dec.Decode(|body); err != nil {
+ 		return apperr.Invalid("malformed body: %v", err)
+ 	}
+ 	// All request contracts require an object. encoding/json otherwise accepts
+@@ -134,13 +134,13 @@
+ 	}
+ 	p, _ := auth.PrincipalFrom(r.Context())
+ 	res, err := h.d.Submit.Execute(r.Context(), usecase.SubmitInput{
+-		Source: usecase.SourceHTTP, AuthorizedProviderID: p.ProviderID, IdempotencyKey: key,
+-		CorrelationID: correlationID(r.Context()),
+-		BetID:         req.BetID,
+-		ProviderID:    req.ProviderID, ExternalTransactionID: req.ExternalTransactionID, PlayerID: req.PlayerID,
+-		WalletID: req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,
+-		ReferenceExternalTransactionID: req.ReferenceExternalTransactionID,
+-		Amount:                         req.Money.Amount, Currency: req.Money.Currency,
++		Source:	usecase.SourceHTTP, AuthorizedProviderID: p.ProviderID, IdempotencyKey: key,
++		CorrelationID:	correlationID(r.Context()),
++		BetID:		req.BetID,
++		ProviderID:	req.ProviderID, ExternalTransactionID: req.ExternalTransactionID, PlayerID: req.PlayerID,
++		WalletID:	req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,
++		ReferenceExternalTransactionID:	req.ReferenceExternalTransactionID,
++		Amount:				req.Money.Amount, Currency: req.Money.Currency,
+ 	})
+ 	if err != nil {
+ 		writeError(w, err)
+@@ -152,8 +152,8 @@
+ 	case wager.StatusProcessed:
+ 		writeJSON(w, http.StatusOK, body)
+ 	case wager.StatusRejected, wager.StatusFailed:
+-		writeJSON(w, http.StatusUnprocessableEntity, body) // definitive business outcome
+-	default: // PENDING / PENDING_REFERENCE
++		writeJSON(w, http.StatusUnprocessableEntity, body)	// definitive business outcome
++	default:	// PENDING / PENDING_REFERENCE
+ 		w.Header().Set("Location", "/wagering/transactions/"+res.TransactionID)
+ 		writeJSON(w, http.StatusAccepted, body)
+ 	}

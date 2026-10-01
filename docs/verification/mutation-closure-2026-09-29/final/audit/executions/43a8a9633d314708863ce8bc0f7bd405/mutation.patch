@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/settlement_audit.go
++++ mutant/internal/app/usecase/settlement_audit.go
+@@ -51,7 +51,7 @@
+ 			return err
+ 		}
+ 		record, facts, err := r.LockReversal(ctx, parsed.String())
+-		if err != nil {
++		if err == nil {
+ 			return err
+ 		}
+ 		if record.Status == "REVERSED" {

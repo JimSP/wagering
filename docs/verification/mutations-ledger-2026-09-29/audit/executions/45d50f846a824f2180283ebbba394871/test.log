@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.082s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:16:02 INFO transaction handled correlationId="" messageId="" transactionId=688ec63b-a2b6-4319-839f-ac059d0bc280 walletId=c8550beb-7647-48a4-8a8f-7427cec2638d providerId=p status=PROCESSED
+2026/09/29 22:16:02 WARN transaction handling failed correlationId="" messageId="" transactionId=0e74ecd6-4060-4a04-8d8a-b45dbb005398 walletId=c8550beb-7647-48a4-8a8f-7427cec2638d providerId=p transient=false
+--- FAIL: TestCreateBetValidatesBeforePersistenceAndNormalizesIdentity (0.00s)
+    --- FAIL: TestCreateBetValidatesBeforePersistenceAndNormalizesIdentity/success (0.00s)
+        settlement_failure_test.go:89: invalid input: providerId, roundId and gameId required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.491s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.109s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.782s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.151s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.438s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.028s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.365s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.910s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.324s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.814s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.791s
+FAIL

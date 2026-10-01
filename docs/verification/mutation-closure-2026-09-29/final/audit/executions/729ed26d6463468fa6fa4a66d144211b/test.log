@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.248s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.479s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.847s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.976s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.720s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/expiry_absent (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING_REFERENCE FailureCode: BalanceAfter:<nil> Attempts:1 NextAttemptAt:2026-09-28 12:00:01 +0000 UTC ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.416s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.818s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.561s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.929s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.717s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.881s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.419s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.405s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.577s
+FAIL

@@ -1,0 +1,298 @@
+[
+  {
+    "conname": "inbox_messages_pkey",
+    "contype": "p",
+    "definition": "PRIMARY KEY (consumer_name, message_id)",
+    "table_name": "inbox_messages",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "outbox_events_pkey",
+    "contype": "p",
+    "definition": "PRIMARY KEY (event_id)",
+    "table_name": "outbox_events",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "amount_policy",
+    "contype": "c",
+    "definition": "CHECK ((((kind = 'LOSS'::text) AND (amount_minor = 0)) OR ((kind <> 'LOSS'::text) AND (amount_minor > 0))))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "attempts_nonnegative",
+    "contype": "c",
+    "definition": "CHECK ((attempts >= 0))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "internal_shape",
+    "contype": "c",
+    "definition": "CHECK (((origin <> 'INTERNAL'::text) OR ((status = 'PROCESSED'::text) AND (reference_transaction_id IS NULL))))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "origin_shape",
+    "contype": "c",
+    "definition": "CHECK ((((origin = 'INTERNAL'::text) AND (kind = 'OPENING'::text) AND (provider_id IS NULL) AND (external_transaction_id IS NULL) AND (idempotency_key IS NULL) AND (payload_hash IS NULL) AND (round_id IS NULL) AND (game_id IS NULL) AND (reference_external_id IS NULL)) OR ((origin = 'EXTERNAL'::text) AND (kind <> 'OPENING'::text) AND (provider_id IS NOT NULL) AND (external_transaction_id IS NOT NULL) AND (idempotency_key IS NOT NULL) AND (payload_hash IS NOT NULL) AND (round_id IS NOT NULL) AND (game_id IS NOT NULL))))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "reversal_needs_reference",
+    "contype": "c",
+    "definition": "CHECK (((kind <> ALL (ARRAY['REFUND'::text, 'ROLLBACK'::text])) OR (reference_external_id IS NOT NULL)))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "state_shape",
+    "contype": "c",
+    "definition": "CHECK ((((status = 'PROCESSED'::text) AND (balance_after_minor IS NOT NULL) AND (balance_after_minor >= 0) AND (failure_code IS NULL)) OR ((status = ANY (ARRAY['REJECTED'::text, 'FAILED'::text])) AND (failure_code IS NOT NULL) AND (failure_code <> ''::text)) OR ((status = ANY (ARRAY['PENDING'::text, 'PENDING_REFERENCE'::text])) AND (failure_code IS NULL))))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "supported_currency",
+    "contype": "c",
+    "definition": "CHECK ((currency = ANY (ARRAY['BRL'::bpchar, 'USD'::bpchar, 'EUR'::bpchar])))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "tx_integrity",
+    "contype": "t",
+    "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+    "table_name": "wager_transactions",
+    "condeferred": true,
+    "condeferrable": true
+  },
+  {
+    "conname": "wager_transactions_amount_minor_check",
+    "contype": "c",
+    "definition": "CHECK ((amount_minor >= 0))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wager_transactions_kind_check",
+    "contype": "c",
+    "definition": "CHECK ((kind = ANY (ARRAY['OPENING'::text, 'BET'::text, 'WIN'::text, 'LOSS'::text, 'REFUND'::text, 'ROLLBACK'::text])))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wager_transactions_origin_check",
+    "contype": "c",
+    "definition": "CHECK ((origin = ANY (ARRAY['INTERNAL'::text, 'EXTERNAL'::text])))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wager_transactions_pkey",
+    "contype": "p",
+    "definition": "PRIMARY KEY (id)",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wager_transactions_reference_transaction_id_fkey",
+    "contype": "f",
+    "definition": "FOREIGN KEY (reference_transaction_id) REFERENCES wager_transactions(id)",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wager_transactions_status_check",
+    "contype": "c",
+    "definition": "CHECK ((status = ANY (ARRAY['PENDING'::text, 'PENDING_REFERENCE'::text, 'PROCESSED'::text, 'REJECTED'::text, 'FAILED'::text])))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wager_transactions_wallet_id_fkey",
+    "contype": "f",
+    "definition": "FOREIGN KEY (wallet_id) REFERENCES wallets(id)",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "waiting_shape",
+    "contype": "c",
+    "definition": "CHECK (((status <> 'PENDING_REFERENCE'::text) OR ((reference_external_id IS NOT NULL) AND (next_attempt_at IS NOT NULL) AND (expires_at IS NOT NULL))))",
+    "table_name": "wager_transactions",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "balance_math",
+    "contype": "c",
+    "definition": "CHECK ((((direction = 'DEBIT'::text) AND (balance_after_minor = (balance_before_minor - amount_minor))) OR ((direction = 'CREDIT'::text) AND (balance_after_minor = (balance_before_minor + amount_minor)))))",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "ledger_seq_unique",
+    "contype": "u",
+    "definition": "UNIQUE (seq)",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "ledger_tx_integrity",
+    "contype": "t",
+    "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": true,
+    "condeferrable": true
+  },
+  {
+    "conname": "ledger_wallet_integrity",
+    "contype": "t",
+    "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": true,
+    "condeferrable": true
+  },
+  {
+    "conname": "wallet_ledger_entries_amount_minor_check",
+    "contype": "c",
+    "definition": "CHECK ((amount_minor > 0))",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_balance_after_minor_check",
+    "contype": "c",
+    "definition": "CHECK ((balance_after_minor >= 0))",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_balance_before_minor_check",
+    "contype": "c",
+    "definition": "CHECK ((balance_before_minor >= 0))",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_direction_check",
+    "contype": "c",
+    "definition": "CHECK ((direction = ANY (ARRAY['DEBIT'::text, 'CREDIT'::text])))",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_pkey",
+    "contype": "p",
+    "definition": "PRIMARY KEY (id)",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_transaction_id_fkey",
+    "contype": "f",
+    "definition": "FOREIGN KEY (transaction_id) REFERENCES wager_transactions(id)",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_wallet_id_fkey",
+    "contype": "f",
+    "definition": "FOREIGN KEY (wallet_id) REFERENCES wallets(id)",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_ledger_entries_wallet_id_transaction_id_key",
+    "contype": "u",
+    "definition": "UNIQUE (wallet_id, transaction_id)",
+    "table_name": "wallet_ledger_entries",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "supported_currency",
+    "contype": "c",
+    "definition": "CHECK ((currency = ANY (ARRAY['BRL'::bpchar, 'USD'::bpchar, 'EUR'::bpchar])))",
+    "table_name": "wallets",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallet_integrity",
+    "contype": "t",
+    "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED",
+    "table_name": "wallets",
+    "condeferred": true,
+    "condeferrable": true
+  },
+  {
+    "conname": "wallets_balance_minor_check",
+    "contype": "c",
+    "definition": "CHECK ((balance_minor >= 0))",
+    "table_name": "wallets",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallets_currency_check",
+    "contype": "c",
+    "definition": "CHECK ((currency ~ '^[A-Z]{3}$'::text))",
+    "table_name": "wallets",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallets_pkey",
+    "contype": "p",
+    "definition": "PRIMARY KEY (id)",
+    "table_name": "wallets",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallets_player_id_currency_key",
+    "contype": "u",
+    "definition": "UNIQUE (player_id, currency)",
+    "table_name": "wallets",
+    "condeferred": false,
+    "condeferrable": false
+  },
+  {
+    "conname": "wallets_version_check",
+    "contype": "c",
+    "definition": "CHECK ((version >= 1))",
+    "table_name": "wallets",
+    "condeferred": false,
+    "condeferrable": false
+  }
+]

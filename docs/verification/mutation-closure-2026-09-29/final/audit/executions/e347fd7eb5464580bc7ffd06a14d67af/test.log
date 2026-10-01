@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.101s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:33:55 INFO transaction handled correlationId="" messageId="" transactionId=d8d7d169-da11-4459-b1a2-8e29eafa4b08 walletId=f32c8fb7-f860-4ae1-8d65-a3ff8c462a79 providerId=p status=PROCESSED
+2026/09/30 01:33:55 WARN transaction handling failed correlationId="" messageId="" transactionId=654b2712-dda4-4696-a957-f180261858de walletId=f32c8fb7-f860-4ae1-8d65-a3ff8c462a79 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.794s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.385s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.168s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.845s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.595s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.334s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.04s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/malformed (0.00s)
+        authorization_paths_test.go:88: {  false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	12.525s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.273s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.164s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	13.193s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	13.190s
+ok  	github.com/alexandre/wagering/internal/platform/logging	13.180s
+FAIL

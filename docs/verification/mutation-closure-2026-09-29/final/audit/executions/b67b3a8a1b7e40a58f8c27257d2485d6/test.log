@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.559s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	8.217s
+ok  	github.com/alexandre/wagering/internal/domain/event	6.758s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.041s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.151s
+ok  	github.com/alexandre/wagering/internal/domain/wager	6.319s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	6.888s
+ok  	github.com/alexandre/wagering/internal/infra/auth	7.165s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.790s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingDatabaseProtocol (0.00s)
+    --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT (0.00s)
+        --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT/failure-0-query (0.00s)
+            accounting_mutation_test.go:64: step 4 args=[]interface {}{"tx", "o", "g", 100, time.Date(2026, time.January, 2, 3, 4, 5, 0, time.UTC)} want=[]interface {}{"tx", "g", "o", 100, time.Date(2026, time.January, 2, 3, 4, 5, 0, time.UTC)}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	7.192s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.375s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.039s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.021s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.917s
+FAIL

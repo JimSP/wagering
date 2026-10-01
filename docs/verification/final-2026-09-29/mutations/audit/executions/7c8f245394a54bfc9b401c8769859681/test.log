@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.005s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:19:19 INFO transaction handled correlationId="" messageId="" transactionId=a08a6ad6-f058-4b4e-bde3-642a2bd4ab1b walletId=a349366b-49d5-4ce3-8eb2-2700c2069075 providerId=p status=PROCESSED
+2026/09/29 03:19:19 WARN transaction handling failed correlationId="" messageId="" transactionId=25168245-20eb-45f6-8a9e-be0c2b45bdc7 walletId=a349366b-49d5-4ce3-8eb2-2700c2069075 providerId=p transient=false
+--- FAIL: TestReversalsUndoOnlyEligibleUnreversedMovements (0.00s)
+    --- FAIL: TestReversalsUndoOnlyEligibleUnreversedMovements/BET (0.00s)
+        journey_semantics_test.go:263: unexpected result {00000000-0000-4000-8000-000000000010 REJECTED <nil> INVALID_REFERENCE_KIND false}
+    journey_semantics_test.go:298: {00000000-0000-4000-8000-000000000014 REJECTED <nil> INVALID_REFERENCE_KIND false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.425s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.099s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.803s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:57: BET
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.531s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.524s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.047s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.278s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.406s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.862s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.049s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.054s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.063s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.205s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.078s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	4.165s
+FAIL

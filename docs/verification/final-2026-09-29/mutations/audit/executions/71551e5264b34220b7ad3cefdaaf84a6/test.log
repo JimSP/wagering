@@ -1,0 +1,23 @@
+# github.com/alexandre/wagering/internal/infra/postgres
+internal/infra/postgres/wallet_repo.go:41:38: invalid operation: operator - not defined on `SELECT ` + walletCols (untyped string constant "SELECT id::text, player_id::text, currency, balance_minor, version, ...)
+FAIL	github.com/alexandre/wagering/cmd/wagering [build failed]
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.438s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.925s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.180s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.324s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.799s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.227s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.046s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+FAIL	github.com/alexandre/wagering/internal/infra/postgres [build failed]
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.341s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.443s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.529s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.445s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.086s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.098s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.151s
+FAIL

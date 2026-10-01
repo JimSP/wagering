@@ -1,0 +1,40 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.920s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.582s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.351s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.020s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.262s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.676s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.380s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.234s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.137s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.566s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/30 01:52:31 ERROR sqs delete failed (message will be redelivered; inbox dedupes) messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=<nil>
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 01:52:31 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestTransientBackoffAndCleanupLogsMatchActualOutcome (0.00s)
+    --- FAIL: TestTransientBackoffAndCleanupLogsMatchActualOutcome/cleanup_failure=false (0.00s)
+        contract_test.go:121: calls=2 logs={"time":"2026-09-30T01:52:31.846908-03:00","level":"ERROR","msg":"sqs delete failed (message will be redelivered; inbox dedupes)","err":null}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	9.547s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.082s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.094s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.141s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.138s
+ok  	github.com/alexandre/wagering/internal/platform/worker	9.163s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.087s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	9.157s
+ok  	github.com/alexandre/wagering/scripts	10.378s
+FAIL

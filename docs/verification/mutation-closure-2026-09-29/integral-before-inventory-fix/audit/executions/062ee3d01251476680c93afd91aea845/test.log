@@ -1,0 +1,38 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.835s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:48:19 INFO transaction handled correlationId="" messageId="" transactionId=4708c015-c759-45ae-b7ff-30c651536dcd walletId=8014068a-e3ef-4b06-bbb3-110be1b61672 providerId=p status=PROCESSED
+2026/09/29 23:48:19 WARN transaction handling failed correlationId="" messageId="" transactionId=5a947d1d-b91c-4da3-9059-4bb2b36a4bae walletId=8014068a-e3ef-4b06-bbb3-110be1b61672 providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+panic: unexpected accounting write [recovered, repanicked]
+
+goroutine 60 [running]:
+testing.tRunner.func1.2({0x1039ab450, 0x1038d08a0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1039ab450?, 0x1038d08a0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.accountingTxStub.ApplyAccounting(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/paired_storage_failure_test.go:29
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x7587bce87d58, {0x103a51198, 0x103af2380}, {0x103a51dd0, 0x7587bce49520}, 0x7587bce6d680)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/process.go:110 +0x5b4
+github.com/alexandre/wagering/internal/app/usecase.TestProcessRequiresAccountingAndValidTransitionTime(0x7587bcee0248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/paired_storage_failure_test.go:96 +0x2d0
+testing.tRunner(0x7587bcee0248, 0x103a56610)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.099s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.480s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.610s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.730s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.855s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.181s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.404s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.139s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.368s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.726s
+FAIL

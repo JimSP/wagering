@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.118s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:04:36 INFO transaction handled correlationId="" messageId="" transactionId=5af628f7-d83e-4b8a-aade-4f363f1e7e23 walletId=c76f0cb7-98c8-4197-bf99-86a594102b76 providerId=p status=PROCESSED
+2026/09/30 01:04:36 WARN transaction handling failed correlationId="" messageId="" transactionId=861880c3-37e6-4742-be16-57bb35b222b3 walletId=c76f0cb7-98c8-4197-bf99-86a594102b76 providerId=p transient=false
+--- FAIL: TestSettlementMessageRejectsMissingIDAndInlineParticipants (0.00s)
+    --- FAIL: TestSettlementMessageRejectsMissingIDAndInlineParticipants/{"messageId":"m","type":"SettlementRequested","occurredAt":"2026-09-29T12:00:00Z","data":{"settlementId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a7","wallets":["A","B"]}} (0.00s)
+        settlement_message_contract_test.go:115: err=permanent: invalid input: settlement executor not configured writes=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.391s
+ok  	github.com/alexandre/wagering/internal/domain/event	7.488s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.734s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.457s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.314s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.600s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.804s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.848s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.037s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.843s
+FAIL

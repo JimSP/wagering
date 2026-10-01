@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.341s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.755s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.760s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.637s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.152s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_guarantee_on_LOSS (0.00s)
+        mutation_regression_test.go:26: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.392s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.511s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.827s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.176s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    accounting_closure_extra_test.go:37: INVALID_INPUT: invalid input: reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.067s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.939s
+FAIL

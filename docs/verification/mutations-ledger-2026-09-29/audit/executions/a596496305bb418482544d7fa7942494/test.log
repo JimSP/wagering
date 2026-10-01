@@ -1,0 +1,28 @@
+# github.com/alexandre/wagering/internal/domain/wager
+# [github.com/alexandre/wagering/internal/domain/wager]
+internal/domain/wager/types.go:39:9: suspect and: s == StatusProcessed && s == StatusRejected
+ok  	github.com/alexandre/wagering/cmd/wagering	1.306s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:47:26 INFO transaction handled correlationId="" messageId="" transactionId=0c293420-1da1-4630-8791-c2ac2be50cc9 walletId=c195062c-2173-4b02-aa2e-ec233abfce7e providerId=p status=PROCESSED
+2026/09/29 22:47:26 WARN transaction handling failed correlationId="" messageId="" transactionId=ca9cbb20-3596-4634-a62e-9e711d836de1 walletId=c195062c-2173-4b02-aa2e-ec233abfce7e providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/already_terminal (0.00s)
+        reference_failure_test.go:84: worker reported a failure it did not persist [REFUND:FAILED]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.941s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.271s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.038s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.554s
+FAIL	github.com/alexandre/wagering/internal/domain/wager [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.755s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.540s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.340s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.651s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.115s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.064s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.050s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.083s
+FAIL

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.018s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.670s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.077s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.308s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.682s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.571s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.795s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.841s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.188s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.969s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.815s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.340s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.341s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.392s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.460s
+ok  	github.com/alexandre/wagering/internal/platform/worker	10.475s
+--- FAIL: TestBalanceFixtureAndEnvelopeFieldsIndependently (0.00s)
+    --- FAIL: TestBalanceFixtureAndEnvelopeFieldsIndependently/valid-version-one (0.00s)
+        mutation_regression_test.go:193: verdict: balance payload differs from declared movement: got {WalletID:w TransactionID:t Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:1} want {WalletID:w TransactionID:t Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	10.615s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	10.683s
+ok  	github.com/alexandre/wagering/scripts	10.675s
+FAIL

@@ -1,0 +1,110 @@
+6 versions; paired up/down files; SHA-256 verified
+=== RUN   TestAccountingModelOpeningBETWINAndReplay
+=== RUN   TestAccountingModelOpeningBETWINAndReplay/false
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=7d22b8e4-a1a9-4573-ad95-978ab57fbb70 walletId=06d5a73f-eeb4-4e94-b9c3-1ee8f69e84dc providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=6272bb2d-b01f-41b2-9d6c-e13236be1052 walletId=06d5a73f-eeb4-4e94-b9c3-1ee8f69e84dc providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=7d22b8e4-a1a9-4573-ad95-978ab57fbb70 walletId=06d5a73f-eeb4-4e94-b9c3-1ee8f69e84dc providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=3338d12b-a418-44ab-ace6-3012c36b8967 walletId=06d5a73f-eeb4-4e94-b9c3-1ee8f69e84dc providerId=model status=REJECTED
+=== RUN   TestAccountingModelOpeningBETWINAndReplay/true
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=a5e0231f-50c8-4917-9b9d-bef4cb3661f8 walletId=e6664ec8-020c-4289-903d-aa3a1a824828 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=d23ad471-0304-44e1-b339-9301da4cfe43 walletId=e6664ec8-020c-4289-903d-aa3a1a824828 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=a5e0231f-50c8-4917-9b9d-bef4cb3661f8 walletId=e6664ec8-020c-4289-903d-aa3a1a824828 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=c10982f0-93b7-4e50-b43a-eee6116eb621 walletId=e6664ec8-020c-4289-903d-aa3a1a824828 providerId=model status=REJECTED
+--- PASS: TestAccountingModelOpeningBETWINAndReplay (0.12s)
+    --- PASS: TestAccountingModelOpeningBETWINAndReplay/false (0.07s)
+    --- PASS: TestAccountingModelOpeningBETWINAndReplay/true (0.03s)
+=== RUN   TestAccountingModelRejectsWINWithoutBETAndForeignFunds
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=a6171787-586e-4835-850c-2cd0b7de6638 walletId=381d94c2-dd89-4222-9fe1-973183390125 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=34bab03c-6902-4407-8984-ee53bcbb3185 walletId=381d94c2-dd89-4222-9fe1-973183390125 providerId=model status=REJECTED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=d0396692-5c42-4cb5-b2f4-85e86efae810 walletId=381d94c2-dd89-4222-9fe1-973183390125 providerId=model status=REJECTED
+--- PASS: TestAccountingModelRejectsWINWithoutBETAndForeignFunds (0.06s)
+=== RUN   TestAccountingModelRefundRollbackAndInbox
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=cba3f426-8274-4463-a2ee-612f02aaf21c walletId=62269241-56c4-4965-8bc6-84376ee2a052 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId=fd75b8dc-dbcd-41b5-8450-63af8e4a000c transactionId=d161cfaf-cadc-468f-9113-41d802f6e999 walletId=62269241-56c4-4965-8bc6-84376ee2a052 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId=86786b73-1479-44d6-b8f1-d1d2c9e26852 transactionId=d161cfaf-cadc-468f-9113-41d802f6e999 walletId=62269241-56c4-4965-8bc6-84376ee2a052 providerId=model status=PROCESSED
+2026/09/29 21:08:50 INFO transaction handled correlationId="" messageId="" transactionId=920bb772-c435-4bbe-9405-97116dfdd58e walletId=62269241-56c4-4965-8bc6-84376ee2a052 providerId=model status=PROCESSED
+--- PASS: TestAccountingModelRefundRollbackAndInbox (0.07s)
+=== RUN   TestAccountingModelConcurrentBETConservesFunds
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=a94df801-c6d8-4462-b92a-eadbc5619b2d walletId=ff9e9dc9-78ba-431e-aa14-768e1fa422aa providerId=model status=PROCESSED
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=7c8dd728-6ba6-4df9-aad4-743c3a67d773 walletId=ff9e9dc9-78ba-431e-aa14-768e1fa422aa providerId=model status=REJECTED
+--- PASS: TestAccountingModelConcurrentBETConservesFunds (0.06s)
+=== RUN   TestAccountingModelSQLGuards
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=a2ec2997-0ff3-43f1-a614-6918bc2481f8 walletId=7c045bc3-581d-4c85-9348-928e4eedc66d providerId=model status=PROCESSED
+=== RUN   TestAccountingModelSQLGuards/event_amount
+    accounting_model_integration_test.go:219: guard SQLSTATE=P0001
+=== RUN   TestAccountingModelSQLGuards/terminal_rewrite
+    accounting_model_integration_test.go:219: guard SQLSTATE=P0001
+=== RUN   TestAccountingModelSQLGuards/account_without_posting
+    accounting_model_integration_test.go:219: guard SQLSTATE=P0001
+=== RUN   TestAccountingModelSQLGuards/wallet_without_pair
+    accounting_model_integration_test.go:219: guard SQLSTATE=P0001
+=== RUN   TestAccountingModelSQLGuards/rewrite_history
+    accounting_model_integration_test.go:219: guard SQLSTATE=42501
+=== RUN   TestAccountingModelSQLGuards/wrong_account_owner
+    accounting_model_integration_test.go:219: guard SQLSTATE=P0001
+=== RUN   TestAccountingModelSQLGuards/consumption_without_effect
+    accounting_model_integration_test.go:219: guard SQLSTATE=P0001
+=== RUN   TestAccountingModelSQLGuards/explicit_identity_rejected
+    accounting_model_integration_test.go:219: guard SQLSTATE=428C9
+--- PASS: TestAccountingModelSQLGuards (0.05s)
+    --- PASS: TestAccountingModelSQLGuards/event_amount (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/terminal_rewrite (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/account_without_posting (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/wallet_without_pair (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/rewrite_history (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/wrong_account_owner (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/consumption_without_effect (0.00s)
+    --- PASS: TestAccountingModelSQLGuards/explicit_identity_rejected (0.00s)
+=== RUN   TestAccountingModelFundedSettlementByID
+--- PASS: TestAccountingModelFundedSettlementByID (0.08s)
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/balanced_control
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/single_leg
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/different_currency
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/same_account
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/late_posting
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/WIN_missing_BET
+=== RUN   TestAccountingModelJournalGuardsHaveValidControl/negative_replay
+--- PASS: TestAccountingModelJournalGuardsHaveValidControl (0.08s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/balanced_control (0.01s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/single_leg (0.01s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/different_currency (0.01s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/same_account (0.01s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/late_posting (0.01s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/WIN_missing_BET (0.01s)
+    --- PASS: TestAccountingModelJournalGuardsHaveValidControl/negative_replay (0.01s)
+=== RUN   TestAccountingModelPendingReferenceSurvivesRetry
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=98220185-c572-4aaa-aaef-405707ac0a65 walletId=fc09dc3f-6d1c-42df-b809-dd3a625cd8bf providerId=model status=PENDING_REFERENCE
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=cf71f90f-f8eb-4bda-a8a5-5535c3d0f975 walletId=fc09dc3f-6d1c-42df-b809-dd3a625cd8bf providerId=model status=PROCESSED
+--- PASS: TestAccountingModelPendingReferenceSurvivesRetry (0.06s)
+=== RUN   TestAccountingModelMigrationRefusesToInventLegacyFunding
+--- PASS: TestAccountingModelMigrationRefusesToInventLegacyFunding (0.05s)
+=== RUN   TestAccountingModelRejectsOlderPositiveCursor
+--- PASS: TestAccountingModelRejectsOlderPositiveCursor (0.03s)
+=== RUN   TestAccountingModelDomainRejectsCorruptRetrySnapshot
+--- PASS: TestAccountingModelDomainRejectsCorruptRetrySnapshot (0.02s)
+=== RUN   TestAccountingReviewReverseTwoPaymentsToSameWallet
+--- PASS: TestAccountingReviewReverseTwoPaymentsToSameWallet (0.07s)
+=== RUN   TestAccountingModelSettlementPaymentCurrency
+=== RUN   TestAccountingModelSettlementPaymentCurrency/BRL
+=== RUN   TestAccountingModelSettlementPaymentCurrency/USD
+--- PASS: TestAccountingModelSettlementPaymentCurrency (0.12s)
+    --- PASS: TestAccountingModelSettlementPaymentCurrency/BRL (0.07s)
+    --- PASS: TestAccountingModelSettlementPaymentCurrency/USD (0.05s)
+=== RUN   TestAccountingModelRejectedCurrencyStillAuditable
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=3111f104-0a8a-44b3-9b48-de5c24cb4fb0 walletId=6ccaf553-9de8-4420-815b-15b9ce20035d providerId=model status=REJECTED
+--- PASS: TestAccountingModelRejectedCurrencyStillAuditable (0.04s)
+=== RUN   TestSettlementApplicationConfirmsExecutesAndReplays
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=61932dd0-a7cc-4dd9-a721-098804579a44 walletId=1775b157-79f3-4802-b725-31fd7ffab356 providerId=model status=PROCESSED
+2026/09/29 21:08:51 INFO transaction handled correlationId="" messageId="" transactionId=35d8a242-b90d-45c2-875a-1134fd0e69e4 walletId=3b839d03-6970-4dca-842e-4ce9c0b16aee providerId=model status=PROCESSED
+--- PASS: TestSettlementApplicationConfirmsExecutesAndReplays (0.09s)
+=== RUN   TestSettlementApplicationHTTPAuthorizationAndExplicitBet
+2026/09/29 21:08:52 INFO transaction handled correlationId=626d94c7-1f2e-49db-8be3-3ca6e6b05a83 messageId="" transactionId=14b66591-1686-42d1-bb20-61ad20605164 walletId=341d7c00-19f6-4de2-9510-a7cbaf39be84 providerId=p status=PROCESSED
+2026/09/29 21:08:52 INFO transaction handled correlationId=c9c57551-5f56-4aeb-af6f-8d3507c4d661 messageId="" transactionId=6cb2e505-28e8-4a32-8eb5-20eb7902568b walletId=84bb49fa-914b-45d5-874d-412e6feef547 providerId=p status=PROCESSED
+2026/09/29 21:08:52 INFO transaction handled correlationId="" messageId="" transactionId=6c3c06f9-a942-4bc8-83a1-4a17e45145e3 walletId=341d7c00-19f6-4de2-9510-a7cbaf39be84 providerId=model status=PROCESSED
+2026/09/29 21:08:52 INFO transaction handled correlationId="" messageId="" transactionId=fa409528-f691-44ab-b903-7888012b64d0 walletId=341d7c00-19f6-4de2-9510-a7cbaf39be84 providerId=model status=PROCESSED
+--- PASS: TestSettlementApplicationHTTPAuthorizationAndExplicitBet (0.37s)
+=== RUN   TestSettlementApplicationReversesMultiplePaymentsAndReplaysConcurrently
+--- PASS: TestSettlementApplicationReversesMultiplePaymentsAndReplaysConcurrently (0.09s)
+PASS
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.893s

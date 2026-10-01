@@ -1,0 +1,72 @@
+package wager
+
+import (
+	"errors"
+	"testing"
+	"time"
+
+	"github.com/alexandre/wagering/internal/domain/money"
+	"github.com/alexandre/wagering/internal/domain/wallet"
+)
+
+func TestMutationProofAccountingGuards(t *testing.T) {
+	now := time.Date(2026, 9, 29, 12, 0, 0, 0, time.UTC)
+	amount, _ := money.FromMinor(100, "BRL")
+	for _, name := range []string{"missing guarantee on LOSS", "invalid implicit selection count", "missing commitment", "refund journal link"} {
+		t.Run(name, func(t *testing.T) {
+			p := ExternalParams{ID: "win", ProviderID: "p", ExternalID: "win", IdempotencyKey: "key", PayloadHash: "hash", WalletID: "wallet", PlayerID: "player", RoundID: "round", GameID: "game", Kind: KindWin, Amount: amount}
+			bp := p
+			bp.ID = "bet"
+			bp.ExternalID = "bet"
+			bp.Kind = KindBet
+			bet, err := NewExternal(bp, now)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err = bet.MarkProcessed(amount, now); err != nil {
+				t.Fatal(err)
+			}
+			reference := bet.Snapshot()
+			g, _ := wallet.New("guarantee", "player", amount, now)
+			op, _ := wallet.New("operational", "player", amount, now)
+			facts := AccountingFacts{Guarantee: g.Snapshot(), Operational: op.Snapshot(), Reference: &reference, ReferenceCandidates: 1, BetStatus: "OPEN", CommitmentID: "commitment", Remaining: 100, OriginalJournalID: "original-journal"}
+			switch name {
+			case "missing guarantee on LOSS":
+				p.Kind = KindLoss
+				p.Amount, _ = money.Zero("BRL")
+				facts.Guarantee.ID = ""
+				facts.Reference = nil
+			case "invalid implicit selection count":
+				facts.ReferenceCandidates = 2
+			case "missing commitment":
+				facts.CommitmentID = ""
+			case "refund journal link":
+				p.Kind = KindRefund
+				p.ReferenceExternalID = "bet"
+			}
+			tx, err := NewExternal(p, now)
+			if err != nil {
+				t.Fatal(err)
+			}
+			d, err := DecideAccounting(tx, facts, now)
+			switch name {
+			case "missing guarantee on LOSS":
+				if !errors.Is(err, wallet.ErrInvalidWallet) {
+					t.Fatalf("invalid account accepted: %+v %v", d, err)
+				}
+			case "invalid implicit selection count":
+				if err != nil || d.Failure != FailReferenceMismatch {
+					t.Fatalf("invalid selection count accepted: %+v %v", d, err)
+				}
+			case "missing commitment":
+				if err != nil || d.Failure != FailInsufficientFunds {
+					t.Fatalf("unbound commitment accepted: %+v %v", d, err)
+				}
+			case "refund journal link":
+				if err != nil || d.Failure != "" || d.ReverseJournalID != "original-journal" {
+					t.Fatalf("refund lost original journal: %+v %v", d, err)
+				}
+			}
+		})
+	}
+}

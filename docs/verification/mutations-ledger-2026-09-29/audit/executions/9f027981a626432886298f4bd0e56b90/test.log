@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.225s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:10:06 INFO transaction handled correlationId="" messageId="" transactionId=6faa2b2f-6d53-4c06-8617-2b1b9a64db18 walletId=bfe002a2-39c9-403d-b5af-7837f6dbead7 providerId=p status=PROCESSED
+2026/09/29 23:10:06 WARN transaction handling failed correlationId="" messageId="" transactionId=735fc337-e738-48fb-94a1-7c8e00c44db0 walletId=bfe002a2-39c9-403d-b5af-7837f6dbead7 providerId=p transient=false
+--- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts (0.24s)
+    --- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts/opening=0.00 (0.00s)
+        http_contract_test.go:268: {"code":"INVALID_INPUT","message":"invalid input: \u003cnil\u003e"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.148s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.313s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.460s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.065s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.932s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.632s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.915s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.189s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.370s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.634s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.626s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.595s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.294s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.281s
+FAIL

@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.991s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.095s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.864s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.361s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.619s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/amount (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:0 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x49cd8fcfb150 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: invalid origin
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.411s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.151s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.395s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.733s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:103: INVALID_INPUT: invalid input: invalid origin
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.707s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.135s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.778s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.632s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.852s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.978s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.834s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.067s
+FAIL

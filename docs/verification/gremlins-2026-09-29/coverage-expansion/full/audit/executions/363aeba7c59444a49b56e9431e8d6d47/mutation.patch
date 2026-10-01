@@ -1,0 +1,174 @@
+--- original/internal/domain/wager/transaction.go
++++ mutant/internal/domain/wager/transaction.go
+@@ -9,47 +9,47 @@
+ )
+ 
+ type Transaction struct {
+-	correlationID, causationID                          string
+-	id                                                  string
+-	origin                                              Origin
+-	providerID, externalID, idempotencyKey, payloadHash string
+-	walletID, playerID, roundID, gameID                 string
+-	kind                                                Kind
+-	amount                                              money.Money
+-	referenceExternalID, referenceID                    string
+-	status                                              Status
+-	failureCode                                         FailureCode
+-	balanceAfter                                        *money.Money
+-	attempts                                            int
+-	nextAttemptAt, expiresAt                            *time.Time
+-	createdAt, updatedAt                                time.Time
++	correlationID, causationID				string
++	id							string
++	origin							Origin
++	providerID, externalID, idempotencyKey, payloadHash	string
++	walletID, playerID, roundID, gameID			string
++	kind							Kind
++	amount							money.Money
++	referenceExternalID, referenceID			string
++	status							Status
++	failureCode						FailureCode
++	balanceAfter						*money.Money
++	attempts						int
++	nextAttemptAt, expiresAt				*time.Time
++	createdAt, updatedAt					time.Time
+ }
+ 
+ // Snapshot is the persistence view (repositories map rows <-> Snapshot).
+ type Snapshot struct {
+-	CorrelationID, CausationID                          string
+-	ID                                                  string
+-	Origin                                              Origin
+-	ProviderID, ExternalID, IdempotencyKey, PayloadHash string
+-	WalletID, PlayerID, RoundID, GameID                 string
+-	Kind                                                Kind
+-	Amount                                              money.Money
+-	ReferenceExternalID, ReferenceID                    string
+-	Status                                              Status
+-	FailureCode                                         FailureCode
+-	BalanceAfter                                        *money.Money
+-	Attempts                                            int
+-	NextAttemptAt, ExpiresAt                            *time.Time
+-	CreatedAt, UpdatedAt                                time.Time
++	CorrelationID, CausationID				string
++	ID							string
++	Origin							Origin
++	ProviderID, ExternalID, IdempotencyKey, PayloadHash	string
++	WalletID, PlayerID, RoundID, GameID			string
++	Kind							Kind
++	Amount							money.Money
++	ReferenceExternalID, ReferenceID			string
++	Status							Status
++	FailureCode						FailureCode
++	BalanceAfter						*money.Money
++	Attempts						int
++	NextAttemptAt, ExpiresAt				*time.Time
++	CreatedAt, UpdatedAt					time.Time
+ }
+ 
+ type ExternalParams struct {
+-	CorrelationID, CausationID                              string
+-	ID, ProviderID, ExternalID, IdempotencyKey, PayloadHash string
+-	WalletID, PlayerID, RoundID, GameID                     string
+-	Kind                                                    Kind
+-	Amount                                                  money.Money
+-	ReferenceExternalID                                     string
++	CorrelationID, CausationID				string
++	ID, ProviderID, ExternalID, IdempotencyKey, PayloadHash	string
++	WalletID, PlayerID, RoundID, GameID			string
++	Kind							Kind
++	Amount							money.Money
++	ReferenceExternalID					string
+ }
+ 
+ // NewExternal creates an accepted external operation in PENDING.
+@@ -58,9 +58,9 @@
+ 		return nil, invalid("timestamp required")
+ 	}
+ 	for name, v := range map[string]string{
+-		"id": p.ID, "providerId": p.ProviderID, "externalTransactionId": p.ExternalID,
+-		"idempotencyKey": p.IdempotencyKey, "payloadHash": p.PayloadHash, "walletId": p.WalletID,
+-		"playerId": p.PlayerID, "roundId": p.RoundID, "gameId": p.GameID,
++		"id":	p.ID, "providerId": p.ProviderID, "externalTransactionId": p.ExternalID,
++		"idempotencyKey":	p.IdempotencyKey, "payloadHash": p.PayloadHash, "walletId": p.WalletID,
++		"playerId":	p.PlayerID, "roundId": p.RoundID, "gameId": p.GameID,
+ 	} {
+ 		if v == "" {
+ 			return nil, invalid("%s is required", name)
+@@ -79,10 +79,10 @@
+ 		return nil, invalid("%s must not carry a reference", p.Kind)
+ 	}
+ 	return &Transaction{
+-		correlationID: p.CorrelationID, causationID: p.CausationID, id: p.ID, origin: OriginExternal, providerID: p.ProviderID, externalID: p.ExternalID,
+-		idempotencyKey: p.IdempotencyKey, payloadHash: p.PayloadHash, walletID: p.WalletID,
+-		playerID: p.PlayerID, roundID: p.RoundID, gameID: p.GameID, kind: p.Kind, amount: p.Amount,
+-		referenceExternalID: p.ReferenceExternalID, status: StatusPending, createdAt: now, updatedAt: now,
++		correlationID:	p.CorrelationID, causationID: p.CausationID, id: p.ID, origin: OriginExternal, providerID: p.ProviderID, externalID: p.ExternalID,
++		idempotencyKey:	p.IdempotencyKey, payloadHash: p.PayloadHash, walletID: p.WalletID,
++		playerID:	p.PlayerID, roundID: p.RoundID, gameID: p.GameID, kind: p.Kind, amount: p.Amount,
++		referenceExternalID:	p.ReferenceExternalID, status: StatusPending, createdAt: now, updatedAt: now,
+ 	}, nil
+ }
+ 
+@@ -96,8 +96,8 @@
+ 	}
+ 	after := amount
+ 	return &Transaction{
+-		id: id, origin: OriginInternal, walletID: walletID, playerID: playerID, kind: KindOpening,
+-		amount: amount, status: StatusProcessed, balanceAfter: &after, createdAt: now, updatedAt: now,
++		id:	id, origin: OriginInternal, walletID: walletID, playerID: playerID, kind: KindOpening,
++		amount:	amount, status: StatusProcessed, balanceAfter: &after, createdAt: now, updatedAt: now,
+ 	}, nil
+ }
+ 
+@@ -139,7 +139,7 @@
+ 	if s.Status == StatusProcessed && s.ReferenceExternalID != "" && s.ReferenceID == "" {
+ 		return nil, invalid("processed reference not resolved")
+ 	}
+-	if s.Status != StatusProcessed && s.BalanceAfter != nil {
++	if s.Status == StatusProcessed && s.BalanceAfter != nil {
+ 		return nil, invalid("result on unprocessed transaction")
+ 	}
+ 	if !s.Status.IsTerminal() && s.FailureCode != "" {
+@@ -161,12 +161,12 @@
+ 		return nil, invalid("invalid opening result")
+ 	}
+ 	return &Transaction{
+-		correlationID: s.CorrelationID, causationID: s.CausationID, id: s.ID, origin: s.Origin, providerID: s.ProviderID, externalID: s.ExternalID,
+-		idempotencyKey: s.IdempotencyKey, payloadHash: s.PayloadHash, walletID: s.WalletID,
+-		playerID: s.PlayerID, roundID: s.RoundID, gameID: s.GameID, kind: s.Kind, amount: s.Amount,
+-		referenceExternalID: s.ReferenceExternalID, referenceID: s.ReferenceID, status: s.Status,
+-		failureCode: s.FailureCode, balanceAfter: copyMoney(s.BalanceAfter), attempts: s.Attempts,
+-		nextAttemptAt: copyTime(s.NextAttemptAt), expiresAt: copyTime(s.ExpiresAt), createdAt: s.CreatedAt, updatedAt: s.UpdatedAt,
++		correlationID:	s.CorrelationID, causationID: s.CausationID, id: s.ID, origin: s.Origin, providerID: s.ProviderID, externalID: s.ExternalID,
++		idempotencyKey:	s.IdempotencyKey, payloadHash: s.PayloadHash, walletID: s.WalletID,
++		playerID:	s.PlayerID, roundID: s.RoundID, gameID: s.GameID, kind: s.Kind, amount: s.Amount,
++		referenceExternalID:	s.ReferenceExternalID, referenceID: s.ReferenceID, status: s.Status,
++		failureCode:	s.FailureCode, balanceAfter: copyMoney(s.BalanceAfter), attempts: s.Attempts,
++		nextAttemptAt:	copyTime(s.NextAttemptAt), expiresAt: copyTime(s.ExpiresAt), createdAt: s.CreatedAt, updatedAt: s.UpdatedAt,
+ 	}, nil
+ }
+ 
+@@ -179,14 +179,14 @@
+ 	}
+ }
+ 
+-func (t *Transaction) ID() string                  { return t.id }
+-func (t *Transaction) Status() Status              { return t.status }
+-func (t *Transaction) Kind() Kind                  { return t.kind }
+-func (t *Transaction) Amount() money.Money         { return t.amount }
+-func (t *Transaction) WalletID() string            { return t.walletID }
+-func (t *Transaction) ReferenceExternalID() string { return t.referenceExternalID }
+-func (t *Transaction) ReferenceID() string         { return t.referenceID }
+-func (t *Transaction) FailureCode() FailureCode    { return t.failureCode }
++func (t *Transaction) ID() string			{ return t.id }
++func (t *Transaction) Status() Status			{ return t.status }
++func (t *Transaction) Kind() Kind			{ return t.kind }
++func (t *Transaction) Amount() money.Money		{ return t.amount }
++func (t *Transaction) WalletID() string			{ return t.walletID }
++func (t *Transaction) ReferenceExternalID() string	{ return t.referenceExternalID }
++func (t *Transaction) ReferenceID() string		{ return t.referenceID }
++func (t *Transaction) FailureCode() FailureCode		{ return t.failureCode }
+ 
+ func (t *Transaction) ensureOpen() error {
+ 	if t == nil || t.id == "" || !t.status.Valid() {

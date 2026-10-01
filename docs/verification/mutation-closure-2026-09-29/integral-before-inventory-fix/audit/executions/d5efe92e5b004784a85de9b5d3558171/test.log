@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.185s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:08:08 INFO transaction handled correlationId="" messageId="" transactionId=09c3ae52-3023-443b-8d74-0e82da6804da walletId=3ac0ff38-73c3-45b5-ab53-a096a52cf2df providerId=p status=PROCESSED
+2026/09/30 00:08:08 WARN transaction handling failed correlationId="" messageId="" transactionId=c9c5ae2f-2c78-4cc1-b298-9b7c9c71870b walletId=3ac0ff38-73c3-45b5-ab53-a096a52cf2df providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.416s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.919s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.781s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.756s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.643s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.865s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.734s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.503s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.235s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.181s
+FAIL

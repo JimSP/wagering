@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -84,7 +84,7 @@
+ 	}
+ 	r := reference.Snapshot()
+ 	f.AlreadyReversed, err = t.Transactions().HasReversal(ctx, r.ID)
+-	if err != nil {
++	if err == nil {
+ 		return f, err
+ 	}
+ 	err = t.q.QueryRow(ctx, `SELECT id::text,remaining_minor FROM bet_commitments WHERE bet_transaction_id=$1`, r.ID).Scan(&f.CommitmentID, &f.Remaining)

@@ -1,0 +1,156 @@
+{
+  "command": [
+    "/tmp/go/bin/go",
+    "test",
+    "-count=1",
+    "-json",
+    "./internal/app/usecase"
+  ],
+  "source": "/workspace/scratch/e2947d5b223a/wagering-corrected",
+  "baseline": {
+    "exit_code": 0,
+    "failed_tests": [],
+    "passed_tests": [
+      "TestPersistentResultReplayAndPayloadConflict",
+      "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+      "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+      "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+      "TestReversalsUndoOnlyEligibleUnreversedMovements",
+      "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+      "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+      "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+      "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+      "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+      "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+      "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+    ],
+    "classification": "SURVIVED"
+  },
+  "mutations": [
+    {
+      "exit_code": 1,
+      "failed_tests": [
+        "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+        "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+        "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+      ],
+      "passed_tests": [
+        "TestPersistentResultReplayAndPayloadConflict",
+        "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "TestInvalidRequestsDoNotConsumeFinancialIdentity"
+      ],
+      "classification": "DETECTED",
+      "name": "orphan_ledger_reference",
+      "file": "internal/app/usecase/process.go",
+      "old": "wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, s.ID, direction",
+      "new": "wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, \"10000000\"+s.ID[8:], direction",
+      "meaning": "Link ledger to a nonexistent transaction"
+    },
+    {
+      "exit_code": 1,
+      "failed_tests": [
+        "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent"
+      ],
+      "passed_tests": [
+        "TestPersistentResultReplayAndPayloadConflict",
+        "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+        "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+        "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+        "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+      ],
+      "classification": "DETECTED",
+      "name": "opening_event_wrong_version",
+      "file": "internal/app/usecase/wallet.go",
+      "old": "helper.balanceEvent(ctx, tx, t, entry, 1)",
+      "new": "helper.balanceEvent(ctx, tx, t, entry, 2)",
+      "meaning": "Publish walletVersion 2 for opening whose wallet version is 1"
+    },
+    {
+      "exit_code": 1,
+      "failed_tests": [
+        "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+      ],
+      "passed_tests": [
+        "TestPersistentResultReplayAndPayloadConflict",
+        "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+        "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+        "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome"
+      ],
+      "classification": "DETECTED",
+      "name": "replace_received_sqs_key",
+      "file": "internal/app/usecase/transaction.go",
+      "old": "IdempotencyKey: m.Data.IdempotencyKey,",
+      "new": "IdempotencyKey: \"key:\" + m.Data.ExternalTransactionID,",
+      "meaning": "Silently derive a key instead of preserving the received SQS key"
+    },
+    {
+      "exit_code": 1,
+      "failed_tests": [
+        "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime"
+      ],
+      "passed_tests": [
+        "TestPersistentResultReplayAndPayloadConflict",
+        "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "TestInvalidRequestsDoNotConsumeFinancialIdentity",
+        "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+        "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+      ],
+      "classification": "DETECTED",
+      "name": "omit_reference_expired_event",
+      "file": "internal/app/usecase/process.go",
+      "old": "s := t.Snapshot()\n\te, err := event.NewRejected",
+      "new": "if code == wager.FailReferenceNotFound { return nil }\n\ts := t.Snapshot()\n\te, err := event.NewRejected",
+      "meaning": "Persist reference expiration rejection without its required event"
+    },
+    {
+      "exit_code": 1,
+      "failed_tests": [
+        "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect",
+        "TestFinancialIdentitySurvivesTransportChangesAndRejectsConflictingMeaning",
+        "TestReferenceWaitingResumesOrExpiresWithoutExtendingItsLifetime",
+        "TestApplicationPropagatesFailureInsteadOfReportingUncommittedSuccess",
+        "TestReferenceMeaningIncludesItsScopeEligibilityAndOutcome",
+        "TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox"
+      ],
+      "passed_tests": [
+        "TestPersistentResultReplayAndPayloadConflict",
+        "TestReconciliationReportsCorruptionWithoutRepairingHistory",
+        "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "TestInvalidRequestsDoNotConsumeFinancialIdentity"
+      ],
+      "classification": "DETECTED",
+      "name": "control_debit_becomes_credit",
+      "file": "internal/app/usecase/process.go",
+      "old": "_, _, err = w.Debit(s.Amount, u.clock.Now())",
+      "new": "_, _, err = w.Credit(s.Amount, u.clock.Now())",
+      "meaning": "Positive control: debit incorrectly becomes credit"
+    }
+  ]
+}

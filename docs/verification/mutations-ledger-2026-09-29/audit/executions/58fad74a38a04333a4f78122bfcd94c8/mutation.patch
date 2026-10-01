@@ -1,0 +1,77 @@
+--- original/internal/domain/money/money.go
++++ mutant/internal/domain/money/money.go
+@@ -12,18 +12,18 @@
+ )
+ 
+ var (
+-	ErrInvalidAmount    = errors.New("money: invalid amount")
+-	ErrInvalidCurrency  = errors.New("money: invalid currency")
+-	ErrCurrencyMismatch = errors.New("money: currency mismatch")
+-	ErrOverflow         = errors.New("money: overflow")
+-	ErrUninitialized    = errors.New("money: uninitialized value")
+-	amountRe            = regexp.MustCompile(`^\d+\.\d{2}$`)
+-	currencyRe          = regexp.MustCompile(`^[A-Z]{3}$`)
++	ErrInvalidAmount	= errors.New("money: invalid amount")
++	ErrInvalidCurrency	= errors.New("money: invalid currency")
++	ErrCurrencyMismatch	= errors.New("money: currency mismatch")
++	ErrOverflow		= errors.New("money: overflow")
++	ErrUninitialized	= errors.New("money: uninitialized value")
++	amountRe		= regexp.MustCompile(`^\d+\.\d{2}$`)
++	currencyRe		= regexp.MustCompile(`^[A-Z]{3}$`)
+ )
+ 
+ type Money struct {
+-	minor    int64
+-	currency string
++	minor		int64
++	currency	string
+ }
+ 
+ func FromMinor(minor int64, currency string) (Money, error) {
+@@ -33,7 +33,7 @@
+ 	return Money{minor: minor, currency: currency}, nil
+ }
+ 
+-func Zero(currency string) (Money, error) { return FromMinor(0, currency) }
++func Zero(currency string) (Money, error)	{ return FromMinor(0, currency) }
+ 
+ // Parse accepts only non-negative "NN.NN" strings (external financial input).
+ func Parse(amount, currency string) (Money, error) {
+@@ -48,12 +48,12 @@
+ 	return FromMinor(v, currency)
+ }
+ 
+-func (m Money) Minor() int64     { return m.minor }
+-func (m Money) Currency() string { return m.currency }
+-func (m Money) IsZero() bool     { return m.minor == 0 }
+-func (m Money) IsPositive() bool { return m.minor > 0 }
+-func (m Money) IsNegative() bool { return m.minor < 0 }
+-func (m Money) valid() bool      { return m.currency != "" }
++func (m Money) Minor() int64		{ return m.minor }
++func (m Money) Currency() string	{ return m.currency }
++func (m Money) IsZero() bool		{ return m.minor == 0 }
++func (m Money) IsPositive() bool	{ return m.minor > 0 }
++func (m Money) IsNegative() bool	{ return m.minor < 0 }
++func (m Money) valid() bool		{ return m.currency == "" }
+ 
+ func (m Money) Add(o Money) (Money, error) {
+ 	if err := m.compatible(o); err != nil {
+@@ -113,7 +113,7 @@
+ 	u, sign := uint64(m.minor), ""
+ 	if m.minor < 0 {
+ 		sign = "-"
+-		u = ^u + 1 // valor absoluto, seguro inclusive para MinInt64
++		u = ^u + 1	// valor absoluto, seguro inclusive para MinInt64
+ 	}
+ 	return fmt.Sprintf("%s%d.%02d", sign, u/100, u%100)
+ }
+@@ -123,7 +123,7 @@
+ 		return nil, ErrUninitialized
+ 	}
+ 	return json.Marshal(struct {
+-		Amount   string `json:"amount"`
+-		Currency string `json:"currency"`
++		Amount		string	`json:"amount"`
++		Currency	string	`json:"currency"`
+ 	}{m.Amount(), m.Currency()})
+ }

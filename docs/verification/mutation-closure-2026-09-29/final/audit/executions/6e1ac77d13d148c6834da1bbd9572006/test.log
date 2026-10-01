@@ -1,0 +1,38 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.486s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:15:33 INFO transaction handled correlationId="" messageId="" transactionId=f053ea23-8485-4415-ab45-3ed166ff1af6 walletId=5480a474-290c-4610-8008-1dc6e670791a providerId=p status=PROCESSED
+2026/09/30 01:15:33 WARN transaction handling failed correlationId="" messageId="" transactionId=a072a1cf-bebb-472f-ba0e-66f4e4e5a6f8 walletId=5480a474-290c-4610-8008-1dc6e670791a providerId=p transient=false
+--- FAIL: TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet (0.00s)
+    --- FAIL: TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet/HTTP/credit-overflow-preserves-guarantee (0.00s)
+        paired_bet_contract_test.go:54: BET must return a durable outcome: INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.299s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.941s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 BRL} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	12.936s
+--- FAIL: TestReversalRejectsInvalidHistoryAndUnfundedInversion (0.00s)
+    --- FAIL: TestReversalRejectsInvalidHistoryAndUnfundedInversion/credit_overflow (0.00s)
+        reversal_test.go:85: got REVERSAL_INSUFFICIENT_FUNDS: insufficient funds to reverse, want BALANCE_OVERFLOW
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	12.182s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/overflow (0.00s)
+        ledger_semantics_test.go:80: INSUFFICIENT_FUNDS: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	13.515s
+--- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState (0.00s)
+    --- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState/credit_overflow (0.00s)
+        semantics_test.go:94: rejection mutated state or wrong error <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	12.434s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.004s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.543s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.270s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.568s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.113s
+FAIL

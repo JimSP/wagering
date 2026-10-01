@@ -1,0 +1,49 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.404s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.054s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.064s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.296s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.405s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.949s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.831s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.962s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.173s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.733s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/30 00:40:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x18 pc=0x10312ce04]
+
+goroutine 514 [running, synctest bubble 6]:
+github.com/alexandre/wagering/internal/platform/worker.(*Group).Install.func1.1({{0x10319021d?, 0x15cf9700bd50?}, 0x15cf96fa3cf0?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/platform/worker/worker.go:62 +0x4f4
+created by github.com/alexandre/wagering/internal/platform/worker.(*Group).Install.func1 in goroutine 504
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/platform/worker/worker.go:49 +0x9c
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.658s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.330s
+ok  	github.com/alexandre/wagering/internal/platform/logging	3.008s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	3.060s
+ok  	github.com/alexandre/wagering/internal/platform/sys	3.194s
+--- FAIL: TestLifecycleStopsAllBeforeDrainingAndClosingDependencies (0.00s)
+    worker_test.go:44: test: unexpected component termination
+FAIL
+FAIL	github.com/alexandre/wagering/internal/platform/worker	3.363s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	3.370s
+--- FAIL: TestHTTPServeAndShutdown (0.00s)
+    lifecycle_contract_test.go:97: http: unexpected component termination
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	3.366s
+ok  	github.com/alexandre/wagering/scripts	3.248s
+FAIL

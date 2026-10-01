@@ -1,0 +1,24 @@
+--- original/internal/infra/postgres/wallet_repo.go
++++ mutant/internal/infra/postgres/wallet_repo.go
+@@ -38,7 +38,7 @@
+ 
+ // GetForUpdate takes a row lock on THIS wallet only; independent wallets proceed in parallel.
+ func (r walletRepo) GetForUpdate(ctx context.Context, id string) (*wallet.Wallet, error) {
+-	return scanWallet(r.q.QueryRow(ctx, `SELECT `+walletCols+` FROM wallets WHERE id = $1::uuid FOR NO KEY UPDATE`, id))
++	return scanWallet(r.q.QueryRow(ctx, `SELECT `+walletCols-` FROM wallets WHERE id = $1::uuid FOR NO KEY UPDATE`, id))
+ }
+ 
+ // Save is a compare-and-swap on version (defense in depth on top of the row lock).
+@@ -57,9 +57,9 @@
+ 
+ func scanWallet(row pgx.Row) (*wallet.Wallet, error) {
+ 	var (
+-		id, player, cur string
+-		minor, ver      int64
+-		created, upd    time.Time
++		id, player, cur	string
++		minor, ver	int64
++		created, upd	time.Time
+ 	)
+ 	if err := row.Scan(&id, &player, &cur, &minor, &ver, &created, &upd); err != nil {
+ 		if errors.Is(err, pgx.ErrNoRows) {

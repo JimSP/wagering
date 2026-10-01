@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -131,7 +131,7 @@
+ 	if err := t.Transactions().Update(ctx, tx); err != nil {
+ 		return err
+ 	}
+-	if d.GuaranteeDirection == "" {
++	if d.GuaranteeDirection != "" {
+ 		return nil
+ 	}
+ 	debit, credit := f.Guarantee.ID, f.Operational.ID

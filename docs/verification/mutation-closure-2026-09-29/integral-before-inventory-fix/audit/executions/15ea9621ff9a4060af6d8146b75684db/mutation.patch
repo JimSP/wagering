@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -30,7 +30,7 @@
+ 			return out, apperr.Invalid("invalid cursor")
+ 		}
+ 		parts := strings.Split(string(b), ":")
+-		if len(parts) != 2 || parts[0] != w {
++		if len(parts) != 2 && parts[0] != w {
+ 			return out, apperr.Invalid("invalid cursor")
+ 		}
+ 		seq, e = strconv.ParseInt(parts[1], 10, 64)

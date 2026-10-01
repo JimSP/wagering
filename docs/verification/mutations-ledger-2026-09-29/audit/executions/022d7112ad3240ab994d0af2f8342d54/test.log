@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.736s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:16:26 INFO transaction handled correlationId="" messageId="" transactionId=be391872-e493-4cb4-b50c-f42e7390ffc4 walletId=d9a90f2c-55f3-4b74-94d8-c4e29250f0f4 providerId=p status=PROCESSED
+2026/09/29 22:16:26 WARN transaction handling failed correlationId="" messageId="" transactionId=ea1df6a0-caba-4e7f-ad3f-80d1edcf26f3 walletId=d9a90f2c-55f3-4b74-94d8-c4e29250f0f4 providerId=p transient=false
+--- FAIL: TestConfirmedResultAutomaticallyEnqueuesOnlyItsOwnSettlement (0.04s)
+    result_lifecycle_contract_test.go:120: authorized funded result must be accepted: 409 {"code":"IDEMPOTENCY_CONFLICT","message":"idempotency key reused with different payload"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.184s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.997s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.769s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.878s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.492s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.259s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.476s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.373s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.655s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.103s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.630s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.641s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.766s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.897s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.875s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.888s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.101s
+FAIL

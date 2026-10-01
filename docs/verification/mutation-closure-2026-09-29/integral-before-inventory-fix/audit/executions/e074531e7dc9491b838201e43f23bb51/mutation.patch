@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -103,7 +103,7 @@
+ 	var entry wager.LedgerEntry
+ 	if decision.GuaranteeDirection != "" {
+ 		entry, err = wager.NewLedgerEntry(u.ids.NewID(), t.WalletID(), t.ID(), decision.GuaranteeDirection, t.Amount(), facts.Guarantee.Balance, u.clock.Now())
+-		if err != nil {
++		if err == nil {
+ 			return err
+ 		}
+ 	}

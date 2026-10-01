@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.170s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:15:57 INFO transaction handled correlationId="" messageId="" transactionId=4e1f4873-efce-4ef0-a58b-785fefc0ac23 walletId=ae207dcf-4542-4313-b569-4ed2308e8adb providerId=p status=PROCESSED
+2026/09/30 01:15:57 WARN transaction handling failed correlationId="" messageId="" transactionId=db0ca8a1-227f-4cd9-9284-5e1a752e6f85 walletId=ae207dcf-4542-4313-b569-4ed2308e8adb providerId=p transient=false
+--- FAIL: TestReconciliationMetricsOnlyDescribeSuccessfulInconsistentReads (0.00s)
+    --- FAIL: TestReconciliationMetricsOnlyDescribeSuccessfulInconsistentReads/equal (0.00s)
+        reconciliation_contract_test.go:40: result={WalletID: Stored:{minor:0 currency:} Calculated:{minor:0 currency:} Difference:{minor:0 currency:} Consistent:false CheckedEntries:0} err=money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.734s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.573s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=-9223372036854775808 subtract=true got={0 } err=money: overflow want=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	10.263s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.501s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	8.960s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:48: rehydration changed history wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	9.228s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.447s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.331s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.871s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	13.110s
+FAIL

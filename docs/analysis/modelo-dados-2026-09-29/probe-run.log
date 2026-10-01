@@ -1,0 +1,14 @@
+{"case": "positive_opening", "desired_acceptance": true, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "positive_legacy_bet", "desired_acceptance": true, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "balance_without_ledger", "desired_acceptance": false, "accepted_through_deferred_checks": false, "stderr": "ERROR:  wallet/ledger invariant violated\nCONTEXT:  PL/pgSQL function check_wallet_integrity() line 10 at RAISE\n"}
+{"case": "ledger_rewrite", "desired_acceptance": false, "accepted_through_deferred_checks": false, "stderr": "ERROR:  wallet_ledger_entries is append-only\nCONTEXT:  PL/pgSQL function forbid_ledger_mutation() line 3 at RAISE\n"}
+{"case": "duplicate_wallet", "desired_acceptance": false, "accepted_through_deferred_checks": false, "stderr": "ERROR:  duplicate key value violates unique constraint \"wallets_player_id_currency_key\"\nDETAIL:  Key (player_id, currency)=(32a48343-bc5e-45d9-aa08-10dc4d985388, BRL) already exists.\n"}
+{"case": "win_without_bet_or_counterparty", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "win_references_other_wallet_opening_when_wire_ref_null", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "financial_events_with_wrong_amount_currency_aggregate", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "outbox_without_transaction", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "inbox_identity_and_completion_rewritten", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "rejected_transaction_with_negative_result_balance", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "empty_external_identity_in_durable_pending", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "negative_ledger_seq_hidden_by_first_page", "desired_acceptance": false, "accepted_through_deferred_checks": true, "stderr": ""}
+{"case": "two_accounts_for_same_financial_movement", "desired_acceptance": null, "accepted_through_deferred_checks": false, "stderr": "ERROR:  ledger transaction mismatch\nCONTEXT:  PL/pgSQL function guard_ledger_append() line 6 at RAISE\n"}

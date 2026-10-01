@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.874s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	10.675s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.177s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.307s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.295s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.445s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.170s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.431s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.044s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingDatabaseProtocol (0.00s)
+    --- FAIL: TestLoadAccountingDatabaseProtocol/implicit-true (0.00s)
+        accounting_mutation_test.go:166: facts={Guarantee:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Operational:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Reference:0x33640b46f380 ReferenceCandidates:-2 BetID:bet BetStatus:OPEN SettlementID: ReferenceSettlementID: CommitmentID:commitment Remaining:100 AlreadyReversed:true OriginalJournalID:journal Restores:[{EffectID:effect CommitmentID:commitment Amount:20} {EffectID:effect2 CommitmentID:commitment2 Amount:30}]} want={Guarantee:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Operational:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Reference:0x33640b46f500 ReferenceCandidates:2 BetID:bet BetStatus:OPEN SettlementID: ReferenceSettlementID: CommitmentID:commitment Remaining:100 AlreadyReversed:true OriginalJournalID:journal Restores:[{EffectID:effect CommitmentID:commitment Amount:20} {EffectID:effect2 CommitmentID:commitment2 Amount:30}]}
+        --- FAIL: TestLoadAccountingDatabaseProtocol/implicit-true/failure-0-query (0.00s)
+            testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	8.930s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.527s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.331s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.303s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.334s
+FAIL

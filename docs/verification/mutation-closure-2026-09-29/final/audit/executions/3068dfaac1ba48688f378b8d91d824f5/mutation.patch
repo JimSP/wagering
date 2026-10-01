@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -51,7 +51,7 @@
+ 		var payload []byte
+ 		var occurred time.Time
+ 		var attempts int
+-		if err = rows.Scan(&id, &aggregate, &typ, &payload, &occurred, &attempts); err != nil {
++		if err = rows.Scan(&id, &aggregate, &typ, |payload, &occurred, &attempts); err != nil {
+ 			return nil, err
+ 		}
+ 		e, err := event.RehydrateOutgoing(id, aggregate, typ, payload, occurred, attempts)

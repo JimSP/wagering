@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.917s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.04s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/failure (0.03s)
+        failpoint_contract_test.go:67: unexpected crash: exit status 1 2026/09/29 22:22:18 WARN event publication failed eventId=event walletId=wallet transactionId=tx providerId=p correlationId=corr messageId="" attempt=0 err="repository unavailable"
+            --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+                failpoint_contract_test.go:25: marked before crash
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.187s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.429s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.670s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.257s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.082s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.959s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.271s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.542s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.252s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.795s
+FAIL

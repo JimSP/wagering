@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.144s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:59:26 INFO transaction handled correlationId="" messageId="" transactionId=101a8034-99c1-4b2a-8b2a-89b2f765e8dd walletId=09f2970f-b176-4f0c-8331-fabdf54f7176 providerId=p status=PROCESSED
+2026/09/29 23:59:26 WARN transaction handling failed correlationId="" messageId="" transactionId=9846edd7-c816-491d-961c-4c4a402ed466 walletId=09f2970f-b176-4f0c-8331-fabdf54f7176 providerId=p transient=false
+--- FAIL: TestPairedOperationObserverRejectsCorruptedFacts (0.06s)
+    --- FAIL: TestPairedOperationObserverRejectsCorruptedFacts/wrong-event-version (0.00s)
+        paired_observer_control_test.go:129: observer not reached cleanly: exit status 1
+            === RUN   TestPairedOperationObserverRejectsCorruptedFacts
+                paired_observer_control_test.go:96: invalid integration event: stored metadata mismatch
+            --- FAIL: TestPairedOperationObserverRejectsCorruptedFacts (0.00s)
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.285s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:65: zero attempts roundtrip: {    0 0 {0 0 <nil>}} invalid integration event: stored metadata mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.319s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.704s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.865s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.578s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.629s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.844s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.750s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.344s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.109s
+FAIL

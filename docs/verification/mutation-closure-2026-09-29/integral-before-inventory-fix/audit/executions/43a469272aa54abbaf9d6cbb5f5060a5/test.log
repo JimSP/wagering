@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.674s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.222s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.440s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.319s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.559s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.009s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.197s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.733s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.128s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries (0.00s)
+    --- FAIL: TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries/23514 (0.00s)
+        settlement_contract_test.go:64: permanent failure lost/misclassified: : invalid persisted settlement (SQLSTATE 23514) calls=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.879s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.672s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.674s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.642s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.825s
+FAIL

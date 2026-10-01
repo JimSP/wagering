@@ -1,0 +1,31 @@
+title = "Wagering: default secret detection with contextual checksum exceptions"
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Recorded SHA-256 source checksums, not credentials"
+condition = "AND"
+paths = ['''docs/verification/[^/]+/(source|support)-hashes\.json$''']
+regexTarget = "match"
+regexes = ['''openapi\.yaml": "[a-f0-9]{64}"''']
+
+[[allowlists]]
+description = "Payload digest in historical idempotency fixture output"
+condition = "AND"
+paths = ['''docs/(analysis|verification)/[^/]+/[^/]+\.jsonl$''']
+regexTarget = "match"
+regexes = ['''received-key-73 PayloadHash:[a-f0-9]{64} ''']
+
+[[allowlists]]
+description = "Graph index records file checksums, not credentials"
+condition = "AND"
+paths = ['''graphify-out/cache/stat-index\.json$''']
+regexTarget = "match"
+regexes = ['''(api-contracts\.md|test-credentials\.sh)":"[a-f0-9]{64}"''']
+
+[[allowlists]]
+description = "Synthetic UUID idempotency keys in the clean-start demo, not authentication secrets"
+condition = "AND"
+paths = ['''docs/verification/clean-start-2026-10-01/demonstration\.json$''']
+regexTarget = "match"
+regexes = ['''idempotencyKey": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"''']

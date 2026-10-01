@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.223s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:25:10 INFO transaction handled correlationId="" messageId="" transactionId=2b635bf6-27a9-4295-9fd5-ce748a5f9c87 walletId=9e562043-d652-473e-a333-1171ded2c74e providerId=p status=PROCESSED
+2026/09/29 03:25:10 WARN transaction handling failed correlationId="" messageId="" transactionId=50ac5a75-3f96-4683-b911-bc3fc1214fb3 walletId=9e562043-d652-473e-a333-1171ded2c74e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.04s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:181: HTTP contract: 500 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.021s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.262s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.612s
+--- FAIL: TestPendingReferenceRetainsItsDeadlineAcrossRetriesAndRehydration (0.00s)
+    lifecycle_semantics_test.go:151: rehydration changed state: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.733s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.474s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.258s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.356s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.243s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.081s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.987s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.020s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.984s
+FAIL

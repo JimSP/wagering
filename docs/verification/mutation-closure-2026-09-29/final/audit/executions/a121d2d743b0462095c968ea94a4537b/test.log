@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.724s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	9.816s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.125s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.950s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.069s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.007s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.188s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.354s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.238s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Operational:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} Reference:0x6451d2ae2f00 ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} no rows in result set steps=8
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.528s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.509s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.608s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.014s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.639s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.475s
+ok  	github.com/alexandre/wagering/internal/platform/worker	9.498s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.643s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	9.857s
+FAIL

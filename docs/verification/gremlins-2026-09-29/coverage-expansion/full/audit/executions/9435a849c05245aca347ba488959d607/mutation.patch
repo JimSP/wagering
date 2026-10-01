@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -69,7 +69,7 @@
+ 			return out, e
+ 		}
+ 		entry, e := wager.RehydrateLedgerEntry(id, w, tx, dir, a, b, c, at)
+-		if e != nil {
++		if e == nil {
+ 			return out, e
+ 		}
+ 		out.Entries = append(out.Entries, entry)

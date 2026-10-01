@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.129s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:13:42 INFO transaction handled correlationId="" messageId="" transactionId=ff73e477-2c9d-4649-84f2-cb0505ddc1f6 walletId=cce95007-5e75-4565-9903-d41365aadd6d providerId=p status=PROCESSED
+2026/09/30 00:13:42 WARN transaction handling failed correlationId="" messageId="" transactionId=7a8acc34-eda2-4f09-8b17-fc19504bb788 walletId=cce95007-5e75-4565-9903-d41365aadd6d providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.42s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: retry history on initial pending state"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.804s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.035s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.667s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.911s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/attempt_only (0.00s)
+        error_text_contract_test.go:38: got=<nil> err=INVALID_INPUT: invalid input: invalid reference lifetime want="INVALID_INPUT: invalid input: retry history on initial pending state"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.300s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.415s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.293s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.827s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.728s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.145s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.611s
+FAIL

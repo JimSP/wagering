@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.524s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:11:58 INFO transaction handled correlationId="" messageId="" transactionId=d3bc918d-9039-43b0-994b-cb4436ea3e07 walletId=97e0cc65-f92b-4398-a54f-768a4940b14d providerId=p status=PROCESSED
+2026/09/30 00:11:58 WARN transaction handling failed correlationId="" messageId="" transactionId=93b87fce-9184-41e4-9a29-b3363d33553e walletId=97e0cc65-f92b-4398-a54f-768a4940b14d providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.12s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: invalid processed snapshot"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.946s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.010s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.884s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.273s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: invalid processed snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.533s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.202s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.499s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.649s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: invalid processed snapshot steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.942s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.101s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.750s
+FAIL

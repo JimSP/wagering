@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.081s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.546s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.467s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.943s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.182s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.805s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.484s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.090s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.367s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:228: reversal: {ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} {Status:PROCESSED Payments:[] Journals:[{DebitAccountID:g CreditAccountID:o Amount:{minor:100 currency:BRL}} {DebitAccountID:o CreditAccountID:g Amount:{minor:20 currency:BRL}}] Accounts:map[g:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} o:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC}]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.262s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.607s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.609s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.435s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.258s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.243s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.238s
+FAIL

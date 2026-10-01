@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.598s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.554s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.670s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.050s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.712s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.599s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.168s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.369s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.774s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.884s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.728s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.737s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.757s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.690s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.727s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.709s
+--- FAIL: TestCommitmentComparisonRejectsWrongFundingDespiteCorrectBalances (0.00s)
+    --- FAIL: TestCommitmentComparisonRejectsWrongFundingDespiteCorrectBalances/another_guarantee (0.00s)
+        commitments_test.go:43: accepted incorrect durable funding
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.725s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.810s
+FAIL

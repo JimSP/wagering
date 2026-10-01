@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.848s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:06:01 INFO transaction handled correlationId="" messageId="" transactionId=491fc66f-345c-4356-9c34-f47ca6b613b3 walletId=9eed92e6-c44b-42a6-9e74-5a4efc58534d providerId=p status=PROCESSED
+2026/09/30 00:06:01 WARN transaction handling failed correlationId="" messageId="" transactionId=88e5ac32-a4ea-4d89-beea-b36f416b5188 walletId=9eed92e6-c44b-42a6-9e74-5a4efc58534d providerId=p transient=false
+--- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect (0.00s)
+    --- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect/self_reference (0.00s)
+        journey_semantics_test.go:211: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000007 REJECTED <nil> INVALID_REFERENCE_KIND false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.987s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.343s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.897s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.961s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.722s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.465s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.613s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.525s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.265s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.224s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.210s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.871s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.060s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.057s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.960s
+FAIL

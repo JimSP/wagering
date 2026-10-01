@@ -1,0 +1,58 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.409s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:13:46 INFO transaction handled correlationId="" messageId="" transactionId=de8902e9-07a6-4a09-a7b5-4ed501fb7397 walletId=8da97d4a-e104-48eb-a853-ea4e56314b6e providerId=p status=PROCESSED
+2026/09/29 02:13:46 WARN transaction handling failed correlationId="" messageId="" transactionId=73a7268a-bc0b-4d46-9f56-8e3cc5eb20bf walletId=8da97d4a-e104-48eb-a853-ea4e56314b6e providerId=p transient=false
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x28 pc=0x10455a0d8]
+
+goroutine 163 [running]:
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer.func8({0x20?, 0x104cd4780?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:114 +0x28
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).runStopHook(0x8d993f46000, {0x104cd8e88, 0x104d7a060}, {0x8d993d59760, 0x8d993cb5008, {0x0, 0x0}, {0x0, 0x0}, {{0x8d993cea8c0, ...}, ...}})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:341 +0x194
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).Stop(0x8d993f46000, {0x104cd8e88, 0x104d7a060})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:303 +0x4ec
+go.uber.org/fx.(*App).Stop.func2({0x104cd8e88?, 0x104d7a060?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:725 +0x78
+go.uber.org/fx.withTimeout.func1()
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:803 +0x60
+created by go.uber.org/fx.withTimeout in goroutine 121
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:791 +0xa0
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.783s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestReadinessAndListenerFailure (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x28 pc=0x104875fa8]
+
+goroutine 58 [running]:
+testing.tRunner.func1.2({0x104f23a08, 0x105007c90})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104f23a08?, 0x105007c90?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer.func8({0x104fb01e0?, 0xc28bb0cf840?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/module.go:114 +0x28
+github.com/alexandre/wagering/internal/transport/httpapi.TestReadinessAndListenerFailure(0xc28bb2138c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/transport/httpapi/lifecycle_contract_test.go:67 +0x638
+testing.tRunner(0xc28bb2138c8, 0x104fb5148)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.053s
+FAIL

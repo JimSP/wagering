@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.361s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:41:24 INFO transaction handled correlationId="" messageId="" transactionId=9bbacb04-9565-43a3-90ce-c3a1d5a8fc32 walletId=b9e0bcea-df16-4f0c-9670-6d1c13058043 providerId=p status=PROCESSED
+2026/09/29 22:41:24 WARN transaction handling failed correlationId="" messageId="" transactionId=1857145a-9aad-48ef-941f-e9c16869fd94 walletId=b9e0bcea-df16-4f0c-9670-6d1c13058043 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: invalid processed snapshot"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.754s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.158s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.313s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.173s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: invalid processed snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.902s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.456s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.730s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.618s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid processed snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.920s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.810s
+FAIL

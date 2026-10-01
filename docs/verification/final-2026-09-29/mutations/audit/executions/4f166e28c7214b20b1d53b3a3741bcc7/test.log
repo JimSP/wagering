@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.396s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:53 INFO transaction handled correlationId="" messageId="" transactionId=50f6867f-71e0-4b5f-b45b-89604a8c7ba9 walletId=68026dd1-87eb-4222-9f1e-c631caa8ec8b providerId=p status=PROCESSED
+2026/09/29 03:24:53 WARN transaction handling failed correlationId="" messageId="" transactionId=7f59a724-9b26-4212-980e-a9056c1d28a1 walletId=68026dd1-87eb-4222-9f1e-c631caa8ec8b providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.564s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.044s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.609s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.342s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.763s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.778s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.667s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid reference lifetime want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.084s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.934s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	4.458s
+FAIL

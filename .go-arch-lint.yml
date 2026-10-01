@@ -1,0 +1,26 @@
+version: 3
+workdir: internal
+# Contract/integration tests intentionally compose multiple layers; these rules
+# constrain production dependencies. Tests remain in lint and runtime gates.
+excludeFiles: ['_test\.go$']
+components:
+  domain: {in: domain/**}
+  apperr: {in: app/apperr}
+  port: {in: app/port}
+  usecase: {in: app/usecase}
+  infra: {in: infra/**}
+  transport: {in: transport/**}
+  platform: {in: platform/**}
+  testsupport: {in: testsupport/**}
+vendors:
+  fx: {in: go.uber.org/fx}
+  uuid: {in: github.com/google/uuid}
+deps:
+  domain: {mayDependOn: [domain]}
+  apperr: {mayDependOn: [apperr]}
+  port: {mayDependOn: [port, domain]}
+  usecase: {mayDependOn: [usecase, domain, port, apperr, platform], canUse: [fx, uuid]}
+  infra: {mayDependOn: [infra, domain, port, usecase, apperr, platform], anyVendorDeps: true}
+  transport: {mayDependOn: [transport, domain, port, usecase, apperr, infra, platform], anyVendorDeps: true}
+  platform: {mayDependOn: [platform, domain, port, infra], anyVendorDeps: true}
+  testsupport: {mayDependOn: [testsupport, domain, port, usecase, infra, platform], anyVendorDeps: true}

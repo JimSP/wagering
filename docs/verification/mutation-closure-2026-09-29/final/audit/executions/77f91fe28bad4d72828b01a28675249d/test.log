@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	6.216s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	7.836s
+ok  	github.com/alexandre/wagering/internal/domain/event	5.570s
+ok  	github.com/alexandre/wagering/internal/domain/money	6.206s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	6.456s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/time_before_creation (0.00s)
+        lifecycle_semantics_test.go:286: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	7.145s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.252s
+ok  	github.com/alexandre/wagering/internal/infra/auth	6.645s
+ok  	github.com/alexandre/wagering/internal/infra/config	6.903s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	6.804s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.751s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	11.747s
+ok  	github.com/alexandre/wagering/internal/platform/logging	11.231s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	11.279s
+ok  	github.com/alexandre/wagering/internal/platform/sys	11.349s
+ok  	github.com/alexandre/wagering/internal/platform/worker	11.328s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	11.337s
+FAIL

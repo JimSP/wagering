@@ -1,0 +1,23 @@
+[
+  {
+    "case": "outbox-failpoint-guard",
+    "execution": "abdafb1fb4de4ee98ae26900741787b4",
+    "patch": "docs/verification/gremlins-2026-09-29/coverage-expansion/full/audit/executions/abdafb1fb4de4ee98ae26900741787b4/mutation.patch",
+    "log": "docs/verification/gremlins-2026-09-29/coverage-expansion/full/audit/executions/abdafb1fb4de4ee98ae26900741787b4/test.log",
+    "failure_excerpt": "--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.01s)\n    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/success (0.01s)\n        failpoint_contract_test.go:60: exit=exit status 1 output=--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)\n                failpoint_contract_test.go:25: marked before crash\n            FAIL\nFAIL\nFAIL\tgithub.com/alexandre/wagering/internal/app/usecase\t0.668s\nok  \tgithub.com/alexandre/wagering/internal/domain/event\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/money\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/wager\t(cached)\nok  \tgithub.com/alexandre/wager"
+  },
+  {
+    "case": "reference-worker-loop",
+    "execution": "972f4ef5f7104b1aa9674410ab12556c",
+    "patch": "docs/verification/gremlins-2026-09-29/coverage-expansion/full/audit/executions/972f4ef5f7104b1aa9674410ab12556c/mutation.patch",
+    "log": "docs/verification/gremlins-2026-09-29/coverage-expansion/full/audit/executions/972f4ef5f7104b1aa9674410ab12556c/test.log",
+    "failure_excerpt": "--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (2.00s)\n    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (2.00s)\n        reference_failure_test.go:75: 1 context deadline exceeded\nFAIL\nFAIL\tgithub.com/alexandre/wagering/internal/app/usecase\t4.444s\nok  \tgithub.com/alexandre/wagering/internal/domain/event\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/money\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/wager\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/wallet\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/infra/auth\t(cached)\nok  \tgithub.com/alexandre/wag"
+  },
+  {
+    "case": "outbox-failpoint-guard",
+    "execution": "e9d1233f1302452ab7544d8a7a910c86",
+    "patch": "docs/verification/gremlins-2026-09-29/coverage-expansion/full/audit/executions/e9d1233f1302452ab7544d8a7a910c86/mutation.patch",
+    "log": "docs/verification/gremlins-2026-09-29/coverage-expansion/full/audit/executions/e9d1233f1302452ab7544d8a7a910c86/test.log",
+    "failure_excerpt": "--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.01s)\n    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/failure (0.01s)\n        failpoint_contract_test.go:67: unexpected crash: exit status 86 \nFAIL\nFAIL\tgithub.com/alexandre/wagering/internal/app/usecase\t1.004s\nok  \tgithub.com/alexandre/wagering/internal/domain/event\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/money\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/wager\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/domain/wallet\t(cached)\nok  \tgithub.com/alexandre/wagering/internal/infra/auth\t(cached)\nok  \tgithub.com/alexandre/wagering/inter"
+  }
+]

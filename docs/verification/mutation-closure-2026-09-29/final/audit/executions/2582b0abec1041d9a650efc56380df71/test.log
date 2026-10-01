@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.638s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:26:20 INFO transaction handled correlationId="" messageId="" transactionId=b4c86a11-53b3-4922-9303-5766d62446f2 walletId=3bf5b85f-9bdf-4dd4-b268-cd10af2f978d providerId=p status=PROCESSED
+2026/09/30 01:26:20 WARN transaction handling failed correlationId="" messageId="" transactionId=a6a242aa-621e-4908-8e07-3bfddf9ae2dd walletId=3bf5b85f-9bdf-4dd4-b268-cd10af2f978d providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.910s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.385s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.098s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.351s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.150s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.254s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.203s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.975s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: missing failure steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.689s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.343s
+FAIL

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.666s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:31:27 INFO transaction handled correlationId="" messageId="" transactionId=3e13a681-9f4c-4745-9401-55d3cb38df24 walletId=4566c144-9f45-4cdb-a8ee-3ac5177d76d3 providerId=p status=PROCESSED
+2026/09/29 03:31:27 WARN transaction handling failed correlationId="" messageId="" transactionId=02976897-9bce-4fca-a9e5-cf2e956279ed walletId=4566c144-9f45-4cdb-a8ee-3ac5177d76d3 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"IDP_UNAVAILABLE"} <nil>
+    http_contract_test.go:191: HTTP contract: 503 map[Content-Type:[application/json] Retry-After:[2] X-Correlation-Id:[contract-correlation]] {"code":"IDP_UNAVAILABLE"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.430s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.871s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.987s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.753s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.283s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.03s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/no_subject (0.00s)
+        authorization_paths_test.go:97: 503
+    authorization_paths_test.go:104: failed keyfunc: could not find alg in JWT header
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	0.673s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.762s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.929s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.188s
+FAIL

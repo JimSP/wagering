@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	3.513s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:15:49 INFO transaction handled correlationId="" messageId="" transactionId=82707bf1-2840-43d6-b503-f8788de46c24 walletId=b4df8899-2488-48aa-a69c-b8b0137046f0 providerId=p status=PROCESSED
+2026/09/29 03:15:49 WARN transaction handling failed correlationId="" messageId="" transactionId=967b3f28-40ab-4ada-ae17-721e6b169e66 walletId=b4df8899-2488-48aa-a69c-b8b0137046f0 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/append (0.00s)
+        read_failure_test.go:156: append money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.899s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.131s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=1 subtract=false got={0 } err=money: overflow want=-9223372036854775807
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	4.479s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.751s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	5.031s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.587s
+ok  	github.com/alexandre/wagering/internal/infra/config	5.137s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=money: overflow want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	4.788s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	4.094s
+FAIL

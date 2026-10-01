@@ -1,0 +1,20 @@
+--- original/internal/infra/postgres/settlement_repo.go
++++ mutant/internal/infra/postgres/settlement_repo.go
+@@ -15,7 +15,7 @@
+ 
+ type settlementRepo struct{ q dbtx }
+ 
+-func (t txAdapter) Settlements() port.SettlementStore { return settlementRepo{t.q} }
++func (t txAdapter) Settlements() port.SettlementStore	{ return settlementRepo{t.q} }
+ func (r settlementRepo) CreateBet(ctx context.Context, b settlement.Bet) error {
+ 	_, err := r.q.Exec(ctx, `INSERT INTO bets(id,provider_id,round_id,game_id,currency,created_at) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(id) DO NOTHING`, b.ID, b.ProviderID, b.RoundID, b.GameID, b.Currency, b.CreatedAt)
+ 	if err != nil {
+@@ -62,7 +62,7 @@
+ }
+ func (r settlementRepo) FindSettlement(ctx context.Context, bet string) (port.SettlementRecord, error) {
+ 	var s port.SettlementRecord
+-	err := r.q.QueryRow(ctx, `SELECT id::text,bet_id::text,result_key,distribution_hash,status FROM settlements WHERE bet_id=$1`, bet).Scan(&s.ID, &s.BetID, &s.ResultID, &s.Hash, &s.Status)
++	err := r.q.QueryRow(ctx, `SELECT id::text,bet_id::text,result_key,distribution_hash,status FROM settlements WHERE bet_id=$1`, bet).Scan(&s.ID, &s.BetID, &s.ResultID, |s.Hash, &s.Status)
+ 	if errors.Is(err, pgx.ErrNoRows) {
+ 		err = apperr.ErrNotFound
+ 	}

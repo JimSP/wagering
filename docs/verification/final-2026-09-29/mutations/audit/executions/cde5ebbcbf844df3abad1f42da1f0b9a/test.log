@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.163s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.578s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.297s
+ok  	github.com/alexandre/wagering/internal/domain/money	4.120s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.269s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	4.001s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.043s
+--- FAIL: TestConfigurationDefaultsAndExplicitValues (0.00s)
+    config_test.go:43: got={Roles:[api sqs-consumer outbox-publisher reference-worker] HTTPAddr::9090 ShutdownTimeout:8s LogLevel:debug DatabaseURL:postgres://test@localhost/test AWSRegion:sa-east-1 AWSEndpointURL:http://localhost:4566 WagerQueueURL:https://queue.test/wager WagerDLQURL:https://queue.test/dead EventsQueueURL:https://queue.test/events OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} want={Roles:[api sqs-consumer outbox-publisher reference-worker] HTTPAddr::9090 ShutdownTimeout:8s LogLevel:debug DatabaseURL:postgres://test@localhost/test AWSRegion:sa-east-1 AWSEndpointURL:http://localhost:4566 WagerQueueURL:https://queue.test/wager WagerDLQURL:https://queue.test/dead EventsQueueURL:https://queue.test/events OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} err=SHUTDOWN_TIMEOUT must be in [8s,25s]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	2.856s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.897s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.619s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.393s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.532s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.382s
+FAIL

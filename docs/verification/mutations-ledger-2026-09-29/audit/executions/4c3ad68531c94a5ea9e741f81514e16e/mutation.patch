@@ -1,0 +1,50 @@
+--- original/internal/domain/settlement/plan.go
++++ mutant/internal/domain/settlement/plan.go
+@@ -17,26 +17,26 @@
+ var ErrDistribution = errors.New("invalid settlement distribution")
+ 
+ type Bet struct {
+-	ID, ProviderID, RoundID, GameID, Currency, Status string
+-	CreatedAt                                         time.Time
++	ID, ProviderID, RoundID, GameID, Currency, Status	string
++	CreatedAt						time.Time
+ }
+ type Commitment struct {
+-	ID, TransactionID, ExternalID, WalletID, PlayerID, GameID string
+-	Remaining                                                 money.Money
++	ID, TransactionID, ExternalID, WalletID, PlayerID, GameID	string
++	Remaining							money.Money
+ }
+ type Transfer struct {
+-	From  string      `json:"fromExternalTransactionId"`
+-	To    string      `json:"toExternalTransactionId"`
+-	Money money.Money `json:"money"`
++	From	string		`json:"fromExternalTransactionId"`
++	To	string		`json:"toExternalTransactionId"`
++	Money	money.Money	`json:"money"`
+ }
+ type Return struct {
+-	ExternalID string      `json:"externalTransactionId"`
+-	Money      money.Money `json:"money"`
++	ExternalID	string		`json:"externalTransactionId"`
++	Money		money.Money	`json:"money"`
+ }
+ type Distribution struct {
+-	ResultID    string     `json:"resultId"`
+-	Allocations []Transfer `json:"allocations"`
+-	Returns     []Return   `json:"returns"`
++	ResultID	string		`json:"resultId"`
++	Allocations	[]Transfer	`json:"allocations"`
++	Returns		[]Return	`json:"returns"`
+ }
+ 
+ func (d Distribution) Hash() string {
+@@ -49,7 +49,7 @@
+ // It never chooses winners or distributes a remainder/rounding difference.
+ func (d Distribution) Validate(b Bet, commitments []Commitment) error {
+ 	fail := func(reason string) error { return fmt.Errorf("%w: %s", ErrDistribution, reason) }
+-	if b.Status != "OPEN" || len(commitments) == 0 || strings.TrimSpace(d.ResultID) == "" || len(d.Returns) == 0 {
++	if (b.Status != "OPEN" || len(commitments) == 0 || strings.TrimSpace(d.ResultID) == "") && len(d.Returns) == 0 {
+ 		return fail("open nonempty bet and result required")
+ 	}
+ 	balances := map[string]*big.Int{}

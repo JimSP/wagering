@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.418s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:48:30 INFO transaction handled correlationId="" messageId="" transactionId=55ea6a0d-f970-47d0-9529-5c4bce7b92a4 walletId=163fa07b-28c2-4cbd-8376-d28a1be91f15 providerId=p status=PROCESSED
+2026/09/29 22:48:30 WARN transaction handling failed correlationId="" messageId="" transactionId=904eb357-0763-411b-a3c3-1db1fe74805a walletId=163fa07b-28c2-4cbd-8376-d28a1be91f15 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got wallet: invalid, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.699s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.663s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.363s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.941s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.218s
+--- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState (0.00s)
+    --- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState/insufficient (0.00s)
+        semantics_test.go:85: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.903s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.034s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.014s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:164: error=wallet: invalid want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.342s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.395s
+FAIL

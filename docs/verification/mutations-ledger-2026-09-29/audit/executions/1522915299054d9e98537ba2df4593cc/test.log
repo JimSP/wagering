@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.947s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:17:53 INFO transaction handled correlationId="" messageId="" transactionId=15064d31-0aa4-4b76-847a-42868e784273 walletId=b7cdb7b3-ebc9-425f-8bfc-3d6b5994fa33 providerId=p status=PROCESSED
+2026/09/29 22:17:53 WARN transaction handling failed correlationId="" messageId="" transactionId=9dc5abcf-41df-4a6f-8fb2-bd972f155c83 walletId=b7cdb7b3-ebc9-425f-8bfc-3d6b5994fa33 providerId=p transient=false
+2026/09/29 22:17:53 WARN transaction handling failed correlationId="" messageId="" transactionId=92229e28-58d8-49eb-89e9-573467696129 walletId=b7cdb7b3-ebc9-425f-8bfc-3d6b5994fa33 providerId=p transient=false
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:75: authorization must precede replay idempotency key reused with different payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.740s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.890s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.136s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.253s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.229s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.378s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.331s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.026s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.098s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.873s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.846s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.757s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.794s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.766s
+FAIL

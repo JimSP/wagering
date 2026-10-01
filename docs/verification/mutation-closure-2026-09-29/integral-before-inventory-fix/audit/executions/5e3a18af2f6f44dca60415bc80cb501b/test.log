@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.397s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:15:27 INFO transaction handled correlationId="" messageId="" transactionId=bde66a71-249e-4b5b-aff1-54c2a64da109 walletId=87644b32-23a7-4d64-b6e7-8047795b058a providerId=p status=PROCESSED
+2026/09/30 00:15:27 WARN transaction handling failed correlationId="" messageId="" transactionId=00fb53bc-ee84-47d1-9301-f4a6a0ff4bd9 walletId=87644b32-23a7-4d64-b6e7-8047795b058a providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/reference_already_resolved (0.00s)
+        submit_failure_test.go:162: reference already resolved unexpected accounting write in failure-path stub
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.674s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.750s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.894s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.050s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/resolved_identity_cannot_be_replaced (0.00s)
+        lifecycle_semantics_test.go:265: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.805s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.291s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.956s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.402s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.186s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.104s
+FAIL

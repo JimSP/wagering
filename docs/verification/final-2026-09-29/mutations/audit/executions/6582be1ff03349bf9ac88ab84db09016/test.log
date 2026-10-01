@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.350s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:18:44 INFO transaction handled correlationId="" messageId="" transactionId=c1cb21bd-2f60-439b-92f2-c9d3192081be walletId=bb2ab3d0-0657-4dff-8b4d-6458d2b64f8f providerId=p status=PROCESSED
+2026/09/29 03:18:44 WARN transaction handling failed correlationId="" messageId="" transactionId=df8e6702-cc54-4a6d-9195-17bb46a865bf walletId=bb2ab3d0-0657-4dff-8b4d-6458d2b64f8f providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/ledger_construction (0.00s)
+        read_failure_test.go:156: ledger construction <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.831s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.444s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.865s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/negative_starting_balance (0.00s)
+        ledger_semantics_test.go:80: <nil>
+    ledger_semantics_test.go:86: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.293s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.041s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.669s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.919s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.753s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.215s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.988s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.972s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -36,7 +36,7 @@
+ 		}
+ 		for rows.Next() {
+ 			reference, err = scanTx(rows)
+-			if err != nil {
++			if err == nil {
+ 				break
+ 			}
+ 			f.ReferenceCandidates++

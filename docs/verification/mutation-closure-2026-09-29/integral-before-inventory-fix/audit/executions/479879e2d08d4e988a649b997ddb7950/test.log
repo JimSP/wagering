@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.652s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:02:48 INFO transaction handled correlationId="" messageId="" transactionId=66fb5ae8-7862-4df2-923f-9135dc1235b9 walletId=fcc3d21f-ce04-42eb-9d1a-63cef88f0a6a providerId=p status=PROCESSED
+2026/09/30 00:02:48 WARN transaction handling failed correlationId="" messageId="" transactionId=4a8825f4-26b7-4341-9f93-82cecde7a631 walletId=fcc3d21f-ce04-42eb-9d1a-63cef88f0a6a providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.03s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.03s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: open nonempty bet and result required"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.428s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.014s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.346s
+--- FAIL: TestMutationProofZeroCommitment (0.00s)
+    mutation_regression_test.go:13: zero remaining commitment must coexist with funded participant: invalid settlement distribution: open nonempty bet and result required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.596s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.895s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.133s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.209s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.247s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.221s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.991s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.465s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.454s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/auth/middleware.go
++++ mutant/internal/infra/auth/middleware.go
+@@ -67,7 +67,7 @@
+ // RequireProviderOrInternal is used by read endpoints (scoping is enforced in the use case).
+ func RequireProviderOrInternal(next http.Handler) http.Handler {
+ 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+-		if p, ok := PrincipalFrom(r.Context()); !ok || (p.ProviderID == "" && !p.Internal) {
++		if p, ok := PrincipalFrom(r.Context()); !ok || (p.ProviderID != "" && !p.Internal) {
+ 			deny(w, http.StatusForbidden, "FORBIDDEN")
+ 			return
+ 		}

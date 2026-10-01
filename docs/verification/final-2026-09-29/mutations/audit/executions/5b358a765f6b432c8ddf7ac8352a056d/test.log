@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.198s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:44:02 INFO transaction handled correlationId="" messageId="" transactionId=a7e52162-4728-4064-880c-de683aadfa27 walletId=ce8cd394-c1e7-4ddc-afbd-6c2d517dd343 providerId=p status=PROCESSED
+2026/09/29 03:44:02 WARN transaction handling failed correlationId="" messageId="" transactionId=7c6cfd23-d00b-4f31-9184-0271960726b0 walletId=ce8cd394-c1e7-4ddc-afbd-6c2d517dd343 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.11s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"FORBIDDEN"} <nil>
+    http_contract_test.go:191: HTTP contract: 403 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"FORBIDDEN"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.716s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.104s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.498s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.237s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.757s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.040s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.864s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	0.990s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.391s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.005s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.982s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.017s
+FAIL

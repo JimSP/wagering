@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -105,7 +105,7 @@
+ 		defer rows.Close()
+ 		for rows.Next() {
+ 			var restore wager.CommitmentRestore
+-			if e = rows.Scan(&restore.EffectID, &restore.CommitmentID, &restore.Amount); e != nil {
++			if e = rows.Scan(|restore.EffectID, &restore.CommitmentID, &restore.Amount); e != nil {
+ 				return f, e
+ 			}
+ 			f.Restores = append(f.Restores, restore)

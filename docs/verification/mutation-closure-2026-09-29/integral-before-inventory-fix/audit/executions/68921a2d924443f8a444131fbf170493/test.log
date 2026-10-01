@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.400s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.840s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.923s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.049s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.765s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.799s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.872s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.660s
+--- FAIL: TestConfigurationDefaultsAndExplicitValues (0.00s)
+    config_test.go:25: got={Roles:[api] HTTPAddr::8080 ShutdownTimeout:25s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} want={Roles:[api] HTTPAddr::8080 ShutdownTimeout:25s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} err=SHUTDOWN_TIMEOUT must be in [8s,25s]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	2.123s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.663s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.118s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.766s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.881s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.922s
+ok  	github.com/alexandre/wagering/internal/platform/sys	3.517s
+ok  	github.com/alexandre/wagering/internal/platform/worker	3.795s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	3.809s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	4.036s
+FAIL

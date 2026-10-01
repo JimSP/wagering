@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.795s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:19:44 INFO transaction handled correlationId="" messageId="" transactionId=74b30f42-286a-4a35-aadc-79d8d15dc5cd walletId=89868831-22c7-4914-a51b-efb1b7e5cb16 providerId=p status=PROCESSED
+2026/09/30 00:19:44 WARN transaction handling failed correlationId="" messageId="" transactionId=458e909d-0d04-45c8-b22f-267155831aa8 walletId=89868831-22c7-4914-a51b-efb1b7e5cb16 providerId=p transient=false
+--- FAIL: TestHTTPInvalidInputsAndAuthorizationHaveNoEffects (0.04s)
+    http_contract_test.go:239: HTTP contract: 400 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"invalid input: malformed body: EOF"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.267s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.353s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.480s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.603s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.227s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.722s
+--- FAIL: TestAuthorizationPolicyMatrix (0.00s)
+    --- FAIL: TestAuthorizationPolicyMatrix/internal/provider (0.00s)
+        authorization_paths_test.go:43: 204 
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.020s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.124s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.298s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.716s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.361s
+FAIL

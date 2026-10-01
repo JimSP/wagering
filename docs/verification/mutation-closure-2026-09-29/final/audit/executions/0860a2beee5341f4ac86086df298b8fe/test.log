@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.008s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:27:06 INFO transaction handled correlationId="" messageId="" transactionId=9924c2ea-96e3-4897-940a-17f75bc05bcf walletId=7acd52dc-d52a-48fa-89e6-bb0cc6711760 providerId=p status=PROCESSED
+2026/09/30 01:27:06 WARN transaction handling failed correlationId="" messageId="" transactionId=6cc3bfec-0807-4b80-b88d-fdb07f2d3655 walletId=7acd52dc-d52a-48fa-89e6-bb0cc6711760 providerId=p transient=false
+--- FAIL: TestWINWithCounterpartyPreservesOptionalReference (0.00s)
+    --- FAIL: TestWINWithCounterpartyPreservesOptionalReference/HTTP/reference= (0.00s)
+        win_accounting_contract_test.go:25: paired BET replay changed result or state: got={TransactionID: Status: Balance:<nil> FailureCode: IdempotentReplay:false} want={TransactionID:00000000-0000-4000-8000-000000000012 Status:PROCESSED Balance:0x3d126d53a1c8 FailureCode: IdempotentReplay:true} err=INVALID_INPUT: invalid input: invalid resolved reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.155s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.564s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.694s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.437s
+--- FAIL: TestRehydrationRejectsImpossibleHistories (0.00s)
+    --- FAIL: TestRehydrationRejectsImpossibleHistories/reference_without_external_identity (0.00s)
+        lifecycle_semantics_test.go:209: accepted impossible history: {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:BET Amount:{minor:1000 currency:BRL} ReferenceExternalID: ReferenceID:unrelated Status:PENDING FailureCode: BalanceAfter:<nil> Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}; err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.943s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.062s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.798s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.633s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.367s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.517s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.059s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.035s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.213s
+FAIL

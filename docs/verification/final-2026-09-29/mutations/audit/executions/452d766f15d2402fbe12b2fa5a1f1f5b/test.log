@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.448s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:30:19 INFO transaction handled correlationId="" messageId="" transactionId=381e83c4-518c-4c48-88a1-19715c4fdd58 walletId=d5c10be8-8964-4e93-93b4-4b769bc78b73 providerId=p status=PROCESSED
+2026/09/29 03:30:19 WARN transaction handling failed correlationId="" messageId="" transactionId=65634e8b-6cf8-49b8-be3a-83fc8bfe9cc2 walletId=d5c10be8-8964-4e93-93b4-4b769bc78b73 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+    http_contract_test.go:191: HTTP contract: 401 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"UNAUTHENTICATED"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.577s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.151s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.789s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.671s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.075s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.03s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/valid (0.00s)
+        authorization_paths_test.go:94: 401
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	1.832s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.552s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.963s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.985s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.942s
+FAIL

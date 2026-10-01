@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.370s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:09:45 INFO transaction handled correlationId="" messageId="" transactionId=5a1f0a5f-1be0-4446-a5a6-0671e39c8595 walletId=aabb33df-e664-4ce3-9ced-d86b487b27b4 providerId=p status=PROCESSED
+2026/09/30 00:09:45 WARN transaction handling failed correlationId="" messageId="" transactionId=59631c9e-e034-4c04-b8ff-b9cb2cd6cf45 walletId=aabb33df-e664-4ce3-9ced-d86b487b27b4 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet] [wallet opening]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.630s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.727s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.681s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.933s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    input_contract_test.go:14: INVALID_INPUT: invalid input: id, walletId and playerId are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.130s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.040s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.218s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.237s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:222: INVALID_INPUT: invalid input: id, walletId and playerId are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.572s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.093s
+FAIL

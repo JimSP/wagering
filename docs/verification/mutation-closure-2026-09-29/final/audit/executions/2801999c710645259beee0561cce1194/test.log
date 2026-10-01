@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.206s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.496s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.536s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.754s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.082s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/game (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID:g Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x7bc1f72c8b8 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL     wallet player  g OPENING {100 BRL}   PROCESSED  0x7bc1f72cbd0 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.339s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.653s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.442s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.862s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:103: INVALID_INPUT: invalid input: invalid opening snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.638s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.922s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.590s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.575s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.453s
+FAIL

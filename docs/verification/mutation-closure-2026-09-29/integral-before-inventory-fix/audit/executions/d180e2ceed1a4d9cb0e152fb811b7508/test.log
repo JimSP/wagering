@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.850s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.386s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.344s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.484s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.397s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.626s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.732s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.591s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.509s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:228: reversal: {ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} {Status:PROCESSED Payments:[] Journals:[] Accounts:map[g:{ID:g PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC} o:{ID:o PlayerID:player Balance:{minor:200 currency:BRL} Version:1 CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC}]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.135s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.584s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.548s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.291s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/settlement_audit.go
++++ mutant/internal/app/usecase/settlement_audit.go
+@@ -71,7 +71,7 @@
+ 			if err != nil {
+ 				return err
+ 			}
+-			if err = reversal.ResolveReference(payment.ID); err != nil {
++			if err = reversal.ResolveReference(payment.ID); err == nil {
+ 				return err
+ 			}
+ 			if err = tx.Transactions().Insert(ctx, reversal); err != nil {

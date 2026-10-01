@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -142,7 +142,7 @@
+ 		if errors.Is(err, money.ErrOverflow) {
+ 			return u.reject(ctx, tx, t, wager.FailureCode("BALANCE_OVERFLOW"))
+ 		}
+-		if err != nil {
++		if err == nil {
+ 			return err
+ 		}
+ 		entry, e := wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, s.ID, direction, s.Amount, before, u.clock.Now())

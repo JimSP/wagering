@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.151s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:27:53 INFO transaction handled correlationId="" messageId="" transactionId=5bc0483c-e275-4f0b-a941-a07246300657 walletId=4a55e1ec-dd38-4e88-ba7f-06d1f6e460e0 providerId=p status=PROCESSED
+2026/09/30 01:27:53 WARN transaction handling failed correlationId="" messageId="" transactionId=d145139d-1dc8-4abe-b667-26e56f9584c7 walletId=4a55e1ec-dd38-4e88-ba7f-06d1f6e460e0 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.412s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.491s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.371s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.612s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.126s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.861s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.618s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.043s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: retry history on initial pending state want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.801s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.237s
+FAIL

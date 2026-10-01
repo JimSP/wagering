@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.239s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:40:55 INFO transaction handled correlationId="" messageId="" transactionId=ae282c1b-9ccd-4dbe-a2e6-a2bdb40f1895 walletId=c4a2e9ec-11f1-41d2-8027-a5df893fe41f providerId=p status=PROCESSED
+2026/09/30 00:40:55 WARN transaction handling failed correlationId="" messageId="" transactionId=a13653b2-816c-4896-bd77-f0e4d4303c2e walletId=c4a2e9ec-11f1-41d2-8027-a5df893fe41f providerId=p transient=false
+--- FAIL: TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals (0.00s)
+    --- FAIL: TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals/settle (0.00s)
+        settlement_facts_contract_test.go:50: missing/duplicate journal ID: "generated-2"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.623s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.776s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.652s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.900s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.035s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.443s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.716s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.322s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.616s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.616s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.266s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.254s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.293s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.277s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.131s
+--- FAIL: TestFactsPostingOrderAndExactMultiplicity (0.00s)
+    mutation_regression_test.go:207: missing/duplicate journal ID: "a"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.494s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.836s
+ok  	github.com/alexandre/wagering/scripts	2.848s
+FAIL

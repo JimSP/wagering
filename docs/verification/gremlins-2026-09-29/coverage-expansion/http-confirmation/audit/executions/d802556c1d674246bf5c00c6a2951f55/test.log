@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.416s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:40:03 INFO transaction handled correlationId="" messageId="" transactionId=1b88a0c5-36b1-4576-9c50-da840a8f65f0 walletId=2ea01f5c-35f8-4d47-83e9-10748c7356e6 providerId=p status=PROCESSED
+2026/09/29 02:40:03 WARN transaction handling failed correlationId="" messageId="" transactionId=bceee31c-84b9-4acb-8433-e462b12b0174 walletId=2ea01f5c-35f8-4d47-83e9-10748c7356e6 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.04s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INVALID_INPUT","message":"invalid input: malformed body: \u003cnil\u003e"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.842s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.891s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.008s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.381s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.115s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.561s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.656s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.552s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.828s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.549s
+FAIL

@@ -1,0 +1,52 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.300s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:00:40 INFO transaction handled correlationId="" messageId="" transactionId=52a15cf8-328b-4af0-982d-36c64c4d6350 walletId=6c494ea0-52ba-4aad-bb06-98ac20a62422 providerId=p status=PROCESSED
+2026/09/30 00:00:40 WARN transaction handling failed correlationId="" messageId="" transactionId=c4fa3ce4-09e1-4881-815b-ef2309dc8c22 walletId=6c494ea0-52ba-4aad-bb06-98ac20a62422 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.584s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.085s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.342s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x100863d18]
+
+goroutine 14 [running]:
+testing.tRunner.func1.2({0x1009cd958, 0x100a09050})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1009cd958?, 0x100a09050?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Snapshot(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/domain/wallet/wallet.go:50
+github.com/alexandre/wagering/internal/domain/settlement.reversalFacts()
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/domain/settlement/reversal_test.go:20 +0x228
+github.com/alexandre/wagering/internal/domain/settlement.TestReversalValidatesWholeHistoryWithoutMutatingFacts(0x501a8d1b5688)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/domain/settlement/reversal_test.go:30 +0x28
+testing.tRunner(0x501a8d1b5688, 0x1009ec358)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	3.418s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.818s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:48: rehydration changed history wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.901s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.605s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.019s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.665s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.517s
+FAIL

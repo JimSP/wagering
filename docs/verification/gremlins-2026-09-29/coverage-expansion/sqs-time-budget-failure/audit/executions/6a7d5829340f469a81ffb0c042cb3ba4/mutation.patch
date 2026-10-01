@@ -1,0 +1,11 @@
+--- original/internal/infra/sqs/module.go
++++ mutant/internal/infra/sqs/module.go
+@@ -38,7 +38,7 @@
+ 		return
+ 	}
+ 	if cfg.WagerDLQURL != "" {
+-		worker.Register(group, "dlq-monitor", log, worker.Every(5*time.Second, func(ctx context.Context) error {
++		worker.Register(group, "dlq-monitor", log, worker.Every(5/time.Second, func(ctx context.Context) error {
+ 			return updateDLQDepth(ctx, cl, cfg.WagerDLQURL, recorder)
+ 		}, func(err error) { log.Warn("DLQ metrics unavailable", "err", err) }))
+ 	}

@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.031s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:05:12 INFO transaction handled correlationId="" messageId="" transactionId=e86b0e14-1c2a-4a5f-8a39-94ee4cd986fc walletId=521a2b1e-0170-4f97-b949-38d6e5e97c41 providerId=p status=PROCESSED
+2026/09/30 00:05:12 WARN transaction handling failed correlationId="" messageId="" transactionId=9ae5a7fd-ae2a-4c87-b3ad-5081ffba8160 walletId=521a2b1e-0170-4f97-b949-38d6e5e97c41 providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+    paired_storage_failure_test.go:98: wallet: invalid PENDING
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.376s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.217s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.094s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.848s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/implicit_ambiguous_WIN (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.592s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.962s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.670s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.786s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.687s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.146s
+FAIL

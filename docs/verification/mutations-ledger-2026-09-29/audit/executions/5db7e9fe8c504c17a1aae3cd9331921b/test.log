@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.395s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:12:04 INFO transaction handled correlationId="" messageId="" transactionId=0f19cc60-3ab9-4586-b15b-c8f168421d4d walletId=ec8fc17e-937e-459f-865b-073796054db3 providerId=p status=PROCESSED
+2026/09/29 23:12:04 WARN transaction handling failed correlationId="" messageId="" transactionId=ce84ce44-d9ae-468e-a165-d2a04a58aa41 walletId=ec8fc17e-937e-459f-865b-073796054db3 providerId=p transient=false
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x28 pc=0x105476ae8]
+
+goroutine 250 [running]:
+github.com/alexandre/wagering/internal/transport/httpapi.NewServer.func8({0x20?, 0x105c386a8?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/transport/httpapi/module.go:112 +0x28
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).runStopHook(0x54a9a21820e0, {0x105c3ce08, 0x105cde380}, {0x54a9a23ad860, 0x54a9a23b6ae0, {0x0, 0x0}, {0x0, 0x0}, {{0x54a9a2031a40, ...}, ...}})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:341 +0x194
+go.uber.org/fx/internal/lifecycle.(*Lifecycle).Stop(0x54a9a21820e0, {0x105c3ce08, 0x105cde380})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/internal/lifecycle/lifecycle.go:303 +0x4ec
+go.uber.org/fx.(*App).Stop.func2({0x105c3ce08?, 0x105cde380?})
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:725 +0x78
+go.uber.org/fx.withTimeout.func1()
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:803 +0x60
+created by go.uber.org/fx.withTimeout in goroutine 188
+	/Users/alexandre/go/pkg/mod/go.uber.org/fx@v1.23.0/app.go:791 +0xa0
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.700s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.640s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.765s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.414s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.884s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.987s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.564s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.526s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.152s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.075s
+FAIL

@@ -1,0 +1,43 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.786s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:01:43 INFO transaction handled correlationId="" messageId="" transactionId=1083a352-09b4-4c5a-b4b9-ba87ba479246 walletId=81252447-e86f-4ea9-b9fd-572432e16e50 providerId=p status=PROCESSED
+2026/09/29 02:01:43 WARN transaction handling failed correlationId="" messageId="" transactionId=65109d3f-4dbf-4470-8d5e-26a0501aa841 walletId=81252447-e86f-4ea9-b9fd-572432e16e50 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/balance_event (0.00s)
+        read_failure_test.go:156: balance event invalid integration event: noncanonical money
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.072s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.301s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.560s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:43: unexplained movement {entry-0 wallet tx-0 CREDIT {10000 BRL} {0 BRL} {0 } {0 63926193600 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.115s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.368s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:333: error=INVALID_INPUT: invalid input: ledger entry l1 has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.856s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.722s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    --- FAIL: TestLedgerWireContractAndPaginationBoundaries/limit= (0.00s)
+        contract_test.go:135: want {"entries":[{"id":"entry","transactionId":"tx","direction":"CREDIT","money":{"amount":"1.00","currency":"BRL"},"balanceBefore":{"amount":"0.00","currency":"BRL"},"balanceAfter":{"amount":"1.00","currency":"BRL"},"createdAt":"2026-09-28T12:00:00Z"}],"nextCursor":"next"} got {"entries":[{"id":"entry","transactionId":"tx","direction":"CREDIT","money":{"amount":"1.00","currency":"BRL"},"balanceBefore":{"amount":"0.00","currency":"BRL"},"balanceAfter":{"amount":"0.00","currency":""},"createdAt":"2026-09-28T12:00:00Z"}],"nextCursor":"next"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	4.031s
+FAIL

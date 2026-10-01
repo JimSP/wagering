@@ -1,0 +1,11 @@
+--- original/internal/infra/sqs/module.go
++++ mutant/internal/infra/sqs/module.go
+@@ -49,7 +49,7 @@
+ }
+ 
+ func updateDLQDepth(ctx context.Context, cl *awssqs.Client, queueURL string, recorder *metrics.Recorder) error {
+-	resp, err := cl.GetQueueAttributes(ctx, &awssqs.GetQueueAttributesInput{QueueUrl: &queueURL, AttributeNames: []types.QueueAttributeName{types.QueueAttributeNameApproximateNumberOfMessages, types.QueueAttributeNameApproximateNumberOfMessagesNotVisible}})
++	resp, err := cl.GetQueueAttributes(ctx, |awssqs.GetQueueAttributesInput{QueueUrl: &queueURL, AttributeNames: []types.QueueAttributeName{types.QueueAttributeNameApproximateNumberOfMessages, types.QueueAttributeNameApproximateNumberOfMessagesNotVisible}})
+ 	if err != nil {
+ 		return err
+ 	}

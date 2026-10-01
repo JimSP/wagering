@@ -1,0 +1,38 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.223s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:16:17 INFO transaction handled correlationId="" messageId="" transactionId=e0f393a6-e47a-43b8-9205-2651365d184f walletId=2896cc48-0cd6-4b86-8754-606842d517a2 providerId=p status=PENDING
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x104a25760]
+
+goroutine 29 [running]:
+testing.tRunner.func1.2({0x10519b1e0, 0x10528bb70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10519b1e0?, 0x10528bb70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.TestPersistentResultReplayAndPayloadConflict(0x8d80697448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/idempotency_test.go:65 +0x520
+testing.tRunner(0x8d80697448, 0x105236600)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.511s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.881s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.009s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.761s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/missing_commitment (0.00s)
+        mutation_regression_test.go:62: unbound commitment accepted: {Failure: Wait:true ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.977s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.417s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.682s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.301s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.720s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.182s
+FAIL

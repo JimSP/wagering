@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.583s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.227s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.195s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.217s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.685s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.313s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.967s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.823s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.076s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:228: reversal: {ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} {Status:PROCESSED Payments:[{CorrelationID: CausationID: ID:tx Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x6c37e3134858 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-01-02 03:04:05 +0000 UTC UpdatedAt:2026-01-02 03:04:05 +0000 UTC}] Journals:[{DebitAccountID:g CreditAccountID:o Amount:{minor:100 currency:BRL}} {DebitAccountID:o CreditAccountID:g Amount:{minor:20 currency:BRL}}] Accounts:map[]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.815s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.970s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.709s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.719s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.621s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.653s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.684s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.692s
+FAIL

@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.375s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.213s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/wallet (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"other","playerId":"p","providerId":"provider","externalTransactionId":"ext","roundId":"r","money":{"amount":"1.00","currency":"BRL"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	3.347s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.140s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.401s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.978s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.818s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.088s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.020s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.732s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.089s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.838s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.864s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.009s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.892s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	4.067s
+FAIL

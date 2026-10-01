@@ -1,0 +1,2285 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>usecase: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/alexandre/wagering/internal/app/usecase/process.go (100.0%)</option>
+				
+				<option value="file1">github.com/alexandre/wagering/internal/app/usecase/transaction.go (100.0%)</option>
+				
+				<option value="file2">github.com/alexandre/wagering/internal/app/usecase/wallet.go (100.0%)</option>
+				
+				<option value="file3">github.com/alexandre/wagering/internal/app/usecase/workers.go (100.0%)</option>
+				
+				<option value="file4">github.com/alexandre/wagering/internal/domain/event/event.go (100.0%)</option>
+				
+				<option value="file5">github.com/alexandre/wagering/internal/domain/event/validation.go (100.0%)</option>
+				
+				<option value="file6">github.com/alexandre/wagering/internal/domain/money/money.go (100.0%)</option>
+				
+				<option value="file7">github.com/alexandre/wagering/internal/domain/wager/errors.go (100.0%)</option>
+				
+				<option value="file8">github.com/alexandre/wagering/internal/domain/wager/ledger.go (100.0%)</option>
+				
+				<option value="file9">github.com/alexandre/wagering/internal/domain/wager/rules.go (100.0%)</option>
+				
+				<option value="file10">github.com/alexandre/wagering/internal/domain/wager/transaction.go (100.0%)</option>
+				
+				<option value="file11">github.com/alexandre/wagering/internal/domain/wager/types.go (100.0%)</option>
+				
+				<option value="file12">github.com/alexandre/wagering/internal/domain/wallet/wallet.go (100.0%)</option>
+				
+				<option value="file13">github.com/alexandre/wagering/internal/infra/auth/middleware.go (100.0%)</option>
+				
+				<option value="file14">github.com/alexandre/wagering/internal/infra/auth/verifier.go (100.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">no coverage</span>
+				<span class="cov1">low coverage</span>
+				<span class="cov2">*</span>
+				<span class="cov3">*</span>
+				<span class="cov4">*</span>
+				<span class="cov5">*</span>
+				<span class="cov6">*</span>
+				<span class="cov7">*</span>
+				<span class="cov8">*</span>
+				<span class="cov9">*</span>
+				<span class="cov10">high coverage</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package usecase
+
+import (
+        "context"
+        "errors"
+        "github.com/alexandre/wagering/internal/app/apperr"
+        "github.com/alexandre/wagering/internal/app/port"
+        "github.com/alexandre/wagering/internal/domain/event"
+        "github.com/alexandre/wagering/internal/domain/money"
+        "github.com/alexandre/wagering/internal/domain/wager"
+        "github.com/alexandre/wagering/internal/domain/wallet"
+        "time"
+)
+
+func (u *SubmitTransaction) meta(t *wager.Transaction) event.Meta {
+        <span class="cov9" title="2015">s := t.Snapshot()
+        cor := s.CorrelationID
+        if cor == "" </span>{
+                <span class="cov8" title="411">cor = s.ID
+</span>        }
+        <span class="cov9" title="2015">return event.Meta{EventID: u.ids.NewID(), AggregateID: s.WalletID, CorrelationID: cor, CausationID: s.CausationID, OccurredAt: u.clock.Now()}</span>
+}
+func addEvent(ctx context.Context, tx port.Tx, e event.Outgoing, err error) error {
+        <span class="cov10" title="2016">if err != nil </span>{
+                <span class="cov1" title="1">return err
+</span>        }
+        <span class="cov9" title="2015">return tx.Outbox().Add(ctx, e)</span>
+}
+func (u *SubmitTransaction) reject(ctx context.Context, tx port.Tx, t *wager.Transaction, code wager.FailureCode) error {
+        <span class="cov8" title="455">if err := t.Reject(code, u.clock.Now()); err != nil </span>{
+                <span class="cov1" title="1">return err
+</span>        }
+        <span class="cov8" title="454">if err := tx.Transactions().Update(ctx, t); err != nil </span>{
+                <span class="cov1" title="1">return err
+</span>        }
+        <span class="cov8" title="453">s := t.Snapshot()
+        e, err := event.NewRejected(u.meta(t), event.RejectedData{TransactionID: s.ID, Kind: string(s.Kind), WalletID: s.WalletID, ProviderID: s.ProviderID, ExternalTransactionID: s.ExternalID, FailureCode: string(code)}).ToOutgoing()
+        return addEvent(ctx, tx, e, err)</span>
+}
+func (u *SubmitTransaction) processedEvent(ctx context.Context, tx port.Tx, t *wager.Transaction) error {
+        <span class="cov9" title="867">s := t.Snapshot()
+        e, err := event.NewProcessed(u.meta(t), event.ProcessedData{TransactionID: s.ID, Kind: string(s.Kind), WalletID: s.WalletID, PlayerID: s.PlayerID, ProviderID: s.ProviderID, ExternalTransactionID: s.ExternalID, RoundID: s.RoundID, Money: event.ToMoneyDTO(s.Amount)}).ToOutgoing()
+        return addEvent(ctx, tx, e, err)
+</span>}
+func (u *SubmitTransaction) balanceEvent(ctx context.Context, tx port.Tx, t *wager.Transaction, entry wager.LedgerEntry, version int64) error {
+        <span class="cov8" title="673">e, err := event.NewBalanceChanged(u.meta(t), event.BalanceChangedData{WalletID: t.WalletID(), TransactionID: t.ID(), Direction: string(entry.Direction()), Money: event.ToMoneyDTO(entry.Amount()), BalanceBefore: event.ToMoneyDTO(entry.BalanceBefore()), BalanceAfter: event.ToMoneyDTO(entry.BalanceAfter()), WalletVersion: version}).ToOutgoing()
+        return addEvent(ctx, tx, e, err)
+</span>}
+func (u *SubmitTransaction) waitReference(ctx context.Context, tx port.Tx, t *wager.Transaction) error {
+        <span class="cov5" title="32">s := t.Snapshot()
+        now := u.clock.Now()
+        if s.Attempts &gt;= MaxReferenceAttempts || t.ReferenceExpired(now) </span>{
+                <span class="cov1" title="1">return u.reject(ctx, tx, t, wager.FailReferenceNotFound)
+</span>        }
+        <span class="cov5" title="31">if err := t.MarkPendingReference(now, now.Add(Backoff(s.Attempts)), 10*time.Minute); err != nil </span>{
+                <span class="cov1" title="1">return err
+</span>        }
+        <span class="cov5" title="30">if err := tx.Transactions().Update(ctx, t); err != nil </span>{
+                <span class="cov1" title="1">return err
+</span>        }
+        <span class="cov4" title="29">if s.Status == wager.StatusPendingReference </span>{
+                <span class="cov3" title="7">return nil
+</span>        }
+        <span class="cov4" title="22">s = t.Snapshot()
+        e, err := event.NewPendingReference(u.meta(t), event.PendingReferenceData{TransactionID: s.ID, ProviderID: s.ProviderID, ExternalTransactionID: s.ExternalID, ReferenceExternalTransactionID: s.ReferenceExternalID, NextAttemptAt: *s.NextAttemptAt, ExpiresAt: *s.ExpiresAt}).ToOutgoing()
+        return addEvent(ctx, tx, e, err)</span>
+}
+func (u *SubmitTransaction) process(ctx context.Context, tx port.Tx, t *wager.Transaction) error {
+        <span class="cov9" title="1210">s := t.Snapshot()
+        if t.ReferenceExpired(u.clock.Now()) </span>{
+                <span class="cov1" title="1">return u.reject(ctx, tx, t, wager.FailReferenceNotFound)
+</span>        }
+        <span class="cov9" title="1209">w, err := tx.Wallets().GetForUpdate(ctx, s.WalletID)
+        if err != nil </span>{
+                <span class="cov4" title="28">return err
+</span>        }
+        <span class="cov9" title="1181">if w.PlayerID() != s.PlayerID </span>{
+                <span class="cov1" title="1">return u.reject(ctx, tx, t, wager.FailReferenceMismatch)
+</span>        }
+        <span class="cov9" title="1180">if w.Currency() != s.Amount.Currency() </span>{
+                <span class="cov1" title="1">return u.reject(ctx, tx, t, wager.FailCurrencyMismatch)
+</span>        }
+        <span class="cov9" title="1179">direction, movement := wager.MovementFor(s.Kind)
+        if s.ReferenceExternalID != "" </span>{
+                <span class="cov8" title="547">ref, e := tx.Transactions().FindByExternalID(ctx, s.ProviderID, s.ReferenceExternalID)
+                if errors.Is(e, apperr.ErrNotFound) </span>{
+                        <span class="cov4" title="22">return u.waitReference(ctx, tx, t)
+</span>                }
+                <span class="cov8" title="525">if e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov8" title="524">r := ref.Snapshot()
+                if r.ID == s.ID || r.WalletID != s.WalletID || r.PlayerID != s.PlayerID || r.Amount.Currency() != s.Amount.Currency() || r.RoundID != s.RoundID </span>{
+                        <span class="cov2" title="3">return u.reject(ctx, tx, t, wager.FailReferenceMismatch)
+</span>                }
+                <span class="cov8" title="521">if !wager.CanReference(s.Kind, r.Kind) </span>{
+                        <span class="cov7" title="272">return u.reject(ctx, tx, t, wager.FailInvalidReferenceKind)
+</span>                }
+                <span class="cov7" title="249">if !r.Status.IsTerminal() </span>{
+                        <span class="cov3" title="8">return u.waitReference(ctx, tx, t)
+</span>                }
+                <span class="cov7" title="241">if r.Status != wager.StatusProcessed </span>{
+                        <span class="cov6" title="79">return u.reject(ctx, tx, t, wager.FailReferenceNotProcessed)
+</span>                }
+                <span class="cov7" title="162">if s.Kind.IsReversal() </span>{
+                        <span class="cov6" title="148">if s.Amount.Minor() != r.Amount.Minor() </span>{
+                                <span class="cov1" title="1">return u.reject(ctx, tx, t, wager.FailReversalAmountMismatch)
+</span>                        }
+                        <span class="cov6" title="147">yes, e := tx.Transactions().HasReversal(ctx, r.ID)
+                        if e != nil </span>{
+                                <span class="cov1" title="1">return e
+</span>                        }
+                        <span class="cov6" title="146">if yes </span>{
+                                <span class="cov4" title="27">return u.reject(ctx, tx, t, wager.FailAlreadyReversed)
+</span>                        }
+                }
+                <span class="cov6" title="133">if err = t.ResolveReference(r.ID); err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov6" title="132">if s.Kind == wager.KindRollback </span>{
+                        // CanReference above restricts ROLLBACK to BET/WIN/REFUND,
+                        // all of which have a defined reversal direction.
+                        <span class="cov5" title="68">direction, _ = wager.ReversalDirection(r.Kind)
+                        movement = true
+</span>                }
+        }
+        <span class="cov8" title="764">if movement </span>{
+                <span class="cov8" title="555">before := w.Balance()
+                version := w.Version()
+                if direction == wager.Debit </span>{
+                        <span class="cov7" title="312">_, _, err = w.Debit(s.Amount, u.clock.Now())
+</span>                } else {
+                        <span class="cov7" title="243">_, _, err = w.Credit(s.Amount, u.clock.Now())
+</span>                }
+                <span class="cov8" title="555">if errors.Is(err, wallet.ErrInsufficientFunds) </span>{
+                        <span class="cov5" title="66">code := wager.FailInsufficientFunds
+                        if s.Kind.IsReversal() </span>{
+                                <span class="cov2" title="3">code = wager.FailReversalInsufficientFunds
+</span>                        }
+                        <span class="cov5" title="66">return u.reject(ctx, tx, t, code)</span>
+                }
+                <span class="cov8" title="489">if errors.Is(err, money.ErrOverflow) </span>{
+                        <span class="cov1" title="1">return u.reject(ctx, tx, t, wager.FailureCode("BALANCE_OVERFLOW"))
+</span>                }
+                <span class="cov8" title="488">if err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov8" title="487">entry, e := wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, s.ID, direction, s.Amount, before, u.clock.Now())
+                if e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov8" title="486">if err = tx.Ledger().Append(ctx, entry); err != nil </span>{
+                        <span class="cov3" title="9">return err
+</span>                }
+                <span class="cov8" title="477">if err = tx.Wallets().Save(ctx, w, version); err != nil </span>{
+                        <span class="cov3" title="9">return err
+</span>                }
+                <span class="cov8" title="468">if err = u.balanceEvent(ctx, tx, t, entry, w.Version()); err != nil </span>{
+                        <span class="cov2" title="4">return err
+</span>                }
+        }
+        <span class="cov8" title="673">if err = t.MarkProcessed(w.Balance(), u.clock.Now()); err != nil </span>{
+                <span class="cov1" title="1">return err
+</span>        }
+        <span class="cov8" title="672">if err = tx.Transactions().Update(ctx, t); err != nil </span>{
+                <span class="cov3" title="11">return err
+</span>        }
+        <span class="cov8" title="661">return u.processedEvent(ctx, tx, t)</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package usecase
+
+import (
+        "bytes"
+        "context"
+        "crypto/sha256"
+        "encoding/hex"
+        "encoding/json"
+        "errors"
+        "fmt"
+        "github.com/google/uuid"
+        "io"
+        "log/slog"
+        "time"
+
+        "github.com/alexandre/wagering/internal/app/apperr"
+        "github.com/alexandre/wagering/internal/app/port"
+        "github.com/alexandre/wagering/internal/domain/money"
+        "github.com/alexandre/wagering/internal/domain/wager"
+)
+
+type Source string
+
+const (
+        SourceHTTP Source = "HTTP"
+        SourceSQS  Source = "SQS"
+)
+
+const InboxConsumerName = "wager-transactions"
+
+// SubmitInput is shared by HTTP and SQS so both get the same idempotency/financial guarantees.
+type SubmitInput struct {
+        Source Source
+        // AuthorizedProviderID comes from the token (HTTP). Empty for SQS (broker credentials/policies apply).
+        AuthorizedProviderID string
+        IdempotencyKey       string
+        CorrelationID        string
+
+        ProviderID, ExternalTransactionID, PlayerID, WalletID, RoundID, GameID string
+        Kind, ReferenceExternalTransactionID                                   string
+        Amount, Currency                                                       string // raw strings, parsed in the use case
+
+        // SQS only: inbox registration shares the domain transaction.
+        InboxMessageID, InboxHash string
+}
+
+type SubmitResult struct {
+        TransactionID    string
+        Status           wager.Status
+        Balance          *money.Money // observed at original processing time
+        FailureCode      wager.FailureCode
+        IdempotentReplay bool
+}
+
+type SubmitTransaction struct {
+        uow     port.UnitOfWork
+        clock   port.Clock
+        ids     port.IDGenerator
+        metrics port.Metrics
+}
+
+func NewSubmitTransaction(uow port.UnitOfWork, c port.Clock, ids port.IDGenerator, m port.Metrics) *SubmitTransaction {
+        <span class="cov7" title="241">return &amp;SubmitTransaction{uow, c, ids, m}
+</span>}
+
+func (u *SubmitTransaction) Execute(ctx context.Context, in SubmitInput) (SubmitResult, error) {
+        <span class="cov10" title="1528">started := time.Now()
+        defer func() </span>{ <span class="cov10" title="1528">u.metrics.Latency("submit", time.Since(started)) }</span>()
+        <span class="cov10" title="1528">if in.Source != SourceHTTP &amp;&amp; in.Source != SourceSQS </span>{
+                <span class="cov1" title="1">return SubmitResult{}, apperr.Invalid("invalid source")
+</span>        }
+        <span class="cov9" title="1527">if in.Source == SourceHTTP &amp;&amp; (in.AuthorizedProviderID == "" || in.AuthorizedProviderID != in.ProviderID) </span>{
+                <span class="cov2" title="4">return SubmitResult{}, apperr.ErrForbidden
+</span>        }
+        <span class="cov9" title="1523">if in.Source == SourceSQS &amp;&amp; (in.InboxMessageID == "" || in.InboxHash == "") </span>{
+                <span class="cov2" title="3">return SubmitResult{}, apperr.Invalid("inbox identity required")
+</span>        }
+        <span class="cov9" title="1520">k, err := wager.ParseExternalKind(in.Kind)
+        if err != nil </span>{
+                <span class="cov2" title="3">return SubmitResult{}, apperr.Invalid("%v", err)
+</span>        }
+        <span class="cov9" title="1517">m, err := money.Parse(in.Amount, in.Currency)
+        if err != nil </span>{
+                <span class="cov6" title="102">return SubmitResult{}, apperr.Invalid("%v", err)
+</span>        }
+        // UUID normalization avoids representation-dependent hashes and comparisons.
+        <span class="cov9" title="1415">player, err := uuid.Parse(in.PlayerID)
+        if err != nil </span>{
+                <span class="cov2" title="3">return SubmitResult{}, apperr.Invalid("invalid playerId")
+</span>        }
+        <span class="cov9" title="1412">wid, err := uuid.Parse(in.WalletID)
+        if err != nil </span>{
+                <span class="cov1" title="2">return SubmitResult{}, apperr.Invalid("invalid walletId")
+</span>        }
+        <span class="cov9" title="1410">in.PlayerID = player.String()
+        in.WalletID = wid.String()
+        hash := wager.PayloadHash(wager.HashInput{ProviderID: in.ProviderID, ExternalTransactionID: in.ExternalTransactionID, PlayerID: in.PlayerID, WalletID: in.WalletID, RoundID: in.RoundID, GameID: in.GameID, Kind: in.Kind, ReferenceExternalTransactionID: in.ReferenceExternalTransactionID, Amount: m.Amount(), Currency: m.Currency()})
+        t, err := wager.NewExternal(wager.ExternalParams{ID: u.ids.NewID(), ProviderID: in.ProviderID, ExternalID: in.ExternalTransactionID, IdempotencyKey: in.IdempotencyKey, PayloadHash: hash, WalletID: in.WalletID, PlayerID: in.PlayerID, RoundID: in.RoundID, GameID: in.GameID, Kind: k, Amount: m, ReferenceExternalID: in.ReferenceExternalTransactionID, CorrelationID: in.CorrelationID, CausationID: in.InboxMessageID}, u.clock.Now())
+        if err != nil </span>{
+                <span class="cov3" title="11">return SubmitResult{}, apperr.Invalid("%v", err)
+</span>        }
+        <span class="cov9" title="1399">var result SubmitResult
+        err = u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov9" title="1398">if in.Source == SourceSQS </span>{
+                        <span class="cov8" title="652">state, e := tx.Inbox().Begin(ctx, InboxConsumerName, in.InboxMessageID, in.InboxHash, u.clock.Now())
+                        if e != nil </span>{
+                                <span class="cov1" title="1">return e
+</span>                        }
+                        <span class="cov8" title="651">if state == port.InboxConflict </span>{
+                                <span class="cov1" title="2">return apperr.ErrMessageConflict
+</span>                        }
+                }
+                <span class="cov9" title="1395">existing, e := tx.Transactions().FindByIdempotencyKey(ctx, in.ProviderID, in.IdempotencyKey)
+                if e != nil &amp;&amp; !errors.Is(e, apperr.ErrNotFound) </span>{
+                        <span class="cov1" title="2">return e
+</span>                }
+                <span class="cov9" title="1393">if errors.Is(e, apperr.ErrNotFound) </span>{
+                        // Missing wallets are invalid requests: no impossible FK/audit row is committed.
+                        <span class="cov9" title="1171">if _, e = tx.Wallets().Get(ctx, in.WalletID); e != nil </span>{
+                                <span class="cov1" title="1">return e
+</span>                        }
+                        <span class="cov9" title="1170">inserted, e := tx.Transactions().InsertPending(ctx, t)
+                        if e != nil </span>{
+                                <span class="cov1" title="1">return e
+</span>                        }
+                        <span class="cov9" title="1169">if inserted </span>{
+                                <span class="cov9" title="1166">if e = u.process(ctx, tx, t); e != nil </span>{
+                                        <span class="cov5" title="43">return e
+</span>                                }
+                                <span class="cov9" title="1123">existing = t</span>
+                        } else {
+                                <span class="cov2" title="3">existing, e = tx.Transactions().FindByIdempotencyKey(ctx, in.ProviderID, in.IdempotencyKey)
+                                if errors.Is(e, apperr.ErrNotFound) </span>{
+                                        <span class="cov1" title="1">return apperr.ErrIdempotencyConflict
+</span>                                }
+                                <span class="cov1" title="2">if e != nil </span>{
+                                        <span class="cov1" title="1">return e
+</span>                                }
+                                <span class="cov1" title="1">result.IdempotentReplay = true</span>
+                        }
+                } else {
+                        <span class="cov7" title="222">result.IdempotentReplay = true
+</span>                }
+                <span class="cov9" title="1346">s := existing.Snapshot()
+                if s.PayloadHash != hash || s.IdempotencyKey != in.IdempotencyKey </span>{
+                        <span class="cov3" title="6">return apperr.ErrIdempotencyConflict
+</span>                }
+                <span class="cov9" title="1340">result.TransactionID = s.ID
+                result.Status = s.Status
+                result.Balance = s.BalanceAfter
+                result.FailureCode = s.FailureCode
+                if in.Source == SourceSQS </span>{
+                        <span class="cov8" title="627">return tx.Inbox().Complete(ctx, InboxConsumerName, in.InboxMessageID, u.clock.Now())
+</span>                }
+                <span class="cov9" title="713">return nil</span>
+        })
+        <span class="cov9" title="1399">if err == nil </span>{
+                <span class="cov9" title="1333">u.metrics.TxResult(in.Kind, string(result.Status))
+                if result.IdempotentReplay </span>{
+                        <span class="cov7" title="217">u.metrics.Duplicate(string(in.Source))
+</span>                }
+                <span class="cov9" title="1333">slog.InfoContext(ctx, "transaction handled", "correlationId", in.CorrelationID, "messageId", in.InboxMessageID, "transactionId", result.TransactionID, "walletId", in.WalletID, "providerId", in.ProviderID, "status", result.Status)</span>
+        }
+        <span class="cov9" title="1399">if err != nil </span>{
+                <span class="cov6" title="66">slog.WarnContext(ctx, "transaction handling failed", "correlationId", in.CorrelationID, "messageId", in.InboxMessageID, "transactionId", t.ID(), "walletId", in.WalletID, "providerId", in.ProviderID, "transient", apperr.IsTransient(err))
+</span>        }
+        <span class="cov9" title="1399">if apperr.IsTransient(err) </span>{
+                <span class="cov1" title="2">u.metrics.Retry("submit")
+</span>        }
+        <span class="cov9" title="1399">if errors.Is(err, apperr.ErrConcurrentModification) </span>{
+                <span class="cov1" title="1">u.metrics.ConcurrencyConflict()
+</span>        }
+        <span class="cov9" title="1399">return result, err</span>
+}
+
+// ---- GetTransaction -------------------------------------------------------
+
+// Scope restricts reads: providers only see their own transactions (inclusive replays).
+type Scope struct {
+        ProviderID string
+        Internal   bool
+}
+
+type TransactionView struct {
+        ID, ProviderID, ExternalTransactionID, WalletID string
+        Kind                                            wager.Kind
+        Status                                          wager.Status
+        Amount                                          money.Money
+        Balance                                         *money.Money
+        FailureCode                                     wager.FailureCode
+        NextAttemptAt                                   *time.Time
+}
+
+type GetTransaction struct{ uow port.UnitOfWork }
+
+func NewGetTransaction(uow port.UnitOfWork) *GetTransaction { <span class="cov3" title="9">return &amp;GetTransaction{uow} }</span>
+
+func (u *GetTransaction) ByID(ctx context.Context, id string, s Scope) (TransactionView, error) {
+        <span class="cov4" title="20">var out TransactionView
+        err := u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov4" title="20">t, e := tx.Transactions().FindByID(ctx, id)
+                if e != nil </span>{
+                        <span class="cov1" title="2">return e
+</span>                }
+                <span class="cov4" title="18">v := t.Snapshot()
+                if !s.Internal &amp;&amp; (s.ProviderID == "" || v.ProviderID != s.ProviderID) </span>{
+                        <span class="cov3" title="8">return apperr.ErrNotFound
+</span>                }
+                <span class="cov3" title="10">out = transactionView(t)
+                return nil</span>
+        })
+        <span class="cov4" title="20">return out, err</span>
+}
+
+func (u *GetTransaction) ByExternalID(ctx context.Context, providerID, externalID string, s Scope) (TransactionView, error) {
+        <span class="cov4" title="12">if !s.Internal &amp;&amp; (s.ProviderID == "" || providerID != s.ProviderID) </span>{
+                <span class="cov1" title="1">return TransactionView{}, apperr.ErrNotFound
+</span>        }
+        <span class="cov3" title="11">var out TransactionView
+        err := u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov3" title="11">t, e := tx.Transactions().FindByExternalID(ctx, providerID, externalID)
+                if e != nil </span>{
+                        <span class="cov1" title="2">return e
+</span>                }
+                <span class="cov3" title="9">out = transactionView(t)
+                return nil</span>
+        })
+        <span class="cov3" title="11">return out, err</span>
+}
+
+// ---- ConsumeWagerMessage (SQS entrypoint) ---------------------------------
+
+// WagerTransactionRequested mirrors the SQS message contract (see docs/CONTRACTS.md).
+type WagerTransactionRequested struct {
+        MessageID  string    `json:"messageId"`
+        Type       string    `json:"type"`
+        OccurredAt time.Time `json:"occurredAt"`
+        Data       struct {
+                ProviderID                     string `json:"providerId"`
+                ExternalTransactionID          string `json:"externalTransactionId"`
+                IdempotencyKey                 string `json:"idempotencyKey"`
+                PlayerID                       string `json:"playerId"`
+                WalletID                       string `json:"walletId"`
+                RoundID                        string `json:"roundId"`
+                GameID                         string `json:"gameId"`
+                Kind                           string `json:"kind"`
+                ReferenceExternalTransactionID string `json:"referenceExternalTransactionId,omitempty"`
+                Money                          struct {
+                        Amount   string `json:"amount"`
+                        Currency string `json:"currency"`
+                } `json:"money"`
+        } `json:"data"`
+}
+
+type ConsumeWagerMessage struct{ submit *SubmitTransaction }
+
+func NewConsumeWagerMessage(s *SubmitTransaction) *ConsumeWagerMessage {
+        <span class="cov3" title="6">return &amp;ConsumeWagerMessage{s}
+</span>}
+
+// Handle parses the envelope and delegates to SubmitTransaction (same use case as HTTP).
+// Invalid messages return apperr.ErrInvalidMessage (permanent → DLQ).
+func (u *ConsumeWagerMessage) Handle(ctx context.Context, body []byte) error {
+        <span class="cov4" title="12">var m WagerTransactionRequested
+        dec := json.NewDecoder(bytes.NewReader(body))
+        dec.DisallowUnknownFields()
+        dec.UseNumber()
+        if err := dec.Decode(&amp;m); err != nil </span>{
+                <span class="cov1" title="1">return fmt.Errorf("%w: %v", apperr.ErrInvalidMessage, err)
+</span>        }
+        <span class="cov3" title="11">if dec.Decode(new(any)) != io.EOF </span>{
+                <span class="cov1" title="1">return apperr.ErrInvalidMessage
+</span>        }
+        <span class="cov3" title="10">if m.OccurredAt.IsZero() </span>{
+                <span class="cov1" title="1">return apperr.ErrInvalidMessage
+</span>        }
+        <span class="cov3" title="9">if m.MessageID == "" || m.Type != "WagerTransactionRequested" || m.Data.IdempotencyKey == "" </span>{
+                <span class="cov2" title="4">return fmt.Errorf("%w: missing messageId/type/idempotencyKey", apperr.ErrInvalidMessage)
+</span>        }
+        <span class="cov2" title="5">sum := sha256.Sum256(body)
+        _, err := u.submit.Execute(ctx, SubmitInput{
+                Source:         SourceSQS,
+                IdempotencyKey: m.Data.IdempotencyKey,
+                CorrelationID:  m.MessageID,
+                ProviderID:     m.Data.ProviderID, ExternalTransactionID: m.Data.ExternalTransactionID,
+                PlayerID: m.Data.PlayerID, WalletID: m.Data.WalletID, RoundID: m.Data.RoundID, GameID: m.Data.GameID,
+                Kind: m.Data.Kind, ReferenceExternalTransactionID: m.Data.ReferenceExternalTransactionID,
+                Amount: m.Data.Money.Amount, Currency: m.Data.Money.Currency,
+                InboxMessageID: m.MessageID, InboxHash: hex.EncodeToString(sum[:]),
+        })
+        return err</span>
+}
+
+func transactionView(t *wager.Transaction) TransactionView {
+        <span class="cov4" title="19">s := t.Snapshot()
+        return TransactionView{s.ID, s.ProviderID, s.ExternalID, s.WalletID, s.Kind, s.Status, s.Amount, s.BalanceAfter, s.FailureCode, s.NextAttemptAt}
+</span>}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package usecase
+
+import (
+        "context"
+        "github.com/alexandre/wagering/internal/domain/wager"
+        "github.com/alexandre/wagering/internal/domain/wallet"
+        "github.com/google/uuid"
+        "log/slog"
+
+        "github.com/alexandre/wagering/internal/app/apperr"
+        "github.com/alexandre/wagering/internal/app/port"
+        "github.com/alexandre/wagering/internal/domain/money"
+)
+
+type WalletView struct {
+        ID, PlayerID string
+        Balance      money.Money
+        Version      int64
+}
+
+// ---- OpenWallet -----------------------------------------------------------
+
+type OpenWalletInput struct {
+        PlayerID       string
+        InitialBalance money.Money
+}
+
+type OpenWallet struct {
+        uow   port.UnitOfWork
+        clock port.Clock
+        ids   port.IDGenerator
+}
+
+func NewOpenWallet(uow port.UnitOfWork, clock port.Clock, ids port.IDGenerator) *OpenWallet {
+        <span class="cov10" title="223">return &amp;OpenWallet{uow, clock, ids}
+</span>}
+
+func (u *OpenWallet) Execute(ctx context.Context, in OpenWalletInput) (WalletView, error) {
+        <span class="cov9" title="221">player, err := uuid.Parse(in.PlayerID)
+        if err != nil </span>{
+                <span class="cov1" title="1">return WalletView{}, apperr.Invalid("invalid playerId")
+</span>        }
+        <span class="cov9" title="220">w, err := wallet.New(u.ids.NewID(), player.String(), in.InitialBalance, u.clock.Now())
+        if err != nil </span>{
+                <span class="cov1" title="1">return WalletView{}, apperr.Invalid("%v", err)
+</span>        }
+        <span class="cov9" title="219">err = u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov9" title="219">if err := tx.Wallets().Create(ctx, w); err != nil </span>{
+                        <span class="cov3" title="5">return err
+</span>                }
+                <span class="cov9" title="214">if !in.InitialBalance.IsPositive() </span>{
+                        <span class="cov3" title="4">return nil
+</span>                }
+                <span class="cov9" title="210">t, err := wager.NewOpening(u.ids.NewID(), w.ID(), w.PlayerID(), in.InitialBalance, u.clock.Now())
+                if err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov9" title="209">if err = tx.Transactions().Insert(ctx, t); err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                // wallet.New has already validated the currency.
+                <span class="cov9" title="208">zero, _ := money.Zero(w.Currency())
+                entry, err := wager.NewLedgerEntry(u.ids.NewID(), w.ID(), t.ID(), wager.Credit, in.InitialBalance, zero, u.clock.Now())
+                if err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov9" title="207">if err = tx.Ledger().Append(ctx, entry); err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov9" title="206">helper := SubmitTransaction{clock: u.clock, ids: u.ids}
+                if err = helper.processedEvent(ctx, tx, t); err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov9" title="205">return helper.balanceEvent(ctx, tx, t, entry, 1)</span>
+        })
+        <span class="cov9" title="219">return WalletView{w.ID(), w.PlayerID(), w.Balance(), w.Version()}, err</span>
+}
+
+// ---- GetWallet ------------------------------------------------------------
+
+type GetWallet struct{ uow port.UnitOfWork }
+
+func NewGetWallet(uow port.UnitOfWork) *GetWallet { <span class="cov4" title="8">return &amp;GetWallet{uow} }</span>
+
+func (u *GetWallet) Execute(ctx context.Context, walletID string) (WalletView, error) {
+        <span class="cov2" title="3">var v WalletView
+        err := u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov2" title="3">w, e := tx.Wallets().Get(ctx, walletID)
+                if e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov2" title="2">v = WalletView{w.ID(), w.PlayerID(), w.Balance(), w.Version()}
+                return nil</span>
+        })
+        <span class="cov2" title="3">return v, err</span>
+}
+
+// ---- ListLedger -----------------------------------------------------------
+
+type ListLedger struct{ uow port.UnitOfWork }
+
+func NewListLedger(uow port.UnitOfWork) *ListLedger { <span class="cov5" title="17">return &amp;ListLedger{uow} }</span>
+
+func (u *ListLedger) Execute(ctx context.Context, walletID, cursor string, limit int) (port.LedgerPage, error) {
+        <span class="cov4" title="7">var page port.LedgerPage
+        err := u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov4" title="7">if _, e := tx.Wallets().Get(ctx, walletID); e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov3" title="6">var e error
+                page, e = tx.Ledger().List(ctx, walletID, cursor, limit)
+                return e</span>
+        })
+        <span class="cov4" title="7">return page, err</span>
+}
+
+// ---- ReconcileWallet ------------------------------------------------------
+
+type ReconciliationResult struct {
+        WalletID                       string
+        Stored, Calculated, Difference money.Money
+        Consistent                     bool
+        CheckedEntries                 int64
+}
+
+type ReconcileWallet struct {
+        uow     port.UnitOfWork
+        metrics port.Metrics
+}
+
+func NewReconcileWallet(uow port.UnitOfWork, m port.Metrics) *ReconcileWallet {
+        <span class="cov6" title="26">return &amp;ReconcileWallet{uow, m}
+</span>}
+
+func (u *ReconcileWallet) Execute(ctx context.Context, walletID string) (ReconciliationResult, error) {
+        <span class="cov6" title="21">var out ReconciliationResult
+        err := u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov6" title="21">w, e := tx.Wallets().Get(ctx, walletID)
+                if e != nil </span>{
+                        <span class="cov2" title="2">return e
+</span>                }
+                <span class="cov5" title="19">totals, e := tx.Ledger().Totals(ctx, walletID)
+                if e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov5" title="18">diff, e := w.Balance().Sub(totals.Calculated)
+                if e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov5" title="17">out = ReconciliationResult{walletID, w.Balance(), totals.Calculated, diff, diff.IsZero(), totals.Entries}
+                return nil</span>
+        })
+        <span class="cov6" title="21">if err == nil &amp;&amp; !out.Consistent </span>{
+                <span class="cov2" title="2">u.metrics.ReconciliationDivergence()
+                slog.ErrorContext(ctx, "reconciliation divergence", "walletId", walletID)
+</span>        }
+        <span class="cov6" title="21">return out, err</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package usecase
+
+import (
+        "context"
+        "encoding/json"
+        "github.com/alexandre/wagering/internal/app/apperr"
+        "github.com/alexandre/wagering/internal/app/port"
+        "github.com/alexandre/wagering/internal/domain/event"
+        "github.com/alexandre/wagering/internal/domain/wager"
+        "github.com/alexandre/wagering/internal/platform/failpoint"
+        "log/slog"
+        "time"
+)
+
+const (
+        MaxReferenceAttempts = 8
+        BatchSize            = 20
+)
+
+func Backoff(attempt int) time.Duration { <span class="cov8" title="33">return time.Second &lt;&lt; min(max(attempt, 0), 6) }</span>
+
+type ProcessPendingReferences struct {
+        uow     port.UnitOfWork
+        clock   port.Clock
+        metrics port.Metrics
+        submit  *SubmitTransaction
+}
+
+func NewProcessPendingReferences(u port.UnitOfWork, c port.Clock, m port.Metrics, s *SubmitTransaction) *ProcessPendingReferences {
+        <span class="cov6" title="14">return &amp;ProcessPendingReferences{u, c, m, s}
+</span>}
+func (u *ProcessPendingReferences) RunOnce(ctx context.Context) (int, error) {
+        <span class="cov8" title="25">n := 0
+</span>        // One wallet/transaction per SQL transaction avoids cross-wallet lock cycles.
+        <span class="cov8" title="25">for n &lt; BatchSize &amp;&amp; ctx.Err() == nil </span>{
+                <span class="cov10" title="55">found := false
+                var acceptedID string
+                var outcome *wager.Transaction
+                err := u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                        <span class="cov10" title="55">rows, e := tx.Transactions().ClaimDue(ctx, u.clock.Now(), 1)
+                        if e != nil </span>{
+                                <span class="cov1" title="1">return e
+</span>                        }
+                        <span class="cov9" title="54">if len(rows) == 0 </span>{
+                                <span class="cov7" title="17">return nil
+</span>                        }
+                        <span class="cov9" title="37">found = true
+                        acceptedID = rows[0].ID()
+                        outcome = rows[0]
+                        return u.submit.process(ctx, tx, rows[0])</span>
+                })
+                <span class="cov10" title="55">if err != nil </span>{
+                        <span class="cov8" title="28">if outcome != nil </span>{
+                                <span class="cov8" title="27">s := outcome.Snapshot()
+                                slog.ErrorContext(ctx, "reference processing failed", "transactionId", s.ID, "walletId", s.WalletID, "providerId", s.ProviderID, "correlationId", s.CorrelationID, "messageId", s.CausationID, "err", err)
+</span>                        }
+                        <span class="cov8" title="28">if apperr.IsTransient(err) </span>{
+                                <span class="cov1" title="1">u.metrics.Retry("reference-infrastructure")
+</span>                        }
+                        <span class="cov8" title="28">if acceptedID != "" &amp;&amp; apperr.IsPermanent(err) </span>{
+                                <span class="cov8" title="26">recordedFailure := false
+                                failureErr := u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                                        <span class="cov8" title="26">t, e := tx.Transactions().FindByID(ctx, acceptedID)
+                                        if e != nil </span>{
+                                                <span class="cov1" title="1">return e
+</span>                                        }
+                                        <span class="cov8" title="25">if t.Status().IsTerminal() </span>{
+                                                <span class="cov1" title="1">return nil
+</span>                                        }
+                                        <span class="cov8" title="24">if e = t.Fail(wager.FailInternalPermanent, u.clock.Now()); e != nil </span>{
+                                                <span class="cov1" title="1">return e
+</span>                                        }
+                                        <span class="cov8" title="23">if e = tx.Transactions().Update(ctx, t); e != nil </span>{
+                                                <span class="cov1" title="1">return e
+</span>                                        }
+                                        <span class="cov7" title="22">recordedFailure = true
+                                        return nil</span>
+                                })
+                                <span class="cov8" title="26">if failureErr != nil </span>{
+                                        <span class="cov3" title="3">return n, failureErr
+</span>                                }
+                                <span class="cov8" title="23">if recordedFailure </span>{
+                                        <span class="cov7" title="22">slog.ErrorContext(ctx, "accepted operation failed permanently", "transactionId", acceptedID)
+                                        u.metrics.TxResult(string(outcome.Kind()), "FAILED")
+</span>                                }
+                                <span class="cov8" title="23">n++
+                                continue</span>
+                        }
+                        <span class="cov2" title="2">return n, err</span>
+                }
+                <span class="cov8" title="27">if !found </span>{
+                        <span class="cov7" title="17">break</span>
+                }
+                <span class="cov6" title="10">n++
+                u.metrics.TxResult(string(outcome.Kind()), string(outcome.Status()))
+                u.metrics.Retry("reference")</span>
+        }
+        <span class="cov7" title="20">return n, ctx.Err()</span>
+}
+
+type PublishOutbox struct {
+        uow     port.UnitOfWork
+        pub     port.EventPublisher
+        clock   port.Clock
+        metrics port.Metrics
+}
+
+func NewPublishOutbox(u port.UnitOfWork, p port.EventPublisher, c port.Clock, m port.Metrics) *PublishOutbox {
+        <span class="cov5" title="8">return &amp;PublishOutbox{u, p, c, m}
+</span>}
+func (u *PublishOutbox) RunOnce(ctx context.Context) (int, error) {
+        <span class="cov5" title="8">const outboxLease = 30 * time.Second
+        var events []event.Outgoing
+        err := u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov5" title="8">var e error
+                events, e = tx.Outbox().ClaimBatch(ctx, u.clock.Now(), 1, outboxLease)
+                return e
+</span>        })
+        <span class="cov5" title="8">if err != nil </span>{
+                <span class="cov1" title="1">return 0, err
+</span>        }
+        <span class="cov5" title="7">for _, ev := range events </span>{
+                <span class="cov5" title="6">var ids struct {
+                        CorrelationID string `json:"correlationId"`
+                        CausationID   string `json:"causationId"`
+                        Data          struct {
+                                TransactionID string `json:"transactionId"`
+                                ProviderID    string `json:"providerId"`
+                        } `json:"data"`
+</span>                }
+                <span class="cov5" title="6">_ = json.Unmarshal(ev.Payload(), &amp;ids)
+                log := slog.Default().With("eventId", ev.EventID(), "walletId", ev.AggregateID(), "transactionId", ids.Data.TransactionID, "providerId", ids.Data.ProviderID, "correlationId", ids.CorrelationID, "messageId", ids.CausationID, "attempt", ev.Attempts())
+                sendCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
+                sendErr := u.pub.Publish(sendCtx, ev)
+                if failpoint.Enabled &amp;&amp; sendErr == nil </span>{
+                        <span class="cov4" title="4">failpoint.Hit("after_publish_before_mark")
+</span>                }
+                <span class="cov4" title="5">cancel()
+                if sendErr != nil </span>{
+                        <span class="cov2" title="2">log.Warn("event publication failed", "err", sendErr)
+</span>                }
+                <span class="cov4" title="5">err = u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                        <span class="cov4" title="5">if sendErr != nil </span>{
+                                <span class="cov2" title="2">u.metrics.Retry("outbox")
+                                return tx.Outbox().Reschedule(ctx, ev.EventID(), ev.Attempts(), u.clock.Now().Add(Backoff(ev.Attempts())))
+</span>                        }
+                        <span class="cov3" title="3">return tx.Outbox().MarkPublished(ctx, ev.EventID(), ev.Attempts(), u.clock.Now())</span>
+                })
+                <span class="cov4" title="5">if err != nil </span>{
+                        <span class="cov2" title="2">log.Error("event publication confirmation failed", "err", err)
+                        return 0, err
+</span>                }
+                <span class="cov3" title="3">if sendErr == nil </span>{
+                        <span class="cov2" title="2">log.Info("event published")
+</span>                }
+        }
+        // Include delayed/leased work, and clear the gauge when the backlog is empty.
+        <span class="cov4" title="4">err = u.uow.DoSnapshot(ctx, func(ctx context.Context, tx port.Tx) error </span>{
+                <span class="cov4" title="4">oldest, e := tx.Outbox().OldestPending(ctx)
+                if e != nil </span>{
+                        <span class="cov1" title="1">return e
+</span>                }
+                <span class="cov3" title="3">lag := time.Duration(0)
+                if oldest != nil </span>{
+                        <span class="cov1" title="1">lag = max(time.Duration(0), u.clock.Now().Sub(*oldest))
+</span>                }
+                <span class="cov3" title="3">u.metrics.OutboxLag(lag)
+                return nil</span>
+        })
+        <span class="cov4" title="4">return len(events), err</span>
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">// Package event defines the integration event envelope, typed payloads and constructors.
+// Type and version are fixed by the constructors.
+package event
+
+import (
+        "encoding/json"
+        "time"
+
+        "github.com/alexandre/wagering/internal/domain/money"
+)
+
+const (
+        TypeWagerTransactionProcessed        = "WagerTransactionProcessed"
+        TypeWagerTransactionRejected         = "WagerTransactionRejected"
+        TypeWalletBalanceChanged             = "WalletBalanceChanged"
+        TypeWagerTransactionPendingReference = "WagerTransactionPendingReference"
+)
+
+type Envelope[T any] struct {
+        EventID       string    `json:"eventId"`
+        EventType     string    `json:"eventType"`
+        AggregateID   string    `json:"aggregateId"`
+        CorrelationID string    `json:"correlationId"`
+        CausationID   string    `json:"causationId,omitempty"`
+        OccurredAt    time.Time `json:"occurredAt"`
+        Version       int       `json:"version"`
+        Data          T         `json:"data"`
+}
+
+type MoneyDTO struct {
+        Amount   string `json:"amount"`
+        Currency string `json:"currency"`
+}
+
+func ToMoneyDTO(m money.Money) MoneyDTO { <span class="cov7" title="2896">return MoneyDTO{m.Amount(), m.Currency()} }</span>
+
+// Meta is what the application layer supplies; the constructors add type/version.
+type Meta struct {
+        EventID, AggregateID, CorrelationID, CausationID string
+        OccurredAt                                       time.Time
+}
+
+// Outgoing is the immutable outbox snapshot of an event (payload = serialized envelope).
+type Outgoing struct {
+        eventID, aggregateID, typ, payload string
+        version, attempts                  int
+        occurredAt                         time.Time
+}
+
+func (e Outgoing) EventID() string       { <span class="cov9" title="54253">return e.eventID }</span>
+func (e Outgoing) AggregateID() string   { <span class="cov3" title="25">return e.aggregateID }</span>
+func (e Outgoing) Type() string          { <span class="cov9" title="54259">return e.typ }</span>
+func (e Outgoing) Version() int          { <span class="cov2" title="4">return e.version }</span>
+func (e Outgoing) Attempts() int         { <span class="cov3" title="18">return e.attempts }</span>
+func (e Outgoing) OccurredAt() time.Time { <span class="cov3" title="22">return e.occurredAt }</span>
+func (e Outgoing) Payload() []byte       { <span class="cov10" title="54294">return []byte(e.payload) }</span>
+
+func newEnvelope[T any](m Meta, typ string, data T) Envelope[T] {
+        <span class="cov7" title="2060">return Envelope[T]{m.EventID, typ, m.AggregateID, m.CorrelationID, m.CausationID, m.OccurredAt.UTC(), 1, data}
+</span>}
+
+func (e Envelope[T]) ToOutgoing() (Outgoing, error) {
+        <span class="cov7" title="2084">if err := validate(e.EventID, e.AggregateID, e.CorrelationID, e.EventType, e.Version, e.OccurredAt, e.Data); err != nil </span>{
+                <span class="cov4" title="51">return Outgoing{}, err
+</span>        }
+        <span class="cov7" title="2033">b, err := json.Marshal(e)
+        if err != nil </span>{
+                <span class="cov1" title="1">return Outgoing{}, err
+</span>        }
+        <span class="cov7" title="2032">return Outgoing{eventID: e.EventID, aggregateID: e.AggregateID, typ: e.EventType, version: e.Version, occurredAt: e.OccurredAt.UTC(), payload: string(b)}, nil</span>
+}
+
+// ---- Payloads -------------------------------------------------------------
+
+type ProcessedData struct {
+        TransactionID         string   `json:"transactionId"`
+        Kind                  string   `json:"kind"`
+        WalletID              string   `json:"walletId"`
+        PlayerID              string   `json:"playerId"`
+        ProviderID            string   `json:"providerId,omitempty"`
+        ExternalTransactionID string   `json:"externalTransactionId,omitempty"`
+        RoundID               string   `json:"roundId,omitempty"`
+        Money                 MoneyDTO `json:"money"`
+}
+
+type RejectedData struct {
+        TransactionID         string `json:"transactionId"`
+        Kind                  string `json:"kind"`
+        WalletID              string `json:"walletId"`
+        ProviderID            string `json:"providerId"`
+        ExternalTransactionID string `json:"externalTransactionId"`
+        FailureCode           string `json:"failureCode"`
+}
+
+type BalanceChangedData struct {
+        WalletID      string   `json:"walletId"`
+        TransactionID string   `json:"transactionId"`
+        Direction     string   `json:"direction"`
+        Money         MoneyDTO `json:"money"`
+        BalanceBefore MoneyDTO `json:"balanceBefore"`
+        BalanceAfter  MoneyDTO `json:"balanceAfter"`
+        WalletVersion int64    `json:"walletVersion"`
+}
+
+type PendingReferenceData struct {
+        TransactionID                  string    `json:"transactionId"`
+        ProviderID                     string    `json:"providerId"`
+        ExternalTransactionID          string    `json:"externalTransactionId"`
+        ReferenceExternalTransactionID string    `json:"referenceExternalTransactionId"`
+        NextAttemptAt                  time.Time `json:"nextAttemptAt"`
+        ExpiresAt                      time.Time `json:"expiresAt"`
+}
+
+// ---- Constructors ---------------------------------------------------------
+
+func NewProcessed(m Meta, d ProcessedData) Envelope[ProcessedData] {
+        <span class="cov6" title="884">return newEnvelope(m, TypeWagerTransactionProcessed, d)
+</span>}
+func NewRejected(m Meta, d RejectedData) Envelope[RejectedData] {
+        <span class="cov6" title="461">return newEnvelope(m, TypeWagerTransactionRejected, d)
+</span>}
+func NewBalanceChanged(m Meta, d BalanceChangedData) Envelope[BalanceChangedData] {
+        <span class="cov6" title="689">return newEnvelope(m, TypeWalletBalanceChanged, d)
+</span>}
+func NewPendingReference(m Meta, d PendingReferenceData) Envelope[PendingReferenceData] {
+        <span class="cov3" title="26">return newEnvelope(m, TypeWagerTransactionPendingReference, d)
+</span>}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package event
+
+import (
+        "encoding/json"
+        "errors"
+        "fmt"
+        "github.com/alexandre/wagering/internal/domain/money"
+        "time"
+)
+
+var ErrInvalidEvent = errors.New("invalid integration event")
+
+func invalidEvent(reason string) error { <span class="cov5" title="62">return fmt.Errorf("%w: %s", ErrInvalidEvent, reason) }</span>
+func exactMoney(d MoneyDTO) (money.Money, error) {
+        <span class="cov10" title="2938">m, err := money.Parse(d.Amount, d.Currency)
+        if err != nil || m.Amount() != d.Amount || m.IsNegative() </span>{
+                <span class="cov3" title="7">return money.Money{}, invalidEvent("noncanonical money")
+</span>        }
+        <span class="cov9" title="2931">return m, nil</span>
+}
+func externalKind(k string) bool {
+        <span class="cov8" title="1138">return k == "BET" || k == "WIN" || k == "LOSS" || k == "REFUND" || k == "ROLLBACK"
+</span>}
+func validate(id, aggregate, correlation, typ string, version int, occurred time.Time, data any) error {
+        <span class="cov9" title="2094">if id == "" || aggregate == "" || correlation == "" || version != 1 || occurred.IsZero() </span>{
+                <span class="cov2" title="5">return invalidEvent("envelope metadata")
+</span>        }
+        <span class="cov9" title="2089">switch d := data.(type) </span>{
+        case ProcessedData:
+                <span class="cov8" title="892">if typ != TypeWagerTransactionProcessed || d.TransactionID == "" || d.WalletID != aggregate || d.PlayerID == "" </span>{
+                        <span class="cov2" title="5">return invalidEvent("processed identity")
+</span>                }
+                <span class="cov8" title="887">m, err := exactMoney(d.Money)
+                if err != nil </span>{
+                        <span class="cov2" title="4">return err
+</span>                }
+                <span class="cov8" title="883">if d.Kind == "OPENING" </span>{
+                        <span class="cov7" title="212">if d.ProviderID != "" || d.ExternalTransactionID != "" || d.RoundID != "" || !m.IsPositive() </span>{
+                                <span class="cov1" title="1">return invalidEvent("opening metadata")
+</span>                        }
+                } else <span class="cov8" title="671">if !externalKind(d.Kind) || d.ProviderID == "" || d.ExternalTransactionID == "" || d.RoundID == "" || (d.Kind == "LOSS" &amp;&amp; m.Minor() != 0) || (d.Kind != "LOSS" &amp;&amp; !m.IsPositive()) </span>{
+                        <span class="cov2" title="5">return invalidEvent("external processed fact")
+</span>                }
+        case RejectedData:
+                <span class="cov7" title="471">if typ != TypeWagerTransactionRejected || d.TransactionID == "" || d.WalletID != aggregate || !externalKind(d.Kind) || d.ProviderID == "" || d.ExternalTransactionID == "" || d.FailureCode == "" </span>{
+                        <span class="cov3" title="9">return invalidEvent("rejected fact")
+</span>                }
+        case BalanceChangedData:
+                <span class="cov8" title="690">if typ != TypeWalletBalanceChanged || d.TransactionID == "" || d.WalletID != aggregate || d.WalletVersion &lt; 1 </span>{
+                        <span class="cov2" title="4">return invalidEvent("balance identity")
+</span>                }
+                <span class="cov8" title="686">m, err := exactMoney(d.Money)
+                if err != nil || !m.IsPositive() </span>{
+                        <span class="cov2" title="3">return invalidEvent("movement amount")
+</span>                }
+                <span class="cov8" title="683">before, err := exactMoney(d.BalanceBefore)
+                if err != nil </span>{
+                        <span class="cov1" title="1">return err
+</span>                }
+                <span class="cov8" title="682">after, err := exactMoney(d.BalanceAfter)
+                if err != nil </span>{
+                        <span class="cov1" title="2">return err
+</span>                }
+                <span class="cov8" title="680">var expected money.Money
+                switch d.Direction </span>{
+                case "CREDIT":
+                        <span class="cov7" title="435">expected, err = before.Add(m)</span>
+                case "DEBIT":
+                        <span class="cov7" title="243">expected, err = before.Sub(m)</span>
+                default:
+                        <span class="cov1" title="2">return invalidEvent("direction")</span>
+                }
+                <span class="cov8" title="678">if err != nil || expected.Currency() != after.Currency() || expected.Minor() != after.Minor() </span>{
+                        <span class="cov1" title="2">return invalidEvent("balance equation")
+</span>                }
+        case PendingReferenceData:
+                <span class="cov5" title="35">if typ != TypeWagerTransactionPendingReference || d.TransactionID == "" || d.ProviderID == "" || d.ExternalTransactionID == "" || d.ReferenceExternalTransactionID == "" || !d.NextAttemptAt.After(occurred) || !d.ExpiresAt.After(occurred) </span>{
+                        <span class="cov3" title="8">return invalidEvent("pending reference fact")
+</span>                }
+        default:
+                <span class="cov1" title="1">return invalidEvent("unknown payload type")</span>
+        }
+        <span class="cov9" title="2042">return nil</span>
+}
+
+// RehydrateOutgoing validates the stored snapshot without creating a new fact.
+// PostgreSQL timestamps have microsecond precision; the JSON keeps the original instant.
+func RehydrateOutgoing(id, aggregate, typ string, payload []byte, occurred time.Time, attempts int) (Outgoing, error) {
+        <span class="cov4" title="20">var e Envelope[json.RawMessage]
+        if err := json.Unmarshal(payload, &amp;e); err != nil </span>{
+                <span class="cov1" title="2">return Outgoing{}, invalidEvent("stored JSON")
+</span>        }
+        <span class="cov4" title="18">if attempts &lt; 0 || id != e.EventID || aggregate != e.AggregateID || typ != e.EventType || !occurred.Truncate(time.Microsecond).Equal(e.OccurredAt.Truncate(time.Microsecond)) </span>{
+                <span class="cov3" title="6">return Outgoing{}, invalidEvent("stored metadata mismatch")
+</span>        }
+        <span class="cov3" title="12">var data any
+        switch typ </span>{
+        case TypeWagerTransactionProcessed:
+                <span class="cov2" title="4">data = &amp;ProcessedData{}</span>
+        case TypeWagerTransactionRejected:
+                <span class="cov2" title="4">data = &amp;RejectedData{}</span>
+        case TypeWalletBalanceChanged:
+                <span class="cov1" title="1">data = &amp;BalanceChangedData{}</span>
+        case TypeWagerTransactionPendingReference:
+                <span class="cov1" title="2">data = &amp;PendingReferenceData{}</span>
+        default:
+                <span class="cov1" title="1">return Outgoing{}, invalidEvent("stored type")</span>
+        }
+        <span class="cov3" title="11">if err := json.Unmarshal(e.Data, data); err != nil </span>{
+                <span class="cov1" title="1">return Outgoing{}, invalidEvent("stored payload")
+</span>        }
+        <span class="cov3" title="10">switch d := data.(type) </span>{
+        case *ProcessedData:
+                <span class="cov2" title="3">data = *d</span>
+        case *RejectedData:
+                <span class="cov2" title="4">data = *d</span>
+        case *BalanceChangedData:
+                <span class="cov1" title="1">data = *d</span>
+        case *PendingReferenceData:
+                <span class="cov1" title="2">data = *d</span>
+        }
+        <span class="cov3" title="10">if err := validate(e.EventID, e.AggregateID, e.CorrelationID, e.EventType, e.Version, e.OccurredAt, data); err != nil </span>{
+                <span class="cov1" title="1">return Outgoing{}, err
+</span>        }
+        <span class="cov3" title="9">return Outgoing{eventID: id, aggregateID: aggregate, typ: typ, payload: string(payload), version: e.Version, attempts: attempts, occurredAt: e.OccurredAt.UTC()}, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">// Package money implements an immutable Money value object backed by int64
+// minor units (scale fixed at 2). Range: -92_233_720_368_547_758.08 through +92_233_720_368_547_758.07.
+package money
+
+import (
+        "encoding/json"
+        "errors"
+        "fmt"
+        "math"
+        "regexp"
+        "strconv"
+)
+
+var (
+        ErrInvalidAmount    = errors.New("money: invalid amount")
+        ErrInvalidCurrency  = errors.New("money: invalid currency")
+        ErrCurrencyMismatch = errors.New("money: currency mismatch")
+        ErrOverflow         = errors.New("money: overflow")
+        ErrUninitialized    = errors.New("money: uninitialized value")
+        amountRe            = regexp.MustCompile(`^\d+\.\d{2}$`)
+        currencyRe          = regexp.MustCompile(`^[A-Z]{3}$`)
+)
+
+type Money struct {
+        minor    int64
+        currency string
+}
+
+func FromMinor(minor int64, currency string) (Money, error) {
+        <span class="cov8" title="7754">if currency != "BRL" &amp;&amp; currency != "USD" &amp;&amp; currency != "EUR" </span>{
+                <span class="cov3" title="12">return Money{}, ErrInvalidCurrency
+</span>        }
+        <span class="cov8" title="7742">return Money{minor: minor, currency: currency}, nil</span>
+}
+
+func Zero(currency string) (Money, error) { <span class="cov5" title="224">return FromMinor(0, currency) }</span>
+
+// Parse accepts only non-negative "NN.NN" strings (external financial input).
+func Parse(amount, currency string) (Money, error) {
+        <span class="cov7" title="4549">if !amountRe.MatchString(amount) </span>{
+                <span class="cov4" title="120">return Money{}, fmt.Errorf("%w: %q", ErrInvalidAmount, amount)
+</span>        }
+        <span class="cov7" title="4429">digits := amount[:len(amount)-3] + amount[len(amount)-2:]
+        v, err := strconv.ParseInt(digits, 10, 64)
+        if err != nil </span>{
+                <span class="cov3" title="13">return Money{}, fmt.Errorf("%w: %v", ErrOverflow, err)
+</span>        }
+        <span class="cov7" title="4416">return FromMinor(v, currency)</span>
+}
+
+func (m Money) Minor() int64     { <span class="cov10" title="50935">return m.minor }</span>
+func (m Money) Currency() string { <span class="cov9" title="21419">return m.currency }</span>
+func (m Money) IsZero() bool     { <span class="cov5" title="391">return m.minor == 0 }</span>
+func (m Money) IsPositive() bool { <span class="cov8" title="5100">return m.minor &gt; 0 }</span>
+func (m Money) IsNegative() bool { <span class="cov8" title="8163">return m.minor &lt; 0 }</span>
+func (m Money) valid() bool      { <span class="cov8" title="7210">return m.currency != "" }</span>
+
+func (m Money) Add(o Money) (Money, error) {
+        <span class="cov7" title="1769">if err := m.compatible(o); err != nil </span>{
+                <span class="cov2" title="7">return Money{}, err
+</span>        }
+        <span class="cov7" title="1762">if (o.minor &gt; 0 &amp;&amp; m.minor &gt; math.MaxInt64-o.minor) || (o.minor &lt; 0 &amp;&amp; m.minor &lt; math.MinInt64-o.minor) </span>{
+                <span class="cov5" title="150">return Money{}, ErrOverflow
+</span>        }
+        <span class="cov7" title="1612">return Money{m.minor + o.minor, m.currency}, nil</span>
+}
+
+func (m Money) Neg() (Money, error) {
+        <span class="cov4" title="65">if !m.valid() </span>{
+                <span class="cov1" title="1">return Money{}, ErrUninitialized
+</span>        }
+        <span class="cov4" title="64">if m.minor == math.MinInt64 </span>{
+                <span class="cov2" title="4">return Money{}, ErrOverflow
+</span>        }
+        <span class="cov4" title="60">return Money{-m.minor, m.currency}, nil</span>
+}
+
+func (m Money) Sub(o Money) (Money, error) {
+        <span class="cov7" title="1386">if err := m.compatible(o); err != nil </span>{
+                <span class="cov2" title="6">return Money{}, err
+</span>        }
+        <span class="cov7" title="1380">if (o.minor &gt; 0 &amp;&amp; m.minor &lt; math.MinInt64+o.minor) || (o.minor &lt; 0 &amp;&amp; m.minor &gt; math.MaxInt64+o.minor) </span>{
+                <span class="cov5" title="150">return Money{}, ErrOverflow
+</span>        }
+        <span class="cov6" title="1230">return Money{m.minor - o.minor, m.currency}, nil</span>
+}
+
+func (m Money) Cmp(o Money) (int, error) {
+        <span class="cov5" title="399">if err := m.compatible(o); err != nil </span>{
+                <span class="cov3" title="13">return 0, err
+</span>        }
+        <span class="cov5" title="386">if m.minor &lt; o.minor </span>{
+                <span class="cov5" title="172">return -1, nil
+</span>        }
+        <span class="cov5" title="214">if m.minor &gt; o.minor </span>{
+                <span class="cov5" title="172">return 1, nil
+</span>        }
+        <span class="cov4" title="42">return 0, nil</span>
+}
+
+func (m Money) compatible(o Money) error {
+        <span class="cov7" title="3554">if !m.valid() || !o.valid() </span>{
+                <span class="cov3" title="12">return ErrUninitialized
+</span>        }
+        <span class="cov7" title="3542">if m.currency != o.currency </span>{
+                <span class="cov3" title="14">return ErrCurrencyMismatch
+</span>        }
+        <span class="cov7" title="3528">return nil</span>
+}
+
+// Amount renders the fixed-scale decimal string (e.g. "25.00", "-0.05").
+func (m Money) Amount() string {
+        <span class="cov8" title="9025">u, sign := uint64(m.minor), ""
+        if m.minor &lt; 0 </span>{
+                <span class="cov3" title="16">sign = "-"
+                u = ^u + 1 // valor absoluto, seguro inclusive para MinInt64
+</span>        }
+        <span class="cov8" title="9025">return fmt.Sprintf("%s%d.%02d", sign, u/100, u%100)</span>
+}
+
+func (m Money) MarshalJSON() ([]byte, error) {
+        <span class="cov4" title="42">if !m.valid() </span>{
+                <span class="cov1" title="2">return nil, ErrUninitialized
+</span>        }
+        <span class="cov4" title="40">return json.Marshal(struct {
+                Amount   string `json:"amount"`
+                Currency string `json:"currency"`
+        }{m.Amount(), m.Currency()})</span>
+}
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package wager
+
+import (
+        "errors"
+        "fmt"
+)
+
+// FailureCode is a stable, documented code persisted in REJECTED/FAILED transactions.
+type FailureCode string
+
+const (
+        FailInvalidInput              FailureCode = "INVALID_INPUT"
+        FailWalletNotFound            FailureCode = "WALLET_NOT_FOUND"
+        FailCurrencyMismatch          FailureCode = "CURRENCY_MISMATCH"
+        FailInsufficientFunds         FailureCode = "INSUFFICIENT_FUNDS"          // BET without balance
+        FailReversalInsufficientFunds FailureCode = "REVERSAL_INSUFFICIENT_FUNDS" // ROLLBACK/REFUND needing more than available
+        FailReferenceNotFound         FailureCode = "REFERENCE_NOT_FOUND"         // attempts/TTL exhausted
+        FailReferenceNotProcessed     FailureCode = "REFERENCE_NOT_PROCESSED"     // reference exists but ended REJECTED/FAILED
+        FailReferenceMismatch         FailureCode = "REFERENCE_MISMATCH"          // provider/player/wallet/currency/round differ
+        FailReversalAmountMismatch    FailureCode = "REVERSAL_AMOUNT_MISMATCH"
+        FailInvalidReferenceKind      FailureCode = "INVALID_REFERENCE_KIND"
+        FailAlreadyReversed           FailureCode = "ALREADY_REVERSED"
+        FailConflictingReversal       FailureCode = "CONFLICTING_REVERSAL" // REFUND x ROLLBACK on same bet (see ARCHITECTURE.md)
+        FailInternalPermanent         FailureCode = "INTERNAL_PERMANENT_ERROR"
+)
+
+type DomainError struct {
+        Code FailureCode
+        Msg  string
+}
+
+func (e *DomainError) Error() string { <span class="cov10" title="160">return string(e.Code) + ": " + e.Msg }</span>
+
+// Is compares by code so wrapped errors match sentinels via errors.Is.
+func (e *DomainError) Is(target error) bool {
+        <span class="cov2" title="2">t, ok := target.(*DomainError)
+        return ok &amp;&amp; t.Code == e.Code
+</span>}
+
+func newErr(c FailureCode, msg string) *DomainError { <span class="cov8" title="90">return &amp;DomainError{c, msg} }</span>
+
+var (
+        ErrInvalidInput           = newErr(FailInvalidInput, "invalid input")
+        ErrInsufficientFunds      = newErr(FailInsufficientFunds, "insufficient funds")
+        ErrReversalInsufficient   = newErr(FailReversalInsufficientFunds, "insufficient funds to reverse")
+        ErrReferenceNotFound      = newErr(FailReferenceNotFound, "reference not found")
+        ErrReferenceNotProcessed  = newErr(FailReferenceNotProcessed, "reference not processed")
+        ErrReferenceMismatch      = newErr(FailReferenceMismatch, "reference mismatch")
+        ErrReversalAmountMismatch = newErr(FailReversalAmountMismatch, "reversal amount mismatch")
+        ErrInvalidReferenceKind   = newErr(FailInvalidReferenceKind, "invalid reference kind")
+        ErrAlreadyReversed        = newErr(FailAlreadyReversed, "already reversed")
+        ErrConflictingReversal    = newErr(FailConflictingReversal, "conflicting reversal")
+
+        ErrTerminalState = errors.New("wager: transaction is in a terminal state")
+)
+
+// CodeOf extracts the failure code of a (possibly wrapped) DomainError.
+func CodeOf(err error) (FailureCode, bool) {
+        <span class="cov2" title="2">var d *DomainError
+        if errors.As(err, &amp;d) </span>{
+                <span class="cov1" title="1">return d.Code, true
+</span>        }
+        <span class="cov1" title="1">return "", false</span>
+}
+
+func invalid(format string, a ...any) error {
+        <span class="cov9" title="159">return fmt.Errorf("%w: %s", ErrInvalidInput, fmt.Sprintf(format, a...))
+</span>}
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package wager
+
+import (
+        "time"
+
+        "github.com/alexandre/wagering/internal/domain/money"
+)
+
+// LedgerEntry is immutable; construction validates balanceAfter = balanceBefore ± amount.
+type LedgerEntry struct {
+        id, walletID, transactionID string
+        direction                   Direction
+        amount, before, after       money.Money
+        createdAt                   time.Time
+}
+
+func NewLedgerEntry(id, walletID, txID string, dir Direction, amount, before money.Money, now time.Time) (LedgerEntry, error) {
+        <span class="cov6" title="738">if now.IsZero() || before.IsNegative() || id == "" || walletID == "" || txID == "" </span>{
+                <span class="cov2" title="8">return LedgerEntry{}, invalid("ledger entry ids are required")
+</span>        }
+        <span class="cov6" title="730">if !amount.IsPositive() </span>{
+                <span class="cov1" title="2">return LedgerEntry{}, invalid("ledger amount must be positive")
+</span>        }
+        <span class="cov6" title="728">var (
+                after money.Money
+                err   error
+        )
+        switch dir </span>{
+        case Debit:
+                <span class="cov5" title="258">after, err = before.Sub(amount)</span>
+        case Credit:
+                <span class="cov6" title="469">after, err = before.Add(amount)</span>
+        default:
+                <span class="cov1" title="1">return LedgerEntry{}, invalid("unknown direction %q", dir)</span>
+        }
+        <span class="cov6" title="727">if err != nil </span>{
+                <span class="cov1" title="3">return LedgerEntry{}, err
+</span>        }
+        <span class="cov6" title="724">if after.IsNegative() </span>{
+                <span class="cov1" title="1">return LedgerEntry{}, ErrInsufficientFunds
+</span>        }
+        <span class="cov6" title="723">return LedgerEntry{id, walletID, txID, dir, amount, before, after, now}, nil</span>
+}
+
+// RehydrateLedgerEntry validates the stored math instead of trusting it.
+func RehydrateLedgerEntry(id, walletID, txID string, dir Direction, amount, before, after money.Money, at time.Time) (LedgerEntry, error) {
+        <span class="cov3" title="26">e, err := NewLedgerEntry(id, walletID, txID, dir, amount, before, at)
+        if err != nil </span>{
+                <span class="cov1" title="1">return LedgerEntry{}, err
+</span>        }
+        <span class="cov3" title="25">if c, err := e.after.Cmp(after); err != nil || c != 0 </span>{
+                <span class="cov3" title="17">return LedgerEntry{}, invalid("ledger entry %s has inconsistent balances", id)
+</span>        }
+        <span class="cov2" title="8">return e, nil</span>
+}
+
+func (e LedgerEntry) ID() string                 { <span class="cov3" title="31">return e.id }</span>
+func (e LedgerEntry) WalletID() string           { <span class="cov9" title="29091">return e.walletID }</span>
+func (e LedgerEntry) TransactionID() string      { <span class="cov10" title="50822">return e.transactionID }</span>
+func (e LedgerEntry) Direction() Direction       { <span class="cov9" title="29765">return e.direction }</span>
+func (e LedgerEntry) Amount() money.Money        { <span class="cov9" title="30137">return e.amount }</span>
+func (e LedgerEntry) BalanceBefore() money.Money { <span class="cov9" title="15247">return e.before }</span>
+func (e LedgerEntry) BalanceAfter() money.Money  { <span class="cov9" title="29415">return e.after }</span>
+func (e LedgerEntry) CreatedAt() time.Time       { <span class="cov8" title="14188">return e.createdAt }</span>
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package wager
+
+import (
+        "crypto/sha256"
+        "encoding/hex"
+        "encoding/json"
+
+        "github.com/alexandre/wagering/internal/domain/money"
+)
+
+// MovementFor returns the wallet movement of a non-reversal kind (ok=false → no movement, e.g. LOSS).
+func MovementFor(k Kind) (dir Direction, ok bool) {
+        <span class="cov9" title="1249">switch k </span>{
+        case KindBet:
+                <span class="cov7" title="328">return Debit, true</span>
+        case KindWin, KindRefund, KindOpening:
+                <span class="cov8" title="489">return Credit, true</span>
+        }
+        <span class="cov8" title="432">return "", false</span>
+}
+
+// CanReference reports whether op may reference a processed transaction of kind ref.
+func CanReference(op, ref Kind) bool {
+        <span class="cov8" title="526">switch op </span>{
+        case KindRefund:
+                <span class="cov7" title="218">return ref == KindBet</span>
+        case KindRollback:
+                <span class="cov7" title="221">return ref == KindBet || ref == KindWin || ref == KindRefund</span>
+        case KindWin:
+                <span class="cov6" title="86">return ref == KindBet</span>
+        }
+        <span class="cov1" title="1">return false</span>
+}
+
+// ReversalDirection is the opposite of the original movement (used by ROLLBACK).
+func ReversalDirection(original Kind) (Direction, error) {
+        <span class="cov5" title="70">d, ok := MovementFor(original)
+        if !ok || original == KindOpening </span>{
+                <span class="cov1" title="1">return "", ErrInvalidReferenceKind
+</span>        }
+        <span class="cov5" title="69">if d == Debit </span>{
+                <span class="cov5" title="42">return Credit, nil
+</span>        }
+        <span class="cov4" title="27">return Debit, nil</span>
+}
+
+func validateAmount(k Kind, m money.Money) error {
+        <span class="cov10" title="2372">if m.Currency() == "" </span>{
+                <span class="cov1" title="1">return invalid("money is not initialized")
+</span>        }
+        <span class="cov9" title="2371">switch k </span>{
+        case KindLoss:
+                <span class="cov7" title="373">if !m.IsZero() </span>{
+                        <span class="cov2" title="5">return invalid("LOSS requires amount 0.00")
+</span>                }
+        default:
+                <span class="cov9" title="1998">if !m.IsPositive() </span>{
+                        <span class="cov4" title="14">return invalid("%s requires amount greater than zero", k)
+</span>                }
+        }
+        <span class="cov9" title="2352">return nil</span>
+}
+
+// HashInput lists the business fields covered by the idempotency hash. It is shared by HTTP and SQS.
+// The idempotency key and transport metadata are deliberately excluded.
+type HashInput struct {
+        ProviderID, ExternalTransactionID, PlayerID, WalletID, RoundID, GameID string
+        Kind, ReferenceExternalTransactionID                                   string
+        Amount, Currency                                                       string // amount already normalized ("25.00")
+}
+
+// PayloadHash = hex(sha256(canonical JSON)); map marshaling sorts keys, giving canonical ordering.
+func PayloadHash(in HashInput) string {
+        <span class="cov9" title="1427">m := map[string]any{
+                "providerId":            in.ProviderID,
+                "externalTransactionId": in.ExternalTransactionID,
+                "playerId":              in.PlayerID,
+                "walletId":              in.WalletID,
+                "roundId":               in.RoundID,
+                "gameId":                in.GameID,
+                "kind":                  in.Kind,
+                "money":                 map[string]any{"amount": in.Amount, "currency": in.Currency},
+</span>        }
+        <span class="cov9" title="1427">if in.ReferenceExternalTransactionID != "" </span>{
+                <span class="cov8" title="641">m["referenceExternalTransactionId"] = in.ReferenceExternalTransactionID
+</span>        }
+        <span class="cov9" title="1427">b, _ := json.Marshal(m)
+        sum := sha256.Sum256(b)
+        return hex.EncodeToString(sum[:])</span>
+}
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">// Package wager holds WagerTransaction (state machine), WalletLedgerEntry and per-kind rules.
+package wager
+
+import (
+        "math"
+        "time"
+
+        "github.com/alexandre/wagering/internal/domain/money"
+)
+
+type Transaction struct {
+        correlationID, causationID                          string
+        id                                                  string
+        origin                                              Origin
+        providerID, externalID, idempotencyKey, payloadHash string
+        walletID, playerID, roundID, gameID                 string
+        kind                                                Kind
+        amount                                              money.Money
+        referenceExternalID, referenceID                    string
+        status                                              Status
+        failureCode                                         FailureCode
+        balanceAfter                                        *money.Money
+        attempts                                            int
+        nextAttemptAt, expiresAt                            *time.Time
+        createdAt, updatedAt                                time.Time
+}
+
+// Snapshot is the persistence view (repositories map rows &lt;-&gt; Snapshot).
+type Snapshot struct {
+        CorrelationID, CausationID                          string
+        ID                                                  string
+        Origin                                              Origin
+        ProviderID, ExternalID, IdempotencyKey, PayloadHash string
+        WalletID, PlayerID, RoundID, GameID                 string
+        Kind                                                Kind
+        Amount                                              money.Money
+        ReferenceExternalID, ReferenceID                    string
+        Status                                              Status
+        FailureCode                                         FailureCode
+        BalanceAfter                                        *money.Money
+        Attempts                                            int
+        NextAttemptAt, ExpiresAt                            *time.Time
+        CreatedAt, UpdatedAt                                time.Time
+}
+
+type ExternalParams struct {
+        CorrelationID, CausationID                              string
+        ID, ProviderID, ExternalID, IdempotencyKey, PayloadHash string
+        WalletID, PlayerID, RoundID, GameID                     string
+        Kind                                                    Kind
+        Amount                                                  money.Money
+        ReferenceExternalID                                     string
+}
+
+// NewExternal creates an accepted external operation in PENDING.
+func NewExternal(p ExternalParams, now time.Time) (*Transaction, error) {
+        <span class="cov7" title="2387">if now.IsZero() </span>{
+                <span class="cov1" title="1">return nil, invalid("timestamp required")
+</span>        }
+        <span class="cov7" title="2386">for name, v := range map[string]string{
+                "id": p.ID, "providerId": p.ProviderID, "externalTransactionId": p.ExternalID,
+                "idempotencyKey": p.IdempotencyKey, "payloadHash": p.PayloadHash, "walletId": p.WalletID,
+                "playerId": p.PlayerID, "roundId": p.RoundID, "gameId": p.GameID,
+</span>        } {
+                <span class="cov9" title="21451">if v == "" </span>{
+                        <span class="cov2" title="7">return nil, invalid("%s is required", name)
+</span>                }
+        }
+        <span class="cov7" title="2379">if _, err := ParseExternalKind(string(p.Kind)); err != nil </span>{
+                <span class="cov2" title="7">return nil, err
+</span>        }
+        <span class="cov7" title="2372">if err := validateAmount(p.Kind, p.Amount); err != nil </span>{
+                <span class="cov3" title="20">return nil, err
+</span>        }
+        <span class="cov7" title="2352">if p.Kind.IsReversal() &amp;&amp; p.ReferenceExternalID == "" </span>{
+                <span class="cov1" title="3">return nil, invalid("referenceExternalTransactionId is required for %s", p.Kind)
+</span>        }
+        <span class="cov7" title="2349">if !p.Kind.IsReversal() &amp;&amp; p.Kind != KindWin &amp;&amp; p.ReferenceExternalID != "" </span>{
+                <span class="cov1" title="1">return nil, invalid("%s must not carry a reference", p.Kind)
+</span>        }
+        <span class="cov7" title="2348">return &amp;Transaction{
+                correlationID: p.CorrelationID, causationID: p.CausationID, id: p.ID, origin: OriginExternal, providerID: p.ProviderID, externalID: p.ExternalID,
+                idempotencyKey: p.IdempotencyKey, payloadHash: p.PayloadHash, walletID: p.WalletID,
+                playerID: p.PlayerID, roundID: p.RoundID, gameID: p.GameID, kind: p.Kind, amount: p.Amount,
+                referenceExternalID: p.ReferenceExternalID, status: StatusPending, createdAt: now, updatedAt: now,
+        }, nil</span>
+}
+
+// NewOpening creates the internal wallet-opening credit (already PROCESSED). Zero amounts create no OPENING.
+func NewOpening(id, walletID, playerID string, amount money.Money, now time.Time) (*Transaction, error) {
+        <span class="cov5" title="217">if now.IsZero() || id == "" || walletID == "" || playerID == "" </span>{
+                <span class="cov1" title="2">return nil, invalid("id, walletId and playerId are required")
+</span>        }
+        <span class="cov5" title="215">if !amount.IsPositive() </span>{
+                <span class="cov1" title="1">return nil, invalid("OPENING requires a positive amount")
+</span>        }
+        <span class="cov5" title="214">after := amount
+        return &amp;Transaction{
+                id: id, origin: OriginInternal, walletID: walletID, playerID: playerID, kind: KindOpening,
+                amount: amount, status: StatusProcessed, balanceAfter: &amp;after, createdAt: now, updatedAt: now,
+        }, nil</span>
+}
+
+// Rehydrate rebuilds a transaction from storage without reapplying anything.
+func Rehydrate(s Snapshot) (*Transaction, error) {
+        <span class="cov7" title="877">if s.ID == "" || s.WalletID == "" || !s.Status.Valid() || s.Amount.Currency() == "" </span>{
+                <span class="cov2" title="4">return nil, invalid("corrupted snapshot %q", s.ID)
+</span>        }
+        <span class="cov7" title="873">if (s.Origin == OriginInternal) != (s.Kind == KindOpening) </span>{
+                <span class="cov1" title="1">return nil, invalid("origin/kind mismatch in snapshot %q", s.ID)
+</span>        }
+        <span class="cov7" title="872">if s.Origin != OriginInternal &amp;&amp; s.Origin != OriginExternal </span>{
+                <span class="cov1" title="1">return nil, invalid("invalid origin")
+</span>        }
+        <span class="cov7" title="871">if s.PlayerID == "" || s.CreatedAt.IsZero() || s.UpdatedAt.IsZero() || s.UpdatedAt.Before(s.CreatedAt) || s.Attempts &lt; 0 </span>{
+                <span class="cov2" title="7">return nil, invalid("invalid snapshot")
+</span>        }
+        <span class="cov7" title="864">if s.Origin == OriginExternal </span>{
+                <span class="cov7" title="848">if _, err := NewExternal(ExternalParams{ID: s.ID, ProviderID: s.ProviderID, ExternalID: s.ExternalID, IdempotencyKey: s.IdempotencyKey, PayloadHash: s.PayloadHash, WalletID: s.WalletID, PlayerID: s.PlayerID, RoundID: s.RoundID, GameID: s.GameID, Kind: s.Kind, Amount: s.Amount, ReferenceExternalID: s.ReferenceExternalID}, s.CreatedAt); err != nil </span>{
+                        <span class="cov1" title="3">return nil, err
+</span>                }
+        } else <span class="cov3" title="16">if !s.Amount.IsPositive() || s.Status != StatusProcessed || s.ProviderID != "" || s.ExternalID != "" || s.IdempotencyKey != "" || s.PayloadHash != "" || s.RoundID != "" || s.GameID != "" || s.ReferenceExternalID != "" || s.ReferenceID != "" </span>{
+                <span class="cov3" title="10">return nil, invalid("invalid opening snapshot")
+</span>        }
+        <span class="cov7" title="851">if s.Status == StatusProcessed &amp;&amp; (s.BalanceAfter == nil || s.BalanceAfter.Currency() != s.Amount.Currency() || s.BalanceAfter.IsNegative() || s.FailureCode != "") </span>{
+                <span class="cov1" title="1">return nil, invalid("invalid processed snapshot")
+</span>        }
+        <span class="cov7" title="850">if (s.Status == StatusRejected || s.Status == StatusFailed) &amp;&amp; s.FailureCode == "" </span>{
+                <span class="cov1" title="1">return nil, invalid("missing failure")
+</span>        }
+        <span class="cov7" title="849">if s.Status == StatusPendingReference &amp;&amp; (s.NextAttemptAt == nil || s.ExpiresAt == nil || s.ReferenceExternalID == "") </span>{
+                <span class="cov1" title="3">return nil, invalid("invalid pending reference")
+</span>        }
+        // State shape is checked independently of persistence: a snapshot must be
+        // reachable through the public transitions without inventing financial facts.
+        <span class="cov7" title="846">if s.ReferenceID != "" &amp;&amp; (s.ReferenceExternalID == "" || s.ReferenceID == s.ID) </span>{
+                <span class="cov1" title="2">return nil, invalid("invalid resolved reference")
+</span>        }
+        <span class="cov7" title="844">if s.Status == StatusProcessed &amp;&amp; s.ReferenceExternalID != "" &amp;&amp; s.ReferenceID == "" </span>{
+                <span class="cov1" title="1">return nil, invalid("processed reference not resolved")
+</span>        }
+        <span class="cov7" title="843">if s.Status != StatusProcessed &amp;&amp; s.BalanceAfter != nil </span>{
+                <span class="cov1" title="1">return nil, invalid("result on unprocessed transaction")
+</span>        }
+        <span class="cov7" title="842">if !s.Status.IsTerminal() &amp;&amp; s.FailureCode != "" </span>{
+                <span class="cov1" title="1">return nil, invalid("failure on open transaction")
+</span>        }
+        <span class="cov7" title="841">if s.Status != StatusPendingReference &amp;&amp; s.NextAttemptAt != nil </span>{
+                <span class="cov1" title="1">return nil, invalid("schedule outside pending reference")
+</span>        }
+        <span class="cov7" title="840">if s.Status == StatusPending &amp;&amp; (s.Attempts != 0 || s.ExpiresAt != nil) </span>{
+                <span class="cov2" title="4">return nil, invalid("retry history on initial pending state")
+</span>        }
+        <span class="cov7" title="836">if s.Status == StatusPendingReference &amp;&amp; (s.Attempts == 0 || !s.NextAttemptAt.After(s.UpdatedAt)) </span>{
+                <span class="cov1" title="2">return nil, invalid("invalid reference attempt")
+</span>        }
+        <span class="cov7" title="834">if (s.Attempts &gt; 0) != (s.ExpiresAt != nil) || (s.ExpiresAt != nil &amp;&amp; (!s.ExpiresAt.After(s.CreatedAt) || s.ReferenceExternalID == "")) </span>{
+                <span class="cov1" title="1">return nil, invalid("invalid reference lifetime")
+</span>        }
+        <span class="cov7" title="833">if s.Kind == KindOpening &amp;&amp; (s.BalanceAfter == nil || s.BalanceAfter.Minor() != s.Amount.Minor() || s.Attempts != 0) </span>{
+                <span class="cov1" title="1">return nil, invalid("invalid opening result")
+</span>        }
+        <span class="cov7" title="832">return &amp;Transaction{
+                correlationID: s.CorrelationID, causationID: s.CausationID, id: s.ID, origin: s.Origin, providerID: s.ProviderID, externalID: s.ExternalID,
+                idempotencyKey: s.IdempotencyKey, payloadHash: s.PayloadHash, walletID: s.WalletID,
+                playerID: s.PlayerID, roundID: s.RoundID, gameID: s.GameID, kind: s.Kind, amount: s.Amount,
+                referenceExternalID: s.ReferenceExternalID, referenceID: s.ReferenceID, status: s.Status,
+                failureCode: s.FailureCode, balanceAfter: copyMoney(s.BalanceAfter), attempts: s.Attempts,
+                nextAttemptAt: copyTime(s.NextAttemptAt), expiresAt: copyTime(s.ExpiresAt), createdAt: s.CreatedAt, updatedAt: s.UpdatedAt,
+        }, nil</span>
+}
+
+func (t *Transaction) Snapshot() Snapshot {
+        <span class="cov9" title="10538">return Snapshot{
+                t.correlationID, t.causationID, t.id, t.origin, t.providerID, t.externalID, t.idempotencyKey, t.payloadHash,
+                t.walletID, t.playerID, t.roundID, t.gameID, t.kind, t.amount,
+                t.referenceExternalID, t.referenceID, t.status, t.failureCode, copyMoney(t.balanceAfter),
+                t.attempts, copyTime(t.nextAttemptAt), copyTime(t.expiresAt), t.createdAt, t.updatedAt,
+</span>        }
+}
+
+func (t *Transaction) ID() string                  { <span class="cov8" title="3529">return t.id }</span>
+func (t *Transaction) Status() Status              { <span class="cov4" title="62">return t.status }</span>
+func (t *Transaction) Kind() Kind                  { <span class="cov4" title="32">return t.kind }</span>
+func (t *Transaction) Amount() money.Money         { <span class="cov1" title="1">return t.amount }</span>
+func (t *Transaction) WalletID() string            { <span class="cov6" title="673">return t.walletID }</span>
+func (t *Transaction) ReferenceExternalID() string { <span class="cov1" title="1">return t.referenceExternalID }</span>
+func (t *Transaction) ReferenceID() string         { <span class="cov1" title="1">return t.referenceID }</span>
+func (t *Transaction) FailureCode() FailureCode    { <span class="cov3" title="24">return t.failureCode }</span>
+
+func (t *Transaction) ensureOpen() error {
+        <span class="cov7" title="1428">if t == nil || t.id == "" || !t.status.Valid() </span>{
+                <span class="cov1" title="2">return invalid("uninitialized transaction")
+</span>        }
+        <span class="cov7" title="1426">if t.status.IsTerminal() </span>{
+                <span class="cov4" title="41">return ErrTerminalState
+</span>        }
+        <span class="cov7" title="1385">return nil</span>
+}
+
+// ResolveReference links the internal id of the referenced transaction.
+func (t *Transaction) ResolveReference(refID string) error {
+        <span class="cov5" title="148">if err := t.ensureOpen(); err != nil </span>{
+                <span class="cov2" title="8">return err
+</span>        }
+        <span class="cov5" title="140">if refID == "" || refID == t.id || t.referenceExternalID == "" || (t.referenceID != "" &amp;&amp; t.referenceID != refID) </span>{
+                <span class="cov1" title="3">return invalid("invalid reference")
+</span>        }
+        <span class="cov5" title="137">t.referenceID = refID
+        return nil</span>
+}
+
+// MarkPendingReference parks the operation until its reference arrives (backoff/TTL handled by the caller).
+func (t *Transaction) MarkPendingReference(now, nextAttempt time.Time, ttl time.Duration) error {
+        <span class="cov4" title="52">if err := t.ensureOpen(); err != nil </span>{
+                <span class="cov2" title="8">return err
+</span>        }
+        <span class="cov4" title="44">if now.IsZero() || now.Before(t.updatedAt) || !nextAttempt.After(now) || ttl &lt;= 0 || t.attempts == math.MaxInt </span>{
+                <span class="cov2" title="6">return invalid("invalid reference schedule")
+</span>        }
+        <span class="cov4" title="38">if t.referenceExternalID == "" </span>{
+                <span class="cov1" title="1">return invalid("transaction has no reference to wait for")
+</span>        }
+        <span class="cov4" title="37">t.status = StatusPendingReference
+        t.attempts++
+        if t.expiresAt == nil </span>{
+                <span class="cov3" title="28">e := now.Add(ttl)
+                t.expiresAt = &amp;e
+</span>        }
+        <span class="cov4" title="37">t.nextAttemptAt = &amp;nextAttempt
+        t.updatedAt = now
+        return nil</span>
+}
+
+func (t *Transaction) ReferenceExpired(now time.Time) bool {
+        <span class="cov7" title="1244">return t.expiresAt != nil &amp;&amp; !now.Before(*t.expiresAt)
+</span>}
+
+// MarkProcessed stores the balance observed at processing time (returned verbatim on replays).
+func (t *Transaction) MarkProcessed(balanceAfter money.Money, now time.Time) error {
+        <span class="cov6" title="719">if now.IsZero() || (t != nil &amp;&amp; now.Before(t.updatedAt)) </span>{
+                <span class="cov1" title="2">return invalid("invalid transition timestamp")
+</span>        }
+        <span class="cov6" title="717">if err := t.ensureOpen(); err != nil </span>{
+                <span class="cov3" title="10">return err
+</span>        }
+        <span class="cov6" title="707">if t.referenceExternalID != "" &amp;&amp; t.referenceID == "" </span>{
+                <span class="cov1" title="2">return invalid("reference not resolved")
+</span>        }
+        <span class="cov6" title="705">if balanceAfter.Currency() != t.amount.Currency() || balanceAfter.IsNegative() </span>{
+                <span class="cov3" title="16">return invalid("invalid result balance")
+</span>        }
+        <span class="cov6" title="689">t.status, t.balanceAfter, t.nextAttemptAt, t.updatedAt = StatusProcessed, &amp;balanceAfter, nil, now
+        return nil</span>
+}
+
+func (t *Transaction) Reject(code FailureCode, now time.Time) error {
+        <span class="cov6" title="476">if now.IsZero() || (t != nil &amp;&amp; now.Before(t.updatedAt)) </span>{
+                <span class="cov1" title="2">return invalid("invalid transition timestamp")
+</span>        }
+        <span class="cov6" title="474">if err := t.ensureOpen(); err != nil </span>{
+                <span class="cov3" title="10">return err
+</span>        }
+        <span class="cov6" title="464">if code == "" </span>{
+                <span class="cov1" title="3">return invalid("failure code required")
+</span>        }
+        <span class="cov6" title="461">t.status, t.failureCode, t.nextAttemptAt, t.updatedAt = StatusRejected, code, nil, now
+        return nil</span>
+}
+
+// Fail records a permanent infrastructure failure for audit.
+func (t *Transaction) Fail(code FailureCode, now time.Time) error {
+        <span class="cov4" title="40">if now.IsZero() || (t != nil &amp;&amp; now.Before(t.updatedAt)) </span>{
+                <span class="cov1" title="3">return invalid("invalid transition timestamp")
+</span>        }
+        <span class="cov4" title="37">if err := t.ensureOpen(); err != nil </span>{
+                <span class="cov2" title="7">return err
+</span>        }
+        <span class="cov4" title="30">if code == "" </span>{
+                <span class="cov1" title="3">return invalid("failure code required")
+</span>        }
+        <span class="cov3" title="27">t.status, t.failureCode, t.nextAttemptAt, t.updatedAt = StatusFailed, code, nil, now
+        return nil</span>
+}
+
+func copyMoney(m *money.Money) *money.Money {
+        <span class="cov9" title="11370">if m == nil </span>{
+                <span class="cov8" title="6882">return nil
+</span>        }
+        <span class="cov8" title="4488">v := *m
+        return &amp;v</span>
+}
+func copyTime(t *time.Time) *time.Time {
+        <span class="cov10" title="22740">if t == nil </span>{
+                <span class="cov9" title="22236">return nil
+</span>        }
+        <span class="cov6" title="504">v := *t
+        return &amp;v</span>
+}
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package wager
+
+type Kind string
+
+const (
+        KindOpening  Kind = "OPENING"
+        KindBet      Kind = "BET"
+        KindWin      Kind = "WIN"
+        KindLoss     Kind = "LOSS"
+        KindRefund   Kind = "REFUND"
+        KindRollback Kind = "ROLLBACK"
+)
+
+// ParseExternalKind accepts only kinds allowed via HTTP/SQS (OPENING is internal-only).
+func ParseExternalKind(s string) (Kind, error) {
+        <span class="cov9" title="3900">switch k := Kind(s); k </span>{
+        case KindBet, KindWin, KindLoss, KindRefund, KindRollback:
+                <span class="cov9" title="3889">return k, nil</span>
+        case KindOpening:
+                <span class="cov3" title="7">return "", invalid("OPENING is reserved for internal wallet opening")</span>
+        default:
+                <span class="cov2" title="4">return "", invalid("unknown kind %q", s)</span>
+        }
+}
+
+func (k Kind) IsReversal() bool { <span class="cov10" title="5089">return k == KindRefund || k == KindRollback }</span>
+
+type Status string
+
+const (
+        StatusPending          Status = "PENDING"
+        StatusPendingReference Status = "PENDING_REFERENCE"
+        StatusProcessed        Status = "PROCESSED"
+        StatusRejected         Status = "REJECTED"
+        StatusFailed           Status = "FAILED"
+)
+
+func (s Status) IsTerminal() bool {
+        <span class="cov9" title="2603">return s == StatusProcessed || s == StatusRejected || s == StatusFailed
+</span>}
+
+func (s Status) Valid() bool {
+        <span class="cov9" title="2300">switch s </span>{
+        case StatusPending, StatusPendingReference, StatusProcessed, StatusRejected, StatusFailed:
+                <span class="cov9" title="2299">return true</span>
+        }
+        <span class="cov1" title="1">return false</span>
+}
+
+type Origin string
+
+const (
+        OriginInternal Origin = "INTERNAL"
+        OriginExternal Origin = "EXTERNAL"
+)
+
+type Direction string
+
+const (
+        Debit  Direction = "DEBIT"
+        Credit Direction = "CREDIT"
+)
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">// Package wallet holds the Wallet aggregate root. It is independent of Fx, HTTP, SQS and DB libs.
+package wallet
+
+import (
+        "errors"
+        "math"
+        "time"
+
+        "github.com/alexandre/wagering/internal/domain/money"
+)
+
+var (
+        ErrInvalidWallet     = errors.New("wallet: invalid")
+        ErrInsufficientFunds = errors.New("wallet: insufficient funds")
+        ErrNonPositiveAmount = errors.New("wallet: amount must be positive")
+)
+
+type Wallet struct {
+        id, playerID         string
+        balance              money.Money
+        version              int64
+        createdAt, updatedAt time.Time
+}
+
+// Snapshot is the persistence view of a Wallet (used by repositories to map rows).
+type Snapshot struct {
+        ID, PlayerID         string
+        Balance              money.Money
+        Version              int64
+        CreatedAt, UpdatedAt time.Time
+}
+
+// New creates a wallet with version 1 (initial balance may be zero).
+func New(id, playerID string, initial money.Money, now time.Time) (*Wallet, error) {
+        <span class="cov7" title="244">if now.IsZero() || id == "" || playerID == "" || initial.Currency() == "" || initial.IsNegative() </span>{
+                <span class="cov3" title="6">return nil, ErrInvalidWallet
+</span>        }
+        <span class="cov7" title="238">return &amp;Wallet{id: id, playerID: playerID, balance: initial, version: 1, createdAt: now, updatedAt: now}, nil</span>
+}
+
+// Rehydrate rebuilds a wallet from storage WITHOUT reapplying movements or emitting events.
+func Rehydrate(s Snapshot) (*Wallet, error) {
+        <span class="cov10" title="2384">if s.CreatedAt.IsZero() || s.UpdatedAt.Before(s.CreatedAt) || s.ID == "" || s.PlayerID == "" || s.Balance.Currency() == "" || s.Balance.IsNegative() || s.Version &lt; 1 </span>{
+                <span class="cov3" title="7">return nil, ErrInvalidWallet
+</span>        }
+        <span class="cov9" title="2377">return &amp;Wallet{s.ID, s.PlayerID, s.Balance, s.Version, s.CreatedAt, s.UpdatedAt}, nil</span>
+}
+
+func (w *Wallet) Snapshot() Snapshot {
+        <span class="cov8" title="722">return Snapshot{w.id, w.playerID, w.balance, w.version, w.createdAt, w.updatedAt}
+</span>}
+func (w *Wallet) ID() string           { <span class="cov9" title="1788">return w.id }</span>
+func (w *Wallet) PlayerID() string     { <span class="cov9" title="1622">return w.playerID }</span>
+func (w *Wallet) Balance() money.Money { <span class="cov9" title="1490">return w.balance }</span>
+func (w *Wallet) Version() int64       { <span class="cov9" title="1247">return w.version }</span>
+func (w *Wallet) Currency() string     { <span class="cov9" title="1392">return w.balance.Currency() }</span>
+
+func (w *Wallet) check(m money.Money) error {
+        <span class="cov8" title="579">if w == nil || w.id == "" || w.version &lt; 1 || w.balance.Currency() == "" </span>{
+                <span class="cov2" title="3">return ErrInvalidWallet
+</span>        }
+        <span class="cov8" title="576">if w.version == math.MaxInt64 </span>{
+                <span class="cov1" title="2">return money.ErrOverflow
+</span>        }
+        <span class="cov8" title="574">if m.Currency() == "" </span>{
+                <span class="cov1" title="1">return money.ErrUninitialized
+</span>        }
+        <span class="cov8" title="573">if m.Currency() != w.balance.Currency() </span>{
+                <span class="cov2" title="3">return money.ErrCurrencyMismatch
+</span>        }
+        <span class="cov8" title="570">if !m.IsPositive() </span>{
+                <span class="cov2" title="4">return ErrNonPositiveAmount
+</span>        }
+        <span class="cov8" title="566">return nil</span>
+}
+
+// Debit removes m from the balance; the balance can never go below zero.
+func (w *Wallet) Debit(m money.Money, now time.Time) (before, after money.Money, err error) {
+        <span class="cov7" title="325">if err = w.check(m); err != nil </span>{
+                <span class="cov3" title="6">return
+</span>        }
+        <span class="cov7" title="319">if now.IsZero() || now.Before(w.updatedAt) </span>{
+                <span class="cov2" title="3">return money.Money{}, money.Money{}, ErrInvalidWallet
+</span>        }
+        <span class="cov7" title="316">before = w.balance
+</span>        // check guarantees initialized money of the same currency. Comparing minor
+        // units is exact and cannot fail.
+        <span class="cov7" title="316">if before.Minor() &lt; m.Minor() </span>{
+                <span class="cov5" title="68">return money.Money{}, money.Money{}, ErrInsufficientFunds
+</span>        }
+        // Both operands are nonnegative, with before &gt;= m: subtraction cannot
+        // overflow or produce a negative balance after the checks above.
+        <span class="cov7" title="248">after, _ = before.Sub(m)
+        w.apply(after, now)
+        return before, after, nil</span>
+}
+
+func (w *Wallet) Credit(m money.Money, now time.Time) (before, after money.Money, err error) {
+        <span class="cov7" title="254">if err = w.check(m); err != nil </span>{
+                <span class="cov3" title="7">return
+</span>        }
+        <span class="cov7" title="247">if now.IsZero() || now.Before(w.updatedAt) </span>{
+                <span class="cov1" title="1">return money.Money{}, money.Money{}, ErrInvalidWallet
+</span>        }
+        <span class="cov7" title="246">before = w.balance
+        if after, err = w.balance.Add(m); err != nil </span>{
+                <span class="cov1" title="2">return
+</span>        }
+        <span class="cov7" title="244">w.apply(after, now)
+        return before, after, nil</span>
+}
+
+// apply bumps the version ONLY when the balance changes.
+func (w *Wallet) apply(after money.Money, now time.Time) {
+        <span class="cov8" title="492">w.balance = after
+        w.version++
+        w.updatedAt = now
+</span>}
+</pre>
+		
+		<pre class="file" id="file13" style="display: none">package auth
+
+import (
+        "context"
+        "errors"
+        "net/http"
+        "strings"
+)
+
+type ctxKey struct{}
+
+func PrincipalFrom(ctx context.Context) (Principal, bool) {
+        <span class="cov10" title="153">p, ok := ctx.Value(ctxKey{}).(Principal)
+        return p, ok
+</span>}
+
+func deny(w http.ResponseWriter, status int, code string) {
+        <span class="cov7" title="36">w.Header().Set("Content-Type", "application/json")
+        w.WriteHeader(status)
+        _, _ = w.Write([]byte(`{"code":"` + code + `"}`))
+</span>}
+
+// Authenticate requires a valid Bearer token (401 missing/invalid/expired; 503 if the IdP is unreachable).
+func (v *Verifier) Authenticate(next http.Handler) http.Handler {
+        <span class="cov9" title="91">return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) </span>{
+                <span class="cov9" title="102">tok, ok := strings.CutPrefix(r.Header.Get("Authorization"), "Bearer ")
+                if !ok || tok == "" </span>{
+                        <span class="cov4" title="7">deny(w, http.StatusUnauthorized, "UNAUTHENTICATED")
+                        return
+</span>                }
+                <span class="cov9" title="95">p, err := v.Verify(r.Context(), tok)
+                if err != nil </span>{
+                        <span class="cov6" title="17">if errors.Is(err, ErrJWKSUnavailable) </span>{
+                                <span class="cov1" title="1">w.Header().Set("Retry-After", "2")
+                                deny(w, http.StatusServiceUnavailable, "IDP_UNAVAILABLE")
+                                return
+</span>                        }
+                        <span class="cov5" title="16">deny(w, http.StatusUnauthorized, "UNAUTHENTICATED")
+                        return</span>
+                }
+                <span class="cov8" title="78">next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), ctxKey{}, p)))</span>
+        })
+}
+
+// RequireInternal restricts wallet operations to the internal service.
+func RequireInternal(next http.Handler) http.Handler {
+        <span class="cov7" title="44">return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) </span>{
+                <span class="cov5" title="15">if p, ok := PrincipalFrom(r.Context()); !ok || !p.Internal </span>{
+                        <span class="cov4" title="7">deny(w, http.StatusForbidden, "FORBIDDEN")
+                        return
+</span>                }
+                <span class="cov4" title="8">next.ServeHTTP(w, r)</span>
+        })
+}
+
+// RequireProvider requires a provider identity (providerId claim).
+func RequireProvider(next http.Handler) http.Handler {
+        <span class="cov5" title="14">return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) </span>{
+                <span class="cov7" title="49">if p, ok := PrincipalFrom(r.Context()); !ok || p.ProviderID == "" </span>{
+                        <span class="cov2" title="3">deny(w, http.StatusForbidden, "FORBIDDEN")
+                        return
+</span>                }
+                <span class="cov7" title="46">next.ServeHTTP(w, r)</span>
+        })
+}
+
+// RequireProviderOrInternal is used by read endpoints (scoping is enforced in the use case).
+func RequireProviderOrInternal(next http.Handler) http.Handler {
+        <span class="cov6" title="24">return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) </span>{
+                <span class="cov6" title="25">if p, ok := PrincipalFrom(r.Context()); !ok || (p.ProviderID == "" &amp;&amp; !p.Internal) </span>{
+                        <span class="cov2" title="2">deny(w, http.StatusForbidden, "FORBIDDEN")
+                        return
+</span>                }
+                <span class="cov6" title="23">next.ServeHTTP(w, r)</span>
+        })
+}
+</pre>
+		
+		<pre class="file" id="file14" style="display: none">// Package auth validates externally issued OIDC tokens with a bounded JWKS cache.
+package auth
+
+import (
+        "context"
+        "errors"
+        "fmt"
+        "io"
+        "net/http"
+        "sync"
+        "time"
+
+        "github.com/MicahParks/jwkset"
+        "github.com/MicahParks/keyfunc/v3"
+        "github.com/alexandre/wagering/internal/infra/config"
+        "github.com/golang-jwt/jwt/v5"
+        "go.uber.org/fx"
+)
+
+var (
+        ErrJWKSUnavailable = errors.New("auth: jwks unavailable")
+        ErrInvalidToken    = errors.New("auth: invalid token")
+)
+
+type Principal struct {
+        Subject, ProviderID string
+        Internal            bool
+}
+
+// Refresh is request-owned: no background goroutine can outlive the application.
+// Cached keys live for one hour; an unknown kid can trigger at most one fetch/second.
+type Verifier struct {
+        issuer, jwksURL, audience string
+        client                    *http.Client
+        gate                      chan struct{}
+        mu                        sync.RWMutex
+        kf                        keyfunc.Keyfunc
+        fetched, attempted        time.Time
+        lastErr                   error
+        now                       func() time.Time // immutable source for cache-age decisions; deadlines use context
+}
+
+func NewVerifier(lc fx.Lifecycle, cfg config.Config) *Verifier {
+        <span class="cov6" title="21">v := &amp;Verifier{now: time.Now, issuer: cfg.OIDCIssuer, jwksURL: cfg.OIDCJWKSURL, audience: cfg.OIDCAudience,
+                client: &amp;http.Client{Timeout: 2 * time.Second, Transport: http.DefaultTransport.(*http.Transport).Clone()}, gate: make(chan struct{}, 1)}
+        lc.Append(fx.Hook{OnStart: func(ctx context.Context) error </span>{
+                <span class="cov6" title="17">err := v.refresh(ctx, true)
+                if err != nil </span>{
+                        <span class="cov3" title="3">v.client.CloseIdleConnections()
+</span>                }
+                <span class="cov6" title="17">return err</span>
+        }, OnStop: func(context.Context) error { <span class="cov5" title="14">v.client.CloseIdleConnections(); return nil }</span>})
+        <span class="cov6" title="21">return v</span>
+}
+
+func (v *Verifier) refresh(ctx context.Context, initial bool) error {
+        <span class="cov7" title="31">select </span>{
+        case v.gate &lt;- struct{}{}:<span class="cov7" title="30"></span>
+        case &lt;-ctx.Done():
+                <span class="cov1" title="1">return fmt.Errorf("%w: %w", ErrJWKSUnavailable, ctx.Err())</span>
+        }
+        <span class="cov7" title="30">defer func() </span>{ <span class="cov7" title="30">&lt;-v.gate }</span>()
+        <span class="cov7" title="30">v.mu.RLock()
+        recent := v.now().Sub(v.attempted) &lt; time.Second
+        last := v.lastErr
+        v.mu.RUnlock()
+        if recent &amp;&amp; !initial </span>{
+                <span class="cov3" title="4">return last
+</span>        }
+        <span class="cov7" title="26">ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+        defer cancel()
+        req, err := http.NewRequestWithContext(ctx, http.MethodGet, v.jwksURL, nil)
+        var kf keyfunc.Keyfunc
+        if err == nil </span>{
+                <span class="cov7" title="25">var res *http.Response
+                res, err = v.client.Do(req)
+                if err == nil </span>{
+                        <span class="cov6" title="23">defer res.Body.Close()
+                        if res.StatusCode != http.StatusOK </span>{
+                                <span class="cov2" title="2">err = fmt.Errorf("JWKS HTTP status %d", res.StatusCode)
+</span>                        } else {
+                                <span class="cov6" title="21">var body []byte
+                                body, err = io.ReadAll(io.LimitReader(res.Body, 1&lt;&lt;20))
+                                if err == nil </span>{
+                                        <span class="cov6" title="21">kf, err = keyfunc.NewJWKSetJSON(body)
+</span>                                }
+                                <span class="cov6" title="21">if err == nil </span>{
+                                        <span class="cov6" title="21">keys, e := kf.Storage().KeyReadAll(ctx)
+                                        err = e
+                                        if err == nil &amp;&amp; len(keys) == 0 </span>{
+                                                <span class="cov1" title="1">err = errors.New("empty JWKS")
+</span>                                        }
+                                }
+                        }
+                }
+        }
+        <span class="cov7" title="26">if err != nil </span>{
+                <span class="cov4" title="6">err = fmt.Errorf("%w: %w", ErrJWKSUnavailable, err)
+</span>        }
+        <span class="cov7" title="26">v.mu.Lock()
+        defer v.mu.Unlock()
+        v.attempted = v.now()
+        v.lastErr = err
+        if err == nil </span>{
+                <span class="cov6" title="20">v.kf = kf
+                v.fetched = v.attempted
+</span>        }
+        <span class="cov7" title="26">return err</span>
+}
+
+func (v *Verifier) key(ctx context.Context, t *jwt.Token) (any, error) {
+        <span class="cov10" title="121">if err := ctx.Err(); err != nil </span>{
+                <span class="cov1" title="1">return nil, fmt.Errorf("%w: %w", ErrJWKSUnavailable, err)
+</span>        }
+        <span class="cov9" title="120">kid, ok := t.Header["kid"].(string)
+        if !ok || kid == "" </span>{
+                <span class="cov3" title="4">return nil, ErrInvalidToken
+</span>        }
+        <span class="cov9" title="116">v.mu.RLock()
+        kf, fetched := v.kf, v.fetched
+        v.mu.RUnlock()
+        if kf != nil &amp;&amp; v.now().Sub(fetched) &lt; time.Hour </span>{
+                <span class="cov9" title="112">key, err := kf.KeyfuncCtx(ctx)(t)
+                if !errors.Is(err, jwkset.ErrKeyNotFound) </span>{
+                        <span class="cov9" title="107">return key, err
+</span>                }
+        }
+        <span class="cov5" title="9">if err := v.refresh(ctx, false); err != nil </span>{
+                <span class="cov2" title="2">return nil, err
+</span>        }
+        <span class="cov4" title="7">v.mu.RLock()
+        kf, fetched = v.kf, v.fetched
+        v.mu.RUnlock()
+        if kf == nil || v.now().Sub(fetched) &gt;= time.Hour </span>{
+                <span class="cov2" title="2">return nil, ErrJWKSUnavailable
+</span>        }
+        <span class="cov4" title="5">return kf.KeyfuncCtx(ctx)(t)</span>
+}
+
+func (v *Verifier) Verify(ctx context.Context, raw string) (Principal, error) {
+        <span class="cov9" title="116">ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+        defer cancel()
+        claims := jwt.MapClaims{}
+        _, err := jwt.ParseWithClaims(raw, claims, func(t *jwt.Token) (any, error) </span>{ <span class="cov9" title="111">return v.key(ctx, t) }</span>,
+                jwt.WithValidMethods([]string{"RS256"}), jwt.WithIssuer(v.issuer), jwt.WithAudience(v.audience), jwt.WithExpirationRequired())
+        <span class="cov9" title="116">if err != nil </span>{
+                <span class="cov7" title="29">if errors.Is(err, ErrJWKSUnavailable) </span>{
+                        <span class="cov2" title="2">return Principal{}, err
+</span>                }
+                <span class="cov7" title="27">return Principal{}, fmt.Errorf("%w: %w", ErrInvalidToken, err)</span>
+        }
+        <span class="cov9" title="87">sub, _ := claims.GetSubject()
+        if sub == "" </span>{
+                <span class="cov4" title="5">return Principal{}, ErrInvalidToken
+</span>        }
+        <span class="cov9" title="82">p := Principal{Subject: sub}
+        p.ProviderID, _ = claims["providerId"].(string)
+        role, _ := claims["role"].(string)
+        p.Internal = role == "internal"
+        return p, nil</span>
+}
+
+var Module = fx.Module("auth", fx.Provide(NewVerifier))
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>

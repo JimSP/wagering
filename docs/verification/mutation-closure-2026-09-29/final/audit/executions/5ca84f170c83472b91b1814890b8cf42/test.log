@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.537s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:49 INFO transaction handled correlationId="" messageId="" transactionId=3b13e205-3e83-43ac-afd6-3d29ed790c87 walletId=caad8e7a-ac6e-4a65-90e3-59472b2c7f4e providerId=p status=PROCESSED
+2026/09/30 01:22:49 WARN transaction handling failed correlationId="" messageId="" transactionId=f6e0eccb-e5d3-46a1-b10c-0b8bf8d336cc walletId=caad8e7a-ac6e-4a65-90e3-59472b2c7f4e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.12s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-refund (0.00s)
+        http_contract_test.go:153: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000025","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.229s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.406s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.519s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.705s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure:INVALID_REFERENCE_KIND Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.464s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.765s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.133s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.189s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.160s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.813s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.943s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.935s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	11.041s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.887s
+FAIL

@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.406s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	13.078s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.985s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.104s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.181s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/negative_starting_balance (0.00s)
+        ledger_semantics_test.go:80: <nil>
+    ledger_semantics_test.go:90: zero timestamp accepted
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.366s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.476s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.905s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.743s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.942s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.788s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	12.481s
+ok  	github.com/alexandre/wagering/internal/platform/logging	12.347s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	12.545s
+FAIL

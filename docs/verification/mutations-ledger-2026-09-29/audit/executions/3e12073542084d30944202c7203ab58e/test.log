@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.517s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:48:22 INFO transaction handled correlationId="" messageId="" transactionId=b56560b0-f0f5-4ae7-ad9a-b85b79f3d039 walletId=70a62a1e-5eee-4bc5-875a-5103c3b67c20 providerId=p status=PROCESSED
+2026/09/29 22:48:22 WARN transaction handling failed correlationId="" messageId="" transactionId=5a3f6b8b-330c-4bae-8325-c4e67629ec71 walletId=70a62a1e-5eee-4bc5-875a-5103c3b67c20 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got wallet: invalid, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.810s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.131s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.250s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.161s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.470s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:48: rehydration changed history wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.717s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.660s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.904s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:164: error=wallet: invalid want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.017s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.322s
+FAIL

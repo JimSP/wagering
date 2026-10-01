@@ -1,0 +1,49 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.291s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:48:48 INFO transaction handled correlationId="" messageId="" transactionId=f7974145-b52c-4c7e-a829-d3d31f2f7386 walletId=c3a21387-7ac0-4a8b-aecf-6666984d55b5 providerId=p status=PROCESSED
+2026/09/29 22:48:48 WARN transaction handling failed correlationId="" messageId="" transactionId=a22c0e94-960a-4cbc-9d49-35e56473d6d8 walletId=c3a21387-7ac0-4a8b-aecf-6666984d55b5 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got wallet: invalid, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.609s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.229s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.110s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.828s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.512s
+--- FAIL: TestNilWalletMovementsReturnDomainError (0.00s)
+    --- FAIL: TestNilWalletMovementsReturnDomainError/credit (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x8 pc=0x10074eae8]
+
+goroutine 40 [running]:
+testing.tRunner.func1.2({0x1008af9f8, 0x1008e9060})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1008af9f8?, 0x1008e9060?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).check(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/domain/wallet/wallet.go:59
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).Credit(0x0, {0x21b9f4f8?, {0x10075bcad?, 0x6abc6a7f?}}, {0x2b70c7589648?, 0x1006c36cc?, 0x1008f39e0?})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/domain/wallet/wallet.go:99 +0x48
+github.com/alexandre/wagering/internal/domain/wallet_test.TestNilWalletMovementsReturnDomainError.func1(0x2b70c75ead88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/domain/wallet/input_contract_test.go:31 +0x7c
+testing.tRunner(0x2b70c75ead88, 0x2b70c759e3f0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 39
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	1.798s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.302s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.238s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.127s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.325s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.322s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.151s
+FAIL

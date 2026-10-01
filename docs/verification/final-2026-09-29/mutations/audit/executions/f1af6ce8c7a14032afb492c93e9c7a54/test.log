@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.410s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:23:03 INFO transaction handled correlationId="" messageId="" transactionId=a4c38588-dd87-4015-abfd-25861eaaeb18 walletId=608ac9b8-9d32-4601-a45c-4844c7a684d2 providerId=p status=PROCESSED
+2026/09/29 03:23:03 WARN transaction handling failed correlationId="" messageId="" transactionId=9be6ca63-d5ae-4007-8efb-5a267deb59c7 walletId=608ac9b8-9d32-4601-a45c-4844c7a684d2 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.967s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.622s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.512s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.310s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.053s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.106s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.909s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: missing failure want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	4.198s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.660s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.004s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.012s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.241s
+FAIL

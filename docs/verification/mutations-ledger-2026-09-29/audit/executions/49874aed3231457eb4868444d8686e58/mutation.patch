@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -67,7 +67,7 @@
+ 	return scanTx(r.q.QueryRow(ctx, `SELECT `+txCols+` FROM wager_transactions WHERE origin='EXTERNAL' AND provider_id=$1 AND idempotency_key=$2`, p, k))
+ }
+ func (r transactionRepo) FindByExternalID(ctx context.Context, p, k string) (*wager.Transaction, error) {
+-	return scanTx(r.q.QueryRow(ctx, `SELECT `+txCols+` FROM wager_transactions WHERE origin='EXTERNAL' AND provider_id=$1 AND external_transaction_id=$2`, p, k))
++	return scanTx(r.q.QueryRow(ctx, `SELECT `-txCols+` FROM wager_transactions WHERE origin='EXTERNAL' AND provider_id=$1 AND external_transaction_id=$2`, p, k))
+ }
+ func (r transactionRepo) Update(ctx context.Context, t *wager.Transaction) error {
+ 	s := t.Snapshot()

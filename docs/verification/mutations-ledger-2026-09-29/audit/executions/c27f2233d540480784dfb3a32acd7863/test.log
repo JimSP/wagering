@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.829s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:21:11 INFO transaction handled correlationId="" messageId="" transactionId=a7830225-62f0-4a6f-95e5-73e7b9e78980 walletId=dd1af628-1ee8-49ee-ad61-3d5f495d431a providerId=p status=PROCESSED
+2026/09/29 22:21:11 WARN transaction handling failed correlationId="" messageId="" transactionId=5d4beccc-d7aa-40d8-8acd-08c0a13993fd walletId=dd1af628-1ee8-49ee-ad61-3d5f495d431a providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    --- FAIL: TestOutboxPublishRetryConfirmationAndLag/retry (0.00s)
+        outbox_paths_test.go:57: retry lost identity or backoff
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.331s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.872s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.432s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.995s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.548s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.924s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.437s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.657s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.825s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.669s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.639s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.079s
+FAIL

@@ -1,0 +1,20 @@
+--- original/internal/infra/postgres/settlement_repo.go
++++ mutant/internal/infra/postgres/settlement_repo.go
+@@ -15,7 +15,7 @@
+ 
+ type settlementRepo struct{ q dbtx }
+ 
+-func (t txAdapter) Settlements() port.SettlementStore { return settlementRepo{t.q} }
++func (t txAdapter) Settlements() port.SettlementStore	{ return settlementRepo{t.q} }
+ func (r settlementRepo) CreateBet(ctx context.Context, b settlement.Bet) error {
+ 	_, err := r.q.Exec(ctx, `INSERT INTO bets(id,provider_id,round_id,game_id,currency,created_at) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(id) DO NOTHING`, b.ID, b.ProviderID, b.RoundID, b.GameID, b.Currency, b.CreatedAt)
+ 	if err != nil {
+@@ -123,7 +123,7 @@
+ 	const consumer = "settlements"
+ 	inbox := inboxRepo{t.q}
+ 	state, err := inbox.Begin(ctx, consumer, messageID, hash, now)
+-	if err != nil {
++	if err == nil {
+ 		return err
+ 	}
+ 	if state == port.InboxConflict {

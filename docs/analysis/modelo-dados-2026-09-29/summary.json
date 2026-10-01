@@ -1,0 +1,29 @@
+{
+  "probes": 14,
+  "invalid_cases_accepted": [
+    "win_without_bet_or_counterparty",
+    "win_references_other_wallet_opening_when_wire_ref_null",
+    "financial_events_with_wrong_amount_currency_aggregate",
+    "outbox_without_transaction",
+    "inbox_identity_and_completion_rewritten",
+    "rejected_transaction_with_negative_result_balance",
+    "empty_external_identity_in_durable_pending",
+    "negative_ledger_seq_hidden_by_first_page"
+  ],
+  "valid_current_model_controls": [
+    "positive_opening",
+    "positive_legacy_bet"
+  ],
+  "rejected_controls": [
+    "balance_without_ledger",
+    "ledger_rewrite",
+    "duplicate_wallet"
+  ],
+  "structural_probes": [
+    "two_accounts_for_same_financial_movement"
+  ],
+  "production_migration_files_checked": 12,
+  "changed_production_migration_files": [],
+  "proposed_schema_implemented": false,
+  "applied_to_user_database": false
+}

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -32,7 +32,7 @@
+ 	}
+ 	if balance != nil {
+ 		b, e := money.FromMinor(*balance, currency)
+-		if e != nil {
++		if e == nil {
+ 			return nil, e
+ 		}
+ 		s.BalanceAfter = &b

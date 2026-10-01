@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -11,7 +11,7 @@
+ 
+ func (r inboxRepo) Begin(ctx context.Context, c, id, h string, now time.Time) (port.InboxState, error) {
+ 	_, err := r.q.Exec(ctx, `INSERT INTO inbox_messages(consumer_name,message_id,payload_hash,received_at) VALUES($1,$2,$3,$4) ON CONFLICT(consumer_name,message_id) DO UPDATE SET deliveries=inbox_messages.deliveries+1`, c, id, h, now)
+-	if err != nil {
++	if err == nil {
+ 		return port.InboxNew, err
+ 	}
+ 	var hash string

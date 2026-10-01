@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.405s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:38:45 INFO transaction handled correlationId="" messageId="" transactionId=912106af-0d4b-4b78-a1e3-3a7055647973 walletId=55778b62-4f57-4662-9e31-52c8cd1ffc3c providerId=p status=PROCESSED
+2026/09/29 22:38:45 WARN transaction handling failed correlationId="" messageId="" transactionId=e7875ef5-ad7d-4d45-827b-f2f4cb5830e6 walletId=55778b62-4f57-4662-9e31-52c8cd1ffc3c providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.34s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/win-exceeds-committed-funds (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"INVALID_INPUT","message":"invalid input: INVALID_INPUT: invalid input: WIN must not carry a reference"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.951s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.137s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.278s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.996s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:75: INVALID_INPUT: invalid input: WIN must not carry a reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.356s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.398s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.850s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.732s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.104s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.586s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.212s
+FAIL

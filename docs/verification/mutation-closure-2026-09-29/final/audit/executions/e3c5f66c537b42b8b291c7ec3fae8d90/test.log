@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.891s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	13.500s
+ok  	github.com/alexandre/wagering/internal/domain/event	12.080s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.267s
+--- FAIL: TestReversalRejectsInvalidHistoryAndUnfundedInversion (0.00s)
+    --- FAIL: TestReversalRejectsInvalidHistoryAndUnfundedInversion/credit_overflow (0.00s)
+        reversal_test.go:85: got <nil>, want BALANCE_OVERFLOW
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	11.535s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.198s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.949s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.399s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.826s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.504s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.341s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.993s
+FAIL

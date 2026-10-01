@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -72,7 +72,7 @@
+ func (r transactionRepo) Update(ctx context.Context, t *wager.Transaction) error {
+ 	s := t.Snapshot()
+ 	var b *int64
+-	if s.BalanceAfter != nil {
++	if s.BalanceAfter == nil {
+ 		v := s.BalanceAfter.Minor()
+ 		b = &v
+ 	}

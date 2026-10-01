@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -127,7 +127,7 @@
+ 	if movement {
+ 		before := w.Balance()
+ 		version := w.Version()
+-		if direction == wager.Debit {
++		if direction != wager.Debit {
+ 			_, _, err = w.Debit(s.Amount, u.clock.Now())
+ 		} else {
+ 			_, _, err = w.Credit(s.Amount, u.clock.Now())

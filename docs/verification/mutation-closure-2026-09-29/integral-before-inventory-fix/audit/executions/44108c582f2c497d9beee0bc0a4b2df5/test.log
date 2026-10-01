@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.964s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.073s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.182s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.497s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.339s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.630s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.068s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.482s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.051s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingDatabaseProtocol (0.00s)
+    --- FAIL: TestLoadAccountingDatabaseProtocol/implicit-true (0.00s)
+        --- FAIL: TestLoadAccountingDatabaseProtocol/implicit-true/failure-0-query (0.00s)
+            accounting_mutation_test.go:57: step 2: SQL "SELECT id FROM ledger_accounts WHERE wallet_id=$1 ORDER BY id FOR NO KEY UPDATE" lacks "kind='BET'"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.939s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.582s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.580s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.577s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.425s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.413s
+FAIL

@@ -1,0 +1,21 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.667s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.318s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.114s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.523s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.662s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.800s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.393s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.540s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.781s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:0x2349a38d2f00 ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} <nil> steps=3
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.291s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.773s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.765s
+FAIL

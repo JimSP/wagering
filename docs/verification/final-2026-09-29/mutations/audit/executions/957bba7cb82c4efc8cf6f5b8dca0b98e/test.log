@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.249s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.363s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.754s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.612s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/attempt_only (0.00s)
+        error_text_contract_test.go:38: got=<nil> err=INVALID_INPUT: invalid input: invalid reference lifetime want="INVALID_INPUT: invalid input: retry history on initial pending state"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.336s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.631s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.920s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.721s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.013s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.101s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.955s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.746s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.938s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.870s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -88,7 +88,7 @@
+ 		return port.LedgerTotals{}, err
+ 	}
+ 	v, err := strconv.ParseInt(total, 10, 64)
+-	if err != nil {
++	if err == nil {
+ 		return port.LedgerTotals{}, money.ErrOverflow
+ 	}
+ 	m, err := money.FromMinor(v, cur)

@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.962s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:17:36 INFO transaction handled correlationId="" messageId="" transactionId=f6b8a458-98fd-46b6-a9dd-f4f71df72f04 walletId=5bbd5cd2-9c26-4957-b994-403d89ba6a67 providerId=p status=PROCESSED
+2026/09/30 00:17:36 WARN transaction handling failed correlationId="" messageId="" transactionId=3dbe7ec5-6533-4020-bb88-bd4bd17594df walletId=5bbd5cd2-9c26-4957-b994-403d89ba6a67 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/invalid_wallet (0.00s)
+        read_failure_test.go:138: opening outcome <nil> invalid input
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.218s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.929s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.283s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.158s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.445s
+--- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently (0.00s)
+    --- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently/id (0.00s)
+        input_contract_test.go:22: wallet=&{ player {0 BRL} 1 {0 63926236800 <nil>} {0 63926236800 <nil>}} error=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.652s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.478s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.400s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.978s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.449s
+FAIL

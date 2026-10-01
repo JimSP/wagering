@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.078s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:12:50 INFO transaction handled correlationId="" messageId="" transactionId=eae46b02-acbf-46d9-be88-ea8cde2b635e walletId=ea53d174-e3f6-451a-8d22-d5b578b56594 providerId=p status=PROCESSED
+2026/09/30 01:12:50 WARN transaction handling failed correlationId="" messageId="" transactionId=6325b2dd-1a32-49a1-94e0-955be4ef13f7 walletId=ea53d174-e3f6-451a-8d22-d5b578b56594 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.382s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	11.709s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.290s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.174s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.537s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.651s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.248s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.457s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.169s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.744s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.857s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.720s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.893s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.736s
+FAIL

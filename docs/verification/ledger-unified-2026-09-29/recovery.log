@@ -1,0 +1,58 @@
+6 versions; paired up/down files; SHA-256 verified
+ Network wagering-test-29914-13331_default  Creating
+ Network wagering-test-29914-13331_default  Created
+ Volume "wagering-test-29914-13331_testcredentials"  Creating
+ Volume "wagering-test-29914-13331_testcredentials"  Created
+ Container wagering-test-29914-13331-localstack-1  Creating
+ Container wagering-test-29914-13331-keycloak-1  Creating
+ Container wagering-test-29914-13331-postgres-1  Creating
+ Container wagering-test-29914-13331-keycloak-1  Created
+ Container wagering-test-29914-13331-postgres-1  Created
+ Container wagering-test-29914-13331-localstack-1  Created
+ Container wagering-test-29914-13331-localstack-1  Starting
+ Container wagering-test-29914-13331-postgres-1  Starting
+ Container wagering-test-29914-13331-keycloak-1  Starting
+ Container wagering-test-29914-13331-localstack-1  Started
+ Container wagering-test-29914-13331-keycloak-1  Started
+ Container wagering-test-29914-13331-postgres-1  Started
+ Container wagering-test-29914-13331-postgres-1  Waiting
+ Container wagering-test-29914-13331-localstack-1  Waiting
+ Container wagering-test-29914-13331-keycloak-1  Waiting
+ Container wagering-test-29914-13331-postgres-1  Healthy
+ Container wagering-test-29914-13331-localstack-1  Healthy
+ Container wagering-test-29914-13331-keycloak-1  Healthy
+=== RUN   TestConcurrentReversalsAndFullRestart
+--- PASS: TestConcurrentReversalsAndFullRestart (5.75s)
+=== RUN   TestThreeProcessesConcurrentMoney
+=== RUN   TestThreeProcessesConcurrentMoney/50-replays
+=== RUN   TestThreeProcessesConcurrentMoney/two-80-on-100
+=== RUN   TestThreeProcessesConcurrentMoney/wallet-lock-isolation
+--- PASS: TestThreeProcessesConcurrentMoney (0.24s)
+    --- PASS: TestThreeProcessesConcurrentMoney/50-replays (0.16s)
+    --- PASS: TestThreeProcessesConcurrentMoney/two-80-on-100 (0.04s)
+    --- PASS: TestThreeProcessesConcurrentMoney/wallet-lock-isolation (0.04s)
+=== RUN   TestHTTPAndSQSReplayAndCrash
+--- PASS: TestHTTPAndSQSReplayAndCrash (91.92s)
+=== RUN   TestPendingReferenceRestart
+--- PASS: TestPendingReferenceRestart (8.35s)
+PASS
+ok  	github.com/alexandre/wagering/test/integration	111.817s
+testing: warning: no tests to run
+PASS
+ok  	github.com/alexandre/wagering/cmd/wagering	1.362s [no tests to run]
+ Container wagering-test-29914-13331-keycloak-1  Stopping
+ Container wagering-test-29914-13331-postgres-1  Stopping
+ Container wagering-test-29914-13331-localstack-1  Stopping
+ Container wagering-test-29914-13331-postgres-1  Stopped
+ Container wagering-test-29914-13331-postgres-1  Removing
+ Container wagering-test-29914-13331-postgres-1  Removed
+ Container wagering-test-29914-13331-localstack-1  Stopped
+ Container wagering-test-29914-13331-localstack-1  Removing
+ Container wagering-test-29914-13331-localstack-1  Removed
+ Container wagering-test-29914-13331-keycloak-1  Stopped
+ Container wagering-test-29914-13331-keycloak-1  Removing
+ Container wagering-test-29914-13331-keycloak-1  Removed
+ Volume wagering-test-29914-13331_testcredentials  Removing
+ Network wagering-test-29914-13331_default  Removing
+ Volume wagering-test-29914-13331_testcredentials  Removed
+ Network wagering-test-29914-13331_default  Removed

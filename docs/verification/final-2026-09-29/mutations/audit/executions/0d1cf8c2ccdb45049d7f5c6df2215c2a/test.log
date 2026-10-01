@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.308s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:29:56 INFO transaction handled correlationId="" messageId="" transactionId=fdf98467-08b3-4210-990b-b35acae5f2e6 walletId=5916b6ce-b8c9-46a1-b002-1bce7c2ef641 providerId=p status=PROCESSED
+2026/09/29 03:29:56 WARN transaction handling failed correlationId="" messageId="" transactionId=bf6147c0-adf4-46e3-96ff-1626b453c092 walletId=5916b6ce-b8c9-46a1-b002-1bce7c2ef641 providerId=p transient=false
+--- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect (0.00s)
+    --- FAIL: TestBusinessRejectionIsTerminalAuditableAndHasNoFinancialEffect/reversal_without_funds (0.00s)
+        journey_semantics_test.go:345: rejection moved money or wrong reason {00000000-0000-4000-8000-000000000012 PROCESSED 0x1f492e632318  false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.178s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.751s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.893s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.024s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 6000 6000 0} {0 } {0 } wallet: insufficient funds
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.451s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.617s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.852s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.746s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.211s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.024s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.666s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.841s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.972s
+FAIL

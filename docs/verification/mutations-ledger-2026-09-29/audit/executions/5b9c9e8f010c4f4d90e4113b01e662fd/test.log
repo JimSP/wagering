@@ -1,0 +1,37 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.242s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:46:08 INFO transaction handled correlationId="" messageId="" transactionId=e5221000-592d-43b7-ad04-46655801492b walletId=2b4fa2ae-749c-495e-a7f2-477351382eba providerId=p status=PENDING
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x101135270]
+
+goroutine 11 [running]:
+testing.tRunner.func1.2({0x1018a6fb8, 0x101997b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1018a6fb8?, 0x101997b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.TestPersistentResultReplayAndPayloadConflict(0x7b2edac24248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/idempotency_test.go:65 +0x520
+testing.tRunner(0x7b2edac24248, 0x101942270)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.537s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.930s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.643s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.511s
+--- FAIL: TestRejectedAndFailedAreTerminal (0.00s)
+    invariants_test.go:88: terminal reopened
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.035s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.790s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.014s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.799s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.261s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.246s
+FAIL

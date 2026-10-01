@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.131s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:58:16 INFO transaction handled correlationId="" messageId="" transactionId=11521b72-4790-48bf-98ee-9bf5871f7d2d walletId=aadbf09c-d8c6-4fad-a39e-cfc62d258c9e providerId=p status=PROCESSED
+2026/09/29 23:58:16 WARN transaction handling failed correlationId="" messageId="" transactionId=6fd29161-2e6c-429f-8f75-cd9184947d40 walletId=aadbf09c-d8c6-4fad-a39e-cfc62d258c9e providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.733s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.375s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.109s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.217s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.960s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.080s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.669s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.494s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.795s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.144s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.127s
+FAIL

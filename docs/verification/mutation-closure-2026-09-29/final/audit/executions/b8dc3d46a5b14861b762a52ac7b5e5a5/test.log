@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.541s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:09:29 INFO transaction handled correlationId="" messageId="" transactionId=49c9b3ed-cdac-49a8-b31d-2173fd97bdbd walletId=98fa79a8-2ee5-4554-ba17-558e13793f84 providerId=p status=PROCESSED
+2026/09/30 01:09:29 WARN transaction handling failed correlationId="" messageId="" transactionId=005b4bf0-0d97-48c0-aa29-569e9152c180 walletId=98fa79a8-2ee5-4554-ba17-558e13793f84 providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    --- FAIL: TestOutboxPublishRetryConfirmationAndLag/success (0.00s)
+        outbox_paths_test.go:94: incorrect success log: {"time":"2026-09-30T01:09:29.639438-03:00","level":"ERROR","msg":"event publication confirmation failed","eventId":"event","walletId":"wallet","transactionId":"tx","providerId":"p","correlationId":"correlation","messageId":"","attempt":3,"err":null}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.890s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.417s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.538s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.519s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.115s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.406s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.780s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.984s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.701s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	6.689s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	6.678s
+ok  	github.com/alexandre/wagering/internal/platform/logging	6.670s
+FAIL

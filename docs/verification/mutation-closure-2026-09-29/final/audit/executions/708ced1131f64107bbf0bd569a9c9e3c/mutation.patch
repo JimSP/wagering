@@ -1,0 +1,20 @@
+--- original/internal/domain/event/validation.go
++++ mutant/internal/domain/event/validation.go
+@@ -10,7 +10,7 @@
+ 
+ var ErrInvalidEvent = errors.New("invalid integration event")
+ 
+-func invalidEvent(reason string) error { return fmt.Errorf("%w: %s", ErrInvalidEvent, reason) }
++func invalidEvent(reason string) error	{ return fmt.Errorf("%w: %s", ErrInvalidEvent, reason) }
+ func exactMoney(d MoneyDTO) (money.Money, error) {
+ 	m, err := money.Parse(d.Amount, d.Currency)
+ 	if err != nil || m.Amount() != d.Amount || m.IsNegative() {
+@@ -62,7 +62,7 @@
+ 			return err
+ 		}
+ 		after, err := exactMoney(d.BalanceAfter)
+-		if err != nil {
++		if err == nil {
+ 			return err
+ 		}
+ 		var expected money.Money

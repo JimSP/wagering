@@ -1,0 +1,863 @@
+[
+  {
+    "id": "coesao_oraculos",
+    "tests": [
+      {
+        "name": "TestGeneratedJourneysMatchIndependentFinancialModel",
+        "path": "internal/app/usecase/model_semantics_test.go",
+        "line": 19
+      },
+      {
+        "name": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+        "path": "internal/app/usecase/http_contract_test.go",
+        "line": 124
+      },
+      {
+        "name": "TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent",
+        "path": "internal/app/usecase/journey_semantics_test.go",
+        "line": 49
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_fixtures",
+    "tests": [
+      {
+        "name": "TestPairedFixtureRollbackPreservesGuaranteeAndBinding",
+        "path": "internal/app/usecase/paired_bet_fixture_contract_test.go",
+        "line": 78
+      },
+      {
+        "name": "TestSettlementSQLObserversReadLiteralStoredFacts",
+        "path": "internal/infra/postgres/settlement_observer_control_integration_test.go",
+        "line": 19
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_asserts_conjuntos",
+    "tests": [
+      {
+        "name": "TestSettlementComparatorRejectsBalancedButWrongFinancialFacts",
+        "path": "internal/app/usecase/settlement_facts_contract_test.go",
+        "line": 56
+      },
+      {
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+        "line": 290
+      },
+      {
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+        "line": 64
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_contraparte",
+    "tests": [
+      {
+        "name": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 954
+      },
+      {
+        "name": "TestCommitmentComparisonRejectsWrongFundingDespiteCorrectBalances",
+        "path": "internal/testsupport/settlementfacts/commitments_test.go",
+        "line": 22
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_caminho_positivo",
+    "tests": [
+      {
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "path": "internal/app/usecase/paired_bet_contract_test.go",
+        "line": 45
+      },
+      {
+        "name": "TestSettlementFundedLifecycleOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 271
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_liquidacao_composta",
+    "tests": [
+      {
+        "name": "TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals",
+        "path": "internal/app/usecase/settlement_facts_contract_test.go",
+        "line": 36
+      },
+      {
+        "name": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 466
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_nomes_ack",
+    "tests": [
+      {
+        "name": "TestConsumerDeleteRequiresSuccessfulHandlerCompletion",
+        "path": "internal/infra/sqs/ack_boundary_contract_test.go",
+        "line": 21
+      },
+      {
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 149
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_sql_literal",
+    "tests": [
+      {
+        "name": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "line": 30
+      },
+      {
+        "name": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+        "path": "internal/app/usecase/settlement_message_contract_test.go",
+        "line": 35
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_erros",
+    "tests": [
+      {
+        "name": "TestHTTPInvalidInputsAndAuthorizationHaveNoEffects",
+        "path": "internal/app/usecase/http_contract_test.go",
+        "line": 202
+      },
+      {
+        "name": "TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries",
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "line": 56
+      },
+      {
+        "name": "TestSettlementDatabaseCommandPreservesRetryClassification",
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "line": 42
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "coesao_inventario_total",
+    "tests": [],
+    "assets": [
+      "scripts/audit-test-inventory.go"
+    ],
+    "readiness": "verification_or_delivery_stage",
+    "financial_acceptance": false
+  },
+  {
+    "id": "deposit_replay",
+    "tests": [
+      {
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 565
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "deposit_identity_conflict",
+    "tests": [
+      {
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 565
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "deposit_invalid_amount",
+    "tests": [
+      {
+        "name": "TestDepositIdentityAndValidationOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 565
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "bet_insufficient_own_guarantee",
+    "tests": [
+      {
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "path": "internal/app/usecase/paired_bet_contract_test.go",
+        "line": 45
+      },
+      {
+        "name": "TestPairedBETRejectedIdentityStaysRejectedAfterGuaranteeTopUp",
+        "path": "internal/app/usecase/paired_bet_fixture_contract_test.go",
+        "line": 101
+      },
+      {
+        "name": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+        "path": "internal/infra/postgres/settlement_admission_order_integration_test.go",
+        "line": 36
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "bet_exact_available",
+    "tests": [
+      {
+        "name": "TestPairedBETUsesOwnGuaranteeAndCreditsOperationalWallet",
+        "path": "internal/app/usecase/paired_bet_contract_test.go",
+        "line": 45
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "wrong_guarantee",
+    "tests": [
+      {
+        "name": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 954
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "standalone_win",
+    "tests": [
+      {
+        "name": "TestSettlementRejectsUnfundedWINWithRealPostgres",
+        "path": "internal/infra/postgres/settlement_safety_integration_test.go",
+        "line": 94
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "unfunded_profit",
+    "tests": [
+      {
+        "name": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 297
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "uncommitted_loser_cash",
+    "tests": [
+      {
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 597
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "other_bet_funds",
+    "tests": [
+      {
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+        "line": 290
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "wrong_currency",
+    "tests": [
+      {
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 597
+      },
+      {
+        "name": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "line": 30
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "wrong_provider_or_round",
+    "tests": [
+      {
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 597
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "duplicate_loser_allocation",
+    "tests": [
+      {
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 597
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "already_consumed_commitment",
+    "tests": [
+      {
+        "name": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 737
+      },
+      {
+        "name": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "line": 89
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "settlement_replay",
+    "tests": [
+      {
+        "name": "TestSettlementFundedLifecycleOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 271
+      },
+      {
+        "name": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 381
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "settlement_payload_conflict",
+    "tests": [
+      {
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 645
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "payout_exceeds_allocated",
+    "tests": [
+      {
+        "name": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 297
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "payout_wrong_guarantee",
+    "tests": [
+      {
+        "name": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 597
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "credit_overflow",
+    "tests": [
+      {
+        "name": "TestSettlementOverflowRollsBackEveryParticipantThenRetries",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 692
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "atomicity_every_write",
+    "tests": [
+      {
+        "name": "TestSettlementSQLWriteFailuresRollBackWholeBatchAndRetry",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 412
+      },
+      {
+        "name": "TestSettlementWriteProbeObservesAndAbortsEachActualRow",
+        "path": "internal/infra/postgres/settlement_write_probe_integration_test.go",
+        "line": 125
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "concurrent_same_commitment",
+    "tests": [
+      {
+        "name": "TestConcurrentResultsCannotCreateTwoSettlementsForSameCommitments",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 974
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "concurrent_opposite_pairs",
+    "tests": [
+      {
+        "name": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 765
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "independent_pairs",
+    "tests": [
+      {
+        "name": "TestSettlementLockedPairDoesNotBlockIndependentPair",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 811
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "queue_retry",
+    "tests": [
+      {
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 149
+      },
+      {
+        "name": "TestSettlementPublisherLeaseRejectsStaleOwner",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 217
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "reconciliation",
+    "tests": [
+      {
+        "name": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+        "path": "internal/infra/postgres/settlement_durable_observation_integration_test.go",
+        "line": 290
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "events",
+    "tests": [
+      {
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+        "line": 64
+      },
+      {
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 149
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "refund_unsettled_stake",
+    "tests": [
+      {
+        "name": "TestSettlementClosureAndRefundHaveOnlyOneValidAdmissionOrder",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 874
+      },
+      {
+        "name": "TestConcurrentReversalsAndFullRestart",
+        "path": "test/integration/recovery_test.go",
+        "line": 104
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "rollback_settlement",
+    "tests": [
+      {
+        "name": "TestSettlementRollbackPreservesClosedBetAndOriginalHistory",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 494
+      },
+      {
+        "name": "TestSettlementRollbackCannotBorrowOperationalOrOtherGuaranteeFunds",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 716
+      },
+      {
+        "name": "TestReversalsUndoOnlyEligibleUnreversedMovements",
+        "path": "internal/app/usecase/journey_semantics_test.go",
+        "line": 119
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_varias_apostas",
+    "tests": [
+      {
+        "name": "TestSettlementDoesNotWaitForUnconfirmedOtherBet",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 325
+      },
+      {
+        "name": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 765
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_identidade_estado",
+    "tests": [
+      {
+        "name": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 737
+      },
+      {
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 645
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_centavos",
+    "tests": [
+      {
+        "name": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 466
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "liquidacao_fronteira_id",
+    "tests": [
+      {
+        "name": "TestSettlementMessageExecutesOnlyIDInOneTransaction",
+        "path": "internal/app/usecase/settlement_message_contract_test.go",
+        "line": 35
+      },
+      {
+        "name": "TestSettlementMessageRejectsMissingIDAndInlineParticipants",
+        "path": "internal/app/usecase/settlement_message_contract_test.go",
+        "line": 99
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "autorizacao_participantes",
+    "tests": [
+      {
+        "name": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 645
+      },
+      {
+        "name": "TestSettlementBrokerRejectsForgedAuthority",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 37
+      },
+      {
+        "name": "TestSettlementEnvelopeOnExternalIngressCannotAcquireInternalAuthority",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 250
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "abertura_deposito_migracao",
+    "tests": [
+      {
+        "name": "TestOpeningZeroCreatesNoFinancialFactAndDuplicateOpeningIsAConflict",
+        "path": "internal/app/usecase/journey_semantics_test.go",
+        "line": 86
+      },
+      {
+        "name": "TestGuaranteeMigrationPreservesLegacyOriginAndRetriesAbortedDDL",
+        "path": "internal/infra/postgres/guarantee_migration_integration_test.go",
+        "line": 23
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "consultas_http_eventos",
+    "tests": [
+      {
+        "name": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+        "path": "internal/infra/postgres/settlement_events_queries_integration_test.go",
+        "line": 64
+      },
+      {
+        "name": "TestHTTPFinancialResponsesMatchContractAndPersistedFacts",
+        "path": "internal/app/usecase/http_contract_test.go",
+        "line": 124
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "constraints_banco",
+    "tests": [
+      {
+        "name": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "line": 30
+      },
+      {
+        "name": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+        "path": "internal/infra/postgres/settlement_constraints_integration_test.go",
+        "line": 89
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "ordem_deposito_aposta_liquidacao",
+    "tests": [
+      {
+        "name": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+        "path": "internal/infra/postgres/settlement_admission_order_integration_test.go",
+        "line": 36
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "desempenho_lote",
+    "tests": [
+      {
+        "name": "TestSettlementBatchMeasurementPreservesLiteralTotals",
+        "path": "internal/infra/postgres/settlement_batch_measurement_integration_test.go",
+        "line": 16
+      },
+      {
+        "name": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+        "path": "internal/infra/postgres/settlement_contract_test.go",
+        "line": 30
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_suite",
+    "tests": [],
+    "assets": [
+      "scripts/test-postgres-isolated.sh",
+      "scripts/test-integration.sh"
+    ],
+    "readiness": "verification_or_delivery_stage",
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_mutacao",
+    "tests": [],
+    "assets": [
+      "scripts/test-mutations.sh"
+    ],
+    "readiness": "verification_or_delivery_stage",
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_documentacao_entrega",
+    "tests": [],
+    "assets": [
+      "docs/analysis/garantia/CONTRATO_ATUAL.md",
+      "docs/analysis/garantia/PENDENCIAS.md"
+    ],
+    "readiness": "verification_or_delivery_stage",
+    "financial_acceptance": false
+  },
+  {
+    "id": "commit_resposta_perdida",
+    "tests": [
+      {
+        "name": "TestSettlementCommittedDespiteLostReplyReplaysAfterRestart",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 356
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "reentrega_outro_message_id",
+    "tests": [
+      {
+        "name": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+        "path": "internal/infra/postgres/settlement_lifecycle_integration_test.go",
+        "line": 381
+      },
+      {
+        "name": "TestSettlementAutomaticDeliverySurvivesPublishAndACKCrashes",
+        "path": "test/integration/settlement_system_test.go",
+        "line": 149
+      }
+    ],
+    "assets": [],
+    "readiness": "scenario_implemented",
+    "financial_acceptance": false
+  },
+  {
+    "id": "aceite_cobertura",
+    "tests": [],
+    "assets": [
+      "scripts/test-unit-coverage.sh",
+      "scripts/check_coverage.py"
+    ],
+    "readiness": "verification_or_delivery_stage",
+    "financial_acceptance": false
+  },
+  {
+    "id": "preparacao_integracao",
+    "tests": [],
+    "assets": [
+      "scripts/test-postgres-isolated.sh",
+      "scripts/test-integration.sh",
+      "deploy/docker-compose.test.yml"
+    ],
+    "readiness": "verification_or_delivery_stage",
+    "financial_acceptance": false
+  }
+]

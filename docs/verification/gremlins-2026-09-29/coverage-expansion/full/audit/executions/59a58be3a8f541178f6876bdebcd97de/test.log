@@ -1,0 +1,73 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.522s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:54:38 INFO transaction handled correlationId="" messageId="" transactionId=1a2f0f27-0e8c-4c75-8bbf-ef5afe7d425a walletId=71f1eecd-0a9a-4c8b-9484-79a6392ce32d providerId=p status=PROCESSED
+2026/09/29 01:54:38 WARN transaction handling failed correlationId="" messageId="" transactionId=08d9cea0-cc6f-4d84-829e-f47df618f66f walletId=71f1eecd-0a9a-4c8b-9484-79a6392ce32d providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/transient (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x10 pc=0x1027cb418]
+
+goroutine 68 [running]:
+testing.tRunner.func1.2({0x102ef02c8, 0x102fdbcd0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102ef02c8?, 0x102fdbcd0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wallet.(*Wallet).PlayerID(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/domain/wallet/wallet.go:53
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x51d8834364c0, {0x102f81080, 0x51d883219a40}, {0x102f81940, 0x51d88343e050}, 0x51d883402f00)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/process.go:77 +0xe8
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce.func1({0x102f81080, 0x51d883219a40}, {0x102f81940, 0x51d88343e050})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/workers.go:50 +0x124
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x28?, {0x102f81080?, 0x51d883219a40?}, 0x1026ce958?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce(0x51d883436500, {0x102f81080, 0x51d883219a40})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/workers.go:39 +0x148
+github.com/alexandre/wagering/internal/app/usecase.TestReferenceWorkerClassifiesRecoveryAndAuditFailures.func1(0x51d88343ad88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-4168274773/wd-1894114652/internal/app/usecase/reference_failure_test.go:72 +0x550
+testing.tRunner(0x51d88343ad88, 0x51d8832454e8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 66
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.844s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransportFailuresPreserveCauseAndRetryClassification (0.00s)
+    --- FAIL: TestTransportFailuresPreserveCauseAndRetryClassification/EOF (0.00s)
+        error_contract_test.go:18: classification=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.116s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 01:54:39 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:75: %!v(PANIC=Error method: runtime error: invalid memory address or nil pointer dereference)
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	1.761s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestHTTPErrorContractsDoNotExposeInfrastructureDetails (0.00s)
+    --- FAIL: TestHTTPErrorContractsDoNotExposeInfrastructureDetails/transient (0.00s)
+        contract_test.go:58: 500 map[Content-Type:[application/json]]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.437s
+FAIL

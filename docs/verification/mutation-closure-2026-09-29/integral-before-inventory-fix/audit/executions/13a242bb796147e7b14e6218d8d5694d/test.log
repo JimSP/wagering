@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.061s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:15:22 INFO transaction handled correlationId="" messageId="" transactionId=56a32364-b5c5-4aa7-ada2-d4ac72863a61 walletId=d73af714-f76b-45ef-8aab-05932430116e providerId=p status=PROCESSED
+2026/09/30 00:15:22 WARN transaction handling failed correlationId="" messageId="" transactionId=65476ef4-b969-4d4d-b5f8-f5f21ca85c0b walletId=d73af714-f76b-45ef-8aab-05932430116e providerId=p transient=false
+--- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting (0.00s)
+    --- FAIL: TestProcessSettlementLoadsPersistedOutcomeWithoutSecondPosting/success (0.00s)
+        paired_storage_failure_test.go:39: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.409s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.190s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.878s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.436s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/WIN (0.00s)
+        lifecycle_semantics_test.go:84: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.697s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.449s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.522s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.807s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementPersistenceDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementPersistenceDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:103: INVALID_INPUT: invalid input: invalid reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.757s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.162s
+FAIL

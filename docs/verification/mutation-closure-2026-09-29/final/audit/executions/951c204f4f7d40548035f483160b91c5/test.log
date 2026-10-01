@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.477s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.021s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.891s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.458s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.582s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.206s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.589s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.967s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.333s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingMissingReferenceIsAnObservation (0.00s)
+    accounting_mutation_test.go:64: step 3: SQL "SELECT status FROM bets WHERE id=$1 FOR UPDATE" lacks "ledger_accounts"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.888s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.502s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.502s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.122s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.973s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.965s
+ok  	github.com/alexandre/wagering/internal/platform/worker	9.135s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.270s
+FAIL

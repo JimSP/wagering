@@ -1,0 +1,57 @@
+# Only scripts/test-integration.sh creates this disposable Compose project.
+services:
+  postgres:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_USER: wagering
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate a private env file first}
+      POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?Generate a private env file first}
+      POSTGRES_DB: wagering
+    ports: ["127.0.0.1::5432"]
+    tmpfs: [/var/lib/postgresql/data]
+    volumes:
+      - ./postgres/roles.sql:/docker-entrypoint-initdb.d/roles.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U wagering"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  localstack:
+    image: ministackorg/ministack:1.5.17@sha256:11d7308bfc75029d55625b9525e84a2401431ed1ff2148c6311800ff5009ae9c
+    environment:
+      AUTH: 'true'
+      AWS_DEFAULT_REGION: us-east-1
+      PERSIST_STATE: '1'
+      STATE_DIR: /var/lib/ministack
+    ports: ["127.0.0.1::4566"]
+    tmpfs: [/var/lib/ministack]
+    volumes:
+      - ./localstack/init:/etc/localstack/init/ready.d:ro
+      - testcredentials:/credentials
+    healthcheck:
+      test: [CMD-SHELL, "test -f /credentials/ready"]
+      interval: 3s
+      timeout: 5s
+      retries: 40
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: [start-dev, --import-realm]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?Generate a private env file first}
+      KC_HEALTH_ENABLED: 'true'
+      TEST_PROVIDER_A_CLIENT_SECRET: ${TEST_PROVIDER_A_CLIENT_SECRET:?Missing client secret}
+      TEST_PROVIDER_B_CLIENT_SECRET: ${TEST_PROVIDER_B_CLIENT_SECRET:?Missing client secret}
+      TEST_INTERNAL_CLIENT_SECRET: ${TEST_INTERNAL_CLIENT_SECRET:?Missing client secret}
+      TEST_EXPIRED_CLIENT_SECRET: ${TEST_EXPIRED_CLIENT_SECRET:?Missing client secret}
+      KC_HOSTNAME_STRICT: 'false'
+    ports: ["127.0.0.1::8080"]
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+    healthcheck:
+      test: [CMD-SHELL, "bash -c 'exec 3<>/dev/tcp/localhost/9000; printf \"GET /health/ready HTTP/1.0\\r\\n\\r\\n\" >&3; read -r response <&3; [[ \"$$response\" == *200* ]]'"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+volumes:
+  testcredentials:

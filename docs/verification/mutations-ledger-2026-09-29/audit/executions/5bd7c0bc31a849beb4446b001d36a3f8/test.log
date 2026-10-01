@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.254s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:42:10 INFO transaction handled correlationId="" messageId="" transactionId=0fed9387-7a2f-4537-953a-2a6fec62ac1f walletId=5360deb7-23f4-431c-a9e4-3f6129a57e4d providerId=p status=PROCESSED
+2026/09/29 22:42:10 WARN transaction handling failed correlationId="" messageId="" transactionId=66ce2531-8045-47d8-a64c-26263bd593fd walletId=5360deb7-23f4-431c-a9e4-3f6129a57e4d providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid resolved reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.462s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.001s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.850s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.713s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:80: rehydration changed state: INVALID_INPUT: invalid input: invalid resolved reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.375s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.114s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.949s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.939s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid resolved reference want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.836s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.209s
+FAIL

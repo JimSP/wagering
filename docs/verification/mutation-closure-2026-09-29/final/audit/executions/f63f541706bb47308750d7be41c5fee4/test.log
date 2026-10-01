@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.276s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.724s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.507s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.640s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.896s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/provider (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID:p ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x3c22e32768d0 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL p    wallet player   OPENING {100 BRL}   PROCESSED  0x3c22e32769f0 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.452s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.858s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.635s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.198s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.757s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.800s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.473s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.454s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.507s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.565s
+FAIL

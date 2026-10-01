@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.260s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:25:14 INFO transaction handled correlationId="" messageId="" transactionId=baf58672-9db4-4007-b3b0-1feb9f714460 walletId=9e13fa96-ab7e-416c-904b-141ed10c7ab3 providerId=p status=PROCESSED
+2026/09/29 03:25:14 WARN transaction handling failed correlationId="" messageId="" transactionId=123f529a-72a3-48c5-9e47-bc74da0338f9 walletId=9e13fa96-ab7e-416c-904b-141ed10c7ab3 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid opening result
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.526s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.924s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.051s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid opening result
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.422s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.001s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.970s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.167s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: invalid opening result want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.803s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.903s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.916s
+FAIL

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.707s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:28:37 INFO transaction handled correlationId="" messageId="" transactionId=9b98ea8c-ec49-463b-939f-2eed46167f12 walletId=34b0f3c2-b2d4-4f69-a6b9-a47aa71c0b9a providerId=p status=PROCESSED
+2026/09/29 03:28:37 WARN transaction handling failed correlationId="" messageId="" transactionId=6274f1a4-7238-487f-9ed4-bc2dd85c0647 walletId=34b0f3c2-b2d4-4f69-a6b9-a47aa71c0b9a providerId=p transient=false
+--- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors (0.00s)
+    read_failure_test.go:19: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.349s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.992s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.858s
+ok  	github.com/alexandre/wagering/internal/domain/wager	4.140s
+--- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently (0.00s)
+    --- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently/id (0.00s)
+        input_contract_test.go:22: wallet=&{ player {0 BRL} 1 {0 63926236800 <nil>} {0 63926236800 <nil>}} error=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	4.023s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.559s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.762s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:128: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.336s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.662s
+FAIL

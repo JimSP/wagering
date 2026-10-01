@@ -1,0 +1,63 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.439s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:16:07 INFO transaction handled correlationId="" messageId="" transactionId=2a2b158a-a8bd-47b3-aad0-81ff004cbb8c walletId=30d6a99f-e2d5-417a-b1b6-a6842963f8f7 providerId=p status=PROCESSED
+2026/09/30 00:16:07 WARN transaction handling failed correlationId="" messageId="" transactionId=7a39e281-6eda-4518-97d3-f15d31e177f5 walletId=30d6a99f-e2d5-417a-b1b6-a6842963f8f7 providerId=p transient=false
+--- FAIL: TestProcessRequiresAccountingAndValidTransitionTime (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1009133d8]
+
+goroutine 48 [running]:
+testing.tRunner.func1.2({0x10118f1e0, 0x10127fb70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10118f1e0?, 0x10127fb70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).ReferenceExpired(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/transaction.go:236
+github.com/alexandre/wagering/internal/domain/wager.DecideAccounting(_, {{{0x100aeb6f6, 0x6}, {0x100aeb70e, 0x6}, {0x3e8, {0x100aeabf7, 0x3}}, 0x1, {0x0, ...}, ...}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/accounting.go:54 +0x198
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x43304ff57d58, {0x101225198, 0x1012c6380}, {0x101225dd0, 0x4330501371e0}, 0x43305017d200)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/process.go:85 +0x2c8
+github.com/alexandre/wagering/internal/app/usecase.TestProcessRequiresAccountingAndValidTransitionTime(0x4330501a6908)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/paired_storage_failure_test.go:96 +0x2d0
+testing.tRunner(0x4330501a6908, 0x10122a610)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.724s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.927s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.049s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.123s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/implicit_ambiguous_WIN (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x10106a2a8]
+
+goroutine 7 [running]:
+testing.tRunner.func1.2({0x101237bc8, 0x101279390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x101237bc8?, 0x101279390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).ReferenceExpired(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/transaction.go:236
+github.com/alexandre/wagering/internal/domain/wager.DecideAccounting(_, {{{0x10108af3d, 0x9}, {0x10108a3d1, 0x6}, {0x64, {0x101089e3d, 0x3}}, 0x1, {0x0, ...}, ...}, ...}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/accounting.go:54 +0x198
+github.com/alexandre/wagering/internal/domain/wager.TestAccountingRejectsCorruptFactsWithoutChangingBalances.func10(0x505ff8bfa908)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/domain/wager/accounting_test.go:53 +0x4dc
+testing.tRunner(0x505ff8bfa908, 0x505ff8be6930)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 5
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.725s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.797s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.246s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.173s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.486s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.139s
+FAIL

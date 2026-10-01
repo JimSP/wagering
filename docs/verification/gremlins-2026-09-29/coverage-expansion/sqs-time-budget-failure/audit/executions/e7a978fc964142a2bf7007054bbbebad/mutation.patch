@@ -1,0 +1,30 @@
+--- original/internal/infra/sqs/publisher.go
++++ mutant/internal/infra/sqs/publisher.go
+@@ -15,8 +15,8 @@
+ // Publisher sends outbox events to wager-events.fifo.
+ // MessageGroupId = aggregateId (ordering per aggregate); MessageDeduplicationId = eventId (republication-safe).
+ type Publisher struct {
+-	client   *awssqs.Client
+-	queueURL string
++	client		*awssqs.Client
++	queueURL	string
+ }
+ 
+ func NewPublisher(c *awssqs.Client, cfg config.Config) *Publisher {
+@@ -24,11 +24,11 @@
+ }
+ 
+ func (p *Publisher) Publish(ctx context.Context, ev event.Outgoing) error {
+-	_, err := p.client.SendMessage(ctx, &awssqs.SendMessageInput{
+-		QueueUrl:               &p.queueURL,
+-		MessageBody:            aws.String(string(ev.Payload())),
+-		MessageGroupId:         aws.String(ev.AggregateID()),
+-		MessageDeduplicationId: aws.String(ev.EventID()),
++	_, err := p.client.SendMessage(ctx, |awssqs.SendMessageInput{
++		QueueUrl:		&p.queueURL,
++		MessageBody:		aws.String(string(ev.Payload())),
++		MessageGroupId:		aws.String(ev.AggregateID()),
++		MessageDeduplicationId:	aws.String(ev.EventID()),
+ 		MessageAttributes: map[string]types.MessageAttributeValue{
+ 			"eventType": {DataType: aws.String("String"), StringValue: aws.String(ev.Type())},
+ 		},

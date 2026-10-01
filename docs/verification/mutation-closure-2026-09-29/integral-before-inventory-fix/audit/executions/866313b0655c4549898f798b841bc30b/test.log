@@ -1,0 +1,52 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.405s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:49:17 INFO transaction handled correlationId="" messageId="" transactionId=ab20b618-57d4-499f-91bf-a9384528c932 walletId=d73f4e25-786b-4deb-baeb-a571c8ef4026 providerId=p status=PROCESSED
+2026/09/30 00:49:17 WARN transaction handling failed correlationId="" messageId="" transactionId=1208cf73-f5ed-4fb4-b623-b493760d3768 walletId=d73f4e25-786b-4deb-baeb-a571c8ef4026 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.03s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.03s)
+        result_lifecycle_contract_test.go:78: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 500 {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.677s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.574s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.793s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.464s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.336s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.677s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.405s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.205s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.674s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.542s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.560s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.562s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.634s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.648s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.378s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.359s
+--- FAIL: TestSettlementHTTPDecodingAndReverseBody (0.00s)
+    --- FAIL: TestSettlementHTTPDecodingAndReverseBody/create (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x1027e0180]
+
+goroutine 115 [running]:
+testing.tRunner.func1.2({0x102ea3720, 0x102f8c010})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102ea3720?, 0x102f8c010?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Settlements(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/settlement.go:23
+github.com/alexandre/wagering/internal/transport/httpapi.handlers.createBet({{{{}}, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, {0x0, ...}}}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/transport/httpapi/settlement.go:20 +0x80
+github.com/alexandre/wagering/internal/transport/httpapi.TestSettlementHTTPDecodingAndReverseBody.func1(0x6f3a59060fc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/transport/httpapi/settlement_mutation_test.go:49 +0x190
+testing.tRunner(0x6f3a59060fc8, 0x6f3a59044a80)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 114
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.322s
+ok  	github.com/alexandre/wagering/scripts	1.224s
+FAIL

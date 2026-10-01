@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.624s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:14:31 INFO transaction handled correlationId="" messageId="" transactionId=217e8068-be81-4aa4-a61a-949af89c6db0 walletId=eb0558f5-a2b4-4cde-b6da-a1783cc8b7cf providerId=p status=PROCESSED
+2026/09/29 03:14:31 WARN transaction handling failed correlationId="" messageId="" transactionId=c09a5486-835a-447e-bfca-8d2c6a068605 walletId=eb0558f5-a2b4-4cde-b6da-a1783cc8b7cf providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    outbox_paths_test.go:21: invalid integration event: stored metadata mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.980s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:65: zero attempts roundtrip: {    0 0 {0 0 <nil>}} invalid integration event: stored metadata mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.248s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.429s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.210s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.994s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.253s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.313s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:62: error=invalid integration event: stored metadata mismatch want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.739s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.319s
+FAIL

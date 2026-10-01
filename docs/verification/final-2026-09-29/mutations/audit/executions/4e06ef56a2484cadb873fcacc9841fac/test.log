@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.897s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:31:33 INFO transaction handled correlationId="" messageId="" transactionId=ed56a451-7bca-4725-8222-6967a6cf19de walletId=6e544fe0-af8e-46a7-9936-ebccd0ee14d8 providerId=p status=PROCESSED
+2026/09/29 03:31:33 WARN transaction handling failed correlationId="" messageId="" transactionId=577585af-78e7-4152-a67e-9362352bdbf4 walletId=6e544fe0-af8e-46a7-9936-ebccd0ee14d8 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.13s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+    http_contract_test.go:191: HTTP contract: 401 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"UNAUTHENTICATED"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.673s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.031s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.207s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.768s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	4.190s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.09s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/valid (0.00s)
+        authorization_paths_test.go:94: 401
+    authorization_paths_test.go:116: stale keys accepted auth: invalid token
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	3.991s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.638s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.941s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	4.088s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.411s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.381s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.373s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.057s
+FAIL

@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.069s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.007s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.568s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.697s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.506s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.928s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.720s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.815s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:217: insert args=[]interface {}{"tx", "INTERNAL", "", "", "", "", "wallet", "player", "", "", "OPENING", 100, "BRL", "", "", "PROCESSED", "", (*int64)(nil), 0, <nil>, <nil>, time.Date(2026, time.January, 2, 3, 4, 5, 0, time.UTC), time.Date(2026, time.January, 2, 3, 4, 5, 0, time.UTC), "", ""}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.243s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.266s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.550s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.464s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.327s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.238s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.690s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.755s
+FAIL

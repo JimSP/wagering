@@ -1,0 +1,59 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.126s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: INVALID_INPUT: invalid input: uninitialized transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.487s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.944s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.568s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x1023a84cc]
+
+goroutine 19 [running]:
+testing.tRunner.func1.2({0x10256ae28, 0x1025a9390})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10256ae28?, 0x1025a9390?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/domain/wager_test.TestPendingRetryErrorsHaveExactText(0x5eea8b8ee248)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/domain/wager/error_text_contract_test.go:13 +0x50
+testing.tRunner(0x5eea8b8ee248, 0x10258da58)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.827s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.419s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.169s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.980s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x104de233c]
+
+goroutine 34 [running]:
+testing.tRunner.func1.2({0x10555ec48, 0x105650f30})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10555ec48?, 0x105650f30?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/infra/postgres.transactionRepo.Update({{0x1055d9920?, 0x42e0a8e1000?}}, {0x1055da6d8, 0x10568fe20}, 0x0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/infra/postgres/transaction_repo.go:73 +0x40
+github.com/alexandre/wagering/internal/infra/postgres.TestTransactionPersistenceContract(0x42e0a9c2b48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/infra/postgres/repository_contract_test.go:302 +0x1650
+testing.tRunner(0x42e0a9c2b48, 0x1055dd108)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.733s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.277s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.987s
+FAIL

@@ -1,0 +1,44 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.810s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:06:57 INFO transaction handled correlationId="" messageId="" transactionId=8ff87f9f-1b30-46a3-b04f-2c6c8c86fc78 walletId=740287c6-16a3-4441-a6d0-2e0267917457 providerId=p status=PROCESSED
+2026/09/29 03:06:57 WARN transaction handling failed correlationId="" messageId="" transactionId=549ff5db-5e06-4f6b-ad15-4ad7afd01d11 walletId=740287c6-16a3-4441-a6d0-2e0267917457 providerId=p transient=false
+--- FAIL: TestSubmitInputAndLookupFailures (0.00s)
+    --- FAIL: TestSubmitInputAndLookupFailures/insert (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x1027d02ac]
+
+goroutine 103 [running]:
+testing.tRunner.func1.2({0x102ff02c8, 0x1030dbb60})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102ff02c8?, 0x1030dbb60?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute.func2({0x103080e88, 0x103121f00}, {0x103081940, 0x691d8cdb25a0})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/transaction.go:144 +0x300
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x38?, {0x103080e88?, 0x103121f00?}, 0x0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute(_, {_, _}, {{0x102978578, 0x4}, {0x102978160, 0x1}, {0x102978335, 0x3}, {0x0, ...}, ...})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/transaction.go:103 +0x900
+github.com/alexandre/wagering/internal/app/usecase.TestSubmitInputAndLookupFailures.func5(0x691d8cdbe008)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/submit_failure_test.go:76 +0x580
+testing.tRunner(0x691d8cdbe008, 0x691d8cd254b8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 96
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.162s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.625s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.750s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.872s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.980s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.536s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.089s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.312s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.511s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.558s
+FAIL

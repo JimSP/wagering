@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.507s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:04:39 INFO transaction handled correlationId="" messageId="" transactionId=373f0362-2cc4-4898-b471-50fe571b9222 walletId=7366e54f-3555-4b93-a486-bd0e22505ccd providerId=p status=PROCESSED
+2026/09/29 03:04:39 WARN transaction handling failed correlationId="" messageId="" transactionId=42a30f5b-4d1d-4693-ad84-fc3fe906cb34 walletId=7366e54f-3555-4b93-a486-bd0e22505ccd providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.10s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:154: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000032","status":"REJECTED","failureCode":"REFERENCE_NOT_FOUND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.384s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.381s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.585s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.931s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.503s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.433s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.814s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.986s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.711s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.648s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.609s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.429s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.096s
+FAIL

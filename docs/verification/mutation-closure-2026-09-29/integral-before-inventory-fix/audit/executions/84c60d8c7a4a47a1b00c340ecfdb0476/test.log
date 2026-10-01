@@ -1,0 +1,19 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.238s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.473s
+--- FAIL: TestZeroMovementIsInvalidEvenWhenBalanceEquationHolds (0.00s)
+    input_contract_test.go:74: zero movement={event wallet WalletBalanceChanged {"eventId":"event","eventType":"WalletBalanceChanged","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"walletId":"wallet","transactionId":"tx","direction":"CREDIT","money":{"amount":"0.00","currency":"BRL"},"balanceBefore":{"amount":"1.00","currency":"BRL"},"balanceAfter":{"amount":"1.00","currency":"BRL"},"walletVersion":1}} 1 0 {0 63926193600 <nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.771s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.228s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.991s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.473s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.592s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.502s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.910s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.889s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.134s
+FAIL

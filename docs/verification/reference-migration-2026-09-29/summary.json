@@ -1,0 +1,33 @@
+{
+  "unit_race": {
+    "command": "go test -count=1 -race -json ./...",
+    "exit_code": 1,
+    "main": {
+      "pass": 125,
+      "fail": 33
+    },
+    "leaves": {
+      "pass": 594,
+      "fail": 304
+    }
+  },
+  "isolated_postgres": {
+    "executed_this_round": false,
+    "previous_evidence": "../journey-migration-2026-09-29/postgres-final.jsonl"
+  },
+  "inventory": {
+    "files": 77,
+    "kinds": {
+      "test": 186,
+      "fuzz": 1,
+      "harness": 1
+    },
+    "subtest_declarations": 110
+  },
+  "production_go_changes": [],
+  "all_previous_test_declarations_preserved": true,
+  "desafio_and_user_script_preserved": true,
+  "vet_exit_code": 0,
+  "financial_suite_ready": false,
+  "full_settlement_integration_proven": false
+}

@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.189s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:25:54 INFO transaction handled correlationId="" messageId="" transactionId=e1f1b4d7-ab85-45f2-bbc6-3f880623279a walletId=e2981850-3f28-49a7-8a33-5a44b48d33aa providerId=p status=PROCESSED
+2026/09/29 22:25:54 WARN transaction handling failed correlationId="" messageId="" transactionId=e64fd002-b392-4db1-aeee-641dce6363ad walletId=e2981850-3f28-49a7-8a33-5a44b48d33aa providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.520s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: movement amount
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.521s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.636s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.786s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.771s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.063s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.642s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.930s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.098s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.328s
+FAIL

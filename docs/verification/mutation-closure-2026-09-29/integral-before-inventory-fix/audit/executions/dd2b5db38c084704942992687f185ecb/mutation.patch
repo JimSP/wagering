@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -110,7 +110,7 @@
+ 			}
+ 			f.Restores = append(f.Restores, restore)
+ 		}
+-		if err = rows.Err(); err != nil {
++		if err = rows.Err(); err == nil {
+ 			return f, err
+ 		}
+ 	}

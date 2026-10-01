@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.949s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.731s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.367s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.061s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.115s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.360s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.225s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.987s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.667s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.248s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.772s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.773s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.751s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.326s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.335s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.290s
+--- FAIL: TestBalanceFixtureAndEnvelopeFieldsIndependently (0.00s)
+    --- FAIL: TestBalanceFixtureAndEnvelopeFieldsIndependently/valid-version-one (0.00s)
+        mutation_regression_test.go:193: verdict: balance payload differs from declared movement: got {WalletID:w TransactionID:t Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:1} want {WalletID:w TransactionID:t Direction: Money:{Amount: Currency:} BalanceBefore:{Amount: Currency:} BalanceAfter:{Amount: Currency:} WalletVersion:1}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.412s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.303s
+ok  	github.com/alexandre/wagering/scripts	2.849s
+FAIL

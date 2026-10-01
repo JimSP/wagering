@@ -1,0 +1,34 @@
+--- original/internal/testsupport/settlementfacts/facts.go
++++ mutant/internal/testsupport/settlementfacts/facts.go
+@@ -11,16 +11,16 @@
+ // adapter must supply observed facts; this comparator never executes settlement.
+ // One account may have several postings with distinct intermediate balances.
+ type Posting struct {
+-	Account, Direction, Currency string
+-	Amount, Before, After        int64
++	Account, Direction, Currency	string
++	Amount, Before, After		int64
+ }
+ type Journal struct {
+-	ID, Bet, Reverses string
+-	Postings          []Posting
++	ID, Bet, Reverses	string
++	Postings		[]Posting
+ }
+ type Facts struct {
+-	Balances map[string]int64
+-	Journals []Journal
++	Balances	map[string]int64
++	Journals	[]Journal
+ }
+ 
+ // Compare literal expected journals as a multiset. Ordering a debit and its
+@@ -30,7 +30,7 @@
+ 	if !reflect.DeepEqual(got.Balances, want.Balances) {
+ 		return fmt.Errorf("account snapshots differ: got=%v want=%v", got.Balances, want.Balances)
+ 	}
+-	if len(got.Journals) != len(want.Journals) {
++	if len(got.Journals) == len(want.Journals) {
+ 		return fmt.Errorf("journal count: got=%d want=%d", len(got.Journals), len(want.Journals))
+ 	}
+ 	canonical := func(j Journal) string {

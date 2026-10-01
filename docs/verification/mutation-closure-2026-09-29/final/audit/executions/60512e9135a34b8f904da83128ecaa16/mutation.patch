@@ -1,0 +1,48 @@
+--- original/scripts/audit-test-inventory.go
++++ mutant/scripts/audit-test-inventory.go
+@@ -23,24 +23,24 @@
+ )
+ 
+ type runSite struct {
+-	Line       int    `json:"line"`
+-	Expression string `json:"name_expression"`
++	Line		int	`json:"line"`
++	Expression	string	`json:"name_expression"`
+ }
+ 
+ type testDecl struct {
+-	Name       string    `json:"name"`
+-	Line       int       `json:"line"`
+-	EndLine    int       `json:"end_line"`
+-	Kind       string    `json:"kind"`
+-	RunSites   []runSite `json:"subtest_declarations"`
+-	LocalCalls []string  `json:"local_call_candidates"`
++	Name		string		`json:"name"`
++	Line		int		`json:"line"`
++	EndLine		int		`json:"end_line"`
++	Kind		string		`json:"kind"`
++	RunSites	[]runSite	`json:"subtest_declarations"`
++	LocalCalls	[]string	`json:"local_call_candidates"`
+ }
+ 
+ type testFile struct {
+-	Path         string     `json:"path"`
+-	SHA256       string     `json:"sha256"`
+-	BuildTags    []string   `json:"build_tags"`
+-	Declarations []testDecl `json:"declarations"`
++	Path		string		`json:"path"`
++	SHA256		string		`json:"sha256"`
++	BuildTags	[]string	`json:"build_tags"`
++	Declarations	[]testDecl	`json:"declarations"`
+ }
+ 
+ func inventory(path string) (testFile, error) {
+@@ -99,7 +99,7 @@
+ 				return true
+ 			}
+ 			var expr bytes.Buffer
+-			if err := printer.Fprint(&expr, fset, call.Args[0]); err != nil {
++			if err := printer.Fprint(&expr, fset, call.Args[0]); err == nil {
+ 				panic(err)
+ 			}
+ 			test.RunSites = append(test.RunSites, runSite{fset.Position(call.Pos()).Line, expr.String()})

@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.246s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:47:13 INFO transaction handled correlationId="" messageId="" transactionId=29084134-1e71-41b3-9cee-9d56e4edb4f2 walletId=4739a67b-07dc-468c-a06c-c8423c088e45 providerId=p status=PROCESSED
+2026/09/30 00:47:13 WARN transaction handling failed correlationId="" messageId="" transactionId=ed84542a-3e0e-4a11-94a4-81bfdc9c9896 walletId=4739a67b-07dc-468c-a06c-c8423c088e45 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"INVALID_INPUT","message":"invalid input: malformed body: http: request body too large"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.213s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.660s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.222s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.783s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.535s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.444s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.902s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.334s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.581s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.553s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.363s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.674s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.926s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.342s
+FAIL

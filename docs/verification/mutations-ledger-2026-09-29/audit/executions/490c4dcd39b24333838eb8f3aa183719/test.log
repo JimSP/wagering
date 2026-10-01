@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.711s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.794s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.367s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.212s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.850s
+--- FAIL: TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies (0.00s)
+    --- FAIL: TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies/internal_opening (0.00s)
+        lifecycle_semantics_test.go:225: rehydration changed state: INVALID_INPUT: invalid input: invalid opening result
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.069s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.185s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.841s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.813s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid opening result want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.691s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.996s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.775s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.527s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.694s
+FAIL

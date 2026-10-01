@@ -1,0 +1,39 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.373s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:14:50 INFO transaction handled correlationId="" messageId="" transactionId=031d8fd8-924d-4da5-b5b2-2122c4ac542e walletId=57ecd0ed-0dfc-49e7-b4bb-e8e83d99eb7c providerId=p status=PROCESSED
+2026/09/29 03:14:50 WARN transaction handling failed correlationId="" messageId="" transactionId=f4a86153-e22b-4913-9fd3-856d5e494fe0 walletId=57ecd0ed-0dfc-49e7-b4bb-e8e83d99eb7c providerId=p transient=false
+--- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors (0.00s)
+    --- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors/reconciliation/currency (0.00s)
+        read_failure_test.go:92: money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.697s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/currency (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","playerId":"p","providerId":"provider","externalTransactionId":"ext","roundId":"r","money":{"amount":"1.00","currency":"XYZ"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.611s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.365s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:52: money: invalid currency
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.934s
+--- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState (0.00s)
+    --- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState/wrong_debit_currency (0.00s)
+        semantics_test.go:91: money: invalid currency
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.163s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.423s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.274s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:187: error=<nil> want=money: invalid currency
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.910s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.619s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.381s
+FAIL

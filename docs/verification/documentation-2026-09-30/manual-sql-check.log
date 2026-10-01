@@ -1,0 +1,57 @@
+BEGIN
+                                                    QUERY PLAN                                                     
+-------------------------------------------------------------------------------------------------------------------
+ Nested Loop  (cost=0.30..16.35 rows=1 width=96)
+   ->  Index Scan using wallets_id_currency_key on wallets w  (cost=0.15..8.17 rows=1 width=48)
+         Index Cond: (id = '00000000-0000-0000-0000-000000000000'::uuid)
+   ->  Index Scan using ledger_accounts_wallet_id_role_key on ledger_accounts a  (cost=0.15..8.17 rows=1 width=32)
+         Index Cond: ((wallet_id = '00000000-0000-0000-0000-000000000000'::uuid) AND (role = 'GUARANTEE'::text))
+(5 rows)
+
+                                          QUERY PLAN                                           
+-----------------------------------------------------------------------------------------------
+ Sort  (cost=8.17..8.18 rows=1 width=288)
+   Sort Key: created_at, id
+   ->  Index Scan using ix_tx_wallet on wager_transactions  (cost=0.14..8.16 rows=1 width=288)
+         Index Cond: (wallet_id = '00000000-0000-0000-0000-000000000000'::uuid)
+(4 rows)
+
+                                         QUERY PLAN                                          
+---------------------------------------------------------------------------------------------
+ Index Scan using ix_entries_wallet_seq on ledger_entries  (cost=0.12..8.15 rows=1 width=81)
+   Index Cond: (wallet_id = '00000000-0000-0000-0000-000000000000'::uuid)
+(2 rows)
+
+                                                             QUERY PLAN                                                              
+-------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=24.51..24.55 rows=1 width=96)
+   Group Key: a.balance_minor
+   ->  Sort  (cost=24.51..24.52 rows=1 width=80)
+         Sort Key: a.balance_minor
+         ->  Nested Loop Left Join  (cost=0.42..24.50 rows=1 width=80)
+               ->  Nested Loop  (cost=0.30..16.35 rows=1 width=24)
+                     ->  Index Only Scan using wallets_id_currency_key on wallets w  (cost=0.15..8.17 rows=1 width=16)
+                           Index Cond: (id = '00000000-0000-0000-0000-000000000000'::uuid)
+                     ->  Index Scan using ledger_accounts_wallet_id_role_key on ledger_accounts a  (cost=0.15..8.17 rows=1 width=24)
+                           Index Cond: ((wallet_id = '00000000-0000-0000-0000-000000000000'::uuid) AND (role = 'GUARANTEE'::text))
+               ->  Index Scan using ix_entries_wallet_seq on ledger_entries  (cost=0.12..8.14 rows=1 width=72)
+                     Index Cond: (wallet_id = '00000000-0000-0000-0000-000000000000'::uuid)
+(12 rows)
+
+                                  QUERY PLAN                                   
+-------------------------------------------------------------------------------
+ Sort  (cost=14.89..14.90 rows=2 width=100)
+   Sort Key: occurred_at, event_id
+   ->  Seq Scan on outbox_events  (cost=0.00..14.88 rows=2 width=100)
+         Filter: (aggregate_id = '00000000-0000-0000-0000-000000000000'::uuid)
+(4 rows)
+
+                                  QUERY PLAN                                  
+------------------------------------------------------------------------------
+ Limit  (cost=26.47..26.52 rows=20 width=80)
+   ->  Sort  (cost=26.47..27.60 rows=450 width=80)
+         Sort Key: received_at DESC
+         ->  Seq Scan on inbox_messages  (cost=0.00..14.50 rows=450 width=80)
+(4 rows)
+
+ROLLBACK

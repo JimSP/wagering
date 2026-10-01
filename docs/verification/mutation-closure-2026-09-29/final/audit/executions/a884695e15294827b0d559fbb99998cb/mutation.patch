@@ -1,0 +1,20 @@
+--- original/internal/infra/postgres/settlement_audit_repo.go
++++ mutant/internal/infra/postgres/settlement_audit_repo.go
+@@ -12,7 +12,7 @@
+ 	"time"
+ )
+ 
+-func (t txAdapter) SettlementAudit() port.SettlementAuditStore { return settlementRepo{t.q} }
++func (t txAdapter) SettlementAudit() port.SettlementAuditStore	{ return settlementRepo{t.q} }
+ func (r settlementRepo) readSettlement(ctx context.Context, id string, lock bool) (port.SettlementRecord, error) {
+ 	query := `SELECT id::text,bet_id::text,result_key,distribution_hash,status FROM settlements WHERE id=$1`
+ 	if lock {
+@@ -88,7 +88,7 @@
+ func (r settlementRepo) LockReversal(ctx context.Context, id string) (port.SettlementRecord, settlement.ReversalFacts, error) {
+ 	f := settlement.ReversalFacts{Accounts: map[string]wallet.Snapshot{}}
+ 	s, err := r.readSettlement(ctx, id, true)
+-	if err != nil {
++	if err == nil {
+ 		return s, f, err
+ 	}
+ 	f.Status = s.Status

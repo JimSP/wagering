@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.707s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:13:03 INFO transaction handled correlationId="" messageId="" transactionId=7016a574-e914-486c-b3bb-33de2057bb5d walletId=d9aa87c6-1a98-419d-994f-902066d60b29 providerId=p status=PROCESSED
+2026/09/29 02:13:03 WARN transaction handling failed correlationId="" messageId="" transactionId=fb5582be-1ca8-47b0-af34-0c924bf4232f walletId=d9aa87c6-1a98-419d-994f-902066d60b29 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:154: HTTP contract: 200 map[Content-Type:[application/json] X-Correlation-Id:[533e8a26-2ff4-4f65-af0d-70289f3cfc33]] {"transactionId":"00000000-0000-4000-8000-000000000006","status":"PROCESSED","balance":{"amount":"80.00","currency":"BRL"},"idempotentReplay":false}
+    http_contract_test.go:191: HTTP contract: 200 map[Content-Type:[application/json] X-Correlation-Id:[b9426724-7bc6-483e-92af-d7d9c6c4b51a]] {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.402s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestCorrelationHeaderMatchesContextAndHonorsCancellation (0.00s)
+    --- FAIL: TestCorrelationHeaderMatchesContextAndHonorsCancellation/supplied= (0.00s)
+        contract_test.go:175: correlation identity lost
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.015s
+FAIL

@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.273s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:27:11 INFO transaction handled correlationId="" messageId="" transactionId=e28e2cfa-0ef2-4bce-82b6-500b5278fa50 walletId=aaac49dc-bf87-4649-9f6d-f2936ba6b3f1 providerId=p status=PROCESSED
+2026/09/29 03:27:11 WARN transaction handling failed correlationId="" messageId="" transactionId=f01f578f-e770-4783-a04f-334dc8c4172c walletId=aaac49dc-bf87-4649-9f6d-f2936ba6b3f1 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.11s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/win (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.692s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.061s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.679s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/REFUND (0.00s)
+        lifecycle_semantics_test.go:82: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.936s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.499s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.392s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.614s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.935s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.400s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.935s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.623s
+FAIL

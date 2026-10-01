@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.099s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:03:58 INFO transaction handled correlationId="" messageId="" transactionId=25ea6739-3bf0-467d-9de4-1964ef839b4e walletId=cf0e26eb-cbe5-4696-9f81-27c890d6abbc providerId=p status=PROCESSED
+2026/09/30 00:03:58 WARN transaction handling failed correlationId="" messageId="" transactionId=24e83c1a-2ec4-4f5c-b96e-cb975e282805 walletId=cf0e26eb-cbe5-4696-9f81-27c890d6abbc providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.03s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.03s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: allocation exceeds eligible stake"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.710s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.165s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.874s
+--- FAIL: TestDistributionRequiresCompleteConservedStakes (0.00s)
+    --- FAIL: TestDistributionRequiresCompleteConservedStakes/funded (0.00s)
+        plan_test.go:30: validation=invalid settlement distribution: allocation exceeds eligible stake
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.483s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.732s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.591s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.515s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.603s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.486s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.048s
+FAIL

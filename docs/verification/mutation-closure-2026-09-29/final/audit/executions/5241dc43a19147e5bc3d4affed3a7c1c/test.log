@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.767s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:04:39 INFO transaction handled correlationId="" messageId="" transactionId=ef2ad247-a0e4-42be-83b3-4af13fd428db walletId=9bc2638f-aaac-46c2-a57e-b2e18d2b98e8 providerId=p status=PROCESSED
+2026/09/30 01:04:39 WARN transaction handling failed correlationId="" messageId="" transactionId=9d769bb8-dd28-4705-a6d6-42c74e55cde8 walletId=9bc2638f-aaac-46c2-a57e-b2e18d2b98e8 providerId=p transient=false
+--- FAIL: TestSettlementMessageRejectsMissingIDAndInlineParticipants (0.00s)
+    --- FAIL: TestSettlementMessageRejectsMissingIDAndInlineParticipants/{"messageId":"m","type":"SettlementRequested","occurredAt":"2026-09-29T12:00:00Z","data":{"settlementId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a7","wallets":["A","B"]}} (0.00s)
+        settlement_message_contract_test.go:115: err=permanent: invalid input: settlement executor not configured writes=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.676s
+ok  	github.com/alexandre/wagering/internal/domain/event	7.732s
+ok  	github.com/alexandre/wagering/internal/domain/money	7.985s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.095s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.023s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.844s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.950s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.894s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.794s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.686s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.690s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.679s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.701s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.708s
+FAIL

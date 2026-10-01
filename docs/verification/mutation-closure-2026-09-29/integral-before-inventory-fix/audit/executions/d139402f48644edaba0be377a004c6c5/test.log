@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.913s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.216s
+--- FAIL: TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot (0.00s)
+    --- FAIL: TestOutboxRehydrationRejectsMetadataThatDisagreesWithSnapshot/id (0.00s)
+        semantics_test.go:162: inconsistent outbox record accepted <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.103s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.848s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.089s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.628s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.715s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.172s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.967s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:84: [{ wallet WagerTransactionProcessed {"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"corr","occurredAt":"2026-01-02T03:04:05Z","version":1,"data":{"transactionId":"tx","kind":"OPENING","walletId":"wallet","playerId":"player","money":{"amount":"1.00","currency":"BRL"}}} 1 2 {0 63902919845 <nil>}}] <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.389s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.113s
+FAIL

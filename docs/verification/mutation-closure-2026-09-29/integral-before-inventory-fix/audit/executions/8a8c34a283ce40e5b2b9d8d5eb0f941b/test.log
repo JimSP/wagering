@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.527s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:01:35 INFO transaction handled correlationId="" messageId="" transactionId=78b3ac77-b476-42ea-a77b-a6e45e2e97f8 walletId=d8b288e2-37d8-4a4d-9094-aa798de5f2d6 providerId=p status=PROCESSED
+2026/09/30 00:01:35 WARN transaction handling failed correlationId="" messageId="" transactionId=538b42d8-cf6a-475d-9f04-69d6a38601b7 walletId=d8b288e2-37d8-4a4d-9094-aa798de5f2d6 providerId=p transient=false
+--- FAIL: TestReconciliationReportsCorruptionWithoutRepairingHistory (0.00s)
+    journey_semantics_test.go:88: { {0 } {0 } {0 } false 0} money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.698s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.985s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:33: x=-9223372036854775808 y=-9223372036854775808 subtract=true got={0 } err=money: overflow want=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.688s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.415s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/overdraft (0.00s)
+        ledger_semantics_test.go:80: money: overflow
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.985s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.627s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.026s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.373s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.271s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.593s
+FAIL

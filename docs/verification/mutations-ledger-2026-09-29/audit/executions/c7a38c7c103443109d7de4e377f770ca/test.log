@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.460s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:33:30 INFO transaction handled correlationId="" messageId="" transactionId=8494d093-5d5d-4d02-884d-584e3c5cd262 walletId=6bb3b61d-b210-4fe1-8342-56e495c071e2 providerId=p status=PROCESSED
+2026/09/29 22:33:30 WARN transaction handling failed correlationId="" messageId="" transactionId=0a0365da-a076-4176-a604-19cc41d2950a walletId=6bb3b61d-b210-4fe1-8342-56e495c071e2 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got settlement is not processed: missing counterparty, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.354s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.803s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.454s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: settlement is not processed: missing counterparty
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.971s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.691s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.070s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.317s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.572s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.723s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.401s
+FAIL

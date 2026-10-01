@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.308s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.01s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/success (0.01s)
+        failpoint_contract_test.go:60: exit=exit status 1 output=--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+                failpoint_contract_test.go:20: invalid integration event: rejected fact
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.525s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/rejected/external (0.00s)
+        input_contract_test.go:45: output={eventID:event aggregateID:wallet typ:WagerTransactionRejected payload:{"eventId":"event","eventType":"WagerTransactionRejected","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","providerId":"provider","externalTransactionId":"","failureCode":"INSUFFICIENT_FUNDS"}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+    input_contract_test.go:61: invalid integration event: rejected fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.334s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.905s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.021s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.808s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.937s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.038s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.070s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.635s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.260s
+FAIL

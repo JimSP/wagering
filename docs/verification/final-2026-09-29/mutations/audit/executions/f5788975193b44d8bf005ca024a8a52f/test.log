@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.160s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:36 INFO transaction handled correlationId="" messageId="" transactionId=fdd1bdcb-ab3c-490c-9b14-899ace02254c walletId=abb37c1c-3e0a-4a0f-9df2-3527cdd54f1c providerId=p status=PROCESSED
+2026/09/29 03:24:36 WARN transaction handling failed correlationId="" messageId="" transactionId=eddfd646-7e4c-4159-ba5c-15fe2b6a2fce walletId=abb37c1c-3e0a-4a0f-9df2-3527cdd54f1c providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid reference attempt
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.459s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.263s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.845s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid reference attempt
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.530s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.709s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.216s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.638s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid reference attempt want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.153s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.981s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.988s
+FAIL

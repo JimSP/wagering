@@ -1,0 +1,37 @@
+{
+  "go test -count=1 -race -json ./... (sandbox)": {
+    "exit_code": 1,
+    "valid_final_evidence": false,
+    "reason": "local listener denied"
+  },
+  "go test -count=1 -race -json ./... (approved outside sandbox)": {
+    "exit_code": 1,
+    "valid_final_evidence": true
+  },
+  "go vet ./...": {
+    "exit_code": 0
+  },
+  "go run scripts/audit-test-inventory.go": {
+    "exit_code": 0
+  },
+  "python3 docs/verification/test-readiness-2026-09-29/build-audit.py": {
+    "exit_code": 0
+  },
+  "python3 scripts/check_coverage.py": {
+    "exit_code": 0,
+    "scope": "191/191 documentation references only"
+  },
+  "graphify update .": {
+    "exit_code": 0,
+    "sql_parser_available": false
+  },
+  "integration": {
+    "executed": false
+  },
+  "statement_coverage": {
+    "executed": false
+  },
+  "mutation_campaign": {
+    "executed": false
+  }
+}

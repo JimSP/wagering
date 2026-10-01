@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.057s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:14:26 INFO transaction handled correlationId="" messageId="" transactionId=f3be3e0d-b104-49f1-8d8d-e309f51f4217 walletId=6b48cf53-25f0-4b8a-9224-2ec83d29a97b providerId=p status=PROCESSED
+2026/09/30 00:14:26 WARN transaction handling failed correlationId="" messageId="" transactionId=6e606dc0-81d0-4b7a-9e6d-ef2cf12cb313 walletId=6b48cf53-25f0-4b8a-9224-2ec83d29a97b providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.04s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: invalid reference lifetime"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.314s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.742s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.005s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.497s
+--- FAIL: TestPendingReferenceRetainsItsDeadlineAcrossRetriesAndRehydration (0.00s)
+    lifecycle_semantics_test.go:151: rehydration changed state: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.258s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.866s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.825s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.608s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.739s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.109s
+FAIL

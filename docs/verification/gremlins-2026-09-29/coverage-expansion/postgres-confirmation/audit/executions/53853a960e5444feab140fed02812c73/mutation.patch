@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -91,7 +91,7 @@
+ 	out := []*wager.Transaction{}
+ 	for rows.Next() {
+ 		t, e := scanTx(rows)
+-		if e != nil {
++		if e == nil {
+ 			return nil, e
+ 		}
+ 		out = append(out, t)

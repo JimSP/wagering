@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.030s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:21:02 INFO transaction handled correlationId="" messageId="" transactionId=2d820e4e-d953-4caf-b094-a818b826dbac walletId=54676925-f61c-47f1-8a7d-3cac8e7e21cc providerId=p status=PROCESSED
+2026/09/29 03:21:02 WARN transaction handling failed correlationId="" messageId="" transactionId=71d5a5f7-bb8a-41d2-b2ff-822c4f0deb6f walletId=54676925-f61c-47f1-8a7d-3cac8e7e21cc providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: invalid origin
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.333s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.578s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.795s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid origin
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.464s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.680s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.752s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.573s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: invalid origin want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.874s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.224s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.207s
+FAIL

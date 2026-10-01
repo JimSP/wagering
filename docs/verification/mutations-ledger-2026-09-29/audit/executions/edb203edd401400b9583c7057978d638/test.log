@@ -1,0 +1,42 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.502s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.419s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.881s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.940s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.595s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.484s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.819s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.329s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.706s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.368s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.126s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.801s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.483s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.659s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.700s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.753s
+--- FAIL: TestRequestObserverRejectsConsistentlyWrongStorageAndPayload (0.00s)
+    --- FAIL: TestRequestObserverRejectsConsistentlyWrongStorageAndPayload/missing (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered, repanicked]
+
+goroutine 69 [running]:
+testing.tRunner.func1.2({0x1004df088, 0x2e01cfaa60f0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1004df088?, 0x2e01cfaa60f0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/testsupport/settlementfacts.CheckSettlementRequest({0x0?, 0x0?, 0x2e01cfae5f38?}, {0x10032cbe4, 0x1}, {{0x0, 0xee24d9f3f, 0x0}, {0x0, 0xee24d9f41, ...}})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/testsupport/settlementfacts/observations.go:66 +0x524
+github.com/alexandre/wagering/internal/testsupport/settlementfacts_test.TestRequestObserverRejectsConsistentlyWrongStorageAndPayload.func1(0x2e01cfb05448)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-3345833851/internal/testsupport/settlementfacts/observations_test.go:111 +0xb80
+testing.tRunner(0x2e01cfb05448, 0x2e01cfaa8ab0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 66
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.900s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.984s
+FAIL

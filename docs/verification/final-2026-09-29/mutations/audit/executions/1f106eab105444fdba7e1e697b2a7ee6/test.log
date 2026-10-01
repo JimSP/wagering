@@ -1,0 +1,50 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.422s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:26:52 INFO transaction handled correlationId="" messageId="" transactionId=f40b8841-9647-49d5-9b97-48e3568a5f07 walletId=a9de9f19-e532-4b19-8e1f-0662bbe60741 providerId=p status=PROCESSED
+2026/09/29 03:26:52 WARN transaction handling failed correlationId="" messageId="" transactionId=420f13bb-92c2-4868-9336-668290bbe63a walletId=a9de9f19-e532-4b19-8e1f-0662bbe60741 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/transient (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x100c973cc]
+
+goroutine 90 [running]:
+testing.tRunner.func1.2({0x1013bc2c8, 0x1014a7b60})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1013bc2c8?, 0x1014a7b60?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).ReferenceExpired(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/domain/wager/transaction.go:236
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x304300bb900, {0x10144d080, 0x304300ad500}, {0x10144d940, 0x304300a1ae0}, 0x304300c2f00)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/app/usecase/process.go:70 +0x9c
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce.func1({0x10144d080, 0x304300ad500}, {0x10144d940, 0x304300a1ae0})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/app/usecase/workers.go:50 +0x124
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x28?, {0x10144d080?, 0x304300ad500?}, 0x100b9a958?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*ProcessPendingReferences).RunOnce(0x304300bb940, {0x10144d080, 0x304300ad500})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/app/usecase/workers.go:39 +0x148
+github.com/alexandre/wagering/internal/app/usecase.TestReferenceWorkerClassifiesRecoveryAndAuditFailures.func1(0x3043010a488)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-3221728407/internal/app/usecase/reference_failure_test.go:72 +0x550
+testing.tRunner(0x3043010a488, 0x304300aafa8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 88
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.377s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.535s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.217s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:47: mutable timestamp
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.033s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.785s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.292s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.323s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.111s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.686s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.042s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.008s
+FAIL

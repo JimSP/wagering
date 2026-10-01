@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.401s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:42:45 INFO transaction handled correlationId="" messageId="" transactionId=cd7a774c-7dab-48bf-be3a-307b8938d475 walletId=0a4192c7-ae6a-45ef-91fb-2c5f1434a128 providerId=p status=PROCESSED
+2026/09/29 22:42:45 WARN transaction handling failed correlationId="" messageId="" transactionId=e11f808f-0af0-4721-b705-8c825df2cae1 walletId=0a4192c7-ae6a-45ef-91fb-2c5f1434a128 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.05s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: processed reference not resolved"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.681s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.482s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.369s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.860s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: processed reference not resolved
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.252s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.969s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.331s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.587s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: processed reference not resolved want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.908s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.483s
+FAIL

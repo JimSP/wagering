@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.729s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:43:24 INFO transaction handled correlationId="" messageId="" transactionId=f978c0d4-3f03-4f4b-a75c-11415d851648 walletId=4681227d-262c-4836-b441-8b08b7324d9e providerId=p status=PROCESSED
+2026/09/29 22:43:24 WARN transaction handling failed correlationId="" messageId="" transactionId=1df24b9d-88d1-4e31-8cda-87f713722811 walletId=4681227d-262c-4836-b441-8b08b7324d9e providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.015s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.286s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.413s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.686s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: retry history on initial pending state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.397s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.508s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.620s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.114s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: retry history on initial pending state want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.991s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.237s
+FAIL

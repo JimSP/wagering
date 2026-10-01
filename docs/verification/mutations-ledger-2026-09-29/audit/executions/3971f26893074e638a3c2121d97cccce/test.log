@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.506s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:43:01 INFO transaction handled correlationId="" messageId="" transactionId=cd88a108-0c34-4474-8e0e-823dbd937e47 walletId=5e3b5a79-f566-4eb1-941e-c844b0abb4a4 providerId=p status=PROCESSED
+2026/09/29 22:43:01 WARN transaction handling failed correlationId="" messageId="" transactionId=d32c7d32-d873-4f4c-a389-0e281a957035 walletId=5e3b5a79-f566-4eb1-941e-c844b0abb4a4 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: failure on open transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.959s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.071s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.554s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.020s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: failure on open transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.353s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.766s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.589s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.135s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: failure on open transaction want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.655s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.214s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.174s
+FAIL

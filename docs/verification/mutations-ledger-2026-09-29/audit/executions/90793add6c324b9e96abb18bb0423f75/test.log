@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.566s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:16:33 INFO transaction handled correlationId="" messageId="" transactionId=0c82d2ae-64dd-45e1-9acf-ee9fd31cfd72 walletId=1b7a52ee-72aa-452e-a429-1362c71e32f1 providerId=p status=PROCESSED
+2026/09/29 22:16:33 WARN transaction handling failed correlationId="" messageId="" transactionId=856b97b7-c368-47e0-aaad-9c35ae451f42 walletId=1b7a52ee-72aa-452e-a429-1362c71e32f1 providerId=p transient=false
+--- FAIL: TestConfirmSettlementStopsBeforeSavingIncompleteFacts (0.00s)
+    --- FAIL: TestConfirmSettlementStopsBeforeSavingIncompleteFacts/commitment_failure (0.00s)
+        settlement_failure_test.go:173: invalid settlement distribution: open nonempty bet and result required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.612s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.799s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.132s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.818s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.709s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.905s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.581s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.017s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.993s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.467s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.211s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.237s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.329s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.351s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.088s
+FAIL

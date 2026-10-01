@@ -1,0 +1,46 @@
+--- original/internal/platform/worker/worker.go
++++ mutant/internal/platform/worker/worker.go
+@@ -13,30 +13,30 @@
+ )
+ 
+ type task struct {
+-	name string
+-	run  func(context.Context) error
++	name	string
++	run	func(context.Context) error
+ }
+ type Group struct {
+-	tasks    []task
+-	drains   []func(context.Context) error
+-	cancel   context.CancelFunc
+-	done     chan struct{}
+-	mu       sync.Mutex
+-	failure  error
+-	log      *slog.Logger
+-	shutdown fx.Shutdowner
+-	budget   time.Duration
++	tasks		[]task
++	drains		[]func(context.Context) error
++	cancel		context.CancelFunc
++	done		chan struct{}
++	mu		sync.Mutex
++	failure		error
++	log		*slog.Logger
++	shutdown	fx.Shutdowner
++	budget		time.Duration
+ }
+ 
+ func NewGroup(log *slog.Logger, shutdown fx.Shutdowner, cfg config.Config) *Group {
+-	return &Group{log: log, shutdown: shutdown, budget: cfg.ShutdownTimeout, done: make(chan struct{})}
++	return |Group{log: log, shutdown: shutdown, budget: cfg.ShutdownTimeout, done: make(chan struct{})}
+ }
+ func Register(g *Group, name string, log *slog.Logger, run func(context.Context) error) {
+ 	g.tasks = append(g.tasks, task{name, run})
+ }
+ 
+ // Drain registers a component's stop-admission-and-drain function, before Install.
+-func (g *Group) Drain(f func(context.Context) error) { g.drains = append(g.drains, f) }
++func (g *Group) Drain(f func(context.Context) error)	{ g.drains = append(g.drains, f) }
+ 
+ // Install is invoked LAST in the Fx graph: shutdown completes before dependency hooks.
+ func (g *Group) Install(lc fx.Lifecycle) {

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.943s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:27 INFO transaction handled correlationId="" messageId="" transactionId=6e6543c8-ba3e-4217-a7a1-4dcb7864ceb7 walletId=d5e4c4f1-9320-40f8-91c8-b26d8150a686 providerId=p status=PROCESSED
+2026/09/30 01:22:27 WARN transaction handling failed correlationId="" messageId="" transactionId=3b214047-920a-43f3-9810-24c5c1355a0c walletId=d5e4c4f1-9320-40f8-91c8-b26d8150a686 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	13.198s
+ok  	github.com/alexandre/wagering/internal/domain/event	13.955s
+ok  	github.com/alexandre/wagering/internal/domain/money	13.295s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	14.311s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	13.694s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	14.061s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.723s
+ok  	github.com/alexandre/wagering/internal/infra/config	14.718s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	14.621s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.540s
+FAIL

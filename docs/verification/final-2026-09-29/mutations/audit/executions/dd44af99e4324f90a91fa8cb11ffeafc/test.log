@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.809s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:24:07 INFO transaction handled correlationId="" messageId="" transactionId=f8c1bb71-9b58-44de-8ef3-a7af6b342f0f walletId=e064271c-b663-418c-8fda-773365bb2957 providerId=p status=PROCESSED
+2026/09/29 03:24:07 WARN transaction handling failed correlationId="" messageId="" transactionId=f42489c1-c2ae-41bd-9eb9-8cc8ebf14065 walletId=e064271c-b663-418c-8fda-773365bb2957 providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: failure on open transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.141s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.662s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.789s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: failure on open transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.374s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.539s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.942s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.645s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: failure on open transaction want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.442s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.143s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.976s
+FAIL

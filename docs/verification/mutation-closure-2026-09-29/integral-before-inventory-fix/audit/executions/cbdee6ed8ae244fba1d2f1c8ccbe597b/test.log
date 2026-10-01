@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.150s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:13:32 INFO transaction handled correlationId="" messageId="" transactionId=7de3b52f-a027-4097-b331-da3813ba4d73 walletId=98e968c5-0c58-408f-b728-affaedf8f1f9 providerId=p status=PROCESSED
+2026/09/30 00:13:32 WARN transaction handling failed correlationId="" messageId="" transactionId=fa461304-d0d2-49eb-aab1-f779d5829c80 walletId=98e968c5-0c58-408f-b728-affaedf8f1f9 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.378s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.996s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.863s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.677s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: schedule outside pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.611s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.113s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.216s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.735s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: schedule outside pending reference steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.424s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.136s
+FAIL

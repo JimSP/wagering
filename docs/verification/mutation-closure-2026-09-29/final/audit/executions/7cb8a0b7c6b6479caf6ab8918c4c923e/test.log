@@ -1,0 +1,53 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.602s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:25:05 INFO transaction handled correlationId="" messageId="" transactionId=323088f9-3f18-42a9-832e-3ede8ba9e2b2 walletId=0902127b-5173-497d-95be-fc402e5ebd8c providerId=p status=PROCESSED
+2026/09/30 01:25:05 WARN transaction handling failed correlationId="" messageId="" transactionId=0c6c637f-0a3e-4af5-a578-a263113bf9fd walletId=0902127b-5173-497d-95be-fc402e5ebd8c providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x1010e35ec]
+
+goroutine 83 [running]:
+testing.tRunner.func1.2({0x10195b1e0, 0x101a4bb70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x10195b1e0?, 0x101a4bb70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-628975613/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute.func2({0x1019f1198, 0x101a92380}, {0x1019f1c50, 0x78be3de22640})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-628975613/internal/app/usecase/transaction.go:168 +0x4b4
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x38?, {0x1019f1198?, 0x101a92380?}, 0x7?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-628975613/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute(_, {_, _}, {{0x1012b6beb, 0x3}, {0x1012b6a20, 0x1}, {0x1012b6bfd, 0x3}, {0x0, ...}, ...})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-628975613/internal/app/usecase/transaction.go:111 +0xa84
+github.com/alexandre/wagering/internal/app/usecase.TestSubmitInboxBindingFailurePreventsCompletion(0x78be3de28d88)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-628975613/internal/app/usecase/paired_storage_failure_test.go:289 +0x55c
+testing.tRunner(0x78be3de28d88, 0x1019f6690)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.360s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.628s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.928s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.901s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.653s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.028s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.699s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.383s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_mutation_test.go:57: step 3: SQL "SELECT id FROM ledger_accounts WHERE wallet_id=$1 ORDER BY id FOR NO KEY UPDATE" lacks "coalesce(bet_id"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.335s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.185s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.174s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.982s
+FAIL

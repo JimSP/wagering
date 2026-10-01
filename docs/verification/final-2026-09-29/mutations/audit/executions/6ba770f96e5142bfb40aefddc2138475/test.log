@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.922s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:30:34 INFO transaction handled correlationId="" messageId="" transactionId=b7fe29e2-bbc1-4e4f-90f2-fb1d2e4cb35d walletId=5fa3fbab-d64e-4651-ac92-3533e4ee6985 providerId=p status=PROCESSED
+2026/09/29 03:30:34 WARN transaction handling failed correlationId="" messageId="" transactionId=76ab0440-dbac-493e-b746-8d401b670b09 walletId=5fa3fbab-d64e-4651-ac92-3533e4ee6985 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.11s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:181: HTTP contract: 403 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"FORBIDDEN"}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.952s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.419s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.550s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.290s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.158s
+--- FAIL: TestAuthorizationPolicyMatrix (0.00s)
+    --- FAIL: TestAuthorizationPolicyMatrix/either/internal (0.00s)
+        authorization_paths_test.go:40: 403
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	3.226s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.485s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.387s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.034s
+FAIL

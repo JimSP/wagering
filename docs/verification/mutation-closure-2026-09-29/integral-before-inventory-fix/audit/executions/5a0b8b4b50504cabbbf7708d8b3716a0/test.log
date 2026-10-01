@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.309s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.914s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.181s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.048s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.553s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_equal_updated (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING_REFERENCE FailureCode: BalanceAfter:<nil> Attempts:1 NextAttemptAt:2026-09-28 12:00:00 +0000 UTC ExpiresAt:2026-09-28 13:00:00 +0000 UTC CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{correlation message tx EXTERNAL provider external received-key hash wallet player round game REFUND {1000 BRL} bet-ext  PENDING_REFERENCE  <nil> 1 0x5f7fd4802eb8 0x5f7fd4802ed0 {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.121s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.922s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.582s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.316s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.890s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.222s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.660s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.643s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.799s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.932s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.839s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.920s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	4.049s
+FAIL

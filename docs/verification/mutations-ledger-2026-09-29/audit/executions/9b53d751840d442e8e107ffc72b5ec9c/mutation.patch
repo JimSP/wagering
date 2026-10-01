@@ -1,0 +1,31 @@
+--- original/internal/app/usecase/settlement.go
++++ mutant/internal/app/usecase/settlement.go
+@@ -12,15 +12,15 @@
+ )
+ 
+ type Settlements struct {
+-	uow   port.UnitOfWork
+-	clock port.Clock
+-	ids   port.IDGenerator
++	uow	port.UnitOfWork
++	clock	port.Clock
++	ids	port.IDGenerator
+ }
+ 
+ func NewSettlements(u port.UnitOfWork, c port.Clock, ids port.IDGenerator) *Settlements {
+ 	return &Settlements{u, c, ids}
+ }
+-func (u *SubmitTransaction) Settlements() *Settlements { return NewSettlements(u.uow, u.clock, u.ids) }
++func (u *SubmitTransaction) Settlements() *Settlements	{ return NewSettlements(u.uow, u.clock, u.ids) }
+ func settlementStore(tx port.Tx) (port.SettlementStore, error) {
+ 	s, ok := tx.(port.SettlementTransaction)
+ 	if !ok {
+@@ -43,7 +43,7 @@
+ 	b.CreatedAt = u.clock.Now()
+ 	return u.uow.Do(ctx, func(ctx context.Context, tx port.Tx) error {
+ 		s, e := settlementStore(tx)
+-		if e != nil {
++		if e == nil {
+ 			return e
+ 		}
+ 		return s.CreateBet(ctx, b)

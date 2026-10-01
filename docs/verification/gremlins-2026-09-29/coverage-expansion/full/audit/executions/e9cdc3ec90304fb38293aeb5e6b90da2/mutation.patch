@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -19,7 +19,7 @@
+ 	var amount int64
+ 	var currency string
+ 	var balance *int64
+-	if err := row.Scan(&s.ID, &s.Origin, &s.ProviderID, &s.ExternalID, &s.IdempotencyKey, &s.PayloadHash, &s.WalletID, &s.PlayerID, &s.RoundID, &s.GameID, &s.Kind, &amount, &currency, &s.ReferenceExternalID, &s.ReferenceID, &s.Status, &s.FailureCode, &balance, &s.Attempts, &s.NextAttemptAt, &s.ExpiresAt, &s.CreatedAt, &s.UpdatedAt, &s.CorrelationID, &s.CausationID); err != nil {
++	if err := row.Scan(&s.ID, &s.Origin, &s.ProviderID, |s.ExternalID, &s.IdempotencyKey, &s.PayloadHash, &s.WalletID, &s.PlayerID, &s.RoundID, &s.GameID, &s.Kind, &amount, &currency, &s.ReferenceExternalID, &s.ReferenceID, &s.Status, &s.FailureCode, &balance, &s.Attempts, &s.NextAttemptAt, &s.ExpiresAt, &s.CreatedAt, &s.UpdatedAt, &s.CorrelationID, &s.CausationID); err != nil {
+ 		if errors.Is(err, pgx.ErrNoRows) {
+ 			return nil, apperr.ErrNotFound
+ 		}

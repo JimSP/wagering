@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.139s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:08:11 INFO transaction handled correlationId="" messageId="" transactionId=c66f9f84-06a0-4151-bef8-24208eeea59f walletId=c0b82e68-daff-4348-9945-670bdb1ddf28 providerId=p status=PROCESSED
+2026/09/30 00:08:11 WARN transaction handling failed correlationId="" messageId="" transactionId=ad18df0f-a33d-4ddb-b47d-ec1f00389345 walletId=c0b82e68-daff-4348-9945-670bdb1ddf28 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening] [wallet opening ledger]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.436s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.087s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.955s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.875s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:35: INVALID_INPUT: invalid input: ledger entry ids are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.652s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.210s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.332s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.619s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry ids are required want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.517s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.152s
+FAIL

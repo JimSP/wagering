@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.687s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:14:43 INFO transaction handled correlationId="" messageId="" transactionId=d93cdbc6-797b-4a58-b313-8ef2b8172ae3 walletId=d24785ac-4a36-404f-a7b0-dd1944cb8818 providerId=p status=PROCESSED
+2026/09/30 01:14:43 WARN transaction handling failed correlationId="" messageId="" transactionId=ba5be0af-0c7e-4523-8e9b-d2b6cd7e1116 walletId=d24785ac-4a36-404f-a7b0-dd1944cb8818 providerId=p transient=false
+--- FAIL: TestCreateBetValidatesBeforePersistenceAndNormalizesIdentity (0.00s)
+    --- FAIL: TestCreateBetValidatesBeforePersistenceAndNormalizesIdentity/invalid_currency (0.00s)
+        settlement_failure_test.go:89: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	14.082s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/currency (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","playerId":"p","providerId":"provider","externalTransactionId":"ext","roundId":"r","money":{"amount":"1.00","currency":"XYZ"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	14.261s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=money: uninitialized value
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	14.524s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	14.772s
+ok  	github.com/alexandre/wagering/internal/domain/wager	15.213s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	15.781s
+ok  	github.com/alexandre/wagering/internal/infra/auth	15.946s
+ok  	github.com/alexandre/wagering/internal/infra/config	15.877s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementAuditRejectsInvalidPersistedCurrency (0.00s)
+    accounting_mutation_test.go:71: unexpected DB operation: SELECT e.id::text,e.journal_id::text,e.transaction_id::text,e.account_id::text,e.wallet_id::text,e.account_role,e.direction,e.amount_minor,e.currency,e.balance_before_minor,e.balance_after_minor,e.account_version,e.seq,coalesce(jr.original_journal_id::text,''),e.created_at
+         FROM ledger_entries e JOIN wager_transactions t ON t.id=e.transaction_id LEFT JOIN journal_reversals jr ON jr.compensating_journal_id=e.journal_id WHERE t.settlement_id=$1 ORDER BY e.seq [s]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	15.530s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.590s
+FAIL

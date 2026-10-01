@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.245s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:42:53 INFO transaction handled correlationId="" messageId="" transactionId=336f0726-4bef-42ff-99d5-6029fb1d03a4 walletId=c58bc99b-2b20-4a01-8994-72d9a9166ef4 providerId=p status=PROCESSED
+2026/09/29 22:42:53 WARN transaction handling failed correlationId="" messageId="" transactionId=6b359b5a-feb0-4b58-b9fd-54ea77c10cfe walletId=c58bc99b-2b20-4a01-8994-72d9a9166ef4 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.17s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: result on unprocessed transaction"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.329s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.305s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.463s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.323s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/BET (0.00s)
+        lifecycle_semantics_test.go:96: rehydration changed state: INVALID_INPUT: invalid input: result on unprocessed transaction
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.740s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.609s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.815s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.009s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: result on unprocessed transaction want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.905s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.195s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.168s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.118s
+FAIL

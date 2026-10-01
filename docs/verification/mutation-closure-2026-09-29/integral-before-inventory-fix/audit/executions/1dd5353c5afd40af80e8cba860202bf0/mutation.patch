@@ -1,0 +1,32 @@
+--- original/internal/domain/settlement/reversal.go
++++ mutant/internal/domain/settlement/reversal.go
+@@ -13,14 +13,14 @@
+ 
+ // ReversalJournal is an original journal in descending posting order.
+ type ReversalJournal struct {
+-	DebitAccountID, CreditAccountID string
+-	Amount                          money.Money
++	DebitAccountID, CreditAccountID	string
++	Amount				money.Money
+ }
+ type ReversalFacts struct {
+-	Status   string
+-	Payments []wager.Snapshot
+-	Journals []ReversalJournal
+-	Accounts map[string]wallet.Snapshot
++	Status		string
++	Payments	[]wager.Snapshot
++	Journals	[]ReversalJournal
++	Accounts	map[string]wallet.Snapshot
+ }
+ 
+ // ValidateReversal simulates the exact inverse in memory, including intermediate
+@@ -47,7 +47,7 @@
+ 	}
+ 	for _, j := range f.Journals {
+ 		debit, credit := accounts[j.CreditAccountID], accounts[j.DebitAccountID]
+-		if debit == nil || credit == nil || debit == credit {
++		if debit == nil && credit == nil || debit == credit {
+ 			return fmt.Errorf("%w: missing counterparty", ErrReversalState)
+ 		}
+ 		if _, _, err := debit.Debit(j.Amount, now); err != nil {

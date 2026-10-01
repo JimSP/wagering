@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.283s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.347s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.388s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.107s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	0.832s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.696s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.213s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.026s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.326s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.502s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.848s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.712s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.517s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.548s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.698s
+ok  	github.com/alexandre/wagering/internal/platform/worker	3.338s
+--- FAIL: TestRequestObserverRejectsConsistentlyWrongStorageAndPayload (0.00s)
+    --- FAIL: TestRequestObserverRejectsConsistentlyWrongStorageAndPayload/wrong-settlement (0.00s)
+        observations_test.go:112: corrupt request accepted
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	3.474s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	3.552s
+ok  	github.com/alexandre/wagering/scripts	3.484s
+FAIL

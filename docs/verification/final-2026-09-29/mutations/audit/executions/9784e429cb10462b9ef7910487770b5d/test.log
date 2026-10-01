@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.661s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:07:45 INFO transaction handled correlationId="" messageId="" transactionId=46bfa3db-e333-4f1f-ba6d-5b665a391b5e walletId=fd2ac623-2a30-4fb0-a54f-32f2025a6a3a providerId=p status=PROCESSED
+2026/09/29 03:07:45 WARN transaction handling failed correlationId="" messageId="" transactionId=5e9322b5-319e-47a8-8b90-30468fdb558e walletId=fd2ac623-2a30-4fb0-a54f-32f2025a6a3a providerId=p transient=false
+--- FAIL: TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox (0.00s)
+    --- FAIL: TestMessageAcceptanceSharesFinancialMeaningAndCompletesTheInbox/business_rejection_completes_inbox_and_remains_terminal (0.00s)
+        reference_semantics_test.go:100: invalid message
+    reference_semantics_test.go:126: invalid message
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.912s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.780s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.131s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.015s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.935s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.057s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.900s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.422s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.799s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.581s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.570s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.577s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.205s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.772s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.996s
+FAIL

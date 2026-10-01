@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.412s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:28:39 INFO transaction handled correlationId="" messageId="" transactionId=e2cd10f8-d4ac-4ddb-80f0-813e3b04fa92 walletId=876d282b-94e6-4a42-b966-3ff64b02d743 providerId=p status=PROCESSED
+2026/09/30 01:28:39 WARN transaction handling failed correlationId="" messageId="" transactionId=cce5a145-f4cf-4092-805b-798d9b2f77eb walletId=876d282b-94e6-4a42-b966-3ff64b02d743 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.40s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: invalid reference lifetime"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.107s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.052s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.922s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.562s
+--- FAIL: TestPendingReferenceRetainsItsDeadlineAcrossRetriesAndRehydration (0.00s)
+    lifecycle_semantics_test.go:151: rehydration changed state: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.312s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.679s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.203s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.788s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.166s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.534s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.322s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.432s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.620s
+FAIL

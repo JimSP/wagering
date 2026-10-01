@@ -1,0 +1,42 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.697s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:26:17 INFO transaction handled correlationId="" messageId="" transactionId=68ddf7a5-1a8d-4fa3-b763-ff564e7e75c1 walletId=6bff4881-a3bf-4864-bf38-bd761e8736b1 providerId=p status=PROCESSED
+2026/09/29 03:26:17 WARN transaction handling failed correlationId="" messageId="" transactionId=cde357a3-9c9d-4c2a-a6e3-ab00fd928978 walletId=6bff4881-a3bf-4864-bf38-bd761e8736b1 providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/reference_already_resolved (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x18 pc=0x102863f78]
+
+goroutine 102 [running]:
+testing.tRunner.func1.2({0x102f882c8, 0x103073b60})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102f882c8?, 0x103073b60?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x69af24fe3ec0, {0x103018e88, 0x1030b9f00}, {0x103019940, 0x69af2528ad70}, 0x69af252aad80)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/process.go:152 +0xc58
+github.com/alexandre/wagering/internal/app/usecase.TestProcessingPropagatesDomainAndPortFailures.func1(0x69af252a9b08)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/app/usecase/submit_failure_test.go:161 +0x9c8
+testing.tRunner(0x69af252a9b08, 0x69af252910b0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 98
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.008s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.772s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.352s
+--- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation (0.00s)
+    --- FAIL: TestPendingReferenceRejectsImpossibleTransitionsWithoutMutation/resolved_identity_cannot_be_replaced (0.00s)
+        lifecycle_semantics_test.go:265: rejected transition changed state or wrong error: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.225s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.479s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.752s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.216s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.661s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.122s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.978s
+FAIL

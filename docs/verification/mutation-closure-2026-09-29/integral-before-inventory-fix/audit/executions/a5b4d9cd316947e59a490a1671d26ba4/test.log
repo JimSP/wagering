@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.040s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:48:40 INFO transaction handled correlationId="" messageId="" transactionId=84c4ac12-cf32-4701-9504-de460a3c1289 walletId=f0ef7816-beb8-439e-bb25-5a27e693127e providerId=p status=PROCESSED
+2026/09/30 00:48:40 WARN transaction handling failed correlationId="" messageId="" transactionId=460b6d25-812d-4635-b607-91255c5b775d walletId=f0ef7816-beb8-439e-bb25-5a27e693127e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"FORBIDDEN"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.296s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.316s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.874s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.142s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.747s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.617s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.227s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.420s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.509s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.585s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.582s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.318s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.373s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.357s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.373s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.123s
+FAIL

@@ -1,0 +1,515 @@
+[
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "inbox_messages",
+    "column_name": "consumer_name",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "inbox_messages",
+    "column_name": "message_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "inbox_messages",
+    "column_name": "payload_hash",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "inbox_messages",
+    "column_name": "received_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "inbox_messages",
+    "column_name": "completed_at",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "inbox_messages",
+    "column_name": "deliveries",
+    "is_nullable": "NO",
+    "column_default": "1",
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "outbox_events",
+    "column_name": "event_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "outbox_events",
+    "column_name": "aggregate_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "outbox_events",
+    "column_name": "event_type",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "jsonb",
+    "data_type": "jsonb",
+    "table_name": "outbox_events",
+    "column_name": "payload",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "occurred_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int4",
+    "data_type": "integer",
+    "table_name": "outbox_events",
+    "column_name": "attempts",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "next_attempt_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "locked_until",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "published_at",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wager_transactions",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "origin",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "provider_id",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "external_transaction_id",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "idempotency_key",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "payload_hash",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wager_transactions",
+    "column_name": "wallet_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wager_transactions",
+    "column_name": "player_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "round_id",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "game_id",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "kind",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wager_transactions",
+    "column_name": "amount_minor",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "bpchar",
+    "data_type": "character",
+    "table_name": "wager_transactions",
+    "column_name": "currency",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 3
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "reference_external_id",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wager_transactions",
+    "column_name": "reference_transaction_id",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "failure_code",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wager_transactions",
+    "column_name": "balance_after_minor",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int4",
+    "data_type": "integer",
+    "table_name": "wager_transactions",
+    "column_name": "attempts",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wager_transactions",
+    "column_name": "next_attempt_at",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wager_transactions",
+    "column_name": "expires_at",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wager_transactions",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wager_transactions",
+    "column_name": "updated_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "correlation_id",
+    "is_nullable": "NO",
+    "column_default": "''::text",
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wager_transactions",
+    "column_name": "causation_id",
+    "is_nullable": "NO",
+    "column_default": "''::text",
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "wallet_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "transaction_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "text",
+    "data_type": "text",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "direction",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "amount_minor",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "bpchar",
+    "data_type": "character",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "currency",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 3
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "balance_before_minor",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "balance_after_minor",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wallet_ledger_entries",
+    "column_name": "seq",
+    "is_nullable": "NO",
+    "column_default": "nextval('wallet_ledger_entries_seq_seq'::regclass)",
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wallets",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "uuid",
+    "data_type": "uuid",
+    "table_name": "wallets",
+    "column_name": "player_id",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "bpchar",
+    "data_type": "character",
+    "table_name": "wallets",
+    "column_name": "currency",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 3
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wallets",
+    "column_name": "balance_minor",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "int8",
+    "data_type": "bigint",
+    "table_name": "wallets",
+    "column_name": "version",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wallets",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  },
+  {
+    "udt_name": "timestamptz",
+    "data_type": "timestamp with time zone",
+    "table_name": "wallets",
+    "column_name": "updated_at",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null
+  }
+]

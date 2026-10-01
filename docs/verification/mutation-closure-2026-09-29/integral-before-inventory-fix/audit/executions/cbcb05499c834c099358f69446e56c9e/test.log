@@ -1,0 +1,47 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.736s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.253s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.843s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.180s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.062s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.498s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.642s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.492s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.952s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x40 pc=0x102e89f38]
+
+goroutine 404 [running]:
+testing.tRunner.func1.2({0x1033dd958, 0x1034d10b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1033dd958?, 0x1034d10b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.(*testRows).Close(0x5a33620805a0?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/infra/postgres/repository_contract_test.go:64 +0x18
+panic({0x1033dd958?, 0x1034d10b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.(*testRows).Next(0xffffffffffffffff?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/infra/postgres/repository_contract_test.go:56
+github.com/alexandre/wagering/internal/infra/postgres.ledgerRepo.List({{0x10345a5e0?, 0x5a3362042100?}}, {0x10345b3c8, 0x1035101c0}, {0x102eec005, 0x1}, {0x5a33620181d0?, 0x10338c770?}, 0x1)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/infra/postgres/ledger_repo.go:47 +0x460
+github.com/alexandre/wagering/internal/infra/postgres.TestLedgerPaginationAndTotalsContract(0x5a336202cb48)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-1106214357/internal/infra/postgres/repository_contract_test.go:330 +0x28c
+testing.tRunner(0x5a336202cb48, 0x10345dde0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.941s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.574s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.575s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.581s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.635s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.640s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.461s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.430s
+FAIL

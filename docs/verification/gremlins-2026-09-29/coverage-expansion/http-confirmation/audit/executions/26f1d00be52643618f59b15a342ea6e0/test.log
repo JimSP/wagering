@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.355s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:39:49 INFO transaction handled correlationId="" messageId="" transactionId=802fd778-289b-4ed0-8533-86d6cba68f8f walletId=94f2dd09-5973-4ef8-b2c0-6ebeec012d2d providerId=p status=PROCESSED
+2026/09/29 02:39:49 WARN transaction handling failed correlationId="" messageId="" transactionId=e4d902e2-138e-46c6-9b32-8473866c9c39 walletId=94f2dd09-5973-4ef8-b2c0-6ebeec012d2d providerId=p transient=false
+--- FAIL: TestHTTPInvalidInputsAndAuthorizationHaveNoEffects (0.04s)
+    --- FAIL: TestHTTPInvalidInputsAndAuthorizationHaveNoEffects/null (0.00s)
+        http_contract_test.go:233: invalid input touched persistence: 403 {"code":"FORBIDDEN"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.963s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.165s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.546s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.610s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.972s
+ok  	github.com/alexandre/wagering/internal/infra/auth	0.645s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.428s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.506s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.785s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.744s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.581s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.625s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.642s
+FAIL

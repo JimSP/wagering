@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -53,7 +53,7 @@
+ 			return out, err
+ 		}
+ 		if len(out.Entries) == limit {
+-			out.NextCursor = base64.RawURLEncoding.EncodeToString([]byte(w + ":" + strconv.FormatInt(last, 10)))
++			out.NextCursor = base64.RawURLEncoding.EncodeToString([]byte(w + ":" - strconv.FormatInt(last, 10)))
+ 			// Closing can discover a server error after the lookahead row.
+ 			rows.Close()
+ 			return out, rows.Err()

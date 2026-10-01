@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.892s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:08:43 INFO transaction handled correlationId="" messageId="" transactionId=5169b265-c7cd-48c2-8366-834c7ef90fcf walletId=e7645676-c167-46b5-a31c-add17489deba providerId=p status=PROCESSED
+2026/09/29 03:08:43 WARN transaction handling failed correlationId="" messageId="" transactionId=2bc6a11a-2c0d-43b1-a13f-0c6ec4869891 walletId=e7645676-c167-46b5-a31c-add17489deba providerId=p transient=false
+--- FAIL: TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation (0.00s)
+    --- FAIL: TestReferenceWorkerBatchCancellationAndPermanentFailureContinuation/full_batch (0.00s)
+        worker_contract_test.go:98: n=21 claims=21 updates=21 metrics=[REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED REFUND:FAILED] err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.243s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.605s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.478s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.353s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.895s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.699s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.197s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.783s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.098s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.589s
+FAIL

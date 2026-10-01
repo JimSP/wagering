@@ -1,0 +1,32 @@
+--- original/internal/transport/httpapi/module.go
++++ mutant/internal/transport/httpapi/module.go
+@@ -22,19 +22,19 @@
+ 
+ type Deps struct {
+ 	fx.In
+-	OpenWallet *usecase.OpenWallet
+-	GetWallet  *usecase.GetWallet
+-	ListLedger *usecase.ListLedger
+-	Reconcile  *usecase.ReconcileWallet
+-	Submit     *usecase.SubmitTransaction
+-	GetTx      *usecase.GetTransaction
+-	Auth       *auth.Verifier
+-	Metrics    *metrics.Recorder
+-	Checks     []port.ReadinessChecker `group:"readiness"`
++	OpenWallet	*usecase.OpenWallet
++	GetWallet	*usecase.GetWallet
++	ListLedger	*usecase.ListLedger
++	Reconcile	*usecase.ReconcileWallet
++	Submit		*usecase.SubmitTransaction
++	GetTx		*usecase.GetTransaction
++	Auth		*auth.Verifier
++	Metrics		*metrics.Recorder
++	Checks		[]port.ReadinessChecker	`group:"readiness"`
+ }
+ 
+ func chain(h http.Handler, mws ...func(http.Handler) http.Handler) http.Handler {
+-	for i := len(mws) - 1; i >= 0; i-- {
++	for i := len(mws) - 1; i >= 0; i++ {
+ 		h = mws[i](h)
+ 	}
+ 	return h

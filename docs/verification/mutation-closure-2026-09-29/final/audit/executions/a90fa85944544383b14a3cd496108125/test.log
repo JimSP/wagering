@@ -1,0 +1,30 @@
+# github.com/alexandre/wagering/internal/domain/wager
+# [github.com/alexandre/wagering/internal/domain/wager]
+internal/domain/wager/rules.go:28:10: suspect and: ref == KindBet && ref == KindWin
+ok  	github.com/alexandre/wagering/cmd/wagering	10.934s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:52 INFO transaction handled correlationId="" messageId="" transactionId=e3551ae1-50a6-49c7-82e4-9aded8d79269 walletId=85d9c113-e3f7-49d4-a6cf-7a2fb50e4733 providerId=p status=PROCESSED
+2026/09/30 01:22:52 WARN transaction handling failed correlationId="" messageId="" transactionId=64bc96fd-47c6-4043-88e7-6264296f3e42 walletId=85d9c113-e3f7-49d4-a6cf-7a2fb50e4733 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.16s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-bet-again (0.00s)
+        http_contract_test.go:153: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000033","status":"REJECTED","idempotentReplay":false,"failureCode":"ALREADY_REVERSED"}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000033","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.317s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.243s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.584s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.494s
+FAIL	github.com/alexandre/wagering/internal/domain/wager [build failed]
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.608s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.476s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.051s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.943s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.399s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.130s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.779s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	8.425s
+FAIL

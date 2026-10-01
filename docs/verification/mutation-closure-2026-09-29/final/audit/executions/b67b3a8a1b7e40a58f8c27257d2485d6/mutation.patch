@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -135,7 +135,7 @@
+ 		return nil
+ 	}
+ 	debit, credit := f.Guarantee.ID, f.Operational.ID
+-	if d.GuaranteeDirection == wager.Credit {
++	if d.GuaranteeDirection != wager.Credit {
+ 		debit, credit = credit, debit
+ 	}
+ 	var journalID string

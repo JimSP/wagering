@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.960s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 02:03:53 INFO transaction handled correlationId="" messageId="" transactionId=f45c396a-72de-475a-be52-2e9f09834a70 walletId=9a9311f4-19eb-4e0a-9d17-7313862e6c0f providerId=p status=PROCESSED
+2026/09/30 02:03:53 WARN transaction handling failed correlationId="" messageId="" transactionId=f9850a41-7b06-47c8-b44f-08e3e0f8d7c0 walletId=9a9311f4-19eb-4e0a-9d17-7313862e6c0f providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.13s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.13s)
+        result_lifecycle_contract_test.go:78: MISSING RESULT LIFECYCLE: authorized create bet must succeed, got 500 {"code":"INTERNAL"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.141s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.504s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.076s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.745s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.628s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.574s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.818s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.859s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.009s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.732s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.447s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.441s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.189s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.203s
+ok  	github.com/alexandre/wagering/internal/platform/worker	10.233s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	10.281s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	10.568s
+ok  	github.com/alexandre/wagering/scripts	12.599s
+FAIL

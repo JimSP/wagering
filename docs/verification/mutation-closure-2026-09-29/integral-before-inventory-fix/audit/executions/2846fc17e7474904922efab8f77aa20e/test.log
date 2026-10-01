@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.089s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.826s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.133s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.825s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.696s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/provider (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID:p ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x5b0a5272c8b8 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL p    wallet player   OPENING {100 BRL}   PROCESSED  0x5b0a5272c900 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.819s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.564s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.625s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.125s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.459s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.120s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.114s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.902s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.976s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.100s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.944s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	3.712s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	3.964s
+FAIL

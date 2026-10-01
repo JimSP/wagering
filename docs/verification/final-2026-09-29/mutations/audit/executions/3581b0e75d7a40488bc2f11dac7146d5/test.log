@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.241s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:20:43 INFO transaction handled correlationId="" messageId="" transactionId=1e8c37f2-d9d8-4041-bcd6-cf34054074e1 walletId=d66f3e37-494f-488f-8c68-730be53ddffd providerId=p status=PROCESSED
+2026/09/29 03:20:43 WARN transaction handling failed correlationId="" messageId="" transactionId=87521400-ae28-4a9d-afbe-b508b4010a0e walletId=d66f3e37-494f-488f-8c68-730be53ddffd providerId=p transient=false
+--- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures (0.00s)
+    --- FAIL: TestReferenceWorkerClassifiesRecoveryAndAuditFailures/permanent (0.00s)
+        reference_failure_test.go:44: INVALID_INPUT: invalid input: corrupted snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.562s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.937s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.638s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: corrupted snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.488s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.038s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.261s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.597s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: corrupted snapshot "tx" want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.239s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.945s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.967s
+FAIL

@@ -1,0 +1,35 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.231s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 02:08:37 INFO transaction handled correlationId="" messageId="" transactionId=df628ce9-871c-437e-ae75-10983ffc6b4f walletId=563f8a85-6c81-4536-b239-b56f3bd86a6a providerId=p status=PROCESSED
+2026/09/29 02:08:37 WARN transaction handling failed correlationId="" messageId="" transactionId=fafe8dd1-8646-43d2-acc3-13b8996d423a walletId=563f8a85-6c81-4536-b239-b56f3bd86a6a providerId=p transient=false
+--- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors (0.00s)
+    read_failure_test.go:19: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.585s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:26: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	1.788s
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:120: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.091s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    contract_test.go:106: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	2.417s
+FAIL

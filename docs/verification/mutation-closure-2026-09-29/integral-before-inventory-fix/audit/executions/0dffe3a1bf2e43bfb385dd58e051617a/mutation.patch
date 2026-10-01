@@ -1,0 +1,20 @@
+--- original/internal/infra/postgres/settlement_audit_repo.go
++++ mutant/internal/infra/postgres/settlement_audit_repo.go
+@@ -12,7 +12,7 @@
+ 	"time"
+ )
+ 
+-func (t txAdapter) SettlementAudit() port.SettlementAuditStore { return settlementRepo{t.q} }
++func (t txAdapter) SettlementAudit() port.SettlementAuditStore	{ return settlementRepo{t.q} }
+ func (r settlementRepo) readSettlement(ctx context.Context, id string, lock bool) (port.SettlementRecord, error) {
+ 	query := `SELECT id::text,bet_id::text,result_key,distribution_hash,status FROM settlements WHERE id=$1`
+ 	if lock {
+@@ -92,7 +92,7 @@
+ 		return s, f, err
+ 	}
+ 	f.Status = s.Status
+-	if s.Status != "PROCESSED" {
++	if s.Status == "PROCESSED" {
+ 		return s, f, nil
+ 	}
+ 	if _, err = r.LockBet(ctx, s.BetID); err != nil {

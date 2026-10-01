@@ -1,0 +1,39 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.405s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	1.079s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.214s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.953s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.138s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	0.707s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.714s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.828s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestEverySQLStateClassification (0.00s)
+panic: runtime error: slice bounds out of range [:2] with length 1 [recovered, repanicked]
+
+goroutine 50 [running]:
+testing.tRunner.func1.2({0x102e42d80, 0xa3ba86ee4b0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x102e42d80?, 0xa3ba86ee4b0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/infra/postgres.classify({0x102e68558, 0xa3ba884d300})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/infra/postgres/uow.go:77 +0x450
+github.com/alexandre/wagering/internal/infra/postgres.TestEverySQLStateClassification(0xa3ba88b8fc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-1094658072/wd-636081838/internal/infra/postgres/uow_contract_test.go:125 +0x180
+testing.tRunner(0xa3ba88b8fc8, 0x102e710c8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.674s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.869s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.839s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.637s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.681s
+ok  	github.com/alexandre/wagering/internal/platform/sys	3.572s
+ok  	github.com/alexandre/wagering/internal/platform/worker	3.587s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	3.636s
+FAIL

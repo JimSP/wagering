@@ -1,0 +1,158 @@
+--- original/internal/domain/event/event.go
++++ mutant/internal/domain/event/event.go
+@@ -10,57 +10,57 @@
+ )
+ 
+ const (
+-	TypeWagerTransactionProcessed        = "WagerTransactionProcessed"
+-	TypeWagerTransactionRejected         = "WagerTransactionRejected"
+-	TypeWalletBalanceChanged             = "WalletBalanceChanged"
+-	TypeWagerTransactionPendingReference = "WagerTransactionPendingReference"
++	TypeWagerTransactionProcessed		= "WagerTransactionProcessed"
++	TypeWagerTransactionRejected		= "WagerTransactionRejected"
++	TypeWalletBalanceChanged		= "WalletBalanceChanged"
++	TypeWagerTransactionPendingReference	= "WagerTransactionPendingReference"
+ )
+ 
+ type Envelope[T any] struct {
+-	EventID       string    `json:"eventId"`
+-	EventType     string    `json:"eventType"`
+-	AggregateID   string    `json:"aggregateId"`
+-	CorrelationID string    `json:"correlationId"`
+-	CausationID   string    `json:"causationId,omitempty"`
+-	OccurredAt    time.Time `json:"occurredAt"`
+-	Version       int       `json:"version"`
+-	Data          T         `json:"data"`
++	EventID		string		`json:"eventId"`
++	EventType	string		`json:"eventType"`
++	AggregateID	string		`json:"aggregateId"`
++	CorrelationID	string		`json:"correlationId"`
++	CausationID	string		`json:"causationId,omitempty"`
++	OccurredAt	time.Time	`json:"occurredAt"`
++	Version		int		`json:"version"`
++	Data		T		`json:"data"`
+ }
+ 
+ type MoneyDTO struct {
+-	Amount   string `json:"amount"`
+-	Currency string `json:"currency"`
++	Amount		string	`json:"amount"`
++	Currency	string	`json:"currency"`
+ }
+ 
+-func ToMoneyDTO(m money.Money) MoneyDTO { return MoneyDTO{m.Amount(), m.Currency()} }
++func ToMoneyDTO(m money.Money) MoneyDTO	{ return MoneyDTO{m.Amount(), m.Currency()} }
+ 
+ // Meta is what the application layer supplies; the constructors add type/version.
+ type Meta struct {
+-	EventID, AggregateID, CorrelationID, CausationID string
+-	OccurredAt                                       time.Time
++	EventID, AggregateID, CorrelationID, CausationID	string
++	OccurredAt						time.Time
+ }
+ 
+ // Outgoing is the immutable outbox snapshot of an event (payload = serialized envelope).
+ type Outgoing struct {
+-	eventID, aggregateID, typ, payload string
+-	version, attempts                  int
+-	occurredAt                         time.Time
++	eventID, aggregateID, typ, payload	string
++	version, attempts			int
++	occurredAt				time.Time
+ }
+ 
+-func (e Outgoing) EventID() string       { return e.eventID }
+-func (e Outgoing) AggregateID() string   { return e.aggregateID }
+-func (e Outgoing) Type() string          { return e.typ }
+-func (e Outgoing) Version() int          { return e.version }
+-func (e Outgoing) Attempts() int         { return e.attempts }
+-func (e Outgoing) OccurredAt() time.Time { return e.occurredAt }
+-func (e Outgoing) Payload() []byte       { return []byte(e.payload) }
++func (e Outgoing) EventID() string		{ return e.eventID }
++func (e Outgoing) AggregateID() string		{ return e.aggregateID }
++func (e Outgoing) Type() string			{ return e.typ }
++func (e Outgoing) Version() int			{ return e.version }
++func (e Outgoing) Attempts() int		{ return e.attempts }
++func (e Outgoing) OccurredAt() time.Time	{ return e.occurredAt }
++func (e Outgoing) Payload() []byte		{ return []byte(e.payload) }
+ 
+ func newEnvelope[T any](m Meta, typ string, data T) Envelope[T] {
+ 	return Envelope[T]{m.EventID, typ, m.AggregateID, m.CorrelationID, m.CausationID, m.OccurredAt.UTC(), 1, data}
+ }
+ 
+ func (e Envelope[T]) ToOutgoing() (Outgoing, error) {
+-	if err := validate(e.EventID, e.AggregateID, e.CorrelationID, e.EventType, e.Version, e.OccurredAt, e.Data); err != nil {
++	if err := validate(e.EventID, e.AggregateID, e.CorrelationID, e.EventType, e.Version, e.OccurredAt, e.Data); err == nil {
+ 		return Outgoing{}, err
+ 	}
+ 	b, err := json.Marshal(e)
+@@ -73,42 +73,42 @@
+ // ---- Payloads -------------------------------------------------------------
+ 
+ type ProcessedData struct {
+-	TransactionID         string   `json:"transactionId"`
+-	Kind                  string   `json:"kind"`
+-	WalletID              string   `json:"walletId"`
+-	PlayerID              string   `json:"playerId"`
+-	ProviderID            string   `json:"providerId,omitempty"`
+-	ExternalTransactionID string   `json:"externalTransactionId,omitempty"`
+-	RoundID               string   `json:"roundId,omitempty"`
+-	Money                 MoneyDTO `json:"money"`
++	TransactionID		string		`json:"transactionId"`
++	Kind			string		`json:"kind"`
++	WalletID		string		`json:"walletId"`
++	PlayerID		string		`json:"playerId"`
++	ProviderID		string		`json:"providerId,omitempty"`
++	ExternalTransactionID	string		`json:"externalTransactionId,omitempty"`
++	RoundID			string		`json:"roundId,omitempty"`
++	Money			MoneyDTO	`json:"money"`
+ }
+ 
+ type RejectedData struct {
+-	TransactionID         string `json:"transactionId"`
+-	Kind                  string `json:"kind"`
+-	WalletID              string `json:"walletId"`
+-	ProviderID            string `json:"providerId"`
+-	ExternalTransactionID string `json:"externalTransactionId"`
+-	FailureCode           string `json:"failureCode"`
++	TransactionID		string	`json:"transactionId"`
++	Kind			string	`json:"kind"`
++	WalletID		string	`json:"walletId"`
++	ProviderID		string	`json:"providerId"`
++	ExternalTransactionID	string	`json:"externalTransactionId"`
++	FailureCode		string	`json:"failureCode"`
+ }
+ 
+ type BalanceChangedData struct {
+-	WalletID      string   `json:"walletId"`
+-	TransactionID string   `json:"transactionId"`
+-	Direction     string   `json:"direction"`
+-	Money         MoneyDTO `json:"money"`
+-	BalanceBefore MoneyDTO `json:"balanceBefore"`
+-	BalanceAfter  MoneyDTO `json:"balanceAfter"`
+-	WalletVersion int64    `json:"walletVersion"`
++	WalletID	string		`json:"walletId"`
++	TransactionID	string		`json:"transactionId"`
++	Direction	string		`json:"direction"`
++	Money		MoneyDTO	`json:"money"`
++	BalanceBefore	MoneyDTO	`json:"balanceBefore"`
++	BalanceAfter	MoneyDTO	`json:"balanceAfter"`
++	WalletVersion	int64		`json:"walletVersion"`
+ }
+ 
+ type PendingReferenceData struct {
+-	TransactionID                  string    `json:"transactionId"`
+-	ProviderID                     string    `json:"providerId"`
+-	ExternalTransactionID          string    `json:"externalTransactionId"`
+-	ReferenceExternalTransactionID string    `json:"referenceExternalTransactionId"`
+-	NextAttemptAt                  time.Time `json:"nextAttemptAt"`
+-	ExpiresAt                      time.Time `json:"expiresAt"`
++	TransactionID			string		`json:"transactionId"`
++	ProviderID			string		`json:"providerId"`
++	ExternalTransactionID		string		`json:"externalTransactionId"`
++	ReferenceExternalTransactionID	string		`json:"referenceExternalTransactionId"`
++	NextAttemptAt			time.Time	`json:"nextAttemptAt"`
++	ExpiresAt			time.Time	`json:"expiresAt"`
+ }
+ 
+ // ---- Constructors ---------------------------------------------------------

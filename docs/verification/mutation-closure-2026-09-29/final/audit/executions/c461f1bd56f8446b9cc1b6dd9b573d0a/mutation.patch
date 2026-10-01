@@ -1,0 +1,20 @@
+--- original/internal/infra/postgres/settlement_repo.go
++++ mutant/internal/infra/postgres/settlement_repo.go
+@@ -15,7 +15,7 @@
+ 
+ type settlementRepo struct{ q dbtx }
+ 
+-func (t txAdapter) Settlements() port.SettlementStore { return settlementRepo{t.q} }
++func (t txAdapter) Settlements() port.SettlementStore	{ return settlementRepo{t.q} }
+ func (r settlementRepo) CreateBet(ctx context.Context, b settlement.Bet) error {
+ 	_, err := r.q.Exec(ctx, `INSERT INTO bets(id,provider_id,round_id,game_id,currency,created_at) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(id) DO NOTHING`, b.ID, b.ProviderID, b.RoundID, b.GameID, b.Currency, b.CreatedAt)
+ 	if err != nil {
+@@ -49,7 +49,7 @@
+ 		var c settlement.Commitment
+ 		var amount int64
+ 		var currency string
+-		if err := rows.Scan(&c.ID, &c.TransactionID, &c.ExternalID, &c.WalletID, &c.PlayerID, &c.GameID, &amount, &currency); err != nil {
++		if err := rows.Scan(&c.ID, &c.TransactionID, &c.ExternalID, &c.WalletID, |c.PlayerID, &c.GameID, &amount, &currency); err != nil {
+ 			return nil, err
+ 		}
+ 		c.Remaining, err = money.FromMinor(amount, currency)

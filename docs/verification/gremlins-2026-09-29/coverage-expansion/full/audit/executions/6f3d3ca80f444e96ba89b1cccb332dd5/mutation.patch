@@ -1,0 +1,27 @@
+--- original/internal/infra/postgres/module.go
++++ mutant/internal/infra/postgres/module.go
+@@ -34,20 +34,20 @@
+ 	lc.Append(fx.Hook{
+ 		OnStart: func(ctx context.Context) error {
+ 			err := pool.Ping(ctx)
+-			if err != nil {
++			if err == nil {
+ 				pool.Close()
+ 			}
+ 			return err
+ 		},
+-		OnStop: func(context.Context) error { pool.Close(); return nil }, // runs after workers/servers stop
++		OnStop:	func(context.Context) error { pool.Close(); return nil },	// runs after workers/servers stop
+ 	})
+ 	return pool, nil
+ }
+ 
+ type Readiness struct{ pool *pgxpool.Pool }
+ 
+-func NewReadiness(pool *pgxpool.Pool) *Readiness { return &Readiness{pool} }
+-func (*Readiness) Name() string                  { return "postgres" }
++func NewReadiness(pool *pgxpool.Pool) *Readiness	{ return &Readiness{pool} }
++func (*Readiness) Name() string				{ return "postgres" }
+ func (r *Readiness) Check(ctx context.Context) error {
+ 	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+ 	defer cancel()

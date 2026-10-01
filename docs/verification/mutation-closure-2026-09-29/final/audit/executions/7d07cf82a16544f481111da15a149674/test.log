@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.286s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:18:41 INFO transaction handled correlationId="" messageId="" transactionId=0c57a92b-a443-4313-af00-7c33cf13c0f7 walletId=c5370cdb-2240-4946-991f-ae004edccfe6 providerId=p status=PROCESSED
+2026/09/30 01:18:41 WARN transaction handling failed correlationId="" messageId="" transactionId=134e35c1-c223-4f8e-8207-9b8bcf306df3 walletId=c5370cdb-2240-4946-991f-ae004edccfe6 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got settlement is not processed: missing accounting history, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.574s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.936s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.667s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: settlement is not processed: missing accounting history
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	12.468s
+ok  	github.com/alexandre/wagering/internal/domain/wager	12.591s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.052s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.602s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.803s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.896s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.908s
+FAIL

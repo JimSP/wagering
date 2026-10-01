@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.249s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:25:44 INFO transaction handled correlationId="" messageId="" transactionId=7eb036d4-1439-45b0-b4d7-2adb6cc8640f walletId=3c8c1820-ce9a-4c7c-8448-a50dfbbeb427 providerId=p status=PROCESSED
+2026/09/29 22:25:44 WARN transaction handling failed correlationId="" messageId="" transactionId=99ceae7f-4aa9-4452-be64-38d57638cd49 walletId=3c8c1820-ce9a-4c7c-8448-a50dfbbeb427 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.573s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.828s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.992s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.101s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.362s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.754s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.880s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.644s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	3.069s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.234s
+FAIL

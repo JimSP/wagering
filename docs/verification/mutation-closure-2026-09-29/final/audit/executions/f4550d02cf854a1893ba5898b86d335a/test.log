@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.071s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:16 INFO transaction handled correlationId="" messageId="" transactionId=33513ba3-fdd0-45e8-b70f-e24b2709af9c walletId=436c7d66-10a8-49ac-8b65-e963b26de21c providerId=p status=PROCESSED
+2026/09/30 01:22:16 WARN transaction handling failed correlationId="" messageId="" transactionId=099bf108-386b-4f11-b520-21095a3955e0 walletId=436c7d66-10a8-49ac-8b65-e963b26de21c providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged] [wallet opening]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.399s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.173s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.038s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.921s
+--- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance (0.00s)
+    --- FAIL: TestLedgerRejectsEntriesThatCannotExplainANonnegativeBalance/negative_starting_balance (0.00s)
+        ledger_semantics_test.go:80: <nil>
+    ledger_semantics_test.go:86: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.531s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.274s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.008s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.780s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.684s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	14.588s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	14.453s
+ok  	github.com/alexandre/wagering/internal/platform/logging	14.451s
+FAIL

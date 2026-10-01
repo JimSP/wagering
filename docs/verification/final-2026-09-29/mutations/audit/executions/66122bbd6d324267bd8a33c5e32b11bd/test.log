@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.859s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:06:59 INFO transaction handled correlationId="" messageId="" transactionId=7a39a5e5-2809-4d68-85d6-f4254526eb7d walletId=6ccb3d25-9a71-4c73-9cfb-dab358b0b5fa providerId=p status=PROCESSED
+2026/09/29 03:06:59 WARN transaction handling failed correlationId="" messageId="" transactionId=e6a51d58-f919-4b89-b65e-3ebc0b2ef5a8 walletId=6ccb3d25-9a71-4c73-9cfb-dab358b0b5fa providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.06s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"transactionId":"","status":"","idempotentReplay":false}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.211s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.265s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.697s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.175s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.571s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.985s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.283s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.062s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.912s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.601s
+FAIL

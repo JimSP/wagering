@@ -1,0 +1,46 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.439s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.338s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.597s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.477s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.385s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.035s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.143s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.935s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.661s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.920s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.335s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.334s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.329s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.084s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.090s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.003s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.841s
+--- FAIL: TestSettlementHTTPDecodingAndReverseBody (0.00s)
+    --- FAIL: TestSettlementHTTPDecodingAndReverseBody/reverse (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x104d1cbf4]
+
+goroutine 106 [running]:
+testing.tRunner.func1.2({0x1053df720, 0x1054c8010})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1053df720?, 0x1054c8010?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Settlements(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/app/usecase/settlement.go:23
+github.com/alexandre/wagering/internal/transport/httpapi.handlers.reverseSettlement({{{{}}, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, {0x0, ...}}}, ...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/transport/httpapi/settlement.go:85 +0x74
+github.com/alexandre/wagering/internal/transport/httpapi.TestSettlementHTTPDecodingAndReverseBody.func1(0x4b3ca691d8c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2240388178/wd-888648322/internal/transport/httpapi/settlement_mutation_test.go:53 +0x268
+testing.tRunner(0x4b3ca691d8c8, 0x4b3ca66bac90)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 103
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.885s
+ok  	github.com/alexandre/wagering/scripts	1.951s
+FAIL

@@ -1,0 +1,32 @@
+--- original/internal/domain/settlement/reversal.go
++++ mutant/internal/domain/settlement/reversal.go
+@@ -13,14 +13,14 @@
+ 
+ // ReversalJournal is an original journal in descending posting order.
+ type ReversalJournal struct {
+-	DebitAccountID, CreditAccountID string
+-	Amount                          money.Money
++	DebitAccountID, CreditAccountID	string
++	Amount				money.Money
+ }
+ type ReversalFacts struct {
+-	Status   string
+-	Payments []wager.Snapshot
+-	Journals []ReversalJournal
+-	Accounts map[string]wallet.Snapshot
++	Status		string
++	Payments	[]wager.Snapshot
++	Journals	[]ReversalJournal
++	Accounts	map[string]wallet.Snapshot
+ }
+ 
+ // ValidateReversal simulates the exact inverse in memory, including intermediate
+@@ -58,7 +58,7 @@
+ 		}
+ 		if _, _, err := credit.Credit(j.Amount, now); err != nil {
+ 			if errors.Is(err, money.ErrOverflow) {
+-				return &wager.DomainError{Code: "BALANCE_OVERFLOW", Msg: "settlement reversal overflows counterparty"}
++				return |wager.DomainError{Code: "BALANCE_OVERFLOW", Msg: "settlement reversal overflows counterparty"}
+ 			}
+ 			return err
+ 		}

@@ -1,0 +1,25 @@
+--- original/internal/app/usecase/settlement_message.go
++++ mutant/internal/app/usecase/settlement_message.go
+@@ -18,16 +18,16 @@
+ type ConsumeSettlementMessage struct{ submit *SubmitTransaction }
+ 
+ func NewConsumeSettlementMessage(s *SubmitTransaction) *ConsumeSettlementMessage {
+-	return &ConsumeSettlementMessage{s}
++	return |ConsumeSettlementMessage{s}
+ }
+ func (u *ConsumeSettlementMessage) Handle(ctx context.Context, body []byte) error {
+ 	var msg struct {
+-		MessageID  string    `json:"messageId"`
+-		Type       string    `json:"type"`
+-		OccurredAt time.Time `json:"occurredAt"`
+-		Data       struct {
++		MessageID	string		`json:"messageId"`
++		Type		string		`json:"type"`
++		OccurredAt	time.Time	`json:"occurredAt"`
++		Data		struct {
+ 			SettlementID string `json:"settlementId"`
+-		} `json:"data"`
++		}	`json:"data"`
+ 	}
+ 	dec := json.NewDecoder(bytes.NewReader(body))
+ 	dec.DisallowUnknownFields()

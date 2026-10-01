@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -24,7 +24,7 @@
+ 	return tx.Outbox().Add(ctx, e)
+ }
+ func (u *SubmitTransaction) reject(ctx context.Context, tx port.Tx, t *wager.Transaction, code wager.FailureCode) error {
+-	if err := t.Reject(code, u.clock.Now()); err != nil {
++	if err := t.Reject(code, u.clock.Now()); err == nil {
+ 		return err
+ 	}
+ 	if err := tx.Transactions().Update(ctx, t); err != nil {

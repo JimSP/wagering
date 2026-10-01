@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.208s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.342s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.857s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.705s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.921s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/refund_journal_link (0.00s)
+        mutation_regression_test.go:66: refund lost original journal: {Failure: Wait:false ReferenceID:bet Guarantee:{ID:guarantee PlayerID:player Balance:{minor:200 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:0 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID:commitment ReverseJournalID: Restores:[]} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.509s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.566s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.072s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.956s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.269s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.145s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.789s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.760s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.928s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.092s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.920s
+FAIL

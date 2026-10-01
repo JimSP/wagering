@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/ledger_repo.go
++++ mutant/internal/infra/postgres/ledger_repo.go
+@@ -26,7 +26,7 @@
+ 	}
+ 	if cursor != "" {
+ 		b, e := base64.RawURLEncoding.DecodeString(cursor)
+-		if e != nil {
++		if e == nil {
+ 			return out, apperr.Invalid("invalid cursor")
+ 		}
+ 		parts := strings.Split(string(b), ":")

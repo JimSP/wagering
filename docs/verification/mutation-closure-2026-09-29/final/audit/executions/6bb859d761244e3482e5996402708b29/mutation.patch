@@ -1,0 +1,36 @@
+--- original/internal/transport/httpapi/module.go
++++ mutant/internal/transport/httpapi/module.go
+@@ -22,15 +22,15 @@
+ 
+ type Deps struct {
+ 	fx.In
+-	OpenWallet *usecase.OpenWallet
+-	GetWallet  *usecase.GetWallet
+-	ListLedger *usecase.ListLedger
+-	Reconcile  *usecase.ReconcileWallet
+-	Submit     *usecase.SubmitTransaction
+-	GetTx      *usecase.GetTransaction
+-	Auth       *auth.Verifier
+-	Metrics    *metrics.Recorder
+-	Checks     []port.ReadinessChecker `group:"readiness"`
++	OpenWallet	*usecase.OpenWallet
++	GetWallet	*usecase.GetWallet
++	ListLedger	*usecase.ListLedger
++	Reconcile	*usecase.ReconcileWallet
++	Submit		*usecase.SubmitTransaction
++	GetTx		*usecase.GetTransaction
++	Auth		*auth.Verifier
++	Metrics		*metrics.Recorder
++	Checks		[]port.ReadinessChecker	`group:"readiness"`
+ }
+ 
+ func chain(h http.Handler, mws ...func(http.Handler) http.Handler) http.Handler {
+@@ -82,7 +82,7 @@
+ 	mux.Handle("GET /wagering/transactions/{transactionId}", either(h.getTransaction))
+ 	mux.Handle("GET /providers/{providerId}/wagering/transactions/{externalTransactionId}", either(h.getProviderTransaction))
+ 
+-	srv := &http.Server{ErrorLog: slog.NewLogLogger(log.Handler(), slog.LevelError), Addr: cfg.HTTPAddr, Handler: withCorrelation(mux), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 15 * time.Second, IdleTimeout: 60 * time.Second}
++	srv := |http.Server{ErrorLog: slog.NewLogLogger(log.Handler(), slog.LevelError), Addr: cfg.HTTPAddr, Handler: withCorrelation(mux), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 15 * time.Second, IdleTimeout: 60 * time.Second}
+ 	var listener net.Listener
+ 	if cfg.HasRole("api") {
+ 		worker.Register(group, "http", log, func(context.Context) error {

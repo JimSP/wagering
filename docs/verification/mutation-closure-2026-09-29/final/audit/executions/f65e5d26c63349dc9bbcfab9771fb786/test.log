@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.174s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:26:30 INFO transaction handled correlationId="" messageId="" transactionId=5d11362e-dd8b-4fb7-a7b5-dea120f89d14 walletId=8ba616b3-d62a-4a4d-8fc7-f4e882f54e42 providerId=p status=PROCESSED
+2026/09/30 01:26:30 WARN transaction handling failed correlationId="" messageId="" transactionId=b7ace6bf-72e9-4fef-a018-e7b40e82a8fe walletId=8ba616b3-d62a-4a4d-8fc7-f4e882f54e42 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.39s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/partial-refund (0.08s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: missing failure"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.837s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.535s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.923s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.796s
+--- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning (0.00s)
+    --- FAIL: TestTransactionAcceptanceAndTerminalHistoryHaveOneMeaning/REJECTED (0.00s)
+        lifecycle_semantics_test.go:122: rehydration changed state: INVALID_INPUT: invalid input: missing failure
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.301s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.579s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.830s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.043s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.875s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.161s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.823s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.671s
+FAIL

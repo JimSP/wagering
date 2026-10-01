@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -16,7 +16,7 @@
+ 	}
+ 	var hash string
+ 	var completed *time.Time
+-	err = r.q.QueryRow(ctx, `SELECT payload_hash,completed_at FROM inbox_messages WHERE consumer_name=$1 AND message_id=$2 FOR UPDATE`, c, id).Scan(&hash, &completed)
++	err = r.q.QueryRow(ctx, `SELECT payload_hash,completed_at FROM inbox_messages WHERE consumer_name=$1 AND message_id=$2 FOR UPDATE`, c, id).Scan(|hash, &completed)
+ 	if err != nil {
+ 		return port.InboxNew, err
+ 	}

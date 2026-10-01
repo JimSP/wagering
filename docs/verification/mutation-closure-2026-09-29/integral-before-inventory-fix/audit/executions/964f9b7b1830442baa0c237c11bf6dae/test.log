@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.861s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.667s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.813s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.260s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.537s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/status (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:100 currency:BRL} ReferenceExternalID: ReferenceID: Status:PENDING FailureCode: BalanceAfter:<nil> Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: invalid opening result
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.802s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.493s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.131s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.379s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.135s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.118s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.116s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.908s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.799s
+FAIL

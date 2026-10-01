@@ -1,0 +1,48 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.565s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:19:56 INFO transaction handled correlationId="" messageId="" transactionId=52e9ae58-b2ac-4c55-8cba-ab433a41951a walletId=5998145f-4299-49e3-979d-feec892a1bed providerId=p status=PROCESSED
+2026/09/30 01:19:56 WARN transaction handling failed correlationId="" messageId="" transactionId=5dde528e-cdc6-4c06-a21e-4f71f6089f7b walletId=5998145f-4299-49e3-979d-feec892a1bed providerId=p transient=false
+--- FAIL: TestProcessingPropagatesDomainAndPortFailures (0.00s)
+    --- FAIL: TestProcessingPropagatesDomainAndPortFailures/invalid_wallet_time (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x104b71398]
+
+goroutine 150 [running]:
+testing.tRunner.func1.2({0x1052cb1e0, 0x1053bbb70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x1052cb1e0?, 0x1053bbb70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/app/usecase.transactionStub.Update(...)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/ports_test.go:97
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).reject(0x229c527e3ec0, {0x105361198, 0x105402380}, {0x105361c50, 0x229c52b34230}, 0x229c52b31680, {0x104c2f95a, 0x13})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/process.go:30 +0x98
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).process(0x229c5291fec0, {0x105361198, 0x105402380}, {0x105361c50, 0x229c52b34230}, 0x229c52b31680)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/process.go:90 +0x6bc
+github.com/alexandre/wagering/internal/app/usecase.TestProcessingPropagatesDomainAndPortFailures.func1(0x229c52b32fc8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/submit_failure_test.go:161 +0x9c8
+testing.tRunner(0x229c52b32fc8, 0x229c52b158c0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 145
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.992s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.531s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.082s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.005s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/closed_BET (0.00s)
+        accounting_test.go:55: decision={Failure:REFERENCE_NOT_FOUND Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.750s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.638s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.437s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.497s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.402s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.750s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.741s
+ok  	github.com/alexandre/wagering/internal/platform/logging	11.490s
+FAIL

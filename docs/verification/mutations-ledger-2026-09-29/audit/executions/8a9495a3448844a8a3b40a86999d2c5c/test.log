@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.389s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:49:07 INFO transaction handled correlationId="" messageId="" transactionId=691fd5f4-23a2-4dc3-b33d-7c5c8d8203dc walletId=e0a5c59a-08d0-4801-b48e-cac825c5aec9 providerId=p status=PROCESSED
+2026/09/29 22:49:07 WARN transaction handling failed correlationId="" messageId="" transactionId=4e604062-b1e8-4a52-9d17-7530914271e0 walletId=e0a5c59a-08d0-4801-b48e-cac825c5aec9 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got money: currency mismatch, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.642s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.203s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.037s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: money: currency mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.428s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/counterparty_newer_than_command (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:01:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:true ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=money: currency mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.149s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {0 } {0 } money: currency mismatch
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	1.894s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.986s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.258s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.894s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.334s
+FAIL

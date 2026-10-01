@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -65,7 +65,7 @@
+ 			return f, err
+ 		}
+ 	}
+-	if _, err = t.q.Exec(ctx, `SELECT id FROM ledger_accounts WHERE wallet_id=$1 ORDER BY id FOR NO KEY UPDATE`, s.WalletID); err != nil {
++	if _, err = t.q.Exec(ctx, `SELECT id FROM ledger_accounts WHERE wallet_id=$1 ORDER BY id FOR NO KEY UPDATE`, s.WalletID); err == nil {
+ 		return f, err
+ 	}
+ 	for _, role := range []string{"GUARANTEE", "OPERATIONAL"} {

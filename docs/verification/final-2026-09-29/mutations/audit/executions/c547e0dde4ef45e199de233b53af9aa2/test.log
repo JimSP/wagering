@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.867s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:05:41 INFO transaction handled correlationId="" messageId="" transactionId=cd8c16d6-3152-4514-927f-a64db953a3db walletId=1c13c08b-8edd-4eb1-9153-1b3e03061c71 providerId=p status=PROCESSED
+2026/09/29 03:05:41 WARN transaction handling failed correlationId="" messageId="" transactionId=484b0417-0390-493f-9500-f26853ab94dc walletId=1c13c08b-8edd-4eb1-9153-1b3e03061c71 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.07s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:154: HTTP contract: 202 map[Content-Type:[application/json] Location:[/wagering/transactions/00000000-0000-4000-8000-000000000006] X-Correlation-Id:[contract-correlation]] {"transactionId":"00000000-0000-4000-8000-000000000006","status":"PENDING","idempotentReplay":false}
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"80.00","currency":"BRL"},"version":2}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.557s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.876s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.136s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.073s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.013s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.226s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.954s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.234s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.691s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.574s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.574s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.601s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.593s
+FAIL

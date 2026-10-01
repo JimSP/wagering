@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.424s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:14:27 INFO transaction handled correlationId="" messageId="" transactionId=4295d1a9-a908-488a-8051-0a6f61341cc8 walletId=f98f1c1e-1d06-4195-b511-df0a46c0e482 providerId=p status=PROCESSED
+2026/09/30 01:14:27 WARN transaction handling failed correlationId="" messageId="" transactionId=3fae0a58-21b3-4477-8013-5e4bc75e4ee8 walletId=f98f1c1e-1d06-4195-b511-df0a46c0e482 providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    outbox_paths_test.go:21: invalid integration event: stored payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	7.711s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:65: zero attempts roundtrip: {    0 0 {0 0 <nil>}} invalid integration event: stored payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	8.241s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.788s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.211s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.651s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.386s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.156s
+ok  	github.com/alexandre/wagering/internal/infra/config	7.976s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:62: error=invalid integration event: stored payload want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.109s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.402s
+FAIL

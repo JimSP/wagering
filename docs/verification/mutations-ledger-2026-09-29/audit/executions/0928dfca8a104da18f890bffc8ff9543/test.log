@@ -1,0 +1,41 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.084s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:22:33 INFO transaction handled correlationId="" messageId="" transactionId=11827e5f-4237-4274-a608-f129dabb9109 walletId=02004e1a-9f68-43f8-a986-73d932c2a28a providerId=p status=PROCESSED
+2026/09/29 22:22:33 WARN transaction handling failed correlationId="" messageId="" transactionId=ad071978-6155-4eac-a8c6-a2a734e343d1 walletId=02004e1a-9f68-43f8-a986-73d932c2a28a providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    outbox_paths_test.go:21: invalid integration event: stored JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.377s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:65: zero attempts roundtrip: {    0 0 {0 0 <nil>}} invalid integration event: stored JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	1.780s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.502s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.324s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.585s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.693s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.232s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.203s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:58: args=[]interface {}{"", "", "", []uint8{}, time.Date(1, time.January, 1, 0, 0, 0, 0, time.UTC)} want=[]interface {}{"", "", "", []uint8{}, time.Date(2026, time.January, 2, 3, 4, 5, 0, time.UTC)}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.094s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:22:34 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:55: map[MessageAttributes:map[eventType:map[DataType:String StringValue:]] MessageBody: MessageDeduplicationId: MessageGroupId: QueueUrl:https://sqs.example.test/events.fifo]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.160s
+FAIL

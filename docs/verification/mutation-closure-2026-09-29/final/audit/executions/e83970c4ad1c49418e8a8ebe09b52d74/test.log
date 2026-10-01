@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.065s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:26:50 INFO transaction handled correlationId="" messageId="" transactionId=70dd3e8f-811d-49bd-90ae-990835f3f6b7 walletId=f92b65fd-d259-4977-9e0f-4c322dce2203 providerId=p status=PROCESSED
+2026/09/30 01:26:50 WARN transaction handling failed correlationId="" messageId="" transactionId=bb8b126d-b28c-4708-9927-6cfdff18c78b walletId=f92b65fd-d259-4977-9e0f-4c322dce2203 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/waiting (0.00s)
+        http_contract_test.go:177: HTTP contract: 422 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: invalid pending reference"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.386s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.050s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.514s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.393s
+--- FAIL: TestPendingSnapshotRequiresFutureSchedule (0.00s)
+    --- FAIL: TestPendingSnapshotRequiresFutureSchedule/next_equal_updated (0.00s)
+        input_contract_test.go:75: accepted {CorrelationID:correlation CausationID:message ID:tx Origin:EXTERNAL ProviderID:provider ExternalID:external IdempotencyKey:received-key PayloadHash:hash WalletID:wallet PlayerID:player RoundID:round GameID:game Kind:REFUND Amount:{minor:1000 currency:BRL} ReferenceExternalID:bet-ext ReferenceID: Status:PENDING_REFERENCE FailureCode: BalanceAfter:<nil> Attempts:1 NextAttemptAt:2026-09-28 12:00:00 +0000 UTC ExpiresAt:2026-09-28 13:00:00 +0000 UTC CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: <nil> INVALID_INPUT: invalid input: invalid pending reference
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.914s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.154s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.947s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.673s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.547s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.545s
+FAIL

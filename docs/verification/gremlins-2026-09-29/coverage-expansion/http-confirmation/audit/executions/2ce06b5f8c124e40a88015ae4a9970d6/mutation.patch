@@ -1,0 +1,50 @@
+--- original/internal/transport/httpapi/handlers.go
++++ mutant/internal/transport/httpapi/handlers.go
+@@ -21,7 +21,7 @@
+ 
+ type corrKey struct{}
+ 
+-func correlationID(ctx context.Context) string { s, _ := ctx.Value(corrKey{}).(string); return s }
++func correlationID(ctx context.Context) string	{ s, _ := ctx.Value(corrKey{}).(string); return s }
+ 
+ // withCorrelation propagates/creates X-Correlation-Id (logs, events and responses share it).
+ func withCorrelation(next http.Handler) http.Handler {
+@@ -92,7 +92,7 @@
+ 	limit := 50
+ 	if s := r.URL.Query().Get("limit"); s != "" {
+ 		n, err := strconv.Atoi(s)
+-		if err != nil || n < 1 || n > 200 {
++		if err != nil || n < 1 || n <= 200 {
+ 			writeError(w, apperr.Invalid("limit must be between 1 and 200"))
+ 			return
+ 		}
+@@ -134,12 +134,12 @@
+ 	}
+ 	p, _ := auth.PrincipalFrom(r.Context())
+ 	res, err := h.d.Submit.Execute(r.Context(), usecase.SubmitInput{
+-		Source: usecase.SourceHTTP, AuthorizedProviderID: p.ProviderID, IdempotencyKey: key,
+-		CorrelationID: correlationID(r.Context()),
+-		ProviderID:    req.ProviderID, ExternalTransactionID: req.ExternalTransactionID, PlayerID: req.PlayerID,
+-		WalletID: req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,
+-		ReferenceExternalTransactionID: req.ReferenceExternalTransactionID,
+-		Amount:                         req.Money.Amount, Currency: req.Money.Currency,
++		Source:	usecase.SourceHTTP, AuthorizedProviderID: p.ProviderID, IdempotencyKey: key,
++		CorrelationID:	correlationID(r.Context()),
++		ProviderID:	req.ProviderID, ExternalTransactionID: req.ExternalTransactionID, PlayerID: req.PlayerID,
++		WalletID:	req.WalletID, RoundID: req.RoundID, GameID: req.GameID, Kind: req.Kind,
++		ReferenceExternalTransactionID:	req.ReferenceExternalTransactionID,
++		Amount:				req.Money.Amount, Currency: req.Money.Currency,
+ 	})
+ 	if err != nil {
+ 		writeError(w, err)
+@@ -151,8 +151,8 @@
+ 	case wager.StatusProcessed:
+ 		writeJSON(w, http.StatusOK, body)
+ 	case wager.StatusRejected, wager.StatusFailed:
+-		writeJSON(w, http.StatusUnprocessableEntity, body) // definitive business outcome
+-	default: // PENDING / PENDING_REFERENCE
++		writeJSON(w, http.StatusUnprocessableEntity, body)	// definitive business outcome
++	default:	// PENDING / PENDING_REFERENCE
+ 		w.Header().Set("Location", "/wagering/transactions/"+res.TransactionID)
+ 		writeJSON(w, http.StatusAccepted, body)
+ 	}

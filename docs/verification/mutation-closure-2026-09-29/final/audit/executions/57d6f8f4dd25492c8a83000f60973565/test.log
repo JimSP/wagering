@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.984s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:12:47 INFO transaction handled correlationId="" messageId="" transactionId=9130a5e9-2790-46f6-aa05-ca80b3f41dfa walletId=a916e440-c6c5-42d0-bda2-8979ada3599c providerId=p status=PROCESSED
+2026/09/30 01:12:47 WARN transaction handling failed correlationId="" messageId="" transactionId=27c0df79-d8a3-4034-9844-c5678174efbf walletId=a916e440-c6c5-42d0-bda2-8979ada3599c providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/balance_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger WagerTransactionProcessed] [wallet opening ledger WagerTransactionProcessed WalletBalanceChanged]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.093s
+--- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots (0.00s)
+    --- FAIL: TestIntegrationEventsPreserveTypedFactsAsIndependentWireSnapshots/WalletBalanceChanged (0.00s)
+        semantics_test.go:45: invalid integration event: balance identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	10.170s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.738s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.308s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.698s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.454s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.663s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.174s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	10.618s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.881s
+FAIL

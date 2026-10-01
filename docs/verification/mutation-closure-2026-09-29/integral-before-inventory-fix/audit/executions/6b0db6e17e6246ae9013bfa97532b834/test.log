@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.262s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:40:58 INFO transaction handled correlationId="" messageId="" transactionId=f5886107-1bfe-490b-81ca-b0583ff5abda walletId=0bfb9fd5-8228-4722-a074-8de9d04a197d providerId=p status=PROCESSED
+2026/09/30 00:40:58 WARN transaction handling failed correlationId="" messageId="" transactionId=b948dcaa-0f47-48e0-8983-99964e78aeed walletId=0bfb9fd5-8228-4722-a074-8de9d04a197d providerId=p transient=false
+--- FAIL: TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals (0.00s)
+    --- FAIL: TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals/settle (0.00s)
+        settlement_facts_contract_test.go:50: unexpected journal or counterpart: {ID:generated-2 Bet:bet-1 Reverses: Postings:[{Account:GA Direction:CREDIT Currency:BRL Amount:3500 Before:7500 After:11000} {Account:WA Direction:DEBIT Currency:BRL Amount:3500 Before:3500 After:0}]}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	3.065s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.862s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.305s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.645s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.536s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.416s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.463s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.755s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.030s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.080s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.489s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.447s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.346s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.371s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.510s
+--- FAIL: TestFactsPostingOrderAndExactMultiplicity (0.00s)
+    mutation_regression_test.go:207: unexpected journal or counterpart: {ID:a Bet:bet Reverses: Postings:[{Account:b Direction: Currency: Amount:0 Before:0 After:0} {Account:a Direction: Currency: Amount:0 Before:0 After:0} {Account:a Direction: Currency: Amount:0 Before:0 After:0}]}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.656s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.747s
+ok  	github.com/alexandre/wagering/scripts	1.749s
+FAIL

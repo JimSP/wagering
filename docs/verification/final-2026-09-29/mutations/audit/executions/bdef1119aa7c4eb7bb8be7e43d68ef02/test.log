@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.706s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:56: INVALID_INPUT: invalid input: money is not initialized
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.158s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.769s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.234s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    error_text_contract_test.go:12: INVALID_INPUT: invalid input: money is not initialized
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.658s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.102s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.799s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.209s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:300: error=INVALID_INPUT: invalid input: money is not initialized want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.520s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.002s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.931s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.957s
+FAIL

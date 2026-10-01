@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.191s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	11.507s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.807s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.677s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.794s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.394s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.294s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.088s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.415s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:238: audit {SettlementRecord:{ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} Payments:[{ID:p WalletID:w ReferenceID:ref Status:PROCESSED Money:{minor:100 currency:BRL}} {ID:p2 WalletID:w2 ReferenceID:ref2 Status:PROCESSED Money:{minor:20 currency:BRL}}] Postings:[]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query#01 (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	10.093s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.515s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.205s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.035s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.098s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.112s
+ok  	github.com/alexandre/wagering/internal/platform/worker	10.132s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	9.978s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	10.048s
+FAIL

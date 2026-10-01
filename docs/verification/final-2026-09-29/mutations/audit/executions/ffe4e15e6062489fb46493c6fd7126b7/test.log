@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.358s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.01s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/success (0.01s)
+        failpoint_contract_test.go:60: exit=exit status 1 output=--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+                failpoint_contract_test.go:25: marked before crash
+            FAIL
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.687s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.935s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.347s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.806s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.050s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.680s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.770s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.945s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.672s
+--- FAIL: TestCrashMarkerAndExitContract (0.00s)
+    hit_test.go:25: []
+FAIL
+FAIL	github.com/alexandre/wagering/internal/platform/failpoint	2.108s
+FAIL

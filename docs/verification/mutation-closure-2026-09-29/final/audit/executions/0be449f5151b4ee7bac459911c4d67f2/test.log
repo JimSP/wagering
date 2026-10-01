@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.667s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:34:13 INFO transaction handled correlationId="" messageId="" transactionId=0a72b9b3-8e14-45d2-afc0-ebde29c4a459 walletId=548e059c-0394-4eb8-995a-5a3812d2376e providerId=p status=PROCESSED
+2026/09/30 01:34:13 WARN transaction handling failed correlationId="" messageId="" transactionId=6f5bc21e-3e06-4a55-992c-28889beac13c walletId=548e059c-0394-4eb8-995a-5a3812d2376e providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.02s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:177: HTTP contract: 403 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"FORBIDDEN"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.418s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.723s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.836s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.636s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.057s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.045s
+--- FAIL: TestAuthorizationPolicyMatrix (0.00s)
+    --- FAIL: TestAuthorizationPolicyMatrix/either/internal (0.00s)
+        authorization_paths_test.go:40: 403
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	9.948s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.940s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.533s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.073s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	10.205s
+ok  	github.com/alexandre/wagering/internal/platform/logging	10.349s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	10.413s
+ok  	github.com/alexandre/wagering/internal/platform/sys	10.424s
+FAIL

@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.275s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	9.503s
+ok  	github.com/alexandre/wagering/internal/domain/event	7.633s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.074s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.909s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.797s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.254s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.702s
+--- FAIL: TestShutdownBudgetBoundsAndInvalidConfiguration (0.00s)
+    --- FAIL: TestShutdownBudgetBoundsAndInvalidConfiguration/7.999999999s (0.00s)
+        config_test.go:81: invalid duration accepted: {Roles:[api] HTTPAddr::8080 ShutdownTimeout:7.999999999s LogLevel:info DatabaseURL:postgres://test@localhost/test AWSRegion:us-east-1 AWSEndpointURL: WagerQueueURL:https://queue.test/wager WagerDLQURL: EventsQueueURL:https://queue.test/events SettlementQueueURL:https://queue.test/settlements OIDCIssuer:https://issuer.test OIDCJWKSURL:https://issuer.test/keys OIDCAudience:wagering} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/config	9.146s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	8.686s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.883s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	12.649s
+ok  	github.com/alexandre/wagering/internal/platform/logging	12.447s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	11.993s
+ok  	github.com/alexandre/wagering/internal/platform/sys	12.096s
+ok  	github.com/alexandre/wagering/internal/platform/worker	12.292s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	12.293s
+FAIL

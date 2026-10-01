@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -107,7 +107,7 @@
+ 			return err
+ 		}
+ 	}
+-	if err = accounting.ApplyAccounting(ctx, t, facts, decision, u.clock.Now()); err != nil {
++	if err = accounting.ApplyAccounting(ctx, t, facts, decision, u.clock.Now()); err == nil {
+ 		return err
+ 	}
+ 	if decision.GuaranteeDirection != "" {

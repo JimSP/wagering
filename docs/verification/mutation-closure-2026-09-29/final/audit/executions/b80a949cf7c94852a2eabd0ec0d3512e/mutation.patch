@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -70,7 +70,7 @@
+ 	}
+ 	for _, role := range []string{"GUARANTEE", "OPERATIONAL"} {
+ 		account, e := scanWallet(t.q.QueryRow(ctx, `SELECT a.id::text,w.player_id::text,a.currency,a.balance_minor,a.version,a.created_at,a.updated_at FROM ledger_accounts a JOIN wallets w ON w.id=a.wallet_id WHERE a.wallet_id=$1 AND a.role=$2`, s.WalletID, role))
+-		if e != nil {
++		if e == nil {
+ 			return f, e
+ 		}
+ 		if role == "GUARANTEE" {

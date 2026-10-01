@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	2.633s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:03:32 INFO transaction handled correlationId="" messageId="" transactionId=1b611e18-f7f3-4684-b4c3-2fd9ac5cb937 walletId=3144a25a-1edd-46b5-81e5-865acb913fd5 providerId=p status=PROCESSED
+2026/09/29 23:03:32 WARN transaction handling failed correlationId="" messageId="" transactionId=d68c155c-2e33-4cbc-ad37-6b18a06ef35e walletId=3144a25a-1edd-46b5-81e5-865acb913fd5 providerId=p transient=false
+--- FAIL: TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals (0.00s)
+    --- FAIL: TestSettlementComparatorAcceptsCompoundAndInverseLiteralJournals/settle (0.00s)
+        settlement_facts_contract_test.go:50: unexpected journal or counterpart: {ID:generated-2 Bet:bet-1 Reverses: Postings:[{Account:GA Direction:CREDIT Currency:BRL Amount:3500 Before:7500 After:11000} {Account:WA Direction:DEBIT Currency:BRL Amount:3500 Before:3500 After:0}]}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	4.055s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.260s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.145s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.976s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.779s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.021s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.734s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.902s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.187s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.485s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.383s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.050s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.112s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.189s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.216s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.370s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	2.989s
+FAIL

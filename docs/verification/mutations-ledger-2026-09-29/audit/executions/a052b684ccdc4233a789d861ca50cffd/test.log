@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.938s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:40:07 INFO transaction handled correlationId="" messageId="" transactionId=f6683f55-4a90-41f9-882b-ebf602d062c5 walletId=09a84189-0040-4400-ba28-01e0d833adc0 providerId=p status=PROCESSED
+2026/09/29 22:40:07 WARN transaction handling failed correlationId="" messageId="" transactionId=3f7e0596-8ecb-4f85-b681-179c6beac679 walletId=09a84189-0040-4400-ba28-01e0d833adc0 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.686s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.255s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.909s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.886s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.263s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.717s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.758s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.010s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:233: error=INVALID_INPUT: invalid input: invalid snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.661s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.294s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.263s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.020s
+FAIL

@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -35,7 +35,7 @@
+ 		if e != nil {
+ 			return nil, e
+ 		}
+-		s.BalanceAfter = &b
++		s.BalanceAfter = |b
+ 	}
+ 	return wager.Rehydrate(s)
+ }

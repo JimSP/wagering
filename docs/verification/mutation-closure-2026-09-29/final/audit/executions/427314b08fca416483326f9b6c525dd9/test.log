@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.274s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:33:05 INFO transaction handled correlationId="" messageId="" transactionId=ce1b0e41-6386-48a5-95bf-fce9796b620b walletId=f182e3b0-dc29-41d3-8d62-545db7e5514c providerId=p status=PROCESSED
+2026/09/30 01:33:05 WARN transaction handling failed correlationId="" messageId="" transactionId=772e45e0-1e4d-4fc5-9a34-bda4aa98af52 walletId=f182e3b0-dc29-41d3-8d62-545db7e5514c providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got wallet: invalid, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.049s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.206s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.296s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	11.452s
+--- FAIL: TestMutationProofAccountingGuards (0.00s)
+    --- FAIL: TestMutationProofAccountingGuards/refund_journal_link (0.00s)
+        mutation_regression_test.go:66: refund lost original journal: {Failure: Wait:false ReferenceID:bet Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:CREDIT NewCommitment:false ConsumeCommitmentID:commitment ReverseJournalID:original-journal Restores:[]} wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.709s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {false 8000 10000 2000} {0 } {0 } wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	12.665s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.477s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.402s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.988s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	12.168s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	12.177s
+FAIL

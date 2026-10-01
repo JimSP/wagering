@@ -1,0 +1,177 @@
+{
+  "counts": {
+    "pass": 16,
+    "fail": 32
+  },
+  "packages": {
+    "internal/infra/postgres": {
+      "pass": 16,
+      "fail": 32
+    }
+  },
+  "failed": [
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestGuaranteeMigrationPreservesLegacyOriginAndRetriesAbortedDDL",
+      "first_diagnostic": "guarantee_migration_integration_test.go:144: MISSING IMPLEMENTATION: guarantee migration after 000002; legacy fixture is valid"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestDepositBETAndSettlementFollowAdmissionOrderOnSamePair",
+      "first_diagnostic": "settlement_admission_order_integration_test.go:54: GET /wallets/ac5577a0-b69d-4bdf-8254-f9bf581c1c2d/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementBatchMeasurementPreservesLiteralTotals",
+      "first_diagnostic": "settlement_batch_measurement_integration_test.go:31: POST /bets: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementDatabaseRejectsIncompleteAndInvalidPostings",
+      "first_diagnostic": "settlement_constraints_integration_test.go:32: GET /wallets/28f7ae85-25c5-4e4a-a27e-45be50940c7e/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementSQLCannotRewriteHistoryOrRestoreConsumedCommitment",
+      "first_diagnostic": "settlement_constraints_integration_test.go:93: GET /wallets/c1c2f7a5-7465-4bff-99b1-2b8d70e09a69/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementDatabaseCommandUsesOnlyIdentity",
+      "first_diagnostic": "settlement_contract_test.go:32: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementDatabaseCommandPreservesRetryClassification",
+      "first_diagnostic": "settlement_contract_test.go:47: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementDatabasePermanentErrorsAreNotInfrastructureRetries",
+      "first_diagnostic": "settlement_contract_test.go:61: MISSING CONTRACT: PostgreSQL transaction must expose SettleByID(ctx, id); settlement SQL is not implemented"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementPersistsCommitmentsLedgerAndOutboxAsOneOutcome",
+      "first_diagnostic": "settlement_durable_observation_integration_test.go:310: GET /wallets/4e45b3a9-fc28-4167-b22d-9a6cf73f9bec/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementTerminalEventsAndPaginatedAccountHistory",
+      "first_diagnostic": "settlement_events_queries_integration_test.go:93: GET /wallets/17b3ae48-7595-4f46-ae44-6c7ba7b23f8d/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementFundedLifecycleOnRealPostgres",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:281: GET /wallets/cdcecc5c-d616-4820-9f00-307b1f4ed201/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementInvalidFundingPreservesSQLStateAndAllowsCorrection",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:309: GET /wallets/7eb4a500-383e-474a-b7cc-4e9cea3c8755/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementDoesNotWaitForUnconfirmedOtherBet",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:335: GET /wallets/723b27ba-0d9a-4374-8ca6-3ca79d2f6c7e/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementCommittedDespiteLostReplyReplaysAfterRestart",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:366: GET /wallets/bf2be1f9-f07b-4b1e-b9dc-afaa2f7a519b/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementConcurrentDifferentDeliveriesCommitOnlyOnce",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:391: GET /wallets/51ec9a36-c26c-4382-a8bb-b5b97a22715e/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementSQLWriteFailuresRollBackWholeBatchAndRetry",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:423: GET /wallets/09244ba5-dfc1-4fd3-aa71-e7edf50edc71/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementMultipleWinnersAndLosersPreserveEveryCent",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:476: GET /wallets/5e77dcd1-dc61-4c54-8d40-b4122d286d1d/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementRollbackPreservesClosedBetAndOriginalHistory",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:534: GET /wallets/e8abede0-52f4-4c22-be4b-7adc91c922db/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestDepositIdentityAndValidationOnRealPostgres",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:609: GET /wallets/a583c684-d709-4195-8187-2bfb482f51e2/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementRejectsForeignAndDuplicateCommitmentsWithoutClosing",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:674: GET /wallets/e9228ab2-2674-4874-bafb-e92d6a5e3bed/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementAuthorityAndImmutableResultOnRealPostgres",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:734: GET /wallets/33f2023a-9326-4c13-96f9-b65f4fe00c68/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementOverflowRollsBackEveryParticipantThenRetries",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:781: GET /wallets/cea258c6-ad33-4e64-ba08-57f775d08aaa/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementRollbackCannotBorrowOperationalOrOtherGuaranteeFunds",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:805: GET /wallets/ffe0be6d-9443-4968-928d-7551664e59fb/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementUnknownEmptyAndConsumedSetsCannotClose",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:828: GET /wallets/d808ac1a-7ded-4999-8957-20bef24029b3/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementOppositePairsProduceOneOfTwoSerialHistories",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:857: GET /wallets/1b62bd97-c9a3-46c7-8b57-374ff4d66d3a/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementLockedPairDoesNotBlockIndependentPair",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:903: GET /wallets/48cae079-6a90-4f5d-a61a-3f36d9b34b10/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementClosureAndRefundHaveOnlyOneValidAdmissionOrder",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:967: GET /wallets/ccf3c944-6e0d-46f1-9041-26fd50c79958/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestBETCannotSelectAnotherPlayersGuaranteeOnRealPostgres",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:1049: GET /wallets/7f8fc20c-d94c-43dd-82f6-f0ae839f5597/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestConcurrentResultsCannotCreateTwoSettlementsForSameCommitments",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:1069: GET /wallets/b98f5bfd-4127-4323-adda-466a8c48f308/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestClosedBetRejectsNewCommitmentsBeforeAndAfterSettlement",
+      "first_diagnostic": "settlement_lifecycle_integration_test.go:1132: GET /wallets/a8a2157e-03bf-4b3a-8624-e1c667ce18e3/guarantee: got 404 404 page not found"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementRejectsUnfundedWINWithRealPostgres",
+      "first_diagnostic": "settlement_safety_integration_test.go:112: unfunded WIN must fail before admission: {TransactionID:d1f2a359-0861-4988-971b-b57de944bcd9 Status:PROCESSED Balance:0xc000596be8 FailureCode: IdempotentReplay:false} <nil>"
+    },
+    {
+      "package": "internal/infra/postgres",
+      "test": "TestSettlementDatabaseGuardsRejectUnfundedCreditBypass",
+      "first_diagnostic": "settlement_safety_integration_test.go:179: database must reject lack of financial origin with an integrity error, got <nil>"
+    }
+  ],
+  "data_race_diagnostics": 0,
+  "started": "2026-09-29T16:57:10.021453-03:00",
+  "finished": "2026-09-29T16:57:16.032778-03:00"
+}

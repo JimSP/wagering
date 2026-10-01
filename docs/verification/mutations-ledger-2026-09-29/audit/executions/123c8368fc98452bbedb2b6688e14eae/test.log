@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.349s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:60: wager: transaction is in a terminal state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.347s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.435s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.455s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.699s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/same_physical_account (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID: Guarantee:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:guarantee PlayerID:player Balance:{minor:100 currency:BRL} Version:1 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection: NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=wager: transaction is in a terminal state
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.978s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.581s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.442s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.982s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.878s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.162s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.136s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.991s
+FAIL

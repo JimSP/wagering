@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.421s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.014s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.745s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.063s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.521s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.648s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.631s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.016s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.341s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingDatabaseProtocol (0.00s)
+    --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT (0.00s)
+        --- FAIL: TestApplyAccountingDatabaseProtocol/DEBIT/failure-0-query (0.00s)
+            accounting_mutation_test.go:57: step 6: SQL "INSERT INTO journal_reversals VALUES($1,$2,$3,$4)" lacks "accounting_consume"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.947s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.600s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.396s
+FAIL

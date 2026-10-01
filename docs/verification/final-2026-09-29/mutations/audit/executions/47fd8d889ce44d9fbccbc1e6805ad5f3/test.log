@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.106s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:28:25 INFO transaction handled correlationId="" messageId="" transactionId=023e1a96-259f-4c88-97c7-68c606faf42e walletId=fbee0e03-4450-45dc-9630-9396d6813827 providerId=p status=PROCESSED
+2026/09/29 03:28:25 WARN transaction handling failed correlationId="" messageId="" transactionId=35b94baf-7061-40a7-ba55-53b224b5a2b7 walletId=fbee0e03-4450-45dc-9630-9396d6813827 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/invalid_wallet (0.00s)
+        read_failure_test.go:156: invalid wallet <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.848s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.210s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.944s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.491s
+--- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently (0.00s)
+    --- FAIL: TestWalletConstructorRejectsEachMissingIdentityIndependently/id (0.00s)
+        input_contract_test.go:22: wallet=&{ player {0 BRL} 1 {0 63926236800 <nil>} {0 63926236800 <nil>}} error=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	2.311s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.336s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.065s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.631s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.968s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.134s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.124s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.169s
+FAIL

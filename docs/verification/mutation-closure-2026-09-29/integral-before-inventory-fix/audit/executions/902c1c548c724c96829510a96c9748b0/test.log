@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.407s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:03:19 INFO transaction handled correlationId="" messageId="" transactionId=a0354041-5909-4257-95d7-be2cca5ec496 walletId=f9560fbd-4473-4c18-9500-77c1a9d4c371 providerId=p status=PROCESSED
+2026/09/30 00:03:19 WARN transaction handling failed correlationId="" messageId="" transactionId=d8018459-ceb1-4941-995a-9cb769809fe6 walletId=f9560fbd-4473-4c18-9500-77c1a9d4c371 providerId=p transient=false
+--- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl (0.04s)
+    --- FAIL: TestResultConfirmationRequiresInternalAuthorityAndHasPositiveControl/denied- (0.04s)
+        result_lifecycle_contract_test.go:90: authorized funded result must be accepted: 422 {"code":"INVALID_DISTRIBUTION","message":"invalid settlement distribution: invalid return"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.490s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.188s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.061s
+--- FAIL: TestMutationProofZeroCommitment (0.00s)
+    mutation_regression_test.go:13: zero remaining commitment must coexist with funded participant: invalid settlement distribution: invalid return
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	1.996s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.943s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.617s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.796s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.744s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.504s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.995s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.502s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.493s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.682s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.638s
+ok  	github.com/alexandre/wagering/internal/platform/worker	1.666s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	1.646s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.925s
+FAIL

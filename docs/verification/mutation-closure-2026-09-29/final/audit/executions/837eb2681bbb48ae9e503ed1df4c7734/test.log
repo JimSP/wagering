@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.107s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.362s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.681s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.563s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.827s
+--- FAIL: TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies (0.00s)
+    --- FAIL: TestOpeningIsAnInternalFactAndExternalKindsHaveExplicitAmountPolicies/internal_opening (0.00s)
+        lifecycle_semantics_test.go:225: rehydration changed state: INVALID_INPUT: invalid input: invalid opening snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.579s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.789s
+ok  	github.com/alexandre/wagering/internal/infra/auth	11.392s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.127s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query (0.00s)
+        accounting_mutation_test.go:103: INVALID_INPUT: invalid input: invalid opening snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.447s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.486s
+FAIL

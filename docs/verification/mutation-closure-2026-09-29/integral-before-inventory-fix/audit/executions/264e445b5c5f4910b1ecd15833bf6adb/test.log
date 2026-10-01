@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.698s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:20:52 INFO transaction handled correlationId="" messageId="" transactionId=457be940-860f-49c3-a661-d15f236a8cae walletId=e2f26a95-324d-4767-ab01-163bbae7742f providerId=p status=PROCESSED
+2026/09/30 00:20:52 WARN transaction handling failed correlationId="" messageId="" transactionId=70f6afd2-669d-4956-9cd8-18ec6dc48bf7 walletId=e2f26a95-324d-4767-ab01-163bbae7742f providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.04s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.011s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.396s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.062s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.283s
+ok  	github.com/alexandre/wagering/internal/domain/wager	3.081s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.173s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.02s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/valid (0.00s)
+        authorization_paths_test.go:94: 401
+    authorization_paths_test.go:116: stale keys accepted auth: invalid token
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.990s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.661s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.566s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.958s
+FAIL

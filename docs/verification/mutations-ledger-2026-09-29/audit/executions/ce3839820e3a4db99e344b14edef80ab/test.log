@@ -1,0 +1,32 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.275s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:48:25 INFO transaction handled correlationId="" messageId="" transactionId=676d06be-78d4-4b56-b49f-c1e654fc1952 walletId=db75ae2a-4eac-45d5-a63b-dbcce0dde4d8 providerId=p status=PROCESSED
+2026/09/29 22:48:25 WARN transaction handling failed correlationId="" messageId="" transactionId=6fb19722-7119-4006-b634-16b2599af943 walletId=db75ae2a-4eac-45d5-a63b-dbcce0dde4d8 providerId=p transient=false
+--- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite (0.00s)
+    --- FAIL: TestSettlementReversalCommandsAreAtomicAndReplayDoesNotWrite/success (0.00s)
+        settlement_audit_test.go:202: got wallet: invalid, want <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.701s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.305s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.817s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	2.219s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.953s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:48: rehydration changed history wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.211s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.815s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.948s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestWalletPersistenceContract (0.00s)
+    repository_contract_test.go:164: error=wallet: invalid want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.698s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.386s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.370s
+FAIL

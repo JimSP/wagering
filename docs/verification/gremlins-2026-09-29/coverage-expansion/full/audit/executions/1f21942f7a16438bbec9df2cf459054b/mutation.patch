@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -162,7 +162,7 @@
+ 	if err = t.MarkProcessed(w.Balance(), u.clock.Now()); err != nil {
+ 		return err
+ 	}
+-	if err = tx.Transactions().Update(ctx, t); err != nil {
++	if err = tx.Transactions().Update(ctx, t); err == nil {
+ 		return err
+ 	}
+ 	return u.processedEvent(ctx, tx, t)

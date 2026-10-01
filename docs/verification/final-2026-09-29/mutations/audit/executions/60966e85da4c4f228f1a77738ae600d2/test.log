@@ -1,0 +1,34 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.665s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:15:29 INFO transaction handled correlationId="" messageId="" transactionId=afeea538-e976-4756-91d0-506b855a639a walletId=356512ea-2ad7-4d55-9920-993baf757062 providerId=p status=PROCESSED
+2026/09/29 03:15:29 WARN transaction handling failed correlationId="" messageId="" transactionId=9a75ff3c-e735-4028-8c43-8e2eb1e5e6c8 walletId=356512ea-2ad7-4d55-9920-993baf757062 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/balance_event (0.00s)
+        read_failure_test.go:156: balance event invalid integration event: noncanonical money
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.909s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.382s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	2.129s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:43: unexplained movement {entry-0 wallet tx-0 CREDIT {10000 BRL} {0 BRL} {0 } {0 63926193600 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.520s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.771s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.608s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.126s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry first has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.028s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.720s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.319s
+FAIL

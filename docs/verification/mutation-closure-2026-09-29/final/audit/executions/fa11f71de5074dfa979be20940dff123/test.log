@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	7.651s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:34:48 INFO transaction handled correlationId="" messageId="" transactionId=3db6b69f-1356-40c5-a1cb-b083e5bf3d40 walletId=3e745f7e-6943-448a-858f-79ac84e104d5 providerId=p status=PROCESSED
+2026/09/30 01:34:48 WARN transaction handling failed correlationId="" messageId="" transactionId=9060501e-3fb5-4f94-bb73-017b74cdab8b walletId=3e745f7e-6943-448a-858f-79ac84e104d5 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.36s)
+    http_contract_test.go:127: auth: jwks unavailable: unexpected end of JSON input
+        failed keyfunc: could not unmarshal raw JWK Set JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.515s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.235s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.376s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.756s
+ok  	github.com/alexandre/wagering/internal/domain/wager	9.086s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.947s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.11s)
+    authorization_paths_test.go:64: auth: jwks unavailable: unexpected end of JSON input
+        failed keyfunc: could not unmarshal raw JWK Set JSON
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	8.844s
+ok  	github.com/alexandre/wagering/internal/infra/config	8.826s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.301s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.805s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.800s
+ok  	github.com/alexandre/wagering/internal/platform/logging	7.425s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.263s
+FAIL

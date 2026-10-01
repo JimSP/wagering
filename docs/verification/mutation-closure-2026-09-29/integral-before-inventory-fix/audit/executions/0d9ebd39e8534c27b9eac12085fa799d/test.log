@@ -1,0 +1,22 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.080s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 23:50:29 INFO transaction handled correlationId="" messageId="" transactionId=05d60fab-0651-4121-b12d-4c267197eca3 walletId=8a497a60-dff2-4dfb-8c8a-8730bde2f39e providerId=p status=PROCESSED
+2026/09/29 23:50:29 WARN transaction handling failed correlationId="" messageId="" transactionId=18ff74f5-451f-492d-a6aa-f884fd122761 walletId=8a497a60-dff2-4dfb-8c8a-8730bde2f39e providerId=p transient=false
+2026/09/29 23:50:29 WARN transaction handling failed correlationId="" messageId="" transactionId=d2c87d26-5ed7-4e03-aab5-5707d1605999 walletId=8a497a60-dff2-4dfb-8c8a-8730bde2f39e providerId=p transient=false
+--- FAIL: TestPersistentResultReplayAndPayloadConflict (0.00s)
+    idempotency_test.go:75: authorization must precede replay idempotency key reused with different payload
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.341s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.557s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.098s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.379s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.880s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.429s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.604s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.976s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.738s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.721s
+FAIL

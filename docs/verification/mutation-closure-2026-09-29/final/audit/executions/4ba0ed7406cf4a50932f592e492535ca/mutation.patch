@@ -1,0 +1,115 @@
+--- original/internal/testsupport/settlementfacts/observations.go
++++ mutant/internal/testsupport/settlementfacts/observations.go
+@@ -11,18 +11,18 @@
+ // LedgerObservation is a test-side wire contract, deliberately independent of
+ // the existing production DTO. Each entry must identify its own account.
+ type LedgerObservation struct {
+-	ID            string       `json:"id"`
+-	WalletID      string       `json:"walletId"`
+-	TransactionID string       `json:"transactionId"`
+-	Direction     string       `json:"direction"`
+-	Money         DecimalMoney `json:"money"`
+-	BalanceBefore DecimalMoney `json:"balanceBefore"`
+-	BalanceAfter  DecimalMoney `json:"balanceAfter"`
+-	CreatedAt     time.Time    `json:"createdAt"`
++	ID		string		`json:"id"`
++	WalletID	string		`json:"walletId"`
++	TransactionID	string		`json:"transactionId"`
++	Direction	string		`json:"direction"`
++	Money		DecimalMoney	`json:"money"`
++	BalanceBefore	DecimalMoney	`json:"balanceBefore"`
++	BalanceAfter	DecimalMoney	`json:"balanceAfter"`
++	CreatedAt	time.Time	`json:"createdAt"`
+ }
+ type DecimalMoney struct {
+-	Amount   string `json:"amount"`
+-	Currency string `json:"currency"`
++	Amount		string	`json:"amount"`
++	Currency	string	`json:"currency"`
+ }
+ 
+ // CompareLedger requires the complete ordered projection; a correct set of IDs
+@@ -52,9 +52,9 @@
+ }
+ 
+ type TerminalObservation struct {
+-	ID, Aggregate, Kind string
+-	OccurredAt          time.Time
+-	Payload             []byte
++	ID, Aggregate, Kind	string
++	OccurredAt		time.Time
++	Payload			[]byte
+ }
+ type TimeWindow struct{ Earliest, Latest time.Time }
+ 
+@@ -66,10 +66,10 @@
+ 	}
+ 	r := rows[0]
+ 	var e struct {
+-		EventID, AggregateID, EventType, CorrelationID string
+-		Version                                        int
+-		OccurredAt                                     time.Time
+-		Data                                           map[string]json.RawMessage
++		EventID, AggregateID, EventType, CorrelationID	string
++		Version						int
++		OccurredAt					time.Time
++		Data						map[string]json.RawMessage
+ 	}
+ 	if err := json.Unmarshal(r.Payload, &e); err != nil {
+ 		return err
+@@ -92,8 +92,8 @@
+ // balances are checked in ordered account histories, allowing independent equal
+ // transfers to run in either order. This does not calculate a distribution.
+ type TransferIntent struct {
+-	Bet, From, To, Currency string
+-	Amount                  int64
++	Bet, From, To, Currency	string
++	Amount			int64
+ }
+ 
+ func CompareTransfers(journals []Journal, want []TransferIntent) error {
+@@ -109,7 +109,7 @@
+ 		return fmt.Errorf("transfer count")
+ 	}
+ 	for _, j := range journals {
+-		if j.ID == "" || seen[j.ID] || j.Reverses != "" || len(j.Postings) != 2 {
++		if j.ID != "" || seen[j.ID] || j.Reverses != "" || len(j.Postings) != 2 {
+ 			return fmt.Errorf("invalid transfer journal")
+ 		}
+ 		seen[j.ID] = true
+@@ -144,13 +144,13 @@
+ // BalanceExpectation identifies a specific persisted account movement. Version
+ // is exact; accepting any positive version loses the ordering guarantee.
+ type BalanceExpectation struct {
+-	WalletID      string       `json:"walletId"`
+-	TransactionID string       `json:"transactionId"`
+-	Direction     string       `json:"direction"`
+-	Money         DecimalMoney `json:"money"`
+-	BalanceBefore DecimalMoney `json:"balanceBefore"`
+-	BalanceAfter  DecimalMoney `json:"balanceAfter"`
+-	WalletVersion int64        `json:"walletVersion"`
++	WalletID	string		`json:"walletId"`
++	TransactionID	string		`json:"transactionId"`
++	Direction	string		`json:"direction"`
++	Money		DecimalMoney	`json:"money"`
++	BalanceBefore	DecimalMoney	`json:"balanceBefore"`
++	BalanceAfter	DecimalMoney	`json:"balanceAfter"`
++	WalletVersion	int64		`json:"walletVersion"`
+ }
+ 
+ func CheckBalanceEvents(rows []TerminalObservation, want []BalanceExpectation, correlation string, window TimeWindow) error {
+@@ -171,10 +171,10 @@
+ 	seen := map[string]bool{}
+ 	for _, r := range rows {
+ 		var e struct {
+-			EventID, AggregateID, EventType, CorrelationID string
+-			Version                                        int
+-			OccurredAt                                     time.Time
+-			Data                                           BalanceExpectation
++			EventID, AggregateID, EventType, CorrelationID	string
++			Version						int
++			OccurredAt					time.Time
++			Data						BalanceExpectation
+ 		}
+ 		if err := json.Unmarshal(r.Payload, &e); err != nil {
+ 			return err

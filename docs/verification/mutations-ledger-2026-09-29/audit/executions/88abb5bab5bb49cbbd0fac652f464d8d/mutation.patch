@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -46,7 +46,7 @@
+ func (u *SubmitTransaction) waitReference(ctx context.Context, tx port.Tx, t *wager.Transaction) error {
+ 	s := t.Snapshot()
+ 	now := u.clock.Now()
+-	if s.Attempts >= MaxReferenceAttempts || t.ReferenceExpired(now) {
++	if s.Attempts >= MaxReferenceAttempts && t.ReferenceExpired(now) {
+ 		return u.reject(ctx, tx, t, wager.FailReferenceNotFound)
+ 	}
+ 	if err := t.MarkPendingReference(now, now.Add(Backoff(s.Attempts)), 10*time.Minute); err != nil {

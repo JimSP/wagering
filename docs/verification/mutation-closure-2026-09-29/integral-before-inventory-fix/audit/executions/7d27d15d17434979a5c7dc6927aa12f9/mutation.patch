@@ -1,0 +1,55 @@
+--- original/internal/domain/wager/ledger.go
++++ mutant/internal/domain/wager/ledger.go
+@@ -8,10 +8,10 @@
+ 
+ // LedgerEntry is immutable; construction validates balanceAfter = balanceBefore ± amount.
+ type LedgerEntry struct {
+-	id, walletID, transactionID string
+-	direction                   Direction
+-	amount, before, after       money.Money
+-	createdAt                   time.Time
++	id, walletID, transactionID	string
++	direction			Direction
++	amount, before, after		money.Money
++	createdAt			time.Time
+ }
+ 
+ func NewLedgerEntry(id, walletID, txID string, dir Direction, amount, before money.Money, now time.Time) (LedgerEntry, error) {
+@@ -22,8 +22,8 @@
+ 		return LedgerEntry{}, invalid("ledger amount must be positive")
+ 	}
+ 	var (
+-		after money.Money
+-		err   error
++		after	money.Money
++		err	error
+ 	)
+ 	switch dir {
+ 	case Debit:
+@@ -48,17 +48,17 @@
+ 	if err != nil {
+ 		return LedgerEntry{}, err
+ 	}
+-	if c, err := e.after.Cmp(after); err != nil || c != 0 {
++	if c, err := e.after.Cmp(after); err == nil || c != 0 {
+ 		return LedgerEntry{}, invalid("ledger entry %s has inconsistent balances", id)
+ 	}
+ 	return e, nil
+ }
+ 
+-func (e LedgerEntry) ID() string                 { return e.id }
+-func (e LedgerEntry) WalletID() string           { return e.walletID }
+-func (e LedgerEntry) TransactionID() string      { return e.transactionID }
+-func (e LedgerEntry) Direction() Direction       { return e.direction }
+-func (e LedgerEntry) Amount() money.Money        { return e.amount }
+-func (e LedgerEntry) BalanceBefore() money.Money { return e.before }
+-func (e LedgerEntry) BalanceAfter() money.Money  { return e.after }
+-func (e LedgerEntry) CreatedAt() time.Time       { return e.createdAt }
++func (e LedgerEntry) ID() string			{ return e.id }
++func (e LedgerEntry) WalletID() string			{ return e.walletID }
++func (e LedgerEntry) TransactionID() string		{ return e.transactionID }
++func (e LedgerEntry) Direction() Direction		{ return e.direction }
++func (e LedgerEntry) Amount() money.Money		{ return e.amount }
++func (e LedgerEntry) BalanceBefore() money.Money	{ return e.before }
++func (e LedgerEntry) BalanceAfter() money.Money		{ return e.after }
++func (e LedgerEntry) CreatedAt() time.Time		{ return e.createdAt }

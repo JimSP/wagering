@@ -1,0 +1,37 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.360s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 00:00:49 INFO transaction handled correlationId="" messageId="" transactionId=292a5bc8-82f6-4151-a6fd-0e3994e00415 walletId=5c77f200-ac68-4ff0-b3d1-efa5fb124200 providerId=p status=PROCESSED
+2026/09/30 00:00:49 WARN transaction handling failed correlationId="" messageId="" transactionId=403fd165-f232-4ef4-b44f-ae738caf4068 walletId=5c77f200-ac68-4ff0-b3d1-efa5fb124200 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_append (0.00s)
+        paired_storage_failure_test.go:125: {id id id CREDIT {100 BRL} {0 BRL} {0 } {0 63926193600 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.239s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.459s
+--- FAIL: TestArithmeticBoundaryMatrixAndErrorOutput (0.00s)
+    arithmetic_contract_test.go:30: x=-9223372036854775808 y=-9223372036854775808 subtract=false got={0 } err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	1.526s
+--- FAIL: TestReversalValidatesWholeHistoryWithoutMutatingFacts (0.00s)
+    reversal_test.go:33: wallet: invalid
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/settlement	3.536s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:43: unexplained movement {entry-0 wallet tx-0 CREDIT {10000 BRL} {0 BRL} {0 } {0 63926193600 <nil>}}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.015s
+--- FAIL: TestWalletOwnsItsBalanceVersionAndHistory (0.00s)
+    semantics_test.go:40: {true 4000 2000 6000} {2000 BRL} {0 } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	3.274s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.529s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.846s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry first has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.772s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.674s
+FAIL

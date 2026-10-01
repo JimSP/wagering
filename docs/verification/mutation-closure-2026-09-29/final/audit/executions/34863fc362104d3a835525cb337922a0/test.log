@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.748s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	12.515s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.134s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.486s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.595s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.364s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.708s
+--- FAIL: TestJWKSCacheExpiryThrottleAndLifecycleContracts (0.04s)
+    --- FAIL: TestJWKSCacheExpiryThrottleAndLifecycleContracts/at_expiry (0.00s)
+        cache_contract_test.go:87: key=<nil> err=auth: jwks unavailable
+    cache_contract_test.go:112: age=1s requests=0 want=1
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	12.249s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.247s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	11.877s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.540s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	12.330s
+ok  	github.com/alexandre/wagering/internal/platform/logging	12.487s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	12.683s
+ok  	github.com/alexandre/wagering/internal/platform/sys	12.822s
+ok  	github.com/alexandre/wagering/internal/platform/worker	13.003s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	13.141s
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	13.300s
+FAIL

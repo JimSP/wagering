@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.177s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:24:04 INFO transaction handled correlationId="" messageId="" transactionId=ce1ddd5d-40cf-4008-83ec-b4f2e47979fe walletId=0bca1d25-1525-432d-9d4b-518efd293abc providerId=p status=PROCESSED
+2026/09/30 01:24:04 WARN transaction handling failed correlationId="" messageId="" transactionId=a3d2611e-4c87-45aa-849f-8fba4acf4ed9 walletId=0bca1d25-1525-432d-9d4b-518efd293abc providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/ledger_identity (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet] [wallet opening]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.460s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.828s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.469s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.045s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    input_contract_test.go:14: INVALID_INPUT: invalid input: id, walletId and playerId are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	10.677s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.690s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.169s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.580s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:222: INVALID_INPUT: invalid input: id, walletId and playerId are required
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.349s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.675s
+FAIL

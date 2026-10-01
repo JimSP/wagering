@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.446s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:56:30 INFO transaction handled correlationId="" messageId="" transactionId=e60bc0e6-c5d4-40b4-8c7e-a09fb1ba99fd walletId=7eb770e0-21b9-47b7-b85e-68823f17c30c providerId=p status=PROCESSED
+2026/09/29 01:56:30 WARN transaction handling failed correlationId="" messageId="" transactionId=b7660ba8-2054-46e3-b3e1-09acab01ad86 walletId=7eb770e0-21b9-47b7-b85e-68823f17c30c providerId=p transient=false
+--- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors (0.00s)
+    --- FAIL: TestReadUseCasesPreserveScopePaginationAndErrors/success (0.00s)
+        read_failure_test.go:55: {[] } <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.702s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+--- FAIL: TestLedgerWireContractAndPaginationBoundaries (0.00s)
+    --- FAIL: TestLedgerWireContractAndPaginationBoundaries/limit= (0.00s)
+        contract_test.go:135: want {"entries":[{"id":"entry","transactionId":"tx","direction":"CREDIT","money":{"amount":"1.00","currency":"BRL"},"balanceBefore":{"amount":"0.00","currency":"BRL"},"balanceAfter":{"amount":"1.00","currency":"BRL"},"createdAt":"2026-09-28T12:00:00Z"}],"nextCursor":"next"} got {"entries":[]}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/transport/httpapi	1.000s
+FAIL

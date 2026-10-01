@@ -1,0 +1,49 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.880s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:34:38 INFO transaction handled correlationId="" messageId="" transactionId=f7f1dcfa-5ff4-4fe3-89f4-b35fb7029a41 walletId=ca67ee15-6cc6-4a14-88b2-a41cbc3cea02 providerId=p status=PROCESSED
+2026/09/30 01:34:38 WARN transaction handling failed correlationId="" messageId="" transactionId=717175e8-d8e1-4297-ac4d-d51b5f5ea404 walletId=ca67ee15-6cc6-4a14-88b2-a41cbc3cea02 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.18s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"IDP_UNAVAILABLE"} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.557s
+ok  	github.com/alexandre/wagering/internal/domain/event	11.453s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.992s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.959s
+ok  	github.com/alexandre/wagering/internal/domain/wager	11.584s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.834s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.02s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/no_subject (0.00s)
+        authorization_paths_test.go:97: 503
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x10 pc=0x1045b74d0]
+
+goroutine 9 [running]:
+testing.tRunner.func1.2({0x104bd27f8, 0x104c913e0})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104bd27f8?, 0x104c913e0?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+net/http.(*Client).do(0x104c3f410?, 0x0)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/client.go:613 +0x70
+net/http.(*Client).Do(...)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/net/http/client.go:604
+github.com/alexandre/wagering/internal/infra/auth.(*Verifier).refresh(0x60c1dd6e0210, {0x104c3f2f8, 0x104ccfae0}, 0x1)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-598435654/internal/infra/auth/verifier.go:76 +0x254
+github.com/alexandre/wagering/internal/infra/auth.TestAuthenticationClaimsHeadersAndCacheBounds(0x60c1dd6e6908)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-598435654/internal/infra/auth/authorization_paths_test.go:119 +0xaac
+testing.tRunner(0x60c1dd6e6908, 0x104c41b00)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/infra/auth	12.300s
+ok  	github.com/alexandre/wagering/internal/infra/config	11.712s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	12.460s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.558s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.550s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.203s
+FAIL

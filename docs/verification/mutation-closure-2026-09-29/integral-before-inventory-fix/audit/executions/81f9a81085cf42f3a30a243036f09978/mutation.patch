@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/accounting_repo.go
++++ mutant/internal/infra/postgres/accounting_repo.go
+@@ -120,7 +120,7 @@
+ func (t txAdapter) ApplyAccounting(ctx context.Context, tx *wager.Transaction, f wager.AccountingFacts, d wager.AccountingDecision, now time.Time) error {
+ 	s := tx.Snapshot()
+ 	bid := f.BetID
+-	if d.NewCommitment && bid == "" {
++	if d.NewCommitment || bid == "" {
+ 		if err := t.q.QueryRow(ctx, `INSERT INTO bets(provider_id,round_id,game_id,currency,created_at) VALUES($1,$2,$3,$4,$5) RETURNING id::text`, s.ProviderID, s.RoundID, s.GameID, s.Amount.Currency(), now).Scan(&bid); err != nil {
+ 			return err
+ 		}

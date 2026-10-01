@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.402s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:37:54 INFO transaction handled correlationId="" messageId="" transactionId=68ca6e47-d7b8-4794-808b-4e209cbf7f6a walletId=0c290e9f-3e24-418d-9a70-731d22e37a44 providerId=p status=PROCESSED
+2026/09/29 22:37:54 WARN transaction handling failed correlationId="" messageId="" transactionId=7bf2be95-e483-4e48-82ab-95cce0c8ba09 walletId=0c290e9f-3e24-418d-9a70-731d22e37a44 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.29s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/undo-bet-again (0.00s)
+        http_contract_test.go:153: wire contract
+            want {"transactionId":"00000000-0000-4000-8000-000000000033","status":"REJECTED","idempotentReplay":false,"failureCode":"ALREADY_REVERSED"}
+            got  {"transactionId":"00000000-0000-4000-8000-000000000033","status":"REJECTED","failureCode":"INVALID_REFERENCE_KIND","idempotentReplay":false}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.979s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.201s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.352s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.009s
+--- FAIL: TestReferenceStateAndRules (0.00s)
+    invariants_test.go:57: BET
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	1.924s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.765s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.541s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.062s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.651s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.227s
+FAIL

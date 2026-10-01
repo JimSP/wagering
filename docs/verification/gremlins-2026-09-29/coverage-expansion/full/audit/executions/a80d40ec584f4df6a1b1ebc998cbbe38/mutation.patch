@@ -1,0 +1,11 @@
+--- original/internal/infra/postgres/inbox_outbox_repo.go
++++ mutant/internal/infra/postgres/inbox_outbox_repo.go
+@@ -55,7 +55,7 @@
+ 			return nil, err
+ 		}
+ 		e, err := event.RehydrateOutgoing(id, aggregate, typ, payload, occurred, attempts)
+-		if err != nil {
++		if err == nil {
+ 			return nil, err
+ 		}
+ 		out = append(out, e)

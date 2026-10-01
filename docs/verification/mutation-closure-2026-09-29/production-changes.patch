@@ -1,0 +1,114 @@
+--- before/internal/domain/money/money.go
++++ after/internal/domain/money/money.go
+@@ -59,10 +59,12 @@
+ 	if err := m.compatible(o); err != nil {
+ 		return Money{}, err
+ 	}
+-	if (o.minor > 0 && m.minor > math.MaxInt64-o.minor) || (o.minor < 0 && m.minor < math.MinInt64-o.minor) {
++	// Signed addition overflows when both operands have a different sign from the result.
++	sum := m.minor + o.minor
++	if (m.minor^sum)&(o.minor^sum) < 0 {
+ 		return Money{}, ErrOverflow
+ 	}
+-	return Money{m.minor + o.minor, m.currency}, nil
++	return Money{sum, m.currency}, nil
+ }
+ 
+ func (m Money) Neg() (Money, error) {
+@@ -79,10 +81,13 @@
+ 	if err := m.compatible(o); err != nil {
+ 		return Money{}, err
+ 	}
+-	if (o.minor > 0 && m.minor < math.MinInt64+o.minor) || (o.minor < 0 && m.minor > math.MaxInt64+o.minor) {
++	// Signed subtraction overflows when operands differ in sign and the result
++	// differs in sign from the minuend. Go defines signed integer wraparound.
++	difference := m.minor - o.minor
++	if (m.minor^o.minor)&(m.minor^difference) < 0 {
+ 		return Money{}, ErrOverflow
+ 	}
+-	return Money{m.minor - o.minor, m.currency}, nil
++	return Money{difference, m.currency}, nil
+ }
+ 
+ func (m Money) Cmp(o Money) (int, error) {
+--- before/internal/testsupport/settlementfacts/facts.go
++++ after/internal/testsupport/settlementfacts/facts.go
+@@ -4,7 +4,8 @@
+ import (
+ 	"fmt"
+ 	"reflect"
+-	"sort"
++	"slices"
++	"strings"
+ )
+ 
+ // Test-side projections, not production DTO/schema requirements. A SQL or API
+@@ -35,7 +36,7 @@
+ 	}
+ 	canonical := func(j Journal) string {
+ 		postings := append([]Posting(nil), j.Postings...)
+-		sort.Slice(postings, func(i, k int) bool { return fmt.Sprint(postings[i]) < fmt.Sprint(postings[k]) })
++		slices.SortFunc(postings, func(a, b Posting) int { return strings.Compare(fmt.Sprint(a), fmt.Sprint(b)) })
+ 		return fmt.Sprintf("%q/%q/%v", j.Bet, j.Reverses, postings)
+ 	}
+ 	expected := map[string]int{}
+--- before/internal/testsupport/settlementfacts/observations.go
++++ after/internal/testsupport/settlementfacts/observations.go
+@@ -3,6 +3,7 @@
+ import (
+ 	"encoding/json"
+ 	"fmt"
++	"math"
+ 	"reflect"
+ 	"time"
+ )
+@@ -112,33 +113,28 @@
+ 			return fmt.Errorf("invalid transfer journal")
+ 		}
+ 		seen[j.ID] = true
+-		var debit, credit *Posting
+-		for i := range j.Postings {
+-			p := &j.Postings[i]
+-			if p.Amount <= 0 || p.Before < 0 || p.After < 0 {
+-				return fmt.Errorf("invalid posting amount/balance")
+-			}
+-			switch p.Direction {
+-			case "DEBIT":
+-				if debit != nil || p.Before < p.Amount || p.After != p.Before-p.Amount {
+-					return fmt.Errorf("invalid debit")
+-				}
+-				debit = p
+-			case "CREDIT":
+-				if credit != nil || p.After < p.Before || p.After-p.Before != p.Amount {
+-					return fmt.Errorf("invalid credit")
+-				}
+-				credit = p
+-			default:
+-				return fmt.Errorf("invalid direction")
+-			}
++		debit, credit := j.Postings[0], j.Postings[1]
++		if debit.Direction == "CREDIT" {
++			debit, credit = credit, debit
+ 		}
+-		if debit == nil || credit == nil || debit.Amount != credit.Amount || debit.Currency != credit.Currency {
++		if debit.Direction != "DEBIT" || credit.Direction != "CREDIT" {
++			return fmt.Errorf("invalid transfer directions")
++		}
++
++		if debit.Amount != credit.Amount || debit.Currency != credit.Currency {
+ 			return fmt.Errorf("unbalanced transfer")
+ 		}
+ 		key := TransferIntent{j.Bet, debit.Account, credit.Account, debit.Currency, debit.Amount}
+ 		if expected[key] == 0 {
+ 			return fmt.Errorf("unexpected transfer %+v", key)
++		}
++		// The matching intent guarantees a positive amount. Check arithmetic
++		// preconditions before computing the exact resulting balances.
++		if debit.Before < debit.Amount || credit.Before < 0 || credit.Before > math.MaxInt64-credit.Amount {
++			return fmt.Errorf("invalid posting balance")
++		}
++		if debit.After != debit.Before-debit.Amount || credit.After != credit.Before+credit.Amount {
++			return fmt.Errorf("invalid posting movement")
+ 		}
+ 		expected[key]--
+ 	}

@@ -1,0 +1,25 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.861s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	10.234s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.941s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.566s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	8.697s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.819s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.220s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.348s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.958s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_mutation_test.go:57: step 3: SQL "SELECT id FROM ledger_accounts WHERE wallet_id=$1 ORDER BY id FOR NO KEY UPDATE" lacks "coalesce(bet_id"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.508s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.374s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	7.345s
+ok  	github.com/alexandre/wagering/internal/platform/logging	7.331s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	7.381s
+ok  	github.com/alexandre/wagering/internal/platform/sys	8.592s
+ok  	github.com/alexandre/wagering/internal/platform/worker	8.605s
+FAIL

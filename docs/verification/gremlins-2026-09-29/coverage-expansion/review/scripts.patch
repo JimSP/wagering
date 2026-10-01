@@ -1,0 +1,98 @@
+--- before/scripts/mutation-go-audit.py
++++ after/scripts/mutation-go-audit.py
+@@ -0,0 +1,40 @@
++#!/usr/bin/env python3
++"""Record official Gremlins input diffs and test output; never modify source.
++
++Installed as `go` on a temporary PATH by test-mutations.sh. Replaces itself with
++real Go so Gremlins still controls the process, exit code and timeout directly.
++"""
++import difflib
++import json
++import os
++from pathlib import Path
++import sys
++import uuid
++
++real_go = os.environ["MUTATION_REAL_GO"]
++audit = Path(os.environ["MUTATION_AUDIT_DIR"])
++args = sys.argv[1:]
++if args and args[0] == "test":
++    args = ["test", "-count=1", *args[1:]]
++if len(sys.argv) > 1 and sys.argv[1] == "test":
++    baseline = json.loads((audit / "source.json").read_text())
++    changes = []
++    patches = []
++    for name, before in baseline.items():
++        source = Path.cwd() / name
++        if not source.is_file():
++            continue
++        after = source.read_text()
++        if before != after:
++            changes.append(name)
++            patches.extend(difflib.unified_diff(before.splitlines(True), after.splitlines(True), fromfile="original/" + name, tofile="mutant/" + name))
++    if changes:
++        run = audit / "executions" / uuid.uuid4().hex
++        run.mkdir(parents=True)
++        (run / "mutation.patch").write_text("".join(patches))
++        (run / "command.json").write_text(json.dumps({"cwd": str(Path.cwd()), "argv": [real_go, *args], "changed_files": changes}, indent=2) + "\n")
++        output = os.open(run / "test.log", os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
++        os.dup2(output, 1)
++        os.dup2(output, 2)
++        os.close(output)
++os.execv(real_go, [real_go, *args])
+--- before/scripts/test-integration.sh
++++ after/scripts/test-integration.sh
+@@ -12,4 +12,4 @@
+ unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+ export AWS_SHARED_CREDENTIALS_FILE="$PWD/.local/aws-credentials"
+ export TEST_DATABASE_ADMIN_URL='postgres://wagering:[REDACTED_LOCAL_CREDENTIAL]@localhost:5432/wagering?sslmode=disable'
+-go test -v -p 1 -race -tags 'integration faults' -count=1 -timeout=12m "$@" ./test/integration ./cmd/wagering
++go test -v -p 1 -race -tags 'integration faults' -count=1 -timeout=12m "$@" ./test/integration ./cmd/wagering ./internal/infra/postgres
+--- before/scripts/test-mutations.sh
++++ after/scripts/test-mutations.sh
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env bash
+-# Official Gremlins campaign; this script does not generate mutations.
++# Official Gremlins campaign; the Go proxy only records evidence.
+ set -euo pipefail
+ cd "$(dirname "$0")/.."
+ gremlins_bin="${GREMLINS_BIN:-$PWD/.local/bin/gremlins}"
+@@ -9,7 +9,25 @@
+ fi
+ output_dir="${GREMLINS_OUTPUT_DIR:-$PWD/.local/gremlins}"
+ mkdir -p "$output_dir"
+-"$gremlins_bin" unleash --integration --coverpkg ./... --workers "${GREMLINS_WORKERS:-4}" \
++output_dir="$(cd "$output_dir" && pwd)"
++export MUTATION_REAL_GO="$(command -v go)"
++export MUTATION_AUDIT_DIR="$output_dir/audit"
++mkdir -p "$MUTATION_AUDIT_DIR/bin"
++cp scripts/mutation-go-audit.py "$MUTATION_AUDIT_DIR/bin/go"
++chmod +x "$MUTATION_AUDIT_DIR/bin/go"
++python3 - <<'SNAPSHOT'
++import hashlib, json, os
++from pathlib import Path
++paths = sorted(p for root in ('internal', 'cmd') for p in Path(root).rglob('*.go') if not p.name.endswith('_test.go'))
++audit = Path(os.environ['MUTATION_AUDIT_DIR'])
++(audit / 'source.json').write_text(json.dumps({str(p): p.read_text() for p in paths}, indent=2) + '\n')
++all_inputs = sorted(p for root in ('internal', 'cmd', 'test') for p in Path(root).rglob('*.go')) + [Path('go.mod'), Path('go.sum')]
++(audit / 'hashes.json').write_text(json.dumps({str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in all_inputs}, indent=2) + '\n')
++SNAPSHOT
++export PATH="$MUTATION_AUDIT_DIR/bin:$PATH"
++"$gremlins_bin" unleash "$@" --tags faults --threshold-mcover 100 \
++  --timeout-coefficient "${GREMLINS_TIMEOUT_COEFFICIENT:-5}" \
++  --integration --coverpkg ./... --workers "${GREMLINS_WORKERS:-4}" \
+   --invert-assignments --invert-bitwise --invert-bwassign --invert-logical \
+   --invert-loopctrl --remove-self-assignments \
+   --output "$output_dir/results.json" 2>&1 | tee "$output_dir/run.log"
+--- before/scripts/test-unit-coverage.sh
++++ after/scripts/test-unit-coverage.sh
+@@ -4,7 +4,7 @@
+ coverage_dir="${COVERAGE_DIR:-.local/coverage}"
+ mkdir -p "$coverage_dir"
+ packages='./internal/domain/...,./internal/app/usecase,./internal/infra/auth'
+-go test -count=1 -race -covermode=atomic -coverpkg="$packages" \
++go test -count=1 -race -tags faults -covermode=atomic -coverpkg="$packages" \
+   -coverprofile="$coverage_dir/unit.out" ./... 2>&1 | tee "$coverage_dir/test.log"
+ go tool cover -func="$coverage_dir/unit.out" > "$coverage_dir/functions.txt"
+ go tool cover -html="$coverage_dir/unit.out" -o "$coverage_dir/unit.html"

@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.796s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:14:40 INFO transaction handled correlationId="" messageId="" transactionId=9ee80674-4290-4f0f-a0ae-44d84bbf6563 walletId=bd491e20-3ff0-4131-a7eb-e907d80ecbe7 providerId=p status=PROCESSED
+2026/09/29 03:14:40 WARN transaction handling failed correlationId="" messageId="" transactionId=adf39268-422e-4aca-b131-fd6400a51554 walletId=bd491e20-3ff0-4131-a7eb-e907d80ecbe7 providerId=p transient=false
+--- FAIL: TestOutboxPublishRetryConfirmationAndLag (0.00s)
+    --- FAIL: TestOutboxPublishRetryConfirmationAndLag/success (0.00s)
+        outbox_paths_test.go:47: confirmation identity
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.215s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:65: zero attempts roundtrip: {    0 0 {0 0 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.433s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.557s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.941s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.532s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.856s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.680s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:65: [{    0 0 {0 0 <nil>}}]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	3.821s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	3.284s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.193s
+FAIL

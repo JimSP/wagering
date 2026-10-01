@@ -1,0 +1,33 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	11.147s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:15:05 INFO transaction handled correlationId="" messageId="" transactionId=0180fcd9-169b-42c1-8738-d8c9ec422f97 walletId=c05ec73a-ed85-41e8-8fd4-f37d110f2815 providerId=p status=PROCESSED
+2026/09/30 01:15:05 WARN transaction handling failed correlationId="" messageId="" transactionId=0dad2034-1f59-4a70-9741-a2bcc5e8fe93 walletId=c05ec73a-ed85-41e8-8fd4-f37d110f2815 providerId=p transient=false
+--- FAIL: TestOpeningStopsAtEveryFailedDependency (0.00s)
+    --- FAIL: TestOpeningStopsAtEveryFailedDependency/zero_without_financial_writes (0.00s)
+        read_failure_test.go:138: opening outcome repository unavailable <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.687s
+--- FAIL: TestZeroMovementIsInvalidEvenWhenBalanceEquationHolds (0.00s)
+    input_contract_test.go:74: zero movement={event wallet WalletBalanceChanged {"eventId":"event","eventType":"WalletBalanceChanged","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"walletId":"wallet","transactionId":"tx","direction":"CREDIT","money":{"amount":"0.00","currency":"BRL"},"balanceBefore":{"amount":"1.00","currency":"BRL"},"balanceAfter":{"amount":"1.00","currency":"BRL"},"walletVersion":1}} 1 0 {0 63926193600 <nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	11.215s
+ok  	github.com/alexandre/wagering/internal/domain/money	11.731s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.981s
+--- FAIL: TestOpeningSnapshotRejectsEachCorruptedField (0.00s)
+    --- FAIL: TestOpeningSnapshotRejectsEachCorruptedField/amount (0.00s)
+        input_contract_test.go:43: accepted {CorrelationID: CausationID: ID:opening Origin:INTERNAL ProviderID: ExternalID: IdempotencyKey: PayloadHash: WalletID:wallet PlayerID:player RoundID: GameID: Kind:OPENING Amount:{minor:0 currency:BRL} ReferenceExternalID: ReferenceID: Status:PROCESSED FailureCode: BalanceAfter:0x557a739a2250 Attempts:0 NextAttemptAt:<nil> ExpiresAt:<nil> CreatedAt:2026-09-28 12:00:00 +0000 UTC UpdatedAt:2026-09-28 12:00:00 +0000 UTC}: &{  opening INTERNAL     wallet player   OPENING {0 BRL}   PROCESSED  0x557a73928bd0 0 <nil> <nil> {0 63926193600 <nil>} {0 63926193600 <nil>}} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.242s
+--- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState (0.00s)
+    --- FAIL: TestWalletRejectsInvalidMovementsWithoutChangingState/zero_debit (0.00s)
+        semantics_test.go:94: rejection mutated state or wrong error <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wallet	11.472s
+ok  	github.com/alexandre/wagering/internal/infra/auth	13.052s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.346s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	13.124s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	11.468s
+FAIL

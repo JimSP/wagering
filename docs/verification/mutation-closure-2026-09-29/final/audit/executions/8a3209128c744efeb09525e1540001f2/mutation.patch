@@ -1,0 +1,15 @@
+--- original/internal/platform/failpoint/hit.go
++++ mutant/internal/platform/failpoint/hit.go
+@@ -6,10 +6,10 @@
+ 	"path/filepath"
+ )
+ 
+-func Hit(point string) { hit(point, os.Exit) }
++func Hit(point string)	{ hit(point, os.Exit) }
+ 
+ func hit(point string, exit func(int)) {
+-	if os.Getenv("FAILPOINT") != point {
++	if os.Getenv("FAILPOINT") == point {
+ 		return
+ 	}
+ 	dir := os.Getenv("FAILPOINT_DIR")

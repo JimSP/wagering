@@ -1,0 +1,51 @@
+--- original/internal/platform/worker/worker.go
++++ mutant/internal/platform/worker/worker.go
+@@ -13,19 +13,19 @@
+ )
+ 
+ type task struct {
+-	name string
+-	run  func(context.Context) error
++	name	string
++	run	func(context.Context) error
+ }
+ type Group struct {
+-	tasks    []task
+-	drains   []func(context.Context) error
+-	cancel   context.CancelFunc
+-	done     chan struct{}
+-	mu       sync.Mutex
+-	failure  error
+-	log      *slog.Logger
+-	shutdown fx.Shutdowner
+-	budget   time.Duration
++	tasks		[]task
++	drains		[]func(context.Context) error
++	cancel		context.CancelFunc
++	done		chan struct{}
++	mu		sync.Mutex
++	failure		error
++	log		*slog.Logger
++	shutdown	fx.Shutdowner
++	budget		time.Duration
+ }
+ 
+ func NewGroup(log *slog.Logger, shutdown fx.Shutdowner, cfg config.Config) *Group {
+@@ -36,7 +36,7 @@
+ }
+ 
+ // Drain registers a component's stop-admission-and-drain function, before Install.
+-func (g *Group) Drain(f func(context.Context) error) { g.drains = append(g.drains, f) }
++func (g *Group) Drain(f func(context.Context) error)	{ g.drains = append(g.drains, f) }
+ 
+ // Install is invoked LAST in the Fx graph: shutdown completes before dependency hooks.
+ func (g *Group) Install(lc fx.Lifecycle) {
+@@ -50,7 +50,7 @@
+ 				defer wg.Done()
+ 				g.log.Info("worker started", "worker", t.name)
+ 				err := t.run(ctx)
+-				if ctx.Err() == nil {
++				if ctx.Err() != nil {
+ 					if err == nil {
+ 						err = errors.New("unexpected component termination")
+ 					}

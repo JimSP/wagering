@@ -1,0 +1,19 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.466s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	2.658s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.892s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.756s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.674s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.904s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.787s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.430s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.563s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestPoolConfigurationAndFailedStartup (0.00s)
+    pool_contract_test.go:54: pool leaked after failed startup: failed to connect to `user=user database=db`:
+        	127.0.0.1:1 (127.0.0.1): dial error: dial tcp 127.0.0.1:1: connect: connection refused
+        	127.0.0.1:1 (127.0.0.1): dial error: dial tcp 127.0.0.1:1: connect: connection refused
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.646s
+FAIL

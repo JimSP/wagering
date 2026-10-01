@@ -1,0 +1,36 @@
+--- original/internal/transport/httpapi/module.go
++++ mutant/internal/transport/httpapi/module.go
+@@ -22,15 +22,15 @@
+ 
+ type Deps struct {
+ 	fx.In
+-	OpenWallet *usecase.OpenWallet
+-	GetWallet  *usecase.GetWallet
+-	ListLedger *usecase.ListLedger
+-	Reconcile  *usecase.ReconcileWallet
+-	Submit     *usecase.SubmitTransaction
+-	GetTx      *usecase.GetTransaction
+-	Auth       *auth.Verifier
+-	Metrics    *metrics.Recorder
+-	Checks     []port.ReadinessChecker `group:"readiness"`
++	OpenWallet	*usecase.OpenWallet
++	GetWallet	*usecase.GetWallet
++	ListLedger	*usecase.ListLedger
++	Reconcile	*usecase.ReconcileWallet
++	Submit		*usecase.SubmitTransaction
++	GetTx		*usecase.GetTransaction
++	Auth		*auth.Verifier
++	Metrics		*metrics.Recorder
++	Checks		[]port.ReadinessChecker	`group:"readiness"`
+ }
+ 
+ func chain(h http.Handler, mws ...func(http.Handler) http.Handler) http.Handler {
+@@ -96,7 +96,7 @@
+ 				return nil
+ 			}
+ 			ln, err := net.Listen("tcp", srv.Addr)
+-			if err != nil {
++			if err == nil {
+ 				return err
+ 			}
+ 			listener = ln

@@ -1,0 +1,54 @@
+{
+  "inventory_before": {
+    "files": 91,
+    "declarations": {
+      "test": 229,
+      "harness": 1,
+      "fuzz": 1
+    }
+  },
+  "inventory_after": {
+    "files": 92,
+    "declarations": {
+      "test": 230,
+      "harness": 1,
+      "fuzz": 1
+    }
+  },
+  "removed_declarations": [],
+  "added_declarations": [
+    [
+      "internal/app/usecase/paired_observer_control_test.go",
+      "TestPairedOperationObserverRejectsCorruptedFacts",
+      "test"
+    ]
+  ],
+  "changed_existing_test_files": [
+    "test/integration/system_test.go"
+  ],
+  "production_files_checked": 52,
+  "production_changed": [],
+  "paired_control_passes": [
+    "TestPairedOperationObserverRejectsCorruptedFacts/control",
+    "TestPairedOperationObserverRejectsCorruptedFacts/reject-funded",
+    "TestPairedOperationObserverRejectsCorruptedFacts/success-without-writes",
+    "TestPairedOperationObserverRejectsCorruptedFacts/wrong-guarantee",
+    "TestPairedOperationObserverRejectsCorruptedFacts/other-account",
+    "TestPairedOperationObserverRejectsCorruptedFacts/missing-posting",
+    "TestPairedOperationObserverRejectsCorruptedFacts/wrong-counterparty",
+    "TestPairedOperationObserverRejectsCorruptedFacts/duplicate-posting",
+    "TestPairedOperationObserverRejectsCorruptedFacts/wrong-transaction-amount",
+    "TestPairedOperationObserverRejectsCorruptedFacts/rewritten-history",
+    "TestPairedOperationObserverRejectsCorruptedFacts/missing-outcome",
+    "TestPairedOperationObserverRejectsCorruptedFacts/wrong-event-version",
+    "TestPairedOperationObserverRejectsCorruptedFacts/wrong-correlation"
+  ],
+  "paired_control_failures": [],
+  "validation": {
+    "paired_controls_exit": 0,
+    "system_compile_exit": 0,
+    "vet_with_integration_faults_exit": 0,
+    "graphify_update_exit": 0,
+    "report_links": "all local targets exist"
+  }
+}

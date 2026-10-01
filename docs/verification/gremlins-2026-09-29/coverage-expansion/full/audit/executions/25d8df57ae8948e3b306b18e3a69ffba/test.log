@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.434s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 01:56:18 INFO transaction handled correlationId="" messageId="" transactionId=f0bc2b86-f4d5-4d84-8624-e52d009c2533 walletId=316f1c87-80b0-44e9-8b0f-bfb569f5ad59 providerId=p status=PROCESSED
+2026/09/29 01:56:18 WARN transaction handling failed correlationId="" messageId="" transactionId=6cd2a863-e168-40b5-8080-b20ac240ad29 walletId=316f1c87-80b0-44e9-8b0f-bfb569f5ad59 providerId=p transient=false
+--- FAIL: TestMessageEnvelopeRejectsEachRequiredField (0.00s)
+    --- FAIL: TestMessageEnvelopeRejectsEachRequiredField/idempotencyKey (0.00s)
+        worker_contract_test.go:45: err=invalid input: INVALID_INPUT: invalid input: idempotencyKey is required writes=0
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	0.708s
+ok  	github.com/alexandre/wagering/internal/domain/event	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/money	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wager	(cached)
+ok  	github.com/alexandre/wagering/internal/domain/wallet	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/auth	(cached)
+ok  	github.com/alexandre/wagering/internal/infra/config	(cached)
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	(cached)
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/logging	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/metrics	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/sys	(cached)
+ok  	github.com/alexandre/wagering/internal/platform/worker	(cached)
+ok  	github.com/alexandre/wagering/internal/transport/httpapi	1.005s
+FAIL

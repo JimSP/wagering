@@ -1,0 +1,13 @@
+6 versions; paired up/down files; SHA-256 verified
+=== RUN   TestAccountingReviewPendingStateMustBeRehydratable
+    accounting_review_integration_test.go:38: database committed a state its domain cannot restore: INVALID_INPUT: invalid input: retry history on initial pending state
+--- FAIL: TestAccountingReviewPendingStateMustBeRehydratable (0.06s)
+=== RUN   TestAccountingReviewReverseTwoPaymentsToSameWallet
+    accounting_review_integration_test.go:118: valid reversal rejected; original state preserved but operation unsupported: ERROR: invalid result posting (SQLSTATE P0001)
+--- FAIL: TestAccountingReviewReverseTwoPaymentsToSameWallet (0.09s)
+=== RUN   TestAccountingReviewPlanRejectsPaymentInDifferentCurrency
+    accounting_review_integration_test.go:131: confirmed BRL plan accepted USD payments and closed the bet; execution result: ERROR: wallet mismatch (SQLSTATE P0001)
+--- FAIL: TestAccountingReviewPlanRejectsPaymentInDifferentCurrency (0.06s)
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	0.684s
+FAIL

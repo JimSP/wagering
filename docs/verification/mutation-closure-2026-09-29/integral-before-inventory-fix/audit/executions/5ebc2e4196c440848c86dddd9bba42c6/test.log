@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.879s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.009s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.132s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.189s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.069s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.993s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.458s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.806s
+ok  	github.com/alexandre/wagering/internal/infra/config	0.960s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestSettlementReadAndReversalDatabaseProtocol (0.00s)
+    accounting_mutation_test.go:238: audit {SettlementRecord:{ID:s BetID:bet ResultID:result Status:PROCESSED Hash:hash} Payments:[{ID:p WalletID:w ReferenceID:ref Status:PROCESSED Money:{minor:100 currency:BRL}} {ID:p2 WalletID:w2 ReferenceID:ref2 Status:PROCESSED Money:{minor:20 currency:BRL}}] Postings:[]}
+    --- FAIL: TestSettlementReadAndReversalDatabaseProtocol/failure-0-query#01 (0.00s)
+        testing.go:2062: test executed panic(nil) or runtime.Goexit: subtest may have called FailNow on a parent test
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	1.488s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.713s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.706s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.696s
+FAIL

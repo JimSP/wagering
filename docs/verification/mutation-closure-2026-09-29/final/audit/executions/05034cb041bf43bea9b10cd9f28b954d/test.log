@@ -1,0 +1,23 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.376s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	10.770s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.227s
+ok  	github.com/alexandre/wagering/internal/domain/money	8.491s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	9.761s
+ok  	github.com/alexandre/wagering/internal/domain/wager	8.613s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.094s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.583s
+ok  	github.com/alexandre/wagering/internal/infra/config	9.639s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestApplyAccountingExistingBetAndNoNewCommitment (0.00s)
+    accounting_mutation_test.go:64: unexpected DB operation: SELECT accounting_move($1,$2,$3,$4,NULL,$5)::text [tx   100 2026-01-02 03:04:05 +0000 UTC]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	9.524s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.341s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	8.345s
+ok  	github.com/alexandre/wagering/internal/platform/logging	8.338s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	9.686s
+ok  	github.com/alexandre/wagering/internal/platform/sys	9.672s
+FAIL

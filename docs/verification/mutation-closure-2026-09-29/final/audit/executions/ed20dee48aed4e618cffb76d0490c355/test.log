@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.837s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:35:11 INFO transaction handled correlationId="" messageId="" transactionId=e7bcacca-09ea-43f6-b030-a5318ddd354b walletId=33fb55a0-1921-42c3-9b3b-3b3d2404c510 providerId=p status=PROCESSED
+2026/09/30 01:35:11 WARN transaction handling failed correlationId="" messageId="" transactionId=b7ba7ae0-9dce-473a-85f0-0e108c93d70b walletId=33fb55a0-1921-42c3-9b3b-3b3d2404c510 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.08s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:141: missing transaction identity: {"code":"UNAUTHENTICATED"} <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	9.563s
+ok  	github.com/alexandre/wagering/internal/domain/event	8.836s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.246s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.467s
+ok  	github.com/alexandre/wagering/internal/domain/wager	10.582s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	8.963s
+--- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds (0.08s)
+    --- FAIL: TestAuthenticationClaimsHeadersAndCacheBounds/valid (0.00s)
+        authorization_paths_test.go:94: 401
+    authorization_paths_test.go:116: stale keys accepted auth: invalid token
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	10.200s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.357s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	9.134s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.382s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.358s
+ok  	github.com/alexandre/wagering/internal/platform/logging	9.297s
+FAIL

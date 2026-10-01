@@ -1,0 +1,45 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.357s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:23:58 INFO transaction handled correlationId="" messageId="" transactionId=1bb3ddae-ae26-412e-bcb5-a6fb485e00da walletId=216b75cf-a75b-45d9-bb83-26f663749507 providerId=p status=PROCESSED
+2026/09/29 22:23:58 WARN transaction handling failed correlationId="" messageId="" transactionId=58abf1dc-d416-4f1b-ad4d-1bd9640dd03e walletId=216b75cf-a75b-45d9-bb83-26f663749507 providerId=p transient=false
+--- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency (0.00s)
+    --- FAIL: TestPositiveOpeningStopsAtEachFinancialDependency/processed_event (0.00s)
+        paired_storage_failure_test.go:163: continued after failure [wallet opening ledger] [wallet opening ledger WagerTransactionProcessed]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.699s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    input_contract_test.go:61: invalid integration event: opening metadata
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.223s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.348s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.978s
+--- FAIL: TestOpeningAndSnapshotIsolation (0.00s)
+    invariants_test.go:32:  invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.044s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.724s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.149s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.847s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestOutboxLeasePayloadAndErrors (0.00s)
+    messaging_contract_test.go:54: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.643s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+2026/09/29 22:24:00 WARN transient failure, backing off messageId="" correlationId="" brokerMessageId="" walletId="" providerId="" err=offline
+--- FAIL: TestSDKPublisherAndReadinessContracts (0.00s)
+    sdk_contract_test.go:39: invalid integration event: external processed fact
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/sqs	2.114s
+FAIL

@@ -1,0 +1,31 @@
+--- original/internal/app/usecase/settlement.go
++++ mutant/internal/app/usecase/settlement.go
+@@ -12,15 +12,15 @@
+ )
+ 
+ type Settlements struct {
+-	uow   port.UnitOfWork
+-	clock port.Clock
+-	ids   port.IDGenerator
++	uow	port.UnitOfWork
++	clock	port.Clock
++	ids	port.IDGenerator
+ }
+ 
+ func NewSettlements(u port.UnitOfWork, c port.Clock, ids port.IDGenerator) *Settlements {
+ 	return &Settlements{u, c, ids}
+ }
+-func (u *SubmitTransaction) Settlements() *Settlements { return NewSettlements(u.uow, u.clock, u.ids) }
++func (u *SubmitTransaction) Settlements() *Settlements	{ return NewSettlements(u.uow, u.clock, u.ids) }
+ func settlementStore(tx port.Tx) (port.SettlementStore, error) {
+ 	s, ok := tx.(port.SettlementTransaction)
+ 	if !ok {
+@@ -32,7 +32,7 @@
+ 	if _, err := uuid.Parse(b.ID); err != nil {
+ 		return apperr.Invalid("invalid betId")
+ 	}
+-	if strings.TrimSpace(b.ProviderID) == "" || strings.TrimSpace(b.RoundID) == "" || strings.TrimSpace(b.GameID) == "" {
++	if strings.TrimSpace(b.ProviderID) != "" || strings.TrimSpace(b.RoundID) == "" || strings.TrimSpace(b.GameID) == "" {
+ 		return apperr.Invalid("providerId, roundId and gameId required")
+ 	}
+ 	if _, err := money.Zero(b.Currency); err != nil {

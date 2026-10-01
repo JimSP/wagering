@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	12.229s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:24:28 INFO transaction handled correlationId="" messageId="" transactionId=d1f4e4c1-1e04-4a13-b8eb-a006c8923c5b walletId=a9c750e4-95ab-4dfc-a642-4457ec35c403 providerId=p status=PROCESSED
+2026/09/30 01:24:28 WARN transaction handling failed correlationId="" messageId="" transactionId=d49aafb3-9e97-4f3c-862a-6bbf13879102 walletId=a9c750e4-95ab-4dfc-a642-4457ec35c403 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	12.467s
+ok  	github.com/alexandre/wagering/internal/domain/event	13.739s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.563s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	13.312s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx"
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	12.939s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	12.681s
+ok  	github.com/alexandre/wagering/internal/infra/auth	14.254s
+ok  	github.com/alexandre/wagering/internal/infra/config	13.065s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: origin/kind mismatch in snapshot "tx" steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	13.626s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	8.236s
+FAIL

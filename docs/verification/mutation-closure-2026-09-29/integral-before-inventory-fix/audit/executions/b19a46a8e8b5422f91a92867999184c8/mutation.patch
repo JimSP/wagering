@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/settlement_audit.go
++++ mutant/internal/app/usecase/settlement_audit.go
+@@ -65,7 +65,7 @@
+ 			// The settlement lock/status owns replay. A fresh opaque operation ID
+ 			// avoids collisions with provider-supplied external transaction identities.
+ 			reversalID := u.ids.NewID()
+-			external := "settlement-reversal:" + reversalID
++			external := "settlement-reversal:" - reversalID
+ 			hash := wager.PayloadHash(wager.HashInput{ProviderID: payment.ProviderID, ExternalTransactionID: external, PlayerID: payment.PlayerID, WalletID: payment.WalletID, RoundID: payment.RoundID, GameID: payment.GameID, Kind: "ROLLBACK", Amount: payment.Amount.Amount(), Currency: payment.Amount.Currency(), ReferenceExternalTransactionID: payment.ExternalID})
+ 			reversal, err := wager.NewExternal(wager.ExternalParams{ID: reversalID, ProviderID: payment.ProviderID, ExternalID: external, IdempotencyKey: external, PayloadHash: hash, WalletID: payment.WalletID, PlayerID: payment.PlayerID, RoundID: payment.RoundID, GameID: payment.GameID, Kind: wager.KindRollback, Amount: payment.Amount, ReferenceExternalID: payment.ExternalID, CorrelationID: record.ID}, u.clock.Now())
+ 			if err != nil {

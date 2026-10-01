@@ -1,0 +1,121 @@
+{
+  "date": "2026-09-28",
+  "go_version": "go1.27.1 darwin/arm64",
+  "docker_build_go_version": "go1.23.12",
+  "top_level_tests": {
+    "test": {
+      "pass": 76,
+      "fail": 0,
+      "skip": 0
+    },
+    "race": {
+      "pass": 76,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "commands": {
+    "go test -count=1 -json ./...": 0,
+    "go test -count=1 -race -json ./...": 0,
+    "go vet ./...": 0,
+    "./scripts/test-unit-coverage.sh": 0,
+    "./scripts/test-semantic.sh": 0
+  },
+  "integration_executed": true,
+  "integration": {
+    "exit_code": 0,
+    "race": true,
+    "system_tests": 23,
+    "cmd_tests": 3,
+    "passed_tests": [
+      "TestHTTPContractsAgreeWithCommittedDatabaseFacts",
+      "TestSimultaneousChannelsAndSQSTerminalRejection",
+      "TestConcurrentReversalsAndFullRestart",
+      "TestDependencyOutagesRecoverDurableWork",
+      "TestSIGTERMDrainsInFlightSQS",
+      "TestInternalAuthorizationAndExternalOpening",
+      "TestOutputContractsAndDurableDownstreamDedup",
+      "TestExternalOpeningSQSReachesDLQ",
+      "TestReferenceAttemptsExhaustionAndPendingDependency",
+      "TestTransientExhaustionReachesDLQWithoutFinancialEffect",
+      "TestOutboxOldLeaseCannotConfirmNewOwner",
+      "TestLockTimeoutIsRetryableAndReconciliationSnapshotIsStable",
+      "TestThreeProcessesConcurrentMoney",
+      "TestAuthorization",
+      "TestReversalsAndLoss",
+      "TestDatabaseGuardsAndAtomicRollback",
+      "TestBrokerPermissions",
+      "TestHTTPAndSQSReplayAndCrash",
+      "TestPendingReferenceRestart",
+      "TestOutboxRecoveryTwoPublishers",
+      "TestLedgerCursorAndOpeningZero",
+      "TestExpiredIdPToken",
+      "TestMigrationRoundTrip",
+      "TestFxGraph",
+      "TestRealFxStartStop",
+      "TestJWKSStartupFailureClosesDatabase"
+    ]
+  },
+  "docker_compose_build_app": 0,
+  "readiness_http_status": 200,
+  "limitations": "MiniStack/IAM emulates SQS; no AWS homologation, load test or formal proof. See VERIFICATION.md.",
+  "unit_coverage": {
+    "passed": true,
+    "packages": {
+      "internal/domain/money": {
+        "covered": 51,
+        "statements": 51,
+        "percent": 100.0
+      },
+      "internal/domain/wallet": {
+        "covered": 47,
+        "statements": 47,
+        "percent": 100.0
+      },
+      "internal/domain/event": {
+        "covered": 84,
+        "statements": 84,
+        "percent": 100.0
+      },
+      "internal/domain/wager": {
+        "covered": 204,
+        "statements": 204,
+        "percent": 100.0
+      },
+      "internal/app/usecase": {
+        "covered": 381,
+        "statements": 381,
+        "percent": 100.0
+      },
+      "internal/infra/auth": {
+        "covered": 120,
+        "statements": 120,
+        "percent": 100.0
+      }
+    },
+    "uncovered": []
+  },
+  "latest_evidence": "docs/verification/semantic-2026-09-28",
+  "subtests": {
+    "test": {
+      "pass": 443,
+      "fail": 0,
+      "skip": 0
+    },
+    "race": {
+      "pass": 443,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "semantics": {
+    "fixed_seed_operations": 960,
+    "invalid_amount_kind_channel_cases": 90,
+    "rollback_recovery_cases": 41,
+    "mutations_detected": 11,
+    "mutations_survived": 0,
+    "mutation_build_errors": 0,
+    "fuzz_duration_seconds": 30,
+    "fuzz_executions": 2391445
+  }
+}

@@ -1,0 +1,26 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.866s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	4.665s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/rejected/provider (0.00s)
+        input_contract_test.go:45: output={eventID:event aggregateID:wallet typ:WagerTransactionRejected payload:{"eventId":"event","eventType":"WagerTransactionRejected","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"BET","walletId":"wallet","providerId":"","externalTransactionId":"ext","failureCode":"INSUFFICIENT_FUNDS"}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	3.538s
+ok  	github.com/alexandre/wagering/internal/domain/money	3.294s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.043s
+ok  	github.com/alexandre/wagering/internal/domain/wager	2.612s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.166s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.146s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.646s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.934s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.164s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.471s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.396s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.583s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.230s
+ok  	github.com/alexandre/wagering/internal/platform/worker	2.518s
+ok  	github.com/alexandre/wagering/internal/testsupport/settlementfacts	2.648s
+FAIL

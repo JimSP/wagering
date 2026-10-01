@@ -1,0 +1,52 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.226s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:40:13 INFO transaction handled correlationId="" messageId="" transactionId=77427486-411a-42b7-bd68-7d347ddcb8ab walletId=526e8de4-2026-45c7-b16d-5893511cc4b5 providerId=p status=PROCESSED
+2026/09/29 22:40:13 WARN transaction handling failed correlationId="" messageId="" transactionId=e16d6b2d-d995-4465-ac3d-c643686ac5a7 walletId=526e8de4-2026-45c7-b16d-5893511cc4b5 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x128 pc=0x1009230fc]
+
+goroutine 79 [running]:
+testing.tRunner.func1.2({0x101196fb8, 0x101287b70})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x101196fb8?, 0x101287b70?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+github.com/alexandre/wagering/internal/domain/wager.(*Transaction).Snapshot(_)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/domain/wager/transaction.go:177 +0x4c
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute.func2({0x10122ce08, 0x1012ce380}, {0x10122d8c0, 0x31976b4ce190})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/transaction.go:168 +0x4b4
+github.com/alexandre/wagering/internal/app/usecase.(*uowStub).Do(0x38?, {0x10122ce08?, 0x1012ce380?}, 0x7?)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/ports_test.go:38 +0x74
+github.com/alexandre/wagering/internal/app/usecase.(*SubmitTransaction).Execute(_, {_, _}, {{0x100af426b, 0x3}, {0x100af40a0, 0x1}, {0x100af427d, 0x3}, {0x0, ...}, ...})
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/transaction.go:111 +0xa84
+github.com/alexandre/wagering/internal/app/usecase.TestSubmitInboxBindingFailurePreventsCompletion(0x31976b4d06c8)
+	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2021069106/wd-520634725/internal/app/usecase/paired_storage_failure_test.go:289 +0x55c
+testing.tRunner(0x31976b4d06c8, 0x101232300)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.847s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.223s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.944s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	1.480s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.937s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.672s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.759s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.086s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:314: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	2.569s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.211s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.319s
+ok  	github.com/alexandre/wagering/internal/platform/logging	2.315s
+FAIL

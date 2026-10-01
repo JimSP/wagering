@@ -1,0 +1,26 @@
+ version | dirty 
+---------+-------
+       6 | f
+(1 row)
+
+            conname             | convalidated |                                    pg_get_constraintdef                                    
+--------------------------------+--------------+--------------------------------------------------------------------------------------------
+ uq_transaction_id_currency     | t            | UNIQUE (id, currency)
+ fk_settlement_payment_currency | t            | FOREIGN KEY (payment_transaction_id, currency) REFERENCES wager_transactions(id, currency)
+(2 rows)
+
+ public_tables 
+---------------
+            14
+(1 row)
+
+ public_views 
+--------------
+            2
+(1 row)
+
+ wallets | transactions | entries 
+---------+--------------+---------
+       0 |            0 |       0
+(1 row)
+

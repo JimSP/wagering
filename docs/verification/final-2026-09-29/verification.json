@@ -1,0 +1,134 @@
+{
+  "date": "2026-09-29",
+  "go_version": "go1.27.1 darwin/arm64",
+  "docker_build_go_version": "go1.27.1",
+  "test_counts": {
+    "test": {
+      "top_level": {
+        "pass": 130
+      },
+      "subtests": {
+        "pass": 563
+      }
+    },
+    "race": {
+      "top_level": {
+        "pass": 130
+      },
+      "subtests": {
+        "pass": 563
+      }
+    }
+  },
+  "commands": {
+    "go test -count=1 -json ./...": 0,
+    "go test -count=1 -race -json ./...": 0,
+    "go vet ./...": 0
+  },
+  "integration": {
+    "exit_code": 0,
+    "race": true,
+    "top_level_pass": 41,
+    "passed_tests": [
+      "TestHTTPContractsAgreeWithCommittedDatabaseFacts",
+      "TestSimultaneousChannelsAndSQSTerminalRejection",
+      "TestConcurrentReversalsAndFullRestart",
+      "TestDependencyOutagesRecoverDurableWork",
+      "TestSIGTERMDrainsInFlightSQS",
+      "TestInternalAuthorizationAndExternalOpening",
+      "TestOutputContractsAndDurableDownstreamDedup",
+      "TestExternalOpeningSQSReachesDLQ",
+      "TestReferenceAttemptsExhaustionAndPendingDependency",
+      "TestTransientExhaustionReachesDLQWithoutFinancialEffect",
+      "TestOutboxOldLeaseCannotConfirmNewOwner",
+      "TestLockTimeoutIsRetryableAndReconciliationSnapshotIsStable",
+      "TestThreeProcessesConcurrentMoney",
+      "TestAuthorization",
+      "TestReversalsAndLoss",
+      "TestDatabaseGuardsAndAtomicRollback",
+      "TestBrokerPermissions",
+      "TestHTTPAndSQSReplayAndCrash",
+      "TestPendingReferenceRestart",
+      "TestOutboxRecoveryTwoPublishers",
+      "TestLedgerCursorAndOpeningZero",
+      "TestExpiredIdPToken",
+      "TestMigrationRoundTrip",
+      "TestFxGraph",
+      "TestShutdownBudgetConfiguration",
+      "TestCompositionConstructsLogger",
+      "TestRealFxStartStop",
+      "TestJWKSStartupFailureClosesDatabase",
+      "TestTransportFailuresPreserveCauseAndRetryClassification",
+      "TestLedgerPropagatesLatePostgresError",
+      "TestInboxStatesAndCompletion",
+      "TestOutboxLeasePayloadAndErrors",
+      "TestPoolConfigurationAndFailedStartup",
+      "TestReadinessDeadlineAndCleanup",
+      "TestWalletPersistenceContract",
+      "TestTransactionPersistenceContract",
+      "TestLedgerPaginationAndTotalsContract",
+      "TestLedgerReportsErrorDiscoveredWhileClosingLookahead",
+      "TestUnitOfWorkIsolationCommitRollbackAndErrors",
+      "TestEverySQLStateClassification",
+      "TestSQLConflictsAreRetryableAndObservable"
+    ],
+    "packages": [
+      "./test/integration",
+      "./cmd/wagering",
+      "./internal/infra/postgres"
+    ]
+  },
+  "unit_coverage": {
+    "passed": true,
+    "packages": {
+      "internal/domain/money": {
+        "covered": 52,
+        "statements": 52,
+        "percent": 100.0
+      },
+      "internal/domain/wallet": {
+        "covered": 47,
+        "statements": 47,
+        "percent": 100.0
+      },
+      "internal/domain/event": {
+        "covered": 84,
+        "statements": 84,
+        "percent": 100.0
+      },
+      "internal/domain/wager": {
+        "covered": 204,
+        "statements": 204,
+        "percent": 100.0
+      },
+      "internal/app/usecase": {
+        "covered": 382,
+        "statements": 382,
+        "percent": 100.0
+      },
+      "internal/infra/auth": {
+        "covered": 120,
+        "statements": 120,
+        "percent": 100.0
+      }
+    },
+    "uncovered": []
+  },
+  "mutations": {
+    "killed": 916,
+    "lived": 4,
+    "not_covered": 0,
+    "timed_out": 0,
+    "equivalent_audited": 4,
+    "raw_report": "docs/verification/final-2026-09-29/mutations/results.json",
+    "evidence_index": "docs/verification/final-2026-09-29/mutations/evidence-index.json"
+  },
+  "fuzz": {
+    "seconds": 30,
+    "executions": 2413966,
+    "exit_code": 0
+  },
+  "docker_compose_build_app": 0,
+  "readiness_http_status": 200,
+  "latest_evidence": "docs/verification/final-2026-09-29"
+}

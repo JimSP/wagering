@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.697s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:05:47 INFO transaction handled correlationId="" messageId="" transactionId=724a419c-9a59-4b91-b613-2d1bc561d8a6 walletId=d0c0330d-e7a1-4160-8bd5-8007410fa995 providerId=p status=PROCESSED
+2026/09/29 03:05:47 WARN transaction handling failed correlationId="" messageId="" transactionId=24c4f62d-1e2f-49b4-b31f-27d92744c4d9 walletId=d0c0330d-e7a1-4160-8bd5-8007410fa995 providerId=p transient=false
+--- FAIL: TestFinancialJourneyKeepsWalletJournalResultsAndEventsConsistent (0.00s)
+    journey_semantics_test.go:202: wrong events [{00000000-0000-4000-8000-000000000008 WalletBalanceChanged 00000000-0000-4000-8000-000000000001 correlation  2026-09-28 12:00:01 +0000 UTC 1 {00000000-0000-4000-8000-000000000006  00000000-0000-4000-8000-000000000001      DEBIT {80.00 BRL} {100.00 BRL} {20.00 BRL} 2 0001-01-01 00:00:00 +0000 UTC 0001-01-01 00:00:00 +0000 UTC}}]
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.399s
+ok  	github.com/alexandre/wagering/internal/domain/event	0.738s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.289s
+ok  	github.com/alexandre/wagering/internal/domain/wager	0.861s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.557s
+ok  	github.com/alexandre/wagering/internal/infra/auth	1.698s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.012s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.719s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.911s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.493s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.489s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.965s
+ok  	github.com/alexandre/wagering/internal/platform/sys	2.478s
+FAIL

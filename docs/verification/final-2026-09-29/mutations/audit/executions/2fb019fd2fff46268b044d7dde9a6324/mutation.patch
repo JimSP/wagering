@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -146,7 +146,7 @@
+ 			return err
+ 		}
+ 		entry, e := wager.NewLedgerEntry(u.ids.NewID(), s.WalletID, s.ID, direction, s.Amount, before, u.clock.Now())
+-		if e != nil {
++		if e == nil {
+ 			return e
+ 		}
+ 		if err = tx.Ledger().Append(ctx, entry); err != nil {

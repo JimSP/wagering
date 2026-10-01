@@ -1,0 +1,44 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	5.847s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+--- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.04s)
+    --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend/failure (0.02s)
+        failpoint_contract_test.go:67: unexpected crash: exit status 2 2026/09/30 01:09:36 WARN event publication failed eventId=event walletId=wallet transactionId=tx providerId=p correlationId=corr messageId="" attempt=0 err="repository unavailable"
+            --- FAIL: TestPublishCrashOccursOnlyAfterSuccessfulSend (0.00s)
+            panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+            [signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x102c8ab18]
+            
+            goroutine 6 [running]:
+            testing.tRunner.func1.2({0x1033f71e0, 0x1034e7b70})
+            	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+            testing.tRunner.func1()
+            	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+            panic({0x1033f71e0?, 0x1034e7b70?})
+            	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+            github.com/alexandre/wagering/internal/app/usecase.(*PublishOutbox).RunOnce.func3({0x10348d198, 0x10352e380}, {0x10348dc50?, 0x7cdc763d0460?})
+            	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/workers.go:165 +0x78
+            github.com/alexandre/wagering/internal/app/usecase.(*uowStub).DoSnapshot(0x10?, {0x10348d198?, 0x10352e380?}, 0x4?)
+            	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/ports_test.go:42 +0x4c
+            github.com/alexandre/wagering/internal/app/usecase.(*PublishOutbox).RunOnce(0x7cdc76428cc0, {0x10348d198, 0x10352e380})
+            	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/workers.go:158 +0x618
+            github.com/alexandre/wagering/internal/app/usecase.TestPublishCrashOccursOnlyAfterSuccessfulSend(0x7cdc76600248)
+            	/private/var/folders/mj/s6zwcdt90s1g4wqpntcc733r0000gn/T/gremlins-2018839116/wd-2610815156/internal/app/usecase/failpoint_contract_test.go:33 +0x65c
+            testing.tRunner(0x7cdc76600248, 0x103492628)
+            	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+            created by testing.(*T).Run in goroutine 1
+            	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	6.185s
+ok  	github.com/alexandre/wagering/internal/domain/event	5.808s
+ok  	github.com/alexandre/wagering/internal/domain/money	6.284s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	7.020s
+ok  	github.com/alexandre/wagering/internal/domain/wager	6.714s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	7.144s
+ok  	github.com/alexandre/wagering/internal/infra/auth	8.203s
+ok  	github.com/alexandre/wagering/internal/infra/config	6.402s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	6.597s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	7.250s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.314s
+FAIL

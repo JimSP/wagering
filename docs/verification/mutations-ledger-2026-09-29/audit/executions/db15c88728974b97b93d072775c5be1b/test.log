@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.968s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 22:15:46 INFO transaction handled correlationId="" messageId="" transactionId=13237464-cba8-4a80-8cd3-9a1918a4f689 walletId=fbdc0536-920d-4bcc-bfce-b85525349a62 providerId=p status=PROCESSED
+2026/09/29 22:15:46 WARN transaction handling failed correlationId="" messageId="" transactionId=006dac50-730a-4809-9166-776fc7390d5b walletId=fbdc0536-920d-4bcc-bfce-b85525349a62 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.09s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/bet (0.00s)
+        http_contract_test.go:161: events=1; want 2
+        http_contract_test.go:161: outcomes=1 changed accounts=map[]; want one outcome and 1 account events
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.433s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.445s
+ok  	github.com/alexandre/wagering/internal/domain/money	0.987s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	2.305s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.572s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.189s
+ok  	github.com/alexandre/wagering/internal/infra/auth	2.383s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.074s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	1.752s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	1.802s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.779s
+FAIL

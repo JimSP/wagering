@@ -1,0 +1,11 @@
+--- original/internal/app/usecase/process.go
++++ mutant/internal/app/usecase/process.go
+@@ -110,7 +110,7 @@
+ 	if err = accounting.ApplyAccounting(ctx, t, facts, decision, u.clock.Now()); err != nil {
+ 		return err
+ 	}
+-	if decision.GuaranteeDirection != "" {
++	if decision.GuaranteeDirection == "" {
+ 		if err = u.balanceEvent(ctx, tx, t, entry, decision.Guarantee.Version); err != nil {
+ 			return err
+ 		}

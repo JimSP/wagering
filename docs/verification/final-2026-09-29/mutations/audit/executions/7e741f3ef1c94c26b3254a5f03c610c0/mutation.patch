@@ -1,0 +1,52 @@
+--- original/internal/app/apperr/apperr.go
++++ mutant/internal/app/apperr/apperr.go
+@@ -7,21 +7,21 @@
+ )
+ 
+ var (
+-	ErrInvalidInput           = errors.New("invalid input")
+-	ErrInvalidMessage         = errors.New("invalid message") // permanent for SQS
+-	ErrMessageConflict        = errors.New("message id reused with different payload")
+-	ErrNotFound               = errors.New("not found")
+-	ErrForbidden              = errors.New("forbidden")
+-	ErrIdempotencyConflict    = errors.New("idempotency key reused with different payload")
+-	ErrWalletExists           = errors.New("wallet already exists for player and currency")
+-	ErrWalletNotFound         = errors.New("wallet not found")
+-	ErrConcurrentModification = errors.New("concurrent modification")
++	ErrInvalidInput			= errors.New("invalid input")
++	ErrInvalidMessage		= errors.New("invalid message")	// permanent for SQS
++	ErrMessageConflict		= errors.New("message id reused with different payload")
++	ErrNotFound			= errors.New("not found")
++	ErrForbidden			= errors.New("forbidden")
++	ErrIdempotencyConflict		= errors.New("idempotency key reused with different payload")
++	ErrWalletExists			= errors.New("wallet already exists for player and currency")
++	ErrWalletNotFound		= errors.New("wallet not found")
++	ErrConcurrentModification	= errors.New("concurrent modification")
+ )
+ 
+ type transientError struct{ err error }
+ 
+-func (e transientError) Error() string { return "transient: " + e.err.Error() }
+-func (e transientError) Unwrap() error { return e.err }
++func (e transientError) Error() string	{ return "transient: " + e.err.Error() }
++func (e transientError) Unwrap() error	{ return e.err }
+ 
+ // Transient marks an error as retryable (DB/SQS temporarily unavailable, deadlocks, ...).
+ func Transient(err error) error {
+@@ -44,12 +44,12 @@
+ // Connection failures and ambiguous commits must never use this classification.
+ type permanentError struct{ err error }
+ 
+-func (e permanentError) Error() string { return "permanent: " + e.err.Error() }
+-func (e permanentError) Unwrap() error { return e.err }
++func (e permanentError) Error() string	{ return "permanent: " + e.err.Error() }
++func (e permanentError) Unwrap() error	{ return e.err }
+ func Permanent(err error) error {
+-	if err == nil {
++	if err != nil {
+ 		return nil
+ 	}
+ 	return permanentError{err}
+ }
+-func IsPermanent(err error) bool { var p permanentError; return errors.As(err, &p) }
++func IsPermanent(err error) bool	{ var p permanentError; return errors.As(err, &p) }

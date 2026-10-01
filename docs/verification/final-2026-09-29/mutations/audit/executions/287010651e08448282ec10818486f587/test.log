@@ -1,0 +1,28 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	0.901s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:30:23 INFO transaction handled correlationId="" messageId="" transactionId=d33e32da-199c-4c99-a6f9-73ecfdcac3dd walletId=0ff5676a-ad7e-4c0e-8b82-b820fea814ab providerId=p status=PROCESSED
+2026/09/29 03:30:23 WARN transaction handling failed correlationId="" messageId="" transactionId=a975f9ce-7d4e-4f77-8ad7-57b0cba48b98 walletId=0ff5676a-ad7e-4c0e-8b82-b820fea814ab providerId=p transient=false
+--- FAIL: TestHTTPInvalidInputsAndAuthorizationHaveNoEffects (0.06s)
+    http_contract_test.go:244: HTTP contract: 400 map[Content-Type:[application/json] X-Correlation-Id:[contract-correlation]] {"code":"INVALID_INPUT","message":"invalid input: malformed body: EOF"}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	1.627s
+ok  	github.com/alexandre/wagering/internal/domain/event	1.854s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.146s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.730s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	1.597s
+--- FAIL: TestAuthorizationPolicyMatrix (0.00s)
+    --- FAIL: TestAuthorizationPolicyMatrix/internal/provider (0.00s)
+        authorization_paths_test.go:43: 204 
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/auth	2.171s
+ok  	github.com/alexandre/wagering/internal/infra/config	1.011s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.519s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.368s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.722s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.718s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.748s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.415s
+FAIL

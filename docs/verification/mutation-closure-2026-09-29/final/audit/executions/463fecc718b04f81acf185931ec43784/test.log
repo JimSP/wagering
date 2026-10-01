@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	9.263s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:26:01 INFO transaction handled correlationId="" messageId="" transactionId=8214913e-0bb8-46b4-89ff-72f6c95df721 walletId=6306dcdb-5507-4537-974f-a8be9d2519f4 providerId=p status=PROCESSED
+2026/09/30 01:26:01 WARN transaction handling failed correlationId="" messageId="" transactionId=68ae56bc-3e6d-40a7-ae38-dd592d6f0212 walletId=6306dcdb-5507-4537-974f-a8be9d2519f4 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid processed snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	10.117s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.303s
+ok  	github.com/alexandre/wagering/internal/domain/money	10.195s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.436s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid processed snapshot
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.734s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	10.672s
+ok  	github.com/alexandre/wagering/internal/infra/auth	10.261s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.558s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestTransactionPersistenceContract (0.00s)
+    repository_contract_test.go:312: error=INVALID_INPUT: invalid input: invalid processed snapshot want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	11.012s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.829s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.856s
+FAIL

@@ -1,0 +1,10 @@
+--- original/internal/infra/postgres/transaction_repo.go
++++ mutant/internal/infra/postgres/transaction_repo.go
+@@ -100,6 +100,6 @@
+ }
+ func (r transactionRepo) HasReversal(ctx context.Context, id string) (bool, error) {
+ 	var yes bool
+-	err := r.q.QueryRow(ctx, `SELECT EXISTS(SELECT 1 FROM wager_transactions WHERE reference_transaction_id=$1 AND kind IN ('REFUND','ROLLBACK') AND status='PROCESSED')`, id).Scan(&yes)
++	err := r.q.QueryRow(ctx, `SELECT EXISTS(SELECT 1 FROM wager_transactions WHERE reference_transaction_id=$1 AND kind IN ('REFUND','ROLLBACK') AND status='PROCESSED')`, id).Scan(|yes)
+ 	return yes, err
+ }

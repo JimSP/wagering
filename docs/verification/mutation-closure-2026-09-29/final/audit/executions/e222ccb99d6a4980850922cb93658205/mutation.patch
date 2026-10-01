@@ -1,0 +1,20 @@
+--- original/internal/infra/postgres/settlement_audit_repo.go
++++ mutant/internal/infra/postgres/settlement_audit_repo.go
+@@ -12,7 +12,7 @@
+ 	"time"
+ )
+ 
+-func (t txAdapter) SettlementAudit() port.SettlementAuditStore { return settlementRepo{t.q} }
++func (t txAdapter) SettlementAudit() port.SettlementAuditStore	{ return settlementRepo{t.q} }
+ func (r settlementRepo) readSettlement(ctx context.Context, id string, lock bool) (port.SettlementRecord, error) {
+ 	query := `SELECT id::text,bet_id::text,result_key,distribution_hash,status FROM settlements WHERE id=$1`
+ 	if lock {
+@@ -58,7 +58,7 @@
+ 	}
+ 	rows, err = r.q.Query(ctx, `SELECT e.id::text,e.journal_id::text,e.transaction_id::text,e.account_id::text,e.wallet_id::text,e.account_role,e.direction,e.amount_minor,e.currency,e.balance_before_minor,e.balance_after_minor,e.account_version,e.seq,coalesce(jr.original_journal_id::text,''),e.created_at
+  FROM ledger_entries e JOIN wager_transactions t ON t.id=e.transaction_id LEFT JOIN journal_reversals jr ON jr.compensating_journal_id=e.journal_id WHERE t.settlement_id=$1 ORDER BY e.seq`, id)
+-	if err != nil {
++	if err == nil {
+ 		return out, err
+ 	}
+ 	defer rows.Close()

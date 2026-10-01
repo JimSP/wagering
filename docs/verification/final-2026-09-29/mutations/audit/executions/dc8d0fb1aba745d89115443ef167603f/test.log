@@ -1,0 +1,31 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.397s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/29 03:10:28 INFO transaction handled correlationId="" messageId="" transactionId=6a5d7f38-e4e4-414e-af62-fb024c47615a walletId=f1175e8f-ad90-44aa-a435-04c50ccc6ab3 providerId=p status=PROCESSED
+2026/09/29 03:10:28 WARN transaction handling failed correlationId="" messageId="" transactionId=c3ea6542-90d8-4bff-9cd7-9874024240db walletId=f1175e8f-ad90-44aa-a435-04c50ccc6ab3 providerId=p transient=false
+--- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts (0.38s)
+    --- FAIL: TestHTTPFinancialResponsesMatchContractAndPersistedFacts/refund (0.00s)
+        http_contract_test.go:145: missing transaction identity: {"code":"INTERNAL"}
+             <nil>
+    http_contract_test.go:191: wire contract
+        want {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"100.00","currency":"BRL"},"version":5}
+        got  {"id":"00000000-0000-4000-8000-000000000001","playerId":"0192f28f-5dc0-7d58-bdb2-814ad6a0f4a1","balance":{"amount":"87.00","currency":"BRL"},"version":3}
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	2.101s
+--- FAIL: TestEventDataValidatesEachIndependentField (0.00s)
+    --- FAIL: TestEventDataValidatesEachIndependentField/processed/kind (0.00s)
+        input_contract_test.go:34: output={eventID:event aggregateID:wallet typ:WagerTransactionProcessed payload:{"eventId":"event","eventType":"WagerTransactionProcessed","aggregateId":"wallet","correlationId":"correlation","causationId":"message","occurredAt":"2026-09-28T12:00:00Z","version":1,"data":{"transactionId":"tx","kind":"unknown","walletId":"wallet","playerId":"p","providerId":"provider","externalTransactionId":"ext","roundId":"r","money":{"amount":"1.00","currency":"BRL"}}} version:1 attempts:0 occurredAt:{wall:0 ext:63926193600 loc:<nil>}} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/event	2.654s
+ok  	github.com/alexandre/wagering/internal/domain/money	2.393s
+ok  	github.com/alexandre/wagering/internal/domain/wager	1.935s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	3.326s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.569s
+ok  	github.com/alexandre/wagering/internal/infra/config	3.068s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.972s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.279s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.078s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.613s
+FAIL

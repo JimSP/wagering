@@ -1,0 +1,27 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	3.429s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.410s
+ok  	github.com/alexandre/wagering/internal/domain/event	3.065s
+--- FAIL: TestExactBoundaries (0.00s)
+    boundaries_test.go:42: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/money	5.078s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:50: accepted invented cent <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	3.687s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	4.076s
+ok  	github.com/alexandre/wagering/internal/infra/auth	4.187s
+ok  	github.com/alexandre/wagering/internal/infra/config	4.489s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:387: <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	4.384s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	4.837s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	2.226s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.993s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	2.311s
+FAIL

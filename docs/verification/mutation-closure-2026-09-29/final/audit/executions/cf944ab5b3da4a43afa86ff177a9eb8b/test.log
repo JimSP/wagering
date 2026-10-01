@@ -1,0 +1,30 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	10.948s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:28:29 INFO transaction handled correlationId="" messageId="" transactionId=b524da55-2510-4fe5-a93f-44dbf599cc19 walletId=9db9042a-2501-40ff-808d-8d759ecd6bb4 providerId=p status=PROCESSED
+2026/09/30 01:28:29 WARN transaction handling failed correlationId="" messageId="" transactionId=75c4b66f-659d-4536-b88f-b9674a1d3a00 walletId=9db9042a-2501-40ff-808d-8d759ecd6bb4 providerId=p transient=false
+--- FAIL: TestSubmitInboxBindingFailurePreventsCompletion (0.00s)
+    paired_storage_failure_test.go:274: INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	11.279s
+ok  	github.com/alexandre/wagering/internal/domain/event	10.899s
+ok  	github.com/alexandre/wagering/internal/domain/money	12.390s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	11.870s
+--- FAIL: TestPendingRetryErrorsHaveExactText (0.00s)
+    --- FAIL: TestPendingRetryErrorsHaveExactText/fresh (0.00s)
+        error_text_contract_test.go:34: <nil> INVALID_INPUT: invalid input: invalid reference lifetime
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	11.620s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	11.349s
+ok  	github.com/alexandre/wagering/internal/infra/auth	12.978s
+ok  	github.com/alexandre/wagering/internal/infra/config	12.272s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLoadAccountingOptionalCommitmentAndJournal (0.00s)
+    --- FAIL: TestLoadAccountingOptionalCommitmentAndJournal/reference-settlement- (0.00s)
+        accounting_closure_extra_test.go:48: optional records: {Guarantee:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Operational:{ID: PlayerID: Balance:{minor:0 currency:} Version:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC} Reference:<nil> ReferenceCandidates:0 BetID: BetStatus: SettlementID: ReferenceSettlementID: CommitmentID: Remaining:0 AlreadyReversed:false OriginalJournalID: Restores:[]} INVALID_INPUT: invalid input: invalid reference lifetime steps=2
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	12.161s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	9.419s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	9.416s
+FAIL

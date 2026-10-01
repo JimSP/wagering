@@ -1,0 +1,24 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	1.612s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+ok  	github.com/alexandre/wagering/internal/app/usecase	3.931s
+ok  	github.com/alexandre/wagering/internal/domain/event	2.410s
+ok  	github.com/alexandre/wagering/internal/domain/money	1.967s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	3.133s
+--- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances (0.00s)
+    --- FAIL: TestAccountingRejectsCorruptFactsWithoutChangingBalances/settled_WIN_reversal (0.00s)
+        accounting_test.go:55: decision={Failure: Wait:false ReferenceID:win Guarantee:{ID:guarantee PlayerID:player Balance:{minor:0 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} Operational:{ID:operational PlayerID:player Balance:{minor:200 currency:BRL} Version:2 CreatedAt:2026-09-29 12:00:00 +0000 UTC UpdatedAt:2026-09-29 12:00:00 +0000 UTC} GuaranteeDirection:DEBIT NewCommitment:false ConsumeCommitmentID: ReverseJournalID: Restores:[]} err=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	2.774s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	2.516s
+ok  	github.com/alexandre/wagering/internal/infra/auth	3.726s
+ok  	github.com/alexandre/wagering/internal/infra/config	2.894s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/postgres	2.283s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	2.165s
+ok  	github.com/alexandre/wagering/internal/platform/failpoint	1.768s
+ok  	github.com/alexandre/wagering/internal/platform/logging	1.569s
+ok  	github.com/alexandre/wagering/internal/platform/metrics	1.760s
+ok  	github.com/alexandre/wagering/internal/platform/sys	1.916s
+FAIL

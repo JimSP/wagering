@@ -1,0 +1,29 @@
+ok  	github.com/alexandre/wagering/cmd/wagering	8.164s
+?   	github.com/alexandre/wagering/internal/app/apperr	[no test files]
+?   	github.com/alexandre/wagering/internal/app/port	[no test files]
+2026/09/30 01:22:41 INFO transaction handled correlationId="" messageId="" transactionId=57554051-3165-4247-917a-26816d348d47 walletId=74b0ee30-f2b8-477d-9d88-614b6919f2b2 providerId=p status=PROCESSED
+2026/09/30 01:22:41 WARN transaction handling failed correlationId="" messageId="" transactionId=36383332-753f-48c1-952a-b5084103b955 walletId=74b0ee30-f2b8-477d-9d88-614b6919f2b2 providerId=p transient=false
+--- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts (0.02s)
+    --- FAIL: TestHTTPOpeningAndPermanentFailureHaveExactWireContracts/opening=10.00 (0.00s)
+        http_contract_test.go:268: {"code":"INVALID_INPUT","message":"INVALID_INPUT: invalid input: ledger entry 00000000-0000-4000-8000-000000000011 has inconsistent balances"}
+             <nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/app/usecase	8.604s
+ok  	github.com/alexandre/wagering/internal/domain/event	9.118s
+ok  	github.com/alexandre/wagering/internal/domain/money	9.916s
+ok  	github.com/alexandre/wagering/internal/domain/settlement	10.167s
+--- FAIL: TestLedgerExplainsEveryCentWithoutReapplyingHistory (0.00s)
+    ledger_semantics_test.go:47: history changed {    {0 } {0 } {0 } {0 0 <nil>}} INVALID_INPUT: invalid input: ledger entry entry-0 has inconsistent balances
+FAIL
+FAIL	github.com/alexandre/wagering/internal/domain/wager	9.386s
+ok  	github.com/alexandre/wagering/internal/domain/wallet	9.646s
+ok  	github.com/alexandre/wagering/internal/infra/auth	9.141s
+ok  	github.com/alexandre/wagering/internal/infra/config	10.427s
+?   	github.com/alexandre/wagering/internal/infra/outbox	[no test files]
+--- FAIL: TestLedgerPaginationAndTotalsContract (0.00s)
+    repository_contract_test.go:341: error=INVALID_INPUT: invalid input: ledger entry first has inconsistent balances want=<nil>
+FAIL
+FAIL	github.com/alexandre/wagering/internal/infra/postgres	8.999s
+?   	github.com/alexandre/wagering/internal/infra/reference	[no test files]
+ok  	github.com/alexandre/wagering/internal/infra/sqs	10.720s
+FAIL

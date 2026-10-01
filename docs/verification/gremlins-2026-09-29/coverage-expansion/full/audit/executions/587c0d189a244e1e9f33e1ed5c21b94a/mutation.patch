@@ -1,0 +1,20 @@
+--- original/internal/platform/sys/sys.go
++++ mutant/internal/platform/sys/sys.go
+@@ -11,14 +11,14 @@
+ 
+ type Clock struct{}
+ 
+-func (Clock) Now() time.Time { return time.Now().UTC() }
++func (Clock) Now() time.Time	{ return time.Now().UTC() }
+ 
+ type UUIDv7 struct{}
+ 
+ func (UUIDv7) NewID() string {
+ 	id, err := uuid.NewV7()
+-	if err != nil {
+-		panic(err) // only if the system RNG fails
++	if err == nil {
++		panic(err)	// only if the system RNG fails
+ 	}
+ 	return id.String()
+ }
