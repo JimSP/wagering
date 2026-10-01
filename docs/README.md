@@ -26,9 +26,9 @@ Atualizado em 01/10/2026, incluindo inicialização limpa com três réplicas e 
 
 `docs/analysis/`, `docs/audit/`, `docs/acceptance/`, `CORRECTIONS.md` e os relatórios datados em `docs/verification/` preservam registros de etapas. Seus estados de aprovação, falha e pendência referem-se àquela etapa, não ao checkout inteiro de hoje. Relatórios executados continuam evidências das execuções que registram; seus logs e hashes não foram reescritos para alterar resultados.
 
-`references/` contém a decomposição e propostas do agente. Não é outra especificação concorrente ao desafio nem inventário do comportamento implementado. `graphify-out/` é um índice derivado para navegação. `docs/database/schema.sql` é um snapshot de inspeção; as migrations são a definição executável.
+`references/` contém a decomposição e propostas do agente. Não é outra especificação concorrente ao desafio nem inventário do comportamento implementado. `graphify-out/` e os logs do Graphify são artefatos locais de navegação, fora do versionamento atual. Os links dos relatórios para esses logs apontam para o histórico Git. `docs/database/schema.sql` é um snapshot de inspeção; as migrations são a definição executável.
 
-Arquivos de `dist/` e `MANIFEST.sha256` são artefatos de empacotamentos anteriores. Não foram regenerados nesta revisão e não representam a documentação atual. Use os arquivos do checkout e os comandos do README.
+Arquivos de `dist/` são artefatos locais de empacotamento. O manifesto antigo da raiz foi retirado do versionamento atual porque seus hashes não correspondem ao checkout; permanece disponível como [registro histórico](https://github.com/JimSP/wagering/blob/6175d87d63e7a088d9219fe677c667c14c90e593/MANIFEST.sha256), sem certificar a versão atual. Os arquivos `source-hashes.json` das campanhas foram preservados e identificam os fontes avaliados em cada execução. Para reproduzir a entrega, use os arquivos do checkout e os comandos do README.
 
 ## Limites de entrega presentes
 

@@ -14,7 +14,7 @@ A seleção FIFO e a referência opcional foram preservadas. Testes que esperava
 - [Gate unitário com race/faults](unit.log): 1.172/1.172 statements nos sete pacotes exigidos. [Perfil](coverage/README.md).
 - [Oito migrations: up/down/up e equivalência SQL](schema.log): aprovado; snapshot do schema atualizado.
 - [go vet integration/faults](vet.log): aprovado, saída vazia.
-- [Grafo AST](graphify.log): atualizado; parser SQL indisponível. Não certifica semântica documental.
+- [Grafo AST](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/early-win-2026-09-30/graphify.log): atualizado; parser SQL indisponível. Não certifica semântica documental.
 - [Checagem documental](documentation-check.json): links locais, sintaxe shell e parsing OpenAPI.
 - [Hashes dos fontes](source-hashes.json).
 

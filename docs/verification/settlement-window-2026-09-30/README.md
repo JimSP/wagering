@@ -10,7 +10,7 @@ A migration 000012 acrescenta uma proteção no PostgreSQL para confirmação e 
 - [Cobertura unitária com race/faults](coverage/README.md): 1.358/1.358 statements nos sete pacotes do gate. Inclui WIN individual rejeitada após confirmação do plano e antes de sua execução.
 - [Migrations up/down/up, equivalência e regressões](schema.log): aprovado; snapshot SQL atualizado.
 - [go vet integration/faults](vet.log): aprovado.
-- [Grafo](graphify.log): atualizado.
+- [Grafo](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/settlement-window-2026-09-30/graphify.log): atualizado.
 - [Integração distribuída direcionada com race](distributed.log): aprovados os três testes de liquidação automática entre processos, recuperação após falhas de publicação/ACK e proteção de lease. PostgreSQL, Keycloak e MiniStack reais; janela de teste de 5s. A suíte distribuída completa não foi reexecutada nesta correção.
 
 Comando distribuído: `bash scripts/test-integration.sh -run 'Test(AccountingAutomaticSettlementAcrossProcesses|SettlementAutomaticDeliverySurvivesPublishAndACKCrashes|SettlementPublisherLeaseRejectsStaleOwner)$'`.

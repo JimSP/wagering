@@ -11,7 +11,7 @@ Implementada a configuração única BET_WINDOW (padrão inicial 5m), persistida
 - [Gate unitário com race/faults](unit.log): aprovado, 1.170/1.170 statements nos sete pacotes medidos. [Perfil por pacote](coverage/README.md).
 - [Schema](schema.log): sete migrations verificadas, up/down/up e equivalência de DDL aprovados; snapshot SQL atualizado.
 - [go vet com integration/faults](vet.log): aprovado (saída vazia).
-- [Grafo](graphify.log): atualizado em modo AST; parser SQL indisponível, não constitui verificação semântica documental.
+- [Grafo](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/bet-window-2026-09-30/graphify.log): atualizado em modo AST; parser SQL indisponível, não constitui verificação semântica documental.
 
 ## Limites
 

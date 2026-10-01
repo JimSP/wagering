@@ -34,7 +34,7 @@ Contas adicionais são lidas sob lock; BETs/compromissos de recuperação usam N
 - [Gate unitário com race/faults](unit.log): **1.355/1.355 statements**, 100% em cada um dos sete pacotes medidos. [Perfil e relatório](coverage/README.md).
 - [Onze migrations: up/down/up e equivalência](schema.log): aprovado, snapshot SQL atualizado.
 - [go vet integration/faults](vet.log): aprovado, saída vazia.
-- [Grafo AST](graphify.log), [checagem documental](documentation-check.json) e [hashes dos fontes](source-hashes.json).
+- [Grafo AST](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/rollback-liquidity-2026-09-30/graphify.log), [checagem documental](documentation-check.json) e [hashes dos fontes](source-hashes.json).
 
 Três testes anteriores esperavam rejeição porque o dinheiro estava em uma BET aberta. Os testes de insuficiência agora utilizam uma perda concluída; o teste de falha na segunda compensação passou a verificar pendência, ausência de efeitos parciais e retomada da identidade original. Nenhum desses casos foi removido para ocultar a mudança de regra.
 

@@ -30,7 +30,7 @@ Um savepoint abrange as dependências e a inversão original. Falta de recursos 
 - [Gate unitário com race/faults](unit.log): **1.251/1.251 statements**, 100% em cada um dos sete pacotes medidos. [Perfil, relatório e log](coverage/README.md).
 - [Dez migrations: up/down/up, equivalência e snapshot](schema.log): aprovado.
 - [go vet com integration/faults](vet.log): aprovado, saída vazia.
-- [Grafo AST](graphify.log): atualizado; parser SQL não disponível.
+- [Grafo AST](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/rollback-any-stage-2026-09-30/graphify.log): atualizado; parser SQL não disponível.
 - [Checagem documental](documentation-check.json) e [hashes dos fontes](source-hashes.json).
 
 Implementação principal: [orquestração](../../../internal/app/usecase/rollback_dependencies.go), [locks e savepoint PostgreSQL](../../../internal/infra/postgres/rollback_dependencies.go), [decisão financeira](../../../internal/domain/wager/accounting.go), [migration 000010](../../../migrations/000010_rollback_any_stage.up.sql). [Contrato completo](../../CONTRACTS.md#rollback-em-qualquer-etapa).

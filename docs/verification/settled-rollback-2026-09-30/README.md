@@ -25,7 +25,7 @@ A guarda SQL payment_reversal_check exige todos os journals originais da WIN. Sa
 - [Gate unitário com race/faults](unit.log): 1.203/1.203 statements nos sete pacotes medidos; [perfil](coverage/README.md).
 - [Nove migrations: up/down/up e equivalência SQL](schema.log): aprovado, snapshot atualizado.
 - [go vet integration/faults](vet.log): aprovado, saída vazia.
-- [Grafo AST](graphify.log): atualizado; SQL não incluído por falta do parser.
+- [Grafo AST](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/settled-rollback-2026-09-30/graphify.log): atualizado; SQL não incluído por falta do parser.
 - [Checagem documental](documentation-check.json) e [hashes dos fontes](source-hashes.json).
 
 ## Limites

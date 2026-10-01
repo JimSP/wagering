@@ -28,4 +28,4 @@ A suíte específica está em [regressões por etapa](../../../internal/infra/po
 
 ## Ambiente local
 
-Aplicação [reconstruída](build.log) e reiniciada após [aplicar a migration 000013](migration-local.log), sem apagar dados. Verificação final: version=13, dirty=false; GET /health/ready retornou HTTP 200. [Grafo atualizado](graphify.log).
+Aplicação [reconstruída](build.log) e reiniciada após [aplicar a migration 000013](migration-local.log), sem apagar dados. Verificação final: version=13, dirty=false; GET /health/ready retornou HTTP 200. [Grafo atualizado](https://github.com/JimSP/wagering/blob/997e6d7603865abb8c99eac11320937767ae6d72/docs/verification/loss-win-fix-2026-09-30/graphify.log).
