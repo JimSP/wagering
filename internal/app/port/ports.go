@@ -124,3 +124,10 @@ type AccountingTransaction interface {
 	ApplyAccounting(context.Context, *wager.Transaction, wager.AccountingFacts, wager.AccountingDecision, time.Time) error
 	SettleByID(context.Context, string) error
 }
+
+// TraceContextStore holds transport metadata outside domain snapshots and payload hashes.
+// It is optional for adapters that do not persist tracing metadata.
+type TraceContextStore interface {
+	LoadTraceContext(context.Context, string, string) (map[string]string, error)
+	SetTraceContext(context.Context) error
+}

@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s
+  scrape_timeout: 3s
+scrape_configs:
+  - job_name: wagering
+    metrics_path: /metrics
+    # Docker DNS resolves each replica. Separate worker services must be added here too.
+    dns_sd_configs:
+      - names: [app]
+        type: A
+        port: 9090
+        refresh_interval: 10s

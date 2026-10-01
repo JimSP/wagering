@@ -1,8 +1,10 @@
+> **Inicialização limpa — 01/10/2026:** setup e build concluídos em uma exportação dos fontes locais sem `.env` e com volumes novos; migration 14 aplicada, três réplicas e gateway saudáveis; demo concluído com **28 cenários PASS**, zero falhas ou bloqueios. [Procedimento, hashes e evidências](docs/verification/clean-start-2026-10-01/README.md). Esta execução é distinta das campanhas de integração e mutação abaixo.
+
 > **Correção LOSS → WIN — 30/09/2026:** WIN posterior a LOSS no mesmo contexto é rejeitada com RESULT_ALREADY_LOST em todas as etapas. Regressões PostgreSQL/race, lock, SQL e cobertura 1.360/1.360 aprovados. [Evidências atuais](docs/verification/loss-win-fix-2026-09-30/README.md). A reprodução abaixo registra o estado anterior à correção.
 
 > **Reprodução LOSS → WIN — 30/09/2026:** 12 cenários PostgreSQL/race confirmam que uma WIN individual contraditória pode ser aceita após LOSS enquanto o resultado interno não foi confirmado. Com resultado confirmado, a WIN é rejeitada. São testes de caracterização, não aprovação dessa regra. [Evidências](docs/verification/loss-win-probe-2026-09-30/README.md).
 
-> **Janela da liquidação — 30/09/2026:** confirmação interna antecipada retorna 422/BET_NOT_CLOSED sem efeitos; migration 000012 protege confirmação e execução. PostgreSQL completo com race, schema e gate unitário passaram; cobertura atual 1.358/1.358 nos sete pacotes medidos. [Evidências](docs/verification/settlement-window-2026-09-30/README.md).
+> **Janela da liquidação — 30/09/2026:** confirmação interna antecipada retorna 422/BET_NOT_CLOSED sem efeitos; migration 000012 protege confirmação e execução. PostgreSQL completo com race, schema e gate unitário passaram; cobertura naquela execução de 1.358/1.358 nos sete pacotes medidos. [Evidências](docs/verification/settlement-window-2026-09-30/README.md).
 
 > **ROLLBACK com recuperação e espera — 30/09/2026:** usa o saldo da garantia, recupera BETs abertas quando necessário e mantém pendência durável enquanto aguarda recursos de resultado ainda não concluído. [Contrato e evidências](docs/verification/rollback-liquidity-2026-09-30/README.md).
 
@@ -17,6 +19,25 @@
 > **Atualização de 30/09/2026:** WIN sem referência seleciona a BET elegível mais antiga, incluindo jogo no contexto. [Implementação e validação](docs/verification/implicit-win-2026-09-30/README.md). A campanha de mutação de 29/09 é anterior a esta alteração e não certifica os fontes novos.
 
 # Execuções registradas e limites de validade
+
+## Mutação incremental — 01/10/2026
+
+A última campanha completa concluída aprovou **2.067 mutantes em 25 pacotes**, todos com estado bruto `KILLED`, **100% de cobertura e eficácia de mutação**, sem sobreviventes, candidatos sem cobertura ou timeouts. A auditoria separou **1.725 falhas de teste** de **342 rejeições de compilação**; estas últimas não representam detecção por uma asserção. O ambiente registrado foi Go 1.27.1 em darwin/arm64, com Gremlins 0.6.0, tag `faults` e testes por pacote.
+
+As evidências desta execução estão no checkout local, sob `.local/`, ignorado pelo Git:
+
+| Campanha | Resultado | Evidência local |
+| --- | --- | --- |
+| Confirmação após os ajustes finais | 23 pacotes reutilizados e 2 reexecutados; completa e aprovada | `.local/mutation-campaign.Zl8io3/summary.json` |
+| Confirmação sem alterações de entradas | 25 pacotes reutilizados e nenhum reexecutado; completa e aprovada | `.local/mutation-campaign.UqSfWC/summary.json` |
+| Resultados consolidados | 2.067 `KILLED` | `.local/mutation-campaign.UqSfWC/results.json` |
+| Classificação das eliminações | 1.725 por testes; 342 pelo compilador | `.local/mutation-campaign.UqSfWC/classifications.json` |
+
+Cada resumo aponta para as evidências originais dos pacotes. Logs, patches, hashes de entradas e identificação da toolchain permitem auditar a execução e a reutilização. Esses artefatos locais não acompanham um clone novo; o registro acima não substitui os arquivos brutos. Preserve os diretórios de origem junto do cache.
+
+Os resultados valem para as entradas registradas naquela campanha. Alterações posteriores, inclusive documentais quando incluídas na chave do cache, exigem nova validação incremental antes de declarar aprovação para o novo estado. Esta atualização documental não executou novamente mutação, cobertura de statements, integração ou o gate geral. O resultado de mutação não equivale a 100% de statements de todo o repositório nem a uma nova aprovação do gate geral.
+
+## Histórico de execuções anteriores
 
 **Seleção FIFO — 30/09:** suíte geral com race/faults, PostgreSQL completo com race, vet e cobertura de 1.160/1.160 statements passaram. [Evidências e limites](docs/verification/implicit-win-2026-09-30/README.md).
 
@@ -42,12 +63,14 @@ make integration
 
 O README documenta configuração e dependências. `make integration` usa os dois ambientes descartáveis, com PostgreSQL, Keycloak e MiniStack, tags integration/faults e race. Não depende da aplicação manual.
 
-O modo --integration do Gremlins executa a suíte inteira por mutante; não ativa a tag integration do projeto. O wrapper reprova qualquer estado diferente de KILLED. A integral bruta mais recente permanece reprovada pelos dois timeouts; o aceite consolidado separado está em acceptance.json, verificável por verify-confirmations.py.
+Para executar apenas a campanha de mutação atual, use `bash scripts/test-mutations.sh`. Ela é incremental por padrão: compara o inventário completo de candidatos, reutiliza evidências válidas e reexecuta pacotes cujas entradas mudaram ou cujos resultados falharam. `--package internal/app/usecase` limita a campanha e registra um resultado parcial; `--refresh` força a reexecução. O executor não chama `scripts/check.sh`. [Detalhes do cache e da auditoria](docs/guias/qualidade.md#campanha-de-mutação-incremental).
+
+Na campanha histórica de 29/09, o modo `--integration` do Gremlins executava a suíte inteira por mutante; essa opção não habilitava a tag `integration` do projeto. A integral daquela campanha teve dois timeouts, com aceite consolidado separado em `acceptance.json`, verificável por `verify-confirmations.py` no diretório histórico. Esse procedimento não descreve o executor incremental atual, que exige somente `KILLED` nos resultados de todos os pacotes para aprovação global.
 
 ## Limites e documentação
 
-Não há declaração de conformidade integral com DESAFIO.md. [Desafio versus código](docs/DESAFIO_VS_CODIGO.md) descreve as restrições adicionais presentes. Tracing, dashboards e testes de carga estão ausentes. Não houve homologação AWS nem prova formal de todas as combinações de falhas.
+Não há declaração de conformidade integral com DESAFIO.md. [Desafio versus código](docs/DESAFIO_VS_CODIGO.md) descreve as restrições adicionais presentes. OpenTelemetry está implementado; dashboards Grafana e testes de carga não foram entregues. A validação do tracing está descrita em [observabilidade](docs/OBSERVABILITY.md#opentelemetry). Não houve homologação AWS nem prova formal de todas as combinações de falhas.
 
-Os sete pacotes medidos são o escopo do gate do projeto, não todos os pacotes, branches ou requisitos do desafio. Race/vet/fuzz posteriores aos reforços estão no relatório de mutação; não substituem integração real.
+Os sete pacotes medidos nos relatórios históricos de cobertura de statements não representam todos os pacotes, branches ou requisitos do desafio. O script atual de cobertura mede `internal/domain/...`, `internal/app/usecase` e `internal/infra/auth`. Resultados de race/vet/fuzz devem ser associados à execução e aos hashes registrados em cada relatório; a campanha incremental de mutação acima não comprova nova execução dessas verificações nem substitui integração real.
 
 [Revisão documental de 30/09](docs/verification/documentation-2026-09-30/README.md): correções e checagens desta edição, sem alterações nas regras financeiras, migrations ou DESAFIO.md. Os registros anteriores estão sinalizados como históricos; não são prova de autorização do usuário. Consulte o [índice atual](docs/README.md).

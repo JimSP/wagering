@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -53,9 +54,7 @@ func inspect(dir string, allowNew bool) (history, error) {
 			return h, fmt.Errorf("invalid locked migration: %s", name)
 		}
 		version, _ := strconv.Atoi(match[1])
-		if version > oldMax {
-			oldMax = version
-		}
+		oldMax = max(oldMax, version)
 		content, err := os.ReadFile(filepath.Join(dir, name))
 		if err != nil || digest(content) != hash {
 			return h, fmt.Errorf("immutable migration changed or removed: %s", name)
@@ -80,9 +79,7 @@ func inspect(dir string, allowNew bool) (history, error) {
 			return h, fmt.Errorf("invalid/empty migration: %s", name)
 		}
 		version, _ := strconv.Atoi(match[1])
-		if version > h.latest {
-			h.latest = version
-		}
+		h.latest = max(h.latest, version)
 		if _, ok := h.hashes[name]; !ok {
 			if !allowNew {
 				return h, fmt.Errorf("unregistered migration: %s; use schema-seal after review", name)
@@ -96,7 +93,7 @@ func inspect(dir string, allowNew bool) (history, error) {
 	}
 	for version, members := range pairs {
 		sort.Strings(members)
-		if len(members) != 2 || strings.TrimSuffix(members[0], ".down") != strings.TrimSuffix(members[1], ".up") || !strings.HasSuffix(members[0], ".down") || !strings.HasSuffix(members[1], ".up") {
+		if len(members) != 2 || strings.TrimSuffix(members[0], ".down") != strings.TrimSuffix(members[1], ".up") {
 			return h, fmt.Errorf("version %d requires one matching up/down pair", version)
 		}
 	}
@@ -156,36 +153,9 @@ func run(root string, args []string, out io.Writer, execute executor) error {
 	case "check":
 		_, err = fmt.Fprintf(out, "%d versions; paired up/down files; SHA-256 verified\n", h.latest)
 	case "new":
-		if h.latest >= 999999 {
-			return fmt.Errorf("migration version limit reached")
-		}
-		created := []string{}
-		for _, direction := range []string{"up", "down"} {
-			name := fmt.Sprintf("%06d_%s.%s.sql", h.latest+1, args[1], direction)
-			path := filepath.Join(dir, name)
-			f, openErr := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o644)
-			if openErr != nil {
-				for _, p := range created {
-					_ = os.Remove(p)
-				}
-				return openErr
-			}
-			created = append(created, path)
-			_, writeErr := io.WriteString(f, "BEGIN;\n-- Implement and test before schema-seal.\nCOMMIT;\n")
-			closeErr := f.Close()
-			if writeErr != nil || closeErr != nil {
-				for _, p := range created {
-					_ = os.Remove(p)
-				}
-				if writeErr != nil {
-					return writeErr
-				}
-				return closeErr
-			}
-			if _, err = fmt.Fprintln(out, filepath.Join("migrations", name)); err != nil {
-				return err
-			}
-		}
+		return createMigrations(dir, h.latest, args[1], out, func(path string) (io.WriteCloser, error) {
+			return os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o644)
+		})
 	case "seal":
 		hashes := map[string]string{}
 		for name, content := range h.files {
@@ -219,6 +189,38 @@ func run(root string, args []string, out io.Writer, execute executor) error {
 		err = execute(root, dockerArgs...)
 	}
 	return err
+}
+
+// createMigrations publishes a paired migration and cleans up failed writes.
+func createMigrations(dir string, latest int, name string, out io.Writer, open func(string) (io.WriteCloser, error)) error {
+	if latest >= 999999 {
+		return fmt.Errorf("migration version limit reached")
+	}
+	created := []string{}
+	for _, direction := range []string{"up", "down"} {
+		filename := fmt.Sprintf("%06d_%s.%s.sql", latest+1, name, direction)
+		path := filepath.Join(dir, filename)
+		f, openErr := open(path)
+		if openErr != nil {
+			for _, p := range created {
+				_ = os.Remove(p)
+			}
+			return openErr
+		}
+		created = append(created, path)
+		_, writeErr := io.WriteString(f, "BEGIN;\n-- Implement and test before schema-seal.\nCOMMIT;\n")
+		closeErr := f.Close()
+		if err := errors.Join(writeErr, closeErr); err != nil {
+			for _, p := range created {
+				_ = os.Remove(p)
+			}
+			return err
+		}
+		if _, err := fmt.Fprintln(out, filepath.Join("migrations", filename)); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func replace(path string, data []byte) error {

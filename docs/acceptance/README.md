@@ -43,7 +43,7 @@ Uma jornada completa pode cobrir vários itens como consequência. As variantes 
 
 ## Executar
 
-Pré-requisitos: Go 1.23.12, Python 3 para o relatório, compilador C compatível para `-race` e dependências Go disponíveis. PostgreSQL, broker e IdP não são necessários para estes testes unitários.
+Pré-requisitos: Go estável igual ou superior à versão declarada em [go.mod](../../go.mod), compilador C compatível para `-race` e dependências Go disponíveis. O relatório é gerado pelo comando Go `cmd/reports`. PostgreSQL, broker e IdP não são necessários para estes testes unitários.
 
 ```sh
 ./scripts/test-acceptance.sh

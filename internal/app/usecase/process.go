@@ -103,7 +103,7 @@ func (u *SubmitTransaction) process(ctx context.Context, tx port.Tx, t *wager.Tr
 	if err != nil {
 		return err
 	}
-	if decision.Failure == wager.FailReversalInsufficientFunds && t.Kind() == wager.KindRollback && facts.Reference != nil && facts.Reference.Kind != wager.KindBet && facts.Guarantee.Balance.Minor() < t.Amount().Minor() {
+	if decision.Failure == wager.FailReversalInsufficientFunds && t.Kind() == wager.KindRollback && facts.Reference.Kind != wager.KindBet && facts.Guarantee.Balance.Minor() < t.Amount().Minor() {
 		if _, ok := tx.(port.RollbackLiquidity); ok {
 			return u.recoverRollback(ctx, tx, t, facts)
 		}

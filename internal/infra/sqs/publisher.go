@@ -12,6 +12,7 @@ import (
 	"github.com/alexandre/wagering/internal/app/apperr"
 	"github.com/alexandre/wagering/internal/domain/event"
 	"github.com/alexandre/wagering/internal/infra/config"
+	"github.com/alexandre/wagering/internal/platform/telemetry"
 )
 
 // Publisher sends outbox events to wager-events.fifo.
@@ -26,7 +27,11 @@ func NewPublisher(c *awssqs.Client, cfg config.Config) *Publisher {
 	return &Publisher{client: c, queueURL: cfg.EventsQueueURL, settlementQueueURL: cfg.SettlementQueueURL}
 }
 
-func (p *Publisher) Publish(ctx context.Context, ev event.Outgoing) error {
+func (p *Publisher) Publish(ctx context.Context, ev event.Outgoing) (resultErr error) {
+	ctx, end := telemetry.Producer(ctx, "sqs.publish")
+	defer func() { end(resultErr) }()
+	telemetry.Attribute(ctx, "messaging.system", "aws_sqs")
+	telemetry.Attribute(ctx, "messaging.message.id", ev.EventID())
 	queueURL, body := p.queueURL, string(ev.Payload())
 	if ev.Type() == "SettlementRequested" {
 		if p.settlementQueueURL == "" {
@@ -50,14 +55,18 @@ func (p *Publisher) Publish(ctx context.Context, ev event.Outgoing) error {
 		queueURL = p.settlementQueueURL
 		body = string(payload)
 	}
+	attributes := map[string]types.MessageAttributeValue{
+		"eventType": {DataType: aws.String("String"), StringValue: aws.String(ev.Type())},
+	}
+	for key, value := range telemetry.Capture(ctx) {
+		attributes[key] = types.MessageAttributeValue{DataType: aws.String("String"), StringValue: aws.String(value)}
+	}
 	_, err := p.client.SendMessage(ctx, &awssqs.SendMessageInput{
 		QueueUrl:               &queueURL,
 		MessageBody:            aws.String(body),
 		MessageGroupId:         aws.String(ev.AggregateID()),
 		MessageDeduplicationId: aws.String(ev.EventID()),
-		MessageAttributes: map[string]types.MessageAttributeValue{
-			"eventType": {DataType: aws.String("String"), StringValue: aws.String(ev.Type())},
-		},
+		MessageAttributes:      attributes,
 	})
 	return apperr.Transient(err)
 }

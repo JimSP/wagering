@@ -2,7 +2,8 @@ package postgres
 
 import (
 	"context"
-	"sort"
+	"slices"
+	"strings"
 	"time"
 
 	"github.com/alexandre/wagering/internal/app/port"
@@ -62,12 +63,11 @@ func (t txAdapter) LoadRollbackLiquidity(ctx context.Context, walletID, excludeB
 			plan.AwaitResult = true
 		}
 	}
-	sort.Slice(plan.Bets, func(i, j int) bool {
-		a, b := plan.Bets[i].Transaction, plan.Bets[j].Transaction
-		if a.CreatedAt.Equal(b.CreatedAt) {
-			return a.ID < b.ID
+	slices.SortFunc(plan.Bets, func(a, b port.RecoverableBet) int {
+		if order := a.Transaction.CreatedAt.Compare(b.Transaction.CreatedAt); order != 0 {
+			return order
 		}
-		return a.CreatedAt.Before(b.CreatedAt)
+		return strings.Compare(a.Transaction.ID, b.Transaction.ID)
 	})
 	return plan, nil
 }

@@ -57,6 +57,45 @@ para checksums e hashes de payload históricos; não excluem as pastas de evidê
 Os scanners de vulnerabilidades consultam suas bases externas, portanto uma nova
 vulnerabilidade publicada pode reprovar uma versão anteriormente aprovada.
 
+## Campanha de mutação incremental
+
+Execute somente a mutação com `bash scripts/test-mutations.sh`. Esse comando
+não chama `scripts/check.sh`. A primeira execução preenche o cache; as seguintes
+reutilizam os resultados de pacotes cujas fontes, testes, dependências locais,
+ferramentas e entradas auxiliares não mudaram. Mudanças nos testes ou no executor
+invalidam os resultados correspondentes. O cache fica em `.local/mutation-cache`. Entradas que falharam são executadas
+novamente; testes de dependências que não são executados pelo shard não invalidam
+o cache desse shard.
+
+- `bash scripts/test-mutations.sh --package internal/app/usecase`: executa ou
+  reutiliza somente esse pacote; o resumo identifica a campanha como parcial.
+- `bash scripts/test-mutations.sh --refresh`: força a renovação da campanha.
+- `GREMLINS_OUTPUT_DIR=/caminho/novo bash scripts/test-mutations.sh`: escolhe uma
+  pasta de evidências. Use uma pasta nova para cada execução.
+
+Cada campanha compara os candidatos dos pacotes com um inventário completo do
+Gremlins. O `summary.json` só declara aprovação global quando todos estão presentes
+e todos os registros brutos são `KILLED`, com cobertura e eficácia de mutação de
+100%. O `results.json` consolidado conserva os estados e caminhos dos arquivos.
+Os shards mantêm o relatório original, os patches e os logs de cada teste; entradas
+reutilizadas apontam para a evidência original, que também é validada.
+
+O executor usa um snapshot dos arquivos publicáveis, sem copiar caches ou checkouts
+ignorados. Fontes, testes e embeds que o Go utiliza precisam constar nesse snapshot;
+entradas ausentes, links simbólicos, workspaces Go externos e substituições locais
+fora do módulo interrompem a campanha. Alterar entradas durante a campanha invalida
+a publicação dos resultados no cache. Execuções simultâneas no mesmo cache são
+recusadas; após uma interrupção abrupta, remova o diretório `.lock` somente depois
+de confirmar que nenhum processo de campanha continua ativo.
+
+O Gremlins 0.6.0 calcula incorretamente o alvo dos pacotes `main`. O auditor corrige
+esse alvo a partir do arquivo efetivamente mutado e registra os argumentos originais
+e efetivos. Falhas de preparação do teste são rejeitadas. A auditoria distingue falhas reais
+de teste das mutações rejeitadas pelo compilador, exigindo neste último caso um
+diagnóstico no arquivo mutado. Essa classificação acompanha os estados brutos do
+Gremlins; rejeição de compilação não é apresentada como detecção por uma asserção.
+A cobertura de mutação não substitui a medição de cobertura de statements.
+
 ## Hooks e CI
 
 Para ativar hooks, execute `bash scripts/quality-hooks.sh install`. Esse comando

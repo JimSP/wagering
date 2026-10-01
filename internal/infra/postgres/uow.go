@@ -13,6 +13,7 @@ import (
 
 	"github.com/alexandre/wagering/internal/app/apperr"
 	"github.com/alexandre/wagering/internal/app/port"
+	"github.com/alexandre/wagering/internal/platform/telemetry"
 )
 
 // dbtx is satisfied by pgx.Tx and *pgxpool.Pool.
@@ -38,7 +39,9 @@ func (u *UnitOfWork) DoSnapshot(ctx context.Context, fn func(context.Context, po
 	return u.run(ctx, pgx.TxOptions{IsoLevel: pgx.RepeatableRead, AccessMode: pgx.ReadOnly}, fn)
 }
 
-func (u *UnitOfWork) run(ctx context.Context, opts pgx.TxOptions, fn func(context.Context, port.Tx) error) error {
+func (u *UnitOfWork) run(ctx context.Context, opts pgx.TxOptions, fn func(context.Context, port.Tx) error) (resultErr error) {
+	ctx, end := telemetry.Start(ctx, "postgres.transaction")
+	defer func() { end(resultErr) }()
 	t, err := u.pool.BeginTx(ctx, opts)
 	if err != nil {
 		return apperr.Transient(err)
@@ -48,6 +51,11 @@ func (u *UnitOfWork) run(ctx context.Context, opts pgx.TxOptions, fn func(contex
 		defer cancel()
 		_ = t.Rollback(c)
 	}() // no-op after a successful commit
+	if opts.AccessMode != pgx.ReadOnly {
+		if err := (txAdapter{t}).SetTraceContext(ctx); err != nil {
+			return classify(err)
+		}
+	}
 	if err := fn(ctx, txAdapter{t}); err != nil {
 		return classify(err)
 	}

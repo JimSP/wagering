@@ -1,0 +1,36 @@
+# Demonstração da implementação
+
+Roteiro do projeto para comparação com os scripts independentes do avaliador. PASS significa que o observado corresponde à expectativa documentada do projeto; não significa conformidade integral com DESAFIO.md. FAIL/BLOCKED indica demonstração incompleta ou comportamento inesperado.
+
+Entradas HTTP/SQS, respostas HTTP e eventos desta execução estão em `demonstration.json`, agrupados por cenário, sem tokens ou secrets.
+
+| Cenário | Execução | Esperado pelo projeto | Comparação com o desafio | Observação |
+| --- | --- | --- | --- | --- |
+| readiness-and-OIDC | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| gateway-distributes-to-independent-replicas | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| events-outbox-and-metrics | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| opening-zero-positive-duplicate-ledger-pagination | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| authentication-provider-isolation | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| expired-token | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| money-invalid-input-and-external-opening | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| replay-original-balance-and-conflicts | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| LOSS-does-not-change-balance-version-ledger | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| WIN-after-BET-10.00 | PASS | WIN antes do fechamento: 422 REJECTED/BET_NOT_CLOSED; saldo 75.00. | §7 descreve crédito positivo; não estabelece espera pela janela. Regra adicional do projeto. |  |
+| WIN-after-BET-50.00 | PASS | WIN antes do fechamento: 422 REJECTED/BET_NOT_CLOSED; saldo 75.00. | §7 descreve crédito positivo; não estabelece espera pela janela. Regra adicional do projeto. |  |
+| WIN-optional-reference | PASS | Sem BET candidata: 422 REJECTED/REFERENCE_NOT_FOUND; saldo 100.00. | §7 torna a referência opcional. O projeto exige vínculo interno mesmo sem o campo externo. |  |
+| REFUND-and-ROLLBACK-of-REFUND | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| ROLLBACK-of-BET | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| ROLLBACK-recovers-open-BET | PASS | Compensa outra BET aberta e reverte REFUND: 200 PROCESSED; saldo 0.00 e seis lançamentos. | §7 exige rejeição da reversão sem saldo disponível. O projeto tenta recuperar recursos de outras BETs. |  |
+| REFUND-before-reference | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| ROLLBACK-before-reference | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| 50-concurrent-replays-one-debit | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| two-concurrent-BETs-80-over-100 | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| HTTP-SQS-dedup-and-SQS-first | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| broker-denied-identity | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| invalid-SQS-message-reaches-DLQ | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| timed-contracts-setup | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| timed-contracts-reauthenticate | PASS | Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges. | Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral. |  |
+| REFUND-after-window | PASS | Após BET_WINDOW: 422 REJECTED/BET_CLOSED; saldo 75.00. | §7 não estabelece prazo para REFUND. O projeto limita a devolução à janela aberta. |  |
+| WIN-over-stake-after-window | PASS | WIN 50.00 com compromisso de 25.00: 422 REJECTED/INSUFFICIENT_FUNDS; saldo 75.00. | §7 não limita WIN ao aporte. O projeto exige financiamento pelo compromisso. |  |
+| WIN-and-ROLLBACK-after-window | PASS | Após a janela, WIN 10.00 leva saldo a 85.00; ROLLBACK leva a 75.00; quatro lançamentos. | Demonstra crédito e inversão integral, incluindo a pré-condição de prazo adicional do projeto. |  |
+| WIN-implicit-reference-after-window | PASS | WIN sem referência explícita resolve BET elegível; saldo 85.00. | Demonstra o campo opcional do §7 e a seleção interna de referência do projeto. |  |

@@ -18,6 +18,7 @@ import (
 	"github.com/alexandre/wagering/internal/platform/logging"
 	"github.com/alexandre/wagering/internal/platform/metrics"
 	"github.com/alexandre/wagering/internal/platform/sys"
+	"github.com/alexandre/wagering/internal/platform/telemetry"
 	"github.com/alexandre/wagering/internal/platform/worker"
 	"github.com/alexandre/wagering/internal/transport/httpapi"
 )
@@ -30,6 +31,7 @@ func Options() []fx.Option {
 		fx.Provide(config.Load, logging.New, worker.NewGroup),
 		fx.Provide(func(c config.Config) usecase.BettingWindow { return usecase.BettingWindow(c.BetWindow) }),
 		fx.WithLogger(func(log *slog.Logger) fxevent.Logger { return &fxevent.SlogLogger{Logger: log} }),
+		fx.Invoke(telemetry.Install),
 		sys.Module, metrics.Module, postgres.Module, auth.Module,
 		usecase.Module, sqs.Module, outbox.Module, reference.Module, httpapi.Module,
 		fx.Invoke((*worker.Group).Install),

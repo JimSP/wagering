@@ -24,7 +24,7 @@ func (s liquidityTxStub) LoadRollbackLiquidity(c context.Context, w, b string, n
 }
 
 func TestLiquidityRecoveryCommitsOnlyWithSuccessfulOriginalReversal(t *testing.T) {
-	for _, stage := range []string{"recover", "available", "waiting", "window elapsed", "insufficient", "lookup", "child insert", "root apply", "root rejected", "release"} {
+	for _, stage := range []string{"recover", "available", "expired then eligible", "accumulate existing balance", "waiting", "window elapsed", "insufficient", "lookup", "child insert", "root apply", "root rejected", "release"} {
 		t.Run(stage, func(t *testing.T) {
 			root := pathTransaction(t, wager.KindRollback)
 			before := root.Snapshot()
@@ -35,6 +35,10 @@ func TestLiquidityRecoveryCommitsOnlyWithSuccessfulOriginalReversal(t *testing.T
 			bet.ID = "other"
 			bet.Status = wager.StatusProcessed
 			available := int64(0)
+			if stage == "accumulate existing balance" {
+				available = 40
+				bet.Amount = pathMoney(t, 60)
+			}
 			var writes []string
 			var sequence []string
 			base := rollbackTxStub{}
@@ -98,6 +102,13 @@ func TestLiquidityRecoveryCommitsOnlyWithSuccessfulOriginalReversal(t *testing.T
 				}
 				p := port.RollbackLiquidityPlan{Bets: []port.RecoverableBet{{Transaction: bet, ClosesAt: pathTime.Add(time.Minute)}}}
 				switch stage {
+				case "expired then eligible":
+					expired := bet
+					expired.ID = "expired"
+					expired.ExternalID = "expired-external"
+					p.Bets = append([]port.RecoverableBet{{Transaction: expired, ClosesAt: pathTime}}, p.Bets...)
+				case "accumulate existing balance":
+					p.Balance = 40
 				case "available":
 					available = 100
 					p.Balance = 100
@@ -115,7 +126,7 @@ func TestLiquidityRecoveryCommitsOnlyWithSuccessfulOriginalReversal(t *testing.T
 			}}
 			err := pathSubmit(nil).process(context.Background(), unit, root)
 			switch stage {
-			case "recover", "available":
+			case "recover", "available", "expired then eligible", "accumulate existing balance":
 				if err != nil || root.Status() != wager.StatusProcessed || available != 0 {
 					t.Fatal(root.Snapshot(), available, err)
 				}

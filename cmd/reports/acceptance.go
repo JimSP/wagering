@@ -95,11 +95,11 @@ func contains(xs []string, s string) bool {
 
 func validateCriteria(m criteria) error {
 	expected := map[string]bool{}
-	for i := 1; i <= 113; i++ {
-		expected[fmt.Sprintf("E%02d", i)] = true
+	for i := range 113 {
+		expected[fmt.Sprintf("E%02d", i+1)] = true
 	}
-	for i := 1; i <= 15; i++ {
-		expected[fmt.Sprintf("I%02d", i)] = true
+	for i := range 15 {
+		expected[fmt.Sprintf("I%02d", i+1)] = true
 	}
 	seen := map[string]bool{}
 	for _, item := range m.Items {

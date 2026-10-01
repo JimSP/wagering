@@ -3,12 +3,20 @@ package config
 import (
 	"errors"
 	"fmt"
+	"math"
+	"net/url"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
 
 type Config struct {
+	OTelDisabled       bool
+	OTelServiceName    string
+	OTelTracesEndpoint string
+	OTelSampleRatio    float64
+	MetricsAddr        string
 	Roles              []string
 	HTTPAddr           string
 	ShutdownTimeout    time.Duration
@@ -52,7 +60,25 @@ func Load() (Config, error) {
 	if err != nil || window < time.Second || window%time.Second != 0 {
 		return Config{}, errors.New("BET_WINDOW must be a positive whole-second duration (for example 30s or 5m)")
 	}
+	disabled, err := strconv.ParseBool(env("OTEL_SDK_DISABLED", "true"))
+	if err != nil {
+		return Config{}, fmt.Errorf("OTEL_SDK_DISABLED: %w", err)
+	}
+	ratio, err := strconv.ParseFloat(env("OTEL_TRACES_SAMPLER_ARG", "1"), 64)
+	if err != nil || math.IsNaN(ratio) || math.IsInf(ratio, 0) || ratio < 0 || ratio > 1 {
+		return Config{}, errors.New("OTEL_TRACES_SAMPLER_ARG must be between 0 and 1")
+	}
+	endpoint := env("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", "http://localhost:4318/v1/traces")
+	parsed, err := url.Parse(endpoint)
+	if err != nil || parsed.Host == "" || (parsed.Scheme != "http" && parsed.Scheme != "https") || parsed.User != nil || parsed.RawQuery != "" || parsed.Fragment != "" {
+		return Config{}, errors.New("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT must be an HTTP(S) URL without credentials, query or fragment")
+	}
 	c := Config{
+		OTelDisabled:       disabled,
+		OTelServiceName:    env("OTEL_SERVICE_NAME", "wagering"),
+		OTelTracesEndpoint: endpoint,
+		OTelSampleRatio:    ratio,
+		MetricsAddr:        os.Getenv("METRICS_ADDR"),
 		BetWindow:          window,
 		Roles:              strings.Split(env("ROLES", "api"), ","),
 		HTTPAddr:           env("HTTP_ADDR", ":8080"),

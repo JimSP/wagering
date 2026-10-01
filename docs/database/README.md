@@ -1,17 +1,19 @@
+**Inicialização limpa em 01/10/2026:** migrations aplicadas até a versão 14, sem dirty, em banco novo. [Comandos e evidências](../verification/clean-start-2026-10-01/README.md).
+
 **Evidência de execução:** [integração completa registrada em 29/09](../verification/integration-complete-2026-09-29/README.md). O código presente é descrito abaixo; diferenças frente ao requisito estão em [Desafio versus código](../DESAFIO_VS_CODIGO.md).
 
 # Modelo de dados e gestão de alterações
 
 **Moeda corrigida na definição existente do modelo:** `settlement_items(payment_transaction_id,currency)` referencia `wager_transactions(id,currency)` por FK composta. O pagamento de outra moeda não pode integrar o plano. Solicitações inválidas continuam podendo ser registradas como rejeitadas para auditoria. [Correção, testes e reconstrução local](../verification/currency-schema-rebuild-2026-09-29/README.md). A implementação posterior integrou confirmação/liquidação e corrigiu o algoritmo de estorno; consulte o [executor unificado e o estorno implementados](../verification/ledger-unified-2026-09-29/README.md).
 
-Schema e comandos contábeis estão implementados nas migrations **000003–000013**. O PostgreSQL é a fonte dos saldos, vínculos e contrapartidas. As suítes completas PostgreSQL e distribuída do estado anterior estão registradas no [relatório histórico](../verification/integration-complete-2026-09-29/README.md).
+O modelo contábil está implementado nas migrations **000003–000013**; a **000014** acrescenta metadados de tracing separados dos fatos financeiros. O PostgreSQL é a fonte dos saldos, vínculos e contrapartidas. As suítes completas PostgreSQL e distribuída do estado anterior estão registradas no [relatório histórico](../verification/integration-complete-2026-09-29/README.md).
 
 ## Fonte de verdade
 
 - `migrations/*.up.sql` e `*.down.sql`: definição executável e ordenada do schema. O checksum de uma versão registrada é verificado antes da execução; não alterar silenciosamente o histórico para atualizar uma base.
 - `migrations/checksums.json` e `checksums.sha256`: SHA-256 de todos os arquivos registrados. Mudança ou remoção de arquivo antigo interrompe a gestão de migrations.
 - `schema_migrations`: versão aplicada e indicador `dirty`, mantidos pelo **golang-migrate v4.17.1**, já utilizado pelo projeto.
-- [schema.sql](schema.sql): snapshot completo, gerado por `pg_dump` de PostgreSQL 16.4 descartável após aplicar o histórico. Serve para inspecionar e comparar o modelo; não deve ser editado nem aplicado como substituto das migrations.
+- [schema.sql](schema.sql): snapshot histórico até 000013, gerado por `pg_dump` de PostgreSQL 16.4 descartável. Ainda não inclui 000014, aplicada posteriormente no banco local em 01/10/2026, sem regenerar este snapshot. Serve para inspecionar e comparar o modelo; não deve ser editado nem aplicado como substituto das migrations.
 
 O Compose verifica o manifesto antes de executar o migrator, inclusive em `docker compose up`. Aplicar arquivos SQL diretamente com psql é reservado aos testes de integridade; não substitui o versionamento de ambientes.
 
@@ -52,6 +54,8 @@ São **13 tabelas de negócio**, duas views e a tabela de controle do migrator.
 | `journal_reversals` | Relação única entre diário original e sua compensação. |
 | `inbox_messages` | Entrega, hash e conclusão imutáveis, ligação ao resultado durável. |
 | `outbox_events` | Snapshot validado contra operação/partida/liquidação, unicidade do efeito e metadados de publicação. |
+| `transaction_trace_context` | Contexto W3C opcional vinculado à transação financeira. |
+| `outbox_trace_context` | Contexto W3C opcional vinculado ao evento da outbox. |
 | `wallet_balances` — view | Saldo disponível e versão da garantia, preservando o walletId lógico. |
 | `wallet_ledger_entries` — view | Extrato da garantia; a tabela física mantém a unicidade carteira/operação. |
 
@@ -109,3 +113,12 @@ A migration 000012 impede inserir resultado com created_at anterior ao prazo da 
 ## WIN posterior a LOSS
 
 A migration 000013 acrescenta um índice das LOSS processadas por contexto e um trigger que impede persistir WIN em PROCESSED se já existe LOSS processada para o mesmo provedor/jogador/carteira/moeda/rodada/jogo. A proteção inclui WINs de liquidação; uma violação aborta a transação inteira. O down remove apenas o trigger, sua função e o índice. Não altera dados históricos. [Regra e evidências](../verification/loss-win-fix-2026-09-30/README.md).
+
+
+## Metadados de tracing — 000014
+
+A migration 000014 cria `transaction_trace_context` e `outbox_trace_context`, ligadas por FK às identidades financeiras e de eventos. Armazenam apenas `traceparent`/`tracestate`. Triggers de INSERT capturam o contexto definido pela UnitOfWork em configurações locais à transação, incluindo inserts executados por funções SQL. Os payloads imutáveis, hashes de idempotência e lançamentos permanecem inalterados. Escritas sem contexto válido não criam metadados; não há backfill de operações antigas.
+
+O runtime tem SELECT/INSERT e não pode UPDATE/DELETE/TRUNCATE nesses metadados. O down remove triggers, função e tabelas auxiliares; perde somente a correlação persistida de traces. São duas tabelas auxiliares adicionais às 13 tabelas de negócio. Migrations anteriores e seus hashes foram preservados.
+
+O par up/down está registrado nos manifestos. Em 01/10/2026, o up foi aplicado no banco local por autorização expressa: versão 14 confirmada, sem dirty. Não foram executados down, testes ou gates. O snapshot histórico permanece sem regeneração; não deve ser confundido com o schema completo após 000014.

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/alexandre/wagering/internal/platform/failpoint"
+	"github.com/alexandre/wagering/internal/platform/telemetry"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awssqs "github.com/aws/aws-sdk-go-v2/service/sqs"
@@ -48,6 +49,7 @@ func (c *Consumer) Run(ctx context.Context) error {
 			QueueUrl:                    &c.queueURL,
 			MaxNumberOfMessages:         1,
 			WaitTimeSeconds:             c.waitSeconds,
+			MessageAttributeNames:       []string{"traceparent", "tracestate"},
 			MessageSystemAttributeNames: []types.MessageSystemAttributeName{types.MessageSystemAttributeNameApproximateReceiveCount},
 		})
 		receiveCancel()
@@ -56,7 +58,7 @@ func (c *Consumer) Run(ctx context.Context) error {
 				// Cancellation is a successful worker shutdown, not a receive failure.
 				return nil //nolint:nilerr // Receive may fail while the owner requests shutdown.
 			}
-			c.log.Error("sqs receive failed", "err", err)
+			c.log.ErrorContext(ctx, "sqs receive failed", "err", err)
 			c.metrics.Retry("sqs-receive")
 			retry := time.NewTimer(2 * time.Second)
 			select {
@@ -74,6 +76,18 @@ func (c *Consumer) Run(ctx context.Context) error {
 }
 
 func (c *Consumer) process(ctx context.Context, m types.Message) {
+	carrier := map[string]string{}
+	for _, key := range []string{"traceparent", "tracestate"} {
+		if value, ok := m.MessageAttributes[key]; ok && aws.ToString(value.DataType) == "String" {
+			carrier[key] = aws.ToString(value.StringValue)
+		}
+	}
+	ctx = telemetry.Extract(ctx, carrier)
+	ctx, end := telemetry.Consumer(ctx, "sqs.process")
+	var processErr error
+	defer func() { end(processErr) }()
+	telemetry.Attribute(ctx, "messaging.system", "aws_sqs")
+	telemetry.Attribute(ctx, "messaging.message.id", aws.ToString(m.MessageId))
 	// Only identifiers are extracted; never log the raw envelope or financial values.
 	var ids struct {
 		MessageID string `json:"messageId"`
@@ -83,6 +97,7 @@ func (c *Consumer) process(ctx context.Context, m types.Message) {
 		} `json:"data"`
 	}
 	_ = json.Unmarshal([]byte(aws.ToString(m.Body)), &ids)
+	telemetry.Attribute(ctx, "correlation.id", ids.MessageID)
 	scoped := *c
 	scoped.log = c.log.With("messageId", ids.MessageID, "correlationId", ids.MessageID, "brokerMessageId", aws.ToString(m.MessageId), "walletId", ids.Data.WalletID, "providerId", ids.Data.ProviderID)
 	c = &scoped
@@ -95,6 +110,7 @@ func (c *Consumer) process(ctx context.Context, m types.Message) {
 		return
 	}
 	err := c.handler.Handle(hctx, []byte(aws.ToString(m.Body)))
+	processErr = err
 	if err == nil {
 		if failpoint.Enabled {
 			failpoint.Hit("after_commit_before_ack")
@@ -106,7 +122,7 @@ func (c *Consumer) process(ctx context.Context, m types.Message) {
 		if n >= 5 {
 			c.metrics.DLQ()
 		}
-		c.log.Error("invalid message", "failureCode", "INVALID_MESSAGE")
+		c.log.ErrorContext(hctx, "invalid message", "failureCode", "INVALID_MESSAGE")
 		c.setVisibility(hctx, m, 2)
 	} else {
 		if ctx.Err() != nil {
@@ -114,7 +130,7 @@ func (c *Consumer) process(ctx context.Context, m types.Message) {
 			return
 		}
 		c.metrics.Retry("sqs-consumer")
-		c.log.Warn("transient failure, backing off", "err", err)
+		c.log.WarnContext(hctx, "transient failure, backing off", "err", err)
 		n, _ := strconv.Atoi(m.Attributes[string(types.MessageSystemAttributeNameApproximateReceiveCount)])
 		one := 2
 		c.setVisibility(hctx, m, int32(min(one<<min(n, 9), 900)))
@@ -122,20 +138,28 @@ func (c *Consumer) process(ctx context.Context, m types.Message) {
 }
 
 func (c *Consumer) ack(ctx context.Context, m types.Message) {
+	ctx, end := telemetry.Start(ctx, "sqs.ack")
+	var resultErr error
+	defer func() { end(resultErr) }()
 	ctx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 2*time.Second)
 	defer cancel()
 	if _, err := c.client.DeleteMessage(ctx, &awssqs.DeleteMessageInput{QueueUrl: &c.queueURL, ReceiptHandle: m.ReceiptHandle}); err != nil {
-		c.log.Error("sqs delete failed (message will be redelivered; inbox dedupes)", "err", err)
+		resultErr = err
+		c.log.ErrorContext(ctx, "sqs delete failed (message will be redelivered; inbox dedupes)", "err", err)
 	}
 }
 
 func (c *Consumer) setVisibility(ctx context.Context, m types.Message, seconds int32) {
+	ctx, end := telemetry.Start(ctx, "sqs.visibility")
+	var resultErr error
+	defer func() { end(resultErr) }()
 	ctx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 2*time.Second)
 	defer cancel()
 	_, err := c.client.ChangeMessageVisibility(ctx, &awssqs.ChangeMessageVisibilityInput{
 		QueueUrl: &c.queueURL, ReceiptHandle: m.ReceiptHandle, VisibilityTimeout: seconds,
 	})
 	if err != nil {
-		c.log.Error("sqs change visibility failed", "err", err)
+		resultErr = err
+		c.log.ErrorContext(ctx, "sqs change visibility failed", "err", err)
 	}
 }

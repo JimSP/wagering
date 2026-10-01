@@ -77,6 +77,41 @@ services:
     environment:
       MIGRATION_DATABASE_URL: postgres://wagering:${POSTGRES_PASSWORD:?Missing database password}@postgres:5432/wagering?sslmode=disable
     command: [up]
+  jaeger:
+    image: jaegertracing/jaeger:2.21.0
+    profiles: [observability]
+    command: ["--config", "/etc/jaeger/config.yaml"]
+    volumes:
+    - ./deploy/observability/jaeger.yaml:/etc/jaeger/config.yaml:ro
+    ports:
+    - 127.0.0.1:16686:16686
+    - 127.0.0.1:4318:4318
+  prometheus:
+    image: prom/prometheus:v3.13.3
+    profiles: [observability]
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.retention.time=7d
+    volumes:
+    - ./deploy/observability/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+    - prometheusdata:/prometheus
+    ports:
+    - 127.0.0.1:9090:9090
+  gateway:
+    build:
+      context: .
+      target: gateway
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+    - 127.0.0.1:8080:8080
+    healthcheck:
+      test: ["CMD", "/healthcheck"]
+      interval: 3s
+      timeout: 6s
+      retries: 20
+      start_period: 10s
   app:
     stop_grace_period: 35s
     build: .
@@ -89,6 +124,12 @@ services:
         condition: service_healthy
     env_file: .env
     environment:
+      HTTP_ADDR: :8080
+      OTEL_SDK_DISABLED: ${OTEL_SDK_DISABLED:-true}
+      OTEL_SERVICE_NAME: ${OTEL_SERVICE_NAME:-wagering}
+      OTEL_TRACES_SAMPLER_ARG: ${OTEL_TRACES_SAMPLER_ARG:-1}
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://jaeger:4318/v1/traces
+      METRICS_ADDR: :9090
       DATABASE_URL: postgres://wagering_app:${POSTGRES_APP_PASSWORD:?Missing app password}@postgres:5432/wagering?sslmode=disable
       AWS_ENDPOINT_URL: http://localstack:4566
       AWS_ACCESS_KEY_ID: ''
@@ -103,11 +144,17 @@ services:
       OIDC_JWKS_URL: http://keycloak:8080/realms/wagering/protocol/openid-connect/certs
     volumes:
     - awscredentials:/credentials:ro
-    ports:
-    - 127.0.0.1:8080:8080
+    expose: ["8080", "9090"]
+    healthcheck:
+      test: ["CMD", "/healthcheck"]
+      interval: 3s
+      timeout: 6s
+      retries: 20
+      start_period: 20s
     deploy:
       replicas: 1
 volumes:
+  prometheusdata: null
   pgdata: null
   awscredentials: null
   ministackdata: null

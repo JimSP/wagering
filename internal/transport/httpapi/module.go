@@ -15,6 +15,7 @@ import (
 	"github.com/alexandre/wagering/internal/infra/auth"
 	"github.com/alexandre/wagering/internal/infra/config"
 	"github.com/alexandre/wagering/internal/platform/metrics"
+	"github.com/alexandre/wagering/internal/platform/telemetry"
 	"github.com/alexandre/wagering/internal/platform/worker"
 )
 
@@ -80,7 +81,7 @@ func NewServer(lc fx.Lifecycle, group *worker.Group, cfg config.Config, log *slo
 	mux.Handle("GET /wagering/transactions/{transactionId}", either(h.getTransaction))
 	mux.Handle("GET /providers/{providerId}/wagering/transactions/{externalTransactionId}", either(h.getProviderTransaction))
 
-	srv := &http.Server{ErrorLog: slog.NewLogLogger(log.Handler(), slog.LevelError), Addr: cfg.HTTPAddr, Handler: withCorrelation(mux), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 15 * time.Second, IdleTimeout: 60 * time.Second}
+	srv := &http.Server{ErrorLog: slog.NewLogLogger(log.Handler(), slog.LevelError), Addr: cfg.HTTPAddr, Handler: withCorrelation(telemetry.HTTP(mux)), ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 15 * time.Second, IdleTimeout: 60 * time.Second}
 	var listener net.Listener
 	if cfg.HasRole("api") {
 		worker.Register(group, "http", log, func(context.Context) error {

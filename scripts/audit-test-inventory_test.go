@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"reflect"
 	"testing"
@@ -97,11 +98,27 @@ func TestInventoryErrors(t *testing.T) {
 }
 
 func TestInventoryMain(t *testing.T) {
+	if os.Getenv("INVENTORY_MAIN_SUCCESS_HELPER") == "1" {
+		main()
+		return
+	}
 	root := t.TempDir()
 	for _, name := range []string{"cmd", "internal", "test"} {
 		if err := os.Mkdir(filepath.Join(root, name), 0o700); err != nil {
 			t.Fatal(err)
 		}
+	}
+	executable, err := os.Executable()
+	if err != nil {
+		t.Fatal(err)
+	}
+	child := exec.Command(executable, "-test.run=^TestInventoryMain$", "-test.count=1")
+	child.Dir = root
+	child.Env = append(os.Environ(), "INVENTORY_MAIN_SUCCESS_HELPER=1")
+	var stdout, stderr bytes.Buffer
+	child.Stdout, child.Stderr = &stdout, &stderr
+	if err := child.Run(); err != nil || !bytes.HasPrefix(stdout.Bytes(), []byte("[]\n")) || stderr.Len() != 0 {
+		t.Fatalf("inventory command: stdout=%q stderr=%q error=%v", stdout.String(), stderr.String(), err)
 	}
 	t.Chdir(root)
 	main()

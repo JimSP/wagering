@@ -108,8 +108,6 @@ func targetedMutations(source, goBin, out string) error {
 		err := cmd.Run()
 		if cmd.ProcessState != nil {
 			r.Exit = cmd.ProcessState.ExitCode()
-		} else {
-			r.Exit = -1
 		}
 		if ctx.Err() != nil {
 			return r, ctx.Err()

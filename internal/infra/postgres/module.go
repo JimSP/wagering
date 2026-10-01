@@ -25,6 +25,7 @@ func NewPool(lc fx.Lifecycle, cfg config.Config) (*pgxpool.Pool, error) {
 	if err != nil {
 		return nil, fmt.Errorf("parse DATABASE_URL: %w", err)
 	}
+	pc.ConnConfig.Tracer = queryTracer{}
 	pc.ConnConfig.RuntimeParams["statement_timeout"] = "10000"
 	pc.ConnConfig.RuntimeParams["lock_timeout"] = "8000"
 	pool, err := pgxpool.NewWithConfig(context.Background(), pc)

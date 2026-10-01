@@ -18,6 +18,7 @@ import (
 	"github.com/alexandre/wagering/internal/app/port"
 	"github.com/alexandre/wagering/internal/domain/money"
 	"github.com/alexandre/wagering/internal/domain/wager"
+	"github.com/alexandre/wagering/internal/platform/telemetry"
 )
 
 type Source string
@@ -66,7 +67,11 @@ func NewSubmitTransaction(uow port.UnitOfWork, c port.Clock, ids port.IDGenerato
 	return &SubmitTransaction{uow: uow, clock: c, ids: ids, metrics: m, betWindow: DefaultBettingWindow}
 }
 
-func (u *SubmitTransaction) Execute(ctx context.Context, in SubmitInput) (SubmitResult, error) {
+func (u *SubmitTransaction) Execute(ctx context.Context, in SubmitInput) (output SubmitResult, resultErr error) {
+	ctx, end := telemetry.Start(ctx, "wagering.submit")
+	defer func() { end(resultErr) }()
+	telemetry.Attribute(ctx, "wagering.source", string(in.Source))
+	telemetry.Attribute(ctx, "correlation.id", in.CorrelationID)
 	started := time.Now()
 	defer func() { u.metrics.Latency("submit", time.Since(started)) }()
 	if in.Source != SourceHTTP && in.Source != SourceSQS {
@@ -188,6 +193,8 @@ func (u *SubmitTransaction) Execute(ctx context.Context, in SubmitInput) (Submit
 		return nil
 	})
 	if err == nil {
+		telemetry.Attribute(ctx, "wagering.status", string(result.Status))
+		telemetry.Attribute(ctx, "wagering.transaction.id", result.TransactionID)
 		u.metrics.TxResult(in.Kind, string(result.Status))
 		if result.IdempotentReplay {
 			u.metrics.Duplicate(string(in.Source))

@@ -48,7 +48,7 @@ func (r *Recorder) Latency(op string, d time.Duration) {
 }
 func (r *Recorder) ReconciliationDivergence() { r.divergences.Inc() }
 
-var Module = fx.Module("metrics", fx.Provide(New, func(r *Recorder) port.Metrics { return r }))
+var Module = fx.Module("metrics", fx.Provide(New, func(r *Recorder) port.Metrics { return r }), fx.Invoke(registerServer))
 
 func (r *Recorder) DLQDepth(visible, inflight float64) {
 	r.dlqDepth.WithLabelValues("visible").Set(visible)

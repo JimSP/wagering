@@ -1,0 +1,4584 @@
+{
+  "exchanges": [
+    {
+      "at": "2026-10-01T06:49:43.896075Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "anonymous",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/health/live",
+      "request": null,
+      "response": "",
+      "scenario": "readiness-and-OIDC",
+      "sequence": 1
+    },
+    {
+      "at": "2026-10-01T06:49:43.900377Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "anonymous",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/health/ready",
+      "request": null,
+      "response": "",
+      "scenario": "readiness-and-OIDC",
+      "sequence": 2
+    },
+    {
+      "at": "2026-10-01T06:49:44.141924Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "anonymous",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/health/ready",
+      "request": null,
+      "response": "",
+      "scenario": "gateway-distributes-to-independent-replicas",
+      "sequence": 3
+    },
+    {
+      "at": "2026-10-01T06:49:44.245747Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "anonymous",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/health/ready",
+      "request": null,
+      "response": "",
+      "scenario": "gateway-distributes-to-independent-replicas",
+      "sequence": 4
+    },
+    {
+      "at": "2026-10-01T06:49:44.352162Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "anonymous",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/health/ready",
+      "request": null,
+      "response": "",
+      "scenario": "gateway-distributes-to-independent-replicas",
+      "sequence": 5
+    },
+    {
+      "at": "2026-10-01T06:49:44.382323Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119"
+      },
+      "response": "{\"id\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"playerId\":\"0fc7c164-3192-4ef6-ac43-c913f2541119\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 6
+    },
+    {
+      "at": "2026-10-01T06:49:44.407814Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "8387946f-8180-428d-803d-3e8e0dd3c41e",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "8387946f-8180-428d-803d-3e8e0dd3c41e",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+        "providerId": "provider-a",
+        "roundId": "b8d8aa3d-dac0-46f4-8d2a-920963179c8c",
+        "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac"
+      },
+      "response": "{\"transactionId\":\"01a0f639-e4be-7e34-9833-f1c09e8be3e2\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 7
+    },
+    {
+      "at": "2026-10-01T06:49:44.411241Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "8387946f-8180-428d-803d-3e8e0dd3c41e",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "8387946f-8180-428d-803d-3e8e0dd3c41e",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+        "providerId": "provider-a",
+        "roundId": "b8d8aa3d-dac0-46f4-8d2a-920963179c8c",
+        "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac"
+      },
+      "response": "{\"transactionId\":\"01a0f639-e4be-7e34-9833-f1c09e8be3e2\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 8
+    },
+    {
+      "at": "2026-10-01T06:49:44.416341Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "0e43fd3d-f5ad-45ad-a3e0-cf25bc0a5cd0",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "0e43fd3d-f5ad-45ad-a3e0-cf25bc0a5cd0",
+        "gameId": "challenge-demo",
+        "kind": "LOSS",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+        "providerId": "provider-a",
+        "roundId": "8c349173-771b-460e-80d1-ebc9d7b2b2f3",
+        "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac"
+      },
+      "response": "{\"transactionId\":\"01a0f639-e4db-71c1-aff9-ef3bef52b090\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 9
+    },
+    {
+      "at": "2026-10-01T06:49:44.421098Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "c2b9d7b6-03a8-44cc-825b-dfecafc80f50",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "c2b9d7b6-03a8-44cc-825b-dfecafc80f50",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "200.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+        "providerId": "provider-a",
+        "roundId": "2f9c9f6f-d5a4-4db4-8745-9e4594df24d9",
+        "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac"
+      },
+      "response": "{\"transactionId\":\"01a0f639-e4e0-7c4d-8d34-711884b0a37b\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 10
+    },
+    {
+      "at": "2026-10-01T06:49:44.429903Z",
+      "channel": "HTTP",
+      "httpStatus": 202,
+      "idempotencyKey": "9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "9d3b82bc-114e-415c-94a8-5c3d2287b822",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "5.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "862531fa-3532-4ced-9811-72b0ea243bae",
+        "roundId": "793fcb4f-3561-4bf8-aa6c-6443c01e78c6",
+        "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac"
+      },
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"status\":\"PENDING_REFERENCE\",\"idempotentReplay\":false}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 11
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:44.96318Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "kind": "OPENING",
+          "money": {
+            "amount": "100.00",
+            "currency": "BRL"
+          },
+          "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+          "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+          "transactionId": "01a0f639-e4a4-7cba-9cd7-98ae800781fb"
+        },
+        "eventId": "01a0f639-e4b0-7bf8-8be1-3da8a00a0f96",
+        "version": 1,
+        "eventType": "WagerTransactionProcessed",
+        "occurredAt": "2026-10-01T06:49:44.368786Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "01a0f639-e4a4-7cba-9cd7-98ae800781fb"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 12
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:45.986661Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "money": {
+            "amount": "100.00",
+            "currency": "BRL"
+          },
+          "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+          "direction": "CREDIT",
+          "balanceAfter": {
+            "amount": "100.00",
+            "currency": "BRL"
+          },
+          "balanceBefore": {
+            "amount": "0.00",
+            "currency": "BRL"
+          },
+          "transactionId": "01a0f639-e4a4-7cba-9cd7-98ae800781fb",
+          "walletVersion": 1
+        },
+        "eventId": "01a0f639-e4b3-7e3c-bb64-0f209e08a647",
+        "version": 1,
+        "eventType": "WalletBalanceChanged",
+        "occurredAt": "2026-10-01T06:49:44.371934Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "01a0f639-e4a4-7cba-9cd7-98ae800781fb"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 13
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:46.49831Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "money": {
+            "amount": "10.00",
+            "currency": "BRL"
+          },
+          "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+          "direction": "DEBIT",
+          "balanceAfter": {
+            "amount": "90.00",
+            "currency": "BRL"
+          },
+          "balanceBefore": {
+            "amount": "100.00",
+            "currency": "BRL"
+          },
+          "transactionId": "01a0f639-e4be-7e34-9833-f1c09e8be3e2",
+          "walletVersion": 2
+        },
+        "eventId": "01a0f639-e4cd-7d71-a9ad-a2d1b81f35e0",
+        "version": 1,
+        "eventType": "WalletBalanceChanged",
+        "occurredAt": "2026-10-01T06:49:44.397881Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "ccb64cf7-d353-4ca3-8da9-d30d1b94f83e"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 14
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:46.997675Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "kind": "BET",
+          "money": {
+            "amount": "10.00",
+            "currency": "BRL"
+          },
+          "roundId": "b8d8aa3d-dac0-46f4-8d2a-920963179c8c",
+          "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+          "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+          "providerId": "provider-a",
+          "transactionId": "01a0f639-e4be-7e34-9833-f1c09e8be3e2",
+          "externalTransactionId": "8387946f-8180-428d-803d-3e8e0dd3c41e"
+        },
+        "eventId": "01a0f639-e4cf-745b-abc9-7a7165ea5856",
+        "version": 1,
+        "eventType": "WagerTransactionProcessed",
+        "occurredAt": "2026-10-01T06:49:44.399286Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "ccb64cf7-d353-4ca3-8da9-d30d1b94f83e"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 15
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:47.486675Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "kind": "LOSS",
+          "money": {
+            "amount": "0.00",
+            "currency": "BRL"
+          },
+          "roundId": "8c349173-771b-460e-80d1-ebc9d7b2b2f3",
+          "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+          "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+          "providerId": "provider-a",
+          "transactionId": "01a0f639-e4db-71c1-aff9-ef3bef52b090",
+          "externalTransactionId": "0e43fd3d-f5ad-45ad-a3e0-cf25bc0a5cd0"
+        },
+        "eventId": "01a0f639-e4dd-7e44-bf72-113e11483319",
+        "version": 1,
+        "eventType": "WagerTransactionProcessed",
+        "occurredAt": "2026-10-01T06:49:44.413935Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "3e48fafc-46c9-4936-9caa-71171c80177d"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 16
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:48.48246Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "kind": "BET",
+          "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+          "providerId": "provider-a",
+          "failureCode": "INSUFFICIENT_FUNDS",
+          "transactionId": "01a0f639-e4e0-7c4d-8d34-711884b0a37b",
+          "externalTransactionId": "c2b9d7b6-03a8-44cc-825b-dfecafc80f50"
+        },
+        "eventId": "01a0f639-e4e2-7d10-87d6-6ee365d221e9",
+        "version": 1,
+        "eventType": "WagerTransactionRejected",
+        "occurredAt": "2026-10-01T06:49:44.418856Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "9aa5b299-7bc0-4f30-bad4-9e459f24f41b"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 17
+    },
+    {
+      "action": "received-event",
+      "at": "2026-10-01T06:49:48.993644Z",
+      "channel": "SQS",
+      "event": {
+        "data": {
+          "expiresAt": "2026-10-01T06:59:44.424662Z",
+          "providerId": "provider-a",
+          "nextAttemptAt": "2026-10-01T06:49:45.424662Z",
+          "transactionId": "01a0f639-e4e5-707d-87ee-9a055dab91d9",
+          "externalTransactionId": "9d3b82bc-114e-415c-94a8-5c3d2287b822",
+          "referenceExternalTransactionId": "862531fa-3532-4ced-9811-72b0ea243bae"
+        },
+        "eventId": "01a0f639-e4e9-770e-b2f1-c10fbd5e188b",
+        "version": 1,
+        "eventType": "WagerTransactionPendingReference",
+        "occurredAt": "2026-10-01T06:49:44.425463Z",
+        "aggregateId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac",
+        "correlationId": "ff7bac5d-dc38-4261-875e-e7a029d175d5"
+      },
+      "queue": "wager-events.fifo",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 18
+    },
+    {
+      "at": "2026-10-01T06:49:49.493463Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "862531fa-3532-4ced-9811-72b0ea243bae",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "862531fa-3532-4ced-9811-72b0ea243bae",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "5.00",
+          "currency": "BRL"
+        },
+        "playerId": "0fc7c164-3192-4ef6-ac43-c913f2541119",
+        "providerId": "provider-a",
+        "roundId": "793fcb4f-3561-4bf8-aa6c-6443c01e78c6",
+        "walletId": "01a0f639-e4a0-7eac-83a9-706e0819d9ac"
+      },
+      "response": "{\"transactionId\":\"01a0f639-f89f-7f35-bc6a-4bbce69efe2b\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"85.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 19
+    },
+    {
+      "at": "2026-10-01T06:49:49.494612Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"9d3b82bc-114e-415c-94a8-5c3d2287b822\",\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:51.839525Z\"}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 20
+    },
+    {
+      "at": "2026-10-01T06:49:49.999142Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"9d3b82bc-114e-415c-94a8-5c3d2287b822\",\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:51.839525Z\"}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 21
+    },
+    {
+      "at": "2026-10-01T06:49:50.501656Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"9d3b82bc-114e-415c-94a8-5c3d2287b822\",\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:51.839525Z\"}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 22
+    },
+    {
+      "at": "2026-10-01T06:49:51.008626Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"9d3b82bc-114e-415c-94a8-5c3d2287b822\",\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:51.839525Z\"}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 23
+    },
+    {
+      "at": "2026-10-01T06:49:51.514354Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"9d3b82bc-114e-415c-94a8-5c3d2287b822\",\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:51.839525Z\"}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 24
+    },
+    {
+      "at": "2026-10-01T06:49:52.020147Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/9d3b82bc-114e-415c-94a8-5c3d2287b822",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f639-e4e5-707d-87ee-9a055dab91d9\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"9d3b82bc-114e-415c-94a8-5c3d2287b822\",\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"kind\":\"REFUND\",\"status\":\"PROCESSED\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"balance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"}}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 25
+    },
+    {
+      "at": "2026-10-01T06:49:52.025098Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f639-e4a0-7eac-83a9-706e0819d9ac/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f639-e4a0-7eac-83a9-706e0819d9ac\",\"storedBalance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":4}\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 26
+    },
+    {
+      "at": "2026-10-01T06:49:52.02877Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "anonymous",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/metrics",
+      "request": null,
+      "response": "# HELP wagering_concurrency_conflicts_total Optimistic/lock conflicts\n# TYPE wagering_concurrency_conflicts_total counter\nwagering_concurrency_conflicts_total 0\n# HELP wagering_dlq_messages Approximate DLQ depth reported by broker at last successful poll\n# TYPE wagering_dlq_messages gauge\nwagering_dlq_messages{state=\"inflight\"} 0\nwagering_dlq_messages{state=\"visible\"} 0\n# HELP wagering_outbox_lag_seconds Age of the oldest unpublished event at last successful poll; zero when empty\n# TYPE wagering_outbox_lag_seconds gauge\nwagering_outbox_lag_seconds 0\n# HELP wagering_poison_redrive_threshold_total Poison messages observed at broker redrive threshold\n# TYPE wagering_poison_redrive_threshold_total counter\nwagering_poison_redrive_threshold_total 0\n# HELP wagering_processing_seconds Processing latency\n# TYPE wagering_processing_seconds histogram\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.005\"} 1\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.01\"} 1\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.025\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.05\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.1\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.25\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"0.5\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"1\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"2.5\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"5\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"10\"} 2\nwagering_processing_seconds_bucket{op=\"submit\",le=\"+Inf\"} 2\nwagering_processing_seconds_sum{op=\"submit\"} 0.027097041\nwagering_processing_seconds_count{op=\"submit\"} 2\n# HELP wagering_reconciliation_divergences_total Reconciliation divergences\n# TYPE wagering_reconciliation_divergences_total counter\nwagering_reconciliation_divergences_total 0\n# HELP wagering_retries_total Retries by component\n# TYPE wagering_retries_total counter\nwagering_retries_total{component=\"reference\"} 1\n# HELP wagering_transactions_total Committed submission results and reference worker outcomes, including replays\n# TYPE wagering_transactions_total counter\nwagering_transactions_total{kind=\"BET\",status=\"PROCESSED\"} 1\nwagering_transactions_total{kind=\"BET\",status=\"REJECTED\"} 1\nwagering_transactions_total{kind=\"REFUND\",status=\"PENDING_REFERENCE\"} 1\n",
+      "scenario": "events-outbox-and-metrics",
+      "sequence": 27
+    },
+    {
+      "at": "2026-10-01T06:49:52.034668Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "bd8869ef-2015-40b5-9d05-672cae7eb801"
+      },
+      "response": "{\"id\":\"01a0f63a-029d-7434-953f-b4e65955a4fd\",\"playerId\":\"bd8869ef-2015-40b5-9d05-672cae7eb801\",\"balance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 28
+    },
+    {
+      "at": "2026-10-01T06:49:52.03791Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-029d-7434-953f-b4e65955a4fd/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-029d-7434-953f-b4e65955a4fd\",\"storedBalance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":0}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 29
+    },
+    {
+      "at": "2026-10-01T06:49:52.054708Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "18631811-afae-4ffc-ba4f-5c9e4cc7ee8f"
+      },
+      "response": "{\"id\":\"01a0f63a-02a6-7982-8957-d91bede757e1\",\"playerId\":\"18631811-afae-4ffc-ba4f-5c9e4cc7ee8f\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 30
+    },
+    {
+      "at": "2026-10-01T06:49:52.058341Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-02a6-7982-8957-d91bede757e1/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-02a6-7982-8957-d91bede757e1\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":1}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 31
+    },
+    {
+      "at": "2026-10-01T06:49:52.060692Z",
+      "channel": "HTTP",
+      "httpStatus": 409,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "18631811-afae-4ffc-ba4f-5c9e4cc7ee8f"
+      },
+      "response": "{\"code\":\"WALLET_EXISTS\",\"message\":\"wallet already exists for player and currency\"}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 32
+    },
+    {
+      "at": "2026-10-01T06:49:52.074154Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "27473297-682a-43c9-84ce-ee0aad9215ff",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "27473297-682a-43c9-84ce-ee0aad9215ff",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "18631811-afae-4ffc-ba4f-5c9e4cc7ee8f",
+        "providerId": "provider-a",
+        "roundId": "14108798-ee8a-4a0b-9dea-39ca176c7be0",
+        "walletId": "01a0f63a-02a6-7982-8957-d91bede757e1"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-02bd-7252-9863-2801480dca4d\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 33
+    },
+    {
+      "at": "2026-10-01T06:49:52.07609Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/wallets/01a0f63a-02a6-7982-8957-d91bede757e1/ledger?limit=1",
+      "request": null,
+      "response": "{\"entries\":[{\"walletId\":\"01a0f63a-02a6-7982-8957-d91bede757e1\",\"id\":\"01a0f63a-02ab-7a8f-99eb-66b292f9632a\",\"transactionId\":\"01a0f63a-02a9-72df-9fe6-6af356261d5d\",\"direction\":\"CREDIT\",\"money\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"balanceBefore\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"balanceAfter\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"createdAt\":\"2026-10-01T06:49:52.043695Z\"}],\"nextCursor\":\"MDFhMGY2M2EtMDJhNi03OTgyLTg5NTctZDkxYmVkZTc1N2UxOjg\"}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 34
+    },
+    {
+      "at": "2026-10-01T06:49:52.079333Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/wallets/01a0f63a-02a6-7982-8957-d91bede757e1/ledger?limit=1\u0026cursor=MDFhMGY2M2EtMDJhNi03OTgyLTg5NTctZDkxYmVkZTc1N2UxOjg",
+      "request": null,
+      "response": "{\"entries\":[{\"walletId\":\"01a0f63a-02a6-7982-8957-d91bede757e1\",\"id\":\"aa2bc90b-0e29-4a41-b55e-d6c856b55b2c\",\"transactionId\":\"01a0f63a-02bd-7252-9863-2801480dca4d\",\"direction\":\"DEBIT\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"balanceBefore\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"balanceAfter\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"createdAt\":\"2026-10-01T06:49:52.064163Z\"}]}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 35
+    },
+    {
+      "at": "2026-10-01T06:49:52.08295Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-02a6-7982-8957-d91bede757e1/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-02a6-7982-8957-d91bede757e1\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "opening-zero-positive-duplicate-ledger-pagination",
+      "sequence": 36
+    },
+    {
+      "at": "2026-10-01T06:49:52.089277Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "91ac1265-c773-4963-8169-1ccc1e95e3de"
+      },
+      "response": "{\"id\":\"01a0f63a-02d3-71b0-b324-28ac206b443b\",\"playerId\":\"91ac1265-c773-4963-8169-1ccc1e95e3de\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 37
+    },
+    {
+      "at": "2026-10-01T06:49:52.089955Z",
+      "channel": "HTTP",
+      "httpStatus": 401,
+      "idempotencyKey": "333708d0-8a8e-4495-9759-638d84b74493",
+      "identity": "anonymous",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "91ac1265-c773-4963-8169-1ccc1e95e3de",
+        "providerId": "provider-a",
+        "roundId": "a5d72d65-dd26-451e-a4ed-59c057d03e9e",
+        "walletId": "01a0f63a-02d3-71b0-b324-28ac206b443b"
+      },
+      "response": "{\"code\":\"UNAUTHENTICATED\"}",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 38
+    },
+    {
+      "at": "2026-10-01T06:49:52.090337Z",
+      "channel": "HTTP",
+      "httpStatus": 401,
+      "idempotencyKey": "08c12a6c-2e7a-4223-ad99-8737424a7e5b",
+      "identity": "provided-token",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "91ac1265-c773-4963-8169-1ccc1e95e3de",
+        "providerId": "provider-a",
+        "roundId": "a5d72d65-dd26-451e-a4ed-59c057d03e9e",
+        "walletId": "01a0f63a-02d3-71b0-b324-28ac206b443b"
+      },
+      "response": "{\"code\":\"UNAUTHENTICATED\"}",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 39
+    },
+    {
+      "at": "2026-10-01T06:49:52.090789Z",
+      "channel": "HTTP",
+      "httpStatus": 403,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/wallets/01a0f63a-02d3-71b0-b324-28ac206b443b",
+      "request": null,
+      "response": "{\"code\":\"FORBIDDEN\"}",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 40
+    },
+    {
+      "at": "2026-10-01T06:49:52.091218Z",
+      "channel": "HTTP",
+      "httpStatus": 403,
+      "idempotencyKey": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+      "identity": "provider-b",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "91ac1265-c773-4963-8169-1ccc1e95e3de",
+        "providerId": "provider-a",
+        "roundId": "a5d72d65-dd26-451e-a4ed-59c057d03e9e",
+        "walletId": "01a0f63a-02d3-71b0-b324-28ac206b443b"
+      },
+      "response": "{\"code\":\"FORBIDDEN\"}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 41
+    },
+    {
+      "at": "2026-10-01T06:49:52.099591Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "91ac1265-c773-4963-8169-1ccc1e95e3de",
+        "providerId": "provider-a",
+        "roundId": "a5d72d65-dd26-451e-a4ed-59c057d03e9e",
+        "walletId": "01a0f63a-02d3-71b0-b324-28ac206b443b"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-02da-7e21-95f7-0775305da166\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 42
+    },
+    {
+      "at": "2026-10-01T06:49:52.100653Z",
+      "channel": "HTTP",
+      "httpStatus": 404,
+      "idempotencyKey": "",
+      "identity": "provider-b",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/wagering/transactions/01a0f63a-02da-7e21-95f7-0775305da166",
+      "request": null,
+      "response": "{\"code\":\"NOT_FOUND\"}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 43
+    },
+    {
+      "at": "2026-10-01T06:49:52.101102Z",
+      "channel": "HTTP",
+      "httpStatus": 404,
+      "idempotencyKey": "",
+      "identity": "provider-b",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/91d726cb-593d-4de2-a53e-a1ce8681d665",
+      "request": null,
+      "response": "{\"code\":\"NOT_FOUND\"}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 44
+    },
+    {
+      "at": "2026-10-01T06:49:52.101529Z",
+      "channel": "HTTP",
+      "httpStatus": 403,
+      "idempotencyKey": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+      "identity": "provider-b",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "91d726cb-593d-4de2-a53e-a1ce8681d665",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "91ac1265-c773-4963-8169-1ccc1e95e3de",
+        "providerId": "provider-a",
+        "roundId": "a5d72d65-dd26-451e-a4ed-59c057d03e9e",
+        "walletId": "01a0f63a-02d3-71b0-b324-28ac206b443b"
+      },
+      "response": "{\"code\":\"FORBIDDEN\"}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 45
+    },
+    {
+      "at": "2026-10-01T06:49:52.102313Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-02d3-71b0-b324-28ac206b443b/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-02d3-71b0-b324-28ac206b443b\",\"storedBalance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"90.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "authentication-provider-isolation",
+      "sequence": 46
+    },
+    {
+      "at": "2026-10-01T06:49:55.118013Z",
+      "channel": "HTTP",
+      "httpStatus": 401,
+      "idempotencyKey": "",
+      "identity": "provided-token",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/wallets/52cb73d7-3407-4f58-938c-9824df2d518e",
+      "request": null,
+      "response": "{\"code\":\"UNAUTHENTICATED\"}",
+      "scenario": "expired-token",
+      "sequence": 47
+    },
+    {
+      "at": "2026-10-01T06:49:55.128076Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e"
+      },
+      "response": "{\"id\":\"01a0f63a-0eae-7522-a83e-b4532031b65a\",\"playerId\":\"92956197-8b72-4135-8327-09f03da3df6e\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 48
+    },
+    {
+      "at": "2026-10-01T06:49:55.130595Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "cde2ba1d-974d-4d72-bbdb-5b9faaa920c0",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "cde2ba1d-974d-4d72-bbdb-5b9faaa920c0",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "db56e285-7921-4148-807c-06f74bb835fc",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: invalid amount: \\\"\\\"\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 49
+    },
+    {
+      "at": "2026-10-01T06:49:55.132434Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "ca3cdbf4-bf2f-41a6-a5c8-110448792e72",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ca3cdbf4-bf2f-41a6-a5c8-110448792e72",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "NaN",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "2624ccda-45eb-4fe7-84d5-e3f5763bb74b",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: invalid amount: \\\"NaN\\\"\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 50
+    },
+    {
+      "at": "2026-10-01T06:49:55.133418Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "b27fbf46-60b4-45de-af32-3e8d16fbbb31",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "b27fbf46-60b4-45de-af32-3e8d16fbbb31",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "Infinity",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "1ae2d878-f310-47c1-b089-cccdbea1e473",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: invalid amount: \\\"Infinity\\\"\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 51
+    },
+    {
+      "at": "2026-10-01T06:49:55.134068Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "576aa139-17a4-43a5-899d-0e4c0df168cb",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "576aa139-17a4-43a5-899d-0e4c0df168cb",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1e2",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "54f62b9c-b7a6-4c71-8e6c-24b81bbd371f",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: invalid amount: \\\"1e2\\\"\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 52
+    },
+    {
+      "at": "2026-10-01T06:49:55.134725Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "3c3dfc8f-6cba-4370-bb76-ddf313574705",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "3c3dfc8f-6cba-4370-bb76-ddf313574705",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.001",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "3bc432d1-9699-42fe-b89c-5fbad63ac778",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: invalid amount: \\\"1.001\\\"\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 53
+    },
+    {
+      "at": "2026-10-01T06:49:55.135322Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "4fbd5b7c-b78b-4135-b416-58620e8816ac",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "4fbd5b7c-b78b-4135-b416-58620e8816ac",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "-1.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "878363c3-9515-4abd-8fe2-dae56c685add",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: invalid amount: \\\"-1.00\\\"\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 54
+    },
+    {
+      "at": "2026-10-01T06:49:55.135964Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "4655601a-43e9-480f-9a53-c55c785a8153",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "4655601a-43e9-480f-9a53-c55c785a8153",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "92233720368547758.08",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "7a62ab8b-8b29-4a35-8b85-b04e9e4b9686",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: money: overflow: strconv.ParseInt: parsing \\\"9223372036854775808\\\": value out of range\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 55
+    },
+    {
+      "at": "2026-10-01T06:49:55.13654Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "bce87341-4fa2-4fbe-acad-972936e370fa",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "bce87341-4fa2-4fbe-acad-972936e370fa",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "108b7736-6591-401d-bdf9-ba3ec317d13d",
+        "roundId": "c891af7c-dc9d-4671-9357-bf9f9724011b",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: INVALID_INPUT: invalid input: BET requires amount greater than zero\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 56
+    },
+    {
+      "at": "2026-10-01T06:49:55.137094Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "071cc552-7f6f-4884-9c1c-2d95581d9444",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "071cc552-7f6f-4884-9c1c-2d95581d9444",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "84eca71a-e467-4507-9d2c-be5d7a557ac1",
+        "roundId": "fee79fec-55ad-49ca-b0ce-1ad385bc1655",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: INVALID_INPUT: invalid input: WIN requires amount greater than zero\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 57
+    },
+    {
+      "at": "2026-10-01T06:49:55.137749Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "33682c1a-4e83-47cf-a70a-63d3df61739f",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "33682c1a-4e83-47cf-a70a-63d3df61739f",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "bfa0ace2-92cb-4d2b-8479-990b650e588c",
+        "roundId": "40ccbab4-e110-40c5-b846-cf4a3414f3a2",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: INVALID_INPUT: invalid input: REFUND requires amount greater than zero\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 58
+    },
+    {
+      "at": "2026-10-01T06:49:55.138474Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "2ed20795-454a-4a16-ac12-a6fbebdb2b04",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "2ed20795-454a-4a16-ac12-a6fbebdb2b04",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "86de7485-85af-4bc5-90bb-138c81a49a11",
+        "roundId": "a6010d14-2a81-425b-9b60-620230634f91",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: INVALID_INPUT: invalid input: ROLLBACK requires amount greater than zero\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 59
+    },
+    {
+      "at": "2026-10-01T06:49:55.139089Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "566bf6fe-66a8-4c48-9768-96c8658f0345",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "566bf6fe-66a8-4c48-9768-96c8658f0345",
+        "gameId": "challenge-demo",
+        "kind": "OPENING",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "9e3c5827-7718-4344-b1ca-624d39fb00cb",
+        "roundId": "9db8bc72-5878-4684-ac1d-75e962ba6b82",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: INVALID_INPUT: invalid input: OPENING is reserved for internal wallet opening\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 60
+    },
+    {
+      "at": "2026-10-01T06:49:55.139572Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "6ae312fe-c7ba-4b4c-bf79-d1d326a59d6f",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "6ae312fe-c7ba-4b4c-bf79-d1d326a59d6f",
+        "gameId": "challenge-demo",
+        "kind": "LOSS",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "b3e6f030-5fa4-4a1c-9af9-e38b1b55a5aa",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: INVALID_INPUT: invalid input: LOSS requires amount 0.00\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 61
+    },
+    {
+      "at": "2026-10-01T06:49:55.140037Z",
+      "channel": "HTTP",
+      "httpStatus": 400,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "a0f38cae-b49b-4db2-963e-9ac1695fdafe",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "92956197-8b72-4135-8327-09f03da3df6e",
+        "providerId": "provider-a",
+        "roundId": "28f226db-b5ea-4e3a-8cb0-5a118f4e0ea3",
+        "walletId": "01a0f63a-0eae-7522-a83e-b4532031b65a"
+      },
+      "response": "{\"code\":\"INVALID_INPUT\",\"message\":\"invalid input: Idempotency-Key header is required\"}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 62
+    },
+    {
+      "at": "2026-10-01T06:49:55.141262Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0eae-7522-a83e-b4532031b65a/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0eae-7522-a83e-b4532031b65a\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":1}\n",
+      "scenario": "money-invalid-input-and-external-opening",
+      "sequence": 63
+    },
+    {
+      "at": "2026-10-01T06:49:55.145389Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "f6e46353-91cd-4599-9cbd-89a3b54c4b7a"
+      },
+      "response": "{\"id\":\"01a0f63a-0ec5-708d-b514-5069025f7a5d\",\"playerId\":\"f6e46353-91cd-4599-9cbd-89a3b54c4b7a\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 64
+    },
+    {
+      "at": "2026-10-01T06:49:55.151099Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "f6e46353-91cd-4599-9cbd-89a3b54c4b7a",
+        "providerId": "provider-a",
+        "roundId": "99ba944b-7f98-4adb-a8e9-01921342894d",
+        "walletId": "01a0f63a-0ec5-708d-b514-5069025f7a5d"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ec9-7223-bea9-24185f402cb5\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 65
+    },
+    {
+      "at": "2026-10-01T06:49:55.1594Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "9d77af1f-dcc4-47f5-8992-0343f80fd461",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "9d77af1f-dcc4-47f5-8992-0343f80fd461",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "5.00",
+          "currency": "BRL"
+        },
+        "playerId": "f6e46353-91cd-4599-9cbd-89a3b54c4b7a",
+        "providerId": "provider-a",
+        "roundId": "858b465b-3f73-4e1a-882b-84f3960b27a0",
+        "walletId": "01a0f63a-0ec5-708d-b514-5069025f7a5d"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ece-7d81-bb75-90596003cfd5\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 66
+    },
+    {
+      "at": "2026-10-01T06:49:55.160189Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "f6e46353-91cd-4599-9cbd-89a3b54c4b7a",
+        "providerId": "provider-a",
+        "roundId": "99ba944b-7f98-4adb-a8e9-01921342894d",
+        "walletId": "01a0f63a-0ec5-708d-b514-5069025f7a5d"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ec9-7223-bea9-24185f402cb5\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 67
+    },
+    {
+      "at": "2026-10-01T06:49:55.161247Z",
+      "channel": "HTTP",
+      "httpStatus": 409,
+      "idempotencyKey": "0076e852-f141-46b0-bdd8-8dc65a2a12ce",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "f6e46353-91cd-4599-9cbd-89a3b54c4b7a",
+        "providerId": "provider-a",
+        "roundId": "99ba944b-7f98-4adb-a8e9-01921342894d",
+        "walletId": "01a0f63a-0ec5-708d-b514-5069025f7a5d"
+      },
+      "response": "{\"code\":\"IDEMPOTENCY_CONFLICT\",\"message\":\"idempotency key reused with different payload\"}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 68
+    },
+    {
+      "at": "2026-10-01T06:49:55.161865Z",
+      "channel": "HTTP",
+      "httpStatus": 409,
+      "idempotencyKey": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "d190d2ea-c44c-46a0-8e7d-43c4df74014d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "26.00",
+          "currency": "BRL"
+        },
+        "playerId": "f6e46353-91cd-4599-9cbd-89a3b54c4b7a",
+        "providerId": "provider-a",
+        "roundId": "99ba944b-7f98-4adb-a8e9-01921342894d",
+        "walletId": "01a0f63a-0ec5-708d-b514-5069025f7a5d"
+      },
+      "response": "{\"code\":\"IDEMPOTENCY_CONFLICT\",\"message\":\"idempotency key reused with different payload\"}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 69
+    },
+    {
+      "at": "2026-10-01T06:49:55.162891Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0ec5-708d-b514-5069025f7a5d/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0ec5-708d-b514-5069025f7a5d\",\"storedBalance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":3}\n",
+      "scenario": "replay-original-balance-and-conflicts",
+      "sequence": 70
+    },
+    {
+      "at": "2026-10-01T06:49:55.165716Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "d725097e-93f0-4f66-bea7-21fc8119b78a"
+      },
+      "response": "{\"id\":\"01a0f63a-0eda-79c8-81e8-ef1069bf95e0\",\"playerId\":\"d725097e-93f0-4f66-bea7-21fc8119b78a\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "LOSS-does-not-change-balance-version-ledger",
+      "sequence": 71
+    },
+    {
+      "at": "2026-10-01T06:49:55.168507Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "f953d79f-b4b1-4cad-85ba-ddfe45542956",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "f953d79f-b4b1-4cad-85ba-ddfe45542956",
+        "gameId": "challenge-demo",
+        "kind": "LOSS",
+        "money": {
+          "amount": "0.00",
+          "currency": "BRL"
+        },
+        "playerId": "d725097e-93f0-4f66-bea7-21fc8119b78a",
+        "providerId": "provider-a",
+        "roundId": "25929f4c-3a37-4156-8c46-d456522887d9",
+        "walletId": "01a0f63a-0eda-79c8-81e8-ef1069bf95e0"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0edd-7788-bbad-c66c3b45fa5a\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "LOSS-does-not-change-balance-version-ledger",
+      "sequence": 72
+    },
+    {
+      "at": "2026-10-01T06:49:55.169023Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/wallets/01a0f63a-0eda-79c8-81e8-ef1069bf95e0",
+      "request": null,
+      "response": "{\"id\":\"01a0f63a-0eda-79c8-81e8-ef1069bf95e0\",\"playerId\":\"d725097e-93f0-4f66-bea7-21fc8119b78a\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "LOSS-does-not-change-balance-version-ledger",
+      "sequence": 73
+    },
+    {
+      "at": "2026-10-01T06:49:55.170144Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0eda-79c8-81e8-ef1069bf95e0/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0eda-79c8-81e8-ef1069bf95e0\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":1}\n",
+      "scenario": "LOSS-does-not-change-balance-version-ledger",
+      "sequence": 74
+    },
+    {
+      "at": "2026-10-01T06:49:55.173341Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "9b3c3de4-3af5-439c-8730-d02fb913d141"
+      },
+      "response": "{\"id\":\"01a0f63a-0ee1-7bba-bcb0-2f5b3cf59dfd\",\"playerId\":\"9b3c3de4-3af5-439c-8730-d02fb913d141\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "WIN-after-BET-10.00",
+      "sequence": 75
+    },
+    {
+      "at": "2026-10-01T06:49:55.177942Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "4ad2deaf-560f-4c15-9fff-a938d48f7402",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "4ad2deaf-560f-4c15-9fff-a938d48f7402",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "9b3c3de4-3af5-439c-8730-d02fb913d141",
+        "providerId": "provider-a",
+        "roundId": "9ef95800-0174-4047-8955-a086675124b8",
+        "walletId": "01a0f63a-0ee1-7bba-bcb0-2f5b3cf59dfd"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ee5-7106-bb8a-319796a6ab96\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "WIN-after-BET-10.00",
+      "sequence": 76
+    },
+    {
+      "at": "2026-10-01T06:49:55.180893Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "bef3beee-6b66-4051-887b-56afdc4ab342",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "bef3beee-6b66-4051-887b-56afdc4ab342",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "9b3c3de4-3af5-439c-8730-d02fb913d141",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "4ad2deaf-560f-4c15-9fff-a938d48f7402",
+        "roundId": "9ef95800-0174-4047-8955-a086675124b8",
+        "walletId": "01a0f63a-0ee1-7bba-bcb0-2f5b3cf59dfd"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ee9-7a0b-8e7e-51c58de233ad\",\"status\":\"REJECTED\",\"failureCode\":\"BET_NOT_CLOSED\",\"idempotentReplay\":false}\n",
+      "scenario": "WIN-after-BET-10.00",
+      "sequence": 77
+    },
+    {
+      "at": "2026-10-01T06:49:55.181674Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0ee1-7bba-bcb0-2f5b3cf59dfd/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0ee1-7bba-bcb0-2f5b3cf59dfd\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "WIN-after-BET-10.00",
+      "sequence": 78
+    },
+    {
+      "at": "2026-10-01T06:49:55.184173Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "9158cf64-61b7-4f13-9b02-c80bfb6ab868"
+      },
+      "response": "{\"id\":\"01a0f63a-0eed-7717-a60f-507fa364bfde\",\"playerId\":\"9158cf64-61b7-4f13-9b02-c80bfb6ab868\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "WIN-after-BET-50.00",
+      "sequence": 79
+    },
+    {
+      "at": "2026-10-01T06:49:55.187762Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "bd25fbfe-86ac-44ca-a00c-2bde311c8b98",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "bd25fbfe-86ac-44ca-a00c-2bde311c8b98",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "9158cf64-61b7-4f13-9b02-c80bfb6ab868",
+        "providerId": "provider-a",
+        "roundId": "cc5b8cd2-117c-4c06-94c8-24eb92952b4f",
+        "walletId": "01a0f63a-0eed-7717-a60f-507fa364bfde"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0eef-7d6a-8071-a56c2b640257\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "WIN-after-BET-50.00",
+      "sequence": 80
+    },
+    {
+      "at": "2026-10-01T06:49:55.190583Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "a3f56f43-c9ad-48eb-9edb-1f21e7e65b6c",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "a3f56f43-c9ad-48eb-9edb-1f21e7e65b6c",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "50.00",
+          "currency": "BRL"
+        },
+        "playerId": "9158cf64-61b7-4f13-9b02-c80bfb6ab868",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "bd25fbfe-86ac-44ca-a00c-2bde311c8b98",
+        "roundId": "cc5b8cd2-117c-4c06-94c8-24eb92952b4f",
+        "walletId": "01a0f63a-0eed-7717-a60f-507fa364bfde"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ef3-76eb-9ca5-532a7c814ef6\",\"status\":\"REJECTED\",\"failureCode\":\"BET_NOT_CLOSED\",\"idempotentReplay\":false}\n",
+      "scenario": "WIN-after-BET-50.00",
+      "sequence": 81
+    },
+    {
+      "at": "2026-10-01T06:49:55.191289Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0eed-7717-a60f-507fa364bfde/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0eed-7717-a60f-507fa364bfde\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "WIN-after-BET-50.00",
+      "sequence": 82
+    },
+    {
+      "at": "2026-10-01T06:49:55.193335Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "1c745326-4047-4197-9338-d5da6e91fd44"
+      },
+      "response": "{\"id\":\"01a0f63a-0ef6-7f2f-b96e-fbe3dce4f730\",\"playerId\":\"1c745326-4047-4197-9338-d5da6e91fd44\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "WIN-optional-reference",
+      "sequence": 83
+    },
+    {
+      "at": "2026-10-01T06:49:55.195434Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "66ae1fbc-979b-427b-9808-6e68afd265cf",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "66ae1fbc-979b-427b-9808-6e68afd265cf",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "1c745326-4047-4197-9338-d5da6e91fd44",
+        "providerId": "provider-a",
+        "roundId": "feeb31ae-deb4-434a-8594-2df2930aae4a",
+        "walletId": "01a0f63a-0ef6-7f2f-b96e-fbe3dce4f730"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0ef8-7ecc-8a31-3853fb1fe735\",\"status\":\"REJECTED\",\"failureCode\":\"REFERENCE_NOT_FOUND\",\"idempotentReplay\":false}\n",
+      "scenario": "WIN-optional-reference",
+      "sequence": 84
+    },
+    {
+      "at": "2026-10-01T06:49:55.19606Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0ef6-7f2f-b96e-fbe3dce4f730/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0ef6-7f2f-b96e-fbe3dce4f730\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":1}\n",
+      "scenario": "WIN-optional-reference",
+      "sequence": 85
+    },
+    {
+      "at": "2026-10-01T06:49:55.198782Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "625c8b60-c052-444d-afec-c99eae65063d"
+      },
+      "response": "{\"id\":\"01a0f63a-0efb-7b2a-9461-c8f7c93da76b\",\"playerId\":\"625c8b60-c052-444d-afec-c99eae65063d\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "REFUND-and-ROLLBACK-of-REFUND",
+      "sequence": 86
+    },
+    {
+      "at": "2026-10-01T06:49:55.20294Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "c6fe2f1f-1d3a-483b-9d6a-b562cc787b99",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "c6fe2f1f-1d3a-483b-9d6a-b562cc787b99",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "625c8b60-c052-444d-afec-c99eae65063d",
+        "providerId": "provider-a",
+        "roundId": "dff985dd-dd4f-48f9-a36e-6f4ab1483cbb",
+        "walletId": "01a0f63a-0efb-7b2a-9461-c8f7c93da76b"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0efe-774b-ac88-6e80d0080ec0\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-and-ROLLBACK-of-REFUND",
+      "sequence": 87
+    },
+    {
+      "at": "2026-10-01T06:49:55.208512Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "9f0078a9-7115-48f6-9e1e-0c3c41b7786e",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "9f0078a9-7115-48f6-9e1e-0c3c41b7786e",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "625c8b60-c052-444d-afec-c99eae65063d",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "c6fe2f1f-1d3a-483b-9d6a-b562cc787b99",
+        "roundId": "dff985dd-dd4f-48f9-a36e-6f4ab1483cbb",
+        "walletId": "01a0f63a-0efb-7b2a-9461-c8f7c93da76b"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f02-79ca-9e31-868851c04c02\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-and-ROLLBACK-of-REFUND",
+      "sequence": 88
+    },
+    {
+      "at": "2026-10-01T06:49:55.210728Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "d4638632-506e-4f7f-b545-6c9f72306cdb",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "d4638632-506e-4f7f-b545-6c9f72306cdb",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "625c8b60-c052-444d-afec-c99eae65063d",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "c6fe2f1f-1d3a-483b-9d6a-b562cc787b99",
+        "roundId": "dff985dd-dd4f-48f9-a36e-6f4ab1483cbb",
+        "walletId": "01a0f63a-0efb-7b2a-9461-c8f7c93da76b"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f08-731a-af2b-78e490d12f05\",\"status\":\"REJECTED\",\"failureCode\":\"ALREADY_REVERSED\",\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-and-ROLLBACK-of-REFUND",
+      "sequence": 89
+    },
+    {
+      "at": "2026-10-01T06:49:55.217365Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "c949c761-27fa-4212-8b61-a3e104287280",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "c949c761-27fa-4212-8b61-a3e104287280",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "625c8b60-c052-444d-afec-c99eae65063d",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "9f0078a9-7115-48f6-9e1e-0c3c41b7786e",
+        "roundId": "dff985dd-dd4f-48f9-a36e-6f4ab1483cbb",
+        "walletId": "01a0f63a-0efb-7b2a-9461-c8f7c93da76b"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f0a-7587-8780-b0f4ab6e6d26\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-and-ROLLBACK-of-REFUND",
+      "sequence": 90
+    },
+    {
+      "at": "2026-10-01T06:49:55.218263Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0efb-7b2a-9461-c8f7c93da76b/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0efb-7b2a-9461-c8f7c93da76b\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":4}\n",
+      "scenario": "REFUND-and-ROLLBACK-of-REFUND",
+      "sequence": 91
+    },
+    {
+      "at": "2026-10-01T06:49:55.220366Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "b08964be-799b-46e5-9cfa-d1c8e6c389f5"
+      },
+      "response": "{\"id\":\"01a0f63a-0f11-7f00-81dd-33e8db0d65cc\",\"playerId\":\"b08964be-799b-46e5-9cfa-d1c8e6c389f5\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "ROLLBACK-of-BET",
+      "sequence": 92
+    },
+    {
+      "at": "2026-10-01T06:49:55.224039Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "cac8ed63-3861-40db-8200-ebe6feb05242",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "cac8ed63-3861-40db-8200-ebe6feb05242",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "b08964be-799b-46e5-9cfa-d1c8e6c389f5",
+        "providerId": "provider-a",
+        "roundId": "8c1bc318-3039-4aee-9ae7-b76e828f05f6",
+        "walletId": "01a0f63a-0f11-7f00-81dd-33e8db0d65cc"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f14-7036-987f-d9b5d0327980\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-of-BET",
+      "sequence": 93
+    },
+    {
+      "at": "2026-10-01T06:49:55.228878Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "e73d3d73-1e89-4c15-aea3-528437e60787",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "e73d3d73-1e89-4c15-aea3-528437e60787",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "b08964be-799b-46e5-9cfa-d1c8e6c389f5",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "cac8ed63-3861-40db-8200-ebe6feb05242",
+        "roundId": "8c1bc318-3039-4aee-9ae7-b76e828f05f6",
+        "walletId": "01a0f63a-0f11-7f00-81dd-33e8db0d65cc"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f17-7b37-a7df-02310e9ebf34\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-of-BET",
+      "sequence": 94
+    },
+    {
+      "at": "2026-10-01T06:49:55.229491Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "e73d3d73-1e89-4c15-aea3-528437e60787",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "e73d3d73-1e89-4c15-aea3-528437e60787",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "b08964be-799b-46e5-9cfa-d1c8e6c389f5",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "cac8ed63-3861-40db-8200-ebe6feb05242",
+        "roundId": "8c1bc318-3039-4aee-9ae7-b76e828f05f6",
+        "walletId": "01a0f63a-0f11-7f00-81dd-33e8db0d65cc"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f17-7b37-a7df-02310e9ebf34\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "ROLLBACK-of-BET",
+      "sequence": 95
+    },
+    {
+      "at": "2026-10-01T06:49:55.230144Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0f11-7f00-81dd-33e8db0d65cc/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0f11-7f00-81dd-33e8db0d65cc\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":3}\n",
+      "scenario": "ROLLBACK-of-BET",
+      "sequence": 96
+    },
+    {
+      "at": "2026-10-01T06:49:55.23214Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "2b6b34d4-4a4e-40ec-a5ed-ec98d9619778"
+      },
+      "response": "{\"id\":\"01a0f63a-0f1d-7cce-ac37-34849f90742c\",\"playerId\":\"2b6b34d4-4a4e-40ec-a5ed-ec98d9619778\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "ROLLBACK-recovers-open-BET",
+      "sequence": 97
+    },
+    {
+      "at": "2026-10-01T06:49:55.235415Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "b7472f7b-5cb7-4777-9447-93b9f00a4d3f",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "b7472f7b-5cb7-4777-9447-93b9f00a4d3f",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "2b6b34d4-4a4e-40ec-a5ed-ec98d9619778",
+        "providerId": "provider-a",
+        "roundId": "827c2619-20f4-41c3-bd35-0f79b68684c5",
+        "walletId": "01a0f63a-0f1d-7cce-ac37-34849f90742c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f1f-7c65-bd79-c5d043aaa790\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-recovers-open-BET",
+      "sequence": 98
+    },
+    {
+      "at": "2026-10-01T06:49:55.240083Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "8bb7c723-97dc-4b72-b995-7e1ecc1f3732",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "8bb7c723-97dc-4b72-b995-7e1ecc1f3732",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "2b6b34d4-4a4e-40ec-a5ed-ec98d9619778",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "b7472f7b-5cb7-4777-9447-93b9f00a4d3f",
+        "roundId": "827c2619-20f4-41c3-bd35-0f79b68684c5",
+        "walletId": "01a0f63a-0f1d-7cce-ac37-34849f90742c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f23-711c-aa91-e8d0488dee36\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-recovers-open-BET",
+      "sequence": 99
+    },
+    {
+      "at": "2026-10-01T06:49:55.243437Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "26548ea4-c459-4373-81da-7481687444b5",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "26548ea4-c459-4373-81da-7481687444b5",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "2b6b34d4-4a4e-40ec-a5ed-ec98d9619778",
+        "providerId": "provider-a",
+        "roundId": "ee9eed96-bf83-46b2-b5f8-b292c64e385f",
+        "walletId": "01a0f63a-0f1d-7cce-ac37-34849f90742c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f27-7cd9-a054-108698e290ae\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-recovers-open-BET",
+      "sequence": 100
+    },
+    {
+      "at": "2026-10-01T06:49:55.25359Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "6b1ba261-66f8-440d-80c2-30d5f9090a54",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "6b1ba261-66f8-440d-80c2-30d5f9090a54",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "2b6b34d4-4a4e-40ec-a5ed-ec98d9619778",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "8bb7c723-97dc-4b72-b995-7e1ecc1f3732",
+        "roundId": "827c2619-20f4-41c3-bd35-0f79b68684c5",
+        "walletId": "01a0f63a-0f1d-7cce-ac37-34849f90742c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f2b-716d-9de6-d35b66910b0c\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-recovers-open-BET",
+      "sequence": 101
+    },
+    {
+      "at": "2026-10-01T06:49:55.254209Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0f1d-7cce-ac37-34849f90742c/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0f1d-7cce-ac37-34849f90742c\",\"storedBalance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":6}\n",
+      "scenario": "ROLLBACK-recovers-open-BET",
+      "sequence": 102
+    },
+    {
+      "at": "2026-10-01T06:49:55.256399Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "df4b5efc-f208-4142-be16-c1147b7c73c7"
+      },
+      "response": "{\"id\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"playerId\":\"df4b5efc-f208-4142-be16-c1147b7c73c7\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 103
+    },
+    {
+      "at": "2026-10-01T06:49:55.258347Z",
+      "channel": "HTTP",
+      "httpStatus": 202,
+      "idempotencyKey": "d28ef2ad-31f7-46e9-b394-57e715de0b65",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "d28ef2ad-31f7-46e9-b394-57e715de0b65",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "df4b5efc-f208-4142-be16-c1147b7c73c7",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "a75f5c7f-0aa2-43e3-8a40-2d395bc180f9",
+        "roundId": "648e3417-58eb-459d-b50f-6c6166ffa166",
+        "walletId": "01a0f63a-0f35-7e05-882c-ce0dcc1b9913"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f38-725a-b078-1257f58e4fb2\",\"status\":\"PENDING_REFERENCE\",\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 104
+    },
+    {
+      "at": "2026-10-01T06:49:55.261881Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "a75f5c7f-0aa2-43e3-8a40-2d395bc180f9",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "a75f5c7f-0aa2-43e3-8a40-2d395bc180f9",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "df4b5efc-f208-4142-be16-c1147b7c73c7",
+        "providerId": "provider-a",
+        "roundId": "648e3417-58eb-459d-b50f-6c6166ffa166",
+        "walletId": "01a0f63a-0f35-7e05-882c-ce0dcc1b9913"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-0f3a-7077-a861-bcacd1185283\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 105
+    },
+    {
+      "at": "2026-10-01T06:49:55.26246Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/d28ef2ad-31f7-46e9-b394-57e715de0b65",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-0f38-725a-b078-1257f58e4fb2\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"d28ef2ad-31f7-46e9-b394-57e715de0b65\",\"walletId\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:56.256768Z\"}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 106
+    },
+    {
+      "at": "2026-10-01T06:49:55.765061Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/d28ef2ad-31f7-46e9-b394-57e715de0b65",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-0f38-725a-b078-1257f58e4fb2\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"d28ef2ad-31f7-46e9-b394-57e715de0b65\",\"walletId\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:56.256768Z\"}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 107
+    },
+    {
+      "at": "2026-10-01T06:49:56.271017Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/d28ef2ad-31f7-46e9-b394-57e715de0b65",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-0f38-725a-b078-1257f58e4fb2\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"d28ef2ad-31f7-46e9-b394-57e715de0b65\",\"walletId\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:56.256768Z\"}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 108
+    },
+    {
+      "at": "2026-10-01T06:49:56.775527Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/d28ef2ad-31f7-46e9-b394-57e715de0b65",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-0f38-725a-b078-1257f58e4fb2\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"d28ef2ad-31f7-46e9-b394-57e715de0b65\",\"walletId\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"kind\":\"REFUND\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:56.256768Z\"}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 109
+    },
+    {
+      "at": "2026-10-01T06:49:57.281292Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/d28ef2ad-31f7-46e9-b394-57e715de0b65",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-0f38-725a-b078-1257f58e4fb2\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"d28ef2ad-31f7-46e9-b394-57e715de0b65\",\"walletId\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"kind\":\"REFUND\",\"status\":\"PROCESSED\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"}}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 110
+    },
+    {
+      "at": "2026-10-01T06:49:57.285852Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-0f35-7e05-882c-ce0dcc1b9913/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-0f35-7e05-882c-ce0dcc1b9913\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":3}\n",
+      "scenario": "REFUND-before-reference",
+      "sequence": 111
+    },
+    {
+      "at": "2026-10-01T06:49:57.295475Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "c73dc33a-828d-43cb-8d1c-f3decbe360af"
+      },
+      "response": "{\"id\":\"01a0f63a-1726-7592-b4b7-d08168915a4c\",\"playerId\":\"c73dc33a-828d-43cb-8d1c-f3decbe360af\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 112
+    },
+    {
+      "at": "2026-10-01T06:49:57.305565Z",
+      "channel": "HTTP",
+      "httpStatus": 202,
+      "idempotencyKey": "92e0f48f-0d8e-42fd-8a76-64731103bc06",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "92e0f48f-0d8e-42fd-8a76-64731103bc06",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "c73dc33a-828d-43cb-8d1c-f3decbe360af",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "71f65610-c10b-4801-8ac6-6ca862cf39da",
+        "roundId": "2551f904-0d0c-4f02-a1eb-b5e6a5aa7a3b",
+        "walletId": "01a0f63a-1726-7592-b4b7-d08168915a4c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1730-7001-9f88-5dfb6be04a3e\",\"status\":\"PENDING_REFERENCE\",\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 113
+    },
+    {
+      "at": "2026-10-01T06:49:57.321895Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "71f65610-c10b-4801-8ac6-6ca862cf39da",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "71f65610-c10b-4801-8ac6-6ca862cf39da",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "c73dc33a-828d-43cb-8d1c-f3decbe360af",
+        "providerId": "provider-a",
+        "roundId": "2551f904-0d0c-4f02-a1eb-b5e6a5aa7a3b",
+        "walletId": "01a0f63a-1726-7592-b4b7-d08168915a4c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-173a-75c6-aef4-9fc79c9bebfe\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 114
+    },
+    {
+      "at": "2026-10-01T06:49:57.324186Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/92e0f48f-0d8e-42fd-8a76-64731103bc06",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-1730-7001-9f88-5dfb6be04a3e\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"92e0f48f-0d8e-42fd-8a76-64731103bc06\",\"walletId\":\"01a0f63a-1726-7592-b4b7-d08168915a4c\",\"kind\":\"ROLLBACK\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:58.300406Z\"}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 115
+    },
+    {
+      "at": "2026-10-01T06:49:57.828768Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/92e0f48f-0d8e-42fd-8a76-64731103bc06",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-1730-7001-9f88-5dfb6be04a3e\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"92e0f48f-0d8e-42fd-8a76-64731103bc06\",\"walletId\":\"01a0f63a-1726-7592-b4b7-d08168915a4c\",\"kind\":\"ROLLBACK\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:58.300406Z\"}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 116
+    },
+    {
+      "at": "2026-10-01T06:49:58.332388Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/92e0f48f-0d8e-42fd-8a76-64731103bc06",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-1730-7001-9f88-5dfb6be04a3e\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"92e0f48f-0d8e-42fd-8a76-64731103bc06\",\"walletId\":\"01a0f63a-1726-7592-b4b7-d08168915a4c\",\"kind\":\"ROLLBACK\",\"status\":\"PENDING_REFERENCE\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"nextAttemptAt\":\"2026-10-01T06:49:58.300406Z\"}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 117
+    },
+    {
+      "at": "2026-10-01T06:49:58.837253Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/92e0f48f-0d8e-42fd-8a76-64731103bc06",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-1730-7001-9f88-5dfb6be04a3e\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"92e0f48f-0d8e-42fd-8a76-64731103bc06\",\"walletId\":\"01a0f63a-1726-7592-b4b7-d08168915a4c\",\"kind\":\"ROLLBACK\",\"status\":\"PROCESSED\",\"money\":{\"amount\":\"25.00\",\"currency\":\"BRL\"},\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"}}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 118
+    },
+    {
+      "at": "2026-10-01T06:49:58.84046Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-1726-7592-b4b7-d08168915a4c/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-1726-7592-b4b7-d08168915a4c\",\"storedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":3}\n",
+      "scenario": "ROLLBACK-before-reference",
+      "sequence": 119
+    },
+    {
+      "at": "2026-10-01T06:49:58.861579Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f"
+      },
+      "response": "{\"id\":\"01a0f63a-1d39-7ede-927c-e58749f559e6\",\"playerId\":\"aa9e438a-b2a0-4443-aa3e-35022214c74f\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 120
+    },
+    {
+      "at": "2026-10-01T06:49:58.884332Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 121
+    },
+    {
+      "at": "2026-10-01T06:49:58.888463Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 122
+    },
+    {
+      "at": "2026-10-01T06:49:58.888606Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 123
+    },
+    {
+      "at": "2026-10-01T06:49:58.889047Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 124
+    },
+    {
+      "at": "2026-10-01T06:49:58.889944Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 125
+    },
+    {
+      "at": "2026-10-01T06:49:58.890144Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 126
+    },
+    {
+      "at": "2026-10-01T06:49:58.890736Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 127
+    },
+    {
+      "at": "2026-10-01T06:49:58.894611Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 128
+    },
+    {
+      "at": "2026-10-01T06:49:58.896115Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 129
+    },
+    {
+      "at": "2026-10-01T06:49:58.896118Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 130
+    },
+    {
+      "at": "2026-10-01T06:49:58.899332Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 131
+    },
+    {
+      "at": "2026-10-01T06:49:58.899335Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 132
+    },
+    {
+      "at": "2026-10-01T06:49:58.899337Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 133
+    },
+    {
+      "at": "2026-10-01T06:49:58.899344Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 134
+    },
+    {
+      "at": "2026-10-01T06:49:58.899357Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 135
+    },
+    {
+      "at": "2026-10-01T06:49:58.899385Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 136
+    },
+    {
+      "at": "2026-10-01T06:49:58.899402Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 137
+    },
+    {
+      "at": "2026-10-01T06:49:58.89941Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 138
+    },
+    {
+      "at": "2026-10-01T06:49:58.89998Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 139
+    },
+    {
+      "at": "2026-10-01T06:49:58.900115Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 140
+    },
+    {
+      "at": "2026-10-01T06:49:58.901129Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 141
+    },
+    {
+      "at": "2026-10-01T06:49:58.901139Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 142
+    },
+    {
+      "at": "2026-10-01T06:49:58.901254Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 143
+    },
+    {
+      "at": "2026-10-01T06:49:58.901463Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 144
+    },
+    {
+      "at": "2026-10-01T06:49:58.901484Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 145
+    },
+    {
+      "at": "2026-10-01T06:49:58.901588Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 146
+    },
+    {
+      "at": "2026-10-01T06:49:58.901735Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 147
+    },
+    {
+      "at": "2026-10-01T06:49:58.903058Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 148
+    },
+    {
+      "at": "2026-10-01T06:49:58.903071Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 149
+    },
+    {
+      "at": "2026-10-01T06:49:58.903076Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 150
+    },
+    {
+      "at": "2026-10-01T06:49:58.903086Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 151
+    },
+    {
+      "at": "2026-10-01T06:49:58.903796Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 152
+    },
+    {
+      "at": "2026-10-01T06:49:58.9038Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 153
+    },
+    {
+      "at": "2026-10-01T06:49:58.904096Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 154
+    },
+    {
+      "at": "2026-10-01T06:49:58.904168Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 155
+    },
+    {
+      "at": "2026-10-01T06:49:58.905821Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 156
+    },
+    {
+      "at": "2026-10-01T06:49:58.905839Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 157
+    },
+    {
+      "at": "2026-10-01T06:49:58.905841Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 158
+    },
+    {
+      "at": "2026-10-01T06:49:58.906012Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 159
+    },
+    {
+      "at": "2026-10-01T06:49:58.906791Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 160
+    },
+    {
+      "at": "2026-10-01T06:49:58.907131Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 161
+    },
+    {
+      "at": "2026-10-01T06:49:58.907135Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 162
+    },
+    {
+      "at": "2026-10-01T06:49:58.907475Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 163
+    },
+    {
+      "at": "2026-10-01T06:49:58.907494Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 164
+    },
+    {
+      "at": "2026-10-01T06:49:58.907719Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 165
+    },
+    {
+      "at": "2026-10-01T06:49:58.909218Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 166
+    },
+    {
+      "at": "2026-10-01T06:49:58.909225Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 167
+    },
+    {
+      "at": "2026-10-01T06:49:58.909509Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 168
+    },
+    {
+      "at": "2026-10-01T06:49:58.909852Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 169
+    },
+    {
+      "at": "2026-10-01T06:49:58.910418Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "ab9d7181-979c-4049-aa82-70fb7f42625d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "1.00",
+          "currency": "BRL"
+        },
+        "playerId": "aa9e438a-b2a0-4443-aa3e-35022214c74f",
+        "providerId": "provider-a",
+        "roundId": "8fe4ebc0-142c-4526-b5f1-b355c07ffcec",
+        "walletId": "01a0f63a-1d39-7ede-927c-e58749f559e6"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d52-7973-ae83-a44bc205f920\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 170
+    },
+    {
+      "at": "2026-10-01T06:49:58.912865Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-1d39-7ede-927c-e58749f559e6/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-1d39-7ede-927c-e58749f559e6\",\"storedBalance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"99.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "50-concurrent-replays-one-debit",
+      "sequence": 171
+    },
+    {
+      "at": "2026-10-01T06:49:58.921769Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "4b1836fe-4459-4ea0-8a8b-0307365d5a66"
+      },
+      "response": "{\"id\":\"01a0f63a-1d80-7e96-955d-63ae8a808d7c\",\"playerId\":\"4b1836fe-4459-4ea0-8a8b-0307365d5a66\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "two-concurrent-BETs-80-over-100",
+      "sequence": 172
+    },
+    {
+      "at": "2026-10-01T06:49:58.934648Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "fef35fb3-693a-411d-ab47-ff36eb7c572d",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "fef35fb3-693a-411d-ab47-ff36eb7c572d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "80.00",
+          "currency": "BRL"
+        },
+        "playerId": "4b1836fe-4459-4ea0-8a8b-0307365d5a66",
+        "providerId": "provider-a",
+        "roundId": "04bfb161-218d-44ae-b8ee-c40202311587",
+        "walletId": "01a0f63a-1d80-7e96-955d-63ae8a808d7c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d89-7c4b-97f0-f9c3b1653fab\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"20.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "two-concurrent-BETs-80-over-100",
+      "sequence": 173
+    },
+    {
+      "at": "2026-10-01T06:49:58.937938Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "7273204a-4220-475c-9739-20c2cdaf3c2e",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "7273204a-4220-475c-9739-20c2cdaf3c2e",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "80.00",
+          "currency": "BRL"
+        },
+        "playerId": "4b1836fe-4459-4ea0-8a8b-0307365d5a66",
+        "providerId": "provider-a",
+        "roundId": "c014a36a-47b9-4c4e-b2ab-fdf815db43ae",
+        "walletId": "01a0f63a-1d80-7e96-955d-63ae8a808d7c"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1d89-7c68-8715-8c3af64ffe03\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}\n",
+      "scenario": "two-concurrent-BETs-80-over-100",
+      "sequence": 174
+    },
+    {
+      "at": "2026-10-01T06:49:58.939831Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-1d80-7e96-955d-63ae8a808d7c/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-1d80-7e96-955d-63ae8a808d7c\",\"storedBalance\":{\"amount\":\"20.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"20.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "two-concurrent-BETs-80-over-100",
+      "sequence": 175
+    },
+    {
+      "at": "2026-10-01T06:49:58.945208Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "04dd8b62-d490-4de6-9105-5ca9eec5b615"
+      },
+      "response": "{\"id\":\"01a0f63a-1d9b-79fa-ba08-2de02417c549\",\"playerId\":\"04dd8b62-d490-4de6-9105-5ca9eec5b615\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sequence": 176
+    },
+    {
+      "at": "2026-10-01T06:49:58.951508Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "6cf2a277-d9e0-4290-a047-af2590c841d2",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "6cf2a277-d9e0-4290-a047-af2590c841d2",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "04dd8b62-d490-4de6-9105-5ca9eec5b615",
+        "providerId": "provider-a",
+        "roundId": "655d7f99-38c8-4d21-a057-8e8f9c4b1080",
+        "walletId": "01a0f63a-1d9b-79fa-ba08-2de02417c549"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-1da1-7009-a8e8-c47ddcaedb27\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sequence": 177
+    },
+    {
+      "action": "send",
+      "at": "2026-10-01T06:49:59.449721Z",
+      "channel": "SQS",
+      "profile": "ingress",
+      "queue": "wager-transactions.fifo",
+      "request": {
+        "data": {
+          "externalTransactionId": "6cf2a277-d9e0-4290-a047-af2590c841d2",
+          "gameId": "challenge-demo",
+          "idempotencyKey": "6cf2a277-d9e0-4290-a047-af2590c841d2",
+          "kind": "BET",
+          "money": {
+            "amount": "25.00",
+            "currency": "BRL"
+          },
+          "playerId": "04dd8b62-d490-4de6-9105-5ca9eec5b615",
+          "providerId": "provider-a",
+          "roundId": "655d7f99-38c8-4d21-a057-8e8f9c4b1080",
+          "walletId": "01a0f63a-1d9b-79fa-ba08-2de02417c549"
+        },
+        "messageId": "fd5ecfc9-e622-4932-b1a1-b240edeadbb8",
+        "occurredAt": "2026-10-01T06:49:58.951536Z",
+        "type": "WagerTransactionRequested"
+      },
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sent": true,
+      "sequence": 178
+    },
+    {
+      "action": "send",
+      "at": "2026-10-01T06:49:59.954799Z",
+      "channel": "SQS",
+      "profile": "ingress",
+      "queue": "wager-transactions.fifo",
+      "request": {
+        "data": {
+          "externalTransactionId": "6cf2a277-d9e0-4290-a047-af2590c841d2",
+          "gameId": "challenge-demo",
+          "idempotencyKey": "6cf2a277-d9e0-4290-a047-af2590c841d2",
+          "kind": "BET",
+          "money": {
+            "amount": "25.00",
+            "currency": "BRL"
+          },
+          "playerId": "04dd8b62-d490-4de6-9105-5ca9eec5b615",
+          "providerId": "provider-a",
+          "roundId": "655d7f99-38c8-4d21-a057-8e8f9c4b1080",
+          "walletId": "01a0f63a-1d9b-79fa-ba08-2de02417c549"
+        },
+        "messageId": "2d897362-849e-40b4-bd0b-e6c79a2a4d52",
+        "occurredAt": "2026-10-01T06:49:59.449764Z",
+        "type": "WagerTransactionRequested"
+      },
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sent": true,
+      "sequence": 179
+    },
+    {
+      "action": "send",
+      "at": "2026-10-01T06:50:00.533022Z",
+      "channel": "SQS",
+      "profile": "ingress",
+      "queue": "wager-transactions.fifo",
+      "request": {
+        "data": {
+          "externalTransactionId": "c00f3897-6412-4efb-af15-ae5afb9cf73d",
+          "gameId": "challenge-demo",
+          "idempotencyKey": "c00f3897-6412-4efb-af15-ae5afb9cf73d",
+          "kind": "BET",
+          "money": {
+            "amount": "5.00",
+            "currency": "BRL"
+          },
+          "playerId": "04dd8b62-d490-4de6-9105-5ca9eec5b615",
+          "providerId": "provider-a",
+          "roundId": "c0628da5-f9ce-4c70-a90e-20c72aebe490",
+          "walletId": "01a0f63a-1d9b-79fa-ba08-2de02417c549"
+        },
+        "messageId": "9d9b41cc-ee20-4479-a093-78265f992900",
+        "occurredAt": "2026-10-01T06:49:59.954842Z",
+        "type": "WagerTransactionRequested"
+      },
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sent": true,
+      "sequence": 180
+    },
+    {
+      "at": "2026-10-01T06:50:00.534802Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "GET",
+      "path": "/providers/provider-a/wagering/transactions/c00f3897-6412-4efb-af15-ae5afb9cf73d",
+      "request": null,
+      "response": "{\"transactionId\":\"01a0f63a-234a-7ab7-bbd7-5fa3e2fa3de1\",\"providerId\":\"provider-a\",\"externalTransactionId\":\"c00f3897-6412-4efb-af15-ae5afb9cf73d\",\"walletId\":\"01a0f63a-1d9b-79fa-ba08-2de02417c549\",\"kind\":\"BET\",\"status\":\"PROCESSED\",\"money\":{\"amount\":\"5.00\",\"currency\":\"BRL\"},\"balance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"}}\n",
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sequence": 181
+    },
+    {
+      "at": "2026-10-01T06:50:00.535927Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "c00f3897-6412-4efb-af15-ae5afb9cf73d",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "c00f3897-6412-4efb-af15-ae5afb9cf73d",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "5.00",
+          "currency": "BRL"
+        },
+        "playerId": "04dd8b62-d490-4de6-9105-5ca9eec5b615",
+        "providerId": "provider-a",
+        "roundId": "c0628da5-f9ce-4c70-a90e-20c72aebe490",
+        "walletId": "01a0f63a-1d9b-79fa-ba08-2de02417c549"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-234a-7ab7-bbd7-5fa3e2fa3de1\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"},\"idempotentReplay\":true}\n",
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sequence": 182
+    },
+    {
+      "at": "2026-10-01T06:50:00.539722Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-1d9b-79fa-ba08-2de02417c549/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-1d9b-79fa-ba08-2de02417c549\",\"storedBalance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"70.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":3}\n",
+      "scenario": "HTTP-SQS-dedup-and-SQS-first",
+      "sequence": 183
+    },
+    {
+      "action": "received-DLQ",
+      "at": "2026-10-01T06:50:12.707031Z",
+      "channel": "SQS",
+      "message": {
+        "messageId": "42373348-b0e8-469e-b0fe-d7a384880b92",
+        "type": "INVALID_DEMO_MESSAGE"
+      },
+      "queue": "wager-transactions-dlq.fifo",
+      "scenario": "invalid-SQS-message-reaches-DLQ",
+      "sequence": 184
+    },
+    {
+      "at": "2026-10-01T06:50:13.229478Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "146c80c7-b18d-4ca9-98c1-4eece0047cc1"
+      },
+      "response": "{\"id\":\"01a0f63a-5560-7253-b6ae-ff6005910aa1\",\"playerId\":\"146c80c7-b18d-4ca9-98c1-4eece0047cc1\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "timed-contracts-setup",
+      "sequence": 185
+    },
+    {
+      "at": "2026-10-01T06:50:13.240242Z",
+      "channel": "HTTP",
+      "httpStatus": 201,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets",
+      "request": {
+        "initialBalance": {
+          "amount": "100.00",
+          "currency": "BRL"
+        },
+        "playerId": "262d322e-afb3-4ce9-8aaa-585e8cc25b4f"
+      },
+      "response": "{\"id\":\"01a0f63a-556d-7c77-8074-97e19519e12b\",\"playerId\":\"262d322e-afb3-4ce9-8aaa-585e8cc25b4f\",\"balance\":{\"amount\":\"100.00\",\"currency\":\"BRL\"},\"version\":1}\n",
+      "scenario": "timed-contracts-setup",
+      "sequence": 186
+    },
+    {
+      "at": "2026-10-01T06:50:13.247518Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "cbe07e6b-2940-4e2b-ae11-b557086ab1ec",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "cbe07e6b-2940-4e2b-ae11-b557086ab1ec",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "146c80c7-b18d-4ca9-98c1-4eece0047cc1",
+        "providerId": "provider-a",
+        "roundId": "1e8692f9-aade-401d-bb8c-b3c701d7c8bd",
+        "walletId": "01a0f63a-5560-7253-b6ae-ff6005910aa1"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-5578-73f4-a840-064b816b974c\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "timed-contracts-setup",
+      "sequence": 187
+    },
+    {
+      "at": "2026-10-01T06:50:13.256411Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "e514e3bc-2b72-44fc-8de7-7cd059ac837a",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "e514e3bc-2b72-44fc-8de7-7cd059ac837a",
+        "gameId": "challenge-demo",
+        "kind": "BET",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "262d322e-afb3-4ce9-8aaa-585e8cc25b4f",
+        "providerId": "provider-a",
+        "roundId": "1320dfad-737e-4995-86a8-e6a37f6f4d64",
+        "walletId": "01a0f63a-556d-7c77-8074-97e19519e12b"
+      },
+      "response": "{\"transactionId\":\"01a0f63a-557f-75bf-bcd5-25802389decc\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "timed-contracts-setup",
+      "sequence": 188
+    },
+    {
+      "at": "2026-10-01T06:55:14.318428Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "9ad11c1b-18b0-46a8-966d-ddf8c1ab8581",
+      "identity": "provider-a",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "9ad11c1b-18b0-46a8-966d-ddf8c1ab8581",
+        "gameId": "challenge-demo",
+        "kind": "REFUND",
+        "money": {
+          "amount": "25.00",
+          "currency": "BRL"
+        },
+        "playerId": "146c80c7-b18d-4ca9-98c1-4eece0047cc1",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "cbe07e6b-2940-4e2b-ae11-b557086ab1ec",
+        "roundId": "1e8692f9-aade-401d-bb8c-b3c701d7c8bd",
+        "walletId": "01a0f63a-5560-7253-b6ae-ff6005910aa1"
+      },
+      "response": "{\"transactionId\":\"01a0f63e-ed83-78c5-b89d-8ee1d2469563\",\"status\":\"REJECTED\",\"failureCode\":\"BET_CLOSED\",\"idempotentReplay\":false}\n",
+      "scenario": "REFUND-after-window",
+      "sequence": 189
+    },
+    {
+      "at": "2026-10-01T06:55:14.32237Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-5560-7253-b6ae-ff6005910aa1/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-5560-7253-b6ae-ff6005910aa1\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "REFUND-after-window",
+      "sequence": 190
+    },
+    {
+      "at": "2026-10-01T06:55:14.329559Z",
+      "channel": "HTTP",
+      "httpStatus": 422,
+      "idempotencyKey": "24dbc5f2-8753-4b25-a3dc-334dda51addb",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "24dbc5f2-8753-4b25-a3dc-334dda51addb",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "50.00",
+          "currency": "BRL"
+        },
+        "playerId": "262d322e-afb3-4ce9-8aaa-585e8cc25b4f",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "e514e3bc-2b72-44fc-8de7-7cd059ac837a",
+        "roundId": "1320dfad-737e-4995-86a8-e6a37f6f4d64",
+        "walletId": "01a0f63a-556d-7c77-8074-97e19519e12b"
+      },
+      "response": "{\"transactionId\":\"01a0f63e-ed92-78e5-aa30-256fd589625a\",\"status\":\"REJECTED\",\"failureCode\":\"INSUFFICIENT_FUNDS\",\"idempotentReplay\":false}\n",
+      "scenario": "WIN-over-stake-after-window",
+      "sequence": 191
+    },
+    {
+      "at": "2026-10-01T06:55:14.331585Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-556d-7c77-8074-97e19519e12b/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-556d-7c77-8074-97e19519e12b\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":2}\n",
+      "scenario": "WIN-over-stake-after-window",
+      "sequence": 192
+    },
+    {
+      "at": "2026-10-01T06:55:14.349668Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "781f9e95-60c9-45dd-91d2-3dddc237cdf0",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "781f9e95-60c9-45dd-91d2-3dddc237cdf0",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "262d322e-afb3-4ce9-8aaa-585e8cc25b4f",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "e514e3bc-2b72-44fc-8de7-7cd059ac837a",
+        "roundId": "1320dfad-737e-4995-86a8-e6a37f6f4d64",
+        "walletId": "01a0f63a-556d-7c77-8074-97e19519e12b"
+      },
+      "response": "{\"transactionId\":\"01a0f63e-ed9b-774f-9c6a-6f94e9637edc\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"85.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "WIN-and-ROLLBACK-after-window",
+      "sequence": 193
+    },
+    {
+      "at": "2026-10-01T06:55:14.358496Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "8e79bc91-36b3-4d0b-9bcb-a978a52c3e92",
+      "identity": "provider-a",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "8e79bc91-36b3-4d0b-9bcb-a978a52c3e92",
+        "gameId": "challenge-demo",
+        "kind": "ROLLBACK",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "262d322e-afb3-4ce9-8aaa-585e8cc25b4f",
+        "providerId": "provider-a",
+        "referenceExternalTransactionId": "781f9e95-60c9-45dd-91d2-3dddc237cdf0",
+        "roundId": "1320dfad-737e-4995-86a8-e6a37f6f4d64",
+        "walletId": "01a0f63a-556d-7c77-8074-97e19519e12b"
+      },
+      "response": "{\"transactionId\":\"01a0f63e-edad-786f-870c-a0daa19c5ba9\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "WIN-and-ROLLBACK-after-window",
+      "sequence": 194
+    },
+    {
+      "at": "2026-10-01T06:55:14.359484Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app3",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-556d-7c77-8074-97e19519e12b/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-556d-7c77-8074-97e19519e12b\",\"storedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"75.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":4}\n",
+      "scenario": "WIN-and-ROLLBACK-after-window",
+      "sequence": 195
+    },
+    {
+      "at": "2026-10-01T06:55:14.368227Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "9eb9970a-dee4-4357-b08d-854174046cfa",
+      "identity": "provider-a",
+      "instance": "app1",
+      "method": "POST",
+      "path": "/wagering/transactions",
+      "request": {
+        "externalTransactionId": "9eb9970a-dee4-4357-b08d-854174046cfa",
+        "gameId": "challenge-demo",
+        "kind": "WIN",
+        "money": {
+          "amount": "10.00",
+          "currency": "BRL"
+        },
+        "playerId": "146c80c7-b18d-4ca9-98c1-4eece0047cc1",
+        "providerId": "provider-a",
+        "roundId": "1e8692f9-aade-401d-bb8c-b3c701d7c8bd",
+        "walletId": "01a0f63a-5560-7253-b6ae-ff6005910aa1"
+      },
+      "response": "{\"transactionId\":\"01a0f63e-edb7-7373-8ecb-e75bb18074f2\",\"status\":\"PROCESSED\",\"balance\":{\"amount\":\"85.00\",\"currency\":\"BRL\"},\"idempotentReplay\":false}\n",
+      "scenario": "WIN-implicit-reference-after-window",
+      "sequence": 196
+    },
+    {
+      "at": "2026-10-01T06:55:14.369302Z",
+      "channel": "HTTP",
+      "httpStatus": 200,
+      "idempotencyKey": "",
+      "identity": "internal-service",
+      "instance": "app2",
+      "method": "POST",
+      "path": "/wallets/01a0f63a-5560-7253-b6ae-ff6005910aa1/reconciliation",
+      "request": null,
+      "response": "{\"walletId\":\"01a0f63a-5560-7253-b6ae-ff6005910aa1\",\"storedBalance\":{\"amount\":\"85.00\",\"currency\":\"BRL\"},\"calculatedBalance\":{\"amount\":\"85.00\",\"currency\":\"BRL\"},\"difference\":{\"amount\":\"0.00\",\"currency\":\"BRL\"},\"consistent\":true,\"checkedEntries\":3}\n",
+      "scenario": "WIN-implicit-reference-after-window",
+      "sequence": 197
+    }
+  ],
+  "finishedAt": "2026-10-01T06:55:14.369343Z",
+  "matchesDocumentedProject": true,
+  "results": [
+    {
+      "name": "readiness-and-OIDC",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "gateway-distributes-to-independent-replicas",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "events-outbox-and-metrics",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "opening-zero-positive-duplicate-ledger-pagination",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "authentication-provider-isolation",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "expired-token",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "money-invalid-input-and-external-opening",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "replay-original-balance-and-conflicts",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "LOSS-does-not-change-balance-version-ledger",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "WIN-after-BET-10.00",
+      "status": "PASS",
+      "projectExpectation": "WIN antes do fechamento: 422 REJECTED/BET_NOT_CLOSED; saldo 75.00.",
+      "challengeComparison": "§7 descreve crédito positivo; não estabelece espera pela janela. Regra adicional do projeto."
+    },
+    {
+      "name": "WIN-after-BET-50.00",
+      "status": "PASS",
+      "projectExpectation": "WIN antes do fechamento: 422 REJECTED/BET_NOT_CLOSED; saldo 75.00.",
+      "challengeComparison": "§7 descreve crédito positivo; não estabelece espera pela janela. Regra adicional do projeto."
+    },
+    {
+      "name": "WIN-optional-reference",
+      "status": "PASS",
+      "projectExpectation": "Sem BET candidata: 422 REJECTED/REFERENCE_NOT_FOUND; saldo 100.00.",
+      "challengeComparison": "§7 torna a referência opcional. O projeto exige vínculo interno mesmo sem o campo externo."
+    },
+    {
+      "name": "REFUND-and-ROLLBACK-of-REFUND",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "ROLLBACK-of-BET",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "ROLLBACK-recovers-open-BET",
+      "status": "PASS",
+      "projectExpectation": "Compensa outra BET aberta e reverte REFUND: 200 PROCESSED; saldo 0.00 e seis lançamentos.",
+      "challengeComparison": "§7 exige rejeição da reversão sem saldo disponível. O projeto tenta recuperar recursos de outras BETs."
+    },
+    {
+      "name": "REFUND-before-reference",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "ROLLBACK-before-reference",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "50-concurrent-replays-one-debit",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "two-concurrent-BETs-80-over-100",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "HTTP-SQS-dedup-and-SQS-first",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "broker-denied-identity",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "invalid-SQS-message-reaches-DLQ",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "timed-contracts-setup",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "timed-contracts-reauthenticate",
+      "status": "PASS",
+      "projectExpectation": "Resultados definidos nas asserções deste cenário; entradas e respostas registradas em exchanges.",
+      "challengeComparison": "Comparar o cenário e suas observações com o script independente do avaliador; não é certificação integral."
+    },
+    {
+      "name": "REFUND-after-window",
+      "status": "PASS",
+      "projectExpectation": "Após BET_WINDOW: 422 REJECTED/BET_CLOSED; saldo 75.00.",
+      "challengeComparison": "§7 não estabelece prazo para REFUND. O projeto limita a devolução à janela aberta."
+    },
+    {
+      "name": "WIN-over-stake-after-window",
+      "status": "PASS",
+      "projectExpectation": "WIN 50.00 com compromisso de 25.00: 422 REJECTED/INSUFFICIENT_FUNDS; saldo 75.00.",
+      "challengeComparison": "§7 não limita WIN ao aporte. O projeto exige financiamento pelo compromisso."
+    },
+    {
+      "name": "WIN-and-ROLLBACK-after-window",
+      "status": "PASS",
+      "projectExpectation": "Após a janela, WIN 10.00 leva saldo a 85.00; ROLLBACK leva a 75.00; quatro lançamentos.",
+      "challengeComparison": "Demonstra crédito e inversão integral, incluindo a pré-condição de prazo adicional do projeto."
+    },
+    {
+      "name": "WIN-implicit-reference-after-window",
+      "status": "PASS",
+      "projectExpectation": "WIN sem referência explícita resolve BET elegível; saldo 85.00.",
+      "challengeComparison": "Demonstra o campo opcional do §7 e a seleção interna de referência do projeto."
+    }
+  ],
+  "scope": "project demonstration, not evaluator acceptance",
+  "startedAt": "2026-10-01T06:49:43.888819Z"
+}

@@ -18,7 +18,7 @@ func TestSettledReversalUsesEveryOriginalCounterparty(t *testing.T) {
 		}
 		return v
 	}
-	for _, name := range []string{"success", "insufficient", "overflow", "no journals", "missing counterparty", "same account", "invalid snapshot", "debit currency", "credit currency", "debit time", "credit time", "missing wallet account"} {
+	for _, name := range []string{"success", "insufficient", "overflow", "no journals", "missing counterparty", "missing debit counterparty", "same account", "invalid snapshot", "debit currency", "credit currency", "debit time", "credit time", "missing wallet account"} {
 		t.Run(name, func(t *testing.T) {
 			g, _ := wallet.New("g", "player", m(11000), now)
 			a, _ := wallet.New("a", "player", m(0), now)
@@ -51,6 +51,9 @@ func TestSettledReversalUsesEveryOriginalCounterparty(t *testing.T) {
 				wantErr = true
 			case "missing counterparty":
 				delete(f.ReversalAccounts, "a")
+				wantErr = true
+			case "missing debit counterparty":
+				delete(f.ReversalAccounts, "g")
 				wantErr = true
 			case "same account":
 				f.ReversalJournals[0].DebitAccountID = "g"

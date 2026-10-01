@@ -1,0 +1,213 @@
+OK: curl 8.7.1 (mínimo 7.68.0)
+OK: git 2.49.0 (mínimo 2.23.0)
+OK: jq 1.7.1 (mínimo 1.6.0)
+OK: make 3.81.0 (mínimo 3.81.0)
+OK: cc 21.0.0 (mínimo 10.0.0)
+OK: uuidgen (UUID válido)
+OK: go 1.27.1 (mínimo 1.27.1)
+OK: docker 28.4.0 (mínimo 24.0.0)
+OK: compose 2.39.2 (mínimo 2.20.0)
+OK: Docker Server 28.4.0
+Private environment created (mode 0600). Values are not printed.
+ localstack Pulling
+ migrate Pulling
+ keycloak Pulling
+ postgres Pulling
+ keycloak Pulled
+ migrate Pulled
+ postgres Pulled
+ localstack Pulled
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.22kB done
+#1 DONE 0.0s
+
+#2 [app internal] load build definition from Dockerfile
+#2 transferring dockerfile: 626B done
+#2 DONE 0.0s
+
+#3 [gateway internal] load metadata for docker.io/library/golang:1.27.1-alpine
+#3 DONE 0.9s
+
+#4 [gateway internal] load metadata for docker.io/library/haproxy:3.2.25-alpine
+#4 ...
+
+#5 [app internal] load metadata for gcr.io/distroless/static-debian12:nonroot
+#5 DONE 1.3s
+
+#6 [app internal] load .dockerignore
+#6 transferring context: 122B done
+#6 DONE 0.0s
+
+#7 [app build 1/7] FROM docker.io/library/golang:1.27.1-alpine@sha256:8a5910f31396cd4d89662f56c68b3ae31d374308270a1c3bd96672ee5ed43414
+#7 resolve docker.io/library/golang:1.27.1-alpine@sha256:8a5910f31396cd4d89662f56c68b3ae31d374308270a1c3bd96672ee5ed43414 0.0s done
+#7 DONE 0.0s
+
+#8 [app app 1/4] FROM gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab
+#8 resolve gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab 0.0s done
+#8 DONE 0.0s
+
+#9 [app internal] load build context
+#9 ...
+
+#6 [gateway internal] load .dockerignore
+#6 transferring context: 122B done
+#6 DONE 0.0s
+
+#7 [gateway build 1/7] FROM docker.io/library/golang:1.27.1-alpine@sha256:8a5910f31396cd4d89662f56c68b3ae31d374308270a1c3bd96672ee5ed43414
+#7 resolve docker.io/library/golang:1.27.1-alpine@sha256:8a5910f31396cd4d89662f56c68b3ae31d374308270a1c3bd96672ee5ed43414 0.0s done
+#7 DONE 0.0s
+
+#4 [gateway internal] load metadata for docker.io/library/haproxy:3.2.25-alpine
+#4 DONE 1.5s
+
+#9 [gateway internal] load build context
+#9 ...
+
+#10 [gateway gateway 1/3] FROM docker.io/library/haproxy:3.2.25-alpine@sha256:61074191875132a4a61e864f9ec4880b88553b237df7aadecb70060ec44cd63d
+#10 resolve docker.io/library/haproxy:3.2.25-alpine@sha256:61074191875132a4a61e864f9ec4880b88553b237df7aadecb70060ec44cd63d 0.0s done
+#10 sha256:5a3c7a77188f02dbf1b53aaf46e66508bf6536f07a373fc892d4b6e9010e9095 442B / 442B 0.1s done
+#10 sha256:bb754bb226051c76c2f2951e27666eba0d2f6c6e9c540c93d146e9b455ac4c2a 13.13MB / 13.13MB 0.5s done
+#10 sha256:d24e89194c07de55f3a4b957a1c421305e2076861e0b4b277ded034b13906643 963B / 963B 0.5s done
+#10 sha256:28d78e211081f324b90b221cfb0d8cef18a5dc9b5615203b2b461a2e776c9637 802.53kB / 802.53kB 0.6s done
+#10 extracting sha256:28d78e211081f324b90b221cfb0d8cef18a5dc9b5615203b2b461a2e776c9637 0.1s done
+#10 extracting sha256:d24e89194c07de55f3a4b957a1c421305e2076861e0b4b277ded034b13906643 0.0s done
+#10 extracting sha256:bb754bb226051c76c2f2951e27666eba0d2f6c6e9c540c93d146e9b455ac4c2a 0.2s done
+#10 DONE 1.0s
+
+#9 [gateway internal] load build context
+#9 ...
+
+#10 [gateway gateway 1/3] FROM docker.io/library/haproxy:3.2.25-alpine@sha256:61074191875132a4a61e864f9ec4880b88553b237df7aadecb70060ec44cd63d
+#10 extracting sha256:5a3c7a77188f02dbf1b53aaf46e66508bf6536f07a373fc892d4b6e9010e9095 done
+#10 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#10 DONE 1.0s
+
+#9 [gateway internal] load build context
+#9 transferring context: 147.40MB 2.4s done
+#9 DONE 2.4s
+
+#11 [app build 2/7] WORKDIR /src
+#11 CACHED
+
+#12 [app build 3/7] COPY go.mod go.sum ./
+#12 DONE 0.2s
+
+#13 [gateway build 4/7] RUN go mod download
+#13 DONE 9.3s
+
+#14 [gateway build 5/7] COPY . .
+#14 DONE 1.1s
+
+#15 [app build 6/7] RUN CGO_ENABLED=0 go build -trimpath -o /out/wagering ./cmd/wagering
+#15 DONE 7.8s
+
+#16 [app build 7/7] RUN CGO_ENABLED=0 go build -trimpath -o /out/healthcheck ./cmd/healthcheck
+#16 DONE 0.3s
+
+#8 [app app 1/4] FROM gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab
+#8 CACHED
+
+#17 [gateway gateway 2/3] COPY --from=build /out/healthcheck /healthcheck
+#17 DONE 0.0s
+
+#18 [gateway gateway 3/3] COPY deploy/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+#18 DONE 0.0s
+
+#19 [app app 2/4] COPY --from=build /out/wagering /wagering
+#19 DONE 0.0s
+
+#20 [app app 3/4] COPY --from=build /out/healthcheck /healthcheck
+#20 DONE 0.0s
+
+#21 [gateway] exporting to image
+#21 exporting layers
+#21 ...
+
+#22 [app app 4/4] COPY migrations /migrations
+#22 DONE 0.0s
+
+#21 [gateway] exporting to image
+#21 exporting layers 0.2s done
+#21 exporting manifest sha256:155de15fd62c6bd89f3db31efdec4011ed0f10b8c730250bfe2e35353670cc52 done
+#21 exporting config sha256:9561330c69a06e1933c12c42cbe8050b51240830b2d518db2a59522234c794f3 done
+#21 exporting attestation manifest sha256:318542a24610867dbae5229e7e700a47ee51b028245897558802a7656504028f done
+#21 exporting manifest list sha256:a074aa6b9c2fc0528b1577c231f879fba9090d5f9e141b759e7a4dd6541adc4c done
+#21 naming to docker.io/library/wagering-clean-20261001-gateway:latest done
+#21 unpacking to docker.io/library/wagering-clean-20261001-gateway:latest 0.0s done
+#21 DONE 0.3s
+
+#23 [gateway] resolving provenance for metadata file
+#23 DONE 0.0s
+
+#24 [app] exporting to image
+#24 exporting layers 0.7s done
+#24 exporting manifest sha256:e3149946863a17fd5c455bc0ad5fc7ba2419a6e55a979aff68e0d3a7544470fe done
+#24 exporting config sha256:5b2abf2adeddbbac306c7478df23eb185304c0a74284d8cd2184245bf8d13359 done
+#24 exporting attestation manifest sha256:77a3db2488325cbbb146c70af9e5181cb5d01b711d3b4e4413accdcbedb29af0 done
+#24 exporting manifest list sha256:7ad23ca84adcc492018458612cb2f9fe3a629a3b132f952feabaac4de431230f done
+#24 naming to docker.io/library/wagering-clean-20261001-app:latest done
+#24 unpacking to docker.io/library/wagering-clean-20261001-app:latest 0.1s done
+#24 DONE 0.8s
+
+#25 [app] resolving provenance for metadata file
+#25 DONE 0.0s
+ wagering-clean-20261001-app  Built
+ wagering-clean-20261001-gateway  Built
+ Network wagering-clean-20261001_default  Creating
+ Network wagering-clean-20261001_default  Created
+ Volume "wagering-clean-20261001_ministackdata"  Creating
+ Volume "wagering-clean-20261001_ministackdata"  Created
+ Volume "wagering-clean-20261001_pgdata"  Creating
+ Volume "wagering-clean-20261001_pgdata"  Created
+ Volume "wagering-clean-20261001_awscredentials"  Creating
+ Volume "wagering-clean-20261001_awscredentials"  Created
+ Container wagering-clean-20261001-localstack-1  Creating
+ Container wagering-clean-20261001-postgres-1  Creating
+ Container wagering-clean-20261001-keycloak-1  Creating
+ Container wagering-clean-20261001-keycloak-1  Created
+ Container wagering-clean-20261001-postgres-1  Created
+ Container wagering-clean-20261001-migrate-1  Creating
+ Container wagering-clean-20261001-localstack-1  Created
+ Container wagering-clean-20261001-migrate-1  Created
+ Container wagering-clean-20261001-app-1  Creating
+ Container wagering-clean-20261001-app-1  Created
+ Container wagering-clean-20261001-gateway-1  Creating
+ Container wagering-clean-20261001-gateway-1  Created
+ Container wagering-clean-20261001-localstack-1  Starting
+ Container wagering-clean-20261001-keycloak-1  Starting
+ Container wagering-clean-20261001-postgres-1  Starting
+ Container wagering-clean-20261001-postgres-1  Started
+ Container wagering-clean-20261001-postgres-1  Waiting
+ Container wagering-clean-20261001-localstack-1  Started
+ Container wagering-clean-20261001-keycloak-1  Started
+ Container wagering-clean-20261001-postgres-1  Healthy
+ Container wagering-clean-20261001-migrate-1  Starting
+ Container wagering-clean-20261001-migrate-1  Started
+ Container wagering-clean-20261001-localstack-1  Waiting
+ Container wagering-clean-20261001-keycloak-1  Waiting
+ Container wagering-clean-20261001-migrate-1  Waiting
+ Container wagering-clean-20261001-migrate-1  Exited
+ Container wagering-clean-20261001-localstack-1  Healthy
+ Container wagering-clean-20261001-keycloak-1  Healthy
+ Container wagering-clean-20261001-app-1  Starting
+ Container wagering-clean-20261001-app-1  Started
+ Container wagering-clean-20261001-app-1  Waiting
+ Container wagering-clean-20261001-app-1  Healthy
+ Container wagering-clean-20261001-gateway-1  Starting
+ Container wagering-clean-20261001-gateway-1  Started
+ Container wagering-clean-20261001-migrate-1  Waiting
+ Container wagering-clean-20261001-gateway-1  Waiting
+ Container wagering-clean-20261001-app-1  Waiting
+ Container wagering-clean-20261001-postgres-1  Waiting
+ Container wagering-clean-20261001-localstack-1  Waiting
+ Container wagering-clean-20261001-keycloak-1  Waiting
+ Container wagering-clean-20261001-migrate-1  Exited
+ Container wagering-clean-20261001-localstack-1  Healthy
+ Container wagering-clean-20261001-postgres-1  Healthy
+ Container wagering-clean-20261001-keycloak-1  Healthy
+ Container wagering-clean-20261001-app-1  Healthy
+ Container wagering-clean-20261001-gateway-1  Healthy
+Environment started.
+API: http://localhost:8080
+Keycloak: http://localhost:8081
+Logs: docker compose logs -f app

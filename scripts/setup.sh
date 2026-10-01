@@ -23,6 +23,6 @@ docker compose pull postgres localstack keycloak migrate
 if [[ "$start" == true ]]; then
   bash scripts/up.sh
 else
-  docker compose build app
+  docker compose build app gateway
   echo 'Environment prepared. Start it with: bash scripts/up.sh'
 fi

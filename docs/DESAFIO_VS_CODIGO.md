@@ -1,6 +1,6 @@
 # DESAFIO.md versus comportamento implementado
 
-Conferência de 30/09/2026. O enunciado é a referência. Esta comparação não muda regras, não autoriza restrições e não atribui decisões anteriores ao usuário. Código e testes demonstram o comportamento presente; testes verdes não estabelecem, sozinhos, conformidade com o pedido.
+Comparação das regras conferidas em 30/09/2026, com atualização documental em 01/10/2026. O [demo em ambiente limpo](verification/clean-start-2026-10-01/README.md) registrou 28 cenários aprovados segundo o comportamento do projeto, mantendo explícitas as diferenças do enunciado. O enunciado é a referência. Esta comparação não muda regras, não autoriza restrições e não atribui decisões anteriores ao usuário. Código e testes demonstram o comportamento presente; testes verdes não estabelecem, sozinhos, conformidade com o pedido.
 
 ## Cenário pedido
 
@@ -59,9 +59,9 @@ As operações externas são síncronas dentro da UnitOfWork, salvo a continuida
 | §8 concorrência | Locks por aposta/compromissos/contas, sem lock global; execução registrada com três processos, 50 replays e disputa 80/80. |
 | §9 API | Rotas do desafio e quatro rotas internas adicionais; [OpenAPI](../api/openapi.yaml). |
 | §§10–11 mensageria | Inbox transacional, ACK após commit, retry/DLQ, outbox com lease/fence e fila privada adicional; [contratos](CONTRACTS.md). |
-| §12 observabilidade | Logs JSON, métricas Prometheus, health; [nomes e limites presentes](OBSERVABILITY.md). Tracing e dashboards ausentes. |
+| §12 observabilidade | Logs JSON, métricas Prometheus, health; [nomes e limites presentes](OBSERVABILITY.md). OpenTelemetry implementado; dashboards Grafana ausentes. |
 | §13 testes | Há execução registrada de PostgreSQL/Keycloak/MiniStack, falhas, concorrência e race. [VERIFICATION.md](../VERIFICATION.md) delimita os fontes de cada campanha; não é uma nova execução hoje. |
-| §§14–15 opcionais/entrega | Partidas internas pareadas presentes; OPENING externo tem uma partida. Carga, OpenTelemetry e dashboards ausentes. pgx adotado, sqlc não. Comandos e limitações no [README](../README.md). |
+| §§14–15 opcionais/entrega | Partidas internas pareadas presentes; OPENING externo tem uma partida. OpenTelemetry implementado, sem validação integrada nesta alteração. Carga e dashboards Grafana ausentes. pgx adotado, sqlc não. Comandos e limitações no [README](../README.md). |
 
 Não há declaração de conformidade integral. A revisão documental expõe as restrições, mas não as corrige no código nem redefine o DESAFIO.md para fazer a implementação parecer conforme.
 
