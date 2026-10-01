@@ -34,7 +34,7 @@ O script semântico executa testes normais/race/vet, cobertura, mutações em c�
 ## Evidência
 
 - [Log semântico/fuzzing](semantic.log), [mutações e testes que detectaram cada defeito](mutations/results.json), [integração](integration.log), [build](build.log), [readiness](readiness.log), [resultados estruturados](results.json).
-- [Perfil de statements](unit.out), [funções](functions.txt), [HTML](unit.html), [resumo de cobertura](summary.json).
+- `Perfil de statements` (artefato local não versionado), [funções](functions.txt), [HTML](unit.html), [resumo de cobertura](summary.json).
 - Eventos completos dos testes: [normal](../../acceptance/evidence/test.jsonl) e [race](../../acceptance/evidence/race.jsonl).
 - Regressões observadas **antes** das correções: [null retornando 403](expected-failure-null-before-fix.log) e [métrica FAILED sem nova falha persistida](expected-failure-metric-before-fix.log). São falhas esperadas históricas; a execução final passou.
 

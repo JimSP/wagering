@@ -17,13 +17,6 @@ regexTarget = "match"
 regexes = ['''received-key-73 PayloadHash:[a-f0-9]{64} ''']
 
 [[allowlists]]
-description = "Graph index records file checksums, not credentials"
-condition = "AND"
-paths = ['''graphify-out/cache/stat-index\.json$''']
-regexTarget = "match"
-regexes = ['''(api-contracts\.md|test-credentials\.sh)":"[a-f0-9]{64}"''']
-
-[[allowlists]]
 description = "Synthetic UUID idempotency keys in the clean-start demo, not authentication secrets"
 condition = "AND"
 paths = ['''docs/verification/clean-start-2026-10-01/demonstration\.json$''']

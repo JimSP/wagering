@@ -31,7 +31,7 @@ A [rodada intermediária](round-1/results.json) encontrou 16 sobreviventes: seis
 
 ## Evidência
 
-- [Cobertura com race](coverage/test.log), [resumo dos seis pacotes](coverage/summary.json), [perfil](coverage/unit.out) e [funções](coverage/functions.txt): 887/887 statements, 100% em cada área solicitada.
+- [Cobertura com race](coverage/test.log), [resumo dos seis pacotes](coverage/summary.json), `perfil` (artefato local não versionado) e [funções](coverage/functions.txt): 887/887 statements, 100% em cada área solicitada.
 - `go vet ./...`: aprovado.
 - [Log integral intermediário](round-1/run.log) e [JSON intermediário](round-1/results.json), preservados.
 - [Log final](final/run.log), JSON final em `final/results.json` e [hashes das entradas da campanha](final/source-baseline.json).

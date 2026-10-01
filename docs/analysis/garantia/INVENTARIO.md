@@ -10,7 +10,7 @@
 
 | Arquivo | Destino | Avaliação |
 |---|---|---|
-| [.DS_Store](../../../.DS_Store) | Preservar | Metadado local do Finder, sem papel no sistema; não incluir na entrega. |
+| `.DS_Store` (artefato local não versionado) | Preservar | Metadado local do Finder, sem papel no sistema; não incluir na entrega. |
 | [.dockerignore](../../../.dockerignore) | Regressão | Verificar inclusão de artefatos de bootstrap sem segredos. |
 | [.env.example](../../../.env.example) | Condicional | Configuração aprovada da reserva sem inventar capitalização. |
 | [.gitignore](../../../.gitignore) | Regressão | Manter credenciais/artefatos locais fora da entrega. |
@@ -99,7 +99,7 @@
 | [internal/infra/config/config_test.go](../../../internal/infra/config/config_test.go) | Regressão | Executar integralmente; adaptar fixtures/interfaces se necessário, sem relaxar asserts. |
 | [internal/infra/outbox/module.go](../../../internal/infra/outbox/module.go) | Regressão | Publicação desacoplada dos locks; lifecycle. |
 | [internal/infra/postgres/error_contract_test.go](../../../internal/infra/postgres/error_contract_test.go) | Alterar | Contratos SQL/scan/constraints e falhas de persistência; conservar regressões existentes. |
-| [internal/infra/postgres/helpers.go](../../../internal/infra/postgres/helpers.go) | Regressão | Conversão de erros sem mudança prevista. |
+| `internal/infra/postgres/helpers.go` (arquivo histórico ausente do checkout) | Regressão | Conversão de erros sem mudança prevista. |
 | [internal/infra/postgres/inbox_outbox_repo.go](../../../internal/infra/postgres/inbox_outbox_repo.go) | Regressão | Atomicidade inbox/outbox estendida ao par; payloads e identidade histórica. |
 | [internal/infra/postgres/late_error_integration_test.go](../../../internal/infra/postgres/late_error_integration_test.go) | Alterar | Contratos SQL/scan/constraints e falhas de persistência; conservar regressões existentes. |
 | [internal/infra/postgres/ledger_repo.go](../../../internal/infra/postgres/ledger_repo.go) | Alterar | Append de par/diário, List/Totals por conta e jogador, scan e cursores. |
@@ -154,17 +154,17 @@
 | [references/schema.md](../../../references/schema.md) | Alterar | Atualizar requisitos/contratos/esquema/comandos/resultado atuais; marcar histórico sem alterar original. |
 | [references/security.md](../../../references/security.md) | Alterar | Atualizar requisitos/contratos/esquema/comandos/resultado atuais; marcar histórico sem alterar original. |
 | [references/tests.md](../../../references/tests.md) | Alterar | Atualizar requisitos/contratos/esquema/comandos/resultado atuais; marcar histórico sem alterar original. |
-| [scripts/acceptance-report.py](../../../scripts/acceptance-report.py) | Condicional | Rastreabilidade novos critérios/testes conforme schema da matriz. |
-| [scripts/check_coverage.py](../../../scripts/check_coverage.py) | Preservar | Script do usuário; sua matriz recebe requisito adicional sem alterar script por conveniência. |
+| `scripts/acceptance-report.py` (arquivo histórico ausente do checkout) | Condicional | Rastreabilidade novos critérios/testes conforme schema da matriz. |
+| `scripts/check_coverage.py` (arquivo histórico ausente do checkout) | Preservar | Script do usuário; sua matriz recebe requisito adicional sem alterar script por conveniência. |
 | [scripts/manual-session.sh](../../../scripts/manual-session.sh) | Condicional | Compatibilidade de endpoints, preparo da garantia e novas conferências; roteiro atual usa curl direto. |
-| [scripts/mutation-go-audit.py](../../../scripts/mutation-go-audit.py) | Regressão | Auditar novos caminhos; não alterar operador/resultado para maquiar mutações. |
+| `scripts/mutation-go-audit.py` (arquivo histórico ausente do checkout) | Regressão | Auditar novos caminhos; não alterar operador/resultado para maquiar mutações. |
 | [scripts/test-acceptance.sh](../../../scripts/test-acceptance.sh) | Regressão | Nova suíte normal/race/vet; relatórios atuais tornam-se baseline. |
 | [scripts/test-integration.sh](../../../scripts/test-integration.sh) | Alterar | Migrations novas, depósitos iniciais idempotentes de teste e cenários de ordem/liquidez. |
-| [scripts/test-mutations.py](../../../scripts/test-mutations.py) | Histórico | Gerador manual antigo, fora do pipeline oficial; não usar para comprovar esta mudança. |
+| `scripts/test-mutations.py` (arquivo histórico ausente do checkout) | Histórico | Gerador manual antigo, fora do pipeline oficial; não usar para comprovar esta mudança. |
 | [scripts/test-mutations.sh](../../../scripts/test-mutations.sh) | Regressão | Campanha oficial integral inclui novos pacotes; sem exclusões. |
 | [scripts/test-semantic.sh](../../../scripts/test-semantic.sh) | Condicional | Incluir novo fuzz/modelo de conservação se for comando separado. |
 | [scripts/test-unit-coverage.sh](../../../scripts/test-unit-coverage.sh) | Condicional | Domínio novo já entra via wildcard; conferir coverpkg e relatório. |
-| [scripts/unit-coverage-report.py](../../../scripts/unit-coverage-report.py) | Alterar | TARGETS deve incluir novos pacotes de domínio/casos de uso. |
+| `scripts/unit-coverage-report.py` (arquivo histórico ausente do checkout) | Alterar | TARGETS deve incluir novos pacotes de domínio/casos de uso. |
 | [scripts/verify-sql.mjs](../../../scripts/verify-sql.mjs) | Alterar | Lista fixa de migrations e fixtures de uma perna precisam evolução. |
 | [test/concurrency/doc.go](../../../test/concurrency/doc.go) | Condicional | Documentar novo escopo de integração/concorrência, sem apresentar prova não executada. |
 | [test/integration/contract_test.go](../../../test/integration/contract_test.go) | Alterar | Todos os fluxos reais estendem a conservação às duas contas, migração e recuperação. |

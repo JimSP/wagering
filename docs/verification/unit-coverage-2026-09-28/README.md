@@ -29,6 +29,6 @@ Reproduzir: `./scripts/test-unit-coverage.sh`. Arquivos: `unit.out`, `functions.
 - Gate de cobertura verificado com um bloco artificialmente descoberto em cópia temporária do perfil: exit 1, como esperado.
 - Código formatado com gofmt; scripts shell com sintaxe válida.
 
-Logs e dados: [perfil](unit.out), [funções](functions.txt), [HTML](unit.html), [JSON](summary.json), [testes](test.log), [aceite](acceptance.log), [build](build.log), [readiness](readiness.log).
+Logs e dados: `perfil` (artefato local não versionado), [funções](functions.txt), [HTML](unit.html), [JSON](summary.json), [testes](test.log), [aceite](acceptance.log), [build](build.log), [readiness](readiness.log).
 
 O domínio cobre 386 statements; casos de uso, 376; autenticação, 120. A soma das áreas solicitadas é **882/882**. Os pacotes fora dessas áreas continuam executando seus testes, mas não entram nessa meta. As três simplificações de caminhos inalcançáveis são descritas em [CORRECTIONS.md](../../../CORRECTIONS.md). Os limites da integração estão em [VERIFICATION.md](../../../VERIFICATION.md).

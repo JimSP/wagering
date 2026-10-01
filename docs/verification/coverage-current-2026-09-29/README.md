@@ -42,6 +42,6 @@ O medidor foi atualizado para incluir `domain/settlement`. O perfil entregue aos
 
 A execução unitária com instrumentação de todos os pacotes Go produziu 77,9% de statements nos pacotes da aplicação, excluindo auxiliares de teste. Esse número inclui adaptadores fora da lista acima e **não é o indicador de aceite da meta unitária por pacote**, nem uma cobertura combinada com integração.
 
-Artefatos preservados para diagnóstico: [resumo amplo](all-summary.json), [perfil](all.out), [perfil bruto](all-raw.out), [funções](functions.txt), [HTML](all.html), [log](test.log). O total amplo usa todos os blocos, inclusive closures de configuração Fx; o total de `go tool cover -func` agrega funções declaradas e inclui os auxiliares de teste, portanto tem um denominador diferente.
+Artefatos preservados para diagnóstico: [resumo amplo](all-summary.json), `perfil` (artefato local não versionado), `perfil bruto` (artefato local não versionado), [funções](functions.txt), [HTML](all.html), [log](test.log). O total amplo usa todos os blocos, inclusive closures de configuração Fx; o total de `go tool cover -func` agrega funções declaradas e inclui os auxiliares de teste, portanto tem um denominador diferente.
 
 O percentual histórico de 100% não descreve a cobertura unitária do código atual.

@@ -24,7 +24,7 @@ Há um executável, `cmd/wagering`, composto com Uber Fx. O mesmo binário habil
 | Referências | Espera persistida, backoff, limite de tentativas e expiração | Processa as regras financeiras antigas |
 | Operação | Logs estruturados, métricas Prometheus, health/readiness, timeouts e shutdown coordenado | Não comprova implantação ou homologação em produção |
 
-Fontes: [composição](/Users/alexandre/wagering/cmd/wagering/app.go:29), [casos de uso registrados](/Users/alexandre/wagering/internal/app/usecase/module.go:9), [Money](/Users/alexandre/wagering/internal/domain/money/money.go:31), [unidade de trabalho](/Users/alexandre/wagering/internal/infra/postgres/uow.go:33), [lock e versão](/Users/alexandre/wagering/internal/infra/postgres/wallet_repo.go:44), [autenticação](/Users/alexandre/wagering/internal/infra/auth/verifier.go:157), [consumidor](/Users/alexandre/wagering/internal/infra/sqs/consumer.go:95), [workers](/Users/alexandre/wagering/internal/app/usecase/workers.go:31).
+Fontes: [composição](../../../cmd/wagering/app.go), [casos de uso registrados](../../../internal/app/usecase/module.go), [Money](../../../internal/domain/money/money.go), [unidade de trabalho](../../../internal/infra/postgres/uow.go), [lock e versão](../../../internal/infra/postgres/wallet_repo.go), [autenticação](../../../internal/infra/auth/verifier.go), [consumidor](../../../internal/infra/sqs/consumer.go), [workers](../../../internal/app/usecase/workers.go).
 
 ## 2. Comportamento financeiro que roda hoje
 
@@ -38,7 +38,7 @@ Fontes: [composição](/Users/alexandre/wagering/cmd/wagering/app.go:29), [casos
 | ROLLBACK | Inverte o movimento de uma transação em uma carteira | Compensar todos os movimentos e contas envolvidos, atomicamente |
 | Reconciliação | Compara saldo de uma carteira à soma de seu ledger | Conferir também garantias, diários, compromissos e transferências entre pares |
 
-Fontes: [classificador financeiro](/Users/alexandre/wagering/internal/domain/wager/rules.go:12), [processamento](/Users/alexandre/wagering/internal/app/usecase/process.go:68), [abertura](/Users/alexandre/wagering/internal/app/usecase/wallet.go:38), [reconciliação](/Users/alexandre/wagering/internal/app/usecase/wallet.go:135), [contrato documentado](/Users/alexandre/wagering/docs/analysis/garantia/CONTRATO_ATUAL.md:7).
+Fontes: [classificador financeiro](../../../internal/domain/wager/rules.go), [processamento](../../../internal/app/usecase/process.go), [abertura](../../../internal/app/usecase/wallet.go), [reconciliação](../../../internal/app/usecase/wallet.go), [contrato documentado](../garantia/CONTRATO_ATUAL.md).
 
 **Constatação executada:** enviar WIN de 35,00 sem financiamento a uma carteira vazia é processado e altera os fatos duráveis. A tentativa equivalente diretamente pelos repositórios também commita no PostgreSQL. Foram exercitados `TestRevisedStandaloneWINCannotCreateUnfundedMoney`, `TestSettlementRejectsUnfundedWINWithRealPostgres` e `TestSettlementDatabaseGuardsRejectUnfundedCreditBypass`. O comportamento é incompatível com o contrato novo; não é apenas ausência de documentação.
 
@@ -48,7 +48,7 @@ Existem somente duas migrations de subida: `000001_init.up.sql` e `000002_integr
 
 O banco protege saldo não negativo, identidade, versões, ledger imutável, cadeia de saldos, unicidades e eventos exigidos. Essas proteções são do modelo antigo. Em particular, `check_transaction_integrity` exige **exatamente um lançamento** por transação financeira processada. Não existe schema de garantias, compromissos, resultados e liquidações. Portanto, simplesmente inverter BET/WIN no Go não implementaria o contrato novo e entraria em conflito com as constraints existentes.
 
-Fontes: [schema inicial](/Users/alexandre/wagering/migrations/000001_init.up.sql:1), [exigência de um lançamento](/Users/alexandre/wagering/migrations/000002_integrity.up.sql:88), [portas atuais](/Users/alexandre/wagering/internal/app/port/ports.go:26), [teste do executor SQL ausente](/Users/alexandre/wagering/internal/infra/postgres/settlement_contract_test.go:22).
+Fontes: [schema inicial](../../../migrations/000001_init.up.sql), [exigência de um lançamento](../../../migrations/000002_integrity.up.sql), [portas atuais](../../../internal/app/port/ports.go), [teste do executor SQL ausente](../../../internal/infra/postgres/settlement_contract_test.go).
 
 ## 4. API e fila realmente disponíveis
 
@@ -68,7 +68,7 @@ As rotas propostas nos testes, como `/bets`, confirmação de resultado e `/wall
 
 Há ainda uma divergência concreta no contrato HTTP já existente: `LedgerEntryDTO` omite `walletId`, exigido no OpenAPI e no teste atual.
 
-Fontes: [router](/Users/alexandre/wagering/internal/transport/httpapi/module.go:43), [decoder SQS](/Users/alexandre/wagering/internal/app/usecase/transaction.go:263), [DTO do ledger](/Users/alexandre/wagering/internal/transport/httpapi/dto.go:81), [cenários de resultado](/Users/alexandre/wagering/internal/app/usecase/result_lifecycle_contract_test.go:24).
+Fontes: [router](../../../internal/transport/httpapi/module.go), [decoder SQS](../../../internal/app/usecase/transaction.go), [DTO do ledger](../../../internal/transport/httpapi/dto.go), [cenários de resultado](../../../internal/app/usecase/result_lifecycle_contract_test.go).
 
 ## 5. Verificações executadas nesta análise
 
@@ -109,7 +109,7 @@ Parte dos testes compara fatos literais de duas contas e utiliza os verificadore
 
 Muitos cenários integrados falham durante a preparação porque a consulta da garantia ou a criação da aposta retorna 404. Nesses casos, os asserts posteriores de distribuição, concorrência, atomicidade e eventos **não foram alcançados**. Outros testes chegam a um comportamento incorreto concreto, como WIN sem financiamento. Essas duas classes de falha não devem ser confundidas.
 
-Assim, 41 funções vermelhas não significam 41 defeitos independentes, e 126 verdes não permitem calcular uma porcentagem de conclusão do projeto. A revisão da suficiência da suíte permanece aberta conforme a retificação de escopo em [PENDENCIAS.md](/Users/alexandre/wagering/docs/analysis/garantia/PENDENCIAS.md:11). Esta análise não certifica todos os asserts nem altera esse status.
+Assim, 41 funções vermelhas não significam 41 defeitos independentes, e 126 verdes não permitem calcular uma porcentagem de conclusão do projeto. A revisão da suficiência da suíte permanece aberta conforme a retificação de escopo em [PENDENCIAS.md](../garantia/PENDENCIAS.md). Esta análise não certifica todos os asserts nem altera esse status.
 
 ## 7. Situação da entrega e sequência restante
 
@@ -126,8 +126,8 @@ A sequência coerente com o escopo documentado é:
 
 ## Evidências desta análise
 
-- [Resumo dos testes sem integração](/Users/alexandre/wagering/docs/analysis/estado-fonte-2026-09-29/unit-summary.json)
-- [Resumo dos testes PostgreSQL](/Users/alexandre/wagering/docs/analysis/estado-fonte-2026-09-29/postgres-summary.json)
-- [Log completo sem integração](/Users/alexandre/wagering/docs/analysis/estado-fonte-2026-09-29/tests.jsonl)
-- [Log completo PostgreSQL](/Users/alexandre/wagering/docs/analysis/estado-fonte-2026-09-29/postgres.jsonl)
-- [SHA-256 das fontes, testes e configuração conferidos](/Users/alexandre/wagering/docs/analysis/estado-fonte-2026-09-29/SOURCE.sha256)
+- [Resumo dos testes sem integração](unit-summary.json)
+- [Resumo dos testes PostgreSQL](postgres-summary.json)
+- [Log completo sem integração](tests.jsonl)
+- [Log completo PostgreSQL](postgres.jsonl)
+- [SHA-256 das fontes, testes e configuração conferidos](SOURCE.sha256)
