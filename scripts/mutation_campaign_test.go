@@ -15,10 +15,10 @@ func TestIncrementalMutationCampaignCacheAndInvalidation(t *testing.T) {
 	put := func(p, s string) {
 		t.Helper()
 		p = filepath.Join(root, p)
-		if e := os.MkdirAll(filepath.Dir(p), 0755); e != nil {
+		if e := os.MkdirAll(filepath.Dir(p), 0o755); e != nil {
 			t.Fatal(e)
 		}
-		if e := os.WriteFile(p, []byte(s), 0755); e != nil {
+		if e := os.WriteFile(p, []byte(s), 0o755); e != nil {
 			t.Fatal(e)
 		}
 	}
@@ -132,7 +132,9 @@ exit "$code"
 	entries, _ := filepath.Glob(filepath.Join(root, ".local/cache/p/*/result.json"))
 	for _, p := range entries {
 		b, _ := os.ReadFile(p)
-		os.WriteFile(p, []byte(strings.ReplaceAll(string(b), "KILLED", "LIVED")), 0600)
+		if err := os.WriteFile(p, []byte(strings.ReplaceAll(string(b), "KILLED", "LIVED")), 0o600); err != nil {
+			t.Fatal(err)
+		}
 	}
 	if s = run(true); s["passed"] != false {
 		t.Fatal("tampered cache accepted")
@@ -146,7 +148,9 @@ exit "$code"
 	if calls() != before+2 {
 		t.Fatal("failed entries were not retried", calls())
 	}
-	os.Remove(filepath.Join(root, ".local/fail"))
+	if err := os.Remove(filepath.Join(root, ".local/fail")); err != nil {
+		t.Fatal(err)
+	}
 	put(".local/change", "yes")
 	if s = run(true, "--refresh"); s["passed"] != false {
 		t.Fatal("changing inputs accepted")

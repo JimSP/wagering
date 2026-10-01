@@ -18,6 +18,7 @@ func TestEnvironmentMainHelper(t *testing.T) {
 	}
 	main()
 }
+
 func TestEnvironmentCLIAndBareCredential(t *testing.T) {
 	template, e := os.ReadFile("../../.env.example")
 	if e != nil {
@@ -37,10 +38,14 @@ func TestEnvironmentCLIAndBareCredential(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			dir := t.TempDir()
 			if !tc.missing {
-				os.WriteFile(filepath.Join(dir, ".env.example"), append([]byte("POSTGRES_PASSWORD\nUNRELATED=value\n"), template...), 0600)
+				if err := os.WriteFile(filepath.Join(dir, ".env.example"), append([]byte("POSTGRES_PASSWORD\nUNRELATED=value\n"), template...), 0o600); err != nil {
+					t.Fatal(err)
+				}
 			}
 			if tc.exists {
-				os.WriteFile(filepath.Join(dir, ".env"), []byte("keep"), 0600)
+				if err := os.WriteFile(filepath.Join(dir, ".env"), []byte("keep"), 0o600); err != nil {
+					t.Fatal(err)
+				}
 			}
 			cmd := exec.Command(os.Args[0], "-test.run=^TestEnvironmentMainHelper$")
 			cmd.Dir = dir

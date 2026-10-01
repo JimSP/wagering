@@ -30,7 +30,7 @@ func TestClassificationPreservesCauseAndRetryContract(t *testing.T) {
 			if got, want := classified.Error(), tc.name+": database unavailable"; got != want {
 				t.Fatalf("message=%q, want %q", got, want)
 			}
-			if errors.Unwrap(classified) != cause {
+			if errors.Unwrap(classified) != cause { //nolint:errorlint // Verify immediate cause identity, not transitive matching.
 				t.Fatal("wrapper lost original cause identity")
 			}
 			for _, err := range []error{classified, fmt.Errorf("apply transaction: %w", classified), errors.Join(errors.New("secondary failure"), classified)} {
@@ -59,7 +59,7 @@ func TestInvalidPreservesSentinelAndFormattedObservation(t *testing.T) {
 	if got, want := err.Error(), "invalid input: wallet wallet-7: limit 21 exceeds 20"; got != want {
 		t.Fatalf("message=%q, want %q", got, want)
 	}
-	if errors.Unwrap(err) != apperr.ErrInvalidInput || !errors.Is(fmt.Errorf("request: %w", err), apperr.ErrInvalidInput) {
+	if errors.Unwrap(err) != apperr.ErrInvalidInput || !errors.Is(fmt.Errorf("request: %w", err), apperr.ErrInvalidInput) { //nolint:errorlint // Verify the immediate sentinel as well as transitive matching.
 		t.Fatal("validation sentinel identity lost")
 	}
 	if errors.Is(err, errors.New("invalid input")) || errors.Is(err, apperr.ErrInvalidMessage) || apperr.IsTransient(err) || apperr.IsPermanent(err) {

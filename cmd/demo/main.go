@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,15 +21,18 @@ import (
 	"github.com/google/uuid"
 )
 
-type object = map[string]any
-type failure string
-type result struct {
-	Name                string `json:"name"`
-	Status              string `json:"status"`
-	Detail              string `json:"detail,omitempty"`
-	ProjectExpectation  string `json:"projectExpectation"`
-	ChallengeComparison string `json:"challengeComparison"`
-}
+type (
+	object  = map[string]any
+	failure string
+	result  struct {
+		Name                string `json:"name"`
+		Status              string `json:"status"`
+		Detail              string `json:"detail,omitempty"`
+		ProjectExpectation  string `json:"projectExpectation"`
+		ChallengeComparison string `json:"challengeComparison"`
+	}
+)
+
 type response struct {
 	Code     int
 	Body     object
@@ -50,6 +54,7 @@ func must(ok bool, format string, args ...any) {
 		panic(failure(fmt.Sprintf(format, args...)))
 	}
 }
+
 func env(key, fallback string) string {
 	if s := os.Getenv(key); s != "" {
 		return s
@@ -81,6 +86,7 @@ func (e *evaluator) run(name string, f func()) {
 	e.results = append(e.results, r)
 	fmt.Printf("%s %s %s\n", r.Status, r.Name, r.Detail)
 }
+
 func (e *evaluator) request(token, method, path, key string, body any) response {
 	var data []byte
 	if body != nil {
@@ -89,7 +95,9 @@ func (e *evaluator) request(token, method, path, key string, body any) response 
 		must(err == nil, "encode request")
 	}
 	req, err := http.NewRequest(method, e.base+path, bytes.NewReader(data))
-	must(err == nil, "invalid request URL")
+	if err != nil {
+		panic(failure("invalid request URL"))
+	}
 	if token != "" {
 		req.Header.Set("Authorization", "Bearer "+token)
 	}
@@ -100,9 +108,9 @@ func (e *evaluator) request(token, method, path, key string, body any) response 
 	res, err := e.client.Do(req)
 	if err != nil {
 		e.record(object{"channel": "HTTP", "method": method, "path": path, "request": json.RawMessage(dataOrNull(data)), "transportError": true})
+		panic(failure(fmt.Sprintf("HTTP transport failed at %s", path)))
 	}
-	must(err == nil, "HTTP transport failed at %s", path)
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 	raw, err := io.ReadAll(io.LimitReader(res.Body, 2<<20))
 	must(err == nil, "read HTTP response")
 	r := response{Code: res.StatusCode, Raw: string(raw), Instance: res.Header.Get("X-Wagering-Instance")}
@@ -125,6 +133,7 @@ func (e *evaluator) request(token, method, path, key string, body any) response 
 	}
 	return r
 }
+
 func expect(r response, code int, status, balance string) {
 	must(r.Code == code, "expected HTTP %d, got %d (status=%s failureCode=%s code=%s)", code, r.Code, str(r.Body, "status"), str(r.Body, "failureCode"), str(r.Body, "code"))
 	if status != "" {
@@ -134,14 +143,18 @@ func expect(r response, code int, status, balance string) {
 		must(amount(r.Body, "balance") == balance, "expected balance %s, got %s", balance, amount(r.Body, "balance"))
 	}
 }
+
 func (e *evaluator) token(client, secret string) string {
 	res, err := e.client.PostForm(e.issuer+"/protocol/openid-connect/token", url.Values{"grant_type": {"client_credentials"}, "client_id": {client}, "client_secret": {secret}})
-	must(err == nil, "OIDC transport failed")
-	defer res.Body.Close()
+	if err != nil {
+		panic(failure("OIDC transport failed"))
+	}
+	defer func() { _ = res.Body.Close() }()
 	var data object
 	must(res.StatusCode == 200 && json.NewDecoder(io.LimitReader(res.Body, 1<<20)).Decode(&data) == nil && str(data, "access_token") != "", "OIDC token failed for %s", client)
 	return str(data, "access_token")
 }
+
 func (e *evaluator) open(initial string) wallet {
 	w := wallet{Player: newID()}
 	r := e.request(e.internal, "POST", "/wallets", "", object{"playerId": w.Player, "initialBalance": money(initial)})
@@ -151,6 +164,7 @@ func (e *evaluator) open(initial string) wallet {
 	must(fmt.Sprint(r.Body["version"]) == "1", "opening version must be 1")
 	return w
 }
+
 func (e *evaluator) operation(w wallet, kind, value, round, ref string) object {
 	o := object{"providerId": e.providerID, "externalTransactionId": newID(), "playerId": w.Player, "walletId": w.ID, "roundId": round, "gameId": "challenge-demo", "kind": kind, "money": money(value)}
 	if ref != "" {
@@ -158,15 +172,18 @@ func (e *evaluator) operation(w wallet, kind, value, round, ref string) object {
 	}
 	return o
 }
+
 func (e *evaluator) submit(o object) response {
 	return e.request(e.provider, "POST", "/wagering/transactions", str(o, "externalTransactionId"), o)
 }
+
 func (e *evaluator) reconcile(w wallet, expected string, entries int) {
 	r := e.request(e.internal, "POST", "/wallets/"+w.ID+"/reconciliation", "", nil)
 	expect(r, 200, "", "")
 	must(r.Body["consistent"] == true && amount(r.Body, "difference") == "0.00" && amount(r.Body, "storedBalance") == expected && amount(r.Body, "calculatedBalance") == expected, "reconciliation mismatch, expected %s", expected)
 	must(fmt.Sprint(r.Body["checkedEntries"]) == fmt.Sprint(entries), "expected %d ledger entries, got %v", entries, r.Body["checkedEntries"])
 }
+
 func (e *evaluator) poll(o object, status string, timeout time.Duration) response {
 	path := "/providers/" + url.PathEscape(e.providerID) + "/wagering/transactions/" + url.PathEscape(str(o, "externalTransactionId"))
 	deadline := time.Now().Add(timeout)
@@ -179,6 +196,7 @@ func (e *evaluator) poll(o object, status string, timeout time.Duration) respons
 		time.Sleep(500 * time.Millisecond)
 	}
 }
+
 func broker(profile string, input []byte, args ...string) ([]byte, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
@@ -299,7 +317,6 @@ func (e *evaluator) contracts() {
 		e.reconcile(w, "100.00", 1)
 	})
 	for _, value := range []string{"10.00", "50.00"} {
-		value := value
 		e.run("WIN-after-BET-"+value, func() {
 			w := e.open("100.00")
 			round := newID()
@@ -352,7 +369,6 @@ func (e *evaluator) contracts() {
 		e.reconcile(w, "0.00", 6)
 	})
 	for _, kind := range []string{"REFUND", "ROLLBACK"} {
-		kind := kind
 		e.run(kind+"-before-reference", func() {
 			w := e.open("100.00")
 			round := newID()
@@ -385,7 +401,8 @@ func (e *evaluator) contracts() {
 		_, err := broker("auditor", nil, "get-queue-attributes", "--queue-url", queuePrefix+"wager-events.fifo", "--attribute-names", "QueueArn")
 		must(err == nil, "auditor unavailable")
 		_, err = broker("denied", nil, "get-queue-attributes", "--queue-url", queuePrefix+"wager-events.fifo", "--attribute-names", "QueueArn")
-		denied, ok := err.(*exec.ExitError)
+		var denied *exec.ExitError
+		ok := errors.As(err, &denied)
 		must(ok && strings.Contains(string(denied.Stderr), "AccessDenied"), "expected IAM AccessDenied; success or infrastructure failure cannot prove denial")
 	})
 	e.run("invalid-SQS-message-reaches-DLQ", e.dlq)
@@ -486,7 +503,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "report encoding failed")
 		os.Exit(1)
 	}
-	if err = os.WriteFile(env("DEMO_REPORT", ".local/demo-contracts.json"), append(b, '\n'), 0600); err != nil {
+	if err = os.WriteFile(env("DEMO_REPORT", ".local/demo-contracts.json"), append(b, '\n'), 0o600); err != nil {
 		fmt.Fprintln(os.Stderr, "report write failed")
 		os.Exit(1)
 	}

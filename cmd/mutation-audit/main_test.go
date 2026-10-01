@@ -106,6 +106,7 @@ func auditFixture(t *testing.T) (string, string) {
 	}
 	return root, audit
 }
+
 func TestSnapshotExactInputs(t *testing.T) {
 	root, audit := auditFixture(t)
 	if err := snapshot(root, audit); err != nil {
@@ -141,6 +142,7 @@ func TestSnapshotExactInputs(t *testing.T) {
 		t.Fatalf("hashes: %v", hashes)
 	}
 }
+
 func TestSnapshotFailures(t *testing.T) {
 	for _, missing := range []string{"cmd", "go.mod", "go.sum"} {
 		t.Run(missing, func(t *testing.T) {
@@ -175,6 +177,7 @@ func TestSnapshotFailures(t *testing.T) {
 		t.Fatal("accepted unsupported JSON")
 	}
 }
+
 func TestExecuteRecordsExactEvidence(t *testing.T) {
 	root, audit := auditFixture(t)
 	t.Chdir(root)
@@ -257,6 +260,7 @@ func TestExecuteRecordsExactEvidence(t *testing.T) {
 		}
 	}
 }
+
 func TestExecuteNoChangesAndOtherCommands(t *testing.T) {
 	for _, args := range [][]string{{"test", "./..."}, {"version"}, {"snapshot", "extra"}, nil} {
 		t.Run(strings.Join(args, "_"), func(t *testing.T) {
@@ -289,6 +293,7 @@ func TestExecuteNoChangesAndOtherCommands(t *testing.T) {
 		})
 	}
 }
+
 func TestExecuteRejectsInvalidInputs(t *testing.T) {
 	for _, tc := range []struct {
 		name, baseline, real string
@@ -317,6 +322,7 @@ func TestExecuteRejectsInvalidInputs(t *testing.T) {
 		t.Fatalf("error=%v", err)
 	}
 }
+
 func TestAuditMainSnapshot(t *testing.T) {
 	if os.Getenv("AUDIT_MAIN_HELPER") == "1" {
 		os.Args = []string{"mutation-audit", "snapshot"}
@@ -404,6 +410,7 @@ func TestExecuteNestedCWDRecordsModuleRelativeEvidence(t *testing.T) {
 		t.Fatalf("snapshot=%v error=%v", source, err)
 	}
 }
+
 func TestModuleRootRejectsMissingOrInvalidModule(t *testing.T) {
 	root := t.TempDir()
 	if _, err := moduleRoot(root); err == nil || !strings.Contains(err.Error(), "no go.mod") {
@@ -439,6 +446,7 @@ func auditFixtureContent(name string) string {
 	}
 	return name + "\n"
 }
+
 func TestCorrectMainTargetOnlyRewritesWrongRoot(t *testing.T) {
 	root, audit := auditFixture(t)
 	t.Chdir(filepath.Join(root, "cmd"))

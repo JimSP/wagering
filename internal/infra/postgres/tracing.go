@@ -9,8 +9,10 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-type queryTraceKey struct{}
-type queryTracer struct{}
+type (
+	queryTraceKey struct{}
+	queryTracer   struct{}
+)
 
 func (queryTracer) TraceQueryStart(ctx context.Context, _ *pgx.Conn, data pgx.TraceQueryStartData) context.Context {
 	// Never export SQL text or parameters: both can contain financial data or credentials.
@@ -26,6 +28,7 @@ func (queryTracer) TraceQueryStart(ctx context.Context, _ *pgx.Conn, data pgx.Tr
 	telemetry.Attribute(ctx, "db.system.name", "postgresql")
 	return context.WithValue(ctx, queryTraceKey{}, end)
 }
+
 func (queryTracer) TraceQueryEnd(ctx context.Context, _ *pgx.Conn, data pgx.TraceQueryEndData) {
 	if end, ok := ctx.Value(queryTraceKey{}).(func(error)); ok {
 		end(data.Err)
@@ -52,6 +55,7 @@ func (t txAdapter) LoadTraceContext(ctx context.Context, entity, id string) (map
 	carrier["traceparent"], carrier["tracestate"] = parent, state
 	return carrier, nil
 }
+
 func (t txAdapter) SetTraceContext(ctx context.Context) error {
 	if !telemetry.Enabled() {
 		return nil

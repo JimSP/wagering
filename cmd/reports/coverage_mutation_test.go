@@ -24,7 +24,7 @@ func TestCoverageExactBlocksAndTotals(t *testing.T) {
 				loc := module + pkg + "/source.go"
 				fmt.Fprintf(&input, "%s:1.1,2.1 2 0\n%s:1.1,2.1 2 3\n%s:3.1,4.1 5 0\n%s:5.1,6.1 0 0\n", loc, loc, loc, loc)
 			}
-			if e := os.WriteFile(p, []byte(input.String()), 0600); e != nil {
+			if e := os.WriteFile(p, []byte(input.String()), 0o600); e != nil {
 				t.Fatal(e)
 			}
 			if e := coverage(p); e == nil {
@@ -66,11 +66,15 @@ func TestCoverageExactBlocksAndTotals(t *testing.T) {
 			for _, pkg := range targets {
 				good += fmt.Sprintf("%s%s/a.go:1.1,2.1 1 1\n", module, pkg)
 			}
-			os.WriteFile(p, []byte(good), 0600)
+			if err := os.WriteFile(p, []byte(good), 0o600); err != nil {
+				t.Fatal(err)
+			}
 			if e = run([]string{"coverage", p}); e != nil {
 				t.Fatal(e)
 			}
-			readJSON(filepath.Join(dir, "summary.json"), &summary)
+			if err := readJSON(filepath.Join(dir, "summary.json"), &summary); err != nil {
+				t.Fatal(err)
+			}
 			if !summary.Passed || len(summary.Uncovered) != 0 {
 				t.Fatal(summary)
 			}
@@ -80,7 +84,9 @@ func TestCoverageExactBlocksAndTotals(t *testing.T) {
 				}
 			}
 			good = strings.Replace(good, fmt.Sprintf("%s%s/a.go:1.1,2.1 1 1\n", module, targets[0]), "", 1)
-			os.WriteFile(p, []byte(good), 0600)
+			if err := os.WriteFile(p, []byte(good), 0o600); err != nil {
+				t.Fatal(err)
+			}
 			if coverage(p) == nil {
 				t.Fatal("missing target accepted")
 			}
@@ -92,7 +98,9 @@ func TestCoverageInvalidCountsAndOverflow(t *testing.T) {
 	loc := module + targets[0] + "/a.go:1.1,2.1"
 	for _, body := range []string{"1", "x 1", "-1 1", "1 x", "1 -1"} {
 		p := filepath.Join(t.TempDir(), "input.out")
-		os.WriteFile(p, []byte("mode: atomic\n"+loc+" "+body+"\n"), 0600)
+		if err := os.WriteFile(p, []byte("mode: atomic\n"+loc+" "+body+"\n"), 0o600); err != nil {
+			t.Fatal(err)
+		}
 		if coverage(p) == nil {
 			t.Fatal("accepted ", body)
 		}
@@ -105,7 +113,9 @@ func TestCoverageInvalidCountsAndOverflow(t *testing.T) {
 			body += fmt.Sprintf("%s%s/a.go:1.1,2.1 1 %d\n", module, pkg, int64(math.MaxInt64))
 		}
 		body += fmt.Sprintf("%s 1 %d\n", loc, extra)
-		os.WriteFile(p, []byte(body), 0600)
+		if err := os.WriteFile(p, []byte(body), 0o600); err != nil {
+			t.Fatal(err)
+		}
 		e := coverage(p)
 		if (e == nil) != (extra == 0) {
 			t.Fatalf("overflow boundary %d: %v", extra, e)
@@ -130,19 +140,25 @@ func TestMutationGateIndependentMissingFields(t *testing.T) {
 				r[key] = 0
 			}
 			p := filepath.Join(t.TempDir(), "r.json")
-			writeJSON(p, r)
+			if err := writeJSON(p, r); err != nil {
+				t.Fatal(err)
+			}
 			if mutationGate(p) == nil {
 				t.Fatalf("accepted %s missing=%v", key, missing)
 			}
 		}
 	}
 	p := filepath.Join(t.TempDir(), "r.json")
-	writeJSON(p, good)
+	if err := writeJSON(p, good); err != nil {
+		t.Fatal(err)
+	}
 	if e := run([]string{"mutations", p}); e != nil {
 		t.Fatal(e)
 	}
 	var round map[string]any
-	readJSON(p, &round)
+	if err := readJSON(p, &round); err != nil {
+		t.Fatal(err)
+	}
 	if !reflect.DeepEqual(round["mutants_killed"], float64(1)) {
 		t.Fatal(round)
 	}
@@ -158,7 +174,7 @@ func TestCoverageRejectsInvalidCountsBeforeReporting(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			path := filepath.Join(t.TempDir(), "input.out")
 			body := fmt.Sprintf("mode: atomic\n%s%s/a.go:1.1,2.1 %s\n", module, targets[0], tc.counts)
-			if err := os.WriteFile(path, []byte(body), 0600); err != nil {
+			if err := os.WriteFile(path, []byte(body), 0o600); err != nil {
 				t.Fatal(err)
 			}
 			if err := coverage(path); err == nil || err.Error() != tc.want {
@@ -188,7 +204,7 @@ func TestCoverageAccumulatesDistinctBlocksAndRendersMissingEvidence(t *testing.T
 				}
 				fmt.Fprintf(&body, "%s%s/a.go:1.1,2.1 %d %d\n%s%s/a.go:3.1,4.1 %d 1\n", module, pkg, first, hits, module, pkg, second)
 			}
-			if err := os.WriteFile(path, []byte(body.String()), 0600); err != nil {
+			if err := os.WriteFile(path, []byte(body.String()), 0o600); err != nil {
 				t.Fatal(err)
 			}
 			stdout, err := mutationCapture(t, func() error { return coverage(path) })

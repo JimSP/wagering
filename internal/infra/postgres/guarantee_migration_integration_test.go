@@ -44,7 +44,7 @@ func TestAccountingBaselineRebuildRetriesAbortedDDL(t *testing.T) {
 		t.Fatal(err)
 	}
 	sort.Strings(files)
-	if len(files) != 13 {
+	if len(files) != 14 {
 		t.Fatal("unexpected baseline", files)
 	}
 	apply := func(tx pgx.Tx) {

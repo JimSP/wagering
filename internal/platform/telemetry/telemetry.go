@@ -22,8 +22,10 @@ import (
 	"github.com/alexandre/wagering/internal/infra/config"
 )
 
-var enabled atomic.Bool
-var propagator = propagation.TraceContext{} // Deliberately does not propagate baggage.
+var (
+	enabled    atomic.Bool
+	propagator = propagation.TraceContext{} // Deliberately does not propagate baggage.
+)
 
 func Enabled() bool { return enabled.Load() }
 
@@ -80,12 +82,15 @@ func Install(lc fx.Lifecycle, cfg config.Config, log *slog.Logger) {
 func Start(ctx context.Context, name string) (context.Context, func(error)) {
 	return start(ctx, name, trace.SpanKindInternal)
 }
+
 func Producer(ctx context.Context, name string) (context.Context, func(error)) {
 	return start(ctx, name, trace.SpanKindProducer)
 }
+
 func Consumer(ctx context.Context, name string) (context.Context, func(error)) {
 	return start(ctx, name, trace.SpanKindConsumer)
 }
+
 func start(ctx context.Context, name string, kind trace.SpanKind) (context.Context, func(error)) {
 	if !Enabled() {
 		return ctx, func(error) {}
@@ -106,9 +111,11 @@ func start(ctx context.Context, name string, kind trace.SpanKind) (context.Conte
 		span.End()
 	}
 }
+
 func Attribute(ctx context.Context, key, value string) {
 	trace.SpanFromContext(ctx).SetAttributes(attribute.String(key, value))
 }
+
 func Capture(ctx context.Context) map[string]string {
 	carrier := propagation.MapCarrier{}
 	if Enabled() {
@@ -116,6 +123,7 @@ func Capture(ctx context.Context) map[string]string {
 	}
 	return carrier
 }
+
 func Extract(ctx context.Context, carrier map[string]string) context.Context {
 	if !Enabled() {
 		return ctx
@@ -158,5 +166,7 @@ func (h LogHandler) Handle(ctx context.Context, r slog.Record) error {
 	}
 	return h.Handler.Handle(ctx, r)
 }
+
 func (h LogHandler) WithAttrs(a []slog.Attr) slog.Handler { return LogHandler{h.Handler.WithAttrs(a)} }
-func (h LogHandler) WithGroup(g string) slog.Handler      { return LogHandler{h.Handler.WithGroup(g)} }
+
+func (h LogHandler) WithGroup(g string) slog.Handler { return LogHandler{h.Handler.WithGroup(g)} }

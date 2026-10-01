@@ -22,10 +22,10 @@ func TestMutationEvidenceRejectsInfrastructureFailuresAndTampering(t *testing.T)
 	put := func(path, data string) {
 		t.Helper()
 		path = filepath.Join(root, path)
-		if err := os.MkdirAll(filepath.Dir(path), 0700); err != nil {
+		if err := os.MkdirAll(filepath.Dir(path), 0o700); err != nil {
 			t.Fatal(err)
 		}
-		if err := os.WriteFile(path, []byte(data), 0600); err != nil {
+		if err := os.WriteFile(path, []byte(data), 0o600); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -74,7 +74,6 @@ func TestMutationEvidenceRejectsInfrastructureFailuresAndTampering(t *testing.T)
 	if classifications.Counts["compile_rejected"] != 1 || classifications.Counts["test_failure"] != 0 {
 		t.Fatalf("wrong classification: %+v", classifications)
 	}
-
 }
 
 func TestMutationManifestRejectsIgnoredSource(t *testing.T) {
@@ -86,7 +85,7 @@ func TestMutationManifestRejectsIgnoredSource(t *testing.T) {
 	for path, data := range map[string]string{
 		"go.mod": "module example.local/mutationfixture\n\ngo 1.23\n", "go.sum": "", "main.go": "package fixture\n", ".gitignore": "ignored.go\n",
 	} {
-		if err := os.WriteFile(filepath.Join(root, path), []byte(data), 0600); err != nil {
+		if err := os.WriteFile(filepath.Join(root, path), []byte(data), 0o600); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -105,7 +104,7 @@ func TestMutationManifestRejectsIgnoredSource(t *testing.T) {
 		}
 	}
 	check(true)
-	if err := os.WriteFile(filepath.Join(root, "ignored.go"), []byte("package fixture\nconst hidden = 1\n"), 0600); err != nil {
+	if err := os.WriteFile(filepath.Join(root, "ignored.go"), []byte("package fixture\nconst hidden = 1\n"), 0o600); err != nil {
 		t.Fatal(err)
 	}
 	check(false)

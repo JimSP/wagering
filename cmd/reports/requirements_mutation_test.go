@@ -110,7 +110,7 @@ func TestMutationRequirementsSortedProblemsAndReadErrors(t *testing.T) {
 		if e := os.Chmod("locked", 0); e != nil {
 			t.Fatal(e)
 		}
-		t.Cleanup(func() { _ = os.Chmod("locked", 0700) })
+		t.Cleanup(func() { _ = os.Chmod("locked", 0o700) })
 		if _, e := os.ReadDir("locked"); e == nil {
 			t.Skip("process can read directories without permission bits")
 		}

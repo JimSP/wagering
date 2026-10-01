@@ -10,6 +10,7 @@ import (
 func validEnvironment(t *testing.T) {
 	t.Helper()
 	for k, v := range map[string]string{
+		"OTEL_SDK_DISABLED": "", "OTEL_SERVICE_NAME": "", "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT": "", "OTEL_TRACES_SAMPLER_ARG": "", "METRICS_ADDR": "",
 		"BET_WINDOW": "", "SHUTDOWN_TIMEOUT": "", "ROLES": "", "HTTP_ADDR": "", "LOG_LEVEL": "", "AWS_REGION": "", "AWS_ENDPOINT_URL": "", "WAGER_DLQ_URL": "",
 		"DATABASE_URL": "postgres://test@localhost/test", "OIDC_ISSUER": "https://issuer.test", "OIDC_JWKS_URL": "https://issuer.test/keys", "OIDC_AUDIENCE": "wagering",
 		"WAGER_QUEUE_URL": "https://queue.test/wager", "EVENTS_QUEUE_URL": "https://queue.test/events", "SETTLEMENT_QUEUE_URL": "https://queue.test/settlements",
@@ -20,7 +21,7 @@ func validEnvironment(t *testing.T) {
 
 func TestConfigurationDefaultsAndExplicitValues(t *testing.T) {
 	validEnvironment(t)
-	want := Config{BetWindow: 5 * time.Minute, Roles: []string{"api"}, HTTPAddr: ":8080", ShutdownTimeout: 25 * time.Second, LogLevel: "info", DatabaseURL: "postgres://test@localhost/test", AWSRegion: "us-east-1", WagerQueueURL: "https://queue.test/wager", EventsQueueURL: "https://queue.test/events", SettlementQueueURL: "https://queue.test/settlements", OIDCIssuer: "https://issuer.test", OIDCJWKSURL: "https://issuer.test/keys", OIDCAudience: "wagering"}
+	want := Config{OTelDisabled: true, OTelServiceName: "wagering", OTelTracesEndpoint: "http://localhost:4318/v1/traces", OTelSampleRatio: 1, BetWindow: 5 * time.Minute, Roles: []string{"api"}, HTTPAddr: ":8080", ShutdownTimeout: 25 * time.Second, LogLevel: "info", DatabaseURL: "postgres://test@localhost/test", AWSRegion: "us-east-1", WagerQueueURL: "https://queue.test/wager", EventsQueueURL: "https://queue.test/events", SettlementQueueURL: "https://queue.test/settlements", OIDCIssuer: "https://issuer.test", OIDCJWKSURL: "https://issuer.test/keys", OIDCAudience: "wagering"}
 	got, err := Load()
 	if err != nil || !reflect.DeepEqual(got, want) {
 		t.Fatalf("got=%+v want=%+v err=%v", got, want, err)

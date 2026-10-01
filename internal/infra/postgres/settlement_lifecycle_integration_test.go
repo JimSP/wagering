@@ -26,6 +26,7 @@ import (
 	"github.com/alexandre/wagering/internal/infra/auth"
 	"github.com/alexandre/wagering/internal/infra/config"
 	"github.com/alexandre/wagering/internal/platform/metrics"
+	"github.com/alexandre/wagering/internal/platform/worker"
 	"github.com/alexandre/wagering/internal/testsupport/settlementfacts"
 	"github.com/alexandre/wagering/internal/transport/httpapi"
 	"github.com/golang-jwt/jwt/v5"
@@ -77,7 +78,7 @@ func newSettlementSystemOnDatabase(t *testing.T, pool *pgxpool.Pool, ctx context
 	t.Cleanup(jwks.Close)
 	cfg := config.Config{OIDCIssuer: "settlement-test", OIDCAudience: "api", OIDCJWKSURL: jwks.URL}
 	app := fx.New(fx.NopLogger, fx.Supply(usecase.DefaultBettingWindow, cfg, slog.New(slog.NewTextHandler(io.Discard, nil))), metrics.Module, usecase.Module,
-		fx.Provide(func() port.UnitOfWork { return s.commitReply }, func() port.Clock { return clock }, func() port.IDGenerator { return settlementTestIDs{} }, auth.NewVerifier),
+		fx.Provide(worker.NewGroup, func() port.UnitOfWork { return s.commitReply }, func() port.Clock { return clock }, func() port.IDGenerator { return settlementTestIDs{} }, auth.NewVerifier),
 		fx.Invoke(func(lc fx.Lifecycle, log *slog.Logger, d httpapi.Deps, h *usecase.ConsumeSettlementMessage) {
 			s.api = httpapi.NewServer(lc, nil, cfg, log, d).Handler
 			s.consume = h

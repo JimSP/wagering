@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -23,7 +24,6 @@ func TestMutationReportsCLIRejectsInvalidArity(t *testing.T) {
 }
 
 func TestMutationReportsCLIMainSuccess(t *testing.T) {
-
 	if os.Getenv("WAGER_REPORTS_CLI_SUCCESS_CHILD") != "1" {
 		binary, err := os.Executable()
 		if err != nil {
@@ -36,7 +36,7 @@ func TestMutationReportsCLIMainSuccess(t *testing.T) {
 		}
 	}
 	t.Chdir(t.TempDir())
-	if err := os.MkdirAll("docs/acceptance/evidence", 0700); err != nil {
+	if err := os.MkdirAll("docs/acceptance/evidence", 0o700); err != nil {
 		t.Fatal(err)
 	}
 	old := os.Args
@@ -74,7 +74,13 @@ func TestMutationReportsCLIMainFailure(t *testing.T) {
 	if !errors.As(err, &exit) || exit.ExitCode() != 1 {
 		t.Fatalf("want exit 1, got %v; stdout=%q stderr=%q", err, stdout.String(), stderr.String())
 	}
-	if stdout.Len() != 0 || stderr.String() != "invalid report arguments: [unknown-action]\n" {
+	diagnostic := stderr.String()
+	// With -coverpkg excluding this command, the Go test runtime may append
+	// this diagnostic when main exits before the test runner finishes.
+	if testing.CoverMode() != "" {
+		diagnostic = strings.TrimSuffix(diagnostic, "program not built with -cover\n")
+	}
+	if stdout.Len() != 0 || diagnostic != "invalid report arguments: [unknown-action]\n" {
 		t.Fatalf("stdout=%q stderr=%q", stdout.String(), stderr.String())
 	}
 }

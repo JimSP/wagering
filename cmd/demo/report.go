@@ -14,6 +14,7 @@ func dataOrNull(b []byte) []byte {
 	}
 	return b
 }
+
 func (e *evaluator) record(v object) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -54,5 +55,5 @@ func (e *evaluator) writeComparison() error {
 		fmt.Fprintf(&out, "| %s | %s | %s | %s | %s |\n", clean(r.Name), r.Status, clean(r.ProjectExpectation), clean(r.ChallengeComparison), clean(r.Detail))
 	}
 	path := env("DEMO_COMPARISON", filepath.Join(filepath.Dir(env("DEMO_REPORT", ".local/demonstration.json")), "comparison.md"))
-	return os.WriteFile(path, []byte(out.String()), 0600)
+	return os.WriteFile(path, []byte(out.String()), 0o600)
 }

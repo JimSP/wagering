@@ -11,10 +11,10 @@ import (
 
 func mutationFixtureWrite(t *testing.T, path, body string) {
 	t.Helper()
-	if err := os.MkdirAll(filepath.Dir(path), 0700); err != nil {
+	if err := os.MkdirAll(filepath.Dir(path), 0o700); err != nil {
 		t.Fatal(err)
 	}
-	if err := os.WriteFile(path, []byte(body), 0600); err != nil {
+	if err := os.WriteFile(path, []byte(body), 0o600); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -177,17 +177,17 @@ func TestMutationAcceptanceErrorsAndAbsentEvidence(t *testing.T) {
 			case "criteria malformed":
 				mutationFixtureWrite(t, "docs/acceptance/criteria.json", "{")
 			case "normal read":
-				if err := os.MkdirAll("docs/acceptance/evidence/test.jsonl", 0700); err != nil {
+				if err := os.MkdirAll("docs/acceptance/evidence/test.jsonl", 0o700); err != nil {
 					t.Fatal(err)
 				}
 			case "race read":
-				if err := os.MkdirAll("docs/acceptance/evidence/race.jsonl", 0700); err != nil {
+				if err := os.MkdirAll("docs/acceptance/evidence/race.jsonl", 0o700); err != nil {
 					t.Fatal(err)
 				}
 			case "commands malformed":
 				mutationFixtureWrite(t, "docs/acceptance/evidence/commands.json", "{")
 			case "report write":
-				if err := os.Mkdir("docs/acceptance/RESULTADOS.md", 0700); err != nil {
+				if err := os.Mkdir("docs/acceptance/RESULTADOS.md", 0o700); err != nil {
 					t.Fatal(err)
 				}
 			}

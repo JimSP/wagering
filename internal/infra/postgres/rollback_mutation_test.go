@@ -247,7 +247,7 @@ func TestMutationApplyAccountingSettledReversal(t *testing.T) {
 
 func TestMutationClassifyTypedNil(t *testing.T) {
 	var cause *pgconn.PgError
-	if got := classify(cause); got != cause {
+	if got := classify(cause); got != cause { //nolint:errorlint // A typed nil must retain its exact interface identity.
 		t.Fatal("typed nil classification changed")
 	}
 }

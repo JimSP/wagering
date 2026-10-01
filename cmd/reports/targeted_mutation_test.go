@@ -76,7 +76,7 @@ case "$TARGETED_FIXTURE_MODE" in
  ;;
 esac
 `)
-	if e := os.Chmod(binary, 0700); e != nil {
+	if e := os.Chmod(binary, 0o700); e != nil {
 		t.Fatal(e)
 	}
 	output = filepath.Join(t.TempDir(), "output")
@@ -229,15 +229,15 @@ func TestMutationTargetedFilesystemAndProcessFailures(t *testing.T) {
 			case "output file":
 				mutationFixtureWrite(t, out, "blocked")
 			case "stdout directory":
-				if e := os.MkdirAll(filepath.Join(out, "baseline.jsonl"), 0700); e != nil {
+				if e := os.MkdirAll(filepath.Join(out, "baseline.jsonl"), 0o700); e != nil {
 					t.Fatal(e)
 				}
 			case "stderr directory":
-				if e := os.MkdirAll(filepath.Join(out, "baseline.stderr"), 0700); e != nil {
+				if e := os.MkdirAll(filepath.Join(out, "baseline.stderr"), 0o700); e != nil {
 					t.Fatal(e)
 				}
 			case "results directory":
-				if e := os.MkdirAll(filepath.Join(out, "results.json"), 0700); e != nil {
+				if e := os.MkdirAll(filepath.Join(out, "results.json"), 0o700); e != nil {
 					t.Fatal(e)
 				}
 			case "mutant file missing":
@@ -247,7 +247,7 @@ func TestMutationTargetedFilesystemAndProcessFailures(t *testing.T) {
 			case "temp unavailable":
 				t.Setenv("TMPDIR", filepath.Join(t.TempDir(), "absent"))
 			case "mutant stdout directory":
-				if e := os.MkdirAll(filepath.Join(out, mutations[0].Name+".jsonl"), 0700); e != nil {
+				if e := os.MkdirAll(filepath.Join(out, mutations[0].Name+".jsonl"), 0o700); e != nil {
 					t.Fatal(e)
 				}
 			}
@@ -271,7 +271,7 @@ func TestMutationCopySourcesSecurityAndPermissions(t *testing.T) {
 	for _, p := range []string{"keep.go", "nested/keep.go", ".secret", "nested/.secret", ".git/config", "dist/build", "graphify-out/graph", "docs/private", "nested/docs/private"} {
 		mutationFixtureWrite(t, filepath.Join(source, p), p)
 	}
-	if e := os.Chmod(filepath.Join(source, "keep.go"), 0751); e != nil {
+	if e := os.Chmod(filepath.Join(source, "keep.go"), 0o751); e != nil {
 		t.Fatal(e)
 	}
 	if e := os.Symlink("keep.go", filepath.Join(source, "link.go")); e != nil {
@@ -301,7 +301,7 @@ func TestMutationCopySourcesSecurityAndPermissions(t *testing.T) {
 		t.Fatal(names)
 	}
 	info, e := os.Stat(filepath.Join(target, "keep.go"))
-	if e != nil || info.Mode().Perm() != 0751 {
+	if e != nil || info.Mode().Perm() != 0o751 {
 		t.Fatal(info, e)
 	}
 	for _, p := range names {
@@ -321,7 +321,7 @@ func TestMutationCopySourcesSecurityAndPermissions(t *testing.T) {
 			case "target file":
 				mutationFixtureWrite(t, dst, "file")
 			case "destination file conflict":
-				if e := os.MkdirAll(filepath.Join(dst, "file.go"), 0700); e != nil {
+				if e := os.MkdirAll(filepath.Join(dst, "file.go"), 0o700); e != nil {
 					t.Fatal(e)
 				}
 			case "unreadable file":
@@ -329,7 +329,7 @@ func TestMutationCopySourcesSecurityAndPermissions(t *testing.T) {
 				if e := os.Chmod(p, 0); e != nil {
 					t.Fatal(e)
 				}
-				t.Cleanup(func() { _ = os.Chmod(p, 0600) })
+				t.Cleanup(func() { _ = os.Chmod(p, 0o600) })
 				if _, e := os.ReadFile(p); e == nil {
 					t.Skip("permission bypass")
 				}
@@ -337,7 +337,7 @@ func TestMutationCopySourcesSecurityAndPermissions(t *testing.T) {
 				if e := os.Chmod(src, 0); e != nil {
 					t.Fatal(e)
 				}
-				t.Cleanup(func() { _ = os.Chmod(src, 0700) })
+				t.Cleanup(func() { _ = os.Chmod(src, 0o700) })
 				if _, e := os.ReadDir(src); e == nil {
 					t.Skip("permission bypass")
 				}

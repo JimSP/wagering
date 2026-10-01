@@ -26,8 +26,10 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-const localPlayer = "0192f28f-5dc0-7d58-bdb2-814ad6a0f4a7"
-const localWallet = "0192f28f-5dc0-7d58-bdb2-814ad6a0f4a8"
+const (
+	localPlayer = "0192f28f-5dc0-7d58-bdb2-814ad6a0f4a7"
+	localWallet = "0192f28f-5dc0-7d58-bdb2-814ad6a0f4a8"
+)
 
 var localAt = time.Date(2026, 10, 1, 12, 0, 0, 0, time.UTC)
 
@@ -60,6 +62,7 @@ func (u *localUOW) Do(c context.Context, f func(context.Context, port.Tx) error)
 	}
 	return f(c, u.tx)
 }
+
 func (u *localUOW) DoSnapshot(c context.Context, f func(context.Context, port.Tx) error) error {
 	return u.Do(c, f)
 }
@@ -89,6 +92,7 @@ func (r localTransactionRepo) FindByID(_ context.Context, id string) (*wager.Tra
 	}
 	return r.tx, nil
 }
+
 func (r localTransactionRepo) FindByExternalID(_ context.Context, p, e string) (*wager.Transaction, error) {
 	s := r.tx.Snapshot()
 	if p != s.ProviderID || e != s.ExternalID {
@@ -96,6 +100,7 @@ func (r localTransactionRepo) FindByExternalID(_ context.Context, p, e string) (
 	}
 	return r.tx, nil
 }
+
 func (r localTransactionRepo) FindByIdempotencyKey(_ context.Context, p, k string) (*wager.Transaction, error) {
 	s := r.tx.Snapshot()
 	if p != s.ProviderID || k != s.IdempotencyKey {
@@ -288,11 +293,12 @@ func TestLocalHTTPTransactionStatusesAndReadContracts(t *testing.T) {
 				t.Fatal(out.Code, out.Body.String())
 			}
 			extra := ""
-			if status == wager.StatusProcessed {
+			switch status {
+			case wager.StatusProcessed:
 				extra = `,"balance":{"amount":"4.00","currency":"BRL"}`
-			} else if status == wager.StatusRejected {
+			case wager.StatusRejected:
 				extra = `,"failureCode":"INSUFFICIENT_FUNDS"`
-			} else if status == wager.StatusFailed {
+			case wager.StatusFailed:
 				extra = `,"failureCode":"INTERNAL_PERMANENT_ERROR"`
 			}
 			sameJSON(t, out.Body.String(), fmt.Sprintf(`{"transactionId":"transaction","status":%q,"idempotentReplay":true%s}`, status, extra))
@@ -360,9 +366,11 @@ type localSettlementStore struct {
 func (s localSettlementStore) CreateBet(_ context.Context, b settlement.Bet) error {
 	return s.create(b)
 }
+
 func (s localSettlementStore) LockBet(_ context.Context, id string) (settlement.Bet, error) {
 	return settlement.Bet{ID: id}, nil
 }
+
 func (s localSettlementStore) FindSettlement(context.Context, string) (port.SettlementRecord, error) {
 	return s.record, nil
 }
