@@ -752,12 +752,12 @@ sequenceDiagram
     P->>H: BET + JWT + Idempotency-Key
     H->>H: Valida JWT, permissão e corpo
     H->>U: Execute(input)
-    U->>U: Normaliza Money e IDs; calcula hash
+    U->>U: Normaliza Money e IDs, calcula hash
     U->>DB: BEGIN e consulta idempotência
     alt Operação existente e conteúdo equivalente
         DB-->>U: Resultado financeiro persistido
         U->>DB: COMMIT
-        U-->>H: Snapshot original; idempotentReplay=true
+        U-->>H: Snapshot original, idempotentReplay=true
     else Operação nova
         U->>DB: Insere PENDING e carrega fatos sob locks
         DB-->>U: Contas, aposta e compromissos
@@ -766,7 +766,7 @@ sequenceDiagram
         U->>DB: Persiste contas, compromisso, diário e partidas
         U->>DB: Persiste PROCESSED e eventos na outbox
         U->>DB: COMMIT com validação das invariantes
-        U-->>H: Resultado; idempotentReplay=false
+        U-->>H: Resultado, idempotentReplay=false
     end
     H-->>P: Resposta financeira
     Note over U,DB: Conflito de chave ou conteúdo encerra sem reaplicar movimento
@@ -785,13 +785,13 @@ sequenceDiagram
     participant O as SQS de saída
     Q-->>C: ReceiveMessage
     C->>U: Handle(envelope)
-    U->>DB: BEGIN; inbox e idempotência
+    U->>DB: BEGIN, inbox e idempotência
     U->>DB: Estado, efeitos financeiros aplicáveis e outbox
     U->>DB: Conclui inbox e COMMIT
     U-->>C: Tratamento durável concluído
     C->>Q: DeleteMessage / ACK
     Note over Q,DB: Falha após commit e antes do ACK gera reentrega deduplicada
-    W->>DB: Claim com SKIP LOCKED, lease e attempts; COMMIT
+    W->>DB: Claim com SKIP LOCKED, lease e attempts, COMMIT
     DB-->>W: Evento confirmado
     W->>O: Publica com eventId estável
     O-->>W: Confirma envio
@@ -811,17 +811,17 @@ sequenceDiagram
     participant Q as SQS privada
     participant C as Consumidor de liquidação
     I->>A: Confirma resultado e distribuição
-    A->>DB: BEGIN; lock da aposta e consulta de replay
+    A->>DB: BEGIN, lock da aposta e consulta de replay
     A->>A: Valida prazo e distribuição dos compromissos
-    A->>DB: Fecha aposta; salva CONFIRMED, plano e outbox
+    A->>DB: Fecha aposta, salva CONFIRMED, plano e outbox
     A->>DB: COMMIT
     A-->>I: Identidade e estado da liquidação
     P->>DB: Claim do SettlementRequested
     P->>Q: Publica settlementId
     Q-->>C: Entrega da solicitação
-    C->>DB: BEGIN; inbox e execução do plano persistido
+    C->>DB: BEGIN, inbox e execução do plano persistido
     Note over C,DB: Transferências, pagamentos, partidas e eventos no mesmo commit
-    C->>DB: Liquidação PROCESSED; conclui inbox; COMMIT
+    C->>DB: Liquidação PROCESSED, conclui inbox, COMMIT
     C->>Q: ACK
 ```
 
