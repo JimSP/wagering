@@ -922,6 +922,14 @@ stateDiagram-v2
 
 Uma compensação parcial do conjunto de pagamentos, por ROLLBACK de uma WIN específica, preserva as outras WINs; `REVERSED` identifica a compensação completa da liquidação. Estornar não reabre a aposta. Fontes: [confirmação](internal/app/usecase/settlement.go), [estorno](internal/app/usecase/settlement_audit.go) e [regras SQL de compensação](migrations/000010_rollback_any_stage.up.sql).
 
+## Como interpretar as evidências
+
+Os registros versionados permitem conferir como as garantias descritas neste projeto foram verificadas. Sua finalidade é tornar a avaliação reproduzível e rastreável: relacionar cenários, resultados e, quando registrados, hashes dos fontes utilizados. Mantê-los no repositório permite consultar os relatórios e suas evidências junto ao histórico da entrega.
+
+Os [relatórios resumidos](VERIFICATION.md) são o ponto de entrada. Logs, patches de mutação e demais saídas brutas permitem aprofundar a inspeção; não é necessário ler cada arquivo para compreender a solução. Os registros datados preservam resultados da respectiva etapa, incluindo falhas e correções, e não devem ser interpretados como validação automática da versão atual.
+
+Para avaliar a entrega, comece pelas [instruções de execução](#instalação-em-um-comando), pelo [roteiro demonstrativo](#nosso-roteiro-demonstrativo) e pelo [processo de qualidade e resultados](#processo-de-qualidade-e-resultados). Consulte as evidências detalhadas para verificar uma afirmação específica. O [relatório de execução limpa](docs/verification/clean-start-2026-10-01/README.md) registra o ambiente, os fontes e os cenários daquela demonstração; as [execuções do CI](https://github.com/JimSP/wagering/actions/workflows/quality.yml) identificam o commit avaliado e o resultado das verificações executadas.
+
 ## Notas do autor
 
 Este projeto foi desenvolvido sob um prazo de três dias, com diversas dificuldades ao longo da implementação. Para mim, seria impossível entregar sozinho, nesse período, o desafio com o escopo e o nível de exigência que busquei. Por isso, recorri de forma intensiva e extensiva a um modelo de linguagem, por meio do Codex, durante a construção da solução.
